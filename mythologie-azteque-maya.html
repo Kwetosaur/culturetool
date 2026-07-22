@@ -101,6 +101,11 @@
   .god-body{padding:18px 24px 24px;}
   .god-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
   .tag{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px;}
+  .tag-azteque{color:var(--gold); border-color:var(--gold);}
+  .tag-maya{color:var(--jade-bright); border-color:var(--jade-bright);}
+  .tag-commun{color:var(--turquoise); border-color:var(--turquoise);}
+  .realm-card .tag, .timeline-content .tag{margin-left:8px; vertical-align:middle;}
+  .tradition-heading{text-align:center; margin:0 0 26px; font-size:1.3rem; letter-spacing:0.1em; text-transform:uppercase;}
   .god-body p{margin:0 0 10px; font-size:0.97rem;}
   .god-body p:last-child{margin-bottom:0;}
   .god-body strong{color:var(--jade-bright); font-weight:600;}
@@ -175,7 +180,7 @@
   <p class="tagline">Du cinquième soleil qui éclaire notre âge à la fleur et au chant qui, seuls, disaient vrai sur cette terre : neuvième chapitre d'un voyage à travers les mythologies du monde.</p>
   <div class="divider"></div>
   <nav class="nav-pills">
-    <a href="#royaumes">Les Neuf Royaumes</a>
+    <a href="#royaumes">Les Royaumes</a>
     <a href="#pantheon">Le Panthéon</a>
     <a href="#genealogie">Arbre Généalogique</a>
     <a href="#creatures">Créatures &amp; Êtres</a>
@@ -212,112 +217,89 @@
 <!-- ================= ROYAUMES ================= -->
 <section id="royaumes">
   <div class="section-label">Cosmogonie</div>
-  <h2 class="section-title">Les Neuf Royaumes du Cosmos Mésoaméricain</h2>
-  <p class="section-intro">Cette page réunit deux traditions voisines mais distinctes — aztèque (nahua) et maya — qui partagent une même architecture cosmique fondamentale : treize cieux superposés, neuf niveaux de l'inframonde, et un monde du milieu constamment menacé d'effondrement, que seuls les rituels et le sang humain maintiennent en équilibre.</p>
+  <h2 class="section-title">Les Royaumes du Cosmos Mésoaméricain</h2>
+  <p class="section-intro">Cette page réunit deux traditions voisines mais distinctes, présentées ici côte à côte plutôt que fusionnées de force en un seul décompte : la cosmologie aztèque (nahua), organisée en treize cieux, un monde du milieu et un inframonde à neuf niveaux solidement attesté par les codex, et la cosmologie maya, dont le ciel, la terre reliée par l'arbre cosmique et l'inframonde de Xibalba obéissent à une intuition proche mais reposent sur des sources et des degrés de certitude parfois très différents.</p>
 
+  <h3 class="tradition-heading">Cosmologie aztèque (nahua) — trois royaumes</h3>
   <div class="realms-wrap">
     <div class="realm-card">
-      <h3><span class="realm-num">I</span>Omeyocan</h3>
-      <div class="realm-sub">Le Lieu de la Dualité</div>
-      <p>Treizième et plus haut des cieux, résidence d'Ometeotl, principe divin double, à la fois masculin et féminin, origine de toute création aztèque.</p>
+      <h3><span class="realm-num">I</span>Les Treize Cieux</h3>
+      <div class="realm-sub">Ilhuicatl, jusqu'à Omeyocan <span class="tag tag-azteque">Aztèque</span></div>
+      <p>Treize strates célestes superposées, chacune associée à un astre, une divinité ou un phénomène précis, culminant au treizième ciel d'Omeyocan, résidence du principe dual Ometeotl — architecture cohérente à travers plusieurs codex post-conquête indépendants.</p>
     </div>
     <div class="realm-card">
-      <h3><span class="realm-num">II</span>Les Treize Cieux</h3>
-      <div class="realm-sub">Ilhuicatl</div>
-      <p>Strates célestes superposées, chacune associée à un astre, une divinité ou un phénomène précis, du ciel de la lune jusqu'au séjour d'Ometeotl.</p>
-    </div>
-    <div class="realm-card">
-      <h3><span class="realm-num">III</span>Tlalticpac</h3>
-      <div class="realm-sub">Le Monde du Milieu</div>
+      <h3><span class="realm-num">II</span>Tlalticpac</h3>
+      <div class="realm-sub">Le Monde du Milieu <span class="tag tag-azteque">Aztèque</span></div>
       <p>La surface terrestre elle-même, conçue comme un disque flottant sur les eaux primordiales, en équilibre précaire entre ciel et inframonde.</p>
     </div>
     <div class="realm-card">
-      <h3><span class="realm-num">IV</span>Mictlan</h3>
-      <div class="realm-sub">Le Royaume des Morts Aztèque</div>
-      <p>Inframonde à neuf niveaux que l'âme du défunt doit traverser durant quatre années d'épreuves avant d'atteindre le repos final auprès de Mictlantecuhtli.</p>
-    </div>
-    <div class="realm-card">
-      <h3><span class="realm-num">V</span>Xibalba</h3>
-      <div class="realm-sub">Le Royaume des Morts Maya</div>
-      <p>Monde souterrain redouté, "lieu de l'effroi", gouverné par des seigneurs cruels que doivent affronter les Jumeaux Héros du Popol Vuh.</p>
-    </div>
-    <div class="realm-card">
-      <h3><span class="realm-num">VI</span>Tlalocan</h3>
-      <div class="realm-sub">Le Paradis de Tlaloc</div>
-      <p>Royaume verdoyant et fertile réservé à ceux morts noyés, foudroyés ou de maladies liées à l'eau — jugement post-mortem fondé non sur la vertu mais sur la nature de la mort elle-même.</p>
-    </div>
-    <div class="realm-card">
-      <h3><span class="realm-num">VII</span>Tamoanchan</h3>
-      <div class="realm-sub">Le Jardin des Origines</div>
-      <p>Paradis primordial où les dieux créèrent l'humanité et où poussait l'arbre fleuri originel, lieu de naissance mythique de la civilisation elle-même.</p>
-    </div>
-    <div class="realm-card">
-      <h3><span class="realm-num">VIII</span>Aztlán</h3>
-      <div class="realm-sub">Le Pays d'Origine</div>
-      <p>Île mythique de départ d'où les sept tribus nahuas, dont les Mexicas, entamèrent leur longue migration vers la vallée de Mexico.</p>
-    </div>
-    <div class="realm-card">
-      <h3><span class="realm-num">IX</span>Tenochtitlan</h3>
-      <div class="realm-sub">La Cité Prophétique</div>
-      <p>Capitale fondée à l'endroit exact prophétisé par Huitzilopochtli — un aigle dévorant un serpent perché sur un figuier de barbarie — aujourd'hui cœur de Mexico.</p>
+      <h3><span class="realm-num">III</span>Mictlan</h3>
+      <div class="realm-sub">L'Inframonde Aztèque <span class="tag tag-azteque">Aztèque</span></div>
+      <p>Inframonde structuré en neuf niveaux explicitement attestés par les codex (dont le Vaticanus A, dit Ríos), que l'âme du défunt traverse durant quatre années d'épreuves — le seul décompte de "neuf" authentiquement documenté de toute cette cosmologie.</p>
     </div>
   </div>
 
-  <h3 style="text-align:center; margin-top:90px; font-size:1.8rem;">Voyage détaillé à travers les Neuf Royaumes</h3>
-  <p class="section-intro" style="margin-bottom:50px;">Deux civilisations, deux corpus de textes (le Popol Vuh maya, les codex aztèques post-conquête), mais une même intuition cosmique : le monde est fragile, cyclique, et suspendu à un pacte constant entre les humains et le divin.</p>
-
-  <div class="legend-block">
-    <div class="legend-number">Royaume I — Omeyocan</div>
-    <h3>Le Sommet de la Dualité</h3>
-    <p>Au treizième ciel réside Ometeotl, divinité duelle unissant en une seule entité Ometecuhtli et Omecihuatl, seigneur et dame de la dualité, parents primordiaux dont naissent les quatre grands dieux créateurs qui façonneront ensuite, par leurs rivalités successives, chacun des âges du monde.</p>
+  <h3 class="tradition-heading" style="margin-top:60px;">Cosmologie maya — trois royaumes</h3>
+  <div class="realms-wrap">
+    <div class="realm-card">
+      <h3><span class="realm-num">IV</span>Les Cieux Mayas</h3>
+      <div class="realm-sub">Souvent Treize Niveaux <span class="tag tag-maya">Maya</span></div>
+      <p>Un monde céleste superposé au monde des mortels, parfois décrit lui aussi en treize niveaux dans des synthèses populaires — mais sur une base textuelle classique nettement moins ferme que pour son pendant aztèque.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">V</span>La Terre du Milieu</h3>
+      <div class="realm-sub">Reliée par le Wacah Chan <span class="tag tag-maya">Maya</span></div>
+      <p>Plan terrestre représenté comme un disque ou un dos de caïman flottant sur les eaux primordiales, relié aux autres strates par l'arbre du monde sacré, le Wacah Chan, souvent identifié à une ceiba.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">VI</span>Xibalba</h3>
+      <div class="realm-sub">Le Lieu de l'Effroi <span class="tag tag-maya">Maya</span></div>
+      <p>Monde souterrain redouté, gouverné par des seigneurs cruels et structuré non par un compte net de niveaux mais par des maisons d'épreuves distinctes, que doivent affronter les Jumeaux Héros du Popol Vuh.</p>
+    </div>
   </div>
 
+  <h3 style="text-align:center; margin-top:90px; font-size:1.8rem;">Voyage détaillé à travers les Six Royaumes</h3>
+  <p class="section-intro" style="margin-bottom:50px;">Deux civilisations, deux corpus de textes (le Popol Vuh maya, les codex aztèques post-conquête) et deux degrés de certitude assez différents sur leurs cosmologies respectives — mais une même intuition d'un monde fragile, cyclique, suspendu à un pacte constant entre les humains et le divin.</p>
+
   <div class="legend-block">
-    <div class="legend-number">Royaume II — Les Treize Cieux</div>
+    <div class="legend-number">Royaume I — Les Treize Cieux (Ilhuicatl)</div>
     <h3>L'Architecture Verticale du Ciel</h3>
-    <p>Chaque niveau céleste porte une fonction précise : ciel de la lune et des nuages, ciel des étoiles, ciel du soleil, ciel de la comète, jusqu'aux cieux les plus élevés réservés aux forces créatrices primordiales — une cosmologie d'une précision architecturale rare, comparable par sa rigueur structurale aux strates égyptiennes ou aux royaumes nordiques de cette série.</p>
+    <p>Treize strates célestes se superposent selon un ordre cohérent, chacune associée à un astre, une divinité ou un phénomène précis : ciel de la lune et des nuages, ciel des étoiles, ciel du soleil, ciel de la comète, jusqu'aux cieux les plus élevés réservés aux forces créatrices primordiales. Cette architecture, l'une des plus précisément documentées de toute la cosmologie mésoaméricaine, est attestée de façon cohérente dans plusieurs codex post-conquête, dont le Codex Vaticanus A (dit Ríos).</p>
+    <p>Au treizième et plus haut de ces cieux réside Omeyocan, "le lieu de la dualité", résidence d'Ometeotl, principe divin double unissant Ometecuhtli et Omecihuatl, parents primordiaux dont naissent les quatre grands dieux créateurs qui façonneront ensuite, par leurs rivalités successives, chacun des âges du monde. Deux paradis secondaires complètent traditionnellement cette géographie : Tlalocan, jardin verdoyant de Tlaloc réservé à ceux morts noyés, foudroyés ou de maladies liées à l'eau, et Tamoanchan, jardin primordial où les dieux façonnèrent l'humanité actuelle à partir des ossements récupérés par Quetzalcoatl à Mictlan.</p>
   </div>
 
   <div class="legend-block">
-    <div class="legend-number">Royaume III — Tlalticpac</div>
+    <div class="legend-number">Royaume II — Tlalticpac</div>
     <h3>Le Disque Terrestre en Équilibre</h3>
-    <p>La terre est conçue comme un disque plat entouré d'eau, orienté selon quatre directions cardinales, chacune associée à une couleur, un arbre cosmique et un présage particulier — au centre se dresse l'arbre du monde qui relie les treize cieux aux neuf niveaux souterrains.</p>
+    <p>La terre est conçue comme un disque plat entouré d'eau, orienté selon quatre directions cardinales, chacune associée à une couleur, un arbre cosmique et un présage particulier — au centre se dresse l'arbre du monde qui relie les treize cieux à l'inframonde souterrain de Mictlan.</p>
   </div>
 
   <div class="legend-block">
-    <div class="legend-number">Royaume IV — Mictlan</div>
-    <h3>Les Neuf Épreuves du Défunt</h3>
-    <p>L'âme aztèque, quelle qu'ait été sa conduite dans la vie, entreprend un voyage de quatre ans à travers neuf niveaux périlleux — franchir une rivière déchaînée, traverser un lieu où s'entrechoquent des montagnes, échapper à des vents tranchants comme l'obsidienne — avant d'atteindre enfin le repos éternel auprès de Mictlantecuhtli et de son épouse Mictecacihuatl.</p>
+    <div class="legend-number">Royaume III — Mictlan</div>
+    <h3>Les Neuf Niveaux du Défunt</h3>
+    <p>L'âme aztèque, quelle qu'ait été sa conduite dans la vie, entreprend un voyage de quatre ans à travers les neuf niveaux de Mictlan — une structure numérique explicitement attestée par les commentaires nahuas des codex coloniaux, notamment le Codex Vaticanus A (Ríos). Les sources, dont les récits recueillis par Sahagún, décrivent classiquement, avec des noms et un ordre qui varient légèrement selon les manuscrits : la traversée d'une rivière déchaînée avec l'aide d'un chien, le passage entre des montagnes qui s'entrechoquent, l'ascension d'une colline hérissée d'obsidienne, une région de vents tranchants comme la pierre à feu, un lieu où flottent des bannières dans un vent cinglant, une pluie de flèches, un passage où le cœur est dévoré par des fauves, un lieu d'obscurité totale, et enfin une dernière rivière avant le repos éternel auprès de Mictlantecuhtli et de son épouse Mictecacihuatl.</p>
+    <p>Ce compte de neuf niveaux solidement attesté est, dans l'ensemble des cosmologies mondiales couvertes par cette série, l'un des rares échos authentiques — plutôt qu'artificiellement plaqués — du chiffre neuf rendu célèbre par les Neuf Mondes nordiques d'Yggdrasil.</p>
   </div>
 
   <div class="legend-block">
-    <div class="legend-number">Royaume V — Xibalba</div>
+    <div class="legend-number">Royaume IV — Les Cieux Mayas</div>
+    <h3>Des Strates Célestes Moins Fermement Attestées</h3>
+    <p>Plusieurs synthèses populaires et certains textes coloniaux tardifs, comme les livres du Chilam Balam, décrivent, à l'image du ciel aztèque voisin, treize niveaux célestes superposés au-dessus du monde des mortels. Mais contrairement à l'architecture des Treize Cieux aztèques, recoupée par plusieurs codex indépendants, la base textuelle proprement classique (250-900 apr. J.-C.) pour ce compte précis de treize cieux mayas reste nettement plus ténue — un chiffre transmis surtout par des sources tardives et des synthèses modernes que par une épigraphie classique univoque.</p>
+    <p>Ce que les inscriptions et l'iconographie de l'époque classique attestent avec plus de certitude, en revanche, c'est l'existence d'un monde supérieur peuplé d'oiseaux célestes, d'astres divinisés et de dieux comme Itzamná, gouvernant depuis les hauteurs un cosmos que l'arbre du monde relie verticalement à la terre et à l'inframonde.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume V — La Terre du Milieu</div>
+    <h3>Le Monde Relié par l'Arbre Cosmique</h3>
+    <p>Entre ciel et inframonde s'étend la terre du milieu, souvent représentée dans l'iconographie classique comme un disque ou un dos de caïman flottant sur les eaux primordiales. En son centre se dresse le Wacah Chan, l'arbre du monde sacré, fréquemment identifié à une ceiba, dont les racines plongent vers Xibalba tandis que ses branches soutiennent les strates célestes.</p>
+    <p>Cet arbre-pilier, motif récurrent des stèles et des vases peints classiques, joue un rôle proche de celui de l'arbre cosmique évoqué à Tlalticpac dans la tradition aztèque voisine — un axe vertical structurant le cosmos que l'on retrouve, sous des formes variées, dans plusieurs autres mythologies de cette série.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume VI — Xibalba</div>
     <h3>Le Lieu de l'Effroi</h3>
-    <p>Accessible par une grotte ou par le disque du serpent aquatique, Xibalba est gouverné par douze seigneurs de la maladie et de la mort, dont Un Mort et Sept Morts, qui soumettent leurs visiteurs à des épreuves truquées dans des maisons redoutables — la Maison des Lames, la Maison du Froid, la Maison des Jaguars, la Maison du Feu — avant que les Jumeaux Héros ne renversent enfin ce système par la ruse.</p>
-  </div>
-
-  <div class="legend-block">
-    <div class="legend-number">Royaume VI — Tlalocan</div>
-    <h3>Le Paradis Vert de Tlaloc</h3>
-    <p>Contrairement à un jugement moral classique, l'accès à ce paradis luxuriant dépend uniquement de la cause du décès — noyade, foudre, hydropisie, ou certaines maladies associées à l'eau — offrant une destination bienheureuse à des morts que d'autres traditions auraient jugées tragiques ou honteuses.</p>
-  </div>
-
-  <div class="legend-block">
-    <div class="legend-number">Royaume VII — Tamoanchan</div>
-    <h3>Le Jardin où Naquit l'Humanité</h3>
-    <p>C'est ici que Quetzalcoatl, après être descendu à Mictlan récupérer les ossements des générations disparues, les broie et les mélange à son propre sang pour façonner la cinquième humanité, celle du monde actuel.</p>
-  </div>
-
-  <div class="legend-block">
-    <div class="legend-number">Royaume VIII — Aztlán</div>
-    <h3>L'Île de Départ, Jamais Retrouvée</h3>
-    <p>Point de départ mythique de la longue migration mexica vers le centre du Mexique, dont l'emplacement précis reste débattu par les historiens — un flou géographique assumé, puisque l'essentiel du récit tient moins à la localisation exacte qu'au motif de l'errance guidée par la prophétie divine.</p>
-  </div>
-
-  <div class="legend-block">
-    <div class="legend-number">Royaume IX — Tenochtitlan</div>
-    <h3>La Cité Bâtie sur un Présage</h3>
-    <p>Après deux siècles d'errance, les Mexicas aperçoivent enfin, sur un îlot marécageux du lac Texcoco, le signe annoncé par Huitzilopochtli : un aigle dévorant un serpent, perché sur un nopal — la fondation de Tenochtitlan en ce lieu précis donnera naissance, deux siècles plus tard, à l'empire aztèque à son apogée.</p>
+    <p>Accessible par une grotte ou par le disque du serpent aquatique, Xibalba est gouverné par douze seigneurs de la maladie et de la mort, dont Un Mort et Sept Morts, qui soumettent leurs visiteurs à des épreuves truquées dans des maisons redoutables que le Popol Vuh nomme distinctement : la Maison des Lames, la Maison du Froid, la Maison des Jaguars, la Maison du Feu, la Maison des Chauves-Souris et la Maison Obscure — avant que les Jumeaux Héros ne renversent enfin ce système par la ruse.</p>
+    <p>Le chiffre de neuf niveaux parfois cité pour Xibalba — y compris dans une version précédente de cette page — n'a rien de la solidité du compte équivalent pour le Mictlan aztèque : le Popol Vuh, notre principale source, structure l'inframonde maya par ces maisons d'épreuves plutôt que par un décompte net de niveaux superposés. L'idée d'un Xibalba à neuf strates est une extrapolation postérieure, notamment associée aux lectures de l'épigraphiste J. E. S. Thompson comparant ce monde souterrain aux treize cieux mayas ; des chercheurs plus récents, dont Dennis Tedlock, traducteur et commentateur du Popol Vuh, contestent cette lecture et y voient davantage une fonction narrative et politique du texte qu'une cosmographie rigoureuse.</p>
   </div>
 </section>
 
@@ -761,51 +743,51 @@
 
   <div class="timeline">
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">v. 1500 av. J.-C.</span><h4>Civilisation Olmèque</h4>
+      <span class="timeline-year">v. 1500 av. J.-C.</span><h4>Civilisation Olmèque <span class="tag tag-commun">Commun</span></h4>
       <p>Culture-mère mésoaméricaine dont dérivent en partie les traditions religieuses aztèques et mayas ultérieures.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">v. 250 – 900 apr. J.-C.</span><h4>Période Classique Maya</h4>
+      <span class="timeline-year">v. 250 – 900 apr. J.-C.</span><h4>Période Classique Maya <span class="tag tag-maya">Maya</span></h4>
       <p>Apogée des grandes cités mayas, de l'écriture hiéroglyphique et du calendrier astronomique.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">v. 900 apr. J.-C.</span><h4>Effondrement Maya Classique</h4>
+      <span class="timeline-year">v. 900 apr. J.-C.</span><h4>Effondrement Maya Classique <span class="tag tag-maya">Maya</span></h4>
       <p>Abandon progressif des grandes cités du sud, dont les causes exactes (sécheresse, guerre, épuisement des sols) restent débattues par les archéologues.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">1325 apr. J.-C.</span><h4>Fondation de Tenochtitlan</h4>
+      <span class="timeline-year">1325 apr. J.-C.</span><h4>Fondation de Tenochtitlan <span class="tag tag-azteque">Aztèque</span></h4>
       <p>Établissement de la future capitale aztèque sur l'îlot du lac Texcoco, conformément au présage prophétisé.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">1428 apr. J.-C.</span><h4>Formation de la Triple Alliance</h4>
+      <span class="timeline-year">1428 apr. J.-C.</span><h4>Formation de la Triple Alliance <span class="tag tag-azteque">Aztèque</span></h4>
       <p>Union de Tenochtitlan, Texcoco et Tlacopan, fondement politique de l'empire aztèque à son apogée.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">1519 – 1521 apr. J.-C.</span><h4>Conquête espagnole de Tenochtitlan</h4>
+      <span class="timeline-year">1519 – 1521 apr. J.-C.</span><h4>Conquête espagnole de Tenochtitlan <span class="tag tag-azteque">Aztèque</span></h4>
       <p>Chute de l'empire aztèque face à Hernán Cortés, ses alliés indigènes et les épidémies dévastatrices apportées par les Européens.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">1562 apr. J.-C.</span><h4>L'Auto-da-fé de Maní</h4>
+      <span class="timeline-year">1562 apr. J.-C.</span><h4>L'Auto-da-fé de Maní <span class="tag tag-maya">Maya</span></h4>
       <p>Le frère franciscain Diego de Landa fait brûler la quasi-totalité des codex mayas connus, catastrophe documentaire irréparable pour la compréhension de cette civilisation.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">Vers 1550-1560 apr. J.-C.</span><h4>Rédaction du Popol Vuh</h4>
+      <span class="timeline-year">Vers 1550-1560 apr. J.-C.</span><h4>Rédaction du Popol Vuh <span class="tag tag-maya">Maya</span></h4>
       <p>Transcription en écriture latine, par des lettrés k'iche', de traditions mythologiques orales bien plus anciennes.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">1790 apr. J.-C.</span><h4>Découverte de la Pierre du Soleil</h4>
+      <span class="timeline-year">1790 apr. J.-C.</span><h4>Découverte de la Pierre du Soleil <span class="tag tag-azteque">Aztèque</span></h4>
       <p>Redécouverte fortuite, lors de travaux à Mexico, du célèbre calendrier aztèque monumental aujourd'hui exposé au Musée national d'anthropologie.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">1978 apr. J.-C.</span><h4>Redécouverte du Templo Mayor</h4>
+      <span class="timeline-year">1978 apr. J.-C.</span><h4>Redécouverte du Templo Mayor <span class="tag tag-azteque">Aztèque</span></h4>
       <p>Mise au jour accidentelle du temple principal de Tenochtitlan, dont le monolithe de Coyolxauhqui, sous le centre historique de Mexico.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">1950 – 1980 apr. J.-C.</span><h4>Déchiffrement de l'écriture maya</h4>
+      <span class="timeline-year">1950 – 1980 apr. J.-C.</span><h4>Déchiffrement de l'écriture maya <span class="tag tag-maya">Maya</span></h4>
       <p>Progrès décisifs, notamment par Yuri Knorozov et David Stuart, permettant de lire enfin une grande partie des inscriptions mayas classiques.</p>
     </div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
-      <span class="timeline-year">21 décembre 2012</span><h4>Fin du treizième Baktun</h4>
+      <span class="timeline-year">21 décembre 2012</span><h4>Fin du treizième Baktun <span class="tag tag-maya">Maya</span></h4>
       <p>Achèvement d'un grand cycle du Compte Long maya, largement déformé médiatiquement en prophétie de fin du monde à travers la planète.</p>
     </div></div>
   </div>
