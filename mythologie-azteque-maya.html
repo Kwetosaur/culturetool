@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythologie Aztèque &amp; Maya — Dieux, Royaumes &amp; Légendes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #14100f;
+    --bg-deep: #0d0a09;
+    --panel: #1e1815;
+    --panel-border: #4a3c2c;
+    --jade: #2f9e7f;
+    --jade-bright: #3fc79f;
+    --turquoise: #1f9baa;
+    --gold: #d4a017;
+    --blood: #a3271f;
+    --obsidian: #2a2320;
+    --text: #ece2cf;
+    --text-dim: #9b8e78;
+    --glow: rgba(212,160,23,0.28);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #1c1613 0%, #14100f 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{font-family:'Cinzel', serif; color:var(--jade-bright); letter-spacing:0.03em; font-weight:700;}
+  a{color:var(--gold);}
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(45deg, rgba(212,160,23,0.015) 0px, transparent 2px, transparent 4px, rgba(212,160,23,0.015) 6px);
+    z-index:1;
+  }
+  .meander-strip{display:block; width:100%; height:20px;}
+
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 20%, rgba(47,158,127,0.16), transparent 55%),
+      linear-gradient(180deg, #191411 0%, #14100f 60%, #0d0a09 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .epigraph-row{font-size:22px; letter-spacing:6px; color:var(--gold); opacity:0.85; margin-bottom:28px; font-family:'Cinzel', serif;}
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.4rem, 6.5vw, 4.8rem); margin:0;
+    background:linear-gradient(180deg, var(--jade-bright), var(--turquoise) 55%, var(--gold) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 40px rgba(47,158,127,0.2);
+  }
+  .hero .subtitle{font-family:'Cinzel', serif; font-size:1.05rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-top:14px;}
+  .hero .tagline{max-width:640px; margin:34px auto 0; font-style:italic; color:var(--text-dim); font-size:1.15rem;}
+  .divider{width:120px; height:2px; margin:36px auto; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+  .nav-pills{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:860px;}
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(212,160,23,0.04); transition:all .25s ease;
+  }
+  .nav-pills a:hover{color:var(--jade-bright); border-color:var(--gold); box-shadow:0 0 14px var(--glow);}
+
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 18px; justify-content:center;
+    padding:14px 20px; background:rgba(20,16,15,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--jade-bright); border-color:var(--jade-bright);}
+
+  section{position:relative; z-index:2; max-width:1000px; margin:0 auto; padding:100px 24px;}
+  .section-label{text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); font-size:0.8rem; margin-bottom:12px;}
+  .section-title{text-align:center; font-size:clamp(2rem,4.5vw,3rem); margin:0 0 16px;}
+  .section-intro{text-align:center; max-width:680px; margin:0 auto 60px; color:var(--text-dim); font-style:italic;}
+
+  .realms-wrap{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:22px;}
+  .realm-card{background:linear-gradient(160deg, var(--panel), var(--obsidian)); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden;}
+  .realm-card::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--jade), var(--gold));}
+  .realm-card h3{margin:0 0 4px; font-size:1.25rem; display:flex; align-items:center; gap:10px;}
+  .realm-num{color:var(--gold); font-size:1.05rem; opacity:0.9; font-family:'Cinzel', serif;}
+  .realm-card .realm-sub{font-size:0.85rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;}
+  .realm-card p{margin:0; font-size:0.98rem;}
+
+  .tree-diagram{text-align:center; margin:50px 0 70px; opacity:0.95;}
+  .tree-diagram svg{max-width:100%; height:auto;}
+
+  .pantheon-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px;}
+  .god-card{background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;}
+  .god-card:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--gold);}
+  .god-header{padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(47,158,127,0.08), transparent);}
+  .god-name{font-size:1.5rem; margin:0;}
+  .god-epithet{font-size:0.85rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px;}
+  .god-body{padding:18px 24px 24px;}
+  .god-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px;}
+  .god-body p{margin:0 0 10px; font-size:0.97rem;}
+  .god-body p:last-child{margin-bottom:0;}
+  .god-body strong{color:var(--jade-bright); font-weight:600;}
+
+  .creature-list{display:grid; gap:18px;}
+  .creature-item{display:grid; grid-template-columns:180px 1fr; gap:24px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:20px 24px;}
+  .creature-name{font-family:'Cinzel', serif; color:var(--gold); font-size:1.15rem; align-self:start;}
+  .creature-name span{display:block; font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; font-family:'EB Garamond', serif; font-style:italic;}
+
+  .legend-block{margin-bottom:56px; padding-bottom:52px; border-bottom:1px solid var(--panel-border);}
+  .legend-block:last-child{border-bottom:none;}
+  .legend-number{font-family:'Cinzel Decorative', serif; font-size:0.95rem; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;}
+  .legend-block h3{font-size:1.7rem; margin:0 0 20px;}
+  .legend-block p{margin:0 0 16px; font-size:1.02rem;}
+  .legend-block p:last-child{margin-bottom:0;}
+  .pull-quote{border-left:3px solid var(--jade-bright); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--jade-bright); font-size:1.1rem;}
+
+  .anecdote-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;}
+  .anecdote-card{background:linear-gradient(160deg, rgba(47,158,127,0.06), var(--panel)); border:1px solid var(--panel-border); border-left:3px solid var(--turquoise); padding:20px 22px; border-radius:3px;}
+  .anecdote-card h4{font-size:1rem; margin:0 0 8px; color:var(--gold); text-transform:uppercase; letter-spacing:0.04em;}
+  .anecdote-card p{margin:0; font-size:0.95rem; color:var(--text);}
+
+  .reach-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:50px;}
+  .reach-card{border:1px solid var(--panel-border); border-top:2px solid var(--turquoise); padding:18px 20px; background:var(--panel); border-radius:3px;}
+  .reach-card h4{margin:0 0 6px; font-size:1rem; color:var(--gold);}
+  .reach-card .reach-dist{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px;}
+  .reach-card p{margin:0; font-size:0.92rem;}
+
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg, transparent, var(--gold) 6%, var(--gold) 94%, transparent); transform:translateX(-50%);}
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--gold); box-shadow:0 0 10px var(--glow);}
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{font-family:'Cinzel', serif; color:var(--gold); font-size:1rem; letter-spacing:0.05em; display:block; margin-bottom:6px;}
+  .timeline-content h4{margin:0 0 6px; font-size:1.05rem; color:var(--jade-bright);}
+  .timeline-content p{margin:0; font-size:0.92rem; color:var(--text-dim);}
+
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{font-size:0.95rem; color:var(--jade-bright); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{border-left:3px solid var(--blood); padding:4px 20px; margin-top:32px; font-size:0.92rem; color:var(--text-dim); font-style:italic;}
+
+  footer{text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim);}
+  footer .epigraph-row{margin-bottom:20px; font-size:18px;}
+  footer .next-up{font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim);}
+  footer .next-up strong{color:var(--jade-bright);}
+
+  ::selection{background:var(--gold); color:#14100f;}
+
+  @media (max-width:640px){
+    .creature-item{grid-template-columns:1fr;}
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:780px; max-width:none;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.62rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){width:100%; left:0; text-align:left; padding:0 10px 44px 50px;}
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{left:13px; right:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="epigraph-row">IN XŌCHITL IN CUĪCATL</div>
+  <h1>Mythologie Aztèque &amp; Maya</h1>
+  <div class="subtitle">Dieux, Royaumes &amp; Légendes de Mésoamérique</div>
+  <p class="tagline">Du cinquième soleil qui éclaire notre âge à la fleur et au chant qui, seuls, disaient vrai sur cette terre : neuvième chapitre d'un voyage à travers les mythologies du monde.</p>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#royaumes">Les Neuf Royaumes</a>
+    <a href="#pantheon">Le Panthéon</a>
+    <a href="#genealogie">Arbre Généalogique</a>
+    <a href="#creatures">Créatures &amp; Êtres</a>
+    <a href="#legendes">Grandes Légendes</a>
+    <a href="#anecdotes">Anecdotes</a>
+    <a href="#monde">Le Monde Mésoaméricain</a>
+    <a href="#frise">Frise Chronologique</a>
+    <a href="#heritage">Héritage Actuel</a>
+  </nav>
+</header>
+
+<svg class="meander-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="stepfret0" width="24" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 20 L0 10 L8 10 L8 4 L16 4 L16 0" stroke="#d4a017" stroke-width="1.6" fill="none" opacity="0.45"/>
+      <path d="M8 20 L8 14 L16 14 L16 8 L24 8" stroke="#2f9e7f" stroke-width="1.6" fill="none" opacity="0.35"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#stepfret0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#royaumes">Royaumes</a>
+  <a href="#pantheon">Panthéon</a>
+  <a href="#genealogie">Généalogie</a>
+  <a href="#creatures">Créatures</a>
+  <a href="#legendes">Légendes</a>
+  <a href="#anecdotes">Anecdotes</a>
+  <a href="#monde">Le Monde</a>
+  <a href="#frise">Frise</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ROYAUMES ================= -->
+<section id="royaumes">
+  <div class="section-label">Cosmogonie</div>
+  <h2 class="section-title">Les Neuf Royaumes du Cosmos Mésoaméricain</h2>
+  <p class="section-intro">Cette page réunit deux traditions voisines mais distinctes — aztèque (nahua) et maya — qui partagent une même architecture cosmique fondamentale : treize cieux superposés, neuf niveaux de l'inframonde, et un monde du milieu constamment menacé d'effondrement, que seuls les rituels et le sang humain maintiennent en équilibre.</p>
+
+  <div class="realms-wrap">
+    <div class="realm-card">
+      <h3><span class="realm-num">I</span>Omeyocan</h3>
+      <div class="realm-sub">Le Lieu de la Dualité</div>
+      <p>Treizième et plus haut des cieux, résidence d'Ometeotl, principe divin double, à la fois masculin et féminin, origine de toute création aztèque.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">II</span>Les Treize Cieux</h3>
+      <div class="realm-sub">Ilhuicatl</div>
+      <p>Strates célestes superposées, chacune associée à un astre, une divinité ou un phénomène précis, du ciel de la lune jusqu'au séjour d'Ometeotl.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">III</span>Tlalticpac</h3>
+      <div class="realm-sub">Le Monde du Milieu</div>
+      <p>La surface terrestre elle-même, conçue comme un disque flottant sur les eaux primordiales, en équilibre précaire entre ciel et inframonde.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">IV</span>Mictlan</h3>
+      <div class="realm-sub">Le Royaume des Morts Aztèque</div>
+      <p>Inframonde à neuf niveaux que l'âme du défunt doit traverser durant quatre années d'épreuves avant d'atteindre le repos final auprès de Mictlantecuhtli.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">V</span>Xibalba</h3>
+      <div class="realm-sub">Le Royaume des Morts Maya</div>
+      <p>Monde souterrain redouté, "lieu de l'effroi", gouverné par des seigneurs cruels que doivent affronter les Jumeaux Héros du Popol Vuh.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">VI</span>Tlalocan</h3>
+      <div class="realm-sub">Le Paradis de Tlaloc</div>
+      <p>Royaume verdoyant et fertile réservé à ceux morts noyés, foudroyés ou de maladies liées à l'eau — jugement post-mortem fondé non sur la vertu mais sur la nature de la mort elle-même.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">VII</span>Tamoanchan</h3>
+      <div class="realm-sub">Le Jardin des Origines</div>
+      <p>Paradis primordial où les dieux créèrent l'humanité et où poussait l'arbre fleuri originel, lieu de naissance mythique de la civilisation elle-même.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">VIII</span>Aztlán</h3>
+      <div class="realm-sub">Le Pays d'Origine</div>
+      <p>Île mythique de départ d'où les sept tribus nahuas, dont les Mexicas, entamèrent leur longue migration vers la vallée de Mexico.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">IX</span>Tenochtitlan</h3>
+      <div class="realm-sub">La Cité Prophétique</div>
+      <p>Capitale fondée à l'endroit exact prophétisé par Huitzilopochtli — un aigle dévorant un serpent perché sur un figuier de barbarie — aujourd'hui cœur de Mexico.</p>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:90px; font-size:1.8rem;">Voyage détaillé à travers les Neuf Royaumes</h3>
+  <p class="section-intro" style="margin-bottom:50px;">Deux civilisations, deux corpus de textes (le Popol Vuh maya, les codex aztèques post-conquête), mais une même intuition cosmique : le monde est fragile, cyclique, et suspendu à un pacte constant entre les humains et le divin.</p>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume I — Omeyocan</div>
+    <h3>Le Sommet de la Dualité</h3>
+    <p>Au treizième ciel réside Ometeotl, divinité duelle unissant en une seule entité Ometecuhtli et Omecihuatl, seigneur et dame de la dualité, parents primordiaux dont naissent les quatre grands dieux créateurs qui façonneront ensuite, par leurs rivalités successives, chacun des âges du monde.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume II — Les Treize Cieux</div>
+    <h3>L'Architecture Verticale du Ciel</h3>
+    <p>Chaque niveau céleste porte une fonction précise : ciel de la lune et des nuages, ciel des étoiles, ciel du soleil, ciel de la comète, jusqu'aux cieux les plus élevés réservés aux forces créatrices primordiales — une cosmologie d'une précision architecturale rare, comparable par sa rigueur structurale aux strates égyptiennes ou aux royaumes nordiques de cette série.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume III — Tlalticpac</div>
+    <h3>Le Disque Terrestre en Équilibre</h3>
+    <p>La terre est conçue comme un disque plat entouré d'eau, orienté selon quatre directions cardinales, chacune associée à une couleur, un arbre cosmique et un présage particulier — au centre se dresse l'arbre du monde qui relie les treize cieux aux neuf niveaux souterrains.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume IV — Mictlan</div>
+    <h3>Les Neuf Épreuves du Défunt</h3>
+    <p>L'âme aztèque, quelle qu'ait été sa conduite dans la vie, entreprend un voyage de quatre ans à travers neuf niveaux périlleux — franchir une rivière déchaînée, traverser un lieu où s'entrechoquent des montagnes, échapper à des vents tranchants comme l'obsidienne — avant d'atteindre enfin le repos éternel auprès de Mictlantecuhtli et de son épouse Mictecacihuatl.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume V — Xibalba</div>
+    <h3>Le Lieu de l'Effroi</h3>
+    <p>Accessible par une grotte ou par le disque du serpent aquatique, Xibalba est gouverné par douze seigneurs de la maladie et de la mort, dont Un Mort et Sept Morts, qui soumettent leurs visiteurs à des épreuves truquées dans des maisons redoutables — la Maison des Lames, la Maison du Froid, la Maison des Jaguars, la Maison du Feu — avant que les Jumeaux Héros ne renversent enfin ce système par la ruse.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume VI — Tlalocan</div>
+    <h3>Le Paradis Vert de Tlaloc</h3>
+    <p>Contrairement à un jugement moral classique, l'accès à ce paradis luxuriant dépend uniquement de la cause du décès — noyade, foudre, hydropisie, ou certaines maladies associées à l'eau — offrant une destination bienheureuse à des morts que d'autres traditions auraient jugées tragiques ou honteuses.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume VII — Tamoanchan</div>
+    <h3>Le Jardin où Naquit l'Humanité</h3>
+    <p>C'est ici que Quetzalcoatl, après être descendu à Mictlan récupérer les ossements des générations disparues, les broie et les mélange à son propre sang pour façonner la cinquième humanité, celle du monde actuel.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume VIII — Aztlán</div>
+    <h3>L'Île de Départ, Jamais Retrouvée</h3>
+    <p>Point de départ mythique de la longue migration mexica vers le centre du Mexique, dont l'emplacement précis reste débattu par les historiens — un flou géographique assumé, puisque l'essentiel du récit tient moins à la localisation exacte qu'au motif de l'errance guidée par la prophétie divine.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume IX — Tenochtitlan</div>
+    <h3>La Cité Bâtie sur un Présage</h3>
+    <p>Après deux siècles d'errance, les Mexicas aperçoivent enfin, sur un îlot marécageux du lac Texcoco, le signe annoncé par Huitzilopochtli : un aigle dévorant un serpent, perché sur un nopal — la fondation de Tenochtitlan en ce lieu précis donnera naissance, deux siècles plus tard, à l'empire aztèque à son apogée.</p>
+  </div>
+</section>
+
+<!-- ================= PANTHEON ================= -->
+<section id="pantheon">
+  <div class="section-label">Panthéon</div>
+  <h2 class="section-title">Les Dieux Illustres</h2>
+  <p class="section-intro">Panthéon composite, réunissant ici les figures aztèques (nahuas) les plus centrales et leurs équivalents ou voisins mayas, tant les deux traditions dialoguent et se recoupent depuis des siècles.</p>
+
+  <div class="pantheon-grid">
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Huitzilopochtli</h3><div class="god-epithet">Colibri Gaucher, Dieu du Soleil et de la Guerre</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Soleil</span><span class="tag">Guerre</span><span class="tag">Patron de Tenochtitlan</span></div>
+        <p>Dieu tutélaire des Mexicas, né tout armé du sein de sa mère Coatlicue pour la défendre contre ses frères et sœurs jaloux. Chaque jour, il doit combattre les ténèbres pour que le soleil se lève — un combat cosmique perpétuel exigeant, selon la croyance officielle, l'offrande du sang humain pour maintenir sa force.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Quetzalcoatl</h3><div class="god-epithet">Serpent à Plumes</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Vent</span><span class="tag">Savoir</span><span class="tag">Création</span></div>
+        <p>L'une des figures les plus vénérées de toute la Mésoamérique, associée à la connaissance, à l'agriculture, à l'invention de l'écriture et du calendrier. C'est lui qui descend à Mictlan récupérer les ossements des humanités disparues pour façonner, mêlés à son propre sang, les hommes du cinquième âge.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Tezcatlipoca</h3><div class="god-epithet">Miroir Fumant</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Destin</span><span class="tag">Nuit</span><span class="tag">Rivalité</span></div>
+        <p>Frère et rival éternel de Quetzalcoatl, dieu omniscient dont le miroir d'obsidienne révèle les pensées et le destin de chacun. Leur affrontement perpétuel structure, selon les codex, la succession même des différents âges du monde.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Tlaloc</h3><div class="god-epithet">Dieu de la Pluie</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Pluie</span><span class="tag">Fertilité</span><span class="tag">Foudre</span></div>
+        <p>Divinité essentielle à toute société agricole mésoaméricaine, capable aussi bien de fertiliser les champs que de déclencher grêle et inondations dévastatrices — son culte exigeait parmi les rituels les plus redoutés du calendrier aztèque, dont des sacrifices d'enfants dont les larmes symbolisaient la pluie espérée.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Coatlicue</h3><div class="god-epithet">Celle à la Jupe de Serpents</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Terre</span><span class="tag">Maternité</span><span class="tag">Dévoreuse</span></div>
+        <p>Déesse-terre à l'iconographie effrayante, mère de Huitzilopochtli, fécondée mystérieusement par une boule de plumes tombée du ciel alors qu'elle balayait un temple — incarnation à la fois nourricière et dévoratrice du cycle de la vie et de la mort.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Xochiquetzal</h3><div class="god-epithet">Déesse des Fleurs et de l'Amour</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Beauté</span><span class="tag">Arts</span><span class="tag">Fertilité</span></div>
+        <p>Patronne des artisans, des amoureux et des femmes enceintes, associée aux fleurs, à la musique et au tissage — l'une des rares divinités du panthéon aztèque associée presque exclusivement à des aspects joyeux de l'existence.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Mictlantecuhtli</h3><div class="god-epithet">Seigneur du Royaume des Morts</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Mort</span><span class="tag">Inframonde</span></div>
+        <p>Souverain squelettique du Mictlan, gardien redouté mais non foncièrement malveillant des ossements sacrés des humanités disparues — c'est lui que Quetzalcoatl doit tromper pour récupérer ces ossements et créer la cinquième humanité.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Xipe Totec</h3><div class="god-epithet">Notre Seigneur à la Peau Écorchée</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Renouveau</span><span class="tag">Agriculture</span></div>
+        <p>Divinité associée à la régénération végétale et à l'orfèvrerie, dont les prêtres revêtaient rituellement la peau des victimes sacrifiées — pratique choquante pour un regard contemporain mais dont la logique symbolique renvoyait précisément à la terre qui se dépouille de son ancienne peau pour en revêtir une nouvelle à chaque saison.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Kukulkan</h3><div class="god-epithet">Serpent à Plumes Maya</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Vent</span><span class="tag">Savoir</span><span class="tag">Équivalent maya</span></div>
+        <p>Équivalent maya de Quetzalcoatl, dont la pyramide de Chichén Itzá est conçue pour qu'un jeu d'ombres, deux fois par an aux équinoxes, fasse littéralement "ramper" un serpent de lumière le long de son escalier — une prouesse d'ingénierie astronomique restée fonctionnelle plus de mille ans après sa construction.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Itzamná</h3><div class="god-epithet">Seigneur Maya du Ciel et de l'Écriture</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Savoir</span><span class="tag">Écriture</span><span class="tag">Créateur</span></div>
+        <p>Figure suprême du panthéon maya classique, inventeur mythique de l'écriture hiéroglyphique et du calendrier, souvent représenté comme un sage âgé bienveillant plutôt que comme un dieu guerrier.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ixchel</h3><div class="god-epithet">Déesse Maya de la Lune et de la Médecine</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Lune</span><span class="tag">Médecine</span><span class="tag">Tissage</span></div>
+        <p>Divinité maya majeure liée à la fertilité, à l'accouchement et à la guérison, dont le sanctuaire insulaire de Cozumel attirait des pèlerins de toute la région maya, y compris des femmes venues prier pour un accouchement sans danger.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Hun Hunahpú</h3><div class="god-epithet">Le Père des Jumeaux Héros</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Popol Vuh</span><span class="tag">Maïs</span></div>
+        <p>Vaincu et décapité par les seigneurs de Xibalba, sa tête accrochée à un arbre calebassier féconde miraculeusement Xquic, mère des Jumeaux Héros — sa mort, puis sa résurrection symbolique à travers ses fils, l'associe durablement au cycle du maïs, mourant et renaissant à chaque saison.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Hunahpú &amp; Xbalanqué</h3><div class="god-epithet">Les Jumeaux Héros</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Héros</span><span class="tag">Ruse</span><span class="tag">Popol Vuh</span></div>
+        <p>Héros centraux du Popol Vuh, qui descendent à Xibalba venger leur père en déjouant, un à un, les pièges truqués des seigneurs de la mort, avant de s'élever finalement au ciel pour devenir le soleil et la lune.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Chaac</h3><div class="god-epithet">Dieu Maya de la Pluie</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Pluie</span><span class="tag">Foudre</span><span class="tag">Équivalent de Tlaloc</span></div>
+        <p>Figure agricole essentielle du panthéon maya, souvent représenté brandissant une hache d'éclair — son culte, vital dans une région soumise à des cycles de sécheresse sévères, reste étudié aujourd'hui pour comprendre l'effondrement de certaines cités mayas classiques.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ah Puch</h3><div class="god-epithet">Seigneur Maya de la Mort</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Mort</span><span class="tag">Xibalba</span></div>
+        <p>Souvent identifié à Un Mort, l'un des principaux seigneurs de Xibalba, représenté avec un corps squelettique orné de clochettes et de signes de décomposition — figure funeste équivalente au Mictlantecuhtli aztèque.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Tonatiuh</h3><div class="god-epithet">Le Cinquième Soleil</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Soleil actuel</span><span class="tag">Sacrifice</span></div>
+        <p>Divinité solaire de l'âge présent, née du sacrifice volontaire du dieu Nanahuatzin dans un brasier rituel à Teotihuacan — pour continuer sa course, la tradition affirme qu'il exige d'être nourri du sang des sacrifices humains, fondement théologique central du système sacrificiel aztèque.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= GENEALOGIE ================= -->
+<section id="genealogie">
+  <div class="section-label">Filiations</div>
+  <h2 class="section-title">L'Arbre Généalogique des Dieux</h2>
+  <p class="section-intro">Trois lignées organisent ce panthéon composite : le couple primordial et ses quatre fils créateurs, la naissance guerrière de Huitzilopochtli, et la lignée maya des Jumeaux Héros du Popol Vuh. Trait plein = filiation. Trait pointillé = union. Trait en tirets = naissance surnaturelle ou hors-norme.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1200 680" xmlns="http://www.w3.org/2000/svg" style="max-width:1100px;">
+      <text x="180" y="24" fill="#d4a017" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">OMETEOTL ET LES QUATRE FILS</text>
+      <text x="580" y="24" fill="#a3271f" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">LA NAISSANCE DE HUITZILOPOCHTLI</text>
+      <text x="990" y="24" fill="#2f9e7f" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">LES JUMEAUX HÉROS (MAYA)</text>
+
+      <g stroke="#4a3c2c" stroke-width="1.4" fill="none">
+        <line x1="180" y1="55" x2="180" y2="100" stroke-dasharray="3,3"/>
+        <line x1="180" y1="120" x2="90" y2="165"/>
+        <line x1="180" y1="120" x2="150" y2="165"/>
+        <line x1="180" y1="120" x2="210" y2="165"/>
+        <line x1="180" y1="120" x2="270" y2="165"/>
+
+        <line x1="580" y1="55" x2="580" y2="100" stroke-dasharray="1,5" stroke="#a3271f"/>
+        <line x1="580" y1="120" x2="580" y2="165"/>
+        <line x1="580" y1="185" x2="500" y2="230"/>
+        <line x1="580" y1="185" x2="660" y2="230"/>
+
+        <line x1="990" y1="55" x2="990" y2="100" stroke-dasharray="1,5" stroke="#2f9e7f"/>
+        <line x1="990" y1="120" x2="990" y2="165" stroke-dasharray="1,5"/>
+        <line x1="990" y1="185" x2="930" y2="230"/>
+        <line x1="990" y1="185" x2="1050" y2="230"/>
+      </g>
+
+      <g font-family="EB Garamond, serif" font-size="12.5" fill="#ece2cf" text-anchor="middle">
+        <text x="180" y="50" font-size="11">Ometeotl (dualité)</text>
+        <text x="90" y="180" font-size="10.5">Tezcatlipoca Rouge</text>
+        <text x="150" y="180" font-size="10.5">Tezcatlipoca Noir</text>
+        <text x="210" y="180" font-size="10.5" fill="#3fc79f">Quetzalcoatl</text>
+        <text x="270" y="180" font-size="10.5">Huitzilopochtli</text>
+        <text x="180" y="196" font-size="9" fill="#9b8e78">(créateurs des âges du monde)</text>
+
+        <text x="580" y="115" fill="#9b8e78" font-size="9" font-style="italic">boule de plumes tombée du ciel</text>
+        <text x="580" y="180" font-weight="bold" font-size="11">Coatlicue</text>
+        <text x="500" y="248" font-size="10.5">Coyolxauhqui</text>
+        <text x="500" y="264" font-size="9" fill="#9b8e78">(sœur, démembrée)</text>
+        <text x="660" y="248" fill="#a3271f" font-weight="bold" font-size="11">Huitzilopochtli</text>
+        <text x="660" y="264" font-size="9" fill="#9b8e78">(né armé pour la défendre)</text>
+
+        <text x="990" y="115" fill="#9b8e78" font-size="9" font-style="italic">tête accrochée à un arbre</text>
+        <text x="990" y="180" font-weight="bold" font-size="11">Hun Hunahpú + Xquic</text>
+        <text x="930" y="248" font-size="10.5">Hunahpú</text>
+        <text x="1050" y="248" font-size="10.5">Xbalanqué</text>
+        <text x="990" y="264" font-size="9" fill="#9b8e78">(deviennent soleil et lune)</text>
+      </g>
+    </svg>
+  </div>
+
+  <p class="section-intro" style="margin-top:10px;">Le Popol Vuh maya (rédigé après la conquête, XVIe siècle, à partir de traditions orales bien plus anciennes) et les codex aztèques divergent sur de nombreux détails de filiation entre versions régionales — la tradition orale précoloniale ayant elle-même toujours comporté des variantes selon les cités et les époques.</p>
+</section>
+
+<!-- ================= CREATURES ================= -->
+<section id="creatures">
+  <div class="section-label">Bestiaire</div>
+  <h2 class="section-title">Créatures &amp; Êtres Légendaires</h2>
+  <p class="section-intro">Entre créatures cosmiques structurant les âges du monde et êtres du folklore populaire encore racontés aujourd'hui dans les villages mexicains et guatémaltèques.</p>
+
+  <div class="creature-list">
+    <div class="creature-item">
+      <div class="creature-name">Coyolxauhqui<span>La Sœur Démembrée</span></div>
+      <p>Sœur aînée de Huitzilopochtli, menant ses quatre cents frères dans une tentative de meurtre contre leur mère Coatlicue enceinte. Vaincue et décapitée par Huitzilopochtli né tout armé, son corps démembré roule au bas de la montagne sacrée — un mythe que l'on associe aujourd'hui à un monolithe circulaire monumental retrouvé au Templo Mayor de Mexico.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Xolotl<span>Le Chien Guide des Morts</span></div>
+      <p>Divinité canine jumelle de Quetzalcoatl, associée au monde souterrain et aux jumeaux, censée guider les âmes des défunts à travers les dangers du Mictlan — origine mythique probable de la croyance populaire persistante voulant qu'un chien guide l'âme après la mort.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Camazotz<span>Le Dieu Chauve-Souris Maya</span></div>
+      <p>Créature redoutable de Xibalba, décapitant Hunahpú lors de son passage dans la Maison des Chauves-Souris, l'une des épreuves les plus dangereuses affrontées par les Jumeaux Héros du Popol Vuh.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Le Serpent Emplumé Cosmique</div>
+      <p>Motif visuel omniprésent dans l'iconographie mésoaméricaine, incarnation du Serpent à Plumes divin, sculpté à grande échelle sur les façades des temples de Teotihuacan, Chichén Itzá et Tenochtitlan.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Le Jaguar Sacré</div>
+      <p>Animal le plus vénéré de la faune mésoaméricaine, associé à la nuit, au pouvoir royal et au monde souterrain — de nombreux souverains et guerriers d'élite, dont les célèbres guerriers-jaguars aztèques, en revêtaient rituellement la peau et l'identité symbolique.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Ahuizotl<span>Le Guetteur des Eaux</span></div>
+      <p>Créature aquatique redoutée, dotée d'une main griffue au bout de la queue, attirant ses victimes vers les profondeurs des lacs et rivières — son nom fut porté par l'un des plus puissants empereurs aztèques.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Cihuateteo<span>Femmes Divinisées</span></div>
+      <p>Esprits des femmes mortes en couches, honorées au même titre que les guerriers tombés au combat, censées accompagner le soleil durant sa course de midi jusqu'au coucher — statut funéraire d'exception rarement égalé dans d'autres mythologies pour cette forme spécifique de mort.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Vucub Caquix<span>Le Faux Soleil Vaniteux</span></div>
+      <p>Créature-oiseau orgueilleuse se faisant passer pour le soleil et la lune avant l'existence du monde actuel, vaincue et humiliée par les Jumeaux Héros dans l'un des premiers épisodes du Popol Vuh.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">La Llorona<span>La Femme qui Pleure</span></div>
+      <p>Figure du folklore populaire mexicain postérieur, aux racines partiellement précolombiennes, errant éternellement près des rivières à la recherche de ses enfants noyés — légende toujours activement racontée aujourd'hui pour effrayer les enfants désobéissants.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEGENDES ================= -->
+<section id="legendes">
+  <div class="section-label">Récits Fondateurs</div>
+  <h2 class="section-title">Grandes Légendes</h2>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende I</div>
+    <h3>Les Cinq Soleils</h3>
+    <p>Selon la tradition aztèque, le monde actuel n'est que le cinquième d'une série d'âges cosmiques, chacun détruit par une catastrophe différente : le premier soleil périt dévoré par des jaguars, le second emporté par des vents cataclysmiques, le troisième consumé par une pluie de feu, le quatrième noyé sous un déluge universel.</p>
+    <p>Pour créer le cinquième soleil, les dieux se réunissent à Teotihuacan et exigent un sacrifice volontaire : le riche et arrogant Tecciztecatl hésite devant le brasier, tandis que l'humble et pustuleux Nanahuatzin s'y jette sans attendre, devenant ainsi le soleil ; Tecciztecatl, honteux de son hésitation, saute à son tour et devient la lune.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende II</div>
+    <h3>La Naissance Guerrière de Huitzilopochtli</h3>
+    <p>Sur la montagne sacrée de Coatepec, Coatlicue, déjà mère de nombreux enfants, est mystérieusement fécondée par une boule de plumes tombée du ciel alors qu'elle balayait un temple. Outrés par cette grossesse jugée déshonorante, ses quatre cents autres enfants, menés par leur sœur Coyolxauhqui, décident de la tuer.</p>
+    <p class="pull-quote">Au moment même où les assaillants atteignent le sommet, Huitzilopochtli surgit du ventre de sa mère déjà adulte et tout armé, décapite Coyolxauhqui et disperse ses frères en une bataille fulgurante — un mythe de naissance guerrière réinterprété chaque jour comme la victoire quotidienne du soleil levant sur les étoiles de la nuit.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende III</div>
+    <h3>Le Départ de Quetzalcoatl</h3>
+    <p>Humilié par son rival Tezcatlipoca, qui le pousse par ruse à l'ivresse et à l'inceste avec sa propre sœur, Quetzalcoatl, honteux, quitte Tula, sa cité, promettant un jour de revenir depuis l'orient. Selon certaines versions, il s'embrase lui-même sur la côte et son cœur devient l'étoile du matin ; selon d'autres, il s'embarque sur un radeau de serpents vers la mer.</p>
+    <p>Cette prophétie de retour, réinterprétée bien plus tard dans un contexte de choc colonial, sera parfois évoquée — de façon largement postérieure et déformée par les chroniqueurs espagnols eux-mêmes — pour expliquer certaines hésitations initiales aztèques face à l'arrivée des conquistadors, un point que les historiens contemporains nuancent considérablement.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IV</div>
+    <h3>La Fondation de Tenochtitlan</h3>
+    <p>Après près de deux siècles d'errance depuis Aztlán, guidés par leur dieu Huitzilopochtli, les Mexicas atteignent enfin un îlot marécageux du lac Texcoco où se réalise le présage annoncé : un aigle dévorant un serpent, perché sur un figuier de barbarie poussant à même la roche.</p>
+    <p>Sur ce site jugé inhospitalier par leurs voisins, ils fondent en 1325 la cité qui deviendra, deux siècles plus tard, l'une des plus grandes villes du monde de son époque — cette scène fondatrice orne aujourd'hui encore le drapeau national mexicain.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende V</div>
+    <h3>Le Popol Vuh — La Création de l'Humanité</h3>
+    <p>Selon le grand livre maya-quiché, les dieux créateurs tentent à plusieurs reprises de façonner des êtres capables de les honorer par la parole : d'abord des animaux, incapables de parler ; puis des hommes d'argile, qui se dissolvent sous la pluie ; puis des hommes de bois, dénués d'âme et de mémoire, détruits par un déluge et transformés en singes.</p>
+    <p>Ce n'est qu'au quatrième essai, façonnant des hommes à partir de maïs blanc et jaune moulu, que les dieux obtiennent enfin des êtres dotés d'une intelligence suffisante — trop parfaite, en réalité, puisque les dieux, inquiets de leur voir une vue aussi perçante que la leur, décident aussitôt de voiler légèrement leur regard.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VI</div>
+    <h3>Hun Hunahpú et le Jeu de Balle Fatal</h3>
+    <p>Convoqués à Xibalba pour un jeu de balle rituel après avoir dérangé les seigneurs de la mort par le bruit de leurs propres parties nocturnes, Hun Hunahpú et son frère tombent dans une série de pièges truqués et sont finalement vaincus et décapités.</p>
+    <p>La tête de Hun Hunahpú, accrochée en guise d'avertissement à un arbre calebassier auparavant stérile, se met soudain à porter des fruits ; lorsque la jeune Xquic, fille d'un seigneur de Xibalba, s'approche par curiosité, la tête crache dans sa paume et la féconde miraculeusement — donnant naissance aux futurs Jumeaux Héros.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VII</div>
+    <h3>Les Jumeaux Héros contre Xibalba</h3>
+    <p>Hunahpú et Xbalanqué, convoqués à leur tour dans le royaume souterrain, déjouent méthodiquement chacun des pièges ayant vaincu leur père : ils survivent à la Maison des Lames, à la Maison du Froid et à la Maison des Jaguars grâce à leur ruse, échappant même de justesse à la Maison des Chauves-Souris malgré la décapitation temporaire de Hunahpú.</p>
+    <p class="pull-quote">Feignant de se laisser sacrifier volontairement puis de ressusciter devant les seigneurs ébahis, ils convainquent finalement Un Mort et Sept Morts eux-mêmes de se soumettre au même rituel — mais, cette fois, ne les ressuscitent pas, mettant fin au pouvoir tyrannique de Xibalba sur l'humanité.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VIII</div>
+    <h3>L'Ascension des Jumeaux au Ciel</h3>
+    <p>Leur victoire achevée, Hunahpú et Xbalanqué s'élèvent dans le ciel et deviennent respectivement le soleil et la lune, établissant ainsi, dans la cosmologie maya, une origine héroïque directe des deux astres les plus essentiels au calendrier et à l'agriculture.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IX</div>
+    <h3>La Guerre Fleurie</h3>
+    <p>Institution militaire ritualisée entre cités-États aztèques et leurs voisins alliés-rivaux, dont la fonction première n'était pas la conquête territoriale mais la capture de prisonniers destinés au sacrifice — un système de guerre codifié presque cérémoniel, aux règles convenues à l'avance entre les parties.</p>
+    <p>Les historiens continuent de débattre de son ampleur réelle et de sa fréquence exacte ; ce qui reste certain, c'est qu'elle occupait une place structurante dans l'équilibre politique et religieux du monde aztèque tardif.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende X</div>
+    <h3>Le Jeu de Balle Sacré</h3>
+    <p>Pratiqué dans toute la Mésoamérique sur des terrains monumentaux encore visibles aujourd'hui, ce jeu rituel opposant deux équipes propulsant une lourde balle de caoutchouc sans les mains ni les pieds rejouait symboliquement, à chaque partie, le combat cosmique entre les forces de la vie et celles de la mort — son issue, dans certains contextes rituels d'élite, pouvait se solder par le sacrifice de l'équipe perdante.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XI</div>
+    <h3>L'Arrivée de Hernán Cortés et la Chute de Tenochtitlan</h3>
+    <p>En 1519, l'arrivée des conquistadors espagnols, alliés à plusieurs peuples mésoaméricains rivaux des Mexicas et favorisés par des épidémies dévastatrices, aboutit en 1521 à la chute de Tenochtitlan et à l'effondrement rapide de l'empire aztèque.</p>
+    <p>La correspondance supposée entre Quetzalcoatl et l'arrivée de Cortés, longtemps popularisée, est aujourd'hui considérée par de nombreux historiens comme largement construite après coup par les chroniqueurs, aztèques comme espagnols, pour donner sens rétrospectivement à un effondrement d'une brutalité inouïe.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XII</div>
+    <h3>Les Prophéties du Chilam Balam</h3>
+    <p>Recueils de prophéties et de chroniques mayas du Yucatán, rédigés après la conquête en écriture latine mais préservant des traditions orales et calendaires bien plus anciennes, mêlant annonces cycliques de catastrophes, résistance culturelle et adaptation religieuse au christianisme imposé — témoignage rare de la persistance de la pensée maya précoloniale sous domination coloniale.</p>
+  </div>
+</section>
+
+<!-- ================= ANECDOTES ================= -->
+<section id="anecdotes">
+  <div class="section-label">Le Saviez-Vous</div>
+  <h2 class="section-title">Anecdotes &amp; Curiosités</h2>
+
+  <div class="anecdote-grid">
+    <div class="anecdote-card">
+      <h4>Le mot "chocolat"</h4>
+      <p>Ce terme dérive du nahuatl "xocolatl", boisson amère au cacao réservée à l'élite aztèque et considérée comme un présent divin, bien loin du chocolat sucré moderne.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le drapeau mexicain raconte un mythe</h4>
+      <p>L'aigle dévorant un serpent perché sur un figuier de barbarie, emblème national mexicain, reproduit directement le présage fondateur de Tenochtitlan.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le calendrier maya n'annonçait aucune fin du monde</h4>
+      <p>La fin du cycle du Compte Long en 2012, largement sensationnalisée médiatiquement à l'époque, marquait simplement la fin d'un cycle calendaire parmi d'autres, non une prophétie de fin du monde.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le serpent de lumière de Chichén Itzá</h4>
+      <p>Deux fois par an, aux équinoxes, un jeu d'ombres précisément calculé fait apparaître un serpent de lumière descendant l'escalier de la pyramide de Kukulkan — prouesse astronomique fonctionnelle depuis plus de mille ans.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le maïs, plus qu'une culture</h4>
+      <p>Selon le Popol Vuh, l'humanité elle-même est littéralement façonnée à partir de maïs — une centralité cosmologique de cette céréale rarement égalée ailleurs dans le monde.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Un système d'écriture complexe</h4>
+      <p>L'écriture hiéroglyphique maya, l'un des rares systèmes d'écriture pleinement développés inventés indépendamment dans le monde, ne fut déchiffrée de façon substantielle qu'à partir des années 1950-1980.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Templo Mayor, redécouvert par hasard</h4>
+      <p>Le temple principal de Tenochtitlan, dont Coyolxauhqui, ne fut redécouvert qu'en 1978 lors de travaux d'électricité dans le centre historique de Mexico, sous des siècles de constructions coloniales superposées.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LE MONDE MESOAMERICAIN ================= -->
+<section id="monde">
+  <div class="section-label">Géographie &amp; Expansion</div>
+  <h2 class="section-title">Un Monde Mésoaméricain aux Mille Cités</h2>
+  <p class="section-intro">Ni empire aztèque ni civilisation maya n'ont jamais constitué un bloc unique : un réseau dense de cités-États rivales et alliées, reliées par le commerce, la guerre et une matrice culturelle et religieuse commune.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
+      <g stroke="#4a3c2c" stroke-width="1.3" fill="none" stroke-dasharray="2,4">
+        <line x1="500" y1="230" x2="200" y2="170"/>
+        <line x1="500" y1="230" x2="170" y2="320"/>
+        <line x1="500" y1="230" x2="640" y2="110"/>
+        <line x1="500" y1="230" x2="810" y2="200"/>
+        <line x1="500" y1="230" x2="840" y2="360"/>
+      </g>
+      <circle cx="500" cy="230" r="9" fill="#d4a017"/>
+      <text x="500" y="205" fill="#2f9e7f" font-family="Cinzel, serif" font-size="14" text-anchor="middle" font-weight="700">VALLÉE DE MEXICO</text>
+      <g font-family="EB Garamond, serif" font-size="12" fill="#ece2cf" text-anchor="middle">
+        <text x="200" y="162" fill="#d4a017">Teotihuacan</text>
+        <text x="200" y="178" font-size="10" fill="#9b8e78">cité sacrée préexistante</text>
+        <text x="170" y="312" fill="#d4a017">Golfe du Mexique</text>
+        <text x="170" y="328" font-size="10" fill="#9b8e78">Olmèques, racines communes</text>
+        <text x="640" y="102" fill="#d4a017">Yucatán &amp; Guatemala</text>
+        <text x="640" y="118" font-size="10" fill="#9b8e78">cités mayas, Chichén Itzá, Tikal</text>
+        <text x="810" y="192" fill="#d4a017">Amérique Centrale</text>
+        <text x="810" y="208" font-size="10" fill="#9b8e78">diffusion culturelle maya</text>
+        <text x="840" y="352" fill="#d4a017">Monde entier</text>
+        <text x="840" y="368" font-size="10" fill="#9b8e78">diaspora, chicano, cinéma</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="reach-grid">
+    <div class="reach-card">
+      <h4>Teotihuacan</h4>
+      <span class="reach-dist">Ier - VIIe siècle apr. J.-C.</span>
+      <p>Cité monumentale préexistante à l'empire aztèque, considérée par les Mexicas eux-mêmes comme le lieu sacré où naquit le cinquième soleil, bien qu'abandonnée depuis des siècles à leur arrivée.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Le Monde Maya Classique</h4>
+      <span class="reach-dist">250 – 900 apr. J.-C.</span>
+      <p>Réseau de cités-États rivales (Tikal, Palenque, Copán, Calakmul) unies par une écriture, un calendrier et une cosmologie communes malgré une fragmentation politique constante.</p>
+    </div>
+    <div class="reach-card">
+      <h4>L'Empire Aztèque Tardif</h4>
+      <span class="reach-dist">1428 – 1521</span>
+      <p>La Triple Alliance de Tenochtitlan, Texcoco et Tlacopan domine, par tribut plutôt que par annexion directe, une grande partie du centre et du sud du Mexique actuel.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Diaspora Chicano et le Mouvement d'Aztlán</h4>
+      <span class="reach-dist">Depuis les années 1960</span>
+      <p>Le mouvement chicano aux États-Unis se réapproprie symboliquement Aztlán comme terre ancestrale, revendication identitaire et culturelle toujours vivace aujourd'hui.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Les Communautés Mayas Contemporaines</h4>
+      <span class="reach-dist">Aujourd'hui</span>
+      <p>Plusieurs millions de locuteurs de langues mayas vivent encore aujourd'hui au Mexique, au Guatemala et au Belize, perpétuant certains éléments rituels et calendaires précoloniaux.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Le Cinéma et la Culture Populaire Mondiale</h4>
+      <span class="reach-dist">XXe – XXIe siècle</span>
+      <p>Des films aux jeux vidéo, l'imaginaire aztèque et maya continue d'inspirer la culture populaire mondiale, non sans son lot de simplifications et de stéréotypes à déconstruire.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FRISE CHRONOLOGIQUE ================= -->
+<section id="frise">
+  <div class="section-label">Chronologie</div>
+  <h2 class="section-title">Frise Chronologique</h2>
+  <p class="section-intro">Des premières cités olmèques à la reconnaissance patrimoniale mondiale actuelle, une histoire marquée par une rupture d'une violence rare : la conquête espagnole du XVIe siècle.</p>
+
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 1500 av. J.-C.</span><h4>Civilisation Olmèque</h4>
+      <p>Culture-mère mésoaméricaine dont dérivent en partie les traditions religieuses aztèques et mayas ultérieures.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 250 – 900 apr. J.-C.</span><h4>Période Classique Maya</h4>
+      <p>Apogée des grandes cités mayas, de l'écriture hiéroglyphique et du calendrier astronomique.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 900 apr. J.-C.</span><h4>Effondrement Maya Classique</h4>
+      <p>Abandon progressif des grandes cités du sud, dont les causes exactes (sécheresse, guerre, épuisement des sols) restent débattues par les archéologues.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1325 apr. J.-C.</span><h4>Fondation de Tenochtitlan</h4>
+      <p>Établissement de la future capitale aztèque sur l'îlot du lac Texcoco, conformément au présage prophétisé.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1428 apr. J.-C.</span><h4>Formation de la Triple Alliance</h4>
+      <p>Union de Tenochtitlan, Texcoco et Tlacopan, fondement politique de l'empire aztèque à son apogée.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1519 – 1521 apr. J.-C.</span><h4>Conquête espagnole de Tenochtitlan</h4>
+      <p>Chute de l'empire aztèque face à Hernán Cortés, ses alliés indigènes et les épidémies dévastatrices apportées par les Européens.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1562 apr. J.-C.</span><h4>L'Auto-da-fé de Maní</h4>
+      <p>Le frère franciscain Diego de Landa fait brûler la quasi-totalité des codex mayas connus, catastrophe documentaire irréparable pour la compréhension de cette civilisation.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">Vers 1550-1560 apr. J.-C.</span><h4>Rédaction du Popol Vuh</h4>
+      <p>Transcription en écriture latine, par des lettrés k'iche', de traditions mythologiques orales bien plus anciennes.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1790 apr. J.-C.</span><h4>Découverte de la Pierre du Soleil</h4>
+      <p>Redécouverte fortuite, lors de travaux à Mexico, du célèbre calendrier aztèque monumental aujourd'hui exposé au Musée national d'anthropologie.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1978 apr. J.-C.</span><h4>Redécouverte du Templo Mayor</h4>
+      <p>Mise au jour accidentelle du temple principal de Tenochtitlan, dont le monolithe de Coyolxauhqui, sous le centre historique de Mexico.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1950 – 1980 apr. J.-C.</span><h4>Déchiffrement de l'écriture maya</h4>
+      <p>Progrès décisifs, notamment par Yuri Knorozov et David Stuart, permettant de lire enfin une grande partie des inscriptions mayas classiques.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">21 décembre 2012</span><h4>Fin du treizième Baktun</h4>
+      <p>Achèvement d'un grand cycle du Compte Long maya, largement déformé médiatiquement en prophétie de fin du monde à travers la planète.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Un Héritage Bien Vivant</h2>
+  <p class="section-intro">Entre survivance culturelle continue de millions de descendants et fascination mondiale parfois déformée, cette mythologie occupe une place singulière dans l'imaginaire contemporain.</p>
+
+  <div class="heritage-block">
+    <h4>Dans la langue de tous les jours</h4>
+    <p>Chocolat, tomate, avocat, coyote, chili : le nahuatl a enrichi durablement le vocabulaire mondial de la gastronomie et de la nature, souvent sans que les locuteurs en connaissent l'origine.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans l'identité culturelle contemporaine</h4>
+    <p>Le mouvement chicano aux États-Unis, les revendications culturelles mayas au Guatemala et au Mexique, et la fête mexicaine du Día de los Muertos puisent tous, à des degrés divers, dans cet héritage mythologique précolombien.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans l'astronomie et les mathématiques</h4>
+    <p>Le calendrier maya, l'un des plus précis jamais élaborés sans instruments optiques, et l'usage maya précoce du concept de zéro continuent de susciter l'admiration des historiens des sciences.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans le tourisme et le patrimoine mondial</h4>
+    <p>Chichén Itzá, Teotihuacan, Tikal et Palenque comptent aujourd'hui parmi les sites archéologiques les plus visités au monde, classés au patrimoine mondial de l'UNESCO.</p>
+  </div>
+
+  <p class="heritage-caution">Deux points de vigilance s'imposent ici, de nature différente. D'une part, la pratique aztèque du sacrifice humain, bien réelle, a fait l'objet d'une sensationalisation coloniale et postcoloniale disproportionnée, souvent instrumentalisée pour légitimer rétrospectivement la brutalité de la conquête espagnole elle-même — la réalité historique, complexe et documentée par l'archéologie, mérite mieux qu'une réduction caricaturale à l'horreur. D'autre part, l'autodafé de 1562 ordonné par Diego de Landa, qui détruisit la quasi-totalité des codex mayas préhispanaks, reste une perte documentaire irréparable : l'écrasante majorité de la littérature maya précoloniale a disparu à jamais dans ces flammes, et ce que nous savons aujourd'hui de cette civilisation repose sur une fraction infime de ce qui existait autrefois.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">IN XŌCHITL IN CUĪCATL</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série : <strong>Mythologie Slave</strong></p>
+</footer>
+
+</body>
+</html>
