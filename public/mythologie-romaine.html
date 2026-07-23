@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythologie Romaine — Dieux de l'Empire, Royaumes &amp; Légendes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #1a1210;
+    --bg-deep: #120c0a;
+    --panel: #241a16;
+    --panel-border: #5a3a2a;
+    --red: #8b1f1f;
+    --red-bright: #b8342f;
+    --purple: #5b2a6e;
+    --purple-bright: #7c46a0;
+    --bronze: #b08d57;
+    --bronze-bright: #d4af6a;
+    --text: #ede2d0;
+    --text-dim: #b3a082;
+    --glow: rgba(176,141,87,0.30);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #241a16 0%, #1a1210 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{font-family:'Cinzel', serif; color:var(--bronze-bright); letter-spacing:0.03em; font-weight:700;}
+  a{color:var(--bronze-bright);}
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.015) 3px);
+    z-index:1; opacity:0.4;
+  }
+  .meander-strip{display:block; width:100%; height:20px;}
+
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 20%, rgba(139,31,31,0.20), transparent 55%),
+      linear-gradient(180deg, #170f0d 0%, #1a1210 60%, #120c0a 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .epigraph-row{font-size:20px; letter-spacing:10px; color:var(--bronze); opacity:0.7; margin-bottom:28px; font-family:'Cinzel', serif;}
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.6rem, 7vw, 5.2rem); margin:0;
+    background:linear-gradient(180deg, var(--bronze-bright), var(--red-bright) 65%, #4a1414);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 40px rgba(139,31,31,0.25);
+  }
+  .hero .subtitle{font-family:'Cinzel', serif; font-size:1.1rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--purple-bright); margin-top:14px;}
+  .hero .tagline{max-width:640px; margin:34px auto 0; font-style:italic; color:var(--text-dim); font-size:1.15rem;}
+  .divider{width:120px; height:2px; margin:36px auto; background:linear-gradient(90deg, transparent, var(--bronze), transparent);}
+  .nav-pills{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:860px;}
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(255,255,255,0.02); transition:all .25s ease;
+  }
+  .nav-pills a:hover{color:var(--bronze-bright); border-color:var(--bronze); box-shadow:0 0 14px rgba(176,141,87,0.18);}
+
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 18px; justify-content:center;
+    padding:14px 20px; background:rgba(20,14,12,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--red-bright); border-color:var(--red-bright);}
+
+  section{position:relative; z-index:2; max-width:1000px; margin:0 auto; padding:100px 24px;}
+  .section-label{text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--red-bright); font-size:0.8rem; margin-bottom:12px;}
+  .section-title{text-align:center; font-size:clamp(2rem,4.5vw,3rem); margin:0 0 16px;}
+  .section-intro{text-align:center; max-width:680px; margin:0 auto 60px; color:var(--text-dim); font-style:italic;}
+
+  .realms-wrap{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:22px;}
+  .realm-card{background:linear-gradient(160deg, var(--panel), #170f0d); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden;}
+  .realm-card::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--purple), var(--bronze));}
+  .realm-card h3{margin:0 0 4px; font-size:1.25rem; display:flex; align-items:center; gap:10px;}
+  .realm-num{color:var(--bronze); font-size:1.05rem; opacity:0.85; font-family:'Cinzel', serif;}
+  .realm-card .realm-sub{font-size:0.85rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;}
+  .realm-card p{margin:0; font-size:0.98rem;}
+
+  .tree-diagram{text-align:center; margin:50px 0 70px; opacity:0.95;}
+  .tree-diagram svg{max-width:100%; height:auto;}
+
+  .pantheon-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px;}
+  .god-card{background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;}
+  .god-card:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.5), 0 0 0 1px var(--bronze);}
+  .god-header{padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(139,31,31,0.14), transparent);}
+  .god-name{font-size:1.5rem; margin:0;}
+  .god-epithet{font-size:0.85rem; color:var(--purple-bright); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px;}
+  .god-body{padding:18px 24px 24px;}
+  .god-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px;}
+  .god-body p{margin:0 0 10px; font-size:0.97rem;}
+  .god-body p:last-child{margin-bottom:0;}
+  .god-body strong{color:var(--bronze-bright); font-weight:600;}
+
+  .creature-list{display:grid; gap:18px;}
+  .creature-item{display:grid; grid-template-columns:180px 1fr; gap:24px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:20px 24px;}
+  .creature-name{font-family:'Cinzel', serif; color:var(--red-bright); font-size:1.15rem; align-self:start;}
+  .creature-name span{display:block; font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; font-family:'EB Garamond', serif; font-style:italic;}
+
+  .legend-block{margin-bottom:56px; padding-bottom:52px; border-bottom:1px solid var(--panel-border);}
+  .legend-block:last-child{border-bottom:none;}
+  .legend-number{font-family:'Cinzel Decorative', serif; font-size:0.95rem; color:var(--red-bright); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;}
+  .legend-block h3{font-size:1.7rem; margin:0 0 20px;}
+  .legend-block p{margin:0 0 16px; font-size:1.02rem;}
+  .legend-block p:last-child{margin-bottom:0;}
+  .pull-quote{border-left:3px solid var(--bronze); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--bronze-bright); font-size:1.1rem;}
+
+  .anecdote-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;}
+  .anecdote-card{background:linear-gradient(160deg, rgba(91,42,110,0.10), var(--panel)); border:1px solid var(--panel-border); border-left:3px solid var(--purple-bright); padding:20px 22px; border-radius:3px;}
+  .anecdote-card h4{font-size:1rem; margin:0 0 8px; color:var(--bronze-bright); text-transform:uppercase; letter-spacing:0.04em;}
+  .anecdote-card p{margin:0; font-size:0.95rem; color:var(--text);}
+
+  .reach-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:50px;}
+  .reach-card{border:1px solid var(--panel-border); border-top:2px solid var(--purple-bright); padding:18px 20px; background:var(--panel); border-radius:3px;}
+  .reach-card h4{margin:0 0 6px; font-size:1rem; color:var(--bronze-bright);}
+  .reach-card .reach-dist{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px;}
+  .reach-card p{margin:0; font-size:0.92rem;}
+
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg, transparent, var(--bronze) 6%, var(--bronze) 94%, transparent); transform:translateX(-50%);}
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--bronze-bright); box-shadow:0 0 10px var(--glow);}
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{font-family:'Cinzel', serif; color:var(--red-bright); font-size:1rem; letter-spacing:0.05em; display:block; margin-bottom:6px;}
+  .timeline-content h4{margin:0 0 6px; font-size:1.05rem; color:var(--bronze-bright);}
+  .timeline-content p{margin:0; font-size:0.92rem; color:var(--text-dim);}
+
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{font-size:0.95rem; color:var(--bronze-bright); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{border-left:3px solid var(--red-bright); padding:4px 20px; margin-top:32px; font-size:0.92rem; color:var(--text-dim); font-style:italic;}
+
+  footer{text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim);}
+  footer .epigraph-row{margin-bottom:20px; font-size:16px;}
+  footer .next-up{font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim);}
+  footer .next-up strong{color:var(--bronze-bright);}
+
+  ::selection{background:var(--bronze); color:#1a1210;}
+
+  @media (max-width:640px){
+    .creature-item{grid-template-columns:1fr;}
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:780px; max-width:none;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.62rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){width:100%; left:0; text-align:left; padding:0 10px 44px 50px;}
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{left:13px; right:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="epigraph-row">DII • HEROES • FATA</div>
+  <h1>Mythologie Romaine</h1>
+  <div class="subtitle">Dieux de l'Empire, Royaumes &amp; Légendes de la Ville Éternelle</div>
+  <p class="tagline">De l'âge d'or de Saturne à l'apothéose de César : le quatrième chapitre d'un voyage à travers les mythologies du monde.</p>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#royaumes">Les Sept Royaumes</a>
+    <a href="#pantheon">Le Panthéon</a>
+    <a href="#genealogie">Arbre Généalogique</a>
+    <a href="#creatures">Créatures &amp; Êtres</a>
+    <a href="#legendes">Grandes Légendes</a>
+    <a href="#anecdotes">Anecdotes</a>
+    <a href="#monde">Le Monde Romain</a>
+    <a href="#frise">Frise Chronologique</a>
+    <a href="#heritage">Héritage Actuel</a>
+  </nav>
+</header>
+
+<svg class="meander-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="laurel0" width="40" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 10 Q10 0 20 10 Q30 20 40 10" stroke="#b08d57" stroke-width="2" fill="none" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#laurel0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#royaumes">Royaumes</a>
+  <a href="#pantheon">Panthéon</a>
+  <a href="#genealogie">Généalogie</a>
+  <a href="#creatures">Créatures</a>
+  <a href="#legendes">Légendes</a>
+  <a href="#anecdotes">Anecdotes</a>
+  <a href="#monde">Le Monde</a>
+  <a href="#frise">Frise</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ROYAUMES ================= -->
+<section id="royaumes">
+  <div class="section-label">Cosmogonie</div>
+  <h2 class="section-title">Les Sept Royaumes du Monde Romain</h2>
+  <p class="section-intro">La cosmologie romaine se lit en deux temps. Un premier groupe — Caelum, la Mer, Orcus, les Dii Consentes — hérite presque sans changement de la Grèce, et n'a rien de bien original en soi. Un second groupe, en revanche, appartient en propre à Rome : Janus, le foyer domestique et l'apothéose des souverains défunts n'ont aucun équivalent cosmologique dans le monde grec — c'est là que la religion romaine invente vraiment.</p>
+
+  <h3 style="text-align:center; margin-top:60px; font-size:1.4rem; opacity:0.85;">Groupe A — La Cosmologie Héritée de la Grèce</h3>
+
+  <div class="realms-wrap">
+    <div class="realm-card">
+      <h3><span class="realm-num">I</span>Caelum</h3>
+      <div class="realm-sub">Le Ciel de Jupiter</div>
+      <p>Royaume céleste du souverain des dieux, source de la foudre et garant des serments, hérité presque tel quel de l'Olympe grec.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">II</span>Le Royaume de Neptune</h3>
+      <div class="realm-sub">La Mer</div>
+      <p>Domaine des tempêtes et des flots, hérité de Poséidon, mais aussi lié aux jeux équestres et aux courses de chars, chers aux Romains.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">III</span>Orcus</h3>
+      <div class="realm-sub">Les Enfers Romains</div>
+      <p>Monde souterrain gouverné par Pluton et Proserpine, traversé des mêmes fleuves infernaux que sa version grecque, mais nommé d'après le dieu punisseur des parjures — ses Champs Élysées en sont une région, non un royaume à part.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">IV</span>Dii Consentes</h3>
+      <div class="realm-sub">L'Olympe Romain Officiel</div>
+      <p>Douze divinités majeures alignées en six couples, liste votée et entretenue par l'État romain lui-même — une institution, là où la tradition grecque restait affaire de poètes.</p>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:70px; font-size:1.4rem; opacity:0.85;">Groupe B — Les Spécificités Religieuses de Rome</h3>
+
+  <div class="realms-wrap">
+    <div class="realm-card">
+      <h3><span class="realm-num">V</span>Janus</h3>
+      <div class="realm-sub">Le Dieu des Seuils</div>
+      <p>Dieu bifrons regardant à la fois le passé et l'avenir, gardien des portes et des commencements, sans le moindre équivalent dans le panthéon grec.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">VI</span>Le Foyer Domestique</h3>
+      <div class="realm-sub">Lares et Pénates</div>
+      <p>Chaque maison romaine constitue son propre sanctuaire, protégé par les esprits familiaux des Lares et les gardiens du garde-manger, les Pénates.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">VII</span>Le Ciel des Empereurs Divinisés</h3>
+      <div class="realm-sub">L'Apothéose Impériale</div>
+      <p>Innovation typiquement romaine : certains empereurs défunts, comme Jules César ou Auguste, sont formellement déclarés dieux (divus) par le Sénat.</p>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:90px; font-size:1.8rem;">Voyage détaillé à travers les Sept Royaumes</h3>
+  <p class="section-intro" style="margin-bottom:50px;">Si le squelette cosmologique romain reprend d'abord celui de la Grèce, ses institutions religieuses propres — le seuil, le foyer, l'apothéose des souverains — n'ont, elles, aucun équivalent direct chez leurs voisins helléniques.</p>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume I — Caelum</div>
+    <h3>Le Ciel qui Garantit les Serments</h3>
+    <p>Jupiter Optimus Maximus règne depuis le Caelum non seulement comme maître de la foudre mais comme garant suprême des serments et des traités — toute parole donnée sous son nom engage irrévocablement celui qui la prononce. Son temple sur le Capitole, cœur religieux de Rome, abrite le culte d'État le plus solennel de toute la République puis de l'Empire.</p>
+    <p>Sa relation avec les autres divinités célestes reprend largement celle de Zeus avec l'Olympe grec, mais Jupiter occupe une place plus institutionnelle encore : les consuls prêtent serment en son nom, et les triomphes militaires se concluent traditionnellement à son temple.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume II — Le Royaume de Neptune</div>
+    <h3>Les Flots et les Courses de Chars</h3>
+    <p>Hérité presque sans changement de Poséidon, Neptune règne sur les mers et les tremblements de terre — mais les Romains lui associent également, de façon plus spécifiquement romaine, les jeux équestres et les courses de chars, célébrés lors des Neptunalia en plein cœur de l'été.</p>
+    <p>Son culte reste pourtant secondaire comparé à celui de Jupiter ou Mars : Rome, puissance d'abord terrestre avant de devenir maritime, n'accorde à son dieu des mers qu'une place modeste dans la hiérarchie divine officielle, du moins jusqu'à l'expansion navale de la fin de la République.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume III — Orcus</div>
+    <h3>Les Enfers du Serment Rompu</h3>
+    <p>Le monde souterrain romain reprend la géographie infernale grecque — mêmes fleuves, mêmes juges, même Cerbère — mais son nom Orcus renvoie spécifiquement au châtiment des parjures et des serments trahis, reflet de l'importance capitale accordée par les Romains à la parole donnée. Pluton (Dis Pater), son souverain, reste une figure discrète du panthéon officiel : peu de temples lui sont directement consacrés, la mort étant un sujet que la religion romaine préfère aborder avec prudence plutôt que par un culte trop appuyé. Le mythe de son épouse Proserpine, enlevée puis contrainte de partager l'année entre les Enfers et le monde des vivants, se rejoue chaque printemps dans les Ludi Cereales dédiés à sa mère Cérès — fête agricole marquant le deuil puis l'espoir du retour des moissons.</p>
+    <p>Les Champs Élysées n'y forment pas un royaume séparé mais une simple région d'Orcus, et Virgile leur donne dans l'Énéide une coloration nettement patriotique : Énée, guidé par la Sibylle de Cumes, y rencontre son père Anchise, qui lui révèle en vision la future lignée glorieuse de Rome, de Romulus jusqu'à Auguste lui-même — un lieu de lumière et de bosquets de lauriers qui sert autant de récompense morale que de vitrine prophétique de la grandeur romaine à venir.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume IV — Dii Consentes</div>
+    <h3>Les Douze Grands Dieux Consentants</h3>
+    <p>La religion officielle romaine organise ses divinités majeures en six couples, les <em>Dii Consentes</em> : Jupiter et Junon, Neptune et Minerve, Mars et Vénus, Apollon et Diane, Vulcain et Vesta, Mercure et Cérès — une liste que la tradition fait remonter à un vers du poète Ennius, deux siècles avant notre ère. Leurs statues dorées, exposées ensemble au Forum romain, matérialisent visuellement cette hiérarchie divine officielle, votée et entretenue par l'État lui-même.</p>
+    <p>C'est précisément ce qui distingue ce panthéon officiel de son modèle grec : l'Olympe hellénique reste une affaire de poètes et de cultes locaux, quand les Dii Consentes forment une liste fermée, arrêtée et institutionnalisée par Rome elle-même — le mythe mis au service de l'État plutôt que l'inverse.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume V — Janus</div>
+    <h3>Le Gardien de Tous les Seuils</h3>
+    <p>Dieu bifrons, représenté avec deux visages tournés simultanément vers le passé et vers l'avenir, Janus préside à tous les commencements, à toutes les portes et à tous les passages — le premier mois de l'année, janvier, porte encore son nom, comme une porte ouverte sur les douze mois à venir. La tradition romaine le compte parmi les divinités les plus anciennes et les plus indigènes de Rome, sans le moindre équivalent direct dans le panthéon grec — l'exemple le plus souvent cité de ce que Rome a inventé cosmologiquement de son propre chef.</p>
+    <p>Les portes de son temple, sur le Forum, restaient traditionnellement ouvertes en temps de guerre, comme pour lui permettre de partir au combat aux côtés des légions, et fermées en temps de paix — un événement si rare dans l'histoire militaire romaine qu'il ne survint que de très rares fois en sept cents ans. Dieu d'aucun lieu précis et pourtant présent à chaque seuil franchi, Janus occupe une place à part dans cette liste : un royaume qui n'est pas un territoire, mais le passage lui-même.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume VI — Le Foyer Domestique</div>
+    <h3>Chaque Maison, un Sanctuaire</h3>
+    <p>Contrairement à la Grèce, où la religion domestique reste secondaire face aux grands cultes civiques, Rome place le foyer familial au cœur même de sa pratique religieuse quotidienne. Les Lares, esprits protecteurs du foyer et des carrefours, veillent sur chaque maison depuis un petit autel (lararium) où la famille dépose offrandes et prières chaque jour.</p>
+    <p>Les Pénates, quant à eux, gardent plus spécifiquement le garde-manger et la prospérité matérielle du foyer — Énée, fuyant Troie en flammes, emporte justement les Pénates de sa famille, dont dépendra symboliquement toute la prospérité future de Rome.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume VII — Le Ciel des Empereurs Divinisés</div>
+    <h3>L'Apothéose, Invention Romaine</h3>
+    <p>Aucune mythologie précédente n'avait institutionnalisé un mécanisme aussi direct entre pouvoir politique et divinité : à sa mort, un empereur jugé digne pouvait être formellement déclaré "divus" par un vote du Sénat, rejoignant ainsi officiellement le panthéon. Jules César, assassiné en 44 avant J.-C., devient le premier Romain ainsi divinisé, son âme représentée s'élevant au ciel sous la forme d'une comète apparue peu après sa mort.</p>
+    <p>Son fils adoptif Auguste, en organisant son propre culte tout en restant prudemment mortel de son vivant, institutionnalise durablement cette pratique — un outil de légitimation politique autant qu'une croyance religieuse sincère.</p>
+  </div>
+</section>
+
+<!-- ================= PANTHEON ================= -->
+<section id="pantheon">
+  <div class="section-label">Panthéon</div>
+  <h2 class="section-title">Les Dieux Illustres</h2>
+  <p class="section-intro">Beaucoup portent les traits de leurs cousins grecs, mais plusieurs — Janus, Quirinus, Vesta — n'ont aucun équivalent hellénique et révèlent ce que Rome a inventé de son propre chef.</p>
+
+  <div class="pantheon-grid">
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Jupiter</h3><div class="god-epithet">Roi des Dieux, Maître de la Foudre</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Ciel</span><span class="tag">Serments</span><span class="tag">État</span></div>
+        <p>Souverain suprême du panthéon romain, garant des serments et des traités, vénéré au sommet du Capitole. Les triomphes militaires se concluent traditionnellement par une procession jusqu'à son temple, où le général victorieux dépose ses lauriers.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Junon</h3><div class="god-epithet">Reine des Dieux, Protectrice de Rome</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Mariage</span><span class="tag">État</span><span class="tag">Protection</span></div>
+        <p>Épouse de Jupiter, protectrice particulière de Rome sous le titre de Junon Moneta — dont le temple abritait la Monnaie romaine, donnant son nom au mot "monnaie" lui-même.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Neptune</h3><div class="god-epithet">Dieu de la Mer</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Mer</span><span class="tag">Chevaux</span><span class="tag">Courses</span></div>
+        <p>Souverain des flots, associé également aux courses de chevaux et de chars lors des Neptunalia — un dieu resté longtemps secondaire dans une Rome d'abord terrestre avant son expansion navale.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Pluton</h3><div class="god-epithet">Seigneur des Enfers</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Morts</span><span class="tag">Serments rompus</span></div>
+        <p>Souverain discret du monde souterrain, également appelé Dis Pater ("père des richesses"), rarement honoré par des temples publics — la mort restant un sujet que la religion romaine préfère traiter avec prudence.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Cérès</h3><div class="god-epithet">Déesse des Moissons</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Agriculture</span><span class="tag">Plèbe</span></div>
+        <p>Déesse nourricière essentielle à une Rome dépendante du blé, son temple sur l'Aventin devient historiquement un refuge politique pour la plèbe romaine dans ses conflits contre le patriciat.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Minerve</h3><div class="god-epithet">Déesse de la Sagesse Stratégique</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Sagesse</span><span class="tag">Artisanat</span><span class="tag">Guerre</span></div>
+        <p>Héritière directe d'Athéna, patronne des artisans et des stratèges. Sa statue, le Palladium, aurait été rapportée de Troie par Énée et conservée dans le temple de Vesta comme garantie mystique de la sécurité de Rome.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Apollon</h3><div class="god-epithet">Dieu de la Lumière et des Arts</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Musique</span><span class="tag">Prophétie</span><span class="tag">Médecine</span></div>
+        <p>Fait rare : Rome adopte Apollon sans même changer son nom grec, signe de la fascination précoce de la culture romaine pour cette divinité en particulier, notamment sous l'empereur Auguste, qui en fait son protecteur personnel.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Diane</h3><div class="god-epithet">Déesse de la Chasse et de la Lune</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Chasse</span><span class="tag">Nature</span><span class="tag">Chasteté</span></div>
+        <p>Héritière d'Artémis, particulièrement vénérée dans son sanctuaire boisé du lac de Nemi, où un prêtre-gardien devait défendre sa charge en combat singulier contre tout rival prétendant — une coutume brutale et fascinante restée célèbre.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Mars</h3><div class="god-epithet">Dieu de la Guerre, Père de Rome</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Guerre</span><span class="tag">Agriculture</span><span class="tag">Fondation</span></div>
+        <p>Contrairement à son équivalent grec Arès, tenu en estime mesurée, Mars occupe une place d'honneur immense dans la religion romaine : père de Romulus et Rémus par son union avec la prêtresse Rhéa Silvia, il est littéralement le père mythique du peuple romain, également associé à l'agriculture et à la protection des frontières.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Vénus</h3><div class="god-epithet">Déesse de l'Amour, Mère de Rome</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Amour</span><span class="tag">Lignée</span><span class="tag">Politique</span></div>
+        <p>Bien plus qu'une simple déesse de l'amour : mère mythique d'Énée, elle devient l'ancêtre divine revendiquée de la gens Julia, la famille de Jules César et d'Auguste, qui exploitent activement cette filiation pour légitimer leur pouvoir politique.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Vulcain</h3><div class="god-epithet">Dieu du Feu et de la Forge</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Forge</span><span class="tag">Feu</span><span class="tag">Volcans</span></div>
+        <p>Forgeron divin comme Héphaïstos, mais aussi dieu redouté des incendies destructeurs et des éruptions volcaniques — son nom a donné le mot "volcan" dans la plupart des langues européennes.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Mercure</h3><div class="god-epithet">Messager des Dieux</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Commerce</span><span class="tag">Voyage</span><span class="tag">Éloquence</span></div>
+        <p>Patron des marchands et du commerce, son nom vient de "merx" (marchandise) — reflet d'une Rome pour qui l'échange commercial occupe une place bien plus centrale que dans la Grèce classique.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Bacchus</h3><div class="god-epithet">Dieu du Vin et de l'Extase</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Vin</span><span class="tag">Extase</span><span class="tag">Mystères</span></div>
+        <p>Ses rites, les Bacchanales, connaissent une expansion telle en Italie que le Sénat romain les interdit officiellement en 186 avant J.-C., craignant leurs débordements sociaux et politiques — une rare intervention directe de l'État contre un culte.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Vesta</h3><div class="god-epithet">Gardienne du Feu de Rome</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Foyer</span><span class="tag">Feu sacré</span><span class="tag">État</span></div>
+        <p>Déesse du foyer dont le feu, entretenu sans interruption dans son temple du Forum par les Vestales, symbolise la continuité même de Rome — l'éteindre accidentellement était considéré comme un présage funeste pour la Ville entière.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Janus</h3><div class="god-epithet">Le Dieu à Deux Visages</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Portes</span><span class="tag">Commencements</span><span class="tag">Sans équivalent grec</span></div>
+        <p>Divinité authentiquement romaine, sans équivalent grec direct, dieu des portes, des seuils et des transitions, représenté avec deux visages regardant simultanément le passé et l'avenir. Les portes de son temple restaient ouvertes en temps de guerre et fermées en temps de paix — un événement si rare qu'il ne se produisit que quelques fois en sept siècles d'histoire romaine.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Quirinus</h3><div class="god-epithet">Romulus Divinisé</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Fondation</span><span class="tag">État</span><span class="tag">Sans équivalent grec</span></div>
+        <p>Romulus lui-même, fondateur légendaire de Rome, disparu mystérieusement lors d'une tempête avant d'être proclamé dieu sous ce nom — le tout premier exemple romain d'un mortel élevé formellement au rang divin, modèle direct de l'apothéose impériale qui suivra des siècles plus tard.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= GENEALOGIE ================= -->
+<section id="genealogie">
+  <div class="section-label">Filiations</div>
+  <h2 class="section-title">L'Arbre Généalogique de Rome</h2>
+  <p class="section-intro">Loin de se limiter aux dieux, la généalogie romaine culmine dans une lignée politique bien réelle : de Vénus à Énée, d'Énée à la gens Julia, et de Mars à Romulus, fondateur de la Ville elle-même. Trait plein = filiation. Trait pointillé = union. Trait en tirets = légitimation politique revendiquée.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg" style="max-width:1100px;">
+      <text x="180" y="24" fill="#b08d57" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">LES DIEUX PRIMORDIAUX</text>
+      <text x="600" y="24" fill="#b8342f" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">VÉNUS, ÉNÉE ET LA GENS JULIA</text>
+      <text x="1010" y="24" fill="#7c46a0" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">MARS ET LA FONDATION DE ROME</text>
+
+      <g stroke="#5a3a2a" stroke-width="1.4" fill="none">
+        <line x1="180" y1="55" x2="140" y2="100"/>
+        <line x1="180" y1="55" x2="220" y2="100"/>
+        <line x1="140" y1="120" x2="220" y2="120" stroke-dasharray="3,3"/>
+        <line x1="140" y1="130" x2="140" y2="180"/>
+        <line x1="90" y1="220" x2="140" y2="195"/>
+        <line x1="190" y1="220" x2="140" y2="195"/>
+
+        <line x1="600" y1="60" x2="600" y2="105" stroke-dasharray="2,4" stroke="#b8342f"/>
+        <line x1="600" y1="115" x2="600" y2="165"/>
+        <line x1="600" y1="185" x2="600" y2="235"/>
+        <line x1="600" y1="255" x2="540" y2="300"/>
+        <line x1="600" y1="255" x2="660" y2="300"/>
+        <line x1="660" y1="320" x2="660" y2="365"/>
+        <line x1="660" y1="385" x2="600" y2="430" stroke-dasharray="1,5" stroke="#b08d57"/>
+        <line x1="660" y1="385" x2="720" y2="430" stroke-dasharray="1,5" stroke="#b08d57"/>
+
+        <line x1="1010" y1="55" x2="960" y2="100"/>
+        <line x1="1010" y1="55" x2="1010" y2="100" stroke-dasharray="3,3"/>
+        <line x1="985" y1="120" x2="985" y2="170"/>
+        <line x1="940" y1="210" x2="985" y2="185"/>
+        <line x1="1030" y1="210" x2="985" y2="185"/>
+        <line x1="940" y1="230" x2="940" y2="280" stroke-dasharray="1,5" stroke="#b8342f"/>
+      </g>
+
+      <g font-family="EB Garamond, serif" font-size="12.5" fill="#ede2d0" text-anchor="middle">
+        <text x="140" y="95" font-size="11">Ouranos</text>
+        <text x="220" y="95" font-size="11">(écume)</text>
+        <text x="140" y="192" fill="#b8342f" font-weight="bold">Vénus</text>
+        <text x="90" y="238" font-size="10.5">Anchise</text>
+        <text x="190" y="238" font-size="10.5" fill="#6e6047">(union)</text>
+
+        <text x="600" y="50" fill="#6e6047" font-size="10" font-style="italic">Vénus + Anchise</text>
+        <text x="600" y="160" fill="#b8342f" font-weight="bold" font-size="11">Énée</text>
+        <text x="600" y="230" font-size="11">Ascagne / Iule</text>
+        <text x="600" y="250" font-size="9" fill="#6e6047">(fonde la gens Julia)</text>
+        <text x="540" y="298" font-size="10.5">Rois d'Albe la Longue</text>
+        <text x="660" y="315" font-size="10.5">(lignée Julia)</text>
+        <text x="660" y="360" font-size="11">Jules César</text>
+        <text x="600" y="450" font-size="10.5">Auguste</text>
+        <text x="600" y="465" font-size="9" fill="#6e6047">(fils adoptif)</text>
+        <text x="720" y="450" font-size="10.5">Divus Julius</text>
+        <text x="720" y="465" font-size="9" fill="#6e6047">(apothéose, comète)</text>
+
+        <text x="960" y="95" font-size="11">Mars</text>
+        <text x="1010" y="95" font-size="11" fill="#6e6047">Rhéa Silvia</text>
+        <text x="985" y="182" fill="#7c46a0" font-weight="bold" font-size="11">Jumeaux</text>
+        <text x="940" y="204" font-size="10.5">Romulus</text>
+        <text x="1030" y="204" font-size="10.5">Rémus</text>
+        <text x="940" y="298" font-size="10.5" fill="#7c46a0">Quirinus</text>
+        <text x="940" y="312" font-size="9" fill="#6e6047">(apothéose)</text>
+      </g>
+    </svg>
+  </div>
+
+  <p class="section-intro" style="margin-top:10px;">Cette généalogie n'est pas qu'un mythe désintéressé : elle a servi, très concrètement, d'argument politique. César et Auguste s'en réclamaient ouvertement pour asseoir leur légitimité, faisant de la mythologie romaine l'une des rares au monde à avoir été utilisée aussi directement comme outil de propagande dynastique.</p>
+</section>
+
+<!-- ================= CREATURES ================= -->
+<section id="creatures">
+  <div class="section-label">Bestiaire</div>
+  <h2 class="section-title">Créatures &amp; Êtres Légendaires</h2>
+  <p class="section-intro">Entre esprits domestiques bienveillants et monstres terrassés par les héros fondateurs, le bestiaire romain reste étroitement lié à la vie quotidienne et à la fondation de la Ville.</p>
+
+  <div class="creature-list">
+    <div class="creature-item">
+      <div class="creature-name">La Louve du Capitole<span>Lupa</span></div>
+      <p>Louve ayant recueilli et allaité les jumeaux abandonnés Romulus et Rémus au bord du Tibre, devenue l'un des symboles les plus universellement reconnus de Rome elle-même, immortalisée par la statue de bronze conservée aujourd'hui aux Musées du Capitole.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Cacus<span>Le Monstre Cracheur de Feu</span></div>
+      <p>Géant à trois têtes semant la terreur près du futur site de Rome, voleur du bétail d'Hercule qu'il traîne à reculons dans sa caverne pour brouiller les traces. Démasqué par les mugissements du bétail, il est étranglé par Hercule — épisode fondateur de l'Ara Maxima, l'un des plus anciens autels de Rome.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Lares<span>Esprits Protecteurs du Foyer</span></div>
+      <p>Petites divinités familiales veillant sur la maison et les carrefours, honorées quotidiennement devant un autel domestique (lararium) — croyance si profondément ancrée qu'elle survivra, sous des formes atténuées, bien après la christianisation de l'Empire.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Pénates<span>Gardiens du Garde-Manger</span></div>
+      <p>Esprits protecteurs des réserves alimentaires et de la prospérité familiale, emportés par Énée depuis Troie en flammes — leur transfert symbolise la continuité de la civilisation troyenne jusqu'à la fondation de Rome.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Mânes<span>Esprits des Ancêtres</span></div>
+      <p>Âmes des ancêtres défunts, vénérées collectivement lors des fêtes des Parentalia et des Lemuria — l'inscription "Dis Manibus" ("aux dieux Mânes") figure sur d'innombrables épitaphes romaines retrouvées jusqu'à aujourd'hui.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Lémures<span>Esprits Errants et Malveillants</span></div>
+      <p>Contrairement aux Mânes apaisés, les Lémures désignent les morts inquiets ou mal ensevelis, errant la nuit et menaçant les vivants — apaisés lors de la fête nocturne des Lemuria par des rites précis, dont le nom a curieusement donné, des siècles plus tard, celui des lémuriens de Madagascar.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Faunus<span>L'Esprit Sauvage des Champs</span></div>
+      <p>Dieu rustique de la nature et de la fertilité, proche des satyres grecs, dont le culte central se célèbre lors des Lupercales de février — un rituel de purification et de fertilité qui influencera peut-être, bien plus tard, la fixation de la fête de la Saint-Valentin au calendrier chrétien.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">La Sibylle de Cumes<span>La Prophétesse Immortelle</span></div>
+      <p>Prêtresse d'Apollon dotée d'une vie extraordinairement longue mais non d'une éternelle jeunesse, réduite à l'état de voix chuchotante enfermée dans un vase à force de vieillesse. C'est elle qui guide Énée à travers les Enfers dans l'Énéide, lui montrant le rameau d'or nécessaire pour franchir les portes du royaume des morts.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Harpies<span>Oiseaux-Femmes Souillant les Festins</span></div>
+      <p>Créatures empruntées à la tradition grecque, rencontrées par Énée et ses compagnons lors de leur exil, souillant leurs repas et proférant de sombres prophéties sur la faim qui les attendrait avant la fondation de leur nouvelle patrie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEGENDES ================= -->
+<section id="legendes">
+  <div class="section-label">Récits Fondateurs</div>
+  <h2 class="section-title">Grandes Légendes</h2>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende I</div>
+    <h3>Saturne et l'Âge d'Or</h3>
+    <p>Chassé du ciel par son fils Jupiter, le Titan Saturne (Cronos) trouve refuge dans le Latium, où il règne sur les premiers hommes durant un âge d'or légendaire : ni guerre, ni esclavage, ni labeur pénible, la terre offrant ses fruits sans culture. En souvenir de ce règne béni, les Romains célèbrent chaque décembre les Saturnales, fête d'inversion sociale où maîtres et esclaves échangent temporairement leurs rôles.</p>
+    <p class="pull-quote">De nombreuses traditions de Noël — cadeaux, banquets, décorations, période de réjouissance hivernale — descendent directement des Saturnales romaines, absorbées puis christianisées des siècles plus tard.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende II</div>
+    <h3>La Naissance de Vénus</h3>
+    <p>Comme Aphrodite avant elle, Vénus naît de l'écume marine formée autour du sexe tranché d'Ouranos. Mais à Rome, sa légende prend une dimension supplémentaire : devenue mère d'Énée avec le mortel troyen Anchise, elle devient l'ancêtre revendiquée de toute la lignée julienne — un lien que Jules César exploitera ouvertement en consacrant un temple à "Vénus Genetrix", Vénus l'ancêtre, en plein Forum.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende III</div>
+    <h3>Énée Fuit Troie</h3>
+    <p>Alors que Troie s'effondre sous les flammes grecques, Énée, guerrier troyen et fils de Vénus, porte sur son dos son vieux père Anchise, tenant par la main son jeune fils Ascagne, tout en emportant les Pénates sacrés de sa famille. Son épouse Créüse, perdue dans la confusion de la fuite, disparaît — son fantôme apparaît ensuite à Énée pour lui révéler son destin : fonder, après un long périple, un nouveau royaume en Italie.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IV</div>
+    <h3>Énée aux Enfers</h3>
+    <p>Guidé par la Sibylle de Cumes, Énée descend dans le monde souterrain muni d'un rameau d'or, seul sésame accepté par Charon pour franchir le Styx en vie. Il y croise les ombres de nombreuses figures de son passé, dont celle, glaçante et silencieuse, de Didon, la reine qu'il a abandonnée.</p>
+    <p>Aux Champs Élysées, il retrouve enfin son père Anchise, qui lui dévoile en vision prophétique toute la lignée future de Rome — de Romulus jusqu'à Auguste lui-même — donnant tout son sens sacré à la mission d'Énée et, par extension, à la destinée de Rome tout entière.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende V</div>
+    <h3>Didon et Énée</h3>
+    <p>Échoué à Carthage après une tempête, Énée trouve refuge auprès de sa reine Didon, qui tombe éperdument amoureuse de lui — un amour que les dieux eux-mêmes ont en partie orchestré. Mais Jupiter rappelle Énée à son devoir : fonder Rome prime sur tout sentiment personnel, et le héros reprend la mer sans même un dernier adieu.</p>
+    <p>Anéantie de chagrin et de rage, Didon se donne la mort sur un bûcher, maudissant à jamais Énée et sa descendance — une malédiction que la tradition romaine associera plus tard, rétrospectivement, à l'origine mythique de l'inimitié entre Rome et Carthage lors des guerres puniques.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VI</div>
+    <h3>Romulus et Rémus</h3>
+    <p>Descendants d'Énée par la lignée des rois d'Albe la Longue, les jumeaux Romulus et Rémus, fils du dieu Mars et de la prêtresse Rhéa Silvia, sont abandonnés à la naissance sur ordre d'un grand-oncle usurpateur craignant pour son trône. Déposés au bord du Tibre, ils sont miraculeusement recueillis et allaités par une louve, puis élevés par un berger.</p>
+    <p>Devenus adultes, ils décident de fonder une nouvelle cité à l'endroit même de leur sauvetage — mais une dispute éclate sur l'emplacement exact et sur lequel des deux frères doit régner. Romulus finit par tuer Rémus lors d'une querelle, puis fonde seul la Ville, qui portera son nom : Rome.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VII</div>
+    <h3>L'Enlèvement des Sabines</h3>
+    <p>Peuplée essentiellement d'hommes — exilés, fugitifs et aventuriers accueillis sans distinction par Romulus —, la jeune Rome manque cruellement de femmes pour assurer sa descendance. Romulus organise alors un grand festival auquel il convie les peuples voisins, dont les Sabins, puis donne le signal à ses hommes d'enlever de force les jeunes femmes présentes.</p>
+    <p>La guerre qui s'ensuit entre Romains et Sabins prend fin de façon inattendue lorsque les femmes enlevées, désormais épouses et mères d'enfants romains, s'interposent en personne entre les deux armées, suppliant leurs pères et leurs maris de cesser le combat — les deux peuples finissent par fusionner en une seule nation.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VIII</div>
+    <h3>Numa Pompilius et la Nymphe Égérie</h3>
+    <p>Second roi de Rome après Romulus, Numa Pompilius choisit la voie de la sagesse plutôt que de la conquête. Selon la légende, il reçoit ses lois et ses institutions religieuses directement de la nymphe Égérie, qu'il rencontre secrètement chaque nuit dans un bosquet sacré hors des murs de la Ville.</p>
+    <p>C'est à lui que l'on attribue la création du collège des Vestales, du calendrier religieux romain et de nombreux cultes fondateurs — un roi bâtisseur d'institutions plutôt que de conquêtes, dont l'inspiration divine légitime la structure religieuse romaine dans son ensemble.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IX</div>
+    <h3>Cupidon et Psyché</h3>
+    <p>Récit tardif mais immensément populaire, transmis par l'écrivain latin Apulée : Psyché, mortelle d'une beauté si extraordinaire qu'elle rivalise avec Vénus elle-même, s'attire la jalousie de la déesse, qui charge son fils Cupidon de la punir. Mais celui-ci tombe amoureux d'elle et l'épouse secrètement, à condition qu'elle ne cherche jamais à voir son visage.</p>
+    <p>Rongée par la curiosité, Psyché finit par l'éclairer une nuit à la lueur d'une lampe — une goutte d'huile brûlante réveille Cupidon, qui s'enfuit, blessé dans sa confiance trahie. Psyché doit alors accomplir une série d'épreuves impossibles imposées par Vénus pour reconquérir son époux, avant d'être finalement élevée au rang de déesse et réunie pour toujours avec Cupidon.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende X</div>
+    <h3>Janus et les Deux Visages du Temps</h3>
+    <p>Dieu authentiquement romain sans équivalent grec direct, Janus préside à tous les commencements, à toutes les portes et à tous les seuils — le premier mois de l'année, janvier, porte encore son nom. Ses deux visages, tournés simultanément vers le passé et l'avenir, en font le gardien symbolique de toute transition.</p>
+    <p>Les portes de son temple restaient traditionnellement ouvertes en temps de guerre, comme pour lui permettre de partir au combat aux côtés des légions, et fermées en temps de paix — un événement si rare dans l'histoire militaire romaine qu'il ne survint que trois fois en sept cents ans, dont une fois sous le règne pacificateur d'Auguste.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XI</div>
+    <h3>Hercule et Cacus</h3>
+    <p>De retour d'un de ses travaux, menant le bétail volé au géant Géryon, Hercule fait halte près du site du futur Rome. Pendant son sommeil, le monstre local Cacus lui dérobe une partie du troupeau, en tirant les bêtes à reculons par la queue pour brouiller leurs traces dans la poussière et masquer sa cachette.</p>
+    <p>Mais les mugissements du bétail caché trahissent sa ruse : furieux, Hercule arrache l'entrée de la caverne de Cacus et l'étrangle à mains nues. En remerciement de sa délivrance, les habitants locaux élèvent l'Ara Maxima, l'un des plus anciens autels de Rome, consacré au culte d'Hercule bien avant même la fondation officielle de la Ville par Romulus.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XII</div>
+    <h3>L'Apothéose de César</h3>
+    <p>Assassiné aux ides de mars 44 avant J.-C. par un groupe de sénateurs craignant ses ambitions monarchiques, Jules César devient, quelques mois après sa mort, la première figure romaine officiellement divinisée par un vote du Sénat. Le poète Ovide raconte comment Vénus elle-même, mère mythique de la lignée julienne, intercepte l'âme de César avant qu'elle ne quitte son corps et l'emporte au ciel, où elle se transforme en étoile étincelante.</p>
+    <p>Une comète particulièrement brillante, réellement observée lors des jeux funéraires organisés en son honneur, est aussitôt interprétée par le peuple comme la preuve tangible de cette ascension céleste — la propagande politique et la croyance populaire se rejoignant en un seul et même phénomène, immédiatement récupéré par son héritier Auguste pour asseoir sa propre légitimité de "fils du divin César".</p>
+  </div>
+</section>
+
+<!-- ================= ANECDOTES ================= -->
+<section id="anecdotes">
+  <div class="section-label">Le Saviez-Vous</div>
+  <h2 class="section-title">Anecdotes &amp; Curiosités</h2>
+
+  <div class="anecdote-grid">
+    <div class="anecdote-card">
+      <h4>Les mois de l'année</h4>
+      <p>Janvier vient de Janus, mars de Mars, mai possiblement de Maia (mère de Mercure), juin de Junon — le calendrier occidental reste, encore aujourd'hui, largement peuplé de dieux romains.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Un vocabulaire tout aussi vivant</h4>
+      <p>"Céréale" vient de Cérès, "martial" de Mars, "mercuriel" de Mercure, "jovial" de Jupiter (Jove), "vénérer" et "vénérien" de Vénus : la langue française reste saturée de dieux romains sans même qu'on y pense.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les Vestales, un statut unique</h4>
+      <p>Ces prêtresses, chargées d'entretenir le feu sacré de Vesta, bénéficiaient de privilèges exceptionnels pour des femmes romaines — mais rompre leur vœu de chasteté de trente ans les exposait à être enterrées vivantes.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le Panthéon, temple de tous les dieux</h4>
+      <p>Ce monument encore debout à Rome, dédié à l'ensemble des divinités, conserve la plus grande coupole en béton non armé jamais construite avant l'ère moderne — un exploit architectural resté sans égal pendant plus de mille sept cents ans.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les jeux du cirque, un rite funéraire</h4>
+      <p>Les premiers combats de gladiateurs (munera) étaient à l'origine des rites funéraires honorant les défunts de haut rang, avant de devenir le spectacle de masse que l'on connaît.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>L'interpretatio romana</h4>
+      <p>Rome assimilait délibérément les dieux des peuples conquis à ses propres divinités (le dieu gaulois Teutatès devenant "Mars", par exemple) — un outil politique conscient pour faciliter l'intégration religieuse et culturelle des territoires annexés.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LE MONDE ROMAIN ================= -->
+<section id="monde">
+  <div class="section-label">Géographie &amp; Expansion</div>
+  <h2 class="section-title">Un Monde à l'Échelle d'un Empire</h2>
+  <p class="section-intro">Aucune mythologie de cette série ne s'est diffusée sur un territoire aussi vaste : à son apogée, le monde romain s'étend de l'Écosse à l'Euphrate, imposant partout ses dieux, ses temples et son calendrier.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
+      <g stroke="#5a3a2a" stroke-width="1.3" fill="none" stroke-dasharray="2,4">
+        <line x1="500" y1="230" x2="150" y2="140"/>
+        <line x1="500" y1="230" x2="120" y2="300"/>
+        <line x1="500" y1="230" x2="330" y2="400"/>
+        <line x1="500" y1="230" x2="620" y2="110"/>
+        <line x1="500" y1="230" x2="800" y2="180"/>
+        <line x1="500" y1="230" x2="880" y2="340"/>
+      </g>
+      <circle cx="500" cy="230" r="9" fill="#b08d57"/>
+      <text x="500" y="205" fill="#b8342f" font-family="Cinzel, serif" font-size="14" text-anchor="middle" font-weight="700">ROME</text>
+      <g font-family="EB Garamond, serif" font-size="12" fill="#ede2d0" text-anchor="middle">
+        <text x="150" y="132" fill="#b08d57">Bretagne</text>
+        <text x="150" y="148" font-size="10" fill="#b3a082">Mur d'Hadrien</text>
+        <text x="120" y="292" fill="#b08d57">Hispanie</text>
+        <text x="120" y="308" font-size="10" fill="#b3a082">provinces occidentales</text>
+        <text x="330" y="392" fill="#b08d57">Afrique du Nord</text>
+        <text x="330" y="408" font-size="10" fill="#b3a082">Carthage romaine</text>
+        <text x="620" y="102" fill="#b08d57">Gaule</text>
+        <text x="620" y="118" font-size="10" fill="#b3a082">Lutèce, Lyon</text>
+        <text x="800" y="172" fill="#b08d57">Grèce &amp; Asie Mineure</text>
+        <text x="800" y="188" font-size="10" fill="#b3a082">provinces orientales</text>
+        <text x="880" y="332" fill="#b08d57">Levant</text>
+        <text x="880" y="348" font-size="10" fill="#b3a082">Judée, Syrie</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="reach-grid">
+    <div class="reach-card">
+      <h4>La Bretagne Romaine</h4>
+      <span class="reach-dist">43 – 410 apr. J.-C.</span>
+      <p>Le mur d'Hadrien marque la frontière septentrionale de l'Empire ; temples et inscriptions dédiés à Jupiter, Mars et au culte de Mithra se retrouvent jusqu'en Écosse.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Gaule</h4>
+      <span class="reach-dist">58 – 51 av. J.-C.</span>
+      <p>Conquise par Jules César, elle se romanise en profondeur — Lutèce (Paris) et Lugdunum (Lyon) deviennent d'importants centres du culte impérial.</p>
+    </div>
+    <div class="reach-card">
+      <h4>L'Afrique du Nord</h4>
+      <span class="reach-dist">146 av. J.-C. et après</span>
+      <p>Carthage, rasée puis reconstruite par Rome, devient l'une des villes les plus prospères de l'Empire — un retournement de situation frappant après les guerres puniques.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Grèce et l'Orient</h4>
+      <span class="reach-dist">146 av. J.-C. et après</span>
+      <p>En conquérant la Grèce, Rome en absorbe presque intégralement la mythologie — le poète Horace résumera la situation d'une formule célèbre : "la Grèce conquise a conquis son farouche vainqueur".</p>
+    </div>
+    <div class="reach-card">
+      <h4>Le Danube et le Rhin</h4>
+      <span class="reach-dist">Ier siècle av. J.-C. – Ve siècle apr. J.-C.</span>
+      <p>Ces frontières fluviales, ponctuées de forteresses légionnaires, deviennent autant de foyers de diffusion de la religion romaine vers les peuples germaniques.</p>
+    </div>
+    <div class="reach-card">
+      <h4>L'Héritage Byzantin</h4>
+      <span class="reach-dist">330 – 1453 apr. J.-C.</span>
+      <p>L'Empire romain d'Orient perpétue institutions et symboles romains pendant mille ans encore après la chute de Rome elle-même, jusqu'à la prise de Constantinople.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FRISE CHRONOLOGIQUE ================= -->
+<section id="frise">
+  <div class="section-label">Chronologie</div>
+  <h2 class="section-title">Frise Chronologique</h2>
+  <p class="section-intro">De la fondation légendaire de Rome à sa résurgence dans l'imaginaire politique moderne.</p>
+
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">753 av. J.-C.</span><h4>Fondation légendaire de Rome</h4>
+      <p>Date traditionnelle retenue par les Romains eux-mêmes pour la fondation de leur ville par Romulus.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">509 av. J.-C.</span><h4>Fondation de la République</h4>
+      <p>Chute de la royauté étrusque, instauration du régime républicain qui durera près de cinq siècles.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">264 – 146 av. J.-C.</span><h4>Les guerres puniques</h4>
+      <p>Conflit existentiel contre Carthage, dont le mythe rétrospectif de Didon et Énée offrira une origine légendaire.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">44 av. J.-C.</span><h4>Assassinat et apothéose de César</h4>
+      <p>Premier Romain officiellement divinisé par le Sénat après sa mort.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">27 av. J.-C.</span><h4>Auguste, premier empereur</h4>
+      <p>Début du Principat et de la Pax Romana, deux siècles de stabilité relative dans tout l'Empire.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">29 – 19 av. J.-C.</span><h4>Virgile compose l'Énéide</h4>
+      <p>Commandée en partie par Auguste, cette épopée fixe durablement le mythe fondateur romain autour d'Énée.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">79 apr. J.-C.</span><h4>Éruption du Vésuve</h4>
+      <p>Pompéi et Herculanum, figées sous les cendres, livreront des siècles plus tard un témoignage inégalé sur la religion romaine quotidienne.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">313 apr. J.-C.</span><h4>Édit de Milan</h4>
+      <p>Constantin légalise le christianisme, amorçant le déclin progressif des cultes traditionnels romains.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">391 apr. J.-C.</span><h4>Interdiction des cultes païens</h4>
+      <p>L'empereur Théodose interdit officiellement les sacrifices et ferme les temples traditionnels.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">476 apr. J.-C.</span><h4>Chute de Rome</h4>
+      <p>Déposition du dernier empereur d'Occident, marquant la fin conventionnelle de l'Empire romain d'Occident.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1748</span><h4>Redécouverte de Pompéi</h4>
+      <p>Les fouilles archéologiques débutent, offrant un accès sans précédent au quotidien religieux romain.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">XVIIIe siècle</span><h4>Le néoclassicisme révolutionnaire</h4>
+      <p>La Révolution française et les pères fondateurs américains puisent abondamment dans le vocabulaire et l'imagerie républicaine romaine.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">Années 2000-2020</span><h4>Le grand retour populaire</h4>
+      <p>Séries télévisées, jeux vidéo et cinéma continuent de puiser abondamment dans l'imaginaire de la Rome antique et de ses mythes fondateurs.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Un Héritage Bien Vivant</h2>
+  <p class="section-intro">Peu de civilisations ont laissé une empreinte aussi structurelle sur le monde contemporain — jusque dans le vocabulaire même des institutions politiques actuelles.</p>
+
+  <div class="heritage-block">
+    <h4>Dans les institutions politiques</h4>
+    <p>Sénat, république, dictateur, veto, quorum : le vocabulaire politique mondial reste, aujourd'hui encore, largement latin. Le droit romain constitue la base directe des systèmes juridiques de "droit civil" utilisés dans la majeure partie du monde non anglophone.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans l'architecture</h4>
+    <p>La coupole du Panthéon romain inspire directement celle du Capitole des États-Unis et de nombreux autres bâtiments gouvernementaux à travers le monde ; l'arc de triomphe reste un motif monumental universel, de Paris à Pyongyang.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans la langue et le calendrier</h4>
+    <p>Les langues romanes (français, italien, espagnol, portugais, roumain) sont littéralement du latin évolué. Le calendrier grégorien lui-même descend directement du calendrier julien, réformé par Jules César.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans la culture populaire</h4>
+    <p>Des séries comme "Rome" aux films "Gladiator", en passant par d'innombrables jeux vidéo de stratégie, l'imaginaire romain reste l'un des cadres historico-mythologiques les plus exploités du divertissement contemporain.</p>
+  </div>
+
+  <p class="heritage-caution">Un bémol s'impose : l'imagerie impériale romaine — aigles, faisceaux (d'où le mot "fascisme"), formules latines de puissance — a été explicitement récupérée par des régimes autoritaires du XXe siècle, l'Italie mussolinienne en tête, qui se proclamait ouvertement héritière directe de la grandeur romaine. Un rappel que l'héritage antique n'est jamais politiquement neutre, et continue d'être invoqué, aujourd'hui encore, dans des contextes très variés.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">SENATVS POPVLVSQVE ROMANVS</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série : <strong>Mythologie Celtique</strong></p>
+</footer>
+
+</body>
+</html>

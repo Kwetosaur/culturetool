@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythologie Japonaise — Kami, Royaumes &amp; Légendes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #ede6da;
+    --bg-deep: #e2d8c6;
+    --panel: #f7f2e8;
+    --panel-border: #b5a488;
+    --vermillion: #c8362c;
+    --vermillion-bright: #e0483d;
+    --gold: #b8952f;
+    --indigo: #223a5e;
+    --indigo-bright: #35578a;
+    --black: #1c1c1c;
+    --text: #241f1a;
+    --text-dim: #6b6155;
+    --glow: rgba(200,54,44,0.28);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #f3ede1 0%, #ede6da 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{font-family:'Cinzel', serif; color:var(--indigo); letter-spacing:0.03em; font-weight:700;}
+  a{color:var(--vermillion);}
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, rgba(30,30,30,0.02) 0px, transparent 1px, transparent 2px, rgba(30,30,30,0.02) 3px);
+    z-index:1; opacity:0.6;
+  }
+  .meander-strip{display:block; width:100%; height:20px;}
+
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 15%, rgba(200,54,44,0.12), transparent 55%),
+      linear-gradient(180deg, #f3ede1 0%, #ede6da 60%, #e2d8c6 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .epigraph-row{font-size:22px; letter-spacing:10px; color:var(--vermillion); opacity:0.8; margin-bottom:28px; font-family:'Cinzel', serif;}
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.6rem, 7vw, 5.2rem); margin:0;
+    background:linear-gradient(180deg, var(--vermillion-bright), var(--indigo) 65%, #16283f);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 40px rgba(200,54,44,0.15);
+  }
+  .hero .subtitle{font-family:'Cinzel', serif; font-size:1.1rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-top:14px;}
+  .hero .tagline{max-width:640px; margin:34px auto 0; font-style:italic; color:var(--text-dim); font-size:1.15rem;}
+  .divider{width:120px; height:2px; margin:36px auto; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+  .nav-pills{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:860px;}
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(255,255,255,0.4); transition:all .25s ease;
+  }
+  .nav-pills a:hover{color:var(--vermillion); border-color:var(--gold); box-shadow:0 0 14px rgba(184,149,47,0.2);}
+
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 18px; justify-content:center;
+    padding:14px 20px; background:rgba(243,237,225,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--indigo); border-color:var(--indigo);}
+
+  section{position:relative; z-index:2; max-width:1000px; margin:0 auto; padding:100px 24px;}
+  .section-label{text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--vermillion); font-size:0.8rem; margin-bottom:12px;}
+  .section-title{text-align:center; font-size:clamp(2rem,4.5vw,3rem); margin:0 0 16px;}
+  .section-intro{text-align:center; max-width:680px; margin:0 auto 60px; color:var(--text-dim); font-style:italic;}
+
+  .realms-wrap{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:22px;}
+  .realm-card{background:linear-gradient(160deg, var(--panel), #ede4d0); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden;}
+  .realm-card::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--indigo), var(--vermillion));}
+  .realm-card h3{margin:0 0 4px; font-size:1.25rem; display:flex; align-items:center; gap:10px;}
+  .realm-num{color:var(--gold); font-size:1.05rem; opacity:0.9; font-family:'Cinzel', serif;}
+  .realm-card .realm-sub{font-size:0.85rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;}
+  .realm-card p{margin:0; font-size:0.98rem;}
+
+  .tree-diagram{text-align:center; margin:50px 0 70px; opacity:0.95;}
+  .tree-diagram svg{max-width:100%; height:auto;}
+
+  .pantheon-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px;}
+  .god-card{background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;}
+  .god-card:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(30,25,15,0.14), 0 0 0 1px var(--gold);}
+  .god-header{padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(34,58,94,0.08), transparent);}
+  .god-name{font-size:1.5rem; margin:0;}
+  .god-epithet{font-size:0.85rem; color:var(--vermillion); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px;}
+  .god-body{padding:18px 24px 24px;}
+  .god-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px;}
+  .god-body p{margin:0 0 10px; font-size:0.97rem;}
+  .god-body p:last-child{margin-bottom:0;}
+  .god-body strong{color:var(--indigo); font-weight:600;}
+
+  .creature-list{display:grid; gap:18px;}
+  .creature-item{display:grid; grid-template-columns:180px 1fr; gap:24px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:20px 24px;}
+  .creature-name{font-family:'Cinzel', serif; color:var(--vermillion); font-size:1.15rem; align-self:start;}
+  .creature-name span{display:block; font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; font-family:'EB Garamond', serif; font-style:italic;}
+
+  .legend-block{margin-bottom:56px; padding-bottom:52px; border-bottom:1px solid var(--panel-border);}
+  .legend-block:last-child{border-bottom:none;}
+  .legend-number{font-family:'Cinzel Decorative', serif; font-size:0.95rem; color:var(--vermillion); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;}
+  .legend-block h3{font-size:1.7rem; margin:0 0 20px;}
+  .legend-block p{margin:0 0 16px; font-size:1.02rem;}
+  .legend-block p:last-child{margin-bottom:0;}
+  .pull-quote{border-left:3px solid var(--gold); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--indigo); font-size:1.1rem;}
+
+  .anecdote-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;}
+  .anecdote-card{background:linear-gradient(160deg, rgba(34,58,94,0.06), var(--panel)); border:1px solid var(--panel-border); border-left:3px solid var(--indigo-bright); padding:20px 22px; border-radius:3px;}
+  .anecdote-card h4{font-size:1rem; margin:0 0 8px; color:var(--vermillion); text-transform:uppercase; letter-spacing:0.04em;}
+  .anecdote-card p{margin:0; font-size:0.95rem; color:var(--text);}
+
+  .reach-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:50px;}
+  .reach-card{border:1px solid var(--panel-border); border-top:2px solid var(--indigo-bright); padding:18px 20px; background:var(--panel); border-radius:3px;}
+  .reach-card h4{margin:0 0 6px; font-size:1rem; color:var(--vermillion);}
+  .reach-card .reach-dist{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px;}
+  .reach-card p{margin:0; font-size:0.92rem;}
+
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg, transparent, var(--gold) 6%, var(--gold) 94%, transparent); transform:translateX(-50%);}
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--vermillion); box-shadow:0 0 10px var(--glow);}
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{font-family:'Cinzel', serif; color:var(--vermillion); font-size:1rem; letter-spacing:0.05em; display:block; margin-bottom:6px;}
+  .timeline-content h4{margin:0 0 6px; font-size:1.05rem; color:var(--indigo);}
+  .timeline-content p{margin:0; font-size:0.92rem; color:var(--text-dim);}
+
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{font-size:0.95rem; color:var(--indigo); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{border-left:3px solid var(--vermillion); padding:4px 20px; margin-top:32px; font-size:0.92rem; color:var(--text-dim); font-style:italic;}
+
+  footer{text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim);}
+  footer .epigraph-row{margin-bottom:20px; font-size:18px;}
+  footer .next-up{font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim);}
+  footer .next-up strong{color:var(--indigo);}
+
+  ::selection{background:var(--vermillion); color:#f7f2e8;}
+
+  @media (max-width:640px){
+    .creature-item{grid-template-columns:1fr;}
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:780px; max-width:none;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.62rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){width:100%; left:0; text-align:left; padding:0 10px 44px 50px;}
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{left:13px; right:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="epigraph-row">八百万の神</div>
+  <h1>Mythologie Japonaise</h1>
+  <div class="subtitle">Kami, Royaumes &amp; Légendes de l'Archipel</div>
+  <p class="tagline">Du pont flottant du ciel à la grotte où se cacha le soleil : le huitième chapitre d'un voyage à travers les mythologies du monde.</p>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#royaumes">Les Royaumes</a>
+    <a href="#pantheon">Le Panthéon</a>
+    <a href="#genealogie">Arbre Généalogique</a>
+    <a href="#creatures">Créatures &amp; Êtres</a>
+    <a href="#legendes">Grandes Légendes</a>
+    <a href="#anecdotes">Anecdotes</a>
+    <a href="#monde">Le Monde Japonais</a>
+    <a href="#frise">Frise Chronologique</a>
+    <a href="#heritage">Héritage Actuel</a>
+  </nav>
+</header>
+
+<svg class="meander-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="seigaiha0" width="30" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 20 A15 15 0 0 1 30 20" stroke="#223a5e" stroke-width="1.6" fill="none" opacity="0.4"/>
+      <path d="M-15 20 A15 15 0 0 1 15 20" stroke="#c8362c" stroke-width="1.6" fill="none" opacity="0.3"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#seigaiha0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#royaumes">Royaumes</a>
+  <a href="#pantheon">Panthéon</a>
+  <a href="#genealogie">Généalogie</a>
+  <a href="#creatures">Créatures</a>
+  <a href="#legendes">Légendes</a>
+  <a href="#anecdotes">Anecdotes</a>
+  <a href="#monde">Le Monde</a>
+  <a href="#frise">Frise</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ROYAUMES ================= -->
+<section id="royaumes">
+  <div class="section-label">Cosmogonie</div>
+  <h2 class="section-title">Les Royaumes du Cosmos Japonais</h2>
+  <p class="section-intro">Le shinto ne dessine pas de cosmos rigide : il peuple avant tout le monde visible lui-même d'innombrables kami, esprits divins habitant rochers, cascades, arbres et sanctuaires. Le Kojiki et le Nihon Shoki (VIIIe siècle) attestent néanmoins un socle cosmologique assez stable en trois plans — le ciel de Takamagahara, la terre d'Ashihara no Nakatsukuni, les ténèbres souterraines de Yomi — auquel s'ajoute un quatrième pôle largement reconnu par la tradition et le folklore : le pays éternel de Tokoyo, par-delà la mer.</p>
+
+  <div class="realms-wrap">
+    <div class="realm-card">
+      <h3><span class="realm-num">I</span>Takamagahara</h3>
+      <div class="realm-sub">La Plaine Céleste Élevée</div>
+      <p>Royaume des dieux célestes, relié au monde terrestre par un pont flottant, Ame-no-Ukihashi, depuis lequel les premiers kami façonnèrent l'archipel.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">II</span>Ashihara no Nakatsukuni</h3>
+      <div class="realm-sub">Le Pays Central des Roseaux</div>
+      <p>Le Japon lui-même, monde des mortels et des kami terrestres, façonné à l'origine dans une confusion boueuse avant d'être solidifié — une terre où le sacré se disperse aujourd'hui encore en une multitude de seuils, sanctuaires et sommets vénérés.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">III</span>Yomi no Kuni</h3>
+      <div class="realm-sub">Le Pays des Ténèbres</div>
+      <p>Royaume souterrain des morts où se retire Izanami après son trépas, lieu de pourrissement et de souillure que même les dieux redoutent de visiter — auquel se rattache étroitement Ne no Kuni, le "Pays des Racines" de Susanoo.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">IV</span>Tokoyo no Kuni</h3>
+      <div class="realm-sub">Le Pays Éternel</div>
+      <p>Paradis lointain situé au-delà de la mer, terre d'immortalité et d'abondance perpétuelle rarement atteinte par les mortels, que plusieurs chercheurs rapprochent de la croyance okinawaïenne apparentée de Niraikanai.</p>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:90px; font-size:1.8rem;">Voyage détaillé à travers les Quatre Royaumes</h3>
+  <p class="section-intro" style="margin-bottom:50px;">Ce que le Kojiki et le Nihon Shoki racontent n'est pas seulement une cosmologie : c'est aussi, très explicitement, une généalogie politique justifiant la lignée impériale du Japon.</p>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume I — Takamagahara</div>
+    <h3>La Plaine où Naissent les Premiers Dieux</h3>
+    <p>Sur cette plaine céleste apparaissent, sans parents ni union, les tout premiers kami, dont Amenominakanushi, "maître auguste du centre du ciel", suivi de plusieurs générations de dieux invisibles avant l'arrivée d'Izanagi et Izanami, chargés de solidifier la terre encore flottante.</p>
+    <p>C'est depuis Takamagahara que ces derniers descendent sur le pont flottant du ciel, remuant l'océan primordial de leur lance ornée de joyaux jusqu'à ce qu'une goutte retombée forme la première île de l'archipel.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume II — Ashihara no Nakatsukuni</div>
+    <h3>Le Pays Central des Roseaux</h3>
+    <p>Terre des mortels et des kami terrestres, gouvernée un temps par Ōkuninushi avant qu'il ne cède pacifiquement l'autorité aux descendants d'Amaterasu — un mythe de transfert de pouvoir qui légitime directement, dans le récit officiel, la souveraineté de la lignée impériale japonaise sur l'ensemble de l'archipel.</p>
+    <p>Plutôt qu'en quelques hauts lieux uniques, le shinto disperse le sacré dans ce paysage terrestre tout entier : chaque torii marque un seuil, chaque sanctuaire (jinja) abrite un kami souvent lié à un rocher, une cascade ou un sommet remarquable — dont le mont Fuji, résidence de la déesse Konohanasakuya-hime et lieu de pèlerinage rituel depuis des siècles.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume III — Yomi no Kuni</div>
+    <h3>Le Pays de la Pourriture</h3>
+    <p>Lorsqu'Izanagi s'y aventure pour ramener son épouse défunte Izanami, il découvre avec horreur son corps déjà en décomposition, grouillant de créatures monstrueuses — une vision si insoutenable qu'il prend aussitôt la fuite, poursuivi par une Izanami furieuse d'avoir été vue dans cet état. Il scelle définitivement la pente frontière de Yomotsu Hirasaka d'un rocher colossal ; depuis l'autre côté, Izanami jure alors de faire mourir mille personnes chaque jour, tandis qu'Izanagi rétorque qu'il en fera naître mille cinq cents — origine mythique du cycle perpétuel de la naissance et de la mort humaine.</p>
+    <p>Le royaume voisin de Ne no Kuni, le "Pays des Racines" attribué à Susanoo après son bannissement céleste, lui est étroitement associé. Dans les strates les plus anciennes de la tradition, les deux semblent conceptuellement distincts — Yomi comme terre de mort et de pourriture, Ne no Kuni comme domaine plus ambivalent tourné vers la régénération et la vie sauvage — mais au moment de la rédaction du Kojiki et du Nihon Shoki, au VIIIe siècle, les deux territoires sont déjà largement confondus dans les textes, ce qui justifie de les rassembler ici plutôt que de leur consacrer des royaumes distincts.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume IV — Tokoyo no Kuni</div>
+    <h3>Le Pays Éternel au-delà des Flots</h3>
+    <p>Terre lointaine et immortelle, associée à l'abondance perpétuelle et à la vie éternelle, que peu de mortels atteignent jamais — un lointain écho japonais aux paradis marins que l'on retrouve, sous des formes variées, dans plusieurs autres traditions insulaires ou côtières de cette série.</p>
+    <p>Plusieurs chercheurs en folklore japonais rapprochent directement Tokoyo no Kuni de Niraikanai, la terre lointaine par-delà l'océan d'où proviennent les divinités et les âmes ancestrales dans les croyances d'Okinawa et des îles Ryūkyū — une parenté qui souligne combien cette notion d'un ailleurs marin bienveillant dépasse les seules frontières de l'archipel japonais central.</p>
+  </div>
+</section>
+
+<!-- ================= PANTHEON ================= -->
+<section id="pantheon">
+  <div class="section-label">Panthéon</div>
+  <h2 class="section-title">Les Dieux Illustres</h2>
+  <p class="section-intro">Le shinto compte, selon l'expression consacrée, "huit millions de kami" — figure de style désignant un nombre incalculable plutôt qu'un chiffre exact. En voici les plus vénérés.</p>
+
+  <div class="pantheon-grid">
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Izanagi</h3><div class="god-epithet">Celui qui Invite, le Créateur Masculin</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Création</span><span class="tag">Purification</span></div>
+        <p>Aux côtés de sa sœur-épouse Izanami, il façonne les îles du Japon et une multitude de kami. Après la mort d'Izanami, sa fuite hors de Yomi et le rituel de purification qui s'ensuit donnent naissance aux trois divinités les plus importantes du panthéon entier.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Izanami</h3><div class="god-epithet">Celle qui Invite, la Créatrice Féminine</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Création</span><span class="tag">Mort</span></div>
+        <p>Épouse-sœur d'Izanagi, elle meurt en donnant naissance au dieu du feu Kagutsuchi et devient, depuis Yomi, souveraine funeste du monde des morts — sa transformation du couple créateur originel vers une figure de mort marque un tournant dramatique majeur du récit.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Amaterasu</h3><div class="god-epithet">Déesse du Soleil</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Soleil</span><span class="tag">Lignée impériale</span></div>
+        <p>Née de l'œil gauche d'Izanagi lors de sa purification, elle règne sur Takamagahara et constitue l'ancêtre mythique directe de la lignée impériale japonaise. Sa retraite temporaire dans une grotte, plongeant le monde dans l'obscurité totale, compte parmi les récits les plus célèbres du shinto.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Susanoo</h3><div class="god-epithet">Dieu des Tempêtes</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Tempête</span><span class="tag">Mer</span><span class="tag">Rédemption</span></div>
+        <p>Né du nez d'Izanagi, frère turbulent d'Amaterasu, banni du ciel pour ses méfaits répétés. Une fois exilé sur terre, il rachète sa réputation en terrassant l'immense serpent Yamata no Orochi, découvrant dans sa queue l'épée sacrée Kusanagi.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Tsukuyomi</h3><div class="god-epithet">Dieu de la Lune</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Lune</span><span class="tag">Nuit</span></div>
+        <p>Né de l'œil droit d'Izanagi, frère d'Amaterasu qu'il offense mortellement en tuant la déesse de la nourriture Ukemochi pour un banquet qu'il jugeait souillé — un geste qui pousse Amaterasu à ne plus jamais lui faire face, expliquant mythiquement pourquoi le soleil et la lune ne partagent jamais le ciel simultanément.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ame-no-Uzume</h3><div class="god-epithet">Déesse de l'Aube et de la Joie</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Danse</span><span class="tag">Rire</span><span class="tag">Ruse</span></div>
+        <p>Déesse dont la danse comique et provocante, exécutée devant la grotte où s'était réfugiée Amaterasu, déclenche un tel éclat de rire général chez les autres kami que la déesse du soleil, intriguée, finit par sortir de sa cachette — sauvant ainsi le monde de l'obscurité éternelle.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Inari</h3><div class="god-epithet">Divinité du Riz et de la Prospérité</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Agriculture</span><span class="tag">Renards</span><span class="tag">Prospérité</span></div>
+        <p>Kami parmi les plus populaires du Japon contemporain, vénéré dans des dizaines de milliers de sanctuaires, dont le célèbre Fushimi Inari-taisha et ses milliers de torii vermillon. Les renards (kitsune) en sont les messagers et gardiens sacrés plutôt que la divinité elle-même.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Hachiman</h3><div class="god-epithet">Dieu de la Guerre et de l'Archerie</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Guerre</span><span class="tag">Protection</span></div>
+        <p>Divinité tutélaire des samouraïs et protecteur du Japon, associé de longue date à l'empereur Ōjin divinisé — l'une des rares figures shinto ayant été directement liée, dans la tradition populaire, à une figure historique réelle.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Raijin</h3><div class="god-epithet">Dieu du Tonnerre</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Tonnerre</span><span class="tag">Tambours</span></div>
+        <p>Représenté entouré de tambours qu'il frappe pour produire le tonnerre, souvent associé et opposé à son compagnon Fūjin dans l'iconographie traditionnelle des temples.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Fūjin</h3><div class="god-epithet">Dieu du Vent</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Vent</span><span class="tag">Tempête</span></div>
+        <p>Figure démoniaque à l'apparence redoutable, portant un grand sac dont il libère les vents — l'une des plus anciennes divinités du panthéon, souvent représentée en garde aux portes des temples bouddhistes autant que shinto.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ryūjin</h3><div class="god-epithet">Dieu-Dragon des Mers</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Mer</span><span class="tag">Dragon</span><span class="tag">Marées</span></div>
+        <p>Souverain sous-marin régnant depuis son palais de corail Ryūgū-jō, capable de contrôler les marées grâce à des joyaux magiques — sa fille Toyotama-hime épousera un descendant direct de la lignée impériale, liant mythiquement la maison régnante aux profondeurs marines.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Konohanasakuya-hime</h3><div class="god-epithet">Princesse des Fleurs Éphémères</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Mont Fuji</span><span class="tag">Fertilité</span><span class="tag">Fragilité</span></div>
+        <p>Déesse du mont Fuji et symbole de la vie humaine, aussi brève et éclatante que la floraison des cerisiers. Pour prouver la légitimité de sa grossesse rapide, elle s'enferme dans une hutte qu'elle embrase elle-même, accouchant sans dommage au cœur des flammes.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ebisu</h3><div class="god-epithet">Dieu de la Pêche et de la Fortune</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Pêche</span><span class="tag">Chance</span></div>
+        <p>Seul des Sept Dieux du Bonheur à être d'origine purement japonaise, souvent identifié comme un enfant infirme d'Izanagi et Izanami abandonné en mer avant de devenir, une fois recueilli, une divinité bienveillante de la prospérité.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Daikokuten</h3><div class="god-epithet">Dieu de la Richesse</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Richesse</span><span class="tag">Récoltes</span></div>
+        <p>Divinité de la prospérité et des récoltes, souvent représentée souriante, assise sur des sacs de riz, un maillet magique à la main — figure syncrétique issue en partie du dieu hindou Mahakala, importé via le bouddhisme.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Benzaiten</h3><div class="god-epithet">Déesse des Arts et de l'Eau</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Musique</span><span class="tag">Eau</span><span class="tag">Syncrétisme</span></div>
+        <p>Déesse jouant du biwa, protectrice des arts et de l'éloquence, dont l'origine remonte directement à la déesse hindoue Saraswati — l'un des exemples les plus clairs de syncrétisme religieux entre traditions indienne, bouddhiste et shinto au sein du panthéon japonais.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Sarutahiko</h3><div class="god-epithet">Le Guide des Carrefours</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Guidage</span><span class="tag">Carrefours</span></div>
+        <p>Kami terrestre imposant, au long nez rougeoyant, qui accueille et guide Ninigi, petit-fils d'Amaterasu, lors de sa descente du ciel vers la terre — figure fondatrice de la légitimité impériale, aujourd'hui encore associée à la protection des voyages et des nouveaux départs.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= GENEALOGIE ================= -->
+<section id="genealogie">
+  <div class="section-label">Filiations</div>
+  <h2 class="section-title">L'Arbre Généalogique des Kami</h2>
+  <p class="section-intro">Cette généalogie n'est pas qu'un récit religieux : elle constitue le fondement mythique officiel de la lignée impériale japonaise elle-même, jusqu'à l'empereur légendaire Jinmu. Trait plein = filiation. Trait pointillé = union. Trait en tirets = naissance par purification rituelle.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1200 660" xmlns="http://www.w3.org/2000/svg" style="max-width:1100px;">
+      <text x="180" y="24" fill="#223a5e" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">L'UNION D'IZANAGI ET IZANAMI</text>
+      <text x="600" y="24" fill="#c8362c" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">LA PURIFICATION D'IZANAGI</text>
+      <text x="1010" y="24" fill="#b8952f" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">LA DESCENDANCE D'AMATERASU</text>
+
+      <g stroke="#b5a488" stroke-width="1.4" fill="none">
+        <line x1="140" y1="55" x2="220" y2="55" stroke-dasharray="3,3"/>
+        <line x1="180" y1="65" x2="180" y2="110"/>
+        <line x1="180" y1="130" x2="180" y2="175"/>
+        <line x1="180" y1="195" x2="120" y2="240" stroke-dasharray="1,5" stroke="#c8362c"/>
+
+        <line x1="600" y1="55" x2="600" y2="100" stroke-dasharray="1,5" stroke="#c8362c"/>
+        <line x1="600" y1="120" x2="530" y2="165"/>
+        <line x1="600" y1="120" x2="600" y2="165"/>
+        <line x1="600" y1="120" x2="670" y2="165"/>
+
+        <line x1="530" y1="185" x2="530" y2="230" stroke-dasharray="1,5" stroke="#b8952f"/>
+        <line x1="530" y1="250" x2="530" y2="295"/>
+        <line x1="530" y1="315" x2="530" y2="360"/>
+        <line x1="530" y1="380" x2="530" y2="425"/>
+
+        <line x1="900" y1="60" x2="900" y2="100"/>
+        <line x1="900" y1="120" x2="900" y2="165"/>
+      </g>
+
+      <g font-family="EB Garamond, serif" font-size="12.5" fill="#241f1a" text-anchor="middle">
+        <text x="140" y="50" font-size="11">Izanagi</text>
+        <text x="220" y="50" font-size="11">Izanami</text>
+        <text x="180" y="128" font-size="11">Îles du Japon</text>
+        <text x="180" y="150" font-size="9" fill="#6b6155">+ nombreux kami</text>
+        <text x="120" y="256" font-size="10.5" fill="#c8362c">(mort d'Izanami,</text>
+        <text x="120" y="270" font-size="10.5" fill="#c8362c">fuite de Yomi)</text>
+
+        <text x="600" y="115" fill="#6b6155" font-size="9" font-style="italic">ablution purificatrice</text>
+        <text x="530" y="180" fill="#c8362c" font-weight="bold" font-size="11">Amaterasu</text>
+        <text x="530" y="196" font-size="9" fill="#6b6155">(œil gauche)</text>
+        <text x="600" y="180" font-size="11">Tsukuyomi</text>
+        <text x="600" y="196" font-size="9" fill="#6b6155">(œil droit)</text>
+        <text x="670" y="180" font-size="11">Susanoo</text>
+        <text x="670" y="196" font-size="9" fill="#6b6155">(nez)</text>
+
+        <text x="530" y="248" fill="#b8952f" font-size="10.5">Ame-no-Oshihomimi</text>
+        <text x="530" y="312" font-size="10.5">Ninigi</text>
+        <text x="530" y="328" font-size="9" fill="#6b6155">(descend sur terre)</text>
+        <text x="530" y="378" font-size="10.5">Hoori</text>
+        <text x="530" y="422" fill="#b8952f" font-weight="bold" font-size="11">Empereur Jinmu</text>
+        <text x="530" y="438" font-size="9" fill="#6b6155">(fondateur légendaire, 660 av. J.-C.)</text>
+
+        <text x="900" y="55" fill="#6b6155" font-size="10" font-style="italic">petit-fils</text>
+        <text x="900" y="115" font-size="11">Ninigi</text>
+        <text x="900" y="180" font-size="11">+ Konohanasakuya-hime</text>
+      </g>
+    </svg>
+  </div>
+
+  <p class="section-intro" style="margin-top:10px;">Le Kojiki (712) et le Nihon Shoki (720) divergent parfois sur des détails précis de cette généalogie — les deux chroniques, rédigées à quelques années d'écart seulement, portent déjà des versions légèrement différentes du même récit fondateur.</p>
+</section>
+
+<!-- ================= CREATURES ================= -->
+<section id="creatures">
+  <div class="section-label">Bestiaire</div>
+  <h2 class="section-title">Créatures &amp; Êtres Légendaires</h2>
+  <p class="section-intro">Entre monstres antiques des chroniques officielles et esprits populaires du folklore régional (yōkai), ce bestiaire continue aujourd'hui d'irriguer directement l'imaginaire visuel mondial.</p>
+
+  <div class="creature-list">
+    <div class="creature-item">
+      <div class="creature-name">Yamata no Orochi<span>Le Serpent à Huit Têtes</span></div>
+      <p>Monstre gigantesque aux huit têtes et huit queues, dévorant chaque année une jeune fille sacrifiée, terrassé par Susanoo grâce à un stratagème d'ivresse — huit cuves de saké fort, une pour chaque tête. Dans sa queue, il découvre l'épée sacrée Kusanagi, qui deviendra l'un des trois trésors impériaux.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Kitsune<span>Esprits-Renards</span></div>
+      <p>Messagers sacrés d'Inari, capables de prendre forme humaine et de vivre des centaines d'années, gagnant une queue supplémentaire (jusqu'à neuf) à mesure que grandit leur sagesse et leur pouvoir magique.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Le Tengu<span>L'Esprit Ailé des Montagnes</span></div>
+      <p>Créature au long nez ou au bec d'oiseau, habitant les forêts montagneuses, autrefois considérée comme malveillante avant d'évoluer, dans le folklore plus tardif, en gardien redoutable mais protecteur des arts martiaux.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Oni<span>Démons Cornus</span></div>
+      <p>Ogres à la peau rouge ou bleue, armés de massues cloutées, incarnation populaire du mal et du malheur, traditionnellement chassés chaque février lors du rituel de Setsubun à coups de haricots de soja lancés en criant "dehors les oni, dedans la chance !"</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Le Kappa<span>L'Esprit Aquatique des Rivières</span></div>
+      <p>Créature amphibie à carapace de tortue et cavité crânienne remplie d'eau, source de son pouvoir : la renverser force le kappa, par pure politesse rituelle, à s'incliner et à répandre l'eau, le neutralisant aussitôt.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Le Tanuki<span>Le Chien Viverrin Facétieux</span></div>
+      <p>Animal réel doté dans le folklore de pouvoirs métamorphiques extraordinaires, farceur bienveillant plutôt que menaçant, souvent représenté sous une forme rondouillarde et comique devant les commerces japonais en guise de porte-bonheur.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Yuki-onna<span>La Femme des Neiges</span></div>
+      <p>Esprit d'une beauté glaciale hantant les tempêtes de neige, capable de geler d'un souffle les voyageurs égarés — figure ambivalente, tantôt impitoyable, tantôt amoureuse d'un mortel qu'elle épargne.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Le Namazu<span>Le Poisson-Chat Sismique</span></div>
+      <p>Gigantesque silure vivant sous l'archipel, dont les mouvements provoqueraient les tremblements de terre — contenu par le dieu Kashima, qui l'immobilise à l'aide d'une pierre sacrée toujours vénérée aujourd'hui près de son sanctuaire.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Tamamo-no-Mae<span>Le Renard à Neuf Queues</span></div>
+      <p>Créature déguisée en courtisane d'une beauté envoûtante à la cour impériale, démasquée avant de causer la ruine du souverain, puis transformée en pierre maudite, la "pierre qui tue", continuant de propager son influence funeste selon la légende.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEGENDES ================= -->
+<section id="legendes">
+  <div class="section-label">Récits Fondateurs</div>
+  <h2 class="section-title">Grandes Légendes</h2>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende I</div>
+    <h3>Izanagi et Izanami — La Création du Japon</h3>
+    <p>Debout sur le pont flottant du ciel, Izanagi et Izanami remuent l'océan primordial de leur lance ornée de joyaux ; les gouttes retombant de sa pointe forment la première île. Ils y descendent, s'unissent, et engendrent successivement les îles de l'archipel japonais puis une multitude de kami incarnant montagnes, rivières, vents et végétation.</p>
+    <p>Leur premier enfant, cependant, naît difforme — les textes l'attribuent au fait qu'Izanami, lors de leur rituel nuptial, ait parlé la première, contrevenant à l'ordre naturel attendu entre les sexes. Recommençant correctement le rituel, ils engendrent enfin une descendance florissante.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende II</div>
+    <h3>La Mort d'Izanami et la Naissance du Feu</h3>
+    <p>En mettant au monde Kagutsuchi, dieu du feu, Izanami est mortellement brûlée par son propre enfant. Fou de chagrin et de rage, Izanagi tranche la tête de Kagutsuchi de son épée — de son sang et de son corps démembré naissent encore plusieurs kami supplémentaires, un motif de création par mutilation que l'on retrouve, sous des formes variées, dans plusieurs autres mythologies de cette série.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende III</div>
+    <h3>Izanagi aux Enfers</h3>
+    <p>Incapable de se résoudre à la perte de son épouse, Izanagi la suit jusqu'à Yomi, la suppliant de revenir. Izanami accepte, à condition qu'il ne la regarde surtout pas pendant qu'elle négocie sa libération avec les divinités infernales. Rongé par l'impatience, Izanagi allume une torche et découvre avec effroi le corps déjà pourrissant et grouillant d'asticots de son épouse.</p>
+    <p class="pull-quote">Humiliée et furieuse d'avoir été ainsi surprise, Izanami envoie des créatures démoniaques puis huit divinités du tonnerre à sa poursuite. Izanagi s'échappe de justesse et scelle l'entrée de Yomi avec un immense rocher, mettant fin pour toujours à leur union.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IV</div>
+    <h3>La Purification et la Naissance des Trois Nobles Enfants</h3>
+    <p>Souillé par son passage à Yomi, Izanagi se purifie en se baignant dans une rivière. En lavant son œil gauche naît Amaterasu, déesse du soleil ; en lavant son œil droit, Tsukuyomi, dieu de la lune ; en se nettoyant le nez, Susanoo, dieu des tempêtes — les trois divinités les plus importantes de tout le panthéon shinto, nées non d'une union mais d'un simple geste d'hygiène rituelle.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende V</div>
+    <h3>Susanoo et le Serpent Yamata no Orochi</h3>
+    <p>Banni de Takamagahara pour ses méfaits, Susanoo rencontre sur terre un couple de kami terrestres en pleurs : leurs sept premières filles ont déjà été dévorées par le monstrueux serpent à huit têtes Yamata no Orochi, et la huitième s'apprête à subir le même sort.</p>
+    <p>Susanoo propose un marché : il tuera le monstre en échange de la main de la jeune fille. Il fait disposer huit cuves de saké fort, une devant chacune des huit têtes du serpent, qui s'enivre et s'endort. Susanoo le décapite alors entièrement et découvre, en fendant l'une de ses queues, l'épée sacrée Kusanagi, qu'il offre en cadeau de réconciliation à sa sœur Amaterasu.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VI</div>
+    <h3>Amaterasu se Cache dans la Grotte</h3>
+    <p>Excédée par les provocations répétées de son frère Susanoo — qui saccage ses rizières sacrées et jette un poulain écorché dans sa salle de tissage, provoquant la mort accidentelle d'une de ses servantes — Amaterasu se retire dans une grotte céleste et en bloque l'entrée d'un rocher, plongeant l'univers entier dans une nuit permanente.</p>
+    <p>Désespérés, les autres kami organisent une fête devant l'entrée de la grotte : Ame-no-Uzume y exécute une danse si comique et provocante que l'assemblée entière éclate de rire. Intriguée par ce vacarme joyeux malgré l'obscurité totale, Amaterasu entrouvre le rocher — un miroir sacré, placé stratégiquement devant l'entrée, lui renvoie alors sa propre image resplendissante, et, fascinée, elle se laisse attirer suffisamment loin pour que les dieux referment la grotte derrière elle, restaurant la lumière du monde.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VII</div>
+    <h3>Le Lièvre Blanc d'Inaba</h3>
+    <p>Un lièvre, ayant trompé des requins pour traverser la mer en marchant sur leur dos et s'étant vanté de sa ruse au dernier moment, se fait dépouiller de sa fourrure par leur vengeance. Des divinités cruelles, croisant sa route, lui conseillent malicieusement de se baigner dans l'eau salée, aggravant ses souffrances.</p>
+    <p>C'est Ōkuninushi, plus bienveillant que ses frères, qui recommande enfin le remède véritable : se laver à l'eau douce puis se rouler dans le pollen des roseaux. Guéri, le lièvre prophétise qu'Ōkuninushi, et non ses frères aînés plus puissants, épousera la princesse qu'ils convoitaient tous — un conte de gentillesse récompensée qui annonce son ascension future.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VIII</div>
+    <h3>La Descente de Ninigi et les Trois Régalia</h3>
+    <p>Amaterasu envoie son petit-fils Ninigi gouverner la terre, lui confiant trois objets sacrés : le miroir Yata no Kagami ayant servi à la faire sortir de sa grotte, l'épée Kusanagi trouvée par Susanoo dans le serpent vaincu, et le joyau Yasakani no Magatama — les Trois Trésors Sacrés, encore aujourd'hui symboles officiels de la légitimité impériale, jamais exposés publiquement.</p>
+    <p>Guidé sur terre par le kami Sarutahiko, Ninigi épouse Konohanasakuya-hime ; leur descendance, après plusieurs générations, aboutira à Jinmu, premier empereur légendaire du Japon selon la chronologie traditionnelle.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IX</div>
+    <h3>Urashima Tarō</h3>
+    <p>Un jeune pêcheur sauve une tortue maltraitée par des enfants et se retrouve, en récompense, invité au palais sous-marin de Ryūgū-jō, où il vit dans un bonheur et un luxe sans pareil, ignorant l'écoulement du temps. Pris de nostalgie pour son village, il obtient la permission de rentrer, muni d'un coffret précieux qu'on lui interdit formellement d'ouvrir.</p>
+    <p>De retour à la surface, il découvre que des siècles entiers se sont écoulés : son village a totalement changé, sa famille est morte depuis longtemps. Désespéré, il ouvre malgré tout le coffret interdit — une fumée blanche s'en échappe, et Urashima Tarō vieillit instantanément de plusieurs siècles, s'effondrant en poussière.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende X</div>
+    <h3>Momotarō, l'Enfant de la Pêche</h3>
+    <p>Un couple sans enfant trouve, flottant sur une rivière, une pêche gigantesque d'où surgit, en son cœur, un jeune garçon. Devenu adulte, Momotarō part combattre les oni qui terrorisent la région, recrutant en chemin un chien, un singe et un faisan qu'il rallie par le partage de boulettes de mil.</p>
+    <p>Ensemble, ils vainquent les démons et rapportent leur trésor volé aux villages qu'ils avaient dépouillés — un conte populaire d'entraide et de courage, transmis aujourd'hui encore à chaque génération d'enfants japonais.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XI</div>
+    <h3>Konohanasakuya-hime et la Naissance dans les Flammes</h3>
+    <p>Mariée à Ninigi après une seule nuit de rencontre, Konohanasakuya-hime se retrouve enceinte si rapidement que son époux, soupçonneux, doute de sa fidélité. Pour prouver son innocence, elle s'enferme dans une hutte sans issue qu'elle incendie elle-même, jurant que si les enfants ne sont pas de Ninigi, le feu les consumera ; s'ils sont bien les siens, ils naîtront indemnes.</p>
+    <p>Elle accouche sans dommage au cœur même du brasier, prouvant ainsi sa fidélité de manière spectaculaire — récit fondateur qui associe durablement la déesse à la fois à la fragilité éphémère des fleurs et à une force intérieure insoupçonnée.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XII</div>
+    <h3>La Lignée Impériale — D'Amaterasu à l'Empereur Jinmu</h3>
+    <p>Selon la chronologie légendaire consignée dans le Kojiki et le Nihon Shoki, Jinmu, arrière-arrière-petit-fils de Ninigi et donc descendant direct d'Amaterasu, fonde officiellement le Japon en 660 avant J.-C. et devient le premier empereur d'une lignée que la tradition présente comme ininterrompue jusqu'à nos jours.</p>
+    <p>Cette généalogie mythologique constitue le fondement religieux du "kokutai", concept d'unité nationale sacrée du Japon, encore officiellement affirmé jusqu'en 1946, lorsque l'empereur Hirohito renonce publiquement, sous la pression de l'après-guerre, à toute prétention de descendance divine littérale.</p>
+  </div>
+</section>
+
+<!-- ================= ANECDOTES ================= -->
+<section id="anecdotes">
+  <div class="section-label">Le Saviez-Vous</div>
+  <h2 class="section-title">Anecdotes &amp; Curiosités</h2>
+
+  <div class="anecdote-grid">
+    <div class="anecdote-card">
+      <h4>Huit millions de dieux, vraiment ?</h4>
+      <p>L'expression "yaoyorozu no kami" (八百万の神), littéralement "huit millions de kami", ne désigne pas un décompte réel mais une façon rhétorique traditionnelle d'exprimer un nombre incalculable.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le torii, un simple portail</h4>
+      <p>Ce portail rouge caractéristique ne marque pas l'entrée d'un bâtiment mais le passage symbolique entre le monde profane et l'espace sacré habité par un kami, même en l'absence de toute structure alentour.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Un sanctuaire reconstruit tous les vingt ans</h4>
+      <p>Le grand sanctuaire d'Ise est intégralement démoli et rebâti à l'identique tous les vingt ans depuis des siècles, selon le rite du Shikinen Sengu — une tradition qui préserve le savoir-faire architectural autant que la pureté rituelle du lieu.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les mille torii de Fushimi Inari</h4>
+      <p>Ce sanctuaire de Kyoto est célèbre pour son allée de plusieurs milliers de torii vermillon offerts par des fidèles et des entreprises en remerciement de vœux exaucés, formant un tunnel continu à travers la montagne.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les yōkai, source de l'imaginaire pop moderne</h4>
+      <p>Une grande partie du bestiaire des mangas, animes et jeux vidéo japonais contemporains puise directement dans le folklore des yōkai — Pokémon lui-même doit une partie de son inspiration à ces esprits populaires.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le shintoïsme n'a pas de fondateur</h4>
+      <p>Contrairement à de nombreuses religions organisées, le shinto n'a ni texte sacré unique contraignant, ni fondateur historique identifiable, ni dogme rigide — une pratique rituelle avant tout, plus qu'un système de croyances formalisé.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le mot "tycoon"</h4>
+      <p>Ce terme anglais désignant un magnat des affaires dérive du japonais "taikun", titre honorifique autrefois attribué aux shoguns pour impressionner les diplomates étrangers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LE MONDE JAPONAIS ================= -->
+<section id="monde">
+  <div class="section-label">Géographie &amp; Expansion</div>
+  <h2 class="section-title">Un Monde Longtemps Insulaire, Aujourd'hui Mondial</h2>
+  <p class="section-intro">Contrairement à d'autres mythologies de cette série, le shinto est resté pendant des siècles étroitement lié à l'archipel japonais lui-même — c'est par la culture populaire contemporaine, bien plus que par la conquête ou le commerce ancien, qu'il a fini par se répandre à travers le monde.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
+      <g stroke="#b5a488" stroke-width="1.3" fill="none" stroke-dasharray="2,4">
+        <line x1="500" y1="230" x2="200" y2="180"/>
+        <line x1="500" y1="230" x2="180" y2="330"/>
+        <line x1="500" y1="230" x2="620" y2="120"/>
+        <line x1="500" y1="230" x2="800" y2="200"/>
+        <line x1="500" y1="230" x2="850" y2="360"/>
+      </g>
+      <circle cx="500" cy="230" r="9" fill="#c8362c"/>
+      <text x="500" y="205" fill="#223a5e" font-family="Cinzel, serif" font-size="14" text-anchor="middle" font-weight="700">ARCHIPEL JAPONAIS</text>
+      <g font-family="EB Garamond, serif" font-size="12" fill="#241f1a" text-anchor="middle">
+        <text x="200" y="172" fill="#c8362c">Ryūkyū</text>
+        <text x="200" y="188" font-size="10" fill="#6b6155">syncrétisme régional</text>
+        <text x="180" y="322" fill="#c8362c">Hawaï &amp; Amérique</text>
+        <text x="180" y="338" font-size="10" fill="#6b6155">émigration, sanctuaires exportés</text>
+        <text x="620" y="112" fill="#c8362c">Corée</text>
+        <text x="620" y="128" font-size="10" fill="#6b6155">échanges anciens</text>
+        <text x="800" y="192" fill="#c8362c">Chine</text>
+        <text x="800" y="208" font-size="10" fill="#6b6155">influences bouddhistes croisées</text>
+        <text x="850" y="352" fill="#c8362c">Monde entier</text>
+        <text x="850" y="368" font-size="10" fill="#6b6155">anime, manga, jeux vidéo</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="reach-grid">
+    <div class="reach-card">
+      <h4>Les Îles Ryūkyū</h4>
+      <span class="reach-dist">Toute l'histoire japonaise</span>
+      <p>Cette chaîne insulaire méridionale, dont Okinawa, développe une religion locale distincte mais apparentée, mêlant ses propres divinités à des éléments shinto continentaux.</p>
+    </div>
+    <div class="reach-card">
+      <h4>L'Émigration Japonaise</h4>
+      <span class="reach-dist">Fin XIXe – XXe siècle</span>
+      <p>Les vagues d'émigration vers Hawaï, le Brésil et la côte ouest des États-Unis emportent avec elles temples et sanctuaires, aujourd'hui encore actifs au sein des communautés nippo-descendantes.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Les Échanges Bouddhistes avec la Chine et la Corée</h4>
+      <span class="reach-dist">VIe siècle apr. J.-C. et après</span>
+      <p>L'arrivée du bouddhisme via le continent transforme profondément le paysage religieux japonais, aboutissant à un syncrétisme durable entre kami shinto et divinités bouddhistes.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Diffusion par l'Anime et le Manga</h4>
+      <span class="reach-dist">Depuis les années 1980</span>
+      <p>Des œuvres comme "Le Voyage de Chihiro" de Miyazaki, mettant en scène directement des kami et des esprits, ont introduit des millions de spectateurs à travers le monde à l'imaginaire shinto.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Le Tourisme Spirituel Contemporain</h4>
+      <span class="reach-dist">XXIe siècle</span>
+      <p>Les grands sanctuaires japonais, dont Ise et Fushimi Inari, attirent aujourd'hui des millions de visiteurs internationaux, bien au-delà de la seule pratique religieuse traditionnelle.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Les Jeux Vidéo et la Pop Culture Mondiale</h4>
+      <span class="reach-dist">Années 1990-2020</span>
+      <p>De "Ōkami" à "Persona" en passant par "Pokémon", d'innombrables jeux vidéo japonais puisent explicitement dans la mythologie shinto et le folklore des yōkai pour un public désormais mondial.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FRISE CHRONOLOGIQUE ================= -->
+<section id="frise">
+  <div class="section-label">Chronologie</div>
+  <h2 class="section-title">Frise Chronologique</h2>
+  <p class="section-intro">D'un animisme préhistorique à la globalisation de la culture pop japonaise, une continuité religieuse rarement interrompue par des siècles d'histoire tourmentée.</p>
+
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 14000 – 300 av. J.-C.</span><h4>Période Jōmon</h4>
+      <p>Racines animistes les plus anciennes du culte des esprits qui deviendra le shinto.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">660 av. J.-C. (date légendaire)</span><h4>Fondation du Japon par Jinmu</h4>
+      <p>Premier empereur légendaire, descendant direct d'Amaterasu selon la tradition officielle.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">VIe siècle apr. J.-C.</span><h4>Introduction du bouddhisme</h4>
+      <p>Amorce d'un syncrétisme durable entre shinto et bouddhisme (shinbutsu-shūgō) qui structurera la religion japonaise pendant plus d'un millénaire.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">712 apr. J.-C.</span><h4>Compilation du Kojiki</h4>
+      <p>Plus ancienne chronique écrite du Japon, source principale de la mythologie shinto telle que nous la connaissons aujourd'hui.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">720 apr. J.-C.</span><h4>Compilation du Nihon Shoki</h4>
+      <p>Seconde grande chronique officielle, rédigée en partie pour un lectorat chinois, offrant des variantes précieuses des mêmes récits.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">690s – aujourd'hui</span><h4>Début du Shikinen Sengu</h4>
+      <p>Reconstruction rituelle du sanctuaire d'Ise tous les vingt ans, tradition ininterrompue depuis plus de treize siècles.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1868</span><h4>Restauration de Meiji</h4>
+      <p>Le shinto devient religion d'État, séparé de force du bouddhisme après des siècles de fusion religieuse.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1868 – 1945</span><h4>Le Shinto d'État</h4>
+      <p>Instrumentalisation politique et militariste de la mythologie impériale à des fins nationalistes durant l'ère impériale japonaise.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1er janvier 1946</span><h4>La "Déclaration d'Humanité"</h4>
+      <p>L'empereur Hirohito renonce publiquement à toute prétention de nature divine, marquant la fin officielle du Shinto d'État.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1984</span><h4>"Nausicaä de la Vallée du Vent"</h4>
+      <p>Hayao Miyazaki commence à populariser mondialement un imaginaire animiste directement issu de la sensibilité shinto.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">2001</span><h4>"Le Voyage de Chihiro"</h4>
+      <p>Ce film, mettant en scène un bain rituel pour kami, remporte l'Oscar du meilleur film d'animation et introduit des millions de spectateurs occidentaux à la cosmologie shinto.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">Années 2000-2020</span><h4>Diffusion mondiale continue</h4>
+      <p>Anime, manga et jeux vidéo japonais deviennent l'un des vecteurs culturels les plus puissants au monde pour la diffusion, souvent inconsciente, de motifs mythologiques shinto.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Un Héritage Bien Vivant</h2>
+  <p class="section-intro">Contrairement à plusieurs mythologies de cette série revenues d'un long oubli, le shinto n'a jamais cessé d'être une pratique vivante au Japon — sa diffusion mondiale récente s'ajoute à une continuité locale jamais rompue.</p>
+
+  <div class="heritage-block">
+    <h4>Dans la langue de tous les jours</h4>
+    <p>Tycoon, tsunami, karaoke, emoji, kawaii : de nombreux mots japonais d'usage courant dans le monde entier trouvent leurs racines dans une culture profondément marquée par la sensibilité shinto envers la nature et l'esthétique de l'éphémère.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans l'animation et les jeux vidéo</h4>
+    <p>Des studios Ghibli à d'innombrables jeux vidéo, le vocabulaire visuel des kami et des yōkai imprègne aujourd'hui une part considérable de la culture populaire mondiale, souvent sans que le public en identifie précisément l'origine religieuse.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans l'esthétique et l'architecture</h4>
+    <p>Le minimalisme des sanctuaires shinto, l'harmonie recherchée entre construction et nature environnante, continuent d'influencer profondément l'architecture et le design contemporains à l'échelle mondiale.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Une pratique religieuse toujours active</h4>
+    <p>Contrairement à d'autres traditions de cette série nécessitant une véritable "renaissance" moderne, le shinto reste une pratique quotidienne bien vivante au Japon, des millions de fidèles continuant chaque année de visiter les sanctuaires pour le nouvel an (hatsumōde).</p>
+  </div>
+
+  <p class="heritage-caution">Un bémol s'impose : entre 1868 et 1945, le Shinto d'État a été délibérément instrumentalisé à des fins nationalistes et militaristes, la lignée impériale divine servant à légitimer l'expansion coloniale et la guerre. La renonciation publique d'Hirohito à sa nature divine en 1946 marque une rupture officielle importante — un rappel que, comme pour plusieurs autres mythologies de cette série, aucun récit fondateur n'est jamais totalement à l'abri d'une récupération politique dans son propre pays d'origine.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">ありがとう</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série : <strong>Mythologie Aztèque et Maya</strong></p>
+</footer>
+
+</body>
+</html>

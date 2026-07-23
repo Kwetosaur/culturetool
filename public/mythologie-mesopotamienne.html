@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythologie Mésopotamienne — Dieux, Royaumes &amp; Légendes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #c9a876;
+    --bg-deep: #b8935e;
+    --panel: #e8d4ab;
+    --panel-border: #8a6a3f;
+    --indigo: #23234f;
+    --indigo-bright: #3f3f7a;
+    --gold: #b8860b;
+    --gold-bright: #d8a92f;
+    --reed: #4f6e40;
+    --text: #2b1f12;
+    --text-dim: #6b5636;
+    --glow: rgba(184,134,11,0.30);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #d7bd8c 0%, #c9a876 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{font-family:'Cinzel', serif; color:var(--indigo); letter-spacing:0.03em; font-weight:700;}
+  a{color:var(--indigo-bright);}
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, rgba(60,40,10,0.03) 0px, transparent 1px, transparent 2px, rgba(60,40,10,0.03) 3px);
+    z-index:1; opacity:0.6;
+  }
+  .meander-strip{display:block; width:100%; height:22px;}
+
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 15%, rgba(35,35,79,0.16), transparent 55%),
+      linear-gradient(180deg, #d7bd8c 0%, #c9a876 60%, #b8935e 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .epigraph-row{font-size:26px; letter-spacing:14px; color:var(--indigo); opacity:0.75; margin-bottom:28px; font-family:'Cinzel', serif;}
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.6rem, 7vw, 5.2rem); margin:0;
+    background:linear-gradient(180deg, var(--indigo-bright), var(--indigo) 60%, #0e0e28);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 40px rgba(35,35,79,0.2);
+  }
+  .hero .subtitle{font-family:'Cinzel', serif; font-size:1.1rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-top:14px;}
+  .hero .tagline{max-width:640px; margin:34px auto 0; font-style:italic; color:var(--text-dim); font-size:1.15rem;}
+  .divider{width:120px; height:2px; margin:36px auto; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+  .nav-pills{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:860px;}
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(255,255,255,0.3); transition:all .25s ease;
+  }
+  .nav-pills a:hover{color:var(--indigo); border-color:var(--gold); box-shadow:0 0 14px rgba(184,134,11,0.2);}
+
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 18px; justify-content:center;
+    padding:14px 20px; background:rgba(220,197,150,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--indigo); border-color:var(--indigo);}
+
+  section{position:relative; z-index:2; max-width:1000px; margin:0 auto; padding:100px 24px;}
+  .section-label{text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--indigo-bright); font-size:0.8rem; margin-bottom:12px;}
+  .section-title{text-align:center; font-size:clamp(2rem,4.5vw,3rem); margin:0 0 16px;}
+  .section-intro{text-align:center; max-width:680px; margin:0 auto 60px; color:var(--text-dim); font-style:italic;}
+
+  .realms-wrap{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:22px;}
+  .realm-card{background:linear-gradient(160deg, var(--panel), #ddc292); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden;}
+  .realm-card::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--indigo), var(--gold));}
+  .realm-card h3{margin:0 0 4px; font-size:1.25rem; display:flex; align-items:center; gap:10px;}
+  .realm-num{color:var(--gold); font-size:1.05rem; opacity:0.9; font-family:'Cinzel', serif;}
+  .realm-card .realm-sub{font-size:0.85rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;}
+  .realm-card p{margin:0; font-size:0.98rem;}
+
+  .tree-diagram{text-align:center; margin:50px 0 70px; opacity:0.95;}
+  .tree-diagram svg{max-width:100%; height:auto;}
+
+  .pantheon-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px;}
+  .god-card{background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;}
+  .god-card:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(40,30,10,0.2), 0 0 0 1px var(--gold);}
+  .god-header{padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(35,35,79,0.10), transparent);}
+  .god-name{font-size:1.5rem; margin:0;}
+  .god-epithet{font-size:0.85rem; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px;}
+  .god-body{padding:18px 24px 24px;}
+  .god-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px;}
+  .god-body p{margin:0 0 10px; font-size:0.97rem;}
+  .god-body p:last-child{margin-bottom:0;}
+  .god-body strong{color:var(--indigo); font-weight:600;}
+
+  .creature-list{display:grid; gap:18px;}
+  .creature-item{display:grid; grid-template-columns:180px 1fr; gap:24px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:20px 24px;}
+  .creature-name{font-family:'Cinzel', serif; color:var(--gold); font-size:1.15rem; align-self:start;}
+  .creature-name span{display:block; font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; font-family:'EB Garamond', serif; font-style:italic;}
+
+  .legend-block{margin-bottom:56px; padding-bottom:52px; border-bottom:1px solid var(--panel-border);}
+  .legend-block:last-child{border-bottom:none;}
+  .legend-number{font-family:'Cinzel Decorative', serif; font-size:0.95rem; color:var(--gold); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;}
+  .legend-block h3{font-size:1.7rem; margin:0 0 20px;}
+  .legend-block p{margin:0 0 16px; font-size:1.02rem;}
+  .legend-block p:last-child{margin-bottom:0;}
+  .pull-quote{border-left:3px solid var(--gold); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--indigo); font-size:1.1rem;}
+
+  .anecdote-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;}
+  .anecdote-card{background:linear-gradient(160deg, rgba(79,110,64,0.08), var(--panel)); border:1px solid var(--panel-border); border-left:3px solid var(--reed); padding:20px 22px; border-radius:3px;}
+  .anecdote-card h4{font-size:1rem; margin:0 0 8px; color:var(--indigo); text-transform:uppercase; letter-spacing:0.04em;}
+  .anecdote-card p{margin:0; font-size:0.95rem; color:var(--text);}
+
+  .reach-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:50px;}
+  .reach-card{border:1px solid var(--panel-border); border-top:2px solid var(--reed); padding:18px 20px; background:var(--panel); border-radius:3px;}
+  .reach-card h4{margin:0 0 6px; font-size:1rem; color:var(--indigo);}
+  .reach-card .reach-dist{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px;}
+  .reach-card p{margin:0; font-size:0.92rem;}
+
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg, transparent, var(--gold) 6%, var(--gold) 94%, transparent); transform:translateX(-50%);}
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--gold-bright); box-shadow:0 0 10px var(--glow);}
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{font-family:'Cinzel', serif; color:var(--indigo); font-size:1rem; letter-spacing:0.05em; display:block; margin-bottom:6px;}
+  .timeline-content h4{margin:0 0 6px; font-size:1.05rem; color:var(--indigo-bright);}
+  .timeline-content p{margin:0; font-size:0.92rem; color:var(--text-dim);}
+
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{font-size:0.95rem; color:var(--indigo); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{border-left:3px solid var(--indigo); padding:4px 20px; margin-top:32px; font-size:0.92rem; color:var(--text-dim); font-style:italic;}
+
+  footer{text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim);}
+  footer .epigraph-row{margin-bottom:20px; font-size:22px;}
+  footer .next-up{font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim);}
+  footer .next-up strong{color:var(--indigo);}
+
+  ::selection{background:var(--gold); color:#2b1f12;}
+
+  @media (max-width:640px){
+    .creature-item{grid-template-columns:1fr;}
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:780px; max-width:none;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.62rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){width:100%; left:0; text-align:left; padding:0 10px 44px 50px;}
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{left:13px; right:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="epigraph-row">𒀭 𒂗 𒆠 𒈗</div>
+  <h1>Mythologie Mésopotamienne</h1>
+  <div class="subtitle">Dieux du Croissant Fertile, Royaumes &amp; Légendes des Premières Cités</div>
+  <p class="tagline">Des eaux mêlées d'Apsû et de Tiamat au chagrin immortel de Gilgamesh : le sixième chapitre d'un voyage à travers les mythologies du monde — les tout premiers récits jamais couchés par écrit.</p>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#royaumes">Les Royaumes</a>
+    <a href="#pantheon">Le Panthéon</a>
+    <a href="#genealogie">Arbre Généalogique</a>
+    <a href="#creatures">Créatures &amp; Êtres</a>
+    <a href="#legendes">Grandes Légendes</a>
+    <a href="#anecdotes">Anecdotes</a>
+    <a href="#monde">Le Monde Mésopotamien</a>
+    <a href="#frise">Frise Chronologique</a>
+    <a href="#heritage">Héritage Actuel</a>
+  </nav>
+</header>
+
+<svg class="meander-strip" viewBox="0 0 400 22" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="cunei0" width="30" height="22" patternUnits="userSpaceOnUse">
+      <path d="M4 4 L4 18 M4 11 L14 11 M14 4 L14 18" stroke="#23234f" stroke-width="2.2" fill="none" opacity="0.45" stroke-linecap="square"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="22" fill="url(#cunei0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#royaumes">Royaumes</a>
+  <a href="#pantheon">Panthéon</a>
+  <a href="#genealogie">Généalogie</a>
+  <a href="#creatures">Créatures</a>
+  <a href="#legendes">Légendes</a>
+  <a href="#anecdotes">Anecdotes</a>
+  <a href="#monde">Le Monde</a>
+  <a href="#frise">Frise</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ROYAUMES ================= -->
+<section id="royaumes">
+  <div class="section-label">Cosmogonie</div>
+  <h2 class="section-title">Les Royaumes du Cosmos Mésopotamien</h2>
+  <p class="section-intro">Le site confondait auparavant, sous une même étiquette de « royaumes », des niveaux cosmiques verticaux authentiques et des lieux mythico-géographiques ponctuels qui n'en sont pas : Ékur n'est qu'un temple précis à Nippur, Babylone une ville bien réelle malgré sa prétention cosmique, Dilmun une île paradisiaque de l'Épopée de Gilgamesh, et Tiamat, une fois vaincue, cesse d'être un royaume distinct puisque son corps fendu en deux devient littéralement le ciel et la terre. En repartant des sources primaires — l'<em>Enuma Elish</em> et les mythes sumériens plus anciens — quatre niveaux cosmiques authentiques se dégagent : le ciel d'An, la terre de Ki, les eaux souterraines douces d'Apsû, et le monde des morts, Kur ou Irkalla. Une stratification plus fine du ciel apparaît bien dans des textes tardifs, mais elle reste nettement moins solidement attestée que ce socle à quatre niveaux — une nuance assumée plutôt que lissée.</p>
+
+  <div class="realms-wrap">
+    <div class="realm-card">
+      <h3><span class="realm-num">I</span>An</h3>
+      <div class="realm-sub">Le Ciel Suprême</div>
+      <p>Sphère céleste la plus élevée, domaine du dieu suprême et distant Anu, garant théorique de l'ordre cosmique — et, selon l'Enuma Elish, l'une des deux moitiés du corps fendu de Tiamat après sa défaite.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">II</span>Ki</h3>
+      <div class="realm-sub">La Terre</div>
+      <p>Le monde des hommes, façonné dans l'autre moitié du corps de Tiamat, où prospèrent les cités-états sous la protection de leurs dieux tutélaires.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">III</span>Apsû</h3>
+      <div class="realm-sub">Les Eaux Douces Primordiales</div>
+      <p>Océan souterrain personnifié, père des dieux et domaine d'Enki/Ea, source des eaux douces qui irriguent le monde par-dessous.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">IV</span>Kur / Irkalla</h3>
+      <div class="realm-sub">Le Pays sans Retour</div>
+      <p>Monde souterrain ténébreux gouverné par Ereshkigal, structuré en sept portes gardées, où les morts errent, dépouillés de toute joie, nourris seulement de poussière.</p>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:90px; font-size:1.8rem;">Voyage détaillé à travers les Royaumes</h3>
+  <p class="section-intro" style="margin-bottom:50px;">Ce que l'<em>Enuma Elish</em> babylonien met en scène n'est pas qu'une création : c'est un coup d'État théologique, où Babylone s'impose comme nouveau centre du monde aux dépens des vieilles cités sumériennes.</p>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume I — An</div>
+    <h3>Le Ciel, Autorité Théorique et Distante</h3>
+    <p>An (Anu en akkadien) occupe, en théorie, le sommet absolu de la hiérarchie divine mésopotamienne — mais son pouvoir reste largement honorifique et distant, l'action concrète étant déléguée à Enlil sur terre et à Enki dans les eaux souterraines. Ce ciel n'est pas une création ex nihilo : l'<em>Enuma Elish</em> raconte qu'après sa victoire sur Tiamat, Marduk fend le corps colossal de la déesse-mère en deux, et qu'une moitié, retenant les eaux supérieures, devient précisément cette voûte céleste, abritant aussi les Tablettes du Destin, objet de convoitise centrale dans plusieurs grands récits.</p>
+    <p>Des textes tardifs, dont l'<em>Enuma Elish</em> lui-même, évoquent parfois un ciel subdivisé en plusieurs niveaux superposés — le ciel d'Anu proprement dit, l'Esharra ("maison de l'univers") associée à Enlil, et un niveau supérieur peuplé d'étoiles. Cette stratification reste toutefois moins fermement attestée dans l'ensemble du corpus akkadien que les quatre grands niveaux du cosmos présentés ici : à traiter comme une nuance tardive plutôt que comme un fait aussi solidement établi que le reste.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume II — Ki</div>
+    <h3>La Terre des Cités-États</h3>
+    <p>Autre moitié du corps vaincu de Tiamat, Ki est la terre des hommes façonnée par Marduk à partir de ce cadavre cosmique — ses yeux, dit-on, devenant les sources du Tigre et de l'Euphrate. La géographie religieuse et la géographie politique s'y confondent presque entièrement : chaque cité-état est placée sous la protection d'une divinité tutélaire précise — Nippur pour Enlil, Eridu pour Enki, Uruk pour Anu et Inanna, Babylone pour Marduk.</p>
+    <p>Aucune de ces villes, aussi sacrée soit-elle — pas même Babylone après son ascension politique sous Hammurabi puis religieuse sous l'<em>Enuma Elish</em>, ni Nippur et son temple d'Enlil, l'Ékur, "maison-montagne" censée relier ciel et terre — ne constitue un royaume cosmique séparé : ce sont des lieux précis inscrits à l'intérieur du seul niveau terrestre de Ki, non des strates distinctes du monde.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume III — Apsû</div>
+    <h3>Les Eaux Douces qui Précèdent Tout</h3>
+    <p>Apsû, incarnation de l'eau douce souterraine, s'unit à Tiamat, la mer salée, pour engendrer la toute première génération divine — un mélange primordial d'où naissent Lahmu et Lahamu, puis Anshar et Kishar, puis enfin Anu, ancêtre des grands dieux mésopotamiens. Excédé par le tapage incessant de sa nombreuse descendance, Apsû complote pour l'anéantir — mais c'est lui qui sera surpris et tué le premier, endormi par un sortilège d'Ea, le plus rusé de ses propres petits-enfants.</p>
+    <p>Le corps d'Apsû devient la demeure souterraine où Ea établit son propre royaume aquatique, également appelé Abzu — c'est là, selon la tradition sumérienne d'Eridu, que sont conservés les <em>me</em>, forces divines abstraites gouvernant chaque aspect de la civilisation, de l'écriture à la royauté, qu'Enki offrira plus tard à la déesse Inanna lors d'un banquet trop arrosé. Une terre paradisiaque, Dilmun, est parfois rattachée à ce même horizon aquatique lointain dans certains récits — un lieu mythique précieux, mais qui ne constitue pas non plus un niveau cosmologique à part entière.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume IV — Kur / Irkalla</div>
+    <h3>Le Pays sans Retour, aux Sept Portes</h3>
+    <p>Royaume souterrain gouverné par la sombre Ereshkigal, où toutes les âmes, sans exception ni jugement moral, échouent après la mort — un au-delà remarquablement dépourvu d'espoir comparé à d'autres traditions, où les défunts errent nus, couverts de plumes comme des oiseaux, se nourrissant de poussière et d'argile. Ce royaume porte aussi le nom d'Irkalla, littéralement "la grande terre en bas".</p>
+    <p>Sept portes gardées mènent à son palais central : c'est ce que détaille le mythe de <em>La Descente d'Ishtar aux Enfers</em>, où la déesse, déterminée à franchir le seuil de sa sœur Ereshkigal, doit abandonner à chacune un vêtement ou un bijou — couronne, boucles d'oreilles, collier — jusqu'à se présenter entièrement nue et dépouillée de tout pouvoir devant la reine des morts.</p>
+  </div>
+</section>
+
+<!-- ================= PANTHEON ================= -->
+<section id="pantheon">
+  <div class="section-label">Panthéon</div>
+  <h2 class="section-title">Les Dieux Illustres</h2>
+  <p class="section-intro">Un panthéon marqué par la rivalité entre cités : chaque grande ville mésopotamienne défend son propre dieu tutélaire, jusqu'à ce que Babylone impose Marduk comme roi incontesté des dieux.</p>
+
+  <div class="pantheon-grid">
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Anu</h3><div class="god-epithet">Le Ciel Souverain</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Ciel</span><span class="tag">Autorité suprême</span></div>
+        <p>Dieu du ciel, théoriquement suprême dans la hiérarchie divine mésopotamienne, mais dont le pouvoir reste largement distant et honorifique — l'action concrète du panthéon revient surtout à ses descendants Enlil et Enki.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Enlil</h3><div class="god-epithet">Seigneur du Vent et de la Terre</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Pouvoir exécutif</span><span class="tag">Tempête</span></div>
+        <p>Détenteur du pouvoir exécutif réel parmi les dieux sumériens, gardien des Tablettes du Destin avant leur transfert à Babylone. Excédé par le vacarme incessant de l'humanité grandissante, c'est lui qui décide d'envoyer le grand déluge pour l'anéantir tout entière.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Enki / Éa</h3><div class="god-epithet">Seigneur des Eaux Douces et de la Sagesse</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Sagesse</span><span class="tag">Ruse</span><span class="tag">Protection</span></div>
+        <p>Dieu bienveillant et rusé, ami constant de l'humanité, il déjoue en secret le plan d'extermination d'Enlil en avertissant Utnapishtim du déluge à venir. Gardien des <em>me</em>, les forces divines fondatrices de la civilisation, dans son domaine aquatique d'Eridu.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Marduk</h3><div class="god-epithet">Roi des Dieux de Babylone</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Ordre</span><span class="tag">Victoire</span><span class="tag">Royauté</span></div>
+        <p>Fils d'Ea, il accepte d'affronter Tiamat à la seule condition d'obtenir la royauté suprême sur tous les dieux. Vainqueur, il façonne le monde à partir du corps de Tiamat et crée l'humanité à partir du sang de Kingu, exécuté pour trahison — son ascension reflète directement celle, bien réelle, de Babylone comme puissance politique dominante.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ishtar / Inanna</h3><div class="god-epithet">Reine du Ciel</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Amour</span><span class="tag">Guerre</span><span class="tag">Puissance</span></div>
+        <p>Déesse complexe et redoutée, à la fois patronne de l'amour et de la guerre, capable d'une générosité extrême comme d'une vengeance implacable. Sa descente volontaire aux Enfers pour défier sa sœur Ereshkigal compte parmi les récits mythologiques les plus célèbres de toute la Mésopotamie.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ereshkigal</h3><div class="god-epithet">Reine du Pays sans Retour</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Mort</span><span class="tag">Rigueur</span></div>
+        <p>Sœur aînée et rivale d'Ishtar, souveraine inflexible des Enfers, qui suspend sa propre sœur à un crochet, morte, lorsque celle-ci ose s'aventurer dans son royaume sans autorisation — un geste de pure autorité territoriale plutôt que de cruauté gratuite.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Dumuzi / Tammuz</h3><div class="god-epithet">Le Berger Bien-Aimé</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Végétation</span><span class="tag">Cycle saisonnier</span></div>
+        <p>Époux-berger d'Ishtar, livré aux démons infernaux à sa place pour permettre le retour de la déesse à la surface. Sa mort et son retour saisonniers, pleurés rituellement chaque année, expliquent mythiquement l'alternance entre saison sèche et saison fertile.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Nergal</h3><div class="god-epithet">Dieu de la Peste et de la Guerre</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Peste</span><span class="tag">Guerre</span><span class="tag">Enfers</span></div>
+        <p>Divinité redoutée associée aux fléaux et à la destruction militaire, qui devient, selon un mythe tardif, l'époux d'Ereshkigal après une visite tumultueuse aux Enfers ayant mal tourné — un mariage de raison entre deux puissances de mort complémentaires.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Shamash / Utu</h3><div class="god-epithet">Le Soleil de Justice</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Justice</span><span class="tag">Vérité</span><span class="tag">Soleil</span></div>
+        <p>Dieu solaire garant de la justice et de la vérité, dont on dit qu'il inspecte chaque recoin du monde à mesure qu'il le traverse. Le Code d'Hammurabi le représente explicitement remettant au roi les symboles de l'autorité législative, présentant ainsi les lois humaines comme d'origine directement divine.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Sîn / Nanna</h3><div class="god-epithet">Le Dieu Lune</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Lune</span><span class="tag">Temps</span><span class="tag">Calendrier</span></div>
+        <p>Père de Shamash (le soleil) et d'Ishtar (Vénus) dans certaines généalogies, son cycle régulier structure le calendrier lunaire mésopotamien — la lune précédant symboliquement le soleil dans la hiérarchie divine de certaines cités, notamment Ur.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ninhursag</h3><div class="god-epithet">Mère de la Terre</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Terre</span><span class="tag">Création</span><span class="tag">Maternité</span></div>
+        <p>Grande déesse mère, associée à la création de l'humanité aux côtés d'Enki, façonnant les hommes dans l'argile mêlée au sang d'un dieu sacrifié. Un mythe distinct la lie également au paradis de Dilmun, théâtre de ses démêlés avec Enki.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Nabû</h3><div class="god-epithet">Dieu de l'Écriture</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Écriture</span><span class="tag">Sagesse</span><span class="tag">Scribes</span></div>
+        <p>Fils de Marduk, patron des scribes et de l'écriture cunéiforme, gardien des Tablettes du Destin dans la tradition babylonienne tardive — son importance grandissante reflète le prestige social croissant accordé aux scribes dans la société mésopotamienne.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ashur</h3><div class="god-epithet">Dieu National de l'Assyrie</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Guerre</span><span class="tag">État</span><span class="tag">Assyrie</span></div>
+        <p>Équivalent assyrien de Marduk, dieu national par excellence, dont le nom se confond avec celui de la capitale et du peuple assyriens eux-mêmes — signe éclatant de la diversité régionale d'une "mythologie mésopotamienne" jamais totalement unifiée.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ninlil</h3><div class="god-epithet">Épouse d'Enlil</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Air</span><span class="tag">Destin</span></div>
+        <p>Déesse suivant Enlil jusque dans les Enfers après qu'il l'eut séduite puis banni pour cette transgression, donnant naissance en chemin, sous des identités successives déguisées, à plusieurs divinités majeures dont Nanna lui-même.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Gilgamesh</h3><div class="god-epithet">Le Roi aux Deux Tiers Divins</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Héroïsme</span><span class="tag">Quête</span><span class="tag">Mortalité</span></div>
+        <p>Roi historique d'Uruk devenu héros mythique, aux deux tiers divin et un tiers mortel selon l'épopée qui porte son nom. Sa quête désespérée de l'immortalité après la mort de son ami Enkidu en fait l'une des premières et des plus profondes méditations littéraires jamais écrites sur la condition mortelle.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= GENEALOGIE ================= -->
+<section id="genealogie">
+  <div class="section-label">Filiations</div>
+  <h2 class="section-title">L'Arbre Généalogique des Dieux</h2>
+  <p class="section-intro">L'<em>Enuma Elish</em> raconte autant une généalogie qu'une propagande politique : chaque génération divine y est plus bruyante, plus jeune et plus menaçante que la précédente, jusqu'à ce que Marduk impose un ordre nouveau centré sur Babylone. Trait plein = filiation. Trait pointillé = union. Trait en tirets = succession du pouvoir.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1200 660" xmlns="http://www.w3.org/2000/svg" style="max-width:1100px;">
+      <text x="180" y="24" fill="#4f6e40" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">LES EAUX PRIMORDIALES</text>
+      <text x="600" y="24" fill="#23234f" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">LA MAISON D'ENLIL</text>
+      <text x="1010" y="24" fill="#b8860b" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">MARDUK ET L'ORDRE NOUVEAU</text>
+
+      <g stroke="#8a6a3f" stroke-width="1.4" fill="none">
+        <line x1="110" y1="55" x2="220" y2="55" stroke-dasharray="3,3"/>
+        <line x1="165" y1="65" x2="165" y2="105"/>
+        <line x1="130" y1="140" x2="165" y2="115"/>
+        <line x1="200" y1="140" x2="165" y2="115"/>
+        <line x1="130" y1="150" x2="130" y2="195"/>
+        <line x1="100" y1="230" x2="130" y2="205"/>
+        <line x1="160" y1="230" x2="130" y2="205"/>
+        <line x1="160" y1="250" x2="160" y2="295"/>
+
+        <line x1="600" y1="60" x2="600" y2="100" stroke-dasharray="1,5" stroke="#b8860b"/>
+        <line x1="600" y1="120" x2="600" y2="160"/>
+        <line x1="600" y1="180" x2="540" y2="225" stroke-dasharray="3,3"/>
+        <line x1="600" y1="180" x2="600" y2="225"/>
+        <line x1="540" y1="245" x2="540" y2="290"/>
+        <line x1="540" y1="310" x2="480" y2="355"/>
+        <line x1="540" y1="310" x2="600" y2="355"/>
+
+        <line x1="160" y1="300" x2="960" y2="130" stroke-dasharray="1,5" stroke="#b8860b"/>
+        <line x1="960" y1="150" x2="960" y2="195"/>
+        <line x1="960" y1="215" x2="960" y2="260"/>
+        <line x1="960" y1="280" x2="900" y2="325"/>
+        <line x1="960" y1="280" x2="1020" y2="325" stroke-dasharray="3,3"/>
+        <line x1="1020" y1="345" x2="1020" y2="390"/>
+      </g>
+
+      <g font-family="EB Garamond, serif" font-size="12.5" fill="#2b1f12" text-anchor="middle">
+        <text x="110" y="50" font-size="11">Apsû</text>
+        <text x="220" y="50" font-size="11">Tiamat</text>
+        <text x="165" y="128" font-size="10.5">Lahmu &amp; Lahamu</text>
+        <text x="130" y="148" font-size="9" fill="#6b5636">(génération 1)</text>
+        <text x="100" y="248" font-size="10.5">Anshar</text>
+        <text x="160" y="248" font-size="10.5">Kishar</text>
+        <text x="160" y="313" fill="#23234f" font-weight="bold">Anu</text>
+
+        <text x="600" y="52" fill="#6b5636" font-size="10" font-style="italic">(fils d'Anu)</text>
+        <text x="600" y="140" fill="#23234f" font-weight="bold" font-size="12">ENLIL</text>
+        <text x="540" y="240" font-size="10.5">Ninlil</text>
+        <text x="540" y="308" font-size="11">Nanna / Sîn</text>
+        <text x="480" y="373" font-size="10.5">Shamash</text>
+        <text x="600" y="373" font-size="10.5">Ishtar</text>
+
+        <text x="960" y="128" fill="#6b5636" font-size="10" font-style="italic">(petit-fils d'Anu)</text>
+        <text x="960" y="212" font-size="11">Ea / Enki</text>
+        <text x="960" y="278" fill="#b8860b" font-weight="bold" font-size="12">MARDUK</text>
+        <text x="900" y="343" font-size="10.5">crée l'humanité</text>
+        <text x="900" y="357" font-size="9" fill="#6b5636">(du sang de Kingu)</text>
+        <text x="1020" y="343" font-size="10.5">Nabû</text>
+        <text x="1020" y="405" font-size="10.5">(scribes)</text>
+      </g>
+    </svg>
+  </div>
+
+  <p class="section-intro" style="margin-top:10px;">Chaque cité mésopotamienne racontait volontiers sa propre version de cette généalogie, plaçant son propre dieu tutélaire au sommet — l'ordre présenté ici est celui, tardif et volontairement centré sur Babylone, de l'Enuma Elish.</p>
+</section>
+
+<!-- ================= CREATURES ================= -->
+<section id="creatures">
+  <div class="section-label">Bestiaire</div>
+  <h2 class="section-title">Créatures &amp; Êtres Légendaires</h2>
+  <p class="section-intro">Nées de la rage de Tiamat ou gardiennes des seuils sacrés, ces créatures peuplent aussi bien les tablettes mythologiques que les briques émaillées des portes monumentales de Babylone.</p>
+
+  <div class="creature-list">
+    <div class="creature-item">
+      <div class="creature-name">Kingu<span>Le Général de Tiamat</span></div>
+      <p>Second époux de Tiamat, promu à la tête de son armée monstrueuse et porteur des Tablettes du Destin, symbole suprême de l'autorité cosmique. Capturé après la défaite de Tiamat, il est exécuté par les dieux, et c'est de son sang mêlé à l'argile que Marduk façonne l'humanité tout entière.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Humbaba / Huwawa<span>Le Gardien de la Forêt de Cèdres</span></div>
+      <p>Géant monstrueux placé par Enlil pour protéger la sacrée forêt de cèdres, terrassé par Gilgamesh et Enkidu malgré ses supplications désespérées — un meurtre qui n'ira pas sans conséquence, les dieux jugeant sévèrement cette transgression.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Le Taureau Céleste<span>L'Arme de la Vengeance d'Ishtar</span></div>
+      <p>Créature envoyée par Ishtar pour punir Gilgamesh d'avoir dédaigneusement repoussé ses avances amoureuses, semant la dévastation dans Uruk avant d'être terrassée par Gilgamesh et Enkidu — un exploit qui scellera, en représailles divines, le destin funeste d'Enkidu.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Lamashtu<span>La Démone des Nourrissons</span></div>
+      <p>Démone redoutée s'attaquant spécifiquement aux femmes enceintes et aux nouveau-nés, contre laquelle les familles mésopotamiennes portaient des amulettes protectrices, souvent gravées à l'effigie d'un autre démon, Pazuzu, invoqué paradoxalement pour la repousser.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Pazuzu<span>Le Roi des Vents Démoniaques</span></div>
+      <p>Démon ailé au visage grotesque, associé aux vents porteurs de maladie, mais invoqué comme protecteur paradoxal contre Lamashtu — sa silhouette reste, aujourd'hui encore, l'une des images les plus reconnaissables de la démonologie mésopotamienne, popularisée par le cinéma d'horreur moderne.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Anzû<span>L'Oiseau-Tempête</span></div>
+      <p>Créature composite, mi-aigle mi-lion, qui dérobe les Tablettes du Destin au dieu Enlil pendant son bain, plongeant l'univers entier dans le chaos jusqu'à ce qu'un jeune dieu héroïque — Ninurta selon la version la plus répandue — parvienne à les lui reprendre par la force.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Sebitti<span>Les Sept Démons de Guerre</span></div>
+      <p>Groupe de sept guerriers démoniaques au service de Nergal, incarnation collective de la violence militaire et des fléaux qui l'accompagnent.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Le Mušḫuššu<span>Le Dragon-Serpent de Marduk</span></div>
+      <p>Créature composite à écailles, pattes de lion et de rapace, emblème sacré de Marduk, magnifiquement représentée en briques émaillées bleues sur la porte d'Ishtar de Babylone, aujourd'hui reconstituée au musée de Pergame à Berlin.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">L'Aigle d'Étana<span>Le Compagnon Céleste</span></div>
+      <p>Aigle blessé et sauvé par le roi Étana, qui le porte ensuite en plein vol vers les cieux à la recherche d'une plante magique de fertilité — un des tout premiers récits connus de vol vers le ciel dans toute la littérature humaine.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEGENDES ================= -->
+<section id="legendes">
+  <div class="section-label">Récits Fondateurs</div>
+  <h2 class="section-title">Grandes Légendes</h2>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende I</div>
+    <h3>L'Enuma Elish — La Bataille de Marduk contre Tiamat</h3>
+    <p>Après le meurtre d'Apsû par Ea, Tiamat, folle de rage, engendre une armée de monstres et confie le commandement à son nouvel époux Kingu, porteur des Tablettes du Destin. Terrifiés, les jeunes dieux se tournent vers Marduk, fils d'Ea, qui accepte de combattre à une seule condition : obtenir en échange la royauté suprême et incontestée sur l'ensemble du panthéon.</p>
+    <p class="pull-quote">Armé des vents et d'un filet géant, Marduk piège Tiamat, lui envoie un vent dans la gueule ouverte pour l'empêcher de la refermer, puis lui transperce le ventre d'une flèche. Il fend ensuite son corps colossal en deux comme un coquillage : une moitié devient le ciel, l'autre la terre.</p>
+    <p>Proclamé roi des dieux, Marduk organise le cosmos, fixe les étoiles, règle le calendrier, et exige la construction de Babylone comme nouvelle capitale religieuse de l'univers entier.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende II</div>
+    <h3>La Création de l'Humanité</h3>
+    <p>Une fois le monde ordonné, Marduk constate que les dieux mineurs, épuisés par le travail agricole imposé après la victoire sur Tiamat, se plaignent amèrement de leur charge. Pour les soulager, il propose de créer une nouvelle espèce, destinée à assumer tout le labeur à leur place : l'humanité.</p>
+    <p>Kingu, le général déchu de Tiamat, est désigné comme seul responsable de la rébellion et exécuté ; c'est de son sang, mêlé à l'argile, que naissent les premiers hommes — créés dès l'origine pour servir les dieux, une conception du destin humain nettement plus fataliste que dans bien d'autres traditions.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende III</div>
+    <h3>Le Grand Déluge</h3>
+    <p>Exaspéré par le vacarme incessant d'une humanité toujours plus nombreuse et bruyante, le dieu Enlil décide de l'anéantir entièrement par un déluge universel. Mais Ea, dieu ami des hommes, contourne le serment de silence imposé par ses pairs en s'adressant non pas directement à Utnapishtim mais au mur de sa hutte de roseaux — une ruse qui lui permet techniquement de tenir sa promesse tout en avertissant l'humanité.</p>
+    <p>Utnapishtim construit un immense bateau cubique, y embarque sa famille et des représentants de chaque espèce animale ; après sept jours de déluge et le repos de l'arche sur une montagne, il libère successivement une colombe, une hirondelle, puis un corbeau, qui ne revient pas — signe que les eaux se sont enfin retirées.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IV</div>
+    <h3>Gilgamesh et Enkidu</h3>
+    <p>Roi tyrannique d'Uruk, épuisant ses sujets par ses excès, Gilgamesh voit les dieux répondre aux plaintes populaires en créant Enkidu, homme sauvage vivant nu parmi les bêtes, pour lui tenir tête. Une courtisane sacrée, Shamhat, civilise Enkidu en l'initiant aux plaisirs humains, l'éloignant définitivement de sa vie animale.</p>
+    <p>Amené à Uruk, Enkidu affronte Gilgamesh dans un duel titanesque qui se conclut, à la surprise générale, non par une victoire mais par une amitié indéfectible entre les deux hommes, chacun ayant enfin trouvé un égal à sa mesure.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende V</div>
+    <h3>La Forêt de Cèdres et la Mort d'Enkidu</h3>
+    <p>Poussés par la soif de gloire, Gilgamesh et Enkidu partent affronter Humbaba, gardien monstrueux de la forêt sacrée de cèdres, qu'ils terrassent malgré ses supplications. De retour triomphants, Gilgamesh repousse les avances de la déesse Ishtar, l'insultant en énumérant tous les amants qu'elle a précédemment maudits ou détruits.</p>
+    <p>Vexée, Ishtar obtient d'Anu qu'il lâche le Taureau Céleste sur Uruk ; les deux héros le terrassent également, mais cette double transgression — le meurtre de Humbaba et celui du Taureau — pousse les dieux à décréter la mort d'Enkidu en punition. Sa disparition plonge Gilgamesh dans un désespoir si total qu'il refuse d'abord d'enterrer son corps, avant de fuir vers le désert, hanté par la peur nouvelle de sa propre mortalité.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VI</div>
+    <h3>La Quête de l'Immortalité de Gilgamesh</h3>
+    <p>Refusant d'accepter le sort commun des mortels, Gilgamesh traverse des contrées hostiles jusqu'aux confins du monde pour retrouver Utnapishtim, seul mortel jamais rendu immortel. Celui-ci lui raconte le déluge, puis le soumet à une épreuve simple en apparence : rester éveillé six jours et sept nuits. Gilgamesh échoue presque immédiatement, s'endormant dès le premier jour — preuve, si besoin était, qu'il ne peut même pas vaincre le sommeil, frère mineur de la mort.</p>
+    <p>Prise de pitié, l'épouse d'Utnapishtim persuade son mari de révéler à Gilgamesh l'existence d'une plante de rajeunissement au fond de la mer. Le héros parvient à s'en emparer — mais alors qu'il s'arrête se baigner sur le chemin du retour, un serpent la lui dérobe et mue instantanément, rajeuni, sous ses yeux. Épuisé et résigné, Gilgamesh rentre à Uruk les mains vides, mais transformé : sa quête d'immortalité individuelle cède la place à la fierté plus modeste, mais bien réelle, d'avoir bâti une cité dont les murailles lui survivront.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VII</div>
+    <h3>La Descente d'Inanna aux Enfers</h3>
+    <p>Pour des raisons que le texte lui-même ne précise jamais entièrement, la déesse Inanna décide de descendre visiter sa sœur Ereshkigal, reine des Enfers. À chacune des sept portes du royaume souterrain, un gardien lui retire un élément de sa parure royale — couronne, bijoux, robe — jusqu'à ce qu'elle se présente entièrement nue devant sa sœur, dépouillée de tout pouvoir.</p>
+    <p>Ereshkigal, sans pitié, la transforme aussitôt en cadavre suspendu à un crochet. Grâce à l'intervention d'Enki, deux créatures asexuées ranimeront son corps avec la nourriture et l'eau de vie — mais la loi des Enfers exige qu'une âme la remplace pour qu'elle puisse repartir. De retour à la surface, Inanna découvre avec fureur que son propre époux Dumuzi, loin de la pleurer, festoyait tranquillement en son absence : elle le désigne alors lui-même comme substitut, le livrant aux démons infernaux.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VIII</div>
+    <h3>Enki et Ninhursag — Le Paradis de Dilmun</h3>
+    <p>Dans le pays pur de Dilmun, Enki mange, par pure curiosité gourmande, huit plantes sacrées cultivées par la déesse Ninhursag, provoquant sa colère immédiate. Elle le maudit alors de huit maux distincts, un pour chaque plante consommée, le laissant agoniser sans pouvoir se guérir lui-même par sa propre magie.</p>
+    <p>Finalement apitoyée, Ninhursag crée huit divinités guérisseuses, une pour chaque organe souffrant d'Enki — parmi elles, Ninti, "dame de la côte" (ou "dame qui fait vivre" selon la lecture du signe), un jeu de mots sumérien que certains chercheurs rapprochent, avec prudence, du récit biblique ultérieur de la côte d'Adam.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IX</div>
+    <h3>Adapa et le Pain de Vie</h3>
+    <p>Sage mortel béni d'une intelligence quasi divine par Ea, Adapa brise accidentellement l'aile du vent du sud lors d'une sortie de pêche, provoquant sa convocation devant Anu lui-même pour se justifier. Ea le prévient : sur place, on lui offrira à manger et à boire, mais il doit tout refuser, sous peine de mort.</p>
+    <p>Ce qu'Ea ignorait — ou ce qu'il a délibérément dissimulé, le texte reste ambigu — c'est qu'Anu, impressionné par la franchise d'Adapa, lui offre en réalité le pain et l'eau de l'immortalité. Adapa, fidèle à l'avertissement reçu, refuse tout, perdant ainsi, par obéissance excessive, l'unique chance offerte à un mortel d'échapper définitivement à la mort.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende X</div>
+    <h3>Le Vol des Tablettes du Destin par Anzû</h3>
+    <p>Alors qu'Enlil se baigne, déposant momentanément sa couronne et les Tablettes du Destin, l'oiseau-tempête Anzû s'en empare et s'enfuit vers une montagne inaccessible, plongeant aussitôt l'univers entier dans le chaos : plus aucun décret divin ne peut s'exécuter sans elles.</p>
+    <p>Après plusieurs dieux ayant renoncé, effrayés par le pouvoir qu'Anzû tire désormais des Tablettes elles-mêmes, c'est le jeune dieu guerrier Ninurta qui accepte l'affrontement et parvient, au terme d'un combat acharné, à récupérer les Tablettes et à rétablir l'ordre cosmique.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XI</div>
+    <h3>Étana et l'Aigle</h3>
+    <p>Roi sans héritier, Étana cherche désespérément la plante magique de fertilité censée résoudre son problème de succession. Il porte secours à un aigle blessé et affamé, puni par les dieux pour avoir dévoré les petits d'un serpent malgré un pacte d'amitié juré entre les deux animaux.</p>
+    <p>En remerciement, l'aigle guéri propose de porter Étana sur son dos jusqu'au ciel, où pousserait la plante recherchée. Le vol vertigineux, décrit avec un luxe de détails saisissant pour un texte vieux de plusieurs millénaires, s'achève abruptement dans la plupart des versions conservées — la fin exacte du mythe reste, à ce jour, perdue.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XII</div>
+    <h3>Le Code d'Hammurabi et la Justice de Shamash</h3>
+    <p>Vers 1754 avant J.-C., le roi babylonien Hammurabi fait graver l'un des tout premiers codes de lois systématiques de l'histoire humaine sur une stèle de basalte. En son sommet, un bas-relief représente Hammurabi debout devant Shamash, dieu-soleil de la justice, recevant de lui directement les symboles de l'autorité royale et législative.</p>
+    <p>Ce n'est pas une simple décoration : en présentant ses lois comme un don divin plutôt qu'une invention purement humaine, Hammurabi ancre son autorité dans le sacré — un modèle de légitimation religieuse du pouvoir politique qui traversera, sous des formes variées, la plupart des civilisations ultérieures du Proche-Orient ancien.</p>
+  </div>
+</section>
+
+<!-- ================= ANECDOTES ================= -->
+<section id="anecdotes">
+  <div class="section-label">Le Saviez-Vous</div>
+  <h2 class="section-title">Anecdotes &amp; Curiosités</h2>
+
+  <div class="anecdote-grid">
+    <div class="anecdote-card">
+      <h4>L'écriture la plus ancienne du monde</h4>
+      <p>Le cunéiforme, inventé vers 3200 avant J.-C. pour des besoins avant tout comptables, précède ou accompagne de très près les tout premiers hiéroglyphes égyptiens — les deux systèmes rivalisent pour le titre de plus ancienne écriture connue.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Une découverte qui a fait courir un homme</h4>
+      <p>En 1872, l'assyriologue George Smith, en traduisant une tablette relatant le déluge de Gilgamesh, aurait été si bouleversé par sa découverte qu'il se serait mis à courir dans la pièce en retirant ses vêtements sous le coup de l'excitation.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le système sexagésimal, toujours vivant</h4>
+      <p>Les 60 secondes, les 60 minutes et les 360 degrés d'un cercle descendent directement du système de numération en base 60 des mathématiciens babyloniens — un héritage que nous utilisons littéralement chaque jour sans y penser.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>La tour de Babel avait un modèle réel</h4>
+      <p>La ziggourat de Babylone, l'Etemenanki, dédiée à Marduk, culminait probablement à une hauteur comparable à celle du bâtiment décrit dans le récit biblique, dont elle constitue vraisemblablement l'inspiration directe.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>La semaine de sept jours</h4>
+      <p>Le découpage du temps en semaines de sept jours pourrait dériver de l'importance accordée par les astronomes babyloniens aux sept corps célestes visibles à l'œil nu — soleil, lune et cinq planètes.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>La porte d'Ishtar, reconstituée à Berlin</h4>
+      <p>Les briques émaillées bleu vif de cette porte monumentale de Babylone, ornées de dragons Mušḫuššu et de taureaux, ont été excavées puis reconstituées grandeur nature au musée de Pergame.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Un patrimoine aujourd'hui menacé</h4>
+      <p>Les sites archéologiques de Nimroud, Hatra et le musée de Mossoul ont subi des destructions volontaires massives lors du conflit avec l'État islamique en 2015 — une perte irréparable pour l'histoire de l'humanité entière, toujours en cours d'évaluation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LE MONDE MESOPOTAMIEN ================= -->
+<section id="monde">
+  <div class="section-label">Géographie &amp; Expansion</div>
+  <h2 class="section-title">Un Monde qui a Façonné Trois Religions</h2>
+  <p class="section-intro">Née entre le Tigre et l'Euphrate, cette mythologie a rayonné bien au-delà du Croissant Fertile — et son influence littéraire, via la Bible hébraïque, touche aujourd'hui des milliards de croyants qui ignorent souvent son origine mésopotamienne.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
+      <g stroke="#8a6a3f" stroke-width="1.3" fill="none" stroke-dasharray="2,4">
+        <line x1="500" y1="230" x2="180" y2="160"/>
+        <line x1="500" y1="230" x2="150" y2="330"/>
+        <line x1="500" y1="230" x2="380" y2="400"/>
+        <line x1="500" y1="230" x2="650" y2="120"/>
+        <line x1="500" y1="230" x2="850" y2="200"/>
+        <line x1="500" y1="230" x2="900" y2="350"/>
+      </g>
+      <circle cx="500" cy="230" r="9" fill="#b8860b"/>
+      <text x="500" y="205" fill="#23234f" font-family="Cinzel, serif" font-size="14" text-anchor="middle" font-weight="700">SUMER &amp; BABYLONE</text>
+      <g font-family="EB Garamond, serif" font-size="12" fill="#2b1f12" text-anchor="middle">
+        <text x="180" y="152" fill="#4f6e40">Levant &amp; Canaan</text>
+        <text x="180" y="168" font-size="10" fill="#6b5636">influence biblique</text>
+        <text x="150" y="322" fill="#4f6e40">Égypte</text>
+        <text x="150" y="338" font-size="10" fill="#6b5636">lettres d'Amarna</text>
+        <text x="380" y="392" fill="#4f6e40">Arabie</text>
+        <text x="380" y="408" font-size="10" fill="#6b5636">routes commerciales</text>
+        <text x="650" y="112" fill="#4f6e40">Anatolie</text>
+        <text x="650" y="128" font-size="10" fill="#6b5636">Hittites</text>
+        <text x="850" y="192" fill="#4f6e40">Perse</text>
+        <text x="850" y="208" font-size="10" fill="#6b5636">conquête, 539 av. J.-C.</text>
+        <text x="900" y="342" fill="#4f6e40">Grèce</text>
+        <text x="900" y="358" font-size="10" fill="#6b5636">via Bérose</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="reach-grid">
+    <div class="reach-card">
+      <h4>Le Levant et la Bible Hébraïque</h4>
+      <span class="reach-dist">Ier millénaire av. J.-C.</span>
+      <p>Le récit du déluge de Gilgamesh, celui de la création dans l'Enuma Elish et probablement l'épisode du jardin d'Éden portent tous des parallèles frappants, documentés depuis longtemps par les spécialistes, avec des textes mésopotamiens antérieurs.</p>
+    </div>
+    <div class="reach-card">
+      <h4>L'Égypte des Lettres d'Amarna</h4>
+      <span class="reach-dist">XIVe siècle av. J.-C.</span>
+      <p>La correspondance diplomatique entre l'Égypte et les royaumes du Proche-Orient, rédigée en cunéiforme akkadien, langue diplomatique internationale de l'époque, témoigne de l'influence culturelle mésopotamienne bien au-delà de ses propres frontières.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Les Hittites d'Anatolie</h4>
+      <span class="reach-dist">IIe millénaire av. J.-C.</span>
+      <p>Ce grand royaume d'Asie Mineure adapte et transforme plusieurs mythes mésopotamiens, notamment autour de la royauté céleste, dans sa propre mythologie.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Conquête Perse</h4>
+      <span class="reach-dist">539 av. J.-C.</span>
+      <p>Cyrus le Grand s'empare de Babylone sans grande résistance ; la mythologie mésopotamienne, déjà déclinante, continue néanmoins d'influencer l'astrologie et les pratiques savantes perses.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Bérose et la Transmission Grecque</h4>
+      <span class="reach-dist">v. 290 av. J.-C.</span>
+      <p>Prêtre babylonien de Marduk, Bérose rédige en grec sa Babyloniaca, préservant pour le monde hellénistique une part précieuse de la mythologie mésopotamienne originale.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Route de la Soie Naissante</h4>
+      <span class="reach-dist">Toute l'Antiquité</span>
+      <p>Les routes commerciales mésopotamiennes vers l'Arabie, l'Inde et l'Asie centrale préfigurent, bien avant l'expression elle-même, les grands réseaux d'échange qui relieront plus tard l'ensemble du monde antique.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FRISE CHRONOLOGIQUE ================= -->
+<section id="frise">
+  <div class="section-label">Chronologie</div>
+  <h2 class="section-title">Frise Chronologique</h2>
+  <p class="section-intro">Plus de trois mille ans séparent l'invention de l'écriture cunéiforme de sa dernière tablette datée avec certitude — une longévité vertigineuse, suivie d'un oubli presque total pendant près de deux millénaires.</p>
+
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 5400 av. J.-C.</span><h4>Fondation d'Eridu</h4>
+      <p>Selon la Liste Royale sumérienne, la royauté "descend du ciel" pour la première fois à Eridu, ville la plus ancienne de la tradition mésopotamienne et siège mythique d'Enki.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 3200 av. J.-C.</span><h4>Invention du cunéiforme</h4>
+      <p>À Uruk, ce système d'écriture né de besoins comptables devient le tout premier système d'écriture connu de l'histoire humaine.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 3000 – 2500 av. J.-C.</span><h4>Essor d'Uruk et d'Ur</h4>
+      <p>Ces cités-États sumériennes deviennent des métropoles majeures, dotées de temples monumentaux et de dynasties dont la légende retiendra les noms, à commencer par Gilgamesh d'Uruk.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 2334 av. J.-C.</span><h4>Sargon d'Akkad</h4>
+      <p>Fondation du premier empire connu de l'histoire, unifiant les cités sumériennes sous une autorité centrale.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 2100 av. J.-C.</span><h4>Premiers poèmes sumériens de Gilgamesh</h4>
+      <p>Versions primitives des aventures du roi d'Uruk, précédant de plusieurs siècles la version standard akkadienne.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. XIXe siècle av. J.-C.</span><h4>La Descente d'Ishtar aux Enfers</h4>
+      <p>Ce poème akkadien de l'époque paléo-babylonienne détaille la structure du Kur en sept portes gardées, que la déesse doit franchir une à une, dépouillée à chacune d'un vêtement ou d'un bijou.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1754 av. J.-C.</span><h4>Le Code d'Hammurabi</h4>
+      <p>L'un des plus anciens codes de lois systématiques, présenté comme un don du dieu Shamash au roi de Babylone.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 1750 – 1100 av. J.-C.</span><h4>Composition de l'Enuma Elish</h4>
+      <p>Ce poème de création babylonien élève définitivement Marduk au rang de roi des dieux.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 1200 av. J.-C.</span><h4>Version standard de l'Épopée de Gilgamesh</h4>
+      <p>Compilation akkadienne définitive attribuée au scribe-exorciste Sîn-lēqi-unninni.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">VIIe siècle av. J.-C.</span><h4>La bibliothèque d'Assurbanipal</h4>
+      <p>À Ninive, ce roi assyrien rassemble la plus grande collection de tablettes cunéiformes de l'Antiquité, source majeure de nos connaissances actuelles.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">539 av. J.-C.</span><h4>Chute de Babylone</h4>
+      <p>Cyrus le Grand conquiert la ville, marquant le déclin politique, mais non immédiat, de la civilisation babylonienne.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">75 apr. J.-C.</span><h4>Dernière tablette cunéiforme datée</h4>
+      <p>Un texte astronomique marque la fin connue et précisément documentée de l'usage de cette écriture millénaire.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1802</span><h4>Grotefend perce le cunéiforme</h4>
+      <p>Georg Friedrich Grotefend propose les premières lectures de signes cunéiformes vieux-perses, ouvrant une brèche dans une écriture totalement illisible depuis près de deux millénaires.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1840-1850</span><h4>Fouilles de Ninive et Nimroud</h4>
+      <p>Austen Henry Layard exhume les grandes cités assyriennes, redécouvrant après des siècles d'oubli les trésors de cette civilisation.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 1857</span><h4>Rawlinson achève le déchiffrement</h4>
+      <p>Henry Rawlinson complète la lecture du cunéiforme akkadien grâce à l'inscription trilingue de Béhistun, rendant enfin accessibles les tablettes mythologiques mésopotamiennes.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1872</span><h4>Déchiffrement du récit du déluge</h4>
+      <p>George Smith traduit la tablette de Gilgamesh relatant le déluge, révélant au monde moderne son antériorité troublante sur le récit biblique.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">2003 – 2017</span><h4>Pillages et destructions modernes</h4>
+      <p>Guerre en Irak puis conflit avec l'État islamique infligent des pertes archéologiques considérables et en partie irréversibles au patrimoine mésopotamien.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">XXe-XXIe siècle</span><h4>Gilgamesh et Ishtar dans la culture populaire</h4>
+      <p>Jeux vidéo ("Civilization", "Smite"), bandes dessinées et jeux de rôle redonnent une seconde vie aux figures mésopotamiennes, quatre mille ans après la rédaction des premières tablettes.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Un Héritage Bien Vivant</h2>
+  <p class="section-intro">Peu de mythologies ont exercé une influence aussi profonde tout en restant aussi largement méconnues du grand public — son empreinte se cache souvent derrière d'autres traditions qui l'ont directement absorbée.</p>
+
+  <div class="heritage-block">
+    <h4>Dans notre mesure du temps</h4>
+    <p>Les 60 secondes, les 60 minutes et les 360 degrés d'un cercle descendent directement du système sexagésimal babylonien — l'un des héritages mésopotamiens les plus utilisés au monde, chaque jour, par pratiquement tout être humain, sans qu'il en ait conscience.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans les textes religieux</h4>
+    <p>Le récit du déluge, certains éléments du jardin d'Éden et plusieurs motifs de la Genèse portent des parallèles bien documentés avec des textes mésopotamiens antérieurs de plusieurs siècles — une influence directe sur les traditions juive, chrétienne et, par extension, islamique.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans le droit</h4>
+    <p>Le Code d'Hammurabi, l'un des plus anciens systèmes juridiques codifiés connus, préfigure directement le principe encore invoqué aujourd'hui de la loi écrite et publique, opposable à tous, y compris au pouvoir en place.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans la culture populaire</h4>
+    <p>Gilgamesh apparaît régulièrement dans les jeux vidéo (la série "Fate", "Civilization") et la bande dessinée, tandis que le démon Pazuzu, popularisé par le cinéma d'horreur, reste l'une des rares figures mésopotamiennes largement reconnues du grand public sans qu'il en connaisse l'origine exacte.</p>
+  </div>
+
+  <p class="heritage-caution">Un bémol s'impose, plus urgent qu'ailleurs dans cette série : le patrimoine archéologique mésopotamien a subi, au cours des deux dernières décennies, des destructions et des pillages d'une ampleur considérable — guerre en Irak, puis démolitions volontaires de sites comme Nimroud et Hatra par l'État islamique en 2015. Contrairement aux questions de récupération symbolique posées par d'autres mythologies de cette série, il s'agit ici d'une perte patrimoniale physique et largement irréversible, dont l'ampleur exacte continue d'être évaluée par la communauté archéologique internationale.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">𒀭𒂗𒆠</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série : <strong>Mythologie Hindoue</strong></p>
+</footer>
+
+</body>
+</html>

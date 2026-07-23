@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythologie Celtique — Dieux, Royaumes &amp; Légendes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #14211a;
+    --bg-deep: #0e1813;
+    --panel: #1c2c22;
+    --panel-border: #3a5240;
+    --green: #3a7d44;
+    --green-bright: #5aa663;
+    --gold: #b8944a;
+    --gold-bright: #d4b262;
+    --mist: #8a7ba8;
+    --mist-bright: #a596c4;
+    --text: #e4ead9;
+    --text-dim: #9fae95;
+    --glow: rgba(184,148,74,0.30);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #1c2c22 0%, #14211a 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{font-family:'Cinzel', serif; color:var(--gold-bright); letter-spacing:0.03em; font-weight:700;}
+  a{color:var(--gold-bright);}
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.015) 3px);
+    z-index:1; opacity:0.4;
+  }
+  .meander-strip{display:block; width:100%; height:20px;}
+
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 20%, rgba(138,123,168,0.18), transparent 55%),
+      linear-gradient(180deg, #101c16 0%, #14211a 60%, #0e1813 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .epigraph-row{font-size:22px; letter-spacing:12px; color:var(--gold); opacity:0.65; margin-bottom:28px; font-family:'Cinzel', serif;}
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.6rem, 7vw, 5.2rem); margin:0;
+    background:linear-gradient(180deg, var(--gold-bright), var(--green-bright) 65%, #2a4a30);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 40px rgba(184,148,74,0.2);
+  }
+  .hero .subtitle{font-family:'Cinzel', serif; font-size:1.1rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--mist-bright); margin-top:14px;}
+  .hero .tagline{max-width:640px; margin:34px auto 0; font-style:italic; color:var(--text-dim); font-size:1.15rem;}
+  .divider{width:120px; height:2px; margin:36px auto; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+  .nav-pills{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:860px;}
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(255,255,255,0.02); transition:all .25s ease;
+  }
+  .nav-pills a:hover{color:var(--gold-bright); border-color:var(--gold); box-shadow:0 0 14px rgba(184,148,74,0.18);}
+
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 18px; justify-content:center;
+    padding:14px 20px; background:rgba(16,26,20,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--mist-bright); border-color:var(--mist-bright);}
+
+  section{position:relative; z-index:2; max-width:1000px; margin:0 auto; padding:100px 24px;}
+  .section-label{text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--mist-bright); font-size:0.8rem; margin-bottom:12px;}
+  .section-title{text-align:center; font-size:clamp(2rem,4.5vw,3rem); margin:0 0 16px;}
+  .section-intro{text-align:center; max-width:680px; margin:0 auto 60px; color:var(--text-dim); font-style:italic;}
+
+  .realms-wrap{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:22px;}
+  .realm-card{background:linear-gradient(160deg, var(--panel), #101c16); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden;}
+  .realm-card::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--mist), var(--gold));}
+  .realm-card h3{margin:0 0 4px; font-size:1.25rem; display:flex; align-items:center; gap:10px;}
+  .realm-num{color:var(--gold); font-size:1.05rem; opacity:0.85; font-family:'Cinzel', serif;}
+  .realm-card .realm-sub{font-size:0.85rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;}
+  .realm-card p{margin:0; font-size:0.98rem;}
+
+  .tree-diagram{text-align:center; margin:50px 0 70px; opacity:0.95;}
+  .tree-diagram svg{max-width:100%; height:auto;}
+
+  .pantheon-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px;}
+  .god-card{background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;}
+  .god-card:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.5), 0 0 0 1px var(--gold);}
+  .god-header{padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(58,125,68,0.14), transparent);}
+  .god-name{font-size:1.5rem; margin:0;}
+  .god-epithet{font-size:0.85rem; color:var(--mist-bright); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px;}
+  .god-body{padding:18px 24px 24px;}
+  .god-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px;}
+  .god-body p{margin:0 0 10px; font-size:0.97rem;}
+  .god-body p:last-child{margin-bottom:0;}
+  .god-body strong{color:var(--gold-bright); font-weight:600;}
+
+  .creature-list{display:grid; gap:18px;}
+  .creature-item{display:grid; grid-template-columns:180px 1fr; gap:24px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:20px 24px;}
+  .creature-name{font-family:'Cinzel', serif; color:var(--mist-bright); font-size:1.15rem; align-self:start;}
+  .creature-name span{display:block; font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; font-family:'EB Garamond', serif; font-style:italic;}
+
+  .legend-block{margin-bottom:56px; padding-bottom:52px; border-bottom:1px solid var(--panel-border);}
+  .legend-block:last-child{border-bottom:none;}
+  .legend-number{font-family:'Cinzel Decorative', serif; font-size:0.95rem; color:var(--mist-bright); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;}
+  .legend-block h3{font-size:1.7rem; margin:0 0 20px;}
+  .legend-block p{margin:0 0 16px; font-size:1.02rem;}
+  .legend-block p:last-child{margin-bottom:0;}
+  .pull-quote{border-left:3px solid var(--gold); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--gold-bright); font-size:1.1rem;}
+
+  .anecdote-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;}
+  .anecdote-card{background:linear-gradient(160deg, rgba(138,123,168,0.08), var(--panel)); border:1px solid var(--panel-border); border-left:3px solid var(--mist-bright); padding:20px 22px; border-radius:3px;}
+  .anecdote-card h4{font-size:1rem; margin:0 0 8px; color:var(--gold-bright); text-transform:uppercase; letter-spacing:0.04em;}
+  .anecdote-card p{margin:0; font-size:0.95rem; color:var(--text);}
+
+  .reach-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:50px;}
+  .reach-card{border:1px solid var(--panel-border); border-top:2px solid var(--mist-bright); padding:18px 20px; background:var(--panel); border-radius:3px;}
+  .reach-card h4{margin:0 0 6px; font-size:1rem; color:var(--gold-bright);}
+  .reach-card .reach-dist{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px;}
+  .reach-card p{margin:0; font-size:0.92rem;}
+
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg, transparent, var(--gold) 6%, var(--gold) 94%, transparent); transform:translateX(-50%);}
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--gold-bright); box-shadow:0 0 10px var(--glow);}
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{font-family:'Cinzel', serif; color:var(--mist-bright); font-size:1rem; letter-spacing:0.05em; display:block; margin-bottom:6px;}
+  .timeline-content h4{margin:0 0 6px; font-size:1.05rem; color:var(--gold-bright);}
+  .timeline-content p{margin:0; font-size:0.92rem; color:var(--text-dim);}
+
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{font-size:0.95rem; color:var(--gold-bright); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{border-left:3px solid var(--mist-bright); padding:4px 20px; margin-top:32px; font-size:0.92rem; color:var(--text-dim); font-style:italic;}
+
+  footer{text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim);}
+  footer .epigraph-row{margin-bottom:20px; font-size:18px;}
+  footer .next-up{font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim);}
+  footer .next-up strong{color:var(--gold-bright);}
+
+  ::selection{background:var(--gold); color:#14211a;}
+
+  @media (max-width:640px){
+    .creature-item{grid-template-columns:1fr;}
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:780px; max-width:none;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.62rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){width:100%; left:0; text-align:left; padding:0 10px 44px 50px;}
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{left:13px; right:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="epigraph-row">᚛ᚑᚌᚐᚋ᚜</div>
+  <h1>Mythologie Celtique</h1>
+  <div class="subtitle">Dieux, Héros &amp; Légendes des Peuples de Brume et de Chêne</div>
+  <p class="tagline">Des tertres féeriques d'Irlande aux forêts sacrées de Gaule : le cinquième chapitre d'un voyage à travers les mythologies du monde.</p>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#royaumes">Les Six Royaumes</a>
+    <a href="#pantheon">Le Panthéon</a>
+    <a href="#genealogie">Arbre Généalogique</a>
+    <a href="#creatures">Créatures &amp; Êtres</a>
+    <a href="#legendes">Grandes Légendes</a>
+    <a href="#anecdotes">Anecdotes</a>
+    <a href="#monde">Le Monde Celtique</a>
+    <a href="#frise">Frise Chronologique</a>
+    <a href="#heritage">Héritage Actuel</a>
+  </nav>
+</header>
+
+<svg class="meander-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="knot0" width="40" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 10 C5 0 15 0 20 10 C25 20 35 20 40 10" stroke="#b8944a" stroke-width="2" fill="none" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#knot0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#royaumes">Royaumes</a>
+  <a href="#pantheon">Panthéon</a>
+  <a href="#genealogie">Généalogie</a>
+  <a href="#creatures">Créatures</a>
+  <a href="#legendes">Légendes</a>
+  <a href="#anecdotes">Anecdotes</a>
+  <a href="#monde">Le Monde</a>
+  <a href="#frise">Frise</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ROYAUMES ================= -->
+<section id="royaumes">
+  <div class="section-label">Cosmogonie</div>
+  <h2 class="section-title">Les Six Royaumes du Monde Celtique</h2>
+  <p class="section-intro">Contrairement aux panthéons figés d'autres traditions, la mythologie irlandaise se raconte comme une histoire : des vagues successives de peuples envahissent l'île, jusqu'à ce que les Tuatha Dé Danann, vaincus à leur tour, se retirent sous terre — devenant le peuple invisible des tertres. Le <em>Lebor Gabála Érenn</em> en compte généralement six ; ce nombre varie légèrement d'une recension manuscrite médiévale à l'autre, mais six reste le chiffre retenu par la tradition dominante.</p>
+
+  <div class="realms-wrap">
+    <div class="realm-card">
+      <h3><span class="realm-num">I</span>Cesair</h3>
+      <div class="realm-sub">La Vague d'avant le Déluge</div>
+      <p>Petite-fille légendaire de Noé, arrivée en Irlande avant même le Déluge biblique — une vague presque entièrement engloutie par les eaux, à l'exception d'un unique survivant selon la tradition la plus répandue.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">II</span>Partholón</h3>
+      <div class="realm-sub">Les Premiers Défricheurs</div>
+      <p>Descendants de Japhet, fils de Noé, premiers à défricher les plaines et allumer les feux en Irlande — avant d'être exterminés en une semaine par une peste soudaine.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">III</span>Nemed</h3>
+      <div class="realm-sub">Le Peuple Broyé par les Fomoires</div>
+      <p>Peuple vaguement apparenté aux précédents, lui aussi issu de la lignée de Japhet, écrasé après une longue lutte contre les Fomoires — les survivants fuient l'Irlande vers l'exil.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">IV</span>Fir Bolg</h3>
+      <div class="realm-sub">Le Retour d'Exil et la Royauté</div>
+      <p>Descendants d'exilés nemediens réduits en esclavage en Grèce, revenus s'installer en Irlande pour y instaurer la royauté et diviser l'île en cinq provinces, les cúige.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">V</span>Tuatha Dé Danann</h3>
+      <div class="realm-sub">Le Peuple de la Déesse Danu</div>
+      <p>Arrivé 37 ans après les Fir Bolg, venu — dit-on — des îles du nord du monde dans une nuée, ce peuple divin vainc Fir Bolg puis Fomoires à Mag Tuired : ce sont les dieux déjà présentés au panthéon.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-num">VI</span>Fils de Míl</h3>
+      <div class="realm-sub">Les Derniers Envahisseurs</div>
+      <p>Ultime vague, ancêtres légendaires des Irlandais historiques, qui repoussent les Tuatha Dé Danann sous terre — origine mythique du folklore des Síde et des fées.</p>
+    </div>
+  </div>
+
+  <div style="max-width:820px; margin:40px auto 0; padding:24px 28px; background:linear-gradient(160deg, rgba(138,123,168,0.08), var(--panel)); border:1px solid var(--panel-border); border-left:3px solid var(--gold); border-radius:3px;">
+    <h4 style="margin:0 0 12px; font-size:1.05rem; color:var(--gold-bright); text-transform:uppercase; letter-spacing:0.04em;">Un Autre Monde aux Noms Multiples</h4>
+    <p style="margin:0 0 12px; font-size:0.98rem;">Tír na nÓg, Mag Mell et Emain Ablach ne forment pas trois royaumes distincts et hiérarchisés dans l'imaginaire irlandais, mais plutôt des noms largement interchangeables d'un même concept de paradis insulaire, atteint par la mer ou par un tertre — les textes eux-mêmes les emploient l'un pour l'autre sans grande cohérence, tantôt confondant Tír na nÓg et Mag Mell, tantôt associant Emain Ablach, l'île des pommiers, au dieu marin Manannán mac Lir, dont le manteau de brume magique (le <em>féth fíada</em>) dissimule d'ailleurs l'ensemble de cet Autre Monde aux yeux des mortels.</p>
+    <p style="margin:0; font-size:0.98rem;">Une exception notable se détache de ce flou : Tech Duinn, la "Maison de Donn", lieu de rassemblement des morts avant leur dernier voyage, se rapproche conceptuellement bien davantage de l'Hadès gréco-romain que des paradis lumineux évoqués plus haut. Quant à Annwn, souvent cité aux côtés de ces noms irlandais, il appartient en réalité à une tradition tout à fait distincte, galloise et brittonique, attestée dans le Mabinogion — un rappel que "mythologie celtique" désigne une famille de traditions apparentées, non un corpus unique.</p>
+  </div>
+
+  <h3 style="text-align:center; margin-top:90px; font-size:1.8rem;">Voyage détaillé à travers les Six Royaumes</h3>
+  <p class="section-intro" style="margin-bottom:50px;">La mythologie irlandaise se distingue par sa structure "historicisée" : plutôt qu'un cosmos figé, elle raconte une succession de six vagues d'invasion consignées, avec un sérieux quasi chronique, dans le <em>Lebor Gabála Érenn</em>, le "Livre des Invasions".</p>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume I — Cesair</div>
+    <h3>La Vague Engloutie par le Déluge</h3>
+    <p>Le <em>Lebor Gabála Érenn</em> ("Livre des Invasions"), grande compilation médiévale de la mythologie irlandaise, ouvre son récit avec Cesair, présentée comme petite-fille de Noé, qui aurait mené une troupe de colons jusqu'en Irlande dans les décennies précédant le Déluge biblique, cherchant à échapper au cataclysme annoncé en s'installant aux confins occidentaux du monde connu.</p>
+    <p>La tentative échoue : le Déluge finit par submerger l'île elle-même, et la vague de Cesair périt presque intégralement noyée — seul un homme, Fintan mac Bóchra, survit selon la tradition la plus répandue, se métamorphosant en saumon puis en aigle et en faucon à travers les siècles pour devenir le témoin immémorial de toute l'histoire irlandaise à venir.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume II — Partholón</div>
+    <h3>Les Premiers à Défricher la Terre</h3>
+    <p>Quelque temps après le Déluge, Partholón mène en Irlande un nouveau peuple, descendant comme beaucoup d'autres vagues de la lignée de Japhet, fils de Noé. Ses colons accomplissent les tout premiers gestes de civilisation sur l'île encore vierge : défricher les plaines, allumer les premiers feux, creuser les premiers lacs — la mythologie irlandaise attribue ainsi à ce peuple oublié la transformation matérielle initiale du pays.</p>
+    <p>Leur fin est aussi brutale que leur installation fut fondatrice : une peste foudroyante extermine l'ensemble du peuple de Partholón en une seule semaine, ne laissant derrière elle qu'une terre à nouveau vide, prête pour la vague suivante — un motif de dépeuplement soudain qui reviendra plusieurs fois dans le récit du <em>Lebor Gabála</em>.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume III — Nemed</div>
+    <h3>Le Peuple Broyé par les Fomoires</h3>
+    <p>Nemed conduit à son tour un peuple vaguement apparenté aux précédents colons — lui aussi rattaché par la tradition à la descendance de Japhet — jusqu'en Irlande. Son arrivée marque surtout le début d'un long affrontement avec les Fomoires, race de géants monstrueux et chaotiques qui hanteront plusieurs vagues successives du récit sans jamais constituer eux-mêmes une vague de colonisation à part entière.</p>
+    <p>Après une résistance acharnée, le peuple de Nemed finit par être écrasé par la pression fomoire ; les survivants, trop peu nombreux pour tenir l'île, se dispersent en exil vers des terres lointaines — dont certains descendants reviendront, plus tard, sous les traits des Fir Bolg.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume IV — Fir Bolg</div>
+    <h3>Le Retour d'Exil et la Royauté</h3>
+    <p>Descendants d'exilés nemediens réduits en esclavage en Grèce, où ils auraient porté de lourds sacs de terre — d'où leur nom, littéralement "hommes des sacs" —, les Fir Bolg finissent par revenir s'installer en Irlande. Peuple humain plus fruste que les vagues divines qui les suivront, ils sont néanmoins les premiers à instaurer une véritable royauté sur l'île et à la diviser en cinq provinces, les <em>cúige</em>, un découpage traditionnel dont l'écho perdure aujourd'hui dans la géographie irlandaise.</p>
+    <p>Leur règne prend fin avec l'arrivée des Tuatha Dé Danann à la première bataille de Mag Tuired : vaincus, les Fir Bolg se replient sur les îles périphériques du pays, notamment Rathlin et les îles d'Aran, où leur souvenir reste attaché aujourd'hui encore à certains sites mégalithiques.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume V — Tuatha Dé Danann</div>
+    <h3>Le Peuple Divin et ses Deux Guerres</h3>
+    <p>Le peuple de la déesse Danu débarque en Irlande trente-sept ans après les Fir Bolg, selon la tradition venu des îles du nord du monde, enveloppé d'un nuage magique qui masque son arrivée aux regards mortels. À la première bataille de Mag Tuired, il prend la royauté aux Fir Bolg ; au cours de ce combat, le roi Nuada perd un bras, blessure qui, la coutume celtique exigeant l'intégrité physique du souverain, le contraint à céder temporairement le trône.</p>
+    <p>Une seconde bataille de Mag Tuired, plus décisive encore, les oppose ensuite aux Fomoires — adversaires qui reviennent hanter cette nouvelle vague comme ils avaient déjà hanté celle de Nemed — victoire scellée par la mort du roi fomoire Balor, tué par son propre petit-fils Lugh. Ce sont ces mêmes Tuatha Dé Danann, dieux et déesses de la mythologie irlandaise, que l'on retrouve déjà présentés dans le panthéon de cette page.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume VI — Fils de Míl</div>
+    <h3>Les Derniers Envahisseurs, Premiers Irlandais</h3>
+    <p>Ultime vague du <em>Lebor Gabála Érenn</em>, les fils de Míl Espáine débarquent en Irlande et affrontent les Tuatha Dé Danann pour la maîtrise de l'île. Trois déesses souveraines du peuple divin, Ériu, Banba et Fódla, négocient chacune avec les envahisseurs la promesse que l'île portera à jamais leur nom — un pacte tenu, "Éire" restant aujourd'hui encore le nom officiel de l'Irlande en gaélique.</p>
+    <p>Vaincus, les Tuatha Dé Danann ne disparaissent pas : ils se retirent sous terre, dans les tertres et collines d'Irlande — le site de Brú na Bóinne, avec son tumulus de Newgrange antérieur de plusieurs siècles aux pyramides égyptiennes, en incarne aujourd'hui encore la frontière — devenant peu à peu les Aos Sí, le "peuple des tertres", origine mythique du folklore irlandais des fées. Les fils de Míl, eux, restent en surface et deviennent les ancêtres légendaires des Irlandais historiques, derniers venus d'un récit qui aura vu se succéder six peuples avant que l'île ne trouve sa forme définitive.</p>
+  </div>
+</section>
+
+<!-- ================= PANTHEON ================= -->
+<section id="pantheon">
+  <div class="section-label">Panthéon</div>
+  <h2 class="section-title">Les Dieux Illustres</h2>
+  <p class="section-intro">Le panthéon irlandais des Tuatha Dé Danann se mêle à des héros mortels si puissants qu'ils en deviennent quasi divins — la frontière entre dieu et héros reste, dans le monde celtique, résolument poreuse.</p>
+
+  <div class="pantheon-grid">
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Le Dagda</h3><div class="god-epithet">Le Bon Dieu, Père de la Tribu</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Abondance</span><span class="tag">Force</span><span class="tag">Sagesse</span></div>
+        <p>Figure paternelle et rustique du panthéon irlandais, il possède un chaudron d'abondance dont nul ne repart jamais affamé, et une massue si vaste qu'une extrémité tue tandis que l'autre ressuscite. Sa harpe, capable de commander aux saisons elles-mêmes, apaise ou déchaîne les émotions de ceux qui l'entendent.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Lugh</h3><div class="god-epithet">Le Maître de Tous les Arts</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Polyvalence</span><span class="tag">Lumière</span><span class="tag">Guerre</span></div>
+        <p>Petit-fils du roi fomoire Balor par sa mère, mais élevé parmi les Tuatha Dé Danann, Lugh incarne à lui seul la réunion de deux mondes ennemis. Maître de tous les arts et de tous les métiers à la fois, il se présente à la cour de Tara en énumérant ses talents un à un, jusqu'à ce qu'on lui reconnaisse une compétence qu'aucun autre ne possède déjà — la maîtrise simultanée de tous les savoirs.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">La Morrígan</h3><div class="god-epithet">La Grande Reine, Déesse de la Guerre</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Guerre</span><span class="tag">Destin</span><span class="tag">Souveraineté</span></div>
+        <p>Déesse redoutable de la guerre, du destin et de la souveraineté du territoire, souvent présentée comme une triade avec Badb et Macha. Elle survole les champs de bataille sous forme de corneille, annonçant la mort à ceux qu'elle a choisis — Cú Chulainn lui-même la rencontre à plusieurs reprises avant sa propre fin.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Brigid</h3><div class="god-epithet">Déesse de la Poésie, du Feu et de la Guérison</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Poésie</span><span class="tag">Forge</span><span class="tag">Guérison</span></div>
+        <p>Fille du Dagda, patronne des poètes, des forgerons et des guérisseurs. Son culte survit d'une manière remarquable à la christianisation de l'Irlande : sainte Brigide de Kildare hérite directement de son nom, de sa fête (1er février, Imbolc) et de plusieurs de ses attributs, dans l'un des cas de syncrétisme les mieux documentés d'Europe.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Manannán mac Lir</h3><div class="god-epithet">Seigneur de la Mer</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Mer</span><span class="tag">Autre Monde</span><span class="tag">Illusion</span></div>
+        <p>Dieu de la mer et gardien des frontières entre les mondes, il chevauche les vagues sur un char comme sur une plaine solide et dissimule l'Autre Monde derrière un voile de brume magique. Son nom survit aujourd'hui dans celui de l'île de Man.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Nuada</h3><div class="god-epithet">Le Roi au Bras d'Argent</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Royauté</span><span class="tag">Justice</span></div>
+        <p>Premier roi des Tuatha Dé Danann, contraint d'abdiquer après avoir perdu un bras au combat — un roi celtique se devait d'être physiquement entier. Le médecin-forgeron Dian Cécht lui façonne un bras d'argent articulé, exploit technique remarquable, mais insuffisant pour le maintenir sur le trône jusqu'à sa restauration complète.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Danu</h3><div class="god-epithet">La Mère des Dieux</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Origine</span><span class="tag">Terre</span></div>
+        <p>Déesse mère ancestrale dont le nom même, "Tuatha Dé Danann", signifie littéralement "peuple de la déesse Danu" — figure si primordiale qu'elle apparaît à peine dans les récits eux-mêmes, sa fonction étant avant tout généalogique et fondatrice.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Aengus</h3><div class="god-epithet">Dieu de l'Amour et de la Jeunesse</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Amour</span><span class="tag">Poésie</span><span class="tag">Ruse</span></div>
+        <p>Fils du Dagda et de la déesse-rivière Boann, conçu et né en un seul jour grâce à la magie de son père, qui suspend le cours du soleil pour dissimuler l'adultère à l'époux de Boann. Des oiseaux voltigent perpétuellement au-dessus de sa tête, symboles de ses baisers changés en créatures ailées.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Ogma</h3><div class="god-epithet">Le Champion Éloquent</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Éloquence</span><span class="tag">Écriture</span><span class="tag">Force</span></div>
+        <p>Champion redoutable au combat mais aussi inventeur légendaire de l'alphabet oghamique, système d'écriture celtique gravé en lignes sur les arêtes des pierres et des bâtons — un curieux mariage entre force brute et pouvoir du langage.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Goibniu</h3><div class="god-epithet">Le Forgeron Divin</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Forge</span><span class="tag">Immortalité</span></div>
+        <p>Forgeron des Tuatha Dé Danann, capable de fabriquer une arme parfaite en seulement trois coups de marteau. Il brasse également le "festin de Goibniu", une bière magique qui protège de la vieillesse quiconque en boit.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Balor</h3><div class="god-epithet">Le Roi à l'Œil Destructeur</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Chaos</span><span class="tag">Fomoire</span><span class="tag">Prophétie</span></div>
+        <p>Roi des Fomoires, dont l'œil unique, toujours gardé fermé tant sa vue est dévastatrice, réduit en cendres tout ce sur quoi il se pose une fois ouvert par plusieurs serviteurs à l'aide de crochets. Une prophétie annonçant sa mort par la main de son propre petit-fils le pousse à emprisonner sa fille Ethniu — en vain, puisque Lugh naîtra malgré tout et accomplira la prophétie.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Cú Chulainn</h3><div class="god-epithet">Le Chien d'Ulster</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Héroïsme</span><span class="tag">Fureur guerrière</span></div>
+        <p>Fils mortel de Lugh, héros central du Cycle d'Ulster, capable d'entrer dans une transe de combat, le <em>ríastrad</em>, qui déforme monstrueusement son corps et le rend quasiment invincible. Enfant, il tue le chien de garde du forgeron Culann et s'engage, pour réparer sa faute, à le remplacer lui-même — geste qui lui vaut son nom.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Medb</h3><div class="god-epithet">La Reine Guerrière du Connacht</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Souveraineté</span><span class="tag">Guerre</span><span class="tag">Fierté</span></div>
+        <p>Reine puissante et redoutée, dont la fierté blessée par une simple dispute conjugale sur la richesse comparée des troupeaux déclenche la grande razzia des vaches de Cooley — l'un des plus longs récits épiques de toute la tradition irlandaise.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Epona</h3><div class="god-epithet">La Déesse aux Chevaux</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Chevaux</span><span class="tag">Fertilité</span><span class="tag">Gauloise</span></div>
+        <p>Déesse gauloise du cheval, l'une des rares divinités celtiques adoptées directement et officiellement dans le panthéon romain, vénérée jusque dans les casernes de cavalerie aux confins de l'Empire — signe rare d'une divinité "provinciale" conquérant ses propres conquérants.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Cernunnos</h3><div class="god-epithet">Le Dieu Cornu</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Nature</span><span class="tag">Abondance</span><span class="tag">Mystère</span></div>
+        <p>Divinité gauloise énigmatique, représentée assise en tailleur, coiffée de bois de cerf et entourée d'animaux sauvages, notamment sur le célèbre chaudron de Gundestrup. Aucun texte narratif ne nous est parvenu à son sujet — seule son image, saisissante, a traversé les siècles.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header"><h3 class="god-name">Rhiannon</h3><div class="god-epithet">La Grande Reine Galloise</div></div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Souveraineté</span><span class="tag">Patience</span><span class="tag">Galloise</span></div>
+        <p>Figure du Mabinogion associée aux chevaux, faussement accusée d'avoir dévoré son propre nouveau-né et condamnée à porter les visiteurs sur son dos comme une bête de somme jusqu'à ce que la vérité éclate — un récit de patience et de vindication qui en fait l'une des figures féminines les plus attachantes de la tradition galloise.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= GENEALOGIE ================= -->
+<section id="genealogie">
+  <div class="section-label">Filiations</div>
+  <h2 class="section-title">L'Arbre Généalogique des Dieux</h2>
+  <p class="section-intro">La généalogie irlandaise raconte avant tout un conflit : la lignée des Tuatha Dé Danann, la lignée ennemie des Fomoires, et le pont improbable entre les deux que constitue la naissance de Lugh. Trait plein = filiation. Trait pointillé = union. Trait en tirets = destin prophétique.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg" style="max-width:1100px;">
+      <text x="180" y="24" fill="#3a7d44" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">LA MAISON DE DANU</text>
+      <text x="600" y="24" fill="#b8944a" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">LA LIGNÉE DE LUGH</text>
+      <text x="1010" y="24" fill="#8a7ba8" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">LES FOMOIRES</text>
+
+      <g stroke="#3a5240" stroke-width="1.4" fill="none">
+        <line x1="180" y1="55" x2="180" y2="95"/>
+        <line x1="110" y1="130" x2="180" y2="105"/>
+        <line x1="180" y1="130" x2="180" y2="105"/>
+        <line x1="250" y1="130" x2="180" y2="105"/>
+        <line x1="320" y1="130" x2="180" y2="105"/>
+        <line x1="110" y1="150" x2="110" y2="195" stroke-dasharray="3,3"/>
+        <line x1="90" y1="230" x2="110" y2="205"/>
+        <line x1="130" y1="230" x2="110" y2="205"/>
+
+        <line x1="320" y1="150" x2="500" y2="220" stroke-dasharray="1,5" stroke="#b8944a"/>
+        <line x1="900" y1="150" x2="720" y2="220" stroke-dasharray="1,5" stroke="#8a7ba8"/>
+        <line x1="500" y1="240" x2="700" y2="240" stroke-dasharray="3,3"/>
+        <line x1="500" y1="260" x2="600" y2="310"/>
+        <line x1="700" y1="260" x2="600" y2="310"/>
+        <line x1="600" y1="330" x2="600" y2="380" stroke-dasharray="1,5" stroke="#b8944a"/>
+        <line x1="600" y1="400" x2="600" y2="440"/>
+
+        <line x1="900" y1="60" x2="900" y2="100"/>
+        <line x1="900" y1="120" x2="900" y2="150" stroke-dasharray="3,3"/>
+        <line x1="900" y1="150" x2="900" y2="180"/>
+      </g>
+
+      <g font-family="EB Garamond, serif" font-size="12.5" fill="#e4ead9" text-anchor="middle">
+        <text x="180" y="70" fill="#3a7d44" font-weight="bold">DANU</text>
+        <text x="110" y="148" font-size="11">Le Dagda</text>
+        <text x="180" y="148" font-size="11">Nuada</text>
+        <text x="250" y="148" font-size="11">Ogma</text>
+        <text x="320" y="148" font-size="11">Cian</text>
+        <text x="90" y="248" font-size="10.5">Aengus</text>
+        <text x="130" y="248" font-size="10.5" fill="#6b7a63">(+ Boann)</text>
+
+        <text x="500" y="234" font-size="11">Cian</text>
+        <text x="500" y="216" font-size="9" fill="#6b7a63">(Tuatha Dé Danann)</text>
+        <text x="700" y="234" font-size="11">Ethniu</text>
+        <text x="700" y="216" font-size="9" fill="#6b7a63">(fille de Balor)</text>
+        <text x="600" y="304" fill="#b8944a" font-weight="bold" font-size="12">LUGH</text>
+        <text x="600" y="398" font-size="11">Cú Chulainn</text>
+        <text x="600" y="412" font-size="9" fill="#6b7a63">(fils mortel)</text>
+        <text x="600" y="365" font-size="9.5" fill="#8a7ba8" font-style="italic">tue Balor (prophétie)</text>
+
+        <text x="900" y="52" font-size="11">(ancêtres fomoires)</text>
+        <text x="900" y="115" fill="#8a7ba8" font-weight="bold">Balor</text>
+        <text x="900" y="145" font-size="9" fill="#6b7a63">(œil destructeur)</text>
+        <text x="900" y="196" font-size="10.5">Ethniu</text>
+      </g>
+    </svg>
+  </div>
+
+  <p class="section-intro" style="margin-top:10px;">Les généalogies gaéliques varient sensiblement d'un manuscrit médiéval à l'autre : le <em>Lebor Gabála Érenn</em> lui-même compile plusieurs versions concurrentes sans chercher à les harmoniser complètement — une pluralité de sources que cet arbre simplifie nécessairement.</p>
+</section>
+
+<!-- ================= CREATURES ================= -->
+<section id="creatures">
+  <div class="section-label">Bestiaire</div>
+  <h2 class="section-title">Créatures &amp; Êtres Légendaires</h2>
+  <p class="section-intro">Entre le folklore populaire tardif et les figures monstrueuses les plus anciennes, le bestiaire celtique peuple la brume, les eaux et les routes nocturnes d'Irlande.</p>
+
+  <div class="creature-list">
+    <div class="creature-item">
+      <div class="creature-name">Le Púca<span>L'Esprit Changeant</span></div>
+      <p>Créature facétieuse capable de prendre de multiples formes, le plus souvent celle d'un cheval noir aux yeux flamboyants, entraînant les voyageurs égarés dans des chevauchées nocturnes effrénées — pas nécessairement malveillant, mais toujours imprévisible.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">La Banshee<span>La Pleureuse Annonciatrice</span></div>
+      <p>Femme spectrale dont le cri perçant annonce la mort prochaine d'un membre de certaines familles irlandaises anciennes — on raconte qu'elle serait liée aux Tuatha Dé Danann, gardienne funeste d'une lignée qu'elle continue de veiller depuis l'Autre Monde.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Le Dullahan<span>Le Cavalier Sans Tête</span></div>
+      <p>Spectre chevauchant à travers la nuit, portant sa propre tête sous le bras, dont le simple fait de prononcer le nom d'un mourant qu'il vient chercher suffit à sceller son destin.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">La Leanan Sídhe<span>La Muse Fatale</span></div>
+      <p>Fée d'une beauté irrésistible, inspiratrice de poètes et de musiciens auxquels elle offre un génie artistique fulgurant — au prix d'une vie généralement écourtée par l'épuisement de sa présence dévorante.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">L'Each-Uisge<span>Le Cheval des Eaux</span></div>
+      <p>Créature aquatique prenant l'apparence d'un magnifique cheval sauvage : quiconque le monte se retrouve collé à sa peau et entraîné au fond du lac ou de la mer pour y être dévoré.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Cú Sídhe<span>Les Chiens Féeriques</span></div>
+      <p>Chiens de chasse surnaturels, souvent verts, associés au cortège de l'Autre Monde, dont les aboiements lointains annoncent traditionnellement un danger ou une mort prochaine.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Le Leprechaun<span>Le Cordonnier Solitaire</span></div>
+      <p>Petit personnage facétieux et solitaire, gardien d'un trésor caché, bien plus modeste dans le folklore original que la figure touristique commerciale qu'il est devenu — il n'a, à l'origine, rien à voir avec les puissants Tuatha Dé Danann.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Selkies<span>Les Femmes-Phoques</span></div>
+      <p>Créatures capables de quitter leur peau de phoque pour prendre forme humaine sur le rivage ; un mortel dérobant cette peau peut contraindre une selkie à l'épouser, jusqu'au jour où elle retrouve sa peau cachée et regagne aussitôt la mer.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Fomoires<span>Les Géants Difformes</span></div>
+      <p>Race primordiale et monstrueuse, souvent affligée de difformités symboliques — un œil, un bras ou une jambe unique — incarnant le chaos que les Tuatha Dé Danann doivent vaincre pour établir leur ordre sur l'Irlande.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEGENDES ================= -->
+<section id="legendes">
+  <div class="section-label">Récits Fondateurs</div>
+  <h2 class="section-title">Grandes Légendes</h2>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende I</div>
+    <h3>La Première Bataille de Mag Tuired</h3>
+    <p>Débarqués en Irlande dans un nuage de brume magique, les Tuatha Dé Danann affrontent les Fir Bolg, peuple humain déjà installé sur l'île, pour la maîtrise du territoire. Lors de cette bataille, leur roi Nuada perd un bras — une blessure qui, selon la coutume celtique exigeant l'intégrité physique du souverain, le contraint aussitôt à abdiquer malgré la victoire remportée.</p>
+    <p>Le médecin-forgeron Dian Cécht lui façonne alors un bras d'argent articulé, prodige technique inégalé, mais Nuada devra patienter des années, le temps qu'un remède définitif restaure sa chair, avant de pouvoir reprendre légitimement son trône.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende II</div>
+    <h3>La Naissance de Lugh et la Prophétie de Balor</h3>
+    <p>Une prophétie annonce à Balor, roi des Fomoires, qu'il périra un jour de la main de son propre petit-fils. Pour l'empêcher, il enferme sa fille unique, Ethniu, au sommet d'une tour isolée, loin de tout contact masculin. Mais Cian, guerrier des Tuatha Dé Danann venu récupérer une vache magique volée par Balor, parvient à la rejoindre grâce à l'aide d'une druidesse, et Ethniu donne naissance à des triplés.</p>
+    <p>Balor ordonne aussitôt de noyer les nouveau-nés — un seul, Lugh, survit, recueilli et élevé secrètement, tantôt par Manannán mac Lir, tantôt par un forgeron selon les versions, loin de la vengeance de son grand-père.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende III</div>
+    <h3>La Seconde Bataille de Mag Tuired</h3>
+    <p>Devenu adulte, Lugh se présente à la cour de Tara et se voit refuser l'entrée : nul n'est admis sans posséder un art unique. Il énumère alors, un à un, tous les talents qu'il maîtrise — charpentier, forgeron, guerrier, harpiste, poète, sorcier — jusqu'à ce que le portier, à court d'objections, le laisse enfin passer, reconnaissant en lui le seul à cumuler la totalité des savoirs de la cour.</p>
+    <p class="pull-quote">Lors de la bataille finale contre les Fomoires, Lugh affronte son propre grand-père Balor et, d'une fronde ou d'une lance selon les versions, lui transperce l'œil destructeur — le projectile traverse la tête de Balor et son regard funeste se retourne contre l'armée fomoire elle-même, dévastant ses propres rangs.</p>
+    <p>La victoire des Tuatha Dé Danann scelle définitivement la fin de la menace fomoire sur l'Irlande, et Lugh, héros hybride né de l'union de deux mondes ennemis, en devient l'un des rois les plus vénérés.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IV</div>
+    <h3>La Táin Bó Cúailnge — La Razzia des Vaches de Cooley</h3>
+    <p>Une dispute conjugale entre la reine Medb du Connacht et son époux sur la richesse comparée de leurs troupeaux respectifs dégénère en guerre ouverte lorsque Medb, refusant d'être en reste, lève une armée pour s'emparer du taureau brun légendaire de Cooley, en Ulster.</p>
+    <p>Frappés d'une malédiction qui les rend temporairement incapables de se battre, les guerriers d'Ulster laissent le jeune Cú Chulainn, seul épargné, défendre à lui seul la frontière — invoquant le droit ancien du combat singulier pour ralentir l'armée entière de Medb, un adversaire à la fois.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende V</div>
+    <h3>La Jeunesse de Cú Chulainn</h3>
+    <p>Enfant surdoué nommé Sétanta, il tue accidentellement, en légitime défense, le redoutable chien de garde du forgeron Culann. Pour réparer sa faute, il s'engage à protéger lui-même la demeure du forgeron jusqu'à ce qu'un nouveau chien soit élevé — geste qui lui vaut son nom définitif, "le Chien de Culann".</p>
+    <p>Au combat, il entre dans une transe effroyable, le <em>ríastrad</em> : son corps se tord, un œil s'enfonce tandis que l'autre grossit démesurément, ses cheveux se hérissent, une colonne de sang jaillit de son crâne — méconnaissable, il devient alors capable de terrasser des armées entières à lui seul.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VI</div>
+    <h3>Le Voyage de Bran</h3>
+    <p>Séduit par une musique venue de nulle part et une branche d'argent chargée de fleurs blanches déposée mystérieusement devant lui, Bran prend la mer vers l'ouest à la recherche du pays d'où provient cette merveille. En chemin, il croise Manannán mac Lir, chevauchant les vagues sur son char comme sur une plaine solide, qui lui révèle que ce que Bran perçoit comme un océan est, pour lui, une terre fertile et fleurie.</p>
+    <p>Après un séjour euphorique sur une île où le temps semble suspendu, l'un des compagnons de Bran, pris de nostalgie, touche le sol d'Irlande à son retour — et s'effondre instantanément en poussière, des siècles ayant en réalité filé pendant leur bref séjour dans l'Autre Monde.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VII</div>
+    <h3>Les Enfants de Lir</h3>
+    <p>Après la mort de sa première épouse, le dieu marin Lir se remarie avec Aoife, qui développe une jalousie dévorante envers les quatre enfants de son mari nés de sa précédente union. Par magie noire, elle les transforme en cygnes, les condamnant à neuf cents années d'exil sur les eaux froides d'Irlande, ne conservant que leur voix humaine et leur intelligence intactes.</p>
+    <p>Ce n'est qu'à l'arrivée du christianisme en Irlande, des siècles plus tard, que le sortilège se rompt enfin au son d'une cloche d'église — les enfants retrouvent une forme humaine, mais vieillie de neuf cents ans d'un coup, et meurent presque aussitôt, baptisés in extremis avant de rendre leur dernier souffle.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VIII</div>
+    <h3>Diarmuid et Gráinne</h3>
+    <p>Promise en mariage au vieillissant héros Fionn mac Cumhaill, la jeune Gráinne s'éprend au contraire de Diarmuid, guerrier marqué d'un "point d'amour" magique rendant quiconque le voit irrésistiblement épris de lui. Elle le contraint, par un geste rituel contraignant, à fuir avec elle plutôt que d'épouser Fionn.</p>
+    <p>S'ensuit une poursuite acharnée à travers toute l'Irlande, Fionn traquant sans relâche le couple en fuite pendant des années — un thème de triangle amoureux et de fuite qui préfigure étrangement, des siècles avant leur rédaction, les récits de Tristan et Iseult.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IX</div>
+    <h3>Le Chaudron du Dagda</h3>
+    <p>Parmi les quatre trésors sacrés que les Tuatha Dé Danann apportent avec eux en Irlande — dont la Pierre de Fal, criant sous le pied du roi légitime, et la lance invincible de Lugh — le chaudron du Dagda occupe une place à part : d'une capacité inépuisable, il rassasie toute une armée sans jamais se vider, symbole même de l'abondance et de la générosité que le bon roi doit incarner.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende X</div>
+    <h3>La Mort de Cú Chulainn</h3>
+    <p>Trahi par des ennemis exploitant ses propres tabous (geasa) pour l'affaiblir avant le combat, Cú Chulainn se sait condamné mais refuse de mourir allongé comme un homme ordinaire. Mortellement blessé, il s'attache debout à une pierre dressée à l'aide de sa propre ceinture, afin d'affronter la mort face à ses ennemis, l'épée encore à la main.</p>
+    <p>Ses adversaires, terrifiés, n'osent l'approcher que lorsqu'un corbeau — possible incarnation de la Morrígan elle-même, qui l'avait averti de sa fin à plusieurs reprises — vient enfin se poser sur son épaule, preuve certaine que le héros a définitivement rendu son dernier souffle.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XI</div>
+    <h3>Rhiannon et la Naissance de Pryderi</h3>
+    <p>Épouse du prince gallois Pwyll, Rhiannon voit son nouveau-né disparaître mystérieusement la nuit de sa naissance, tandis que ses servantes, terrifiées d'être accusées, maculent sa bouche du sang d'un chiot pour l'accuser faussement de l'avoir dévoré. Condamnée pour ce crime qu'elle n'a pas commis, elle doit, en pénitence, porter les visiteurs du palais sur son dos comme une monture pendant sept années.</p>
+    <p>L'enfant, en réalité enlevé par une force surnaturelle, est retrouvé sain et sauf par un noble voisin qui l'élève sans savoir son origine, avant qu'un rapprochement fortuit ne révèle enfin la vérité — innocentant Rhiannon et lui rendant son fils, Pryderi, devenu depuis l'une des grandes figures du Mabinogion.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XII</div>
+    <h3>Étain et les Deux Mariages</h3>
+    <p>Épouse du dieu Midir dans l'Autre Monde, Étain devient la cible de la jalousie de sa rivale Fuamnach, qui la transforme d'abord en flaque d'eau, puis en ver, puis en une magnifique mouche pourpre — sous cette forme, elle accompagne Midir partout, jusqu'à ce qu'un vent maléfique la chasse pendant sept longues années.</p>
+    <p>Retombée par hasard dans la coupe d'une reine mortelle qui l'avale sans le savoir, Étain renaît entièrement humaine, mariée de son plein droit à un roi d'Irlande, sans plus aucun souvenir de sa vie antérieure. Midir, la retrouvant des années plus tard, la reconquiert lors d'une partie d'échecs (fidchell) contre son époux mortel — un pari dont l'enjeu final est un simple baiser, suffisant à réveiller entièrement sa mémoire perdue et à la ramener avec lui dans l'Autre Monde.</p>
+  </div>
+</section>
+
+<!-- ================= ANECDOTES ================= -->
+<section id="anecdotes">
+  <div class="section-label">Le Saviez-Vous</div>
+  <h2 class="section-title">Anecdotes &amp; Curiosités</h2>
+
+  <div class="anecdote-grid">
+    <div class="anecdote-card">
+      <h4>Halloween vient de Samain</h4>
+      <p>Cette fête celtique marquant le passage à l'hiver, où le voile entre les mondes s'amincirait le plus, est directement à l'origine d'Halloween — devenu depuis un phénomène commercial mondial bien éloigné de ses racines rituelles.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Sainte Brigide, déesse christianisée</h4>
+      <p>La déesse Brigid et sainte Brigide de Kildare partagent nom, date de fête (1er février) et attributs (feu, guérison, poésie) — l'un des cas de continuité païenne-chrétienne les mieux documentés d'Europe.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>L'alphabet ogham</h4>
+      <p>Ce système d'écriture celtique, composé de traits gravés le long de l'arête d'une pierre ou d'un bâton, servait aussi bien à marquer des territoires qu'à des fins probablement divinatoires.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Newgrange, plus vieux que les pyramides</h4>
+      <p>Ce tumulus irlandais, aligné avec une précision remarquable sur le lever du soleil au solstice d'hiver, précède de plusieurs siècles la construction des pyramides égyptiennes.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les torques, bijoux de pouvoir</h4>
+      <p>Ces anneaux rigides portés autour du cou par la noblesse celtique, retrouvés en grand nombre par l'archéologie, symbolisaient statut social et protection quasi divine.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le leprechaun réel est bien différent</h4>
+      <p>Contrairement à l'image touristique moderne, le leprechaun original du folklore est une figure mineure et solitaire, sans aucun rapport avec la puissance des grands dieux Tuatha Dé Danann.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les Boston Celtics</h4>
+      <p>La franchise de basketball américaine tire directement son nom de l'héritage celtique irlandais revendiqué par la communauté immigrée de Boston au XXe siècle.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>L'invention romantique d'Ossian</h4>
+      <p>Au XVIIIe siècle, l'Écossais James Macpherson publie des poèmes qu'il présente comme traduits d'un barde antique, Ossian — un canular en grande partie de son invention, mais qui déclenchera une fascination européenne durable pour la culture celtique.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LE MONDE CELTIQUE ================= -->
+<section id="monde">
+  <div class="section-label">Géographie &amp; Expansion</div>
+  <h2 class="section-title">Un Monde Bien Au-Delà de l'Irlande</h2>
+  <p class="section-intro">Avant d'être refoulés vers les marges atlantiques de l'Europe, les peuples celtiques dominaient un territoire immense — jusqu'à atteindre, de façon assez surprenante, le cœur de l'Anatolie.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
+      <g stroke="#3a5240" stroke-width="1.3" fill="none" stroke-dasharray="2,4">
+        <line x1="500" y1="230" x2="180" y2="160"/>
+        <line x1="500" y1="230" x2="130" y2="300"/>
+        <line x1="500" y1="230" x2="330" y2="400"/>
+        <line x1="500" y1="230" x2="620" y2="120"/>
+        <line x1="500" y1="230" x2="800" y2="180"/>
+        <line x1="500" y1="230" x2="900" y2="340"/>
+      </g>
+      <circle cx="500" cy="230" r="9" fill="#b8944a"/>
+      <text x="500" y="205" fill="#3a7d44" font-family="Cinzel, serif" font-size="14" text-anchor="middle" font-weight="700">MONDE CELTIQUE</text>
+      <g font-family="EB Garamond, serif" font-size="12" fill="#e4ead9" text-anchor="middle">
+        <text x="180" y="152" fill="#8a7ba8">Irlande</text>
+        <text x="180" y="168" font-size="10" fill="#9fae95">berceau du corpus écrit</text>
+        <text x="130" y="292" fill="#8a7ba8">Bretagne insulaire</text>
+        <text x="130" y="308" font-size="10" fill="#9fae95">Écosse, Pays de Galles, Cornouailles</text>
+        <text x="330" y="392" fill="#8a7ba8">Armorique</text>
+        <text x="330" y="408" font-size="10" fill="#9fae95">Bretagne continentale</text>
+        <text x="620" y="112" fill="#8a7ba8">Gaule</text>
+        <text x="620" y="128" font-size="10" fill="#9fae95">France actuelle</text>
+        <text x="800" y="172" fill="#8a7ba8">Celtibérie</text>
+        <text x="800" y="188" font-size="10" fill="#9fae95">Espagne, Galice</text>
+        <text x="900" y="332" fill="#8a7ba8">Galatie</text>
+        <text x="900" y="348" font-size="10" fill="#9fae95">Anatolie, 278 av. J.-C.</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="reach-grid">
+    <div class="reach-card">
+      <h4>La Galatie, en Plein Cœur de l'Anatolie</h4>
+      <span class="reach-dist">278 av. J.-C.</span>
+      <p>Des tribus celtiques s'installent durablement au centre de l'actuelle Turquie après une série d'invasions — leurs descendants seront directement destinataires, des siècles plus tard, de l'Épître aux Galates dans le Nouveau Testament.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Le Sac de Rome</h4>
+      <span class="reach-dist">390 av. J.-C.</span>
+      <p>Le chef celtique Brennus s'empare brièvement de Rome elle-même, un traumatisme si profond que les Romains en garderont le souvenir pendant des siècles.</p>
+    </div>
+    <div class="reach-card">
+      <h4>L'Armorique et la Bretagne</h4>
+      <span class="reach-dist">Ve – VIe siècle apr. J.-C.</span>
+      <p>Face aux invasions anglo-saxonnes, des populations brittoniques émigrent vers l'Armorique continentale, lui donnant son nom actuel de Bretagne et y transportant leur langue et leurs récits.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Celtibérie</h4>
+      <span class="reach-dist">Ier millénaire av. J.-C.</span>
+      <p>Une bonne partie de la péninsule ibérique, notamment la Galice actuelle, se revendique aujourd'hui encore d'un héritage celtique, visible dans sa musique traditionnelle à la cornemuse.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Gaule Romanisée</h4>
+      <span class="reach-dist">58 – 51 av. J.-C.</span>
+      <p>La conquête de César, loin d'effacer totalement la culture gauloise, la fait fusionner avec les apports romains — Cernunnos et d'autres divinités gauloises continuent d'être représentées sur des monuments gallo-romains bien après la conquête.</p>
+    </div>
+    <div class="reach-card">
+      <h4>L'Irlande, Jamais Conquise par Rome</h4>
+      <span class="reach-dist">Toute l'Antiquité</span>
+      <p>Seule grande région celtique jamais intégrée à l'Empire romain, l'Irlande permet à sa mythologie de se transmettre avec une continuité relative jusqu'à sa mise par écrit par les moines médiévaux.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FRISE CHRONOLOGIQUE ================= -->
+<section id="frise">
+  <div class="section-label">Chronologie</div>
+  <h2 class="section-title">Frise Chronologique</h2>
+  <p class="section-intro">D'un monde oral transmis par les druides à sa redécouverte romantique puis populaire, en passant par des siècles de transcription monastique.</p>
+
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 450 av. J.-C.</span><h4>Culture de La Tène</h4>
+      <p>Apogée archéologique de l'art celtique en Europe centrale et occidentale, à son extension territoriale maximale.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">390 av. J.-C.</span><h4>Sac de Rome par Brennus</h4>
+      <p>Un choc majeur pour la jeune République romaine, longtemps gravé dans la mémoire collective latine.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">278 av. J.-C.</span><h4>Installation en Galatie</h4>
+      <p>Des tribus celtiques s'établissent durablement au cœur de l'Anatolie, à l'extrémité orientale du monde celtique.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">58 – 51 av. J.-C.</span><h4>La Guerre des Gaules</h4>
+      <p>César conquiert la Gaule et rédige ses Commentaires, source antique majeure — bien que partiale — sur la religion celtique continentale.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">60 – 61 apr. J.-C.</span><h4>Révolte de Boudicca</h4>
+      <p>La reine des Icènes se soulève contre l'occupation romaine en Bretagne, épisode marquant de résistance celtique face à Rome.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">Ve siècle apr. J.-C.</span><h4>Christianisation de l'Irlande</h4>
+      <p>Traditionnellement associée à saint Patrick, cette conversion s'opère sans conquête romaine préalable, préservant une continuité culturelle rare.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">VIIIe – XIIe siècle</span><h4>Mise par écrit des cycles mythologiques</h4>
+      <p>Des moines irlandais lettrés couchent par écrit le Lebor Gabála Érenn et la Táin Bó Cúailnge, sauvant l'essentiel du corpus mythologique de l'oubli.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">XIIe – XIIIe siècle</span><h4>Compilation du Mabinogion gallois</h4>
+      <p>Rassemblement écrit des récits mythologiques gallois, offrant un pendant essentiel à la tradition irlandaise.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1760s</span><h4>La controverse d'Ossian</h4>
+      <p>James Macpherson publie ses poèmes en grande partie inventés, déclenchant néanmoins une fascination européenne durable pour l'imaginaire celtique.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">Fin XIXe – début XXe siècle</span><h4>Le renouveau littéraire irlandais</h4>
+      <p>W. B. Yeats et Lady Gregory popularisent activement les mythes celtiques comme fondement d'une identité nationale irlandaise.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">XXe – XXIe siècle</span><h4>Diffusion mondiale d'Halloween</h4>
+      <p>La fête de Samain, exportée et commercialisée, devient l'une des célébrations les plus universellement reconnues issues d'une tradition celtique.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">Années 2000-2020</span><h4>Le grand retour populaire</h4>
+      <p>La fantasy contemporaine, largement inspirée des fées et de l'Autre Monde celtique, ainsi que la musique traditionnelle mondialisée, entretiennent un imaginaire toujours vivant.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Un Héritage Bien Vivant</h2>
+  <p class="section-intro">Rarement une mythologie aussi fragmentairement documentée aura pourtant autant infusé l'imaginaire populaire mondial, des fêtes commerciales aux tropes entiers de la fantasy contemporaine.</p>
+
+  <div class="heritage-block">
+    <h4>Dans les fêtes et le calendrier</h4>
+    <p>Halloween, héritière directe de Samain, s'est imposée comme l'une des célébrations commerciales les plus universelles au monde, largement détachée de sa signification rituelle d'origine sur le passage entre les mondes.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans la fantasy et l'imaginaire populaire</h4>
+    <p>La plupart des tropes modernes de "fées" — capricieuses, dangereuses, habitant un Autre Monde parallèle accessible par des portails naturels — descendent directement des Aos Sí irlandais plutôt que d'inventions purement littéraires récentes.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans l'esthétique contemporaine</h4>
+    <p>Les entrelacs celtiques ornent aujourd'hui bijoux, tatouages et logos bien au-delà de tout contexte irlandais ou gaulois, devenus un langage visuel largement autonome de son origine historique précise.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Une spiritualité retrouvée</h4>
+    <p>Le néo-druidisme moderne, reconnu à des fins caritatives au Royaume-Uni depuis 2010, rassemble aujourd'hui des pratiquants cherchant à renouer, sous des formes nécessairement réinventées, avec la spiritualité de la nature attribuée aux anciens druides.</p>
+  </div>
+
+  <p class="heritage-caution">Un bémol s'impose : une bonne partie de ce que le grand public identifie aujourd'hui comme "authentiquement celtique" doit énormément à la réinvention romantique des XVIIIe et XIXe siècles — l'épisode d'Ossian en étant l'exemple le plus flagrant. Les historiens distinguent aujourd'hui plus prudemment les sources médiévales irlandaises et galloises, elles-mêmes déjà tardives et christianisées, de cette couche romantique postérieure, sans toujours réussir à les démêler complètement dans l'imaginaire populaire.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">SLÁN</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série : <strong>Mythologie Mésopotamienne</strong></p>
+</footer>
+
+</body>
+</html>

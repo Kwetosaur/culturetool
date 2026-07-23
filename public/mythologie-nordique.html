@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythologie Nordique — Dieux, Royaumes &amp; Légendes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0c0b09;
+    --bg-alt: #131110;
+    --panel: #171412;
+    --panel-border: #3a2f22;
+    --gold: #c9a15a;
+    --gold-bright: #e8c27a;
+    --blood: #8a2c1f;
+    --blood-bright: #b8402d;
+    --ice: #6f93a3;
+    --text: #e6ddc9;
+    --text-dim: #a89a7e;
+    --rune-glow: rgba(201,161,90,0.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at top, #1a1613 0%, #0c0b09 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{
+    font-family:'Cinzel', serif;
+    color:var(--gold-bright);
+    letter-spacing:0.03em;
+    font-weight:700;
+  }
+  a{color:var(--gold-bright);}
+
+  /* Texture overlay */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.015) 3px);
+    z-index:1;
+    opacity:0.4;
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 20px;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 20%, rgba(138,44,31,0.18), transparent 55%),
+      linear-gradient(180deg, #0a0908 0%, #14110d 60%, #0c0b09 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .rune-row{
+    font-size:22px;
+    letter-spacing:14px;
+    color:var(--gold);
+    opacity:0.55;
+    margin-bottom:28px;
+    text-shadow:0 0 12px var(--rune-glow);
+  }
+  .hero h1{
+    font-family:'Cinzel Decorative', serif;
+    font-size:clamp(2.6rem, 7vw, 5.2rem);
+    margin:0;
+    background:linear-gradient(180deg, var(--gold-bright), var(--gold) 60%, #8a6f3d);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 40px rgba(201,161,90,0.25);
+  }
+  .hero .subtitle{
+    font-family:'Cinzel', serif;
+    font-size:1.1rem;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    margin-top:14px;
+  }
+  .hero .tagline{
+    max-width:640px;
+    margin:34px auto 0;
+    font-style:italic;
+    color:var(--text-dim);
+    font-size:1.15rem;
+  }
+  .divider{
+    width:120px;
+    height:2px;
+    margin:36px auto;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .nav-pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+    max-width:800px;
+  }
+  .nav-pills a{
+    text-decoration:none;
+    border:1px solid var(--panel-border);
+    padding:9px 20px;
+    border-radius:2px;
+    font-family:'Cinzel', serif;
+    font-size:0.82rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    background:rgba(255,255,255,0.02);
+    transition:all .25s ease;
+  }
+  .nav-pills a:hover{
+    color:var(--gold-bright);
+    border-color:var(--gold);
+    box-shadow:0 0 14px rgba(201,161,90,0.15);
+  }
+
+  /* ===== SECTIONS ===== */
+  section{
+    position:relative;
+    z-index:2;
+    max-width:1000px;
+    margin:0 auto;
+    padding:100px 24px;
+  }
+  .section-label{
+    text-align:center;
+    font-family:'Cinzel', serif;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--blood-bright);
+    font-size:0.8rem;
+    margin-bottom:12px;
+  }
+  .section-title{
+    text-align:center;
+    font-size:clamp(2rem,4.5vw,3rem);
+    margin:0 0 16px;
+  }
+  .section-intro{
+    text-align:center;
+    max-width:680px;
+    margin:0 auto 60px;
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  /* ===== YGGDRASIL / ROYAUMES ===== */
+  .realms-wrap{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:22px;
+  }
+  .realm-card{
+    background:linear-gradient(160deg, var(--panel), #0f0d0b);
+    border:1px solid var(--panel-border);
+    border-radius:3px;
+    padding:26px 24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .realm-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--blood), var(--gold));
+  }
+  .realm-card h3{
+    margin:0 0 4px;
+    font-size:1.25rem;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .realm-rune{
+    color:var(--gold);
+    font-size:1.2rem;
+    opacity:0.8;
+  }
+  .realm-card .realm-sub{
+    font-size:0.85rem;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:12px;
+  }
+  .realm-card p{margin:0; font-size:0.98rem;}
+
+  .tree-diagram{
+    text-align:center;
+    margin:50px 0 70px;
+    opacity:0.9;
+  }
+  .tree-diagram svg{max-width:100%; height:auto;}
+
+  /* ===== PANTHEON CARDS ===== */
+  .pantheon-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+    gap:26px;
+  }
+  .god-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    padding:0;
+    border-radius:4px;
+    overflow:hidden;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .god-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,0,0,0.5), 0 0 0 1px var(--gold);
+  }
+  .god-header{
+    padding:22px 24px 16px;
+    border-bottom:1px solid var(--panel-border);
+    background:linear-gradient(160deg, rgba(138,44,31,0.12), transparent);
+  }
+  .god-name{
+    font-size:1.5rem;
+    margin:0;
+  }
+  .god-epithet{
+    font-size:0.85rem;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin-top:4px;
+  }
+  .god-body{padding:18px 24px 24px;}
+  .god-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .tag{
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    border:1px solid var(--panel-border);
+    color:var(--text-dim);
+    padding:3px 10px;
+    border-radius:20px;
+  }
+  .god-body p{margin:0 0 10px; font-size:0.97rem;}
+  .god-body p:last-child{margin-bottom:0;}
+  .god-body strong{color:var(--gold-bright); font-weight:600;}
+
+  /* ===== CREATURES ===== */
+  .creature-list{
+    display:grid;
+    gap:18px;
+  }
+  .creature-item{
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:24px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:3px;
+    padding:20px 24px;
+  }
+  .creature-name{
+    font-family:'Cinzel', serif;
+    color:var(--blood-bright);
+    font-size:1.15rem;
+    align-self:start;
+  }
+  .creature-name span{
+    display:block;
+    font-size:0.75rem;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-top:4px;
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+  }
+
+  /* ===== LEGENDS ===== */
+  .legend-block{
+    margin-bottom:56px;
+    padding-bottom:52px;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .legend-block:last-child{border-bottom:none;}
+  .legend-number{
+    font-family:'Cinzel Decorative', serif;
+    font-size:0.95rem;
+    color:var(--blood-bright);
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .legend-block h3{
+    font-size:1.7rem;
+    margin:0 0 20px;
+  }
+  .legend-block p{margin:0 0 16px; font-size:1.02rem;}
+  .legend-block p:last-child{margin-bottom:0;}
+  .pull-quote{
+    border-left:3px solid var(--gold);
+    padding:6px 24px;
+    margin:24px 0;
+    font-style:italic;
+    color:var(--gold-bright);
+    font-size:1.1rem;
+  }
+
+  /* ===== ANECDOTES ===== */
+  .anecdote-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+    gap:20px;
+  }
+  .anecdote-card{
+    background:linear-gradient(160deg, rgba(111,147,163,0.06), var(--panel));
+    border:1px solid var(--panel-border);
+    border-left:3px solid var(--ice);
+    padding:20px 22px;
+    border-radius:3px;
+  }
+  .anecdote-card h4{
+    font-size:1rem;
+    margin:0 0 8px;
+    color:var(--ice);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .anecdote-card p{margin:0; font-size:0.95rem; color:var(--text);}
+
+  /* ===== FOOTER / NEXT ===== */
+  footer{
+    text-align:center;
+    padding:80px 24px 60px;
+    border-top:1px solid var(--panel-border);
+    color:var(--text-dim);
+  }
+  footer .rune-row{margin-bottom:20px;}
+  footer .next-up{
+    font-family:'Cinzel', serif;
+    font-size:0.85rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+  }
+  footer .next-up strong{color:var(--gold-bright);}
+
+  ::selection{background:var(--gold); color:#0c0b09;}
+
+  /* ===== STICKY NAV ===== */
+  .sticky-nav{
+    position:sticky;
+    top:0;
+    z-index:40;
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px 18px;
+    justify-content:center;
+    padding:14px 20px;
+    background:rgba(10,9,8,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none;
+    font-family:'Cinzel', serif;
+    font-size:0.7rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    padding:4px 2px;
+    border-bottom:1px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{
+    color:var(--gold-bright);
+    border-color:var(--gold);
+  }
+
+  /* ===== SOURCES NOTE ===== */
+  .sources-note{
+    max-width:640px;
+    margin:0 auto;
+    padding:0 24px;
+    text-align:center;
+    font-style:italic;
+    color:var(--text-dim);
+    font-size:0.95rem;
+    line-height:1.8;
+  }
+
+  /* ===== REACH LIST (world section) ===== */
+  .reach-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:18px;
+    margin-top:50px;
+  }
+  .reach-card{
+    border:1px solid var(--panel-border);
+    border-top:2px solid var(--ice);
+    padding:18px 20px;
+    background:var(--panel);
+    border-radius:3px;
+  }
+  .reach-card h4{
+    margin:0 0 6px;
+    font-size:1rem;
+    color:var(--ice);
+  }
+  .reach-card .reach-dist{
+    display:block;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--text-dim);
+    margin-bottom:8px;
+  }
+  .reach-card p{margin:0; font-size:0.92rem;}
+
+  /* ===== TIMELINE ===== */
+  .timeline{
+    position:relative;
+    max-width:820px;
+    margin:60px auto 0;
+    padding:20px 0 10px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:linear-gradient(180deg, transparent, var(--gold) 6%, var(--gold) 94%, transparent);
+    transform:translateX(-50%);
+  }
+  .timeline-item{
+    position:relative;
+    width:50%;
+    padding:0 42px 54px;
+    box-sizing:border-box;
+  }
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{
+    position:absolute;
+    top:3px;
+    width:13px; height:13px;
+    border-radius:50%;
+    background:var(--bg);
+    border:3px solid var(--gold-bright);
+    box-shadow:0 0 10px var(--rune-glow);
+  }
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{
+    font-family:'Cinzel', serif;
+    color:var(--blood-bright);
+    font-size:1rem;
+    letter-spacing:0.05em;
+    display:block;
+    margin-bottom:6px;
+  }
+  .timeline-content h4{margin:0 0 6px; font-size:1.05rem; color:var(--gold-bright);}
+  .timeline-content p{margin:0; font-size:0.92rem; color:var(--text-dim);}
+
+  /* ===== HERITAGE SECTION ===== */
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{
+    font-size:0.95rem;
+    color:var(--ice);
+    margin:0 0 10px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{
+    border-left:3px solid var(--blood-bright);
+    padding:4px 20px;
+    margin-top:32px;
+    font-size:0.92rem;
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  @media (max-width:640px){
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){
+      width:100%; left:0; text-align:left; padding:0 10px 44px 50px;
+    }
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{
+      left:13px; right:auto;
+    }
+  }
+
+  @media (max-width:640px){
+    .creature-item{grid-template-columns:1fr;}
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:780px; max-width:none;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.62rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="rune-row">ᚱ ᚢ ᚾ ᛖ ᚦ ᛖ ᚱ</div>
+  <h1>Mythologie Nordique</h1>
+  <div class="subtitle">Dieux, Royaumes &amp; Légendes des peuples du Nord</div>
+  <p class="tagline">Des racines d'Yggdrasil aux flammes du Ragnarök : le premier chapitre d'un voyage à travers les mythologies du monde.</p>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#royaumes">Les Neuf Royaumes</a>
+    <a href="#pantheon">Le Panthéon</a>
+    <a href="#genealogie">Arbre Généalogique</a>
+    <a href="#creatures">Créatures &amp; Êtres</a>
+    <a href="#legendes">Grandes Légendes</a>
+    <a href="#anecdotes">Anecdotes</a>
+    <a href="#monde">Le Monde Viking</a>
+    <a href="#frise">Frise Chronologique</a>
+    <a href="#heritage">Héritage Actuel</a>
+  </nav>
+</header>
+
+<nav class="sticky-nav">
+  <a href="#royaumes">Royaumes</a>
+  <a href="#pantheon">Panthéon</a>
+  <a href="#genealogie">Généalogie</a>
+  <a href="#creatures">Créatures</a>
+  <a href="#legendes">Légendes</a>
+  <a href="#anecdotes">Anecdotes</a>
+  <a href="#monde">Le Monde</a>
+  <a href="#frise">Frise</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ROYAUMES ================= -->
+<section id="royaumes">
+  <div class="section-label">Cosmogonie</div>
+  <h2 class="section-title">Les Neuf Royaumes</h2>
+  <p class="section-intro">Tout l'univers nordique repose sur Yggdrasil, le Frêne-Monde, dont les branches et les racines relient neuf royaumes distincts — mondes des dieux, des hommes, des géants et des morts. Le chiffre neuf lui-même est solidement attesté par les sources (le Vafþrúðnismál et la Völuspá parlent explicitement des "neuf mondes") ; la liste précise de leurs neuf noms telle qu'on la présente aujourd'hui est en revanche une reconstruction moderne consensuelle — ni l'Edda poétique ni Snorri Sturluson ne l'énumèrent jamais eux-mêmes d'un seul tenant, et mis bout à bout, leurs textes évoquent en réalité davantage de lieux distincts que neuf.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="trunk" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c9a15a" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#5a4425" stop-opacity="0.7"/>
+        </linearGradient>
+      </defs>
+      <line x1="300" y1="30" x2="300" y2="230" stroke="url(#trunk)" stroke-width="4"/>
+      <line x1="300" y1="70" x2="120" y2="30" stroke="#7a6538" stroke-width="2"/>
+      <line x1="300" y1="70" x2="480" y2="30" stroke="#7a6538" stroke-width="2"/>
+      <line x1="300" y1="130" x2="90" y2="120" stroke="#7a6538" stroke-width="2"/>
+      <line x1="300" y1="130" x2="510" y2="120" stroke="#7a6538" stroke-width="2"/>
+      <line x1="300" y1="190" x2="140" y2="230" stroke="#7a6538" stroke-width="2"/>
+      <line x1="300" y1="190" x2="460" y2="230" stroke="#7a6538" stroke-width="2"/>
+      <line x1="300" y1="230" x2="220" y2="250" stroke="#7a6538" stroke-width="2"/>
+      <line x1="300" y1="230" x2="380" y2="250" stroke="#7a6538" stroke-width="2"/>
+      <g fill="#e8c27a" font-family="Cinzel, serif" font-size="13" text-anchor="middle">
+        <text x="120" y="24">Ásgard</text>
+        <text x="480" y="24">Vanaheim</text>
+        <text x="90" y="114">Álfheim</text>
+        <text x="510" y="114">Jötunheim</text>
+        <text x="140" y="224">Midgard</text>
+        <text x="460" y="224">Múspellsheim</text>
+        <text x="220" y="244">Niflheim</text>
+        <text x="380" y="244">Svartálfheim</text>
+        <text x="300" y="12" font-size="12" fill="#8a2c1f">Yggdrasil</text>
+      </g>
+      <circle cx="300" cy="230" r="4" fill="#c9a15a"/>
+      <text x="300" y="252" fill="#a89a7e" font-family="Cinzel, serif" font-size="11" text-anchor="middle">Helheim (racine)</text>
+    </svg>
+  </div>
+
+  <div class="realms-wrap">
+    <div class="realm-card">
+      <h3><span class="realm-rune">ᚫ</span>Ásgard</h3>
+      <div class="realm-sub">Royaume des Ases</div>
+      <p>Forteresse céleste des dieux, reliée à Midgard par le pont arc-en-ciel Bifröst. On y trouve le Valhalla d'Odin et Vingólf, demeure des déesses.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-rune">ᚹ</span>Vanaheim</h3>
+      <div class="realm-sub">Royaume des Vanes</div>
+      <p>Terre des dieux de la fertilité, de la nature et de la prospérité — Njörd, Freyr et Freyja y sont originaires, avant leur intégration chez les Ases.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-rune">ᛁ</span>Midgard</h3>
+      <div class="realm-sub">Le Monde du Milieu</div>
+      <p>Le monde des humains, façonné par Odin et ses frères à partir du corps du géant Ymir, entouré par l'océan où repose le serpent Jörmungandr.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-rune">ᛃ</span>Jötunheim</h3>
+      <div class="realm-sub">Royaume des Géants</div>
+      <p>Terre sauvage et montagneuse des Jötnar, géants souvent rivaux des dieux mais parfois alliés ou parents par mariage.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-rune">ᛚ</span>Álfheim</h3>
+      <div class="realm-sub">Royaume des Elfes de Lumière</div>
+      <p>Domaine lumineux confié au dieu Freyr, peuplé des álfar, elfes radieux associés à la beauté et à la magie.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-rune">ᛞ</span>Svartálfheim</h3>
+      <div class="realm-sub">Royaume des Nains</div>
+      <p>Monde souterrain des nains forgerons, artisans des plus grands trésors des dieux : Mjöllnir, Gungnir, Draupnir.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-rune">ᚾ</span>Niflheim</h3>
+      <div class="realm-sub">Monde de brume et de glace</div>
+      <p>L'un des deux royaumes primordiaux, froid et obscur, à l'origine du dragon Nidhögg qui ronge les racines d'Yggdrasil.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-rune">ᚠ</span>Múspellsheim</h3>
+      <div class="realm-sub">Monde de feu</div>
+      <p>Royaume primordial embrasé, gardé par le géant de feu Surtr, dont les flammes consumeront le monde au Ragnarök.</p>
+    </div>
+    <div class="realm-card">
+      <h3><span class="realm-rune">ᚺ</span>Helheim</h3>
+      <div class="realm-sub">Royaume des morts</div>
+      <p>Domaine froid et brumeux gouverné par Hel, fille de Loki, où reposent ceux qui ne sont pas morts au combat.</p>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:90px; font-size:1.8rem;">Voyage détaillé à travers les Neuf Royaumes</h3>
+  <p class="section-intro" style="margin-bottom:50px;">Au-delà des noms, chaque royaume abrite des lieux précis, des salles légendaires et des frontières bien réelles pour l'imaginaire nordique — voici ce que les Eddas en disent.</p>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume ᚫ — Ásgard</div>
+    <h3>La Cité des Dieux</h3>
+    <p>Ásgard n'est pas une simple demeure mais une véritable cité fortifiée, hérissée de salles somptueuses. Son cœur est <strong>Gladsheim</strong>, où trône Odin sur <strong>Hlidskjálf</strong>, son siège magique depuis lequel il embrasse d'un regard les Neuf Royaumes tout entiers. Non loin s'élève le <strong>Valhalla</strong>, "salle des tués", toit de boucliers et poutres de lances, percée de <strong>540 portes</strong> si larges que huit cents guerriers pourraient y marcher de front — chacune s'ouvrira au dernier jour pour laisser sortir les einherjar vers la bataille finale.</p>
+    <p>Thor possède sa propre demeure, <strong>Bilskirnir</strong>, le plus vaste édifice jamais bâti avec ses 540 salles également ; Baldr réside à <strong>Breidablik</strong>, lieu si pur qu'aucune chose impure ne peut y subsister ; Frigg tient sa cour à <strong>Fensalir</strong>, palais des marécages. Les déesses, elles, se réunissent à <strong>Vingólf</strong>. À l'entrée du royaume se dresse <strong>Bifröst</strong>, le pont arc-en-ciel tremblant de flammes, gardé jour et nuit par Heimdall — un pont si solide qu'il finira pourtant par s'effondrer sous le poids des fils de Muspell chevauchant vers le Ragnarök.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume ᚹ — Vanaheim</div>
+    <h3>La Terre Oubliée des Vanes</h3>
+    <p>Paradoxalement, Vanaheim reste le plus mystérieux des Neuf Royaumes : aucune Edda ne décrit précisément sa géographie. Ce silence même est révélateur — les Vanes incarnaient des forces plus anciennes, plus proches de la terre et des cycles agraires que les Ases, conquérants et guerriers. On y pratiquait le <strong>seiðr</strong>, une magie de transe et de prophétie considérée comme indigne d'un homme ase mais que Freyja enseigna malgré tout à Odin lui-même.</p>
+    <p>C'est de Vanaheim que viennent Njörd, Freyr et Freyja, envoyés à Ásgard comme otages après la première guerre du monde, opposant Ases et Vanes — un conflit si ancien qu'il précède la création de Midgard, et qui se conclut par un pacte scellé dans la salive commune des deux clans, donnant naissance au sage Kvasir.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume ᛁ — Midgard</div>
+    <h3>Le Monde du Milieu</h3>
+    <p>Midgard occupe littéralement le centre du cosmos nordique, protégé sur son pourtour par un océan infini où gît, mordant sa propre queue, le serpent Jörmungandr. Les hommes le nomment "Miðgarðr" par opposition à "Útgarðr", les terres sauvages situées au-delà — Jötunheim n'étant en somme qu'une extension de cet "en-dehors" hostile. Un rempart fait des cils du géant Ymir, dit-on, sépare Midgard des terres inhospitalières.</p>
+    <p>C'est ici que vécurent les héros des sagas — Sigurd le tueur du dragon Fáfnir, les rois Völsung — et que les peuples scandinaves eux-mêmes se pensaient : les Vikings ne racontaient pas un monde lointain, mais littéralement le sol sous leurs pieds, relié par Bifröst à leurs propres dieux.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume ᛃ — Jötunheim</div>
+    <h3>Les Terres Sauvages de l'Est</h3>
+    <p>Aussi appelé Útgarðr ("l'en-dehors"), ce royaume montagneux et glacé est séparé de Midgard par la rivière Ífing, dont les eaux ne gèlent jamais, et bordé par la sinistre forêt de <strong>Járnviðr</strong>, le "Bois de Fer", où des troll-femmes élèvent une engeance de loups géants — parmi eux, Sköll et Hati, destinés à dévorer le Soleil et la Lune au crépuscule des dieux.</p>
+    <p>C'est à <strong>Útgarðr</strong>, le château d'illusions du roi-géant Útgarða-Loki, que Thor et Loki subirent leur humiliante série d'épreuves truquées. Plus au nord se dresse <strong>Þrymheim</strong>, "la demeure du fracas", forteresse montagneuse d'abord au géant Þjazi puis héritée par sa fille Skadi après sa mort — lieu de chasse et de neige éternelle, à mille lieues de la douceur marine de Njörd, ce qui scellera l'échec de leur union.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume ᛚ — Álfheim</div>
+    <h3>Le Royaume de Lumière</h3>
+    <p>Álfheim fut offert à Freyr en cadeau de première dent (<em>tannfé</em>), une coutume nordique où l'on offrait un présent à l'enfant lors de sa première pousse dentaire — signe de la place particulière que ce royaume occupe, plus proche encore de la lumière et de la beauté que les autres terres. Les álfar, elfes de lumière, y vivraient "plus beaux que le soleil" selon l'Edda de Snorri.</p>
+    <p>Curieusement, c'est l'un des royaumes les moins documentés des sources originales : l'essentiel de ce que le folklore populaire scandinave puis européen attribuera plus tard aux elfes — magie, immortalité, beauté insaisissable — dérive de ces quelques lignes éparses, enrichies au fil des siècles par l'imagination populaire.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume ᛞ — Svartálfheim &amp; Niðavellir</div>
+    <h3>Les Forges Souterraines</h3>
+    <p>Royaume creusé sous la terre et la pierre, où vivent les nains — nés, selon l'Edda, comme des vers dans la chair en décomposition du géant Ymir, avant que les dieux ne leur accordent forme humaine et intelligence. Leurs forges, alimentées par un feu inextinguible, ont produit certains des objets les plus précieux de toute la mythologie : <strong>Mjöllnir</strong> le marteau de Thor, <strong>Gungnir</strong>, la lance d'Odin qui ne manque jamais sa cible et sur laquelle on jure les serments les plus sacrés, <strong>Draupnir</strong> l'anneau qui s'auto-multiplie, et <strong>Skídbladnir</strong>, le navire de Freyr assez grand pour transporter tous les dieux en armes, mais qui se plie comme un tissu pour tenir dans une poche.</p>
+    <p>Les nains les plus célèbres, Brokkr et Sindri, Fjalar et Galar, ou encore les fils d'Ivaldi, apparaissent dans presque toutes les grandes légendes d'objets magiques — rappelant que la puissance des dieux nordiques dépend, en réalité, largement du savoir-faire d'un peuple qu'ils considèrent comme inférieur.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume ᚾ — Niflheim</div>
+    <h3>Le Monde de Brume Primordiale</h3>
+    <p>Antérieur même à la création, Niflheim existait déjà dans le vide du Ginnungagap, aux côtés de Múspellsheim. En son cœur bouillonne <strong>Hvergelmir</strong>, "le chaudron rugissant", source d'où jaillissent onze fleuves primordiaux qui, en gelant au contact du feu venu du sud, donnèrent naissance au géant Ymir lui-même. C'est aussi ici, near l'une des trois racines d'Yggdrasil, que le dragon Niðhöggr ronge sans fin le bois de l'arbre-monde, entouré d'innombrables serpents.</p>
+    <p>Niflheim abrite également <strong>Náströnd</strong>, le "rivage des cadavres", une salle funeste tressée d'échines de serpents dont le venin ruisselle en un fleuve continu — demeure réservée aux parjures, aux meurtriers et aux séducteurs adultères, image nordique la plus proche d'un enfer punitif.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume ᚠ — Múspellsheim</div>
+    <h3>Le Monde de Feu Primordial</h3>
+    <p>Aussi vieux que Niflheim, Múspellsheim brûle depuis l'origine des temps, trop ardent pour quiconque n'y est pas natif. Son gardien, le géant <strong>Surtr</strong>, veille depuis toujours à sa frontière, une épée flamboyante à la main — une épée si éclatante, dit-on, qu'elle rivalise avec le soleil lui-même. Des étincelles et braises échappées de ce royaume auraient servi à façonner le soleil, la lune et les étoiles lors de la création du monde.</p>
+    <p>Surtr n'attend qu'un seul instant depuis l'aube du monde : le signal du Ragnarök, où il chevauchera à la tête des fils de feu à travers un Bifröst effondré, pour embraser les Neuf Royaumes dans un incendie final.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Royaume ᚺ — Helheim</div>
+    <h3>Le Royaume Silencieux des Morts</h3>
+    <p>On atteint Helheim en chevauchant neuf nuits durant des vallées toujours plus sombres et profondes, jusqu'au pont <strong>Gjallarbrú</strong> enjambant la rivière Gjöll — un pont pavé d'or, gardé par la géante Móðguðr, qui exige de chaque voyageur qu'il décline son nom avant de le laisser passer. Plus loin encore veille <strong>Garm</strong>, chien sanguinolent enchaîné à l'entrée de la caverne de Gnipahellir.</p>
+    <p>Le royaume lui-même, gouverné par Hel, n'est pas un lieu de tourment actif mais de froid, de faim et de silence : sa table se nomme <strong>Faim</strong>, son couteau <strong>Famine</strong>, son lit <strong>Lit de Malade</strong>. On y échoue simplement en mourant de maladie ou de vieillesse plutôt qu'au combat — un sort jugé moins glorieux, mais pas nécessairement plus cruel, que celui des einherjar du Valhalla.</p>
+  </div>
+</section>
+
+<!-- ================= PANTHEON ================= -->
+<section id="pantheon">
+  <div class="section-label">Panthéon</div>
+  <h2 class="section-title">Les Dieux Illustres</h2>
+  <p class="section-intro">Ases et Vanes forment un panthéon complexe, marqué par la guerre puis l'alliance des deux clans divins.</p>
+
+  <div class="pantheon-grid">
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Odin</h3>
+        <div class="god-epithet">Le Père de Toutes Choses</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Sagesse</span><span class="tag">Guerre</span><span class="tag">Magie</span><span class="tag">Poésie</span></div>
+        <p>Roi des Ases, borgne depuis qu'il a sacrifié un œil à la source de Mímir pour obtenir la sagesse universelle. Il chevauche Sleipnir, son cheval à huit pattes, et se fait accompagner des corbeaux <strong>Hugin</strong> (pensée) et <strong>Munin</strong> (mémoire), qui parcourent le monde et lui rapportent tout ce qu'ils voient.</p>
+        <p>Odin est aussi le dieu des pendus et de la magie runique : il obtint les runes en se pendant lui-même à Yggdrasil pendant neuf jours et neuf nuits, transpercé de sa propre lance.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Thor</h3>
+        <div class="god-epithet">Le Protecteur au Marteau</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Tonnerre</span><span class="tag">Force</span><span class="tag">Protection</span></div>
+        <p>Fils d'Odin et de la géante Jörd (la Terre), Thor manie <strong>Mjöllnir</strong>, le marteau forgé par les nains, qui revient toujours dans sa main et provoque le tonnerre. Il porte une ceinture de force (Megingjörð) et des gants de fer indispensables pour brandir son arme.</p>
+        <p>Dieu le plus populaire du peuple, gardien de Midgard contre les géants, il traverse le ciel sur un char tiré par deux boucs, Tanngrisnir et Tanngnjóstr.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Loki</h3>
+        <div class="god-epithet">Le Trickster</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Ruse</span><span class="tag">Métamorphose</span><span class="tag">Chaos</span></div>
+        <p>Fils du géant Fárbauti, Loki est un dieu ambigu, ni tout à fait ennemi ni tout à fait allié des Ases. Farceur redoutable, il change de forme à volonté — il devint même jument et enfanta Sleipnir, le cheval d'Odin.</p>
+        <p>Père du loup Fenrir, du serpent Jörmungandr et de Hel, il est aussi responsable, par ruse, de la mort de Baldr, ce qui scelle son destin funeste jusqu'au Ragnarök.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Freyja</h3>
+        <div class="god-epithet">Dame de la Guerre et de l'Amour</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Amour</span><span class="tag">Fertilité</span><span class="tag">Magie seiðr</span><span class="tag">Guerre</span></div>
+        <p>Déesse vane la plus vénérée, elle possède le collier Brísingamen, obtenu auprès de quatre nains forgerons. Maîtresse de la magie <strong>seiðr</strong>, elle l'enseigna aux Ases eux-mêmes, dont Odin.</p>
+        <p>Sur le champ de bataille, elle prélève sa part des guerriers morts avant même les Valkyries, et les accueille dans son domaine, Fólkvangr.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Tyr</h3>
+        <div class="god-epithet">Le Dieu Manchot</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Justice</span><span class="tag">Courage</span><span class="tag">Serment</span></div>
+        <p>Dieu du droit et de la guerre juste, Tyr est le seul à avoir eu le courage de placer sa main dans la gueule du loup Fenrir pour que les dieux puissent l'enchaîner — il y perdit la main, tenant sa parole au prix de son propre corps.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Baldr</h3>
+        <div class="god-epithet">Le Bien-Aimé</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Lumière</span><span class="tag">Beauté</span><span class="tag">Pureté</span></div>
+        <p>Fils d'Odin et de Frigg, dieu si aimé que sa mère fit jurer à toute chose de ne jamais lui nuire — oubliant le modeste gui. Sa mort, provoquée par la ruse de Loki, est l'un des présages annonciateurs du Ragnarök.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Frigg</h3>
+        <div class="god-epithet">Reine d'Ásgard</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Mariage</span><span class="tag">Maternité</span><span class="tag">Destin</span></div>
+        <p>Épouse d'Odin, elle connaît le destin de chacun mais ne le révèle jamais. Sa demeure, Fensalir, est associée aux marécages sacrés.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Heimdall</h3>
+        <div class="god-epithet">Le Gardien du Bifröst</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Vigilance</span><span class="tag">Frontière</span></div>
+        <p>Sentinelle des dieux, il voit à des centaines de kilomètres, de jour comme de nuit, et entend l'herbe pousser. Il sonnera du <strong>Gjallarhorn</strong> pour annoncer le début du Ragnarök.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Freyr</h3>
+        <div class="god-epithet">Seigneur d'Álfheim</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Fertilité</span><span class="tag">Prospérité</span><span class="tag">Paix</span></div>
+        <p>Frère jumeau de Freyja, dieu vane des récoltes et de la prospérité. Il abandonna son épée magique par amour pour la géante Gerd — une arme qui lui manquera cruellement au Ragnarök.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Njörd</h3>
+        <div class="god-epithet">Seigneur des Vents et des Côtes</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Mer</span><span class="tag">Navigation</span><span class="tag">Richesse</span></div>
+        <p>Père de Freyr et Freyja, envoyé chez les Ases avec ses enfants comme otage de paix après la guerre entre Ases et Vanes. Dieu des marins et des pêcheurs, il commande aux vents et calme les tempêtes, et sa richesse est telle qu'on l'invoque pour prospérer en mer comme sur terre.</p>
+        <p>Son mariage malheureux avec la géante Skadi, née dans les montagnes et incapable de supporter le cri des mouettes de Nóatún, illustre à quel point les unions entre dieux et géants restent fragiles, tiraillées entre deux mondes inconciliables.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Sif</h3>
+        <div class="god-epithet">La Chevelure d'Or</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Fertilité</span><span class="tag">Terre cultivée</span></div>
+        <p>Épouse de Thor, célèbre pour ses longs cheveux d'or que Loki, par pure malice, coupa une nuit pendant son sommeil. Pour éviter la colère de Thor, Loki dut commander aux fils d'Ivaldi une perruque d'or véritable qui repousserait comme de vrais cheveux — cet épisode est à l'origine du concours de forge qui produisit également Mjöllnir.</p>
+        <p>Ses cheveux dorés sont traditionnellement associés aux champs de blé mûr, faisant de Sif une figure discrète mais essentielle des cycles agricoles.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Idun</h3>
+        <div class="god-epithet">Gardienne de la Jeunesse</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Jeunesse</span><span class="tag">Immortalité</span></div>
+        <p>Épouse du dieu Bragi, elle garde dans un coffret de bois les pommes magiques que les dieux doivent croquer régulièrement pour conserver leur jeunesse éternelle. Sans elle, même les Ases se mettraient à vieillir et à faner comme de simples mortels — ce qui arriva brièvement lorsqu'elle fut enlevée par le géant Thjazi.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Bragi</h3>
+        <div class="god-epithet">Le Barde d'Ásgard</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Poésie</span><span class="tag">Éloquence</span></div>
+        <p>Dieu de la poésie et de la parole, dont le nom même a donné le mot islandais désignant l'art poétique. Il accueille les guerriers défunts au Valhalla par des vers, et des runes seraient gravées sur sa langue depuis sa naissance, lui conférant un don d'éloquence inné.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Skadi</h3>
+        <div class="god-epithet">Géante des Montagnes Enneigées</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Chasse</span><span class="tag">Ski</span><span class="tag">Vengeance</span></div>
+        <p>Fille du géant Thjazi, elle marche en armes jusqu'à Ásgard pour venger la mort de son père, tué par les dieux. En guise de réparation, on lui accorde un époux parmi les Ases — à condition de le choisir uniquement en regardant leurs pieds. Convaincue de reconnaître la beauté de Baldr, elle choisit en réalité Njörd.</p>
+        <p>Skadi excelle à la chasse, au ski et au tir à l'arc en terrain montagneux ; son nom serait à l'origine de celui de la Scandinavie elle-même.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Víðarr</h3>
+        <div class="god-epithet">Le Vengeur Silencieux</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Force</span><span class="tag">Silence</span><span class="tag">Ragnarök</span></div>
+        <p>Fils d'Odin réputé pour sa force presque égale à celle de Thor et pour son silence quasi absolu. Il porte une botte confectionnée depuis l'origine du monde à partir de tous les rebuts de cuir laissés par les cordonniers — une chaussure destinée à un but précis : lui permettre, au Ragnarök, d'écraser la mâchoire du loup Fenrir pour venger la mort d'Odin.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Ægir &amp; Rán</h3>
+        <div class="god-epithet">Souverains des Profondeurs</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Océan</span><span class="tag">Tempête</span><span class="tag">Naufrage</span></div>
+        <p>Couple de géants marins régnant sur l'océan depuis leur palais sous les flots. Ægir est réputé pour les banquets somptueux qu'il organise pour les dieux, brassant sa propre bière dans un chaudron gigantesque obtenu de haute lutte par Thor. Rán, elle, capture les marins noyés dans son filet et les accueille dans ses profondeurs — les marins nordiques emportaient parfois de l'or à bord, en offrande, pour s'assurer un accueil favorable en cas de naufrage.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Sigyn</h3>
+        <div class="god-epithet">La Fidèle</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Loyauté</span><span class="tag">Endurance</span></div>
+        <p>Épouse de Loki, mère de Narfi et Váli, elle traverse toute la mythologie dans une discrétion presque totale — jusqu'à son dernier rôle, le plus bouleversant. Lorsque les dieux enchaînent Loki sous terre en châtiment pour le meurtre de Baldr, un serpent est suspendu au-dessus de son visage, distillant goutte à goutte un venin brûlant.</p>
+        <p>Sigyn se tient alors éternellement à ses côtés, une coupelle à la main, recueillant le poison avant qu'il ne touche son époux. Elle ne le quitte que pour vider la coupelle pleine — et c'est dans ce bref intervalle, quand le venin retombe sur lui sans protection, que Loki se tord de douleur : ses tremblements, dit-on, sont l'origine mythique des tremblements de terre.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Mímir</h3>
+        <div class="god-epithet">La Tête qui Parle</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Sagesse</span><span class="tag">Oracle</span><span class="tag">Puits sacré</span></div>
+        <p>Gardien du puits de sagesse niché sous l'une des racines d'Yggdrasil, dont l'eau confère une connaissance totale à quiconque en boit — Odin y renonça à un œil pour une seule gorgée. Envoyé à Vanaheim aux côtés de Hœnir dans le cadre de l'échange d'otages scellant la paix entre Ases et Vanes, Mímir connut un sort funeste : les Vanes, s'estimant trompés par la lenteur d'esprit de son compagnon une fois séparé de ses conseils, le décapitèrent et renvoyèrent sa tête à Odin.</p>
+        <p>Loin d'y voir une perte définitive, Odin embauma la tête d'herbes et de secrets magiques pour l'empêcher de pourrir, et continue depuis à la consulter comme un véritable oracle vivant — une relique macabre et fascinante, symbole ultime d'un savoir qui survit même à la mort du corps.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Hœnir</h3>
+        <div class="god-epithet">Le Dieu Silencieux</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Création</span><span class="tag">Otage</span><span class="tag">Ambiguïté</span></div>
+        <p>Figure étrange et insaisissable, décrit tantôt comme un dieu grand et magnifique, tantôt comme un être perpétuellement indécis, incapable de trancher une seule question sans l'aide de Mímir. Il participe, aux côtés d'Odin, à l'animation des tout premiers humains, Ask et Embla, leur offrant le souffle et les sens. Après la guerre entre Ases et Vanes, il est envoyé à Vanaheim en gage de paix — un choix qui se révélera malheureux pour Mímir, exécuté par des Vanes déçus de son incapacité à conseiller seul.</p>
+        <p>Une prophétie de la Völuspá annonce curieusement qu'il survivra même au Ragnarök, pour tirer les sorts du destin dans le monde nouveau qui renaîtra des cendres — un rôle discret mais essentiel, à l'image du personnage lui-même.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Nanna</h3>
+        <div class="god-epithet">L'Épouse Inconsolable</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Amour</span><span class="tag">Deuil</span></div>
+        <p>Épouse de Baldr, mère de Forseti. À la mort de son mari, son cœur se brise si complètement qu'elle meurt de chagrin sur le champ, et rejoint Baldr sur son bûcher funéraire — le navire Hringhorni, le plus grand jamais construit, que les dieux ne parviennent à mettre à la mer qu'en faisant appel à la force d'une géante.</p>
+        <p>Lors de cette crémation, un nain nommé Litr, trop curieux, se trouve sur le passage de Thor, qui l'expédie d'un coup de pied dans les flammes — un détail presque comique au cœur de la scène la plus funèbre de la mythologie, typique du ton nordique qui mêle sans cesse grandeur tragique et brutalité désinvolte.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Forseti</h3>
+        <div class="god-epithet">Le Juge Équitable</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Justice</span><span class="tag">Réconciliation</span></div>
+        <p>Fils de Baldr et Nanna, il siège dans sa salle <strong>Glitnir</strong>, aux piliers d'argent et au toit d'or, où il tranche tous les litiges qui lui sont soumis. Sa réputation est sans égale : tous ceux qui viennent chercher justice devant lui repartent réconciliés, dieux comme hommes — le seul membre du panthéon dont aucune légende ne rapporte jamais la moindre colère ou le moindre excès.</p>
+      </div>
+    </div>
+
+    <div class="god-card">
+      <div class="god-header">
+        <h3 class="god-name">Ullr</h3>
+        <div class="god-epithet">Le Skieur à l'Arc d'If</div>
+      </div>
+      <div class="god-body">
+        <div class="god-tags"><span class="tag">Chasse</span><span class="tag">Ski</span><span class="tag">Serment</span></div>
+        <p>Fils de Sif et beau-fils de Thor, d'une beauté et d'une adresse martiale si grandes qu'on l'invoquait volontiers avant les duels. Il glisse sur des os polis ou des skis à travers la neige avec une aisance surnaturelle et manie l'arc avec une précision inégalée. On jurait sur son anneau comme on jurait ailleurs sur la lance d'Odin — signe qu'il occupait autrefois, dans la pratique religieuse réelle des peuples du Nord, une place bien plus centrale que ne le laisse deviner le peu de récits qui nous en sont parvenus.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= GENEALOGIE ================= -->
+<section id="genealogie">
+  <div class="section-label">Filiations</div>
+  <h2 class="section-title">L'Arbre Généalogique des Dieux</h2>
+  <p class="section-intro">Trois lignées s'entremêlent dans la mythologie nordique : la maison d'Odin qui règne sur Ásgard, la lignée trouble de Loki dont naissent les grandes menaces du Ragnarök, et la maison vane de Njörd, unie aux Ases par un pacte de paix. Trait plein = filiation. Trait pointillé = union ou mariage. Trait en tirets = lien particulier (adoption, don, otage).</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" style="max-width:1100px;">
+      <defs>
+        <marker id="dot" markerWidth="6" markerHeight="6" refX="3" refY="3"><circle cx="3" cy="3" r="2.5" fill="#c9a15a"/></marker>
+      </defs>
+
+      <!-- House labels -->
+      <text x="180" y="24" fill="#b8402d" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">MAISON DE LOKI</text>
+      <text x="620" y="24" fill="#e8c27a" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">MAISON D'ODIN — LES ASES</text>
+      <text x="1040" y="24" fill="#6f93a3" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">MAISON DE NJÖRD — LES VANES</text>
+
+      <g stroke="#5a4425" stroke-width="1.4" fill="none">
+        <!-- Loki house lines -->
+        <line x1="110" y1="60" x2="160" y2="95"/>
+        <line x1="210" y1="60" x2="160" y2="95"/>
+        <line x1="160" y1="95" x2="160" y2="120"/>
+        <line x1="90" y1="150" x2="160" y2="130" stroke-dasharray="3,3"/>
+        <line x1="260" y1="150" x2="160" y2="130" stroke-dasharray="3,3"/>
+        <line x1="90" y1="160" x2="55" y2="225"/>
+        <line x1="90" y1="160" x2="140" y2="225"/>
+        <line x1="90" y1="160" x2="225" y2="225"/>
+        <line x1="260" y1="160" x2="240" y2="225"/>
+        <line x1="260" y1="160" x2="300" y2="225"/>
+        <line x1="90" y1="160" x2="170" y2="290" stroke-dasharray="2,4"/>
+        <line x1="170" y1="290" x2="640" y2="185" stroke-dasharray="2,4"/>
+
+        <!-- Odin house lines -->
+        <line x1="560" y1="60" x2="600" y2="95"/>
+        <line x1="560" y1="95" x2="640" y2="95" stroke-dasharray="3,3"/>
+        <line x1="600" y1="95" x2="620" y2="130"/>
+        <line x1="640" y1="95" x2="620" y2="130"/>
+        <line x1="580" y1="150" x2="660" y2="150" stroke-dasharray="3,3"/>
+        <line x1="620" y1="160" x2="470" y2="225"/>
+        <line x1="620" y1="160" x2="560" y2="225"/>
+        <line x1="620" y1="160" x2="605" y2="225"/>
+        <line x1="620" y1="160" x2="650" y2="225"/>
+        <line x1="620" y1="160" x2="695" y2="225"/>
+        <line x1="620" y1="160" x2="740" y2="225"/>
+        <line x1="620" y1="160" x2="790" y2="225"/>
+        <line x1="470" y1="260" x2="440" y2="290" stroke-dasharray="3,3"/>
+        <line x1="440" y1="320" x2="400" y2="360"/>
+        <line x1="440" y1="320" x2="460" y2="360"/>
+        <line x1="560" y1="225" x2="560" y2="265" stroke-dasharray="3,3"/>
+        <line x1="560" y1="280" x2="560" y2="308"/>
+        <line x1="800" y1="238" x2="855" y2="285" stroke="#6f93a3" stroke-dasharray="2,4"/>
+
+        <!-- Vanir house lines -->
+        <line x1="1040" y1="95" x2="1040" y2="130"/>
+        <line x1="1040" y1="95" x2="1110" y2="130" stroke-dasharray="3,3"/>
+        <line x1="1040" y1="160" x2="990" y2="225"/>
+        <line x1="1040" y1="160" x2="1080" y2="225"/>
+        <line x1="990" y1="260" x2="960" y2="310" stroke-dasharray="3,3"/>
+        <line x1="960" y1="330" x2="960" y2="360"/>
+        <line x1="1080" y1="260" x2="1110" y2="310" stroke-dasharray="3,3"/>
+        <line x1="1110" y1="330" x2="1090" y2="360"/>
+        <line x1="1110" y1="330" x2="1140" y2="360"/>
+
+        <!-- bridge Aesir / Vanir -->
+        <line x1="800" y1="230" x2="960" y2="245" stroke="#6f93a3" stroke-dasharray="1,5"/>
+      </g>
+
+      <g font-family="EB Garamond, serif" font-size="12.5" fill="#e6ddc9" text-anchor="middle">
+        <text x="110" y="52" fill="#a89a7e">Fárbauti</text>
+        <text x="210" y="52" fill="#a89a7e">Laufey</text>
+        <text x="160" y="112" fill="#b8402d" font-weight="bold">LOKI</text>
+        <text x="90" y="148" fill="#a89a7e" font-size="11">Angrboða</text>
+        <text x="260" y="148" fill="#a89a7e" font-size="11">Sigyn</text>
+        <text x="55" y="223" font-size="11">Fenrir</text>
+        <text x="140" y="223" font-size="11">Jörmungandr</text>
+        <text x="225" y="223" font-size="11">Hel</text>
+        <text x="240" y="223" font-size="11">Narfi</text>
+        <text x="300" y="223" font-size="11">Váli</text>
+        <text x="170" y="286" font-size="10.5" fill="#a89a7e">Sleipnir (né jument)</text>
+
+        <text x="560" y="52" fill="#a89a7e">Búri</text>
+        <text x="600" y="90" fill="#a89a7e" font-size="11">Borr</text>
+        <text x="640" y="90" fill="#a89a7e" font-size="11">Bestla</text>
+        <text x="580" y="148" fill="#e8c27a" font-weight="bold">ODIN</text>
+        <text x="660" y="148" fill="#a89a7e" font-size="11">Frigg</text>
+        <text x="470" y="223" font-size="11">Thor</text>
+        <text x="560" y="223" font-size="11">Baldr</text>
+        <text x="605" y="223" font-size="11">Höðr</text>
+        <text x="650" y="223" font-size="11">Tyr</text>
+        <text x="695" y="223" font-size="11">Víðarr</text>
+        <text x="740" y="223" font-size="11">Váli</text>
+        <text x="790" y="223" font-size="11">Bragi</text>
+        <text x="440" y="288" font-size="10.5" fill="#a89a7e">+ Sif</text>
+        <text x="400" y="378" font-size="10.5">Móði</text>
+        <text x="460" y="378" font-size="10.5">Þrúðr</text>
+        <text x="850" y="223" font-size="10.5" fill="#a89a7e">Heimdall (9 mères)</text>
+        <text x="560" y="278" font-size="10" fill="#a89a7e">+ Nanna</text>
+        <text x="560" y="322" font-size="11">Forseti</text>
+        <text x="858" y="298" font-size="10.5" fill="#6f93a3">Hœnir</text>
+        <text x="858" y="312" font-size="10.5" fill="#6f93a3">Mímir</text>
+        <text x="858" y="326" font-size="9" fill="#a89a7e" font-style="italic">(otages à Vanaheim)</text>
+
+        <text x="1040" y="52" fill="#a89a7e">(ancêtres vanes)</text>
+        <text x="1040" y="148" fill="#6f93a3" font-weight="bold">NJÖRD</text>
+        <text x="1110" y="148" fill="#a89a7e" font-size="11">Skadi</text>
+        <text x="990" y="223" font-size="11">Freyr</text>
+        <text x="1080" y="223" font-size="11">Freyja</text>
+        <text x="960" y="308" font-size="10.5" fill="#a89a7e">+ Gerd</text>
+        <text x="960" y="378" font-size="10.5">Fjölnir</text>
+        <text x="1110" y="308" font-size="10.5" fill="#a89a7e">+ Óðr</text>
+        <text x="1090" y="378" font-size="10.5">Hnoss</text>
+        <text x="1140" y="378" font-size="10.5">Gersemi</text>
+      </g>
+
+      <text x="880" y="242" fill="#6f93a3" font-family="EB Garamond, serif" font-style="italic" font-size="10.5" text-anchor="middle">otages de paix</text>
+    </svg>
+  </div>
+
+  <p class="section-intro" style="margin-top:10px;">Cet arbre simplifie volontairement des généalogies parfois contradictoires selon les sources (Edda poétique, Edda de Snorri, sagas tardives) — les mythographes eux-mêmes ne s'accordaient pas toujours sur la parenté exacte de Tyr ou de Váli, par exemple.</p>
+</section>
+
+<!-- ================= CREATURES ================= -->
+<section id="creatures">
+  <div class="section-label">Bestiaire</div>
+  <h2 class="section-title">Créatures &amp; Êtres Légendaires</h2>
+  <p class="section-intro">Géants, monstres et bêtes fabuleuses peuplent les Neuf Royaumes, souvent liés par le sang à Loki lui-même.</p>
+
+  <div class="creature-list">
+    <div class="creature-item">
+      <div class="creature-name">Fenrir<span>Le Loup Monstrueux</span></div>
+      <p>Fils de Loki, il grandit si vite et devint si redoutable que les dieux le firent enchaîner avec Gleipnir, un lien magique fin comme un ruban de soie, forgé par les nains à partir du bruit des pas d'un chat, de la barbe d'une femme et du souffle d'un poisson. Il est destiné à tuer Odin lors du Ragnarök.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Jörmungandr<span>Le Serpent-Monde</span></div>
+      <p>Jeté à la mer par Odin, ce serpent a grandi jusqu'à encercler entièrement Midgard, se mordant la queue. Ennemi juré de Thor, qui le pêche une fois sans pouvoir l'achever — leur combat final au Ragnarök sera fatal aux deux.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Sleipnir<span>Le Cheval à Huit Pattes</span></div>
+      <p>Monture d'Odin, la plus rapide de tous les mondes, née de Loki métamorphosé en jument et du cheval Svaðilfari — une histoire liée à la construction des murailles d'Ásgard.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Nidhögg<span>Le Dragon Rongeur</span></div>
+      <p>Créature qui ronge sans relâche les racines d'Yggdrasil depuis Niflheim, se querellant sans cesse avec l'aigle perché à la cime de l'arbre, par l'intermédiaire de l'écureuil messager Ratatosk.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Valkyries<span>Choisisseuses des Morts</span></div>
+      <p>Servantes d'Odin chevauchant sur les champs de bataille, elles désignent qui mourra et emmènent les guerriers les plus valeureux au Valhalla pour se préparer au Ragnarök.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Hel<span>Maîtresse des Morts</span></div>
+      <p>Fille de Loki, mi-vivante mi-cadavre, bannie par Odin pour régner sur le royaume glacé des morts qui porte son nom.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Nornes<span>Tisseuses du Destin</span></div>
+      <p>Urd (le Passé), Verdandi (le Présent) et Skuld (le Devenir) résident au pied d'Yggdrasil, près du puits d'Urd, et tissent chaque jour le destin des dieux comme des hommes. Elles arrosent quotidiennement les racines de l'arbre-monde d'une eau sacrée pour l'empêcher de pourrir, et gravent le sort de chaque nouveau-né dans le bois de l'arbre lui-même. Ni les dieux ni les hommes n'échappent à leur jugement — pas même Odin.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Ratatosk<span>L'Écureuil Messager</span></div>
+      <p>Petit être facétieux qui court sans relâche le long du tronc d'Yggdrasil, faisant la navette entre l'aigle perché à la cime de l'arbre et le dragon Nidhögg tapi dans ses racines. Sa fonction essentielle : colporter d'un bout à l'autre de l'arbre les insultes que les deux créatures s'échangent, entretenant ainsi une querelle éternelle.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Garm<span>Le Chien des Enfers</span></div>
+      <p>Molosse gardien de Helheim, enchaîné devant la caverne de Gnipahellir. Sa libération et ses hurlements comptent parmi les présages du Ragnarök ; il s'y entretuera avec Tyr, chacun succombant aux blessures infligées par l'autre.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Huginn &amp; Muninn<span>Pensée et Mémoire</span></div>
+      <p>Les deux corbeaux d'Odin quittent chaque matin son épaule pour survoler les Neuf Royaumes, puis reviennent le soir lui murmurer à l'oreille tout ce qu'ils ont vu et entendu. Odin confie lui-même redouter davantage la disparition de Munin (la mémoire) que celle de Hugin (la pensée) — un aveu rare de vulnérabilité chez le plus puissant des dieux.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Les Géants de Jötunheim<span>Thrym, Þjazi, Útgarða-Loki</span></div>
+      <p>Loin d'être uniformément monstrueux, les Jötnar comptent des figures d'une intelligence redoutable. Útgarða-Loki, souverain d'un château illusoire, humilie Thor et Loki lors d'épreuves truquées par la magie ; Þjazi, capable de se transformer en aigle géant, enlève la déesse Idun ; Thrym, lui, dérobe le marteau de Thor pour forcer un mariage avec Freyja. Beaucoup de dieux, dont Odin lui-même, comptent d'ailleurs des géants parmi leurs ancêtres.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Auðumbla<span>La Vache Primordiale</span></div>
+      <p>Apparue en même temps que le géant Ymir dans le vide du Ginnungagap, cette vache cosmique le nourrit de quatre fleuves de lait jaillis de son pis. En léchant les blocs de glace salée qui l'entourent pour se nourrir elle-même, elle façonne peu à peu, jour après jour, un corps humain : d'abord des cheveux, puis une tête, puis un être entier — Búri, premier ancêtre des dieux. La création du monde nordique commence donc, littéralement, par le lent travail de la langue d'une vache sur un bloc de givre.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Heiðrún<span>La Chèvre du Valhalla</span></div>
+      <p>Perchée sur le toit du Valhalla, où elle broute le feuillage de l'arbre Læraðr, cette chèvre produit à la place de lait un hydromel intarissable qui coule directement dans un vase géant, suffisant à abreuver chaque nuit tous les einherjar de la salle. Sur ce même toit se tient également le cerf Eikþyrnir, dont les bois dégouttent d'une eau qui alimente à son tour tous les fleuves du monde.</p>
+    </div>
+    <div class="creature-item">
+      <div class="creature-name">Sköll &amp; Hati<span>Les Loups Dévoreurs d'Astres</span></div>
+      <p>Nés dans le Bois de Fer, ces deux loups géants poursuivent depuis l'origine du monde le char du Soleil et celui de la Lune à travers le ciel, expliquant leur course perpétuelle — c'est leur souffle brûlant sur la nuque des astres qui produit les éclipses, perçues comme un signe funeste. Au Ragnarök, ils rattraperont enfin leurs proies et les dévoreront, plongeant le monde dans l'obscurité totale juste avant l'embrasement final de Surtr.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEGENDES ================= -->
+<section id="legendes">
+  <div class="section-label">Récits Fondateurs</div>
+  <h2 class="section-title">Grandes Légendes</h2>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende I</div>
+    <h3>La Création du Monde</h3>
+    <p>Au commencement n'existait que le <strong>Ginnungagap</strong>, un vide immense entre le feu de Múspellsheim et la glace de Niflheim. Où les deux se rencontrèrent, la glace fondit et donna naissance au géant primordial <strong>Ymir</strong> ainsi qu'à la vache cosmique Auðumbla, qui le nourrit de son lait.</p>
+    <p>En léchant les blocs de glace salée, Auðumbla révéla peu à peu Búri, ancêtre des dieux. Son petit-fils Odin, avec ses frères Vili et Vé, tua Ymir et façonna l'univers à partir de son corps : sa chair devint la terre, son sang les océans, ses os les montagnes, son crâne la voûte céleste et sa cervelle les nuages.</p>
+    <p class="pull-quote">« De la chair d'Ymir fut faite la terre, de son sang la mer, les montagnes de ses os. » — Edda poétique, Völuspá</p>
+    <p>Les premiers humains, Ask et Embla, furent ensuite créés à partir de deux troncs d'arbres échoués sur une plage, animés par le souffle, l'intelligence et les sens qu'Odin et ses frères leur offrirent.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende II</div>
+    <h3>Le Vol du Marteau de Thor</h3>
+    <p>Un matin, Thor se réveille pour découvrir que Mjöllnir a disparu. Le coupable est le géant Thrym, qui exige la main de Freyja en échange du marteau. Refusant catégoriquement, les dieux échafaudent un stratagème : Thor se déguisera en Freyja pour le mariage, avec Loki à ses côtés en demoiselle d'honneur.</p>
+    <p>Malgré l'appétit démesuré et le regard flamboyant de la "mariée" qui manquent trahir la supercherie, Loki improvise des excuses. Quand Mjöllnir est apporté pour bénir l'union selon la coutume, Thor s'en empare aussitôt et massacre l'assemblée de géants — récupérant son arme dans un éclat de fureur comique et brutal à la fois.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende III</div>
+    <h3>La Mort de Baldr</h3>
+    <p>Hanté par des rêves annonçant la mort de son fils Baldr, Odin chevauche Sleipnir jusqu'à Helheim pour consulter une voyante morte. Pendant ce temps, Frigg fait jurer à toutes les choses du monde — métaux, pierres, maladies, animaux, plantes — de ne jamais blesser Baldr. Toutes, sauf le gui, jugé trop jeune et inoffensif pour qu'on lui demande serment.</p>
+    <p>Devenu invulnérable, Baldr devient le jouet favori des dieux, qui s'amusent à lui lancer toutes sortes d'objets pour le voir rire des coups sans effet. Loki, jaloux, découvre le secret du gui, façonne une flèche (ou une lance selon les versions) et la place dans les mains du dieu aveugle Höðr, guidant son geste. Baldr s'effondre, mort.</p>
+    <p class="pull-quote">Le deuil des dieux est tel qu'Hel accepte de le libérer à une condition : que toute chose au monde pleure sa mort. Une seule géante refuse — Loki déguisé — et Baldr reste à jamais chez les morts.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IV</div>
+    <h3>Le Ragnarök</h3>
+    <p>Le crépuscule des dieux est annoncé par un hiver interminable, le <strong>Fimbulvetr</strong>, trois années sans été, durant lesquelles les liens familiaux se déliteront dans la violence. Fenrir et Jörmungandr rompent leurs entraves, le navire Naglfar, construit avec les ongles des morts, prend la mer, et les armées de Múspellsheim menées par Surtr avancent vers Ásgard.</p>
+    <p>Heimdall sonne le Gjallarhorn. La bataille finale voit Odin dévoré par Fenrir, aussitôt vengé par son fils Víðarr ; Thor terrasse Jörmungandr mais succombe à son venin après neuf pas ; Tyr et le chien Garm s'entretuent ; Loki et Heimdall périssent l'un par l'autre. Surtr embrase les Neuf Royaumes, qui sombrent sous les flots.</p>
+    <p>Pourtant, l'Edda annonce qu'un nouveau monde renaîtra de l'océan, verdoyant, et que quelques dieux survivront pour le peupler à nouveau — un cycle plutôt qu'une fin absolue.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende V</div>
+    <h3>L'Hydromel de la Poésie</h3>
+    <p>À la fin de la guerre entre Ases et Vanes, les deux clans scellent leur paix en crachant tous ensemble dans un chaudron. De cette salive collective naît <strong>Kvasir</strong>, l'être le plus sage de l'univers, capable de répondre à n'importe quelle question. Deux nains, Fjalar et Galar, l'assassinent par jalousie et mêlent son sang à du miel pour créer un hydromel magique : quiconque en boit devient poète ou érudit.</p>
+    <p>L'hydromel change plusieurs fois de mains — jusqu'au géant Suttungr, qui le cache au cœur d'une montagne, gardé par sa fille Gunnlöd. Odin, sous un déguisement, séduit la jeune géante, obtient la permission de boire trois gorgées et vide les trois cuves en trois traits. Métamorphosé en aigle, il s'enfuit vers Ásgard, poursuivi par Suttungr transformé lui aussi en rapace, et recrache l'hydromel dans des vases préparés par les dieux — donnant naissance, depuis, à toute inspiration poétique humaine.</p>
+    <p class="pull-quote">Une infime partie de l'hydromel, perdue dans la fuite précipitée d'Odin, serait à l'origine des mauvais poètes — d'où l'expression nordique désignant un vers médiocre comme « la part d'Odin par-derrière ».</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VI</div>
+    <h3>Thor au Royaume d'Útgard</h3>
+    <p>Accompagnés de Loki et de deux jeunes humains, Thor part défier Útgarða-Loki, souverain d'une forteresse de géants. En chemin, ils passent la nuit dans ce qu'ils croient être une caverne — en réalité le gant du géant Skrymir, dont les ronflements sont pris pour des tremblements de terre. Trois fois, Thor tente de frapper Skrymir à la tête pendant son sommeil ; trois fois le géant se réveille à peine, croyant qu'une feuille ou une noisette lui est tombée dessus.</p>
+    <p>Arrivé au château, chaque compagnon est soumis à une épreuve qu'il perd successivement : Loki échoue à un concours de rapidité à manger contre le Feu lui-même ; le jeune Thjálfi perd une course contre la Pensée ; Thor échoue à vider une corne reliée en secret à l'océan, à soulever un chat qui n'est autre que le Serpent-Monde déguisé, et à terrasser à la lutte une vieille femme incarnant la Vieillesse, contre laquelle nul ne peut jamais l'emporter.</p>
+    <p>Humilié, Thor n'apprendra qu'au moment de repartir la vérité : tout n'était qu'illusion magique, et ses exploits, loin d'être des échecs, sont en réalité prodigieux — avoir fait ne serait-ce que reculer l'océan ou tenir tête à la vieillesse relève de l'exploit surhumain.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VII</div>
+    <h3>Les Pommes d'Idun</h3>
+    <p>Le géant Þjazi, transformé en aigle, piège Loki et le force, sous peine de mort, à lui livrer la déesse Idun et ses pommes de jouvence. Loki attire Idun hors d'Ásgard sous un faux prétexte, et le géant l'enlève aussitôt vers Jötunheim. Privés des pommes, les dieux se mettent à vieillir à vue d'œil, leurs cheveux blanchissant, leur dos se voûtant.</p>
+    <p>Furieux, les Ases somment Loki de réparer sa trahison. Emprutant les plumes de faucon de Freyja, il s'envole vers Jötunheim, transforme Idun en noix pour la transporter dans ses serres et prend la fuite. Þjazi, redevenu aigle, le poursuit — jusqu'à ce que les dieux, ayant allumé un grand brasier sur les remparts d'Ásgard, laissent Loki passer de justesse tandis que les ailes du géant s'embrasent, le précipitant au sol où les Ases l'achèvent.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende VIII</div>
+    <h3>L'Enchaînement de Fenrir</h3>
+    <p>Élevé parmi les dieux, le loup Fenrir grandit à une vitesse alarmante. Une prophétie annonçant qu'il causera la mort d'Odin pousse les Ases à vouloir l'entraver, sous couvert de jeu. Deux chaînes, pourtant réputées incassables, sont brisées par la bête sans effort apparent, chaque exploit ajoutant à sa réputation.</p>
+    <p>Les dieux commandent alors aux nains une troisième entrave, <strong>Gleipnir</strong> : un lien souple comme un ruban de soie, tissé à partir de six ingrédients impossibles — le bruit des pas d'un chat, la barbe d'une femme, les racines d'une montagne, les tendons d'un ours, le souffle d'un poisson et la salive d'un oiseau. Méfiant devant cet objet d'apparence si fragile, Fenrir n'accepte de se laisser lier qu'à condition qu'un dieu place sa main dans sa gueule en gage de bonne foi.</p>
+    <p>Seul Tyr ose s'exécuter. Lorsque Fenrir, immobilisé malgré tous ses efforts, comprend la ruse, il referme ses mâchoires — Tyr y laisse sa main, prix définitif d'un serment tenu jusqu'au bout. Le loup restera enchaîné jusqu'au Ragnarök, où il se libérera enfin pour accomplir la prophétie qui avait motivé sa capture.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende IX</div>
+    <h3>La Construction des Murailles d'Ásgard</h3>
+    <p>Peu après la guerre contre les Vanes, un bâtisseur solitaire se présente aux Ases et propose d'ériger en une seule saison, sans nulle aide extérieure hormis son étalon, une muraille si puissante qu'aucun géant ne pourrait plus jamais menacer Ásgard. En récompense, il exige le soleil, la lune, et la main de Freyja. Sur les conseils retors de Loki, les dieux acceptent, persuadés qu'une telle tâche est irréalisable dans le délai imparti.</p>
+    <p>Mais le cheval du bâtisseur, Svaðilfari, se révèle d'une puissance surnaturelle, déplaçant des blocs de pierre colossaux nuit après nuit. À l'approche de l'échéance, les dieux réalisent avec effroi que le chantier sera achevé à temps — et que leur bâtisseur n'est autre qu'un géant déguisé. Sommé de résoudre la crise qu'il a lui-même provoquée, Loki se métamorphose en jument et attire l'étalon loin du chantier une nuit entière, empêchant l'achèvement des travaux dans les délais.</p>
+    <p>Démasqué et furieux, le géant est abattu par le marteau de Thor. Quelques mois plus tard, Loki — toujours sous forme de jument — donne naissance à un poulain gris à huit pattes : Sleipnir, qu'il offre à Odin.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende X</div>
+    <h3>L'Échange d'Otages et la Tête de Mímir</h3>
+    <p>La guerre entre Ases et Vanes s'achève dans une impasse : ni l'un ni l'autre camp ne parvient à l'emporter durablement. Pour sceller une paix véritable, les deux clans échangent des otages de haut rang. Vanaheim envoie à Ásgard Njörd et ses jumeaux Freyr et Freyja ; en retour, les Ases envoient à Vanaheim deux figures que tout oppose : Hœnir, grand et magnifique mais incapable de trancher une décision seul, et Mímir, dont la sagesse est sans égale.</p>
+    <p>Tant que les deux hommes restent ensemble, l'arrangement fonctionne à merveille : Hœnir, conseillé en secret par Mímir, rend des jugements d'une justesse admirable et les Vanes l'élèvent aussitôt à un rang honorifique. Mais le jour où Mímir n'est pas présent pour lui souffler la réponse, Hœnir se contente d'un vague "que d'autres en décident" — une esquive qui, répétée, convainc les Vanes qu'on leur a envoyé un otage de moindre valeur en échange de leurs propres enfants royaux.</p>
+    <p class="pull-quote">Furieux de se sentir flouées, les Vanes tranchent la tête de Mímir et la renvoient à Ásgard en guise de représailles — un geste que les Ases choisiront pourtant de retourner à leur avantage.</p>
+    <p>Odin recueille la tête, l'embaume d'herbes magiques pour la préserver de la corruption et prononce sur elle des incantations qui lui rendent la parole. Depuis, la tête de Mímir continue de conseiller Odin dans les moments les plus décisifs — la sagesse du Vane assassiné survit à sa propre mort, transformée en oracle permanent au service de son ancien geôlier.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XI</div>
+    <h3>L'Or Maudit d'Andvari</h3>
+    <p>Voyageant sous forme mortelle avec Odin et Hœnir, Loki tue par jeu une loutre au bord d'une rivière — sans savoir qu'il s'agit en réalité d'Otr, fils métamorphosé du paysan Hreidmar, lui-même issu d'une lignée aux pouvoirs magiques. Découvrant le corps de son fils, Hreidmar exige des trois dieux, en guise de compensation, qu'ils remplissent et recouvrent entièrement la peau de la loutre d'or pur.</p>
+    <p>Pour réunir cette rançon, Loki capture le nain Andvari, qui vit transformé en brochet au fond d'une cascade, et le force à céder tout son trésor — jusqu'au dernier anneau, que le nain tentait de dissimuler dans son poing fermé. Furieux d'être ainsi dépouillé, Andvari lance une malédiction terrible sur cet anneau et sur tout l'or qui l'accompagne : quiconque le possédera sera détruit par lui.</p>
+    <p>La malédiction frappe presque immédiatement : les deux fils survivants de Hreidmar, Fáfnir et Regin, tuent leur propre père pour s'emparer du trésor. Rongé par la cupidité, Fáfnir chasse son frère et se transforme lui-même, à force d'avarice et de haine, en un dragon monstrueux couché sur son or — donnant naissance à l'une des images les plus durables de toute la mythologie occidentale, reprise des siècles plus tard aussi bien par Wagner que par Tolkien pour son Anneau Unique.</p>
+  </div>
+
+  <div class="legend-block">
+    <div class="legend-number">Légende XII</div>
+    <h3>Sigurd et le Dragon Fáfnir</h3>
+    <p>Chassé par son frère devenu dragon, Regin trouve refuge à la cour d'un roi humain et devient le tuteur du jeune Sigurd, descendant de la lignée des Völsungar. Habile forgeron, il persuade Sigurd de reforger les fragments de l'épée brisée de son père, Sigmund — une lame nommée <strong>Gram</strong>, si tranchante qu'elle fend une enclume et coupe un flocon de laine porté par le courant d'une rivière.</p>
+    <p>Regin pousse alors Sigurd à affronter Fáfnir, en réalité pour récupérer le trésor maudit par ses propres mains sans se salir lui-même. Sur les conseils avisés d'Odin, apparu incognito sur la route, Sigurd creuse une fosse sur le passage du dragon et le transperce par en dessous alors qu'il rampe pour boire. Regin demande alors à Sigurd de lui rôtir le cœur du dragon — mais en le goûtant du doigt pour vérifier la cuisson, Sigurd se brûle et porte instinctivement le doigt à sa bouche.</p>
+    <p>Le sang du dragon lui ouvre aussitôt la compréhension du langage des oiseaux : des mésanges perchées au-dessus de lui le préviennent que Regin s'apprête à le trahir pour garder tout l'or pour lui seul. Sigurd le tue avant d'être tué, dévore lui-même le cœur du dragon et s'empare du trésor — y compris de l'anneau maudit. Il chevauche ensuite jusqu'à une montagne cernée d'un mur de flammes, où dort, plongée dans un sommeil enchanté par Odin, la valkyrie <strong>Brynhild</strong>, punie pour avoir désobéi en accordant la victoire à un guerrier qu'Odin avait pourtant condamné.</p>
+    <p class="pull-quote">Sigurd traverse le brasier sans hésiter, réveille Brynhild, et reçoit d'elle un enseignement runique complet — mais la malédiction d'Andvari n'a pas dit son dernier mot : trahisons, philtres d'oubli et vengeances continueront de frapper leur descendance sur plusieurs générations, faisant de cette saga l'une des plus tragiques de toute la tradition nordique.</p>
+  </div>
+
+</section>
+
+<!-- ================= ANECDOTES ================= -->
+<section id="anecdotes">
+  <div class="section-label">Le Saviez-Vous</div>
+  <h2 class="section-title">Anecdotes &amp; Curiosités</h2>
+
+  <div class="anecdote-grid">
+    <div class="anecdote-card">
+      <h4>Mercredi, jour d'Odin</h4>
+      <p>Le mot anglais "Wednesday" vient de "Woden's day" (le jour de Odin/Woden). De même, "Thursday" vient du jour de Thor, et "Friday" du jour de Frigg ou Freyja.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le Valhalla n'est pas pour tous</h4>
+      <p>Contrairement à une idée reçue, tous les guerriers morts au combat ne vont pas au Valhalla : la moitié revient à Freyja dans son domaine Fólkvangr. Les einherjar du Valhalla passent d'ailleurs leurs journées à s'entretuer joyeusement à l'entraînement avant de ressusciter chaque soir pour festoyer — une préparation permanente au Ragnarök.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Un trésor forgé par pari</h4>
+      <p>Loki paria sa tête contre les nains Brokkr et Sindri pour savoir qui forgerait les plus beaux objets. Ils créèrent Mjöllnir, Draupnir (anneau qui se multiplie tous les neuf jours) et Gullinbursti (sanglier doré à la course plus rapide que tout cheval) — Loki perdit le pari mais évita la décapitation en objectant que son cou n'avait jamais été mis en jeu, seulement sa tête. Les nains, dépités, se contentèrent de lui coudre la bouche pour le faire taire.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Une seule source, deux Eddas</h4>
+      <p>L'essentiel de nos connaissances vient de l'<strong>Edda poétique</strong> (poèmes anonymes islandais compilés dans le Codex Regius, retrouvé en 1643) et de l'<strong>Edda de Snorri Sturluson</strong>, écrite au XIIIe siècle — soit environ deux siècles après la christianisation officielle de l'Islande en l'an 1000.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les runes, un alphabet sacré</h4>
+      <p>Le futhark, alphabet runique germanique, n'était pas qu'un simple outil d'écriture : chaque rune portait une charge magique et divinatoire. Selon le mythe, Odin en découvrit le secret en se sacrifiant lui-même, pendu à Yggdrasil, "sacrifice à moi-même offert à moi-même" comme le formule la Hávamál.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Jól, l'ancêtre de Noël</h4>
+      <p>La fête païenne de Jól (Yule), célébrée au solstice d'hiver, honorait notamment la Chasse Sauvage d'Odin traversant le ciel nocturne. Nombre de ses traditions — bûche, banquet, décorations de sapin — ont été absorbées par le Noël chrétien, et le nom "Yule" subsiste encore en anglais.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Des berserkers voués à Odin</h4>
+      <p>Les berserkir, guerriers d'élite vêtus de peaux d'ours (ou de loups pour les úlfhéðnar), entraient au combat dans une transe furieuse, insensibles à la douleur, que la tradition attribue à une possession par la puissance d'Odin lui-même.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les Vikings en Amérique, 500 ans avant Colomb</h4>
+      <p>Les sagas islandaises racontent l'expédition d'Erik le Rouge et de son fils Leif Erikson vers le "Vinland" — une terre aujourd'hui identifiée à Terre-Neuve, où des vestiges d'un campement viking (L'Anse aux Meadows) ont été découverts en 1960, confirmant en partie ces récits longtemps tenus pour légendaires.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Un héritage jusque dans la fantasy moderne</h4>
+      <p>J.R.R. Tolkien, philologue passionné par les langues nordiques anciennes, a puisé directement dans l'Edda de Snorri les noms de la plupart des nains du Hobbit (Thorin, Balin, Dwalin, Gandalf lui-même provient d'une liste de noms de nains !) ainsi que le concept d'un monde du milieu, écho direct de Midgard.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LE MONDE VIKING ================= -->
+<section id="monde">
+  <div class="section-label">Géographie &amp; Expansion</div>
+  <h2 class="section-title">Un Monde Bien Au-Delà de la Scandinavie</h2>
+  <p class="section-intro">Cette mythologie naît dans les fjords, les îles et les longs hivers de Norvège, de Suède et du Danemark — un paysage de mer, de glace et de nuit qui explique à lui seul l'obsession nordique pour le froid primordial, les géants de feu et de gel, et les dieux marins. Mais dès l'âge viking, ses porteurs la transportent, par le commerce autant que par la conquête, sur une bonne partie du globe alors connu.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
+      <g stroke="#5a4425" stroke-width="1.3" fill="none" stroke-dasharray="2,4">
+        <line x1="500" y1="240" x2="120" y2="120"/>
+        <line x1="500" y1="240" x2="70" y2="240"/>
+        <line x1="500" y1="240" x2="130" y2="380"/>
+        <line x1="500" y1="240" x2="330" y2="420"/>
+        <line x1="500" y1="240" x2="660" y2="420"/>
+        <line x1="500" y1="240" x2="820" y2="360"/>
+        <line x1="500" y1="240" x2="900" y2="230"/>
+        <line x1="500" y1="240" x2="860" y2="100"/>
+      </g>
+      <circle cx="500" cy="240" r="9" fill="#c9a15a"/>
+      <text x="500" y="215" fill="#e8c27a" font-family="Cinzel, serif" font-size="14" text-anchor="middle" font-weight="700">SCANDINAVIE</text>
+      <g font-family="EB Garamond, serif" font-size="12" fill="#e6ddc9" text-anchor="middle">
+        <text x="120" y="112" fill="#6f93a3">Vinland</text>
+        <text x="120" y="128" font-size="10" fill="#a89a7e">(Amérique du Nord, ~1000)</text>
+        <text x="70" y="232" fill="#6f93a3">Groenland</text>
+        <text x="70" y="248" font-size="10" fill="#a89a7e">colonisé v.985</text>
+        <text x="130" y="372" fill="#6f93a3">Islande</text>
+        <text x="130" y="388" font-size="10" fill="#a89a7e">colonisée v.874</text>
+        <text x="330" y="412" fill="#6f93a3">Îles Britanniques</text>
+        <text x="330" y="428" font-size="10" fill="#a89a7e">Danelaw, Dublin, Jórvík</text>
+        <text x="660" y="412" fill="#6f93a3">Normandie</text>
+        <text x="660" y="428" font-size="10" fill="#a89a7e">Rollon, 911</text>
+        <text x="820" y="352" fill="#6f93a3">Rus' de Kiev</text>
+        <text x="820" y="368" font-size="10" fill="#a89a7e">fleuves russes, v.862</text>
+        <text x="900" y="222" fill="#6f93a3">Miklagård</text>
+        <text x="900" y="238" font-size="10" fill="#a89a7e">Constantinople</text>
+        <text x="860" y="92" fill="#6f93a3">Bagdad</text>
+        <text x="860" y="108" font-size="10" fill="#a89a7e">routes commerciales</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="reach-grid">
+    <div class="reach-card">
+      <h4>Les Îles Britanniques</h4>
+      <span class="reach-dist">Raids, colonies, royaumes</span>
+      <p>Le Danelaw impose la loi scandinave sur toute l'Angleterre de l'Est ; York devient Jórvík, capitale viking ; les jarldoms des Orcades et des Shetland resteront norvégiens jusqu'au XVe siècle.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Normandie</h4>
+      <span class="reach-dist">911 apr. J.-C.</span>
+      <p>Le chef viking Rollon reçoit des terres du roi de France. Ses "hommes du Nord" (Norsemen) donnent leur nom à la province — et un de ses descendants, Guillaume, conquerra l'Angleterre en 1066.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Rus' de Kiev</h4>
+      <span class="reach-dist">v. 862 apr. J.-C.</span>
+      <p>Des marchands-guerriers varègues remontent les fleuves russes jusqu'à la mer Noire et la mer Caspienne. Le nom même de "Russie" dériverait de ces "Rus".</p>
+    </div>
+    <div class="reach-card">
+      <h4>Miklagård &amp; Bagdad</h4>
+      <span class="reach-dist">Routes commerciales</span>
+      <p>Des marchands nordiques échangent fourrures et ambre contre l'argent arabe jusqu'à Bagdad ; certains servent comme mercenaires d'élite, la Garde varègue, auprès des empereurs de Constantinople.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Islande</h4>
+      <span class="reach-dist">v. 874 apr. J.-C.</span>
+      <p>Colonisée tardivement, cette île isolée deviendra, des siècles plus tard, l'unique endroit où les mythes seront couchés par écrit — sans elle, la quasi-totalité de cette mythologie serait aujourd'hui perdue.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Groenland &amp; Vinland</h4>
+      <span class="reach-dist">v. 985 – 1000 apr. J.-C.</span>
+      <p>Erik le Rouge colonise le Groenland ; son fils Leif Erikson atteint les côtes d'Amérique du Nord — cinq siècles avant Christophe Colomb.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FRISE CHRONOLOGIQUE ================= -->
+<section id="frise">
+  <div class="section-label">Chronologie</div>
+  <h2 class="section-title">Frise Chronologique</h2>
+  <p class="section-intro">De la pierre gravée à l'écran de cinéma : le trajet d'une mythologie orale devenue phénomène mondial.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Ve – VIe siècle</span>
+        <h4>Racines germaniques</h4>
+        <p>Des amulettes scandinaves (bractéates) figurent déjà une silhouette borgne — ancêtre probable d'Odin — bien avant l'âge viking proprement dit.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">793</span>
+        <h4>Lindisfarne</h4>
+        <p>Le raid sur ce monastère anglais marque, pour la plupart des historiens, le début conventionnel de l'âge viking.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">v. 862</span>
+        <h4>Naissance de la Rus' de Kiev</h4>
+        <p>Le chef varègue Rurik fonde une dynastie le long des fleuves russes.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">v. 874</span>
+        <h4>Colonisation de l'Islande</h4>
+        <p>L'île où seront, des siècles plus tard, écrits les seuls récits complets de cette mythologie.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">911</span>
+        <h4>Naissance de la Normandie</h4>
+        <p>Rollon reçoit des terres du roi de France — un de ses descendants conquerra l'Angleterre en 1066.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">v. 1000</span>
+        <h4>Le Vinland &amp; la christianisation</h4>
+        <p>Leif Erikson atteint l'Amérique du Nord ; l'Althing islandais adopte officiellement le christianisme, tout en tolérant encore les anciens cultes en privé.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1066</span>
+        <h4>Stamford Bridge</h4>
+        <p>La mort du roi Harald Hardrada, ancien mercenaire varègue à Constantinople, symbolise la fin de l'âge viking.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">v. 1220 – 1241</span>
+        <h4>L'Edda de Snorri Sturluson</h4>
+        <p>Ce poète et homme d'État islandais compile la majeure partie de ce que l'on sait aujourd'hui des mythes nordiques.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1643</span>
+        <h4>Redécouverte du Codex Regius</h4>
+        <p>Un évêque islandais retrouve le manuscrit de l'Edda poétique, oublié pendant des siècles.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1876 – 1883</span>
+        <h4>L'Anneau du Nibelung</h4>
+        <p>Wagner porte les dieux nordiques à l'opéra — et invente au passage les fameux casques à cornes, qui n'ont pourtant jamais existé chez les Vikings historiques.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Années 1930-40</span>
+        <h4>Une récupération sombre</h4>
+        <p>Le régime nazi détourne certains symboles nordiques à des fins de propagande — une distorsion que les héritiers actuels de la tradition s'efforcent activement de déconstruire.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1937 – 1954</span>
+        <h4>Tolkien &amp; la Terre du Milieu</h4>
+        <p>Philologue nordisant, Tolkien puise dans l'Edda les noms de ses nains et le concept même de Midgard.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1972</span>
+        <h4>Renaissance de l'Ásatrú</h4>
+        <p>L'Islande reconnaît officiellement l'Ásatrúarfélagið — le culte des anciens dieux redevient une foi vivante.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">2015 – 2018</span>
+        <h4>Un temple renaît à Reykjavik</h4>
+        <p>Construction du premier grand temple païen scandinave depuis l'âge viking.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Années 2010-2020</span>
+        <h4>Le grand retour populaire</h4>
+        <p>Marvel, la série "Vikings", "God of War" et "Assassin's Creed Valhalla" propulsent Thor, Odin et Loki dans la culture mondiale — avec, souvent, de larges libertés créatives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Un Héritage Bien Vivant</h2>
+  <p class="section-intro">Ces récits ont d'abord vécu par la voix — chantés dans les salles des rois, gravés en runes, portés par des scaldes de ferme en ferme — bien avant d'être fixés par l'écriture. Neuf siècles plus tard, ils continuent, sous des formes que leurs premiers conteurs n'auraient jamais imaginées, à traverser notre quotidien.</p>
+
+  <div class="heritage-block">
+    <h4>Dans la langue de tous les jours</h4>
+    <p>Mercredi, jeudi et vendredi portent encore, en anglais, le nom d'Odin, de Thor et de Frigg (Wednesday, Thursday, Friday) ; mardi (Tuesday) porte celui de Tyr. Des mots anglais d'usage quotidien — <em>window</em> ("œil du vent"), <em>sky</em>, <em>knife</em>, <em>egg</em>, <em>law</em>, <em>husband</em>, <em>berserk</em>, ou même les pronoms <em>they/them/their</em> — viennent directement du vieux norrois, importé par les colons vikings des Danelaw.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Sur la carte</h4>
+    <p>La Normandie doit son nom aux "hommes du Nord". Des centaines de villes anglaises se terminent encore en <em>-by</em> ou <em>-thorpe</em>, suffixes scandinaves désignant un village ou une ferme (Whitby, Scunthorpe). Le nom de la Russie elle-même remonterait au peuple des Rus.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans la culture populaire</h4>
+    <p>Des studios Marvel à la série "Vikings", en passant par les jeux vidéo "God of War" et "Assassin's Creed Valhalla", Thor, Odin et Loki comptent aujourd'hui parmi les figures mythologiques les plus reconnues au monde — souvent très librement réinventées, mais indéniablement vivantes. Toute la fantasy moderne, de Tolkien à ses innombrables héritiers, doit à cette mythologie son vocabulaire de nains, d'elfes et de mondes multiples.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Une foi retrouvée</h4>
+    <p>L'Ásatrú, culte moderne des anciens dieux nordiques, est aujourd'hui une religion officiellement reconnue en Islande, au Danemark, en Norvège et en Suède, avec ses propres prêtres, ses propres cérémonies, et depuis peu son propre temple à Reykjavik — la première structure de ce genre construite en Scandinavie depuis un millénaire.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Jusque dans le ciel</h4>
+    <p>Plusieurs des petites lunes irrégulières de Saturne, découvertes au tournant des années 2000, portent aujourd'hui les noms de figures de cette mythologie — Ymir, Skathi, Fenrir, Surtur — inscrivant, de façon assez poétique, les géants et les monstres nordiques jusque dans le système solaire lui-même.</p>
+  </div>
+
+  <p class="heritage-caution">Un bémol s'impose : certains symboles nordiques — dont plusieurs runes et le nœud du valknut — ont aussi été détournés par des groupes extrémistes au XXe et au XXIe siècle. La communauté des pratiquants actuels de l'Ásatrú s'efforce activement de reprendre possession de ces symboles pour leur rendre leur sens spirituel d'origine.</p>
+</section>
+
+<footer>
+  <div class="rune-row">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</div>
+  <p class="next-up">Prochain chapitre de la série : <strong>Mythologie Grecque</strong></p>
+</footer>
+
+</body>
+</html>

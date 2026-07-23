@@ -1,17 +1,217 @@
 ---
+const base = import.meta.env.BASE_URL;
 
+const mythologies = [
+  { slug: 'mythologie-nordique.html', title: 'Nordique', hook: 'Neuf mondes suspendus à un frêne cosmique.', epigraph: 'ᚱᚢᚾᛖᛊ' },
+  { slug: 'mythologie-grecque.html', title: 'Grecque', hook: "Sept royaumes primordiaux, l'Olympe et les Enfers.", epigraph: 'ΘΕΟΙ' },
+  { slug: 'mythologie-egyptienne.html', title: 'Égyptienne', hook: 'Le Nil, le Douat et la pesée du cœur.', epigraph: '𓁢𓂀𓆣' },
+  { slug: 'mythologie-romaine.html', title: 'Romaine', hook: 'Un panthéon hérité, une religion d’État.', epigraph: 'S P Q R' },
+  { slug: 'mythologie-celtique.html', title: 'Celtique', hook: "Six vagues d'invasions, un Autre Monde.", epigraph: 'ᚑᚌᚐᚋ' },
+  { slug: 'mythologie-mesopotamienne.html', title: 'Mésopotamienne', hook: 'Les premières villes, les premiers mythes écrits.', epigraph: '𒀭𒈗𒆠' },
+  { slug: 'mythologie-hindoue.html', title: 'Hindoue', hook: 'Quatorze mondes, un cycle cosmique sans fin.', epigraph: 'ॐ' },
+  { slug: 'mythologie-japonaise.html', title: 'Japonaise', hook: 'Huit millions de kami, du ciel aux sanctuaires.', epigraph: '八百万の神' },
+  { slug: 'mythologie-azteque-maya.html', title: 'Aztèque & Maya', hook: 'Deux cosmologies voisines, un même continent.', epigraph: 'ⓖ ⓔ' },
+  { slug: 'mythologie-slave.html', title: 'Slave', hook: "Le monde visible et l'invisible, Yav et Nav.", epigraph: 'БОГИ' },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mythologies & Cultures du Monde</title>
+  <meta name="description" content="Une encyclopédie illustrée des grandes mythologies du monde — cosmogonies, panthéons, légendes et héritages, culture par culture." />
+  <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #10131c;
+      --bg-deep: #0a0c13;
+      --panel: #171b28;
+      --panel-border: #2a2f42;
+      --gold: #c9982f;
+      --gold-bright: #e8c164;
+      --text: #e9e6db;
+      --text-dim: #9a9bb0;
+      --glow: rgba(201, 152, 47, 0.25);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at top, #1a1f30 0%, var(--bg) 55%),
+        var(--bg-deep);
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    h1, h2, h3 { font-family: 'Cinzel', serif; color: var(--gold-bright); letter-spacing: 0.03em; }
+    a { color: var(--gold-bright); }
+
+    header.hero {
+      text-align: center;
+      padding: 100px 20px 70px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .kicker {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.35em;
+      font-size: 0.8rem;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    h1.title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+      margin: 18px 0 10px;
+      text-shadow: 0 0 40px var(--glow);
+    }
+    .tagline {
+      font-size: 1.15rem;
+      color: var(--text-dim);
+      font-style: italic;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .divider {
+      width: 120px;
+      height: 2px;
+      margin: 34px auto;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    section { max-width: 1180px; margin: 0 auto; padding: 40px 24px 90px; }
+    .section-label {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.25em;
+      font-size: 0.75rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    h2.section-title { text-align: center; font-size: 1.9rem; margin: 0 0 14px; }
+    p.section-intro {
+      text-align: center;
+      color: var(--text-dim);
+      max-width: 640px;
+      margin: 0 auto 50px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 22px;
+    }
+    .card {
+      display: block;
+      text-decoration: none;
+      background: linear-gradient(160deg, var(--panel), var(--bg-deep));
+      border: 1px solid var(--panel-border);
+      border-radius: 6px;
+      padding: 26px 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .card .epigraph { font-size: 0.85rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 10px; }
+    .card h3 { margin: 0 0 8px; font-size: 1.3rem; color: var(--text); }
+    .card p { margin: 0; color: var(--text-dim); font-size: 0.95rem; }
+
+    .placeholder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .placeholder-card {
+      border: 1px dashed var(--panel-border);
+      border-radius: 6px;
+      padding: 22px 20px;
+      color: var(--text-dim);
+      background: rgba(255,255,255,0.02);
+    }
+    .placeholder-card h4 { margin: 0 0 6px; color: var(--text-dim); font-family: 'Cinzel', serif; font-size: 1.05rem; }
+    .placeholder-card span.tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--panel-border);
+      border-radius: 3px;
+      padding: 2px 8px;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 50px 20px 80px;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+      header.hero { padding: 70px 18px 50px; }
+      section { padding: 20px 18px 60px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="kicker">Encyclopédie illustrée</div>
+    <h1 class="title">Mythologies &amp; Cultures du Monde</h1>
+    <div class="divider"></div>
+    <p class="tagline">Cosmogonies, panthéons, généalogies, créatures, légendes, frises et héritages — une traversée culture par culture, chacune racontée à sa juste mesure.</p>
+  </header>
+
+  <section id="mythologies">
+    <div class="section-label">Série en cours</div>
+    <h2 class="section-title">Dix Mythologies</h2>
+    <p class="section-intro">Chaque chapitre a sa propre cosmologie, son propre panthéon, son propre décor — le nombre de royaumes ou l'ampleur de la frise varient selon ce que chaque culture porte vraiment, sans moule imposé.</p>
+    <div class="grid">
+      {mythologies.map((m) => (
+        <a class="card" href={`${base}${m.slug}`}>
+          <div class="epigraph">{m.epigraph}</div>
+          <h3>{m.title}</h3>
+          <p>{m.hook}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section id="a-venir">
+    <div class="section-label">Prochainement</div>
+    <h2 class="section-title">Cultures, Créatures &amp; Mystères</h2>
+    <p class="section-intro">Au-delà des mythologies : des chapitres sur des peuples, continents et pays entiers, un bestiaire des créatures légendaires du monde, et les grands mystères qui traversent les cultures.</p>
+    <div class="placeholder-grid">
+      <div class="placeholder-card">
+        <h4>Chine</h4>
+        <p>Peuples, histoire &amp; carte-récit.</p>
+        <span class="tag">Cultures</span>
+      </div>
+      <div class="placeholder-card">
+        <h4>Créatures du Monde</h4>
+        <p>Un bestiaire transversal, culture par culture.</p>
+        <span class="tag">Créatures</span>
+      </div>
+      <div class="placeholder-card">
+        <h4>Grands Mystères</h4>
+        <p>Énigmes archéologiques et légendes non résolues.</p>
+        <span class="tag">Mystères</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Site personnel — mythologies et cultures du monde.
+  </footer>
+</body>
 </html>
