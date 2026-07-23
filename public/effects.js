@@ -244,6 +244,41 @@
     }, 2400);
   }
 
+  // Égypte antique — le disque solaire de Rê se lève derrière les pyramides de Gizeh.
+  function sunrise() {
+    var l = layer(5400);
+    var sky = document.createElement('div');
+    sky.style.cssText = 'position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,30,0) 0%,rgba(212,124,44,.18) 100%);' +
+      'opacity:0;animation:fx-fade 5s ease forwards;';
+    l.appendChild(sky);
+
+    var sun = document.createElement('div');
+    sun.style.cssText = 'position:absolute;left:50%;bottom:14vh;width:120px;height:120px;margin:0 0 -60px -60px;' +
+      'border-radius:50%;background:radial-gradient(circle,#ffe4a0,#e8a33d 60%,rgba(232,163,61,0));' +
+      'filter:blur(1px);will-change:transform,opacity;z-index:1;';
+    l.appendChild(sun);
+    sun.animate([
+      { transform: 'translateY(60px) scale(.6)', opacity: 0 },
+      { opacity: 1, offset: 0.25 },
+      { transform: 'translateY(-18vh) scale(1)', opacity: 1, offset: 0.7 },
+      { transform: 'translateY(-24vh) scale(1.05)', opacity: 0 }
+    ], { duration: 5200, easing: 'ease-out', fill: 'forwards' });
+
+    var pyramids = document.createElement('div');
+    pyramids.style.cssText = 'position:absolute;left:0;right:0;bottom:13vh;z-index:2;opacity:0;' +
+      'animation:fx-fade 5.2s ease forwards;';
+    pyramids.innerHTML =
+      '<svg viewBox="0 0 600 120" preserveAspectRatio="xMidYMax slice" ' +
+        'xmlns="http://www.w3.org/2000/svg" style="width:100%;height:16vh;display:block">' +
+        '<g fill="#1a1410">' +
+          '<path d="M60 120 L150 30 L240 120 Z"/>' +
+          '<path d="M210 120 L330 5 L450 120 Z"/>' +
+          '<path d="M400 120 L470 45 L540 120 Z"/>' +
+        '</g>' +
+      '</svg>';
+    l.appendChild(pyramids);
+  }
+
   /* ---------------------------------------------------------------------
      Registre : clef data-egg -> déclencheur
      --------------------------------------------------------------------- */
@@ -258,7 +293,7 @@
     nordique:      function () { glyphShower({ glyphs: RUNES, mode: 'fall' }); },
     grecque:       function () { glyphShower({ glyphs: GREEK, mode: 'rise' }); },
     egyptienne:    function () { glyphShower({ glyphs: HIERO, mode: 'rise' }); },
-    egypte:        function () { glyphShower({ glyphs: HIERO, mode: 'rise' }); },
+    egypte:        sunrise,
     romaine:       function () { glyphShower({ glyphs: ROMAN, mode: 'fall' }); },
     celtique:      function () { glyphShower({ glyphs: OGHAM, mode: 'rise' }); },
     mesopotamienne:function () { glyphShower({ glyphs: CUNEI, mode: 'fall' }); },

@@ -180,10 +180,18 @@
   #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
   #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
   #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
-  #side-menu .side-home{margin:0 14px 16px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu a.search-hide{display:none;}
+  #side-menu .side-home{margin:0 14px 14px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
   #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
-  #side-menu .side-label{padding:14px 22px 6px; margin-top:4px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0;}
-  #side-menu .side-label:first-of-type{padding-top:0;}
+  #side-menu .side-search{padding:0 22px 14px;}
+  #side-menu .side-search input{width:100%; box-sizing:border-box; padding:8px 10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:5px; color:#e9e6db; font-family:'EB Garamond', Georgia, serif; font-size:0.9rem;}
+  #side-menu .side-search input::placeholder{color:#7a7b8c;}
+  #side-menu .side-search input:focus{outline:none; border-color:#c9982f;}
+  #side-menu .side-label{padding:12px 22px 6px; margin-top:2px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:space-between;}
+  #side-menu .side-label::after{content:'\25BE'; font-size:0.65rem; transition:transform 0.2s ease; color:#6d6e7e;}
+  #side-menu .side-label.collapsed::after{transform:rotate(-90deg);}
+  #side-menu .side-group{overflow:hidden; max-height:600px; transition:max-height 0.25s ease;}
+  #side-menu .side-group.collapsed{max-height:0;}
 </style>
 </head>
 <body data-egg="egyptienne">
@@ -192,7 +200,9 @@
 <nav id="side-menu">
   <a href="./" class="side-home">&larr; Accueil</a>
   <div class="side-divider"></div>
+  <div class="side-search"><input type="text" id="side-search-input" placeholder="Rechercher une page..." autocomplete="off"></div>
   <div class="side-label">Mythologies</div>
+  <div class="side-group">
     <a href="mythologie-nordique.html">Nordique</a>
     <a href="mythologie-grecque.html">Grecque</a>
     <a href="mythologie-egyptienne.html" class="active">Égyptienne</a>
@@ -203,16 +213,76 @@
     <a href="mythologie-japonaise.html">Japonaise</a>
     <a href="mythologie-azteque-maya.html">Aztèque & Maya</a>
     <a href="mythologie-slave.html">Slave</a>
+  </div>
   <div class="side-label">Cultures</div>
+  <div class="side-group">
     <a href="culture-chinoise.html">Chine</a>
     <a href="culture-egypte-antique.html">Égypte Antique</a>
+  </div>
   <div class="side-label">Créatures</div>
+  <div class="side-group">
     <a href="creature-gevaudan.html">Bête du Gévaudan</a>
     <a href="creature-loch-ness.html">Monstre du Loch Ness</a>
+  </div>
   <div class="side-label">Mystères</div>
+  <div class="side-group">
     <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
     <a href="mystere-stonehenge.html">Stonehenge</a>
+  </div>
 </nav>
+<script>
+(function(){
+  var menu = document.getElementById('side-menu');
+  if(!menu) return;
+  var labels = Array.prototype.slice.call(menu.querySelectorAll('.side-label'));
+  labels.forEach(function(label){
+    var group = label.nextElementSibling;
+    if(!group) return;
+    var hasActive = group.querySelector('a.active');
+    if(!hasActive){ label.classList.add('collapsed'); group.classList.add('collapsed'); }
+    label.addEventListener('click', function(){
+      label.classList.toggle('collapsed');
+      group.classList.toggle('collapsed');
+    });
+  });
+  var input = document.getElementById('side-search-input');
+  if(input){
+    var links = Array.prototype.slice.call(menu.querySelectorAll('.side-group a'));
+    function restoreCollapse(){
+      labels.forEach(function(label){
+        var group = label.nextElementSibling;
+        if(!group) return;
+        var hasActive = group.querySelector('a.active');
+        label.classList.toggle('collapsed', !hasActive);
+        group.classList.toggle('collapsed', !hasActive);
+      });
+    }
+    input.addEventListener('input', function(){
+      var q = input.value.trim().toLowerCase();
+      if(!q){
+        links.forEach(function(a){ a.classList.remove('search-hide'); });
+        restoreCollapse();
+        return;
+      }
+      links.forEach(function(a){
+        var match = a.textContent.toLowerCase().indexOf(q) !== -1;
+        a.classList.toggle('search-hide', !match);
+      });
+      labels.forEach(function(label){
+        label.classList.remove('collapsed');
+        if(label.nextElementSibling) label.nextElementSibling.classList.remove('collapsed');
+      });
+    });
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        var first = links.filter(function(a){ return !a.classList.contains('search-hide'); })[0];
+        if(first) window.location.href = first.getAttribute('href');
+      }
+    });
+  }
+})();
+</script>
+
 
 
 
