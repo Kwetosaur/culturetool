@@ -191,7 +191,7 @@
   #side-menu .side-label:first-of-type{padding-top:0;}
 </style>
 </head>
-<body>
+<body data-egg="azteque">
 <button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
 <div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
 <nav id="side-menu">
@@ -913,5 +913,6 @@
   revealTargets.forEach(function(el){ el.classList.add('reveal-init'); io.observe(el); });
 })();
 </script>
+<script src="./effects.js" defer></script>
 </body>
 </html>
