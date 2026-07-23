@@ -74,6 +74,25 @@
     box-shadow:0 0 60px rgba(0,0,0,0.6);
   }
   #pins{ position:absolute; inset:0; }
+  #calib-grid{ position:absolute; inset:0; width:100%; height:100%; display:none; pointer-events:none; }
+  #calib-grid.on{ display:block; }
+  #calib-grid line{ stroke:#2a4f8a; stroke-width:0.15; }
+  #calib-grid line.major{ stroke:#c9313b; stroke-width:0.25; }
+  #calib-grid text{ font-size:2px; fill:#c9313b; font-family:'Cinzel',serif; }
+  #calib-readout{
+    position:fixed; z-index:700; pointer-events:none; display:none;
+    background:rgba(20,14,8,0.92); color:#e8c164; border:1px solid #c9982f;
+    border-radius:6px; padding:5px 10px; font-family:'Cinzel', serif; font-size:0.8rem;
+    transform:translate(14px, 14px);
+  }
+  #calib-readout.on{ display:block; }
+  #calib-toast{
+    position:fixed; top:72px; left:50%; transform:translateX(-50%); z-index:700;
+    background:rgba(20,14,8,0.94); color:#e8c164; border:1px solid #c9982f;
+    border-radius:6px; padding:8px 16px; font-family:'Cinzel', serif; font-size:0.82rem;
+    opacity:0; transition:opacity .3s ease; pointer-events:none;
+  }
+  #calib-toast.show{ opacity:1; }
 
   /* ---------- badges ---------- */
   .pin{
@@ -277,11 +296,16 @@
   <label><input type="checkbox" data-filter="culture" checked><span class="swatch sw-culture"></span>Cultures</label>
   <label><input type="checkbox" data-filter="creature" checked><span class="swatch sw-creature"></span>Créatures</label>
   <label><input type="checkbox" data-filter="mystere" checked><span class="swatch sw-mystere"></span>Mystères</label>
+  <div class="side-divider" style="margin:10px 0;"></div>
+  <label><input type="checkbox" id="calib-toggle"><span class="swatch" style="background:#4a76bf;"></span>Mode calibrage</label>
 </div>
+
+<div id="calib-readout"></div>
 
 <div id="stage">
   <div id="canvas">
     <img id="map-img" src="map.png" alt="Carte du monde stylisée" draggable="false">
+    <svg id="calib-grid" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
     <div id="pins"></div>
   </div>
 </div>
@@ -292,6 +316,7 @@
   <button id="zoom-out" aria-label="Dézoomer">&minus;</button>
 </div>
 <div id="tooltip"></div>
+<div id="calib-toast"></div>
 
 <script>
 /* =========================================================================
@@ -300,27 +325,30 @@
    entrée recevra sa vraie icône (voir plan-carte-icones.md) — il suffira
    de changer ce champ `icon`, rien d'autre à toucher dans le moteur.
    ========================================================================= */
+// Coordonnees recalibrees visuellement sur map.png (grille de reference %) le 24/07.
+// Encore approximatif par endroits (carte stylisee, pas une projection precise) -
+// utiliser le mode calibrage (bouton dans le panneau filtres) pour affiner au clic.
 var PLACES = [
   // Mythologies
-  { id:'myth-nordique',   title:'Mythologie Nordique',    cat:'mythologie', href:'mythologie-nordique.html',        x:56, y:10, icon:'star' },
-  { id:'myth-grecque',    title:'Mythologie Grecque',     cat:'mythologie', href:'mythologie-grecque.html',         x:58, y:26, icon:'diamond' },
-  { id:'myth-egyptienne', title:'Mythologie Égyptienne',  cat:'mythologie', href:'mythologie-egyptienne.html',      x:57, y:40, icon:'circle' },
-  { id:'myth-romaine',    title:'Mythologie Romaine',     cat:'mythologie', href:'mythologie-romaine.html',         x:53, y:24, icon:'hex' },
-  { id:'myth-celtique',   title:'Mythologie Celtique',    cat:'mythologie', href:'mythologie-celtique.html',        x:45, y:19, icon:'triangle' },
-  { id:'myth-mesopo',     title:'Mythologie Mésopotamienne', cat:'mythologie', href:'mythologie-mesopotamienne.html', x:62, y:34, icon:'drop' },
-  { id:'myth-hindoue',    title:'Mythologie Hindoue',     cat:'mythologie', href:'mythologie-hindoue.html',         x:68, y:44, icon:'star' },
-  { id:'myth-japonaise',  title:'Mythologie Japonaise',   cat:'mythologie', href:'mythologie-japonaise.html',       x:88, y:27, icon:'diamond' },
-  { id:'myth-azteque',    title:'Mythologie Aztèque & Maya', cat:'mythologie', href:'mythologie-azteque-maya.html', x:18, y:44, icon:'circle' },
-  { id:'myth-slave',      title:'Mythologie Slave',       cat:'mythologie', href:'mythologie-slave.html',           x:63, y:14, icon:'hex' },
+  { id:'myth-nordique',   title:'Mythologie Nordique',    cat:'mythologie', href:'mythologie-nordique.html',        x:50, y:14, icon:'star' },
+  { id:'myth-grecque',    title:'Mythologie Grecque',     cat:'mythologie', href:'mythologie-grecque.html',         x:58, y:30, icon:'diamond' },
+  { id:'myth-egyptienne', title:'Mythologie Égyptienne',  cat:'mythologie', href:'mythologie-egyptienne.html',      x:58, y:42, icon:'circle' },
+  { id:'myth-romaine',    title:'Mythologie Romaine',     cat:'mythologie', href:'mythologie-romaine.html',         x:54, y:28, icon:'hex' },
+  { id:'myth-celtique',   title:'Mythologie Celtique',    cat:'mythologie', href:'mythologie-celtique.html',        x:43, y:20, icon:'triangle' },
+  { id:'myth-mesopo',     title:'Mythologie Mésopotamienne', cat:'mythologie', href:'mythologie-mesopotamienne.html', x:62, y:36, icon:'drop' },
+  { id:'myth-hindoue',    title:'Mythologie Hindoue',     cat:'mythologie', href:'mythologie-hindoue.html',         x:68, y:46, icon:'star' },
+  { id:'myth-japonaise',  title:'Mythologie Japonaise',   cat:'mythologie', href:'mythologie-japonaise.html',       x:88, y:29, icon:'diamond' },
+  { id:'myth-azteque',    title:'Mythologie Aztèque & Maya', cat:'mythologie', href:'mythologie-azteque-maya.html', x:17, y:44, icon:'circle' },
+  { id:'myth-slave',      title:'Mythologie Slave',       cat:'mythologie', href:'mythologie-slave.html',           x:61, y:17, icon:'hex' },
   // Cultures
-  { id:'cult-chine',      title:'Culture Chinoise',       cat:'culture', href:'culture-chinoise.html',              x:79, y:27, icon:'triangle' },
-  { id:'cult-egypte',     title:'Égypte Antique',         cat:'culture', href:'culture-egypte-antique.html',        x:58, y:47, icon:'drop' },
+  { id:'cult-chine',      title:'Culture Chinoise',       cat:'culture', href:'culture-chinoise.html',              x:79, y:28, icon:'triangle' },
+  { id:'cult-egypte',     title:'Égypte Antique',         cat:'culture', href:'culture-egypte-antique.html',        x:59, y:48, icon:'drop' },
   // Créatures
-  { id:'crea-gevaudan',   title:'Bête du Gévaudan',       cat:'creature', href:'creature-gevaudan.html',            x:49, y:23, icon:'star' },
-  { id:'crea-lochness',   title:'Monstre du Loch Ness',   cat:'creature', href:'creature-loch-ness.html',           x:44, y:14, icon:'diamond' },
+  { id:'crea-gevaudan',   title:'Bête du Gévaudan',       cat:'creature', href:'creature-gevaudan.html',            x:48, y:25, icon:'star' },
+  { id:'crea-lochness',   title:'Monstre du Loch Ness',   cat:'creature', href:'creature-loch-ness.html',           x:43, y:15, icon:'diamond' },
   // Mystères
-  { id:'myst-bermudes',   title:'Triangle des Bermudes',  cat:'mystere', href:'mystere-triangle-bermudes.html',     x:26, y:36, icon:'circle' },
-  { id:'myst-stonehenge', title:'Stonehenge',             cat:'mystere', href:'mystere-stonehenge.html',            x:46, y:21, icon:'hex' }
+  { id:'myst-bermudes',   title:'Triangle des Bermudes',  cat:'mystere', href:'mystere-triangle-bermudes.html',     x:26, y:38, icon:'circle' },
+  { id:'myst-stonehenge', title:'Stonehenge',             cat:'mystere', href:'mystere-stonehenge.html',            x:44, y:21, icon:'hex' }
 ];
 
 var ICONS = {
@@ -411,10 +439,11 @@ stage.addEventListener('wheel', function(e){
   apply();
 }, { passive:false });
 
-var dragging = false, lastX = 0, lastY = 0;
-function dragStart(x,y){ dragging = true; lastX = x; lastY = y; stage.classList.add('dragging'); }
+var dragging = false, lastX = 0, lastY = 0, dragMoved = false;
+function dragStart(x,y){ dragging = true; dragMoved = false; lastX = x; lastY = y; stage.classList.add('dragging'); }
 function dragMove(x,y){
   if(!dragging) return;
+  if (Math.abs(x - lastX) > 2 || Math.abs(y - lastY) > 2) dragMoved = true;
   tx += x - lastX; ty += y - lastY;
   lastX = x; lastY = y;
   apply();
@@ -455,6 +484,76 @@ document.getElementById('side-menu-toggle-map').addEventListener('click', functi
   var m = document.getElementById('side-menu'), o = document.getElementById('side-menu-overlay');
   if (m) m.classList.toggle('open');
   if (o) o.classList.toggle('open');
+});
+
+/* ---------- mode calibrage : grille % + lecture live + clic pour copier ----------
+   Sert a determiner precisement les coordonnees x/y (en %) d'un lieu sur map.png :
+   cocher "Mode calibrage", survoler le point voulu sur la carte (le pourcentage
+   s'affiche a cote du curseur), cliquer pour copier "x: NN, y: NN" dans le
+   presse-papiers - a coller directement dans le tableau PLACES plus haut. */
+var calibToggle = document.getElementById('calib-toggle');
+var calibGrid = document.getElementById('calib-grid');
+var calibReadout = document.getElementById('calib-readout');
+var calibToast = document.getElementById('calib-toast');
+var calibOn = false;
+
+function buildCalibGrid(){
+  var svgns = 'http://www.w3.org/2000/svg';
+  for (var p = 0; p <= 100; p += 5){
+    var vLine = document.createElementNS(svgns, 'line');
+    vLine.setAttribute('x1', p); vLine.setAttribute('x2', p);
+    vLine.setAttribute('y1', 0); vLine.setAttribute('y2', 100);
+    if (p % 10 === 0) vLine.setAttribute('class', 'major');
+    calibGrid.appendChild(vLine);
+
+    var hLine = document.createElementNS(svgns, 'line');
+    hLine.setAttribute('y1', p); hLine.setAttribute('y2', p);
+    hLine.setAttribute('x1', 0); hLine.setAttribute('x2', 100);
+    if (p % 10 === 0) hLine.setAttribute('class', 'major');
+    calibGrid.appendChild(hLine);
+
+    if (p % 10 === 0 && p < 100){
+      var label = document.createElementNS(svgns, 'text');
+      label.setAttribute('x', p + 0.6); label.setAttribute('y', 2.2);
+      label.textContent = p;
+      calibGrid.appendChild(label);
+    }
+  }
+}
+buildCalibGrid();
+
+calibToggle.addEventListener('change', function(){
+  calibOn = calibToggle.checked;
+  calibGrid.classList.toggle('on', calibOn);
+  calibReadout.classList.toggle('on', calibOn);
+  stage.style.cursor = calibOn ? 'crosshair' : 'grab';
+});
+
+function screenToPct(clientX, clientY){
+  var rect = stage.getBoundingClientRect();
+  var mx = clientX - rect.left, my = clientY - rect.top;
+  var cx = (mx - tx) / scale, cy = (my - ty) / scale;
+  return { x: Math.round(cx / MAP_W * 1000) / 10, y: Math.round(cy / MAP_H * 1000) / 10 };
+}
+
+stage.addEventListener('mousemove', function(e){
+  if (!calibOn) return;
+  var pct = screenToPct(e.clientX, e.clientY);
+  calibReadout.textContent = 'x: ' + pct.x + '  y: ' + pct.y;
+  calibReadout.style.left = e.clientX + 'px';
+  calibReadout.style.top = e.clientY + 'px';
+});
+
+stage.addEventListener('click', function(e){
+  if (!calibOn || dragMoved) return;
+  var pct = screenToPct(e.clientX, e.clientY);
+  var text = 'x:' + pct.x + ', y:' + pct.y;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(function(){});
+  }
+  calibToast.textContent = 'Copié : ' + text;
+  calibToast.classList.add('show');
+  setTimeout(function(){ calibToast.classList.remove('show'); }, 1400);
 });
 </script>
 
