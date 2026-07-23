@@ -65,14 +65,15 @@
   }
   #stage.dragging{cursor:grabbing;}
   #canvas{
-    position:absolute; top:50%; left:50%;
+    position:absolute; top:0; left:0; width:1672px; height:941px;
     transform-origin:0 0;
     will-change:transform;
   }
   #canvas img{
-    display:block; width:1672px; max-width:none; user-select:none; -webkit-user-drag:none;
+    display:block; width:1672px; height:941px; max-width:none; user-select:none; -webkit-user-drag:none;
     box-shadow:0 0 60px rgba(0,0,0,0.6);
   }
+  #pins{ position:absolute; inset:0; }
 
   /* ---------- badges ---------- */
   .pin{
@@ -379,17 +380,17 @@ var img = document.getElementById('map-img');
 var scale = 1, tx = 0, ty = 0;
 var MIN_SCALE = 0.6, MAX_SCALE = 5;
 
+var MAP_W = 1672, MAP_H = 941;
+
 function fitInitial(){
   var sw = stage.clientWidth, sh = stage.clientHeight;
-  var iw = 1672, ih = 941;
-  scale = Math.max(sw / iw, sh / ih) * 1.02;
-  tx = 0; ty = 0;
+  scale = Math.max(sw / MAP_W, sh / MAP_H) * 1.02;
+  tx = (sw - MAP_W * scale) / 2;
+  ty = (sh - MAP_H * scale) / 2;
   apply();
 }
 function apply(){
   canvas.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
-  img.style.marginLeft = (-1672/2) + 'px';
-  img.style.marginTop = (-941/2) + 'px';
 }
 function clamp(){
   scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale));
@@ -398,8 +399,8 @@ function clamp(){
 stage.addEventListener('wheel', function(e){
   e.preventDefault();
   var rect = stage.getBoundingClientRect();
-  var mx = e.clientX - rect.left - rect.width/2;
-  var my = e.clientY - rect.top - rect.height/2;
+  var mx = e.clientX - rect.left;
+  var my = e.clientY - rect.top;
   var prevScale = scale;
   var factor = e.deltaY < 0 ? 1.15 : 1/1.15;
   scale *= factor;
@@ -432,12 +433,18 @@ stage.addEventListener('touchmove', function(e){
 }, { passive:true });
 stage.addEventListener('touchend', dragEnd);
 
-document.getElementById('zoom-in').addEventListener('click', function(){
-  scale *= 1.3; clamp(); apply();
-});
-document.getElementById('zoom-out').addEventListener('click', function(){
-  scale /= 1.3; clamp(); apply();
-});
+function zoomAtCenter(factor){
+  var mx = stage.clientWidth / 2, my = stage.clientHeight / 2;
+  var prevScale = scale;
+  scale *= factor;
+  clamp();
+  var ratio = scale / prevScale;
+  tx = mx - (mx - tx) * ratio;
+  ty = my - (my - ty) * ratio;
+  apply();
+}
+document.getElementById('zoom-in').addEventListener('click', function(){ zoomAtCenter(1.3); });
+document.getElementById('zoom-out').addEventListener('click', function(){ zoomAtCenter(1/1.3); });
 document.getElementById('resetview').addEventListener('click', fitInitial);
 
 window.addEventListener('resize', fitInitial);
