@@ -1,21 +1,26 @@
 /* =========================================================================
    effects.js — couche d'effets partagée pour "Mythologies & Cultures du Monde"
    -------------------------------------------------------------------------
-   Deux rôles :
+   Quatre rôles :
      1. Améliorations universelles, sobres, sur toutes les pages
         (barre de progression, lueur du hero suivant la souris).
      2. Un « easter egg » thématique par page, déclenché en cliquant le
         titre du hero — ou via le code Konami. Chaque page se déclare via
         <body data-egg="clef">.
+     3. Des inscriptions qui se "déchiffrent" au scroll (glyphes -> texte
+        lisible), rejouables à chaque entrée/sortie du viewport.
+        <span class="fx-decode" data-glyphs="rune" data-text="…"></span>
+     4. Des "happenings" au scroll qui rejouent un effet existant quand une
+        section entre dans le viewport, avec un temps de repos pour ne
+        jamais devenir agaçant en va-et-vient.
+        <section data-scroll-fx="nessie">…</section>
 
-   Tout est coupé si l'utilisateur a demandé à réduire les animations
-   (prefers-reduced-motion), pour rester respectueux et accessible.
+   Tout est encapsulé en try/catch : un effet cassé ne doit jamais casser
+   la page. Pas de garde-fou prefers-reduced-motion (demande explicite du
+   site : les effets doivent s'afficher partout).
    ========================================================================= */
 (function () {
   'use strict';
-
-  // Volontairement pas de garde-fou prefers-reduced-motion ici : demande explicite du site
-  // (les effets doivent s'afficher partout, y compris sur les machines configurées pour reduce-motion).
 
   var root = document.documentElement;
   function cssVar(name, fallback) {
@@ -280,8 +285,32 @@
     l.appendChild(pyramids);
   }
 
+  // Chine — un ruban de soie flotte et ondule en travers de l'écran.
+  function silk() {
+    var l = layer(5000);
+    var colors = ['#c9313b', '#d8443a', '#e0b34a'];
+    var s = document.createElement('div');
+    s.style.cssText = 'position:absolute;left:-20vw;top:' + rand(20, 60) + 'vh;width:140vw;height:60px;opacity:0;';
+    s.innerHTML =
+      '<svg viewBox="0 0 1400 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<path d="M0 60 C 200 10, 400 110, 600 60 S 1000 10, 1400 60" fill="none" ' +
+          'stroke="' + pick(colors) + '" stroke-width="14" stroke-linecap="round" opacity=".85"/>' +
+      '</svg>';
+    l.appendChild(s);
+    s.animate([
+      { transform: 'translateX(0)', opacity: 0 },
+      { opacity: 1, offset: 0.15 },
+      { transform: 'translateX(35vw)', opacity: 1, offset: 0.8 },
+      { transform: 'translateX(45vw)', opacity: 0 }
+    ], { duration: 4600, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
   /* ---------------------------------------------------------------------
-     Registre : clef data-egg -> déclencheur
+     3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
+        lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
+        Rejouable : en sortant du viewport, l'inscription redevient des
+        glyphes, prête à se redéchiffrer à la prochaine entrée (avant/arrière).
+        Balisage : <span class="fx-decode" data-glyphs="rune" data-text="…"></span>
      --------------------------------------------------------------------- */
   var RUNES = 'ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛋᛏᛒᛖᛗᛚᛜᛞᛟ';
   var GREEK = 'ΑΒΓΔΘΛΞΠΣΦΨΩ';
@@ -290,30 +319,32 @@
   var OGHAM = 'ᚁᚂᚃᚄᚅᚆᚇᚈᚉᚊ';
   var ROMAN = 'ⅠⅤⅩⅬⅭⅮⅯ';
 
-  /* ---------------------------------------------------------------------
-     3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
-        lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
-        Balisage : <span class="fx-decode" data-glyphs="rune" data-text="…"></span>
-     --------------------------------------------------------------------- */
-  var GLYPH_POOLS = { rune: RUNES, greek: GREEK, hiero: HIERO, cunei: CUNEI, ogham: OGHAM };
+  var GLYPH_POOLS = {
+    rune: RUNES, greek: GREEK, hiero: HIERO, cunei: CUNEI, ogham: OGHAM, roman: ROMAN,
+    hindu: 'ॐ☸✴◈', japan: '❀✿花結', azteque: '☀✴◈❂', slave: '☀✺❉✵', chine: '福龍鳳春'
+  };
 
-  function decodeReveal(el) {
-    var target = el.getAttribute('data-text') || '';
-    var pool = Array.from(GLYPH_POOLS[el.getAttribute('data-glyphs')] || RUNES);
-    var chars = Array.from(target);
+  function glyphify(el, pool) {
+    var chars = Array.from(el.getAttribute('data-text') || '');
     el.textContent = '';
-    var spans = chars.map(function (ch) {
+    chars.forEach(function (ch) {
       var s = document.createElement('span');
-      s.textContent = ch === ' ' ? ' ' : pick(pool);
+      s.textContent = ch === ' ' ? ' ' : pick(pool);
       s.style.transition = 'text-shadow .4s ease, color .4s ease';
       el.appendChild(s);
-      return s;
     });
+  }
+
+  function decodeReveal(el) {
+    var pool = Array.from(GLYPH_POOLS[el.getAttribute('data-glyphs')] || RUNES);
+    var chars = Array.from(el.getAttribute('data-text') || '');
+    glyphify(el, pool);
+    var spans = Array.prototype.slice.call(el.children);
     spans.forEach(function (s, i) {
       if (chars[i] === ' ') return;
-      var delay = i * 55, flickers = 5;
+      var delay = i * (48 + rand(0, 18)), flickers = 4 + Math.floor(rand(0, 3));
       for (var f = 0; f < flickers; f++) {
-        setTimeout((function (sp) { return function () { sp.textContent = pick(pool); }; })(s), delay + f * 45);
+        setTimeout((function (sp) { return function () { sp.textContent = pick(pool); }; })(s), delay + f * 42);
       }
       setTimeout((function (sp, ch) {
         return function () {
@@ -322,23 +353,63 @@
           sp.style.textShadow = '0 0 14px ' + ACCENT + ', 0 0 3px #fff';
           setTimeout(function () { sp.style.textShadow = 'none'; sp.style.color = ''; }, 900);
         };
-      })(s, chars[i]), delay + flickers * 45);
+      })(s, chars[i]), delay + flickers * 42);
     });
+    el.dataset.decoded = '1';
   }
 
   var decodeNodes = document.querySelectorAll('.fx-decode[data-text]');
   if (decodeNodes.length) {
+    decodeNodes.forEach(function (el) {
+      glyphify(el, Array.from(GLYPH_POOLS[el.getAttribute('data-glyphs')] || RUNES));
+    });
     var ioDecode = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
+        var el = entry.target;
         if (entry.isIntersecting) {
-          decodeReveal(entry.target);
-          ioDecode.unobserve(entry.target);
+          if (el.dataset.decoded !== '1') decodeReveal(el);
+        } else if (el.dataset.decoded === '1') {
+          el.dataset.decoded = '0';
+          glyphify(el, Array.from(GLYPH_POOLS[el.getAttribute('data-glyphs')] || RUNES));
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.3 });
     decodeNodes.forEach(function (el) { ioDecode.observe(el); });
   }
 
+  /* ---------------------------------------------------------------------
+     4. Petits "happenings" au scroll — rejoue un effet existant quand une
+        section entre dans le viewport, avec un temps de repos (~7s) pour
+        ne jamais devenir agaçant en cas de va-et-vient.
+        Balisage : <section data-scroll-fx="nessie">…</section>
+     --------------------------------------------------------------------- */
+  var SCROLL_FX = {
+    nessie: nessie, bermudes: bermudes, solstice: solstice, eyes: eyes,
+    sunrise: sunrise, silk: silk
+  };
+  var scrollFxLastPlayed = {};
+  function initScrollHappenings() {
+    var nodes = document.querySelectorAll('[data-scroll-fx]');
+    if (!nodes.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var key = entry.target.getAttribute('data-scroll-fx');
+        var fn = SCROLL_FX[key];
+        if (!fn) return;
+        var now = Date.now();
+        if (scrollFxLastPlayed[key] && now - scrollFxLastPlayed[key] < 7000) return;
+        scrollFxLastPlayed[key] = now;
+        try { fn(); } catch (e) { /* un happening casse, la page continue */ }
+      });
+    }, { threshold: 0.4 });
+    nodes.forEach(function (el) { io.observe(el); });
+  }
+  initScrollHappenings();
+
+  /* ---------------------------------------------------------------------
+     Registre : clef data-egg -> déclencheur (clic sur le titre / Konami)
+     --------------------------------------------------------------------- */
   var EGGS = {
     nordique:      function () { glyphShower({ glyphs: RUNES, mode: 'fall' }); },
     grecque:       function () { glyphShower({ glyphs: GREEK, mode: 'rise' }); },
@@ -350,7 +421,7 @@
     hindoue:       function () { glyphShower({ glyphs: 'ॐ☸✴', mode: 'rise', color: '#e6a23c' }); },
     azteque:       function () { glyphShower({ glyphs: '☀✴◈❂', mode: 'rise' }); },
     slave:         function () { glyphShower({ glyphs: '☀✺❉✵', mode: 'rise', color: '#e0723a' }); },
-    chine:         function () { glyphShower({ glyphs: '福龍鳳春', mode: 'fall', color: '#d8443a' }); },
+    chine:         function () { glyphShower({ glyphs: '福龍鳳春', mode: 'fall', color: '#d8443a' }); silk(); },
     japonaise:     function () { glyphShower({ glyphs: '❀✿花', mode: 'fall', color: '#f4c0d0', count: 30 }); },
     lochness:      nessie,
     bermudes:      bermudes,
@@ -362,26 +433,28 @@
 
   var key = document.body.getAttribute('data-egg');
   var egg = key && EGGS[key];
-  if (!egg) return;
+  if (egg) {
+    (function () {
+      function trigger() {
+        if (busy) return;
+        busy = true;
+        try { egg(); } catch (e) { /* on ne casse jamais la page pour un easter egg */ }
+        setTimeout(function () { busy = false; }, 1500);
+      }
 
-  function trigger() {
-    if (busy) return;
-    busy = true;
-    try { egg(); } catch (e) { /* on ne casse jamais la page pour un easter egg */ }
-    setTimeout(function () { busy = false; }, 1500);
+      // Déclencheur discret : le titre du hero devient cliquable.
+      var title = document.querySelector('.hero h1, header.hero h1');
+      if (title) {
+        title.style.cursor = 'pointer';
+        title.addEventListener('click', trigger);
+      }
+
+      // Déclencheur caché : le code Konami.
+      var seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65], idx = 0;
+      window.addEventListener('keydown', function (e) {
+        idx = (e.keyCode === seq[idx]) ? idx + 1 : (e.keyCode === seq[0] ? 1 : 0);
+        if (idx === seq.length) { idx = 0; trigger(); }
+      });
+    })();
   }
-
-  // Déclencheur discret : le titre du hero devient cliquable.
-  var title = document.querySelector('.hero h1, header.hero h1');
-  if (title) {
-    title.style.cursor = 'pointer';
-    title.addEventListener('click', trigger);
-  }
-
-  // Déclencheur caché : le code Konami.
-  var seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65], idx = 0;
-  window.addEventListener('keydown', function (e) {
-    idx = (e.keyCode === seq[idx]) ? idx + 1 : (e.keyCode === seq[0] ? 1 : 0);
-    if (idx === seq.length) { idx = 0; trigger(); }
-  });
 })();
