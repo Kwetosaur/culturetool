@@ -48,7 +48,8 @@
       '8%{opacity:.95}90%{opacity:.95}100%{transform:translateY(-116vh);opacity:0}}',
     '@keyframes fx-sway{0%{transform:translateX(-14px) rotate(-8deg)}' +
       '100%{transform:translateX(14px) rotate(8deg)}}',
-    '@keyframes fx-fade{0%,100%{opacity:0}12%,80%{opacity:1}}'
+    '@keyframes fx-fade{0%,100%{opacity:0}12%,80%{opacity:1}}',
+    '.fx-decode{font-family:"Cinzel",serif;letter-spacing:.06em;opacity:.92;min-height:1.3em;display:block;}'
   ].join('');
   document.head.appendChild(style);
 
@@ -288,6 +289,55 @@
   var CUNEI = '𒀭𒂗𒆠𒉏𒌷'; // DINGIR, EN, KI, …
   var OGHAM = 'ᚁᚂᚃᚄᚅᚆᚇᚈᚉᚊ';
   var ROMAN = 'ⅠⅤⅩⅬⅭⅮⅯ';
+
+  /* ---------------------------------------------------------------------
+     3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
+        lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
+        Balisage : <span class="fx-decode" data-glyphs="rune" data-text="…"></span>
+     --------------------------------------------------------------------- */
+  var GLYPH_POOLS = { rune: RUNES, greek: GREEK, hiero: HIERO, cunei: CUNEI, ogham: OGHAM };
+
+  function decodeReveal(el) {
+    var target = el.getAttribute('data-text') || '';
+    var pool = Array.from(GLYPH_POOLS[el.getAttribute('data-glyphs')] || RUNES);
+    var chars = Array.from(target);
+    el.textContent = '';
+    var spans = chars.map(function (ch) {
+      var s = document.createElement('span');
+      s.textContent = ch === ' ' ? ' ' : pick(pool);
+      s.style.transition = 'text-shadow .4s ease, color .4s ease';
+      el.appendChild(s);
+      return s;
+    });
+    spans.forEach(function (s, i) {
+      if (chars[i] === ' ') return;
+      var delay = i * 55, flickers = 5;
+      for (var f = 0; f < flickers; f++) {
+        setTimeout((function (sp) { return function () { sp.textContent = pick(pool); }; })(s), delay + f * 45);
+      }
+      setTimeout((function (sp, ch) {
+        return function () {
+          sp.textContent = ch;
+          sp.style.color = ACCENT;
+          sp.style.textShadow = '0 0 14px ' + ACCENT + ', 0 0 3px #fff';
+          setTimeout(function () { sp.style.textShadow = 'none'; sp.style.color = ''; }, 900);
+        };
+      })(s, chars[i]), delay + flickers * 45);
+    });
+  }
+
+  var decodeNodes = document.querySelectorAll('.fx-decode[data-text]');
+  if (decodeNodes.length) {
+    var ioDecode = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          decodeReveal(entry.target);
+          ioDecode.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    decodeNodes.forEach(function (el) { ioDecode.observe(el); });
+  }
 
   var EGGS = {
     nordique:      function () { glyphShower({ glyphs: RUNES, mode: 'fall' }); },
