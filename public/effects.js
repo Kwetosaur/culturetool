@@ -305,6 +305,197 @@
     ], { duration: 4600, easing: 'ease-in-out', fill: 'forwards' });
   }
 
+  // Silhouette générique qui traverse l'écran en volant (corbeau, aigle, oiseau de feu...).
+  function flyAcross(color, opts) {
+    opts = opts || {};
+    var l = layer(opts.life || 4400);
+    var el = document.createElement('div');
+    var top = rand(opts.top || 8, opts.top2 || 38);
+    el.style.cssText = 'position:absolute;top:' + top + 'vh;left:-16vw;width:110px;opacity:0;will-change:transform,opacity;';
+    el.innerHTML =
+      '<svg viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<path d="M0 20 Q25 2 50 20 Q75 2 100 20 Q75 12 50 20 Q25 12 0 20 Z" fill="' + color + '"' +
+          (opts.glow ? ' style="filter:drop-shadow(0 0 6px ' + color + ')"' : '') + '/>' +
+      '</svg>';
+    l.appendChild(el);
+    if (opts.trail) {
+      for (var i = 0; i < 5; i++) {
+        (function (i) {
+          var ember = document.createElement('div');
+          ember.style.cssText = 'position:absolute;top:' + (top + rand(1, 3)) + 'vh;left:-16vw;' +
+            'width:' + rand(3, 7) + 'px;height:' + rand(3, 7) + 'px;border-radius:50%;' +
+            'background:' + color + ';opacity:0;box-shadow:0 0 6px ' + color + ';will-change:transform,opacity;';
+          l.appendChild(ember);
+          ember.animate([
+            { transform: 'translateX(0) translateY(0)', opacity: 0 },
+            { opacity: .9, offset: .15 },
+            { transform: 'translate(' + (opts.dx || 132) + 'vw,' + (opts.dy || -8) + 'vh) translateY(6px)', opacity: 0 }
+          ], { duration: (opts.duration || 4000) + i * 90, delay: 60 + i * 55, easing: 'ease-in', fill: 'forwards' });
+        })(i);
+      }
+    }
+    el.animate([
+      { transform: 'translateX(0) translateY(0)', opacity: 0 },
+      { opacity: 1, offset: .12 },
+      { transform: 'translate(' + (opts.dx || 132) + 'vw,' + (opts.dy || -8) + 'vh)', opacity: 1, offset: .85 },
+      { opacity: 0 }
+    ], { duration: opts.duration || 4000, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Grecque — un éclair de Zeus déchire brièvement le ciel.
+  function lightning() {
+    var l = layer(1400);
+    var flash = document.createElement('div');
+    flash.style.cssText = 'position:absolute;inset:0;background:#fff;opacity:0;';
+    l.appendChild(flash);
+    flash.animate([{ opacity: 0 }, { opacity: .5, offset: .08 }, { opacity: 0, offset: .16 },
+      { opacity: .3, offset: .22 }, { opacity: 0 }], { duration: 700, easing: 'linear' });
+    var bolt = document.createElement('div');
+    bolt.style.cssText = 'position:absolute;left:' + rand(30, 65) + 'vw;top:-4vh;width:120px;opacity:0;';
+    bolt.innerHTML =
+      '<svg viewBox="0 0 60 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:60vh;overflow:visible">' +
+        '<path d="M30 0 L10 90 L30 90 L0 220 L50 100 L28 100 Z" fill="#fff5c2" ' +
+          'style="filter:drop-shadow(0 0 14px #ffe98a) drop-shadow(0 0 26px #fff)"/>' +
+      '</svg>';
+    l.appendChild(bolt);
+    bolt.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .3 }, { opacity: 0 }],
+      { duration: 900, easing: 'ease-out' });
+  }
+
+  // Égyptienne (mythologie) — l'Œil d'Horus s'ouvre et veille un instant.
+  function eyeOfHorus() {
+    var l = layer(3800);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) scale(.6);' +
+      'opacity:0;font-size:min(18vw,140px);color:#1e3a6e;filter:drop-shadow(0 0 18px #d4a017);';
+    wrap.textContent = '𓂀';
+    l.appendChild(wrap);
+    wrap.animate([
+      { transform: 'translate(-50%,-50%) scale(.5)', opacity: 0 },
+      { transform: 'translate(-50%,-50%) scale(1)', opacity: 1, offset: .3 },
+      { opacity: 1, offset: .75 },
+      { transform: 'translate(-50%,-50%) scale(1.05)', opacity: 0 }
+    ], { duration: 3600, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Celtique — une brume légère traverse lentement l'écran.
+  function mistDrift() {
+    var l = layer(6200);
+    for (var i = 0; i < 3; i++) {
+      (function (i) {
+        var band = document.createElement('div');
+        band.style.cssText = 'position:absolute;left:-30vw;top:' + rand(5, 70) + 'vh;width:60vw;height:' + rand(60, 140) + 'px;' +
+          'background:radial-gradient(ellipse at center,rgba(220,235,225,.30),transparent 70%);' +
+          'filter:blur(6px);opacity:0;will-change:transform,opacity;';
+        l.appendChild(band);
+        band.animate([
+          { transform: 'translateX(0)', opacity: 0 },
+          { opacity: .8, offset: .2 },
+          { opacity: .8, offset: .75 },
+          { transform: 'translateX(140vw)', opacity: 0 }
+        ], { duration: rand(5200, 6000), delay: i * 350, easing: 'linear', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Mésopotamienne — des étoiles s'allument une à une au-dessus d'une ziggourat.
+  function starsZiggurat() {
+    var l = layer(4600);
+    var zig = document.createElement('div');
+    zig.style.cssText = 'position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);opacity:0;' +
+      'animation:fx-fade 4.4s ease forwards;';
+    zig.innerHTML =
+      '<svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg" style="width:min(60vw,420px);height:auto">' +
+        '<g fill="#2a1c10">' +
+          '<rect x="20" y="110" width="260" height="24"/>' +
+          '<rect x="50" y="80" width="200" height="24"/>' +
+          '<rect x="80" y="50" width="140" height="24"/>' +
+          '<rect x="110" y="20" width="80" height="24"/>' +
+        '</g>' +
+      '</svg>';
+    l.appendChild(zig);
+    for (var i = 0; i < 9; i++) {
+      (function (i) {
+        var star = document.createElement('div');
+        star.style.cssText = 'position:absolute;left:' + rand(15, 85) + 'vw;top:' + rand(4, 40) + 'vh;' +
+          'width:3px;height:3px;border-radius:50%;background:#f2e6c8;opacity:0;' +
+          'box-shadow:0 0 6px #f2e6c8,0 0 12px #b8860b;';
+        l.appendChild(star);
+        star.animate([{ opacity: 0 }, { opacity: 1, offset: .5 }, { opacity: .5, offset: .7 }, { opacity: 1 }],
+          { duration: rand(1600, 2600), delay: 200 + i * 220, easing: 'ease-in-out', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Hindoue — un lotus s'ouvre pétale par pétale.
+  function lotusBloom() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);opacity:0;';
+    var petals = '';
+    for (var i = 0; i < 8; i++) {
+      var angle = i * 45;
+      petals += '<ellipse cx="60" cy="60" rx="12" ry="34" fill="#e8934a" opacity=".85" ' +
+        'transform="rotate(' + angle + ' 60 60) translate(0 -26)"/>';
+    }
+    wrap.innerHTML =
+      '<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" style="width:min(40vw,220px);height:auto;overflow:visible">' +
+        '<g style="filter:drop-shadow(0 0 12px #e8934a)">' + petals + '<circle cx="60" cy="60" r="14" fill="#f4c05a"/></g>' +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([
+      { transform: 'translate(-50%,-50%) scale(.15) rotate(-20deg)', opacity: 0 },
+      { transform: 'translate(-50%,-50%) scale(1) rotate(0)', opacity: 1, offset: .45 },
+      { opacity: 1, offset: .8 },
+      { opacity: 0 }
+    ], { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Japonaise — un torii se dessine dans une lueur douce.
+  function toriiGlow() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) scale(.85);opacity:0;';
+    wrap.innerHTML =
+      '<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" style="width:min(38vw,220px);height:auto;overflow:visible">' +
+        '<g fill="#c8362c" style="filter:drop-shadow(0 0 16px rgba(200,54,44,.6))">' +
+          '<rect x="10" y="30" width="180" height="16" rx="3"/>' +
+          '<rect x="0" y="52" width="200" height="10"/>' +
+          '<rect x="30" y="46" width="14" height="110"/>' +
+          '<rect x="156" y="46" width="14" height="110"/>' +
+        '</g>' +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([
+      { transform: 'translate(-50%,-50%) scale(.85)', opacity: 0 },
+      { opacity: 1, offset: .3 },
+      { opacity: 1, offset: .78 },
+      { opacity: 0 }
+    ], { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Aztèque/Maya — Quetzalcoatl, le serpent à plumes, ondule à travers l'écran.
+  function serpentGlide() {
+    var l = layer(4600);
+    var s = document.createElement('div');
+    s.style.cssText = 'position:absolute;left:-20vw;top:' + rand(15, 55) + 'vh;width:140vw;height:100px;opacity:0;';
+    s.innerHTML =
+      '<svg viewBox="0 0 1400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<path d="M0 100 Q100 20 200 100 T400 100 T600 100 T800 100 T1000 100 T1200 100 T1400 100" ' +
+          'fill="none" stroke="#2f9e6e" stroke-width="18" stroke-linecap="round" opacity=".9" ' +
+          'style="filter:drop-shadow(0 0 10px #2fbf8a)"/>' +
+        '<path d="M0 100 Q100 20 200 100 T400 100 T600 100 T800 100 T1000 100 T1200 100 T1400 100" ' +
+          'fill="none" stroke="#e0b34a" stroke-width="4" stroke-dasharray="2 14" opacity=".8"/>' +
+      '</svg>';
+    l.appendChild(s);
+    s.animate([
+      { transform: 'translateX(0)', opacity: 0 },
+      { opacity: 1, offset: .15 },
+      { transform: 'translateX(35vw)', opacity: 1, offset: .82 },
+      { transform: 'translateX(45vw)', opacity: 0 }
+    ], { duration: 4600, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -385,7 +576,17 @@
      --------------------------------------------------------------------- */
   var SCROLL_FX = {
     nessie: nessie, bermudes: bermudes, solstice: solstice, eyes: eyes,
-    sunrise: sunrise, silk: silk
+    sunrise: sunrise, silk: silk,
+    raven: function () { flyAcross('#1c1c22', { top: 6, top2: 22, dy: -10 }); },
+    eagle: function () { flyAcross('#8a5a2a', { top: 6, top2: 24, dy: -12, duration: 3600 }); },
+    firebird: function () { flyAcross('#e8622a', { top: 10, top2: 30, dy: -6, trail: true, glow: true, duration: 4200 }); },
+    lightning: lightning,
+    eyeOfHorus: eyeOfHorus,
+    mistDrift: mistDrift,
+    starsZiggurat: starsZiggurat,
+    lotusBloom: lotusBloom,
+    toriiGlow: toriiGlow,
+    serpentGlide: serpentGlide
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -411,18 +612,18 @@
      Registre : clef data-egg -> déclencheur (clic sur le titre / Konami)
      --------------------------------------------------------------------- */
   var EGGS = {
-    nordique:      function () { glyphShower({ glyphs: RUNES, mode: 'fall' }); },
-    grecque:       function () { glyphShower({ glyphs: GREEK, mode: 'rise' }); },
-    egyptienne:    function () { glyphShower({ glyphs: HIERO, mode: 'rise' }); },
+    nordique:      function () { glyphShower({ glyphs: RUNES, mode: 'fall' }); flyAcross('#1c1c22', { top: 6, top2: 22, dy: -10 }); },
+    grecque:       function () { glyphShower({ glyphs: GREEK, mode: 'rise' }); lightning(); },
+    egyptienne:    function () { glyphShower({ glyphs: HIERO, mode: 'rise' }); eyeOfHorus(); },
     egypte:        sunrise,
-    romaine:       function () { glyphShower({ glyphs: ROMAN, mode: 'fall' }); },
-    celtique:      function () { glyphShower({ glyphs: OGHAM, mode: 'rise' }); },
-    mesopotamienne:function () { glyphShower({ glyphs: CUNEI, mode: 'fall' }); },
-    hindoue:       function () { glyphShower({ glyphs: 'ॐ☸✴', mode: 'rise', color: '#e6a23c' }); },
-    azteque:       function () { glyphShower({ glyphs: '☀✴◈❂', mode: 'rise' }); },
-    slave:         function () { glyphShower({ glyphs: '☀✺❉✵', mode: 'rise', color: '#e0723a' }); },
+    romaine:       function () { glyphShower({ glyphs: ROMAN, mode: 'fall' }); flyAcross('#8a5a2a', { top: 6, top2: 24, dy: -12, duration: 3600 }); },
+    celtique:      function () { glyphShower({ glyphs: OGHAM, mode: 'rise' }); mistDrift(); },
+    mesopotamienne:function () { glyphShower({ glyphs: CUNEI, mode: 'fall' }); starsZiggurat(); },
+    hindoue:       function () { glyphShower({ glyphs: 'ॐ☸✴', mode: 'rise', color: '#e6a23c' }); lotusBloom(); },
+    azteque:       function () { glyphShower({ glyphs: '☀✴◈❂', mode: 'rise' }); serpentGlide(); },
+    slave:         function () { glyphShower({ glyphs: '☀✺❉✵', mode: 'rise', color: '#e0723a' }); flyAcross('#e8622a', { top: 10, top2: 30, dy: -6, trail: true, glow: true, duration: 4200 }); },
     chine:         function () { glyphShower({ glyphs: '福龍鳳春', mode: 'fall', color: '#d8443a' }); silk(); },
-    japonaise:     function () { glyphShower({ glyphs: '❀✿花', mode: 'fall', color: '#f4c0d0', count: 30 }); },
+    japonaise:     function () { glyphShower({ glyphs: '❀✿花', mode: 'fall', color: '#f4c0d0', count: 30 }); toriiGlow(); },
     lochness:      nessie,
     bermudes:      bermudes,
     stonehenge:    solstice,

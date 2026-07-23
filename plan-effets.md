@@ -22,31 +22,33 @@ Pas de garde-fou `prefers-reduced-motion` (retiré sur demande explicite : les e
 
 ## Déjà fait (16 pages)
 
-| Page | Clef `data-egg` | Niveau | Effet |
-|---|---|---|---|
-| Nordique | `nordique` | générique | pluie de runes |
-| Grecque | `grecque` | générique | montée de lettres grecques |
-| Égyptienne (mythologie) | `egyptienne` | générique | montée de hiéroglyphes |
-| Romaine | `romaine` | générique | pluie de chiffres romains |
-| Celtique | `celtique` | générique | montée de glyphes ogham |
-| Mésopotamienne | `mesopotamienne` | générique | pluie de cunéiformes |
-| Hindoue | `hindoue` | générique | montée ॐ/☸/✴ |
-| Japonaise | `japonaise` | générique | pluie de pétales de sakura |
-| Aztèque & Maya | `azteque` | générique | montée de glyphes solaires |
-| Slave | `slave` | générique | montée de symboles solaires slaves |
-| Chine (culture) | `chine` | générique | pluie de sinogrammes (福龍鳳春) |
-| Égypte Antique (culture) | `egypte` | **sur-mesure** | lever du disque solaire derrière les pyramides de Gizeh |
-| Bête du Gévaudan | `gevaudan` | **sur-mesure** | deux yeux ambrés s'allument dans le noir |
-| Monstre du Loch Ness | `lochness` | **sur-mesure** | silhouette qui émerge de l'eau puis replonge |
-| Triangle des Bermudes | `bermudes` | **sur-mesure** | avion/bateau aspirés dans un vortex |
-| Stonehenge | `stonehenge` | **sur-mesure** | lever de soleil au solstice à travers les pierres |
-| Accueil | `accueil` | générique | mélange de glyphes de toutes les cultures |
+Les 10 pages mythologie combinent désormais leur pluie de glyphes générique **et** une scène sur-mesure (au clic du titre **et** en happening au scroll sur `#pantheon`) — plus du niveau "minimum" décrit ci-dessus.
+
+| Page | Clef `data-egg` | Effet générique | Effet sur-mesure | Déclenché aussi au scroll sur |
+|---|---|---|---|---|
+| Nordique | `nordique` | pluie de runes | corbeau (Huginn/Muninn) qui traverse l'écran | `#pantheon` |
+| Grecque | `grecque` | montée de lettres grecques | éclair de Zeus + flash d'écran | `#pantheon` |
+| Égyptienne (mythologie) | `egyptienne` | montée de hiéroglyphes | Œil d'Horus qui s'ouvre et veille | `#pantheon` |
+| Romaine | `romaine` | pluie de chiffres romains | aigle (aquila légionnaire) qui traverse l'écran | `#pantheon` |
+| Celtique | `celtique` | montée de glyphes ogham | brume qui dérive lentement | `#pantheon` |
+| Mésopotamienne | `mesopotamienne` | pluie de cunéiformes | étoiles qui s'allument au-dessus d'une ziggourat | `#pantheon` |
+| Hindoue | `hindoue` | montée ॐ/☸/✴ | lotus qui s'ouvre pétale par pétale | `#pantheon` |
+| Japonaise | `japonaise` | pluie de pétales de sakura | torii qui se dessine dans une lueur douce | `#pantheon` |
+| Aztèque & Maya | `azteque` | montée de glyphes solaires | Quetzalcoatl (serpent à plumes) qui ondule à travers l'écran | `#pantheon` |
+| Slave | `slave` | montée de symboles solaires slaves | oiseau de feu avec traînée de braises | `#pantheon` |
+| Chine (culture) | `chine` | pluie de sinogrammes (福龍鳳春) | ruban de soie qui ondule | `#style-de-vie` |
+| Égypte Antique (culture) | `egypte` | — | **sur-mesure** : lever du disque solaire derrière les pyramides de Gizeh | `#style-de-vie` |
+| Bête du Gévaudan | `gevaudan` | — | **sur-mesure** : deux yeux ambrés s'allument dans le noir | `#portrait` |
+| Monstre du Loch Ness | `lochness` | — | **sur-mesure** : silhouette qui émerge de l'eau puis replonge | `#portrait` |
+| Triangle des Bermudes | `bermudes` | — | **sur-mesure** : avion/bateau aspirés dans un vortex | `#enigme` |
+| Stonehenge | `stonehenge` | — | **sur-mesure** : lever de soleil au solstice à travers les pierres | `#enigme` |
+| Accueil | `accueil` | mélange de glyphes de toutes les cultures | — | — |
 
 ## Stratégie par famille de page
 
 Chaque série a sa propre logique d'effet dominant (en plus du décor commun ci-dessus) — c'est le principe à suivre pour toute nouvelle page :
 
-- **Mythologies** → déchiffrement des titres de section (mécanisme 3), déjà généralisé aux 10 pages existantes. Pour une nouvelle mythologie : ajouter sa clef à `GLYPH_POOLS` (glyphes décoratifs de la culture) puis relancer le script d'injection des titres (voir plus bas) — aucun travail créatif supplémentaire requis, c'est le niveau "simple" évoqué pour cette série.
+- **Mythologies** → déchiffrement des titres de section (mécanisme 3, obligatoire et "simple" — voir plus bas) **+**, quand le temps le permet, une scène sur-mesure rejouée au clic du titre et en happening sur `#pantheon` (mécanisme 4). Les 10 pages existantes ont les deux niveaux. Pour une nouvelle mythologie : le déchiffrement des titres reste le minimum non négociable ; la scène sur-mesure est un bonus, jamais un blocage pour livrer.
 - **Créatures** → "happenings" au scroll (mécanisme 4) qui rejouent l'effet sur-mesure de la créature (pas seulement au clic du titre) sur une section clé — typiquement `#portrait` ou `#temoins-recits`. Déjà fait : Gévaudan (`eyes`, sur `#portrait`), Loch Ness (`nessie`, sur `#portrait`).
 - **Mystères** → décors ou effets simples au scroll, même mécanisme 4, sur une section clé — typiquement `#enigme` ou `#decouverte`. Déjà fait : Triangle des Bermudes (`bermudes`, sur `#enigme`), Stonehenge (`solstice`, sur `#enigme`).
 - **Cultures** → effets qui jouent sur un élément matériel/iconique de la culture (danse, soie, poterie...) plutôt que sur des glyphes abstraits. Déjà fait : Chine (`silk`, ruban de soie qui ondule, sur `#style-de-vie`), Égypte Antique (réutilise `sunrise`, sur `#style-de-vie`).
