@@ -32,6 +32,42 @@
   var GOLD = cssVar('--gold', ACCENT);
 
   /* ---------------------------------------------------------------------
+     0. Bascule "Effets" — en haut à droite, sur toutes les pages.
+        Préférence persistée (localStorage), lue avant tout le reste :
+        si désactivée, RIEN d'autre ne s'exécute (site épuré). Le bouton,
+        lui, reste toujours visible pour pouvoir réactiver.
+     --------------------------------------------------------------------- */
+  var FX_KEY = 'culturetool-fx';
+  var fxEnabled = localStorage.getItem(FX_KEY) !== 'off';
+
+  var toggleStyle = document.createElement('style');
+  toggleStyle.textContent =
+    '#fx-toggle{position:fixed;top:18px;right:18px;z-index:9999;width:44px;height:44px;' +
+      'border-radius:8px;border:1px solid rgba(255,255,255,.18);background:rgba(10,10,15,.72);' +
+      'backdrop-filter:blur(6px);color:' + ACCENT + ';font-size:19px;line-height:1;cursor:pointer;' +
+      'display:flex;align-items:center;justify-content:center;transition:opacity .2s,border-color .2s;}' +
+    '#fx-toggle:hover{border-color:' + ACCENT + ';}' +
+    '#fx-toggle.fx-off{opacity:.4;color:#9a9bb0;}';
+  document.head.appendChild(toggleStyle);
+
+  var fxToggle = document.createElement('button');
+  fxToggle.id = 'fx-toggle';
+  fxToggle.type = 'button';
+  fxToggle.textContent = '✨';
+  fxToggle.setAttribute('aria-label', 'Activer ou désactiver les effets visuels');
+  fxToggle.title = fxEnabled
+    ? 'Effets activés — cliquer pour désactiver (site épuré)'
+    : 'Effets désactivés — cliquer pour réactiver';
+  if (!fxEnabled) fxToggle.className = 'fx-off';
+  fxToggle.addEventListener('click', function () {
+    localStorage.setItem(FX_KEY, fxEnabled ? 'off' : 'on');
+    location.reload();
+  });
+  document.body.appendChild(fxToggle); // script chargé en `defer` : le <body> existe déjà
+
+  if (!fxEnabled) return; // site épuré : aucun autre effet ne s'exécute
+
+  /* ---------------------------------------------------------------------
      Feuille de style injectée (keyframes + calques d'effets)
      --------------------------------------------------------------------- */
   var style = document.createElement('style');
@@ -549,9 +585,12 @@
     el.dataset.decoded = '1';
   }
 
-  var decodeNodes = document.querySelectorAll('.fx-decode[data-text]');
+  // Le HTML porte le vrai texte en contenu visible (dégradation propre sans JS,
+  // ou site épuré) : on le capture dans data-text avant de le remplacer par des glyphes.
+  var decodeNodes = document.querySelectorAll('.fx-decode');
   if (decodeNodes.length) {
     decodeNodes.forEach(function (el) {
+      if (!el.hasAttribute('data-text')) el.setAttribute('data-text', el.textContent.trim());
       glyphify(el, Array.from(GLYPH_POOLS[el.getAttribute('data-glyphs')] || RUNES));
     });
     var ioDecode = new IntersectionObserver(function (entries) {
