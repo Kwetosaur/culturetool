@@ -84,6 +84,20 @@ const mythologies = [
       margin: 34px auto;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
+    .map-link {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 22px;
+      border: 1px solid var(--panel-border);
+      border-radius: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .map-link:hover { border-color: var(--gold); color: var(--gold-bright); }
 
     section { max-width: 1180px; margin: 0 auto; padding: 40px 24px 90px; }
     .section-label {
@@ -170,6 +184,7 @@ const mythologies = [
     <h1 class="title">Mythologies &amp; Cultures du Monde</h1>
     <div class="divider"></div>
     <p class="tagline">Cosmogonies, panthéons, généalogies, créatures, légendes, frises et héritages — une traversée culture par culture, chacune racontée à sa juste mesure.</p>
+    <a href={`${base}map.html`} class="map-link">🗺️ Voir la carte du monde</a>
   </header>
 
   <section id="mythologies">

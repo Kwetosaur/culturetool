@@ -464,6 +464,7 @@
   .reveal-init{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
   .reveal-in{opacity:1; transform:translateY(0);}
 </style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>
   #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
   #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
@@ -487,13 +488,13 @@
   #side-menu .side-group{overflow:hidden; max-height:600px; transition:max-height 0.25s ease;}
   #side-menu .side-group.collapsed{max-height:0;}
 </style>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body data-egg="grecque">
 <button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
 <div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
 <nav id="side-menu">
   <a href="./" class="side-home">&larr; Accueil</a>
+  <a href="map.html" class="side-home">&#128506; Carte du Monde</a>
   <div class="side-divider"></div>
   <div class="side-search"><input type="text" id="side-search-input" placeholder="Rechercher une page..." autocomplete="off"></div>
   <div class="side-label">Mythologies</div>
@@ -577,6 +578,8 @@
   }
 })();
 </script>
+
+
 
 
 

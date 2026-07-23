@@ -668,7 +668,8 @@
     stonehenge:    solstice,
     gevaudan:      eyes,
     // page d'accueil : un mélange de glyphes de toutes les cultures
-    accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); }
+    accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
+    carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }
   };
 
   var key = document.body.getAttribute('data-egg');
