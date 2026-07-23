@@ -1,5 +1,14 @@
 # Plan Carte Interactive & Icônes
 
+## État d'avancement
+
+- ✅ `map.html` en ligne (fond `map.png`, zoom/pan, filtres, 16 pages existantes positionnées avec icône placeholder générique).
+- ✅ `icon full/prompts-planches-icones.md` : prompts de génération IA prêts pour toutes les icônes "à venir" (108 icônes, 25 planches), groupés par catégorie/région comme ce document.
+- ✅ **Mythologies** : les 6 planches région ont été générées et découpées. 33 icônes individuelles, recadrées et normalisées (300×300px), disponibles dans `public/icons/mythologie/myth-<slug>.png` (ex. `myth-finnoise.png`, `myth-chinoise.png`...). Sources brutes (planches + découpes intermédiaires) conservées dans `icon full/mythologie/`.
+- ⏳ Cultures, Créatures, Mystères : prompts prêts dans `prompts-planches-icones.md`, planches pas encore générées.
+
+**Pour la suite** : une fois une planche générée et déposée dans `icon full/<categorie>/`, le découpage est mécanique (grille régulière, un slug par cellule dans l'ordre du prompt) — même méthode que pour les mythologies, à reproduire pour chaque nouvelle planche plutôt qu'à réinventer.
+
 ## Objectif
 
 Une page `map` avec un fond de carte du monde stylisé (illustration type carte au trésor ancienne, zoomable/déplaçable), sur laquelle chaque page du site apparaît comme une icône positionnée géographiquement. Filtrage par catégorie (Mythologies/Cultures/Créatures/Mystères), et densité gérée par zoom (badge groupé en vue large, icônes individuelles en vue rapprochée).
