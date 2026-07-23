@@ -14,8 +14,8 @@
 (function () {
   'use strict';
 
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) return; // on ne fait rien de plus que le JS déjà présent dans chaque page
+  // Volontairement pas de garde-fou prefers-reduced-motion ici : demande explicite du site
+  // (les effets doivent s'afficher partout, y compris sur les machines configurées pour reduce-motion).
 
   var root = document.documentElement;
   function cssVar(name, fallback) {
