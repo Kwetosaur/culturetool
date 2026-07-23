@@ -26,6 +26,15 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Le Popobawa | 5 | Zanzibar | Panique collective documentée dans les années 1990-2000 |
 | Le Yowie | 5 | Australie | Équivalent local du Bigfoot, très peu de dossier scientifique |
 | La Créature de Loveland | 4 | Ohio, États-Unis | Anecdote locale isolée, aucune corroboration sérieuse |
+| Le Kappa | 7 | Japon | Croyance folklorique très vivante (mascotte, culture pop), esprit aquatique espiègle et dangereux, non un cryptide "chassé" comme les autres |
+| L'Orang Pendek | 6 | Sumatra, Indonésie | Non prouvé, expéditions régulières, moulages de traces jamais concluants |
+| Champ | 6 | Lac Champlain, États-Unis/Canada | Folklore du XIXe s. + photo "Mansi" (1977) jamais authentifiée formellement, parallèle direct de Nessie |
+| Nahuelito | 6 | Lac Nahuel Huapi, Argentine | "Nessie sud-américaine", témoignages depuis les années 1920, aucune preuve scientifique |
+| Le Bunyip | 6 | Australie (folklore aborigène puis colonial) | Créature aquatique composite, description très variable selon les récits, jamais corroborée |
+| Le Yeren | 6 | Chine (Hubei) | "Bigfoot chinois", expéditions officielles chinoises dans les années 1970-80, aucune preuve concluante |
+| Le Grootslang | 5 | Afrique du Sud | Hybride éléphant-serpent, légende minière (Richtersveld), aucun élément factuel connu |
+| Le Mngwa | 5 | Tanzanie | "Chat mystère" est-africain, attaques rapportées dans les années 1900-1930, explication sceptique dominante : grand félin connu mal identifié |
+| La Bête de Bray Road | 5 | Wisconsin, États-Unis | Vague de témoignages des années 1980-90 largement médiatisée, cas régional bien documenté de panique locale |
 
 ---
 
@@ -51,6 +60,14 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Le Zodiac Killer | 6 | Californie, fin des années 1960 | Affaire criminelle réelle non résolue — sujet sensible, à traiter factuellement et sans spectacle |
 | La Cité Engloutie d'Héracléion | 5 | Égypte antique | Redécouverte archéologique réelle (2000), mystère largement résolu par la science |
 | La Disparition du Vol MH370 | 5 | Océan Indien, 2014 | Tragédie récente non résolue impliquant des victimes réelles — nécessite sobriété et respect absolu des familles |
+| La "Malédiction" de Toutânkhamon | 7 | Égypte, 1922 | Canular médiatique bien documenté (presse des années 1920), décès des fouilleurs statistiquement non anormaux — bon parallèle du Triangle des Bermudes |
+| Le Grand Zimbabwe | 7 | Zimbabwe, XIe-XVe s. | Mystère largement résolu aujourd'hui (bâti par des ancêtres des Shona), mais longtemps nié pour des raisons coloniales racistes — angle historiographique fort |
+| Sanxingdui | 7 | Chine, âge du bronze | Masques et artefacts d'une civilisation inconnue des textes historiques chinois, fouilles et recherches encore actives aujourd'hui |
+| Le Triangle du Dragon (Devil's Sea) | 6 | Pacifique, au sud du Japon | "Triangle des Bermudes japonais", explicable de façon similaire (activité volcanique/tectonique réelle + statistique), bon effet miroir avec la page Bermudes |
+| Newgrange | 6 | Irlande, néolithique | Tombe à couloir alignée sur le solstice d'hiver, prouesse d'ingénierie bien documentée, complément direct de Stonehenge |
+| Les Pierres de Dropa | 5 | Chine (légende moderne) | Canular/légende du XXe siècle sans fondement archéologique sérieux, bon contre-exemple de pseudo-mystère viral |
+| La Cité Perdue de Paititi / El Dorado | 6 | Amazonie, Pérou/Bolivie | Légende de cité d'or jamais localisée malgré des siècles d'expéditions, toujours non résolue |
+| Dwarka, la Cité Engloutie | 5 | Golfe de Cambay, Inde | Ruines sous-marines liées à la légende de Krishna, datation et interprétation encore débattues par les archéologues |
 
 ---
 
