@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Culture Chinoise — Peuples, Histoire &amp; Carte-Récit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f2e6cc;
+    --bg-deep: #ecdcb8;
+    --panel: #faf2e0;
+    --panel-border: #c2a35f;
+    --ink: #2c2013;
+    --red: #a3222b;
+    --red-bright: #c9313b;
+    --gold: #b8860b;
+    --gold-bright: #d4a017;
+    --jade: #3f7a5c;
+    --jade-bright: #529d78;
+    --text: #2c2013;
+    --text-dim: #7c6a48;
+    --glow: rgba(163,34,43,0.25);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #f7eed9 0%, #f2e6cc 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{font-family:'Cinzel', serif; color:var(--red); letter-spacing:0.03em; font-weight:700;}
+  a{color:var(--red-bright);}
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, rgba(44,32,19,0.015) 0px, transparent 2px, transparent 4px, rgba(44,32,19,0.015) 6px);
+    z-index:1;
+  }
+  .meander-strip{display:block; width:100%; height:20px;}
+
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 18%, rgba(163,34,43,0.12), transparent 55%),
+      linear-gradient(180deg, #f7eed9 0%, #f2e6cc 60%, #ecdcb8 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .epigraph-row{font-size:22px; letter-spacing:8px; color:var(--red); opacity:0.85; margin-bottom:28px; font-family:'Cinzel', serif;}
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.4rem, 6.5vw, 4.9rem); margin:0;
+    background:linear-gradient(180deg, var(--red-bright), var(--gold) 55%, var(--jade) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 40px rgba(163,34,43,0.15);
+  }
+  .hero .subtitle{font-family:'Cinzel', serif; font-size:1.05rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-top:14px;}
+  .hero .tagline{max-width:660px; margin:34px auto 0; font-style:italic; color:var(--text-dim); font-size:1.15rem;}
+  .divider{width:120px; height:2px; margin:36px auto; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+  .nav-pills{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:900px;}
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(163,34,43,0.04); transition:all .25s ease;
+  }
+  .nav-pills a:hover{color:var(--red); border-color:var(--gold); box-shadow:0 0 14px var(--glow);}
+
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 16px; justify-content:center;
+    padding:14px 20px; background:rgba(242,230,204,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.07em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--red); border-color:var(--red);}
+
+  section{position:relative; z-index:2; max-width:1040px; margin:0 auto; padding:100px 24px;}
+  .section-label{text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); font-size:0.8rem; margin-bottom:12px;}
+  .section-title{text-align:center; font-size:clamp(2rem,4.5vw,3rem); margin:0 0 16px;}
+  .section-intro{text-align:center; max-width:700px; margin:0 auto 60px; color:var(--text-dim); font-style:italic;}
+
+  .epistemic-note{background:rgba(184,134,11,0.06); border:1px dashed var(--panel-border); border-radius:3px; padding:18px 26px; margin:0 auto 50px; max-width:780px; font-size:0.93rem; color:var(--text-dim); font-style:italic;}
+
+  /* --- Crest strip (bordure de blasons) --- */
+  .crest-strip{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:0 auto 30px; max-width:960px;}
+  .crest-badge{
+    background:linear-gradient(160deg, var(--red), #7c1a20); color:#f2e6cc; border:1px solid var(--gold);
+    border-radius:3px; padding:6px 12px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.04em;
+    text-align:center; min-width:64px;
+  }
+  .crest-badge .cn{display:block; font-size:0.85rem; margin-bottom:2px; color:var(--gold-bright);}
+
+  /* --- Map frame --- */
+  .map-frame{
+    border:2px solid var(--panel-border); border-radius:4px; background:var(--panel);
+    padding:20px; margin:0 auto 26px; max-width:1000px;
+    box-shadow:0 10px 40px rgba(44,32,19,0.12);
+  }
+  .map-frame svg{max-width:100%; height:auto; display:block; margin:0 auto;}
+  .map-legend{display:flex; flex-wrap:wrap; gap:18px; justify-content:center; margin:0 auto 50px; max-width:900px; font-size:0.85rem; color:var(--text-dim);}
+  .map-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend-swatch{display:inline-block; width:22px; height:3px; background:var(--red);}
+  .legend-swatch.river{background:#3a6ea5; height:2px;}
+  .legend-swatch.wall{background:repeating-linear-gradient(90deg, var(--gold) 0 4px, transparent 4px 8px); height:3px;}
+  .legend-swatch.silk{background:repeating-linear-gradient(90deg, var(--red) 0 2px, transparent 2px 5px); height:2px;}
+  .legend-dot{display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--red); border:2px solid var(--gold);}
+
+  .region-wrap{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .region-card{background:linear-gradient(160deg, var(--panel), #f2e6cc); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden;}
+  .region-card::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--red), var(--gold));}
+  .region-card h3{margin:0 0 4px; font-size:1.2rem;}
+  .region-card .region-sub{font-size:0.82rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:12px;}
+  .region-card p{margin:0; font-size:0.97rem;}
+
+  .people-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .people-card{background:var(--panel); border:1px solid var(--panel-border); border-left:4px solid var(--jade-bright); border-radius:3px; padding:22px 24px;}
+  .people-card h3{margin:0 0 4px; font-size:1.15rem;}
+  .people-card .people-pct{font-size:0.78rem; color:var(--jade-bright); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; font-family:'Cinzel', serif;}
+  .people-card p{margin:0; font-size:0.95rem;}
+
+  .figure-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px;}
+  .figure-card{background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;}
+  .figure-card:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(44,32,19,0.15), 0 0 0 1px var(--gold);}
+  .figure-header{padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(163,34,43,0.07), transparent);}
+  .figure-name{font-size:1.45rem; margin:0;}
+  .figure-dates{font-size:0.85rem; color:var(--red); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px;}
+  .figure-body{padding:18px 24px 24px;}
+  .figure-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px;}
+  .figure-body p{margin:0 0 10px; font-size:0.97rem;}
+  .figure-body p:last-child{margin-bottom:0;}
+
+  .invention-list{display:grid; gap:18px;}
+  .invention-item{display:grid; grid-template-columns:200px 1fr; gap:24px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:20px 24px;}
+  .invention-name{font-family:'Cinzel', serif; color:var(--red); font-size:1.1rem; align-self:start;}
+  .invention-name span{display:block; font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; font-family:'EB Garamond', serif; font-style:italic;}
+
+  .story-block{margin-bottom:56px; padding-bottom:52px; border-bottom:1px solid var(--panel-border);}
+  .story-block:last-child{border-bottom:none;}
+  .story-number{font-family:'Cinzel Decorative', serif; font-size:0.95rem; color:var(--red); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;}
+  .story-block h3{font-size:1.65rem; margin:0 0 10px;}
+  .story-date{font-size:0.85rem; color:var(--gold); font-family:'Cinzel', serif; letter-spacing:0.05em; margin-bottom:16px; display:block;}
+  .story-block p{margin:0 0 16px; font-size:1.02rem;}
+  .story-block p:last-child{margin-bottom:0;}
+  .pull-quote{border-left:3px solid var(--gold); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--red); font-size:1.1rem;}
+
+  .anecdote-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;}
+  .anecdote-card{background:linear-gradient(160deg, rgba(163,34,43,0.05), var(--panel)); border:1px solid var(--panel-border); border-left:3px solid var(--jade-bright); padding:20px 22px; border-radius:3px;}
+  .anecdote-card h4{font-size:1rem; margin:0 0 8px; color:var(--red); text-transform:uppercase; letter-spacing:0.04em;}
+  .anecdote-card p{margin:0; font-size:0.95rem; color:var(--text);}
+
+  .life-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .life-card{background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:24px 26px; border-top:3px solid var(--gold);}
+  .life-card h4{margin:0 0 10px; font-size:1.1rem; color:var(--red);}
+  .life-card p{margin:0; font-size:0.96rem;}
+
+  .reach-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:50px;}
+  .reach-card{border:1px solid var(--panel-border); border-top:2px solid var(--jade-bright); padding:18px 20px; background:var(--panel); border-radius:3px;}
+  .reach-card h4{margin:0 0 6px; font-size:1rem; color:var(--red);}
+  .reach-card .reach-dist{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px;}
+  .reach-card p{margin:0; font-size:0.92rem;}
+
+  .tree-diagram{text-align:center; margin:50px 0 70px; opacity:0.97;}
+  .tree-diagram svg{max-width:100%; height:auto;}
+
+  .timeline{position:relative; max-width:840px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg, transparent, var(--gold) 6%, var(--gold) 94%, transparent); transform:translateX(-50%);}
+  .timeline-item{position:relative; width:50%; padding:0 42px 50px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--red); box-shadow:0 0 10px var(--glow);}
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{font-family:'Cinzel', serif; color:var(--red); font-size:0.95rem; letter-spacing:0.05em; display:block; margin-bottom:6px;}
+  .timeline-content h4{margin:0 0 6px; font-size:1.02rem; color:var(--gold);}
+  .timeline-content p{margin:0; font-size:0.9rem; color:var(--text-dim);}
+
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{font-size:0.95rem; color:var(--jade); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{border-left:3px solid var(--red); padding:4px 20px; margin-top:32px; font-size:0.92rem; color:var(--text-dim); font-style:italic;}
+
+  footer{text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim);}
+  footer .epigraph-row{margin-bottom:20px; font-size:18px;}
+  footer .next-up{font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim);}
+  footer .next-up strong{color:var(--red);}
+
+  ::selection{background:var(--red); color:#f2e6cc;}
+
+  @media (max-width:640px){
+    .invention-item{grid-template-columns:1fr;}
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:820px; max-width:none;}
+    .sticky-nav{gap:4px 8px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.6rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){width:100%; left:0; text-align:left; padding:0 10px 40px 50px;}
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{left:13px; right:auto;}
+  }
+</style>
+<style>
+  #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+  #side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+  #side-menu-overlay.open{opacity:1; pointer-events:auto;}
+  #side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+  #side-menu.open{transform:translateX(0);}
+  #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+  #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+  #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+  #side-menu .side-home{margin:0 14px 16px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+  #side-menu .side-label{padding:14px 22px 6px; margin-top:4px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0;}
+  #side-menu .side-label:first-of-type{padding-top:0;}
+</style>
+</head>
+<body>
+<button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
+<div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <div class="side-divider"></div>
+  <div class="side-label">Mythologies</div>
+    <a href="mythologie-nordique.html">Nordique</a>
+    <a href="mythologie-grecque.html">Grecque</a>
+    <a href="mythologie-egyptienne.html">Égyptienne</a>
+    <a href="mythologie-romaine.html">Romaine</a>
+    <a href="mythologie-celtique.html">Celtique</a>
+    <a href="mythologie-mesopotamienne.html">Mésopotamienne</a>
+    <a href="mythologie-hindoue.html">Hindoue</a>
+    <a href="mythologie-japonaise.html">Japonaise</a>
+    <a href="mythologie-azteque-maya.html">Aztèque & Maya</a>
+    <a href="mythologie-slave.html">Slave</a>
+  <div class="side-label">Cultures</div>
+    <a href="culture-chinoise.html" class="active">Chine</a>
+  <div class="side-label">Créatures</div>
+    <a href="creature-gevaudan.html">Bête du Gévaudan</a>
+  <div class="side-label">Mystères</div>
+    <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
+</nav>
+
+
+
+<header class="hero">
+  <div class="epigraph-row">華夏 · 九州 · 千秋</div>
+  <h1>Civilisation Chinoise</h1>
+  <div class="subtitle">Peuples, Empires &amp; Récits de l'Empire du Milieu</div>
+  <p class="tagline">Cinq mille ans d'écriture ininterrompue, de dynasties, d'inventions et de résilience — premier chapitre d'un voyage à travers les peuples et les histoires du monde.</p>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#carte">Carte-Récit</a>
+    <a href="#peuples">Les Peuples</a>
+    <a href="#figures">Grandes Figures</a>
+    <a href="#recits">Grands Récits</a>
+    <a href="#inventions">Inventions</a>
+    <a href="#anecdotes">Anecdotes</a>
+    <a href="#style-de-vie">Style de Vie</a>
+    <a href="#monde">Rayonnement</a>
+    <a href="#frise">Frise Chronologique</a>
+    <a href="#heritage">Héritage Actuel</a>
+  </nav>
+</header>
+
+<svg class="meander-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="cloudband0" width="32" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 12 Q8 4 16 12 T32 12" stroke="#a3222b" stroke-width="1.6" fill="none" opacity="0.4"/>
+      <path d="M0 16 Q8 8 16 16 T32 16" stroke="#b8860b" stroke-width="1.6" fill="none" opacity="0.35"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#cloudband0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#carte">Carte</a>
+  <a href="#peuples">Peuples</a>
+  <a href="#figures">Figures</a>
+  <a href="#recits">Récits</a>
+  <a href="#inventions">Inventions</a>
+  <a href="#anecdotes">Anecdotes</a>
+  <a href="#style-de-vie">Style de Vie</a>
+  <a href="#monde">Rayonnement</a>
+  <a href="#frise">Frise</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= CARTE ================= -->
+<section id="carte">
+  <div class="section-label">Géographie &amp; Territoire</div>
+  <h2 class="section-title">La Carte-Récit de la Chine</h2>
+  <p class="section-intro">Un territoire aussi vaste qu'un continent, façonné par deux grands fleuves, une steppe au nord, un plateau himalayen à l'ouest et une côte tournée vers le Pacifique. Dès l'Antiquité, la tradition chinoise elle-même divisait son territoire en "Neuf Provinces" (九州, Jiuzhou), partage légendaire attribué à Yu le Grand dans le classique "Tribut de Yu" — preuve que penser le pays par grandes régions est une habitude chinoise bien plus qu'un gabarit importé. Les régions présentées plus bas suivent une logique contemporaine plutôt que le tracé antique exact de Jiuzhou.</p>
+
+  <div class="crest-strip">
+    <div class="crest-badge"><span class="cn">北京</span>Pékin</div>
+    <div class="crest-badge"><span class="cn">上海</span>Shanghai</div>
+    <div class="crest-badge"><span class="cn">陕西</span>Shaanxi</div>
+    <div class="crest-badge"><span class="cn">四川</span>Sichuan</div>
+    <div class="crest-badge"><span class="cn">西藏</span>Tibet</div>
+    <div class="crest-badge"><span class="cn">新疆</span>Xinjiang</div>
+    <div class="crest-badge"><span class="cn">云南</span>Yunnan</div>
+    <div class="crest-badge"><span class="cn">广东</span>Guangdong</div>
+    <div class="crest-badge"><span class="cn">香港</span>Hong Kong</div>
+    <div class="crest-badge"><span class="cn">福建</span>Fujian</div>
+  </div>
+
+  <div class="map-frame diagram-scroll">
+    <svg viewBox="0 0 1000 760" xmlns="http://www.w3.org/2000/svg" style="max-width:1000px;">
+      <rect x="330" y="18" width="340" height="46" rx="4" fill="#faf2e0" stroke="#c2a35f" stroke-width="1.5"/>
+      <text x="500" y="38" text-anchor="middle" font-family="Cinzel, serif" font-size="15" fill="#a3222b" letter-spacing="2">华夏疆域</text>
+      <text x="500" y="56" text-anchor="middle" font-family="Cinzel, serif" font-size="11" fill="#7c6a48" letter-spacing="1.5">CARTE-RÉCIT DE LA CHINE (STYLISÉE)</text>
+
+      <!-- Landmass -->
+      <path d="M760,80 L820,130 L790,190 L740,175 L700,140 L650,110 L560,85 L460,95 L380,120 L300,110 L180,140 L140,230 L150,320 L200,400 L230,480 L300,540 L330,600 L400,630 L470,650 L540,660 L600,630 L630,570 L660,500 L690,430 L650,380 L690,320 Z"
+        fill="#f7ecd6" stroke="#8a7248" stroke-width="2.2"/>
+
+      <!-- Hainan & Taiwan islands -->
+      <ellipse cx="430" cy="690" rx="22" ry="14" fill="#f7ecd6" stroke="#8a7248" stroke-width="1.6"/>
+      <text x="430" y="694" text-anchor="middle" font-size="9" fill="#7c6a48" font-family="EB Garamond, serif">Hainan</text>
+      <ellipse cx="700" cy="580" rx="14" ry="34" fill="#f7ecd6" stroke="#8a7248" stroke-width="1.6" transform="rotate(15 700 580)"/>
+      <text x="700" y="622" text-anchor="middle" font-size="9" fill="#7c6a48" font-family="EB Garamond, serif">Taïwan</text>
+
+      <!-- Great Wall -->
+      <path d="M420,150 Q470,120 530,140 T650,135" fill="none" stroke="#b8860b" stroke-width="3" stroke-dasharray="10,6" opacity="0.85"/>
+      <text x="500" y="118" text-anchor="middle" font-size="10" fill="#b8860b" font-family="Cinzel, serif" letter-spacing="1">GRANDE MURAILLE</text>
+
+      <!-- Yellow River -->
+      <path d="M260,410 Q330,300 420,260 Q520,220 560,180 Q610,160 690,340" fill="none" stroke="#3a6ea5" stroke-width="2.4" opacity="0.75"/>
+      <text x="590" y="205" font-size="9.5" fill="#3a6ea5" font-family="EB Garamond, serif" font-style="italic">Fleuve Jaune</text>
+
+      <!-- Yangtze River -->
+      <path d="M280,470 Q380,430 460,420 Q560,430 650,480" fill="none" stroke="#2f5f8f" stroke-width="2.4" opacity="0.8"/>
+      <text x="470" y="410" font-size="9.5" fill="#2f5f8f" font-family="EB Garamond, serif" font-style="italic">Yangtsé</text>
+
+      <!-- Silk Road -->
+      <path d="M480,300 Q400,240 340,210 Q260,190 150,170" fill="none" stroke="#a3222b" stroke-width="2" stroke-dasharray="2,5" opacity="0.8"/>
+      <text x="220" y="195" font-size="9.5" fill="#a3222b" font-family="EB Garamond, serif" font-style="italic">Route de la Soie →</text>
+
+      <!-- Ships -->
+      <path d="M700,450 l10,-8 l10,8 z" fill="#3a6ea5" opacity="0.7"/>
+      <path d="M600,650 l10,-8 l10,8 z" fill="#3a6ea5" opacity="0.7"/>
+
+      <!-- Pins -->
+      <g font-family="EB Garamond, serif">
+        <circle cx="660" cy="150" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="672" y="147" font-size="11" fill="#2c2013" font-weight="600">Pékin</text>
+        <text x="672" y="160" font-size="9" fill="#7c6a48">Cité Interdite &amp; Muraille</text>
+
+        <circle cx="480" cy="290" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="492" y="287" font-size="11" fill="#2c2013" font-weight="600">Xi'an</text>
+        <text x="492" y="300" font-size="9" fill="#7c6a48">Armée de terre cuite</text>
+
+        <circle cx="660" cy="480" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="500" y="500" font-size="11" fill="#2c2013" font-weight="600" text-anchor="end">Shanghai</text>
+        <text x="500" y="513" font-size="9" fill="#7c6a48" text-anchor="end">Mégapole moderne</text>
+
+        <circle cx="380" cy="420" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="270" y="418" font-size="11" fill="#2c2013" font-weight="600" text-anchor="end">Sichuan</text>
+        <text x="270" y="431" font-size="9" fill="#7c6a48" text-anchor="end">Bassin rouge &amp; pandas</text>
+
+        <circle cx="260" cy="440" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="180" y="460" font-size="11" fill="#2c2013" font-weight="600" text-anchor="end">Lhassa</text>
+        <text x="180" y="473" font-size="9" fill="#7c6a48" text-anchor="end">Le Toit du Monde</text>
+
+        <circle cx="200" cy="220" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="130" y="230" font-size="11" fill="#2c2013" font-weight="600" text-anchor="end">Kashgar</text>
+        <text x="130" y="243" font-size="9" fill="#7c6a48" text-anchor="end">Carrefour de la Soie</text>
+
+        <circle cx="330" cy="560" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="330" y="590" font-size="11" fill="#2c2013" font-weight="600" text-anchor="middle">Yunnan</text>
+        <text x="330" y="603" font-size="9" fill="#7c6a48" text-anchor="middle">Mosaïque de peuples</text>
+
+        <circle cx="540" cy="650" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="540" y="678" font-size="11" fill="#2c2013" font-weight="600" text-anchor="middle">Delta des Perles</text>
+        <text x="540" y="691" font-size="9" fill="#7c6a48" text-anchor="middle">Canton &amp; Hong Kong</text>
+
+        <circle cx="560" cy="150" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="560" y="132" font-size="11" fill="#2c2013" font-weight="600" text-anchor="middle">Mongolie-Intérieure</text>
+        <text x="560" y="120" font-size="9" fill="#7c6a48" text-anchor="middle">Steppes</text>
+
+        <circle cx="770" cy="120" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="782" y="118" font-size="11" fill="#2c2013" font-weight="600">Heilongjiang</text>
+        <text x="782" y="131" font-size="9" fill="#7c6a48">Confins glacés</text>
+
+        <circle cx="615" cy="565" r="6" fill="#a3222b" stroke="#b8860b" stroke-width="2"/>
+        <text x="627" y="562" font-size="11" fill="#2c2013" font-weight="600">Fujian</text>
+        <text x="627" y="575" font-size="9" fill="#7c6a48">Thé &amp; jonques</text>
+      </g>
+
+      <!-- Compass rose -->
+      <g transform="translate(90,660)">
+        <circle r="34" fill="none" stroke="#8a7248" stroke-width="1.2"/>
+        <path d="M0,-30 L6,0 L0,30 L-6,0 Z" fill="#a3222b" opacity="0.85"/>
+        <path d="M-30,0 L0,6 L30,0 L0,-6 Z" fill="#b8860b" opacity="0.7"/>
+        <text x="0" y="-40" text-anchor="middle" font-size="10" fill="#2c2013" font-family="Cinzel, serif">N</text>
+        <text x="0" y="48" text-anchor="middle" font-size="10" fill="#2c2013" font-family="Cinzel, serif">S</text>
+        <text x="42" y="4" text-anchor="middle" font-size="10" fill="#2c2013" font-family="Cinzel, serif">E</text>
+        <text x="-42" y="4" text-anchor="middle" font-size="10" fill="#2c2013" font-family="Cinzel, serif">O</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="map-legend">
+    <span><i class="legend-swatch"></i> Mer / navigation</span>
+    <span><i class="legend-swatch river"></i> Fleuves</span>
+    <span><i class="legend-swatch wall"></i> Grande Muraille</span>
+    <span><i class="legend-swatch silk"></i> Route de la Soie</span>
+    <span><i class="legend-dot"></i> Lieu marquant</span>
+  </div>
+
+  <div class="epistemic-note">Note de style : cette carte est une reconstitution artistique et non un tracé géographique de précision — dans l'esprit des cartes-récits illustrées du XXe siècle, elle privilégie la lisibilité narrative sur l'exactitude cartographique.</div>
+
+  <div class="crest-strip">
+    <div class="crest-badge"><span class="cn">内蒙古</span>Mongolie-Int.</div>
+    <div class="crest-badge"><span class="cn">黑龙江</span>Heilongjiang</div>
+    <div class="crest-badge"><span class="cn">江苏</span>Jiangsu</div>
+    <div class="crest-badge"><span class="cn">浙江</span>Zhejiang</div>
+    <div class="crest-badge"><span class="cn">广西</span>Guangxi</div>
+    <div class="crest-badge"><span class="cn">贵州</span>Guizhou</div>
+    <div class="crest-badge"><span class="cn">山东</span>Shandong</div>
+    <div class="crest-badge"><span class="cn">甘肃</span>Gansu</div>
+    <div class="crest-badge"><span class="cn">海南</span>Hainan</div>
+    <div class="crest-badge"><span class="cn">台湾</span>Taïwan</div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:70px; font-size:1.7rem;">Grandes régions, grandes histoires</h3>
+  <p class="section-intro" style="margin-bottom:50px;">De la capitale impériale du nord aux jonques marchandes du sud, chaque grande région chinoise a suivi sa propre trajectoire à l'intérieur d'un même récit national.</p>
+
+  <div class="region-wrap">
+    <div class="region-card">
+      <h3>Pékin &amp; le Nord</h3>
+      <div class="region-sub">Cœur politique depuis huit siècles</div>
+      <p>Capitale impériale sous les Yuan, Ming et Qing, puis capitale de la République populaire depuis 1949 — la Cité Interdite et la Grande Muraille voisine incarnent le pouvoir centralisé chinois dans l'imaginaire mondial.</p>
+    </div>
+    <div class="region-card">
+      <h3>Dongbei, les Confins Mandchous</h3>
+      <div class="region-sub">Heilongjiang, Jilin, Liaoning</div>
+      <p>Berceau de la dynastie Qing avant sa conquête de la Chine entière, région industrielle lourde au XXe siècle, aux hivers les plus rudes du pays — sa forêt et sa toundra tranchent avec l'image du sud tropical.</p>
+    </div>
+    <div class="region-card">
+      <h3>Shanghai &amp; le Delta du Yangtsé</h3>
+      <div class="region-sub">La façade mondiale</div>
+      <p>Simple port de pêche jusqu'au XIXe siècle, propulsé au rang de mégapole financière par les concessions étrangères puis par la réforme économique de 1978 — aujourd'hui vitrine de la Chine mondialisée.</p>
+    </div>
+    <div class="region-card">
+      <h3>Xi'an &amp; la Plaine Centrale</h3>
+      <div class="region-sub">Le berceau de la civilisation</div>
+      <p>Ancienne capitale de plusieurs dynasties fondatrices, terminus oriental historique de la Route de la Soie, gardienne de l'armée de terre cuite de Qin Shi Huang, redécouverte seulement en 1974.</p>
+    </div>
+    <div class="region-card">
+      <h3>Sichuan &amp; le Bassin Rouge</h3>
+      <div class="region-sub">Terre d'abondance et de piment</div>
+      <p>Région agricole fertile isolée par des montagnes, cuisine parmi les plus relevées du pays, sanctuaire mondial du panda géant et refuge stratégique lors des invasions historiques du nord.</p>
+    </div>
+    <div class="region-card">
+      <h3>Tibet, le Toit du Monde</h3>
+      <div class="region-sub">Plateau himalayen</div>
+      <p>Région bouddhiste tantrique à l'altitude moyenne la plus élevée au monde, intégrée à la République populaire en 1951 dans des conditions restées une question politique sensible et toujours débattue aujourd'hui.</p>
+    </div>
+    <div class="region-card">
+      <h3>Xinjiang &amp; la Route de la Soie</h3>
+      <div class="region-sub">Carrefour d'Asie centrale</div>
+      <p>Région désertique et montagneuse à majorité historiquement ouïghoure et musulmane, corridor caravanier essentiel pendant des siècles entre Chine, Perse et Méditerranée.</p>
+    </div>
+    <div class="region-card">
+      <h3>Guangdong-Hong Kong, la Porte du Sud</h3>
+      <div class="region-sub">Delta de la Rivière des Perles</div>
+      <p>Région marchande tournée vers l'océan depuis des siècles, berceau de la majorité de la diaspora chinoise mondiale, Hong Kong ayant conservé un statut administratif particulier depuis sa rétrocession en 1997.</p>
+    </div>
+    <div class="region-card">
+      <h3>Yunnan, la Mosaïque des Peuples</h3>
+      <div class="region-sub">Frontière avec l'Asie du Sud-Est</div>
+      <p>Province la plus diverse ethniquement du pays, rizières en terrasses spectaculaires, carrefour culturel avec le Myanmar, le Laos et le Vietnam voisins.</p>
+    </div>
+    <div class="region-card">
+      <h3>Mongolie-Intérieure, le Monde des Steppes</h3>
+      <div class="region-sub">Bande pastorale du Nord</div>
+      <p>Région à la géographie et au mode de vie radicalement différents du reste du pays : élevage extensif, yourtes encore utilisées l'été, et une frontière historique de plus de deux mille ans avec les peuples nomades du nord.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PEUPLES ================= -->
+<section id="peuples">
+  <div class="section-label">Diversité Humaine</div>
+  <h2 class="section-title">Les Peuples de Chine</h2>
+  <p class="section-intro">La République populaire de Chine reconnaît officiellement 56 groupes ethniques (民族). Loin d'un bloc monolithique, le pays est une mosaïque de langues, de religions et de modes de vie, où l'ethnie han elle-même reste divisée en groupes linguistiques mutuellement inintelligibles à l'oral.</p>
+
+  <div class="people-grid">
+    <div class="people-card">
+      <h3>Han</h3>
+      <div class="people-pct">≈ 91-92% de la population</div>
+      <p>Groupe majoritaire, lui-même subdivisé en aires linguistiques distinctes (mandarin, cantonais, wu, hakka, min...) parfois aussi éloignées entre elles que les langues romanes entre elles.</p>
+    </div>
+    <div class="people-card">
+      <h3>Zhuang</h3>
+      <div class="people-pct">Plus grande minorité officielle</div>
+      <p>Peuple du Guangxi, apparenté linguistiquement aux Thaïs, doté depuis 1958 d'une région autonome et d'une écriture alphabétique propre créée pour sa langue.</p>
+    </div>
+    <div class="people-card">
+      <h3>Hui</h3>
+      <div class="people-pct">Musulmans sinophones</div>
+      <p>Descendants de marchands arabes et persans arrivés dès la dynastie Tang, culturellement proches des Han mais unis par la pratique de l'islam.</p>
+    </div>
+    <div class="people-card">
+      <h3>Mandchous</h3>
+      <div class="people-pct">Fondateurs de la dernière dynastie</div>
+      <p>Peuple originaire du nord-est ayant conquis et gouverné toute la Chine sous la dynastie Qing (1644-1912) ; leur langue est aujourd'hui gravement menacée d'extinction.</p>
+    </div>
+    <div class="people-card">
+      <h3>Ouïghours</h3>
+      <div class="people-pct">Turcophones musulmans du Xinjiang</div>
+      <p>Peuple turcophone et majoritairement musulman d'Asie centrale, au cœur d'une situation de répression et de surveillance de masse documentée par de nombreuses organisations internationales depuis les années 2010.</p>
+    </div>
+    <div class="people-card">
+      <h3>Tibétains</h3>
+      <div class="people-pct">Plateau himalayen</div>
+      <p>Peuple bouddhiste tantrique à l'identité culturelle et religieuse forte, dont le statut politique reste une question sensible et non résolue sur la scène internationale.</p>
+    </div>
+    <div class="people-card">
+      <h3>Miao (Hmong)</h3>
+      <div class="people-pct">Montagnes du sud-ouest</div>
+      <p>Peuple aux costumes traditionnels richement brodés et à l'artisanat d'argenterie réputé, dont une partie de la diaspora s'est installée en Asie du Sud-Est puis en Occident après le XXe siècle.</p>
+    </div>
+    <div class="people-card">
+      <h3>Et 49 autres peuples reconnus</h3>
+      <div class="people-pct">Aucune fiche ne peut épuiser 56 groupes</div>
+      <p>Yi (écriture syllabique propre), Mongols de Chine, Coréens de Yanbian, Kazakhs de l'Altaï, Dai du Yunnan, Li de Hainan, Tujia, Bouyei et bien d'autres composent une mosaïque que cette page ne fait qu'effleurer — la diversité réelle du pays dépasse toujours ce qu'une grille de fiches peut montrer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIGURES ================= -->
+<section id="figures">
+  <div class="section-label">Portraits</div>
+  <h2 class="section-title">Grandes Figures Historiques</h2>
+  <p class="section-intro">Souverains, penseurs, exploratrices et réformateurs qui ont façonné, chacun à leur manière, la trajectoire de la civilisation chinoise — une sélection resserrée sur ce qui a vraiment changé le cours des choses, pas une liste remplie pour atteindre un chiffre rond.</p>
+
+  <div class="figure-grid">
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Qin Shi Huang</h3><div class="figure-dates">259 – 210 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Premier empereur</span><span class="tag">Unification</span></div>
+        <p>Premier souverain à unifier la Chine sous un pouvoir impérial centralisé en 221 av. J.-C., standardisant l'écriture, les poids et mesures et les essieux de chars. Son mausolée, gardé par l'armée de terre cuite, témoigne d'une ambition sans égale — au prix d'un pouvoir tyrannique et d'un travail forcé massif pour ses grands chantiers.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Confucius</h3><div class="figure-dates">551 – 479 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Philosophie</span><span class="tag">Éducation</span></div>
+        <p>Penseur dont l'enseignement sur l'éthique, la piété filiale et le bon gouvernement a structuré durablement l'éducation, l'administration et les rapports sociaux dans toute l'Asie de l'Est pendant plus de deux millénaires.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Laozi</h3><div class="figure-dates">VIe siècle av. J.-C. (semi-légendaire)</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Taoïsme</span><span class="tag">Philosophie</span></div>
+        <p>Sage fondateur attribué du taoïsme et auteur traditionnel du Dao De Jing, texte fondateur prônant l'harmonie avec le cours naturel des choses (le Tao) — influence philosophique et religieuse encore vivace aujourd'hui.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Sun Tzu</h3><div class="figure-dates">v. 544 – 496 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Stratégie</span><span class="tag">Art de la Guerre</span></div>
+        <p>Général et stratège auteur présumé de "L'Art de la guerre", traité militaire encore étudié aujourd'hui bien au-delà du domaine militaire, jusque dans les écoles de commerce occidentales.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Sima Qian</h3><div class="figure-dates">145 – 86 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Historien</span><span class="tag">Résilience</span></div>
+        <p>Père de l'historiographie chinoise, auteur des "Mémoires historiques" couvrant plus de deux mille ans d'histoire, qu'il acheva après avoir subi la castration plutôt que d'abandonner son œuvre ou de se donner la mort.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Cai Lun</h3><div class="figure-dates">v. 50 – 121 apr. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Invention</span><span class="tag">Papier</span></div>
+        <p>Fonctionnaire de la cour Han crédité d'avoir perfectionné le procédé de fabrication du papier à partir de fibres végétales — invention qui gagnera le Moyen-Orient puis l'Europe plusieurs siècles plus tard.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Wu Zetian</h3><div class="figure-dates">624 – 705 apr. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Seule impératrice régnante</span><span class="tag">Tang</span></div>
+        <p>Unique femme à avoir régné en tant qu'empereur de Chine en son nom propre, fondant brièvement sa propre dynastie ; gouvernante habile mais dont l'accession au pouvoir, marquée par l'élimination de rivaux, reste controversée chez les historiens.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Li Bai</h3><div class="figure-dates">701 – 762 apr. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Poésie</span><span class="tag">Âge d'or Tang</span></div>
+        <p>Le plus célèbre poète de l'âge d'or Tang, figure quasi-légendaire mêlant génie littéraire et vie dissolue, dont les vers sur le vin, la lune et la nature sont encore appris par cœur aujourd'hui.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Zhang Qian</h3><div class="figure-dates">IIe siècle av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Exploration</span><span class="tag">Route de la Soie</span></div>
+        <p>Diplomate envoyé en mission vers l'Asie centrale, capturé puis détenu plus de dix ans par les Xiongnu avant de poursuivre sa mission — ses rapports ouvriront officiellement la Route de la Soie au commerce chinois.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Gengis Khan</h3><div class="figure-dates">1162 – 1227 apr. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Empire mongol</span><span class="tag">Conquête</span></div>
+        <p>Fondateur du plus grand empire terrestre contigu de l'Histoire ; son petit-fils Kubilai Khan achèvera la conquête de la Chine et y fondera la dynastie Yuan, intégrant brièvement le pays à un empire eurasiatique sans précédent.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Zheng He</h3><div class="figure-dates">1371 – 1433 apr. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Exploration navale</span><span class="tag">Ming</span></div>
+        <p>Amiral eunuque musulman ayant mené sept expéditions maritimes monumentales jusqu'en Afrique de l'Est, à la tête de flottes bien plus grandes que celles européennes de l'époque — avant que la Chine ne se referme volontairement sur elle-même.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Impératrice douairière Cixi</h3><div class="figure-dates">1835 – 1908 apr. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Régente</span><span class="tag">Fin des Qing</span></div>
+        <p>Régente ayant dominé la cour impériale durant près d'un demi-siècle de déclin dynastique ; figure très controversée, accusée d'avoir freiné des réformes nécessaires face aux puissances étrangères, mais dont le rôle réel reste débattu par les historiens contemporains.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Sun Yat-sen</h3><div class="figure-dates">1866 – 1925 apr. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Père de la Chine moderne</span><span class="tag">Révolution 1911</span></div>
+        <p>Révolutionnaire républicain considéré comme le père fondateur de la Chine moderne, artisan de la chute de l'empire en 1911 et premier président provisoire de la République de Chine.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Mao Zedong</h3><div class="figure-dates">1893 – 1976 apr. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Fondateur de la RPC</span><span class="tag">Figure controversée</span></div>
+        <p>Fondateur de la République populaire de Chine en 1949, il unifie et modernise partiellement le pays, mais son mandat est aussi marqué par des politiques aux conséquences humaines dramatiques : le Grand Bond en avant (fin des années 1950) provoque une famine responsable de dizaines de millions de morts, et la Révolution culturelle (1966-1976) plonge le pays dans un chaos politique durable.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Deng Xiaoping</h3><div class="figure-dates">1904 – 1997 apr. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Réforme économique</span><span class="tag">Ouverture</span></div>
+        <p>Dirigeant ayant lancé en 1978 la politique de "réforme et ouverture", introduisant des mécanismes de marché tout en maintenant le contrôle politique du Parti — tournant décisif ayant transformé la Chine en seconde puissance économique mondiale en une quarantaine d'années.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= RECITS ================= -->
+<section id="recits">
+  <div class="section-label">Histoire</div>
+  <h2 class="section-title">Grands Récits Historiques</h2>
+
+  <div class="story-block">
+    <div class="story-number">Récit I</div>
+    <h3>L'Unification par Qin Shi Huang et les Débuts de la Grande Muraille</h3>
+    <span class="story-date">221 av. J.-C. et suivants</span>
+    <p>Après des siècles de royaumes rivaux durant la période des Royaumes combattants, le roi de Qin conquiert méthodiquement ses voisins et proclame en 221 av. J.-C. la naissance d'un empire unifié, se proclamant "premier empereur" (Shi Huangdi). Il impose une écriture, une monnaie et un système de mesures communs à l'ensemble du territoire, et relie par la corvée forcée les fortifications frontalières existantes en un rempart continu contre les incursions du nord.</p>
+    <p class="pull-quote">Pour se protéger dans l'au-delà, il fait ériger une armée de plus de huit mille soldats en terre cuite grandeur nature, chacun au visage distinct — redécouverte fortuitement par des paysans creusant un puits en 1974, plus de deux mille ans plus tard.</p>
+    <p>Contrairement à l'idée reçue d'un mur unique bâti d'un seul tenant, la Grande Muraille que l'on visite aujourd'hui est surtout l'œuvre de la dynastie Ming, près de deux mille ans plus tard (1368-1644), qui reconstruit et consolide ces fortifications sur la base du principe posé par Qin Shi Huang.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit II</div>
+    <h3>L'Ouverture de la Route de la Soie</h3>
+    <span class="story-date">IIe siècle av. J.-C.</span>
+    <p>Envoyé en mission diplomatique vers l'ouest par l'empereur Han Wudi, Zhang Qian est capturé et détenu plus de dix ans par les Xiongnu avant de poursuivre son voyage jusqu'en Asie centrale. Son rapport détaillé au retour convainc la cour d'établir des routes commerciales officielles — donnant naissance au réseau caravanier qui portera plus tard le nom de Route de la Soie.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit III</div>
+    <h3>L'Âge d'Or de la Dynastie Han</h3>
+    <span class="story-date">206 av. J.-C. – 220 apr. J.-C.</span>
+    <p>Sous les Han, l'empire consolide son administration, développe le papier, l'astronomie et un premier sismographe capable de détecter la direction d'un séisme lointain. Le nom "Han" reste aujourd'hui encore celui du groupe ethnique majoritaire de Chine, témoignage de l'empreinte durable de cette période fondatrice.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit IV</div>
+    <h3>La Dynastie Tang, Âge Cosmopolite</h3>
+    <span class="story-date">618 – 907 apr. J.-C.</span>
+    <p>Chang'an, la capitale Tang, devient la plus grande ville du monde de son temps, accueillant marchands persans, moines bouddhistes indiens et diplomates de tout le continent. La poésie (Li Bai, Du Fu), la peinture et le bouddhisme s'y épanouissent dans une atmosphère d'ouverture rarement égalée dans l'histoire impériale chinoise.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit V</div>
+    <h3>La Dynastie Song et l'Explosion des Inventions</h3>
+    <span class="story-date">960 – 1279 apr. J.-C.</span>
+    <p>Période d'essor économique et technologique exceptionnel : imprimerie à caractères mobiles, boussole magnétique perfectionnée pour la navigation, poudre à canon utilisée militairement et premiers billets de banque en papier voient le jour — plusieurs siècles avant leur adoption en Europe.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit VI</div>
+    <h3>La Conquête Mongole et la Dynastie Yuan</h3>
+    <span class="story-date">1271 – 1368 apr. J.-C.</span>
+    <p>Kubilai Khan, petit-fils de Gengis Khan, achève la conquête de la Chine et fonde la dynastie Yuan, intégrant le pays à l'immense empire mongol eurasiatique. Le voyageur vénitien Marco Polo affirme avoir séjourné à sa cour, laissant un récit qui fascinera durablement l'Europe, bien que son authenticité complète reste débattue par les historiens.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit VII</div>
+    <h3>Les Voyages du Trésor de Zheng He</h3>
+    <span class="story-date">1405 – 1433 apr. J.-C.</span>
+    <p>L'amiral Zheng He mène sept expéditions maritimes monumentales jusqu'en Inde, en Arabie et en Afrique de l'Est, à la tête de flottes comptant jusqu'à plusieurs centaines de navires — largement supérieures en taille à celles que l'Europe enverra un siècle plus tard. Ces expéditions cessent brutalement après 1433 lorsque la cour impériale décide de se recentrer sur l'intérieur du pays.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit VIII</div>
+    <h3>La Dynastie Ming et la Cité Interdite</h3>
+    <span class="story-date">1368 – 1644 apr. J.-C.</span>
+    <p>Dynastie native ayant chassé les Yuan mongols, les Ming font construire à partir de 1406 la Cité Interdite de Pékin, palais impérial de près de mille bâtiments interdit au peuple pendant près de cinq siècles, aujourd'hui l'un des sites les plus visités au monde.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit IX</div>
+    <h3>Les Guerres de l'Opium et le "Siècle de l'Humiliation"</h3>
+    <span class="story-date">1839 – 1949 apr. J.-C.</span>
+    <p>Vaincue militairement par le Royaume-Uni lors des guerres de l'opium, la Chine impériale est contrainte de céder Hong Kong et d'ouvrir ses ports au commerce étranger dans des conditions inégales. S'ensuit une période durable d'ingérences étrangères, de conflits internes et d'occupation japonaise, que l'historiographie chinoise désigne comme le "Siècle de l'humiliation" — période encore centrale dans la mémoire collective et le discours politique chinois contemporain.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit X</div>
+    <h3>De la Chute du Dernier Empereur à la Réforme Économique</h3>
+    <span class="story-date">1911 – 1978 apr. J.-C. et au-delà</span>
+    <p>La révolution de 1911 met fin à plus de deux mille ans de régime impérial : le dernier empereur, Puyi, âgé de six ans, abdique en février 1912, laissant place à la République de Chine proclamée par Sun Yat-sen. Après des décennies de guerre civile et d'occupation, Mao Zedong proclame la République populaire de Chine le 1er octobre 1949.</p>
+    <p>Après les bouleversements du Grand Bond en avant et de la Révolution culturelle, Deng Xiaoping engage à partir de 1978 une politique de réforme économique et d'ouverture qui propulsera la Chine, en quatre décennies, au rang de deuxième économie mondiale.</p>
+  </div>
+</section>
+
+<!-- ================= INVENTIONS ================= -->
+<section id="inventions">
+  <div class="section-label">Contributions au Monde</div>
+  <h2 class="section-title">Grandes Inventions</h2>
+  <p class="section-intro">La tradition chinoise elle-même regroupe quatre innovations sous le nom de "Quatre Grandes Inventions" (四大发明) — une catégorie authentiquement chinoise, pas un classement occidental a posteriori. D'autres contributions majeures viennent ensuite, sans chercher à égaler ce total.</p>
+
+  <h3 style="text-align:center; font-size:1.3rem; color:var(--gold); margin-bottom:30px;">四大发明 — Les Quatre Grandes Inventions</h3>
+  <div class="invention-list">
+    <div class="invention-item">
+      <div class="invention-name">Le Papier<span>IIe siècle av. J.-C. – Ier siècle apr. J.-C.</span></div>
+      <p>Inventé sous les Han et perfectionné par Cai Lun, le papier remplace progressivement la soie et les lamelles de bambou, avant de gagner le Moyen-Orient au VIIIe siècle puis l'Europe plusieurs siècles plus tard.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">L'Imprimerie<span>Xylographie puis caractères mobiles</span></div>
+      <p>L'impression sur planches de bois apparaît dès la dynastie Tang ; Bi Sheng invente les caractères mobiles en argile vers 1040, quatre siècles avant Gutenberg en Europe.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">La Poudre à Canon<span>IXe siècle apr. J.-C.</span></div>
+      <p>Découverte accidentellement par des alchimistes taoïstes cherchant l'élixir d'immortalité, elle sera d'abord utilisée à des fins pyrotechniques et rituelles avant son usage militaire généralisé.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">La Boussole<span>Perfectionnée sous les Song</span></div>
+      <p>Utilisée initialement pour la géomancie (feng shui), son application à la navigation maritime transforme durablement le commerce et l'exploration à travers l'Asie puis le monde.</p>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; font-size:1.3rem; color:var(--gold); margin:56px 0 30px;">D'autres contributions majeures</h3>
+  <div class="invention-list">
+    <div class="invention-item">
+      <div class="invention-name">La Soie<span>Depuis plus de 4000 ans</span></div>
+      <p>Produite en Chine dès le troisième millénaire avant notre ère, sa fabrication resta un secret d'État jalousement gardé pendant des siècles, donnant son nom à la grande route commerciale eurasiatique.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">Le Système des Examens Impériaux<span>Keju, dès le VIIe siècle</span></div>
+      <p>Système méritocratique de sélection des fonctionnaires par concours écrit, ouvert en théorie à tout lettré quel que soit son rang social — modèle précoce de méritocratie administrative étudié aujourd'hui par les historiens des institutions.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">La Médecine Traditionnelle Chinoise<span>Acupuncture &amp; pharmacopée</span></div>
+      <p>Système médical millénaire fondé sur l'équilibre du qi et des méridiens corporels, toujours pratiqué aujourd'hui en complément ou en alternative à la médecine occidentale dans de nombreux pays.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ANECDOTES ================= -->
+<section id="anecdotes">
+  <div class="section-label">Le Saviez-Vous</div>
+  <h2 class="section-title">Anecdotes &amp; Curiosités</h2>
+
+  <div class="anecdote-grid">
+    <div class="anecdote-card">
+      <h4>"Chine" n'est pas son nom natif</h4>
+      <p>Les Chinois appellent leur pays Zhongguo (中国), littéralement "le pays du milieu" — le mot occidental "China" dériverait quant à lui du nom de la dynastie Qin.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>La Grande Muraille n'est pas visible depuis l'espace à l'œil nu</h4>
+      <p>Idée reçue démentie par plusieurs astronautes : sa largeur est trop faible pour être distinguée sans instrument optique depuis l'orbite terrestre.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>La plus ancienne écriture continue au monde</h4>
+      <p>Les inscriptions sur os oraculaires de la dynastie Shang (v. 1200 av. J.-C.) sont les ancêtres directs des caractères chinois toujours utilisés aujourd'hui, sans interruption du système d'écriture.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les chiffres portent chance ou malchance</h4>
+      <p>Le chiffre 8 est prisé car il se prononce comme "prospérité", tandis que le 4 est évité car homophone du mot "mort" — nombre d'immeubles chinois sautent encore le quatrième étage.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>La plus grande migration humaine annuelle</h4>
+      <p>Les déplacements du Nouvel An chinois (chunyun) constituent chaque année le plus grand mouvement de population périodique au monde, avec plusieurs centaines de millions de trajets.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>La diplomatie du panda</h4>
+      <p>Depuis les années 1950, la Chine offre ou prête des pandas géants à des pays partenaires en signe de bonnes relations diplomatiques — pratique surnommée "panda diplomacy" par les observateurs internationaux.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le mahjong, jeu et miroir social</h4>
+      <p>Apparu au XIXe siècle, ce jeu de tuiles combine hasard et stratégie et reste un pilier des réunions familiales et sociales dans toute la sphère culturelle chinoise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STYLE DE VIE ================= -->
+<section id="style-de-vie">
+  <div class="section-label">Vie Quotidienne</div>
+  <h2 class="section-title">Style de Vie &amp; Traditions Vivantes</h2>
+  <p class="section-intro">Au-delà des grands récits historiques, ce qui façonne concrètement le quotidien chinois aujourd'hui : cuisine, fêtes, structure familiale et croyances syncrétiques toujours pratiquées.</p>
+
+  <div class="life-grid">
+    <div class="life-card">
+      <h4>Cuisine &amp; Gastronomie</h4>
+      <p>Des saveurs relevées du Sichuan aux dim sum cantonais en passant par les nouilles du nord et les saveurs sucrées-salées de l'est, la cuisine chinoise reste l'un des systèmes gastronomiques les plus diversifiés et les plus exportés au monde.</p>
+    </div>
+    <div class="life-card">
+      <h4>Grandes Fêtes</h4>
+      <p>Le Nouvel An chinois (calendrier lunaire), la Fête de la Mi-Automne (gâteaux de lune, réunion familiale sous la pleine lune) et la Fête des bateaux-dragons (Duanwu, en mémoire du poète Qu Yuan) rythment encore aujourd'hui le calendrier social du pays et de sa diaspora.</p>
+    </div>
+    <div class="life-card">
+      <h4>Structure Familiale</h4>
+      <p>La piété filiale confucéenne continue d'influencer les rapports intergénérationnels, tandis que la notion de "guanxi" (réseau de relations et d'obligations réciproques) structure encore largement la vie sociale et professionnelle.</p>
+    </div>
+    <div class="life-card">
+      <h4>Arts du Quotidien</h4>
+      <p>Calligraphie, cérémonie du thé, jardins classiques, feng shui et pratiques corporelles comme le tai-chi ou le qigong restent des pratiques vivantes, loin d'un simple folklore muséifié.</p>
+    </div>
+    <div class="life-card">
+      <h4>Croyances Syncrétiques</h4>
+      <p>Bouddhisme, taoïsme, confucianisme et culte des ancêtres coexistent souvent chez un même individu sans exclusivité mutuelle perçue comme contradictoire — une logique religieuse assez différente de l'exclusivisme monothéiste occidental.</p>
+    </div>
+    <div class="life-card">
+      <h4>Langue &amp; Écriture au Quotidien</h4>
+      <p>Le mandarin standard (putonghua), basé sur le dialecte de Pékin, sert de langue commune à un pays où coexistent des dizaines de langues et dialectes mutuellement incompréhensibles à l'oral mais partageant un même système d'écriture.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MONDE ================= -->
+<section id="monde">
+  <div class="section-label">Rayonnement</div>
+  <h2 class="section-title">Un Rayonnement Mondial Ancien et Actuel</h2>
+  <p class="section-intro">De la Route de la Soie antique aux nouvelles routes d'investissement du XXIe siècle, l'influence chinoise s'est déployée sur tous les continents selon des logiques très différentes selon les époques.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
+      <g stroke="#c2a35f" stroke-width="1.3" fill="none" stroke-dasharray="2,4">
+        <line x1="500" y1="230" x2="200" y2="170"/>
+        <line x1="500" y1="230" x2="170" y2="320"/>
+        <line x1="500" y1="230" x2="640" y2="110"/>
+        <line x1="500" y1="230" x2="810" y2="200"/>
+        <line x1="500" y1="230" x2="840" y2="360"/>
+      </g>
+      <circle cx="500" cy="230" r="9" fill="#a3222b"/>
+      <text x="500" y="205" fill="#3f7a5c" font-family="Cinzel, serif" font-size="14" text-anchor="middle" font-weight="700">CHINE</text>
+      <g font-family="EB Garamond, serif" font-size="12" fill="#2c2013" text-anchor="middle">
+        <text x="200" y="162" fill="#a3222b">Asie de l'Est</text>
+        <text x="200" y="178" font-size="10" fill="#7c6a48">écriture, confucianisme, Corée/Japon/Vietnam</text>
+        <text x="170" y="312" fill="#a3222b">Asie du Sud-Est</text>
+        <text x="170" y="328" font-size="10" fill="#7c6a48">diaspora Nanyang, commerce ancien</text>
+        <text x="640" y="102" fill="#a3222b">Asie Centrale &amp; Moyen-Orient</text>
+        <text x="640" y="118" font-size="10" fill="#7c6a48">Route de la Soie historique</text>
+        <text x="810" y="192" fill="#a3222b">Afrique</text>
+        <text x="810" y="208" font-size="10" fill="#7c6a48">nouvelles routes d'investissement</text>
+        <text x="840" y="352" fill="#a3222b">Amériques &amp; Europe</text>
+        <text x="840" y="368" font-size="10" fill="#7c6a48">Chinatowns historiques, économie mondiale</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="reach-grid">
+    <div class="reach-card">
+      <h4>La Route de la Soie</h4>
+      <span class="reach-dist">IIe siècle av. J.-C. – XVe siècle</span>
+      <p>Réseau caravanier reliant la Chine à la Perse, à l'Inde puis à la Méditerranée, vecteur d'échanges commerciaux mais aussi religieux et technologiques pendant plus de mille cinq cents ans.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Sphère Sinisée d'Asie de l'Est</h4>
+      <span class="reach-dist">Ier – XIXe siècle</span>
+      <p>Corée, Japon et Vietnam adoptent durablement l'écriture chinoise, le confucianisme et des institutions administratives inspirées du modèle impérial chinois.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Diaspora Historique (Nanyang)</h4>
+      <span class="reach-dist">XIXe – XXe siècle</span>
+      <p>Émigration massive depuis le Guangdong et le Fujian vers l'Asie du Sud-Est, les Amériques et l'Océanie, formant les Chinatowns aujourd'hui présentes dans la plupart des grandes métropoles mondiales.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Les Chemins de Fer Transcontinentaux</h4>
+      <span class="reach-dist">1860 – 1870</span>
+      <p>Des dizaines de milliers de travailleurs chinois contribuent à la construction du chemin de fer transcontinental nord-américain, dans des conditions de travail extrêmement dures et peu reconnues à l'époque.</p>
+    </div>
+    <div class="reach-card">
+      <h4>L'Économie Mondiale Contemporaine</h4>
+      <span class="reach-dist">Depuis 1978</span>
+      <p>Devenue "l'usine du monde" puis seconde puissance économique mondiale, la Chine investit aujourd'hui massivement à l'étranger via l'initiative "Nouvelles Routes de la Soie" (Belt and Road).</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Culture Populaire Mondiale</h4>
+      <span class="reach-dist">XXe – XXIe siècle</span>
+      <p>Cinéma de kung-fu, cuisine adaptée localement dans le monde entier, et essor plus récent des séries et de l'animation chinoises auprès d'un public international grandissant.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FRISE CHRONOLOGIQUE ================= -->
+<section id="frise">
+  <div class="section-label">Chronologie</div>
+  <h2 class="section-title">Frise Chronologique</h2>
+  <p class="section-intro">Cinq millénaires d'histoire continue, des premières civilisations néolithiques du fleuve Jaune à la puissance économique mondiale actuelle.</p>
+
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 5000 av. J.-C.</span><h4>Civilisation néolithique du Fleuve Jaune</h4>
+      <p>Premières communautés agricoles sédentaires (culture de Yangshao) le long du berceau fluvial chinois.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 1600 av. J.-C.</span><h4>Dynastie Shang</h4>
+      <p>Première dynastie attestée par des sources écrites, inscriptions sur os oraculaires.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1046 av. J.-C.</span><h4>Dynastie Zhou</h4>
+      <p>Instauration du concept de "Mandat du Ciel" légitimant et limitant à la fois le pouvoir impérial.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">551 av. J.-C.</span><h4>Naissance de Confucius</h4>
+      <p>Fondation d'une pensée philosophique qui structurera durablement toute l'Asie de l'Est.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">221 av. J.-C.</span><h4>Unification par Qin Shi Huang</h4>
+      <p>Naissance du premier empire chinois centralisé.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">206 av. J.-C. – 220 apr. J.-C.</span><h4>Dynastie Han</h4>
+      <p>Consolidation administrative, ouverture de la Route de la Soie, perfectionnement du papier.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">618 – 907 apr. J.-C.</span><h4>Dynastie Tang</h4>
+      <p>Âge d'or cosmopolite, apogée de la poésie classique chinoise.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">960 – 1279 apr. J.-C.</span><h4>Dynastie Song</h4>
+      <p>Explosion des inventions techniques : imprimerie, boussole, poudre à canon, billets de banque.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1271 – 1368 apr. J.-C.</span><h4>Dynastie Yuan (mongole)</h4>
+      <p>Intégration de la Chine dans l'empire mongol sous Kubilai Khan.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1405 – 1433 apr. J.-C.</span><h4>Voyages de Zheng He</h4>
+      <p>Expéditions maritimes chinoises jusqu'en Afrique de l'Est, avant repli volontaire.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1368 – 1644 apr. J.-C.</span><h4>Dynastie Ming</h4>
+      <p>Construction de la Cité Interdite (à partir de 1406) et consolidation de la Grande Muraille.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1644 – 1912 apr. J.-C.</span><h4>Dynastie Qing (mandchoue)</h4>
+      <p>Dernière dynastie impériale, apogée territoriale suivie d'un déclin marqué au XIXe siècle.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1839 – 1842 apr. J.-C.</span><h4>Première Guerre de l'Opium</h4>
+      <p>Défaite face au Royaume-Uni, début du "Siècle de l'humiliation".</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1911 – 1912 apr. J.-C.</span><h4>Révolution et fin de l'Empire</h4>
+      <p>Abdication du dernier empereur, proclamation de la République de Chine.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1949 apr. J.-C.</span><h4>Fondation de la République populaire de Chine</h4>
+      <p>Proclamation par Mao Zedong après des décennies de guerre civile et d'occupation.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1978 apr. J.-C.</span><h4>Réforme et Ouverture de Deng Xiaoping</h4>
+      <p>Lancement des réformes économiques à l'origine de l'essor chinois contemporain.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">2001 – aujourd'hui</span><h4>Intégration mondiale et puissance spatiale</h4>
+      <p>Entrée à l'OMC (2001), Jeux olympiques de Pékin (2008), station spatiale Tiangong et exploration lunaire autonome.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Un Héritage Bien Vivant</h2>
+  <p class="section-intro">Entre continuité civilisationnelle remarquable et transformations économiques vertigineuses, l'empreinte chinoise sur le monde contemporain n'a jamais été aussi visible.</p>
+
+  <div class="heritage-block">
+    <h4>Dans la langue et l'écriture</h4>
+    <p>Les caractères chinois ont structuré pendant des siècles l'écriture coréenne et japonaise, et des mots comme "thé", "ketchup" (dérivé du hokkien "kê-tsiap") ou "kung-fu" sont aujourd'hui intégrés à de nombreuses langues du monde.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans l'économie mondiale</h4>
+    <p>Seconde puissance économique mondiale, premier exportateur manufacturier de la planète et investisseur majeur à l'étranger via l'initiative des Nouvelles Routes de la Soie, la Chine occupe aujourd'hui une position centrale dans les chaînes de production mondiales.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans la philosophie et l'éducation</h4>
+    <p>Les valeurs confucéennes de mérite scolaire, de respect hiérarchique et de piété familiale continuent d'influencer profondément les systèmes éducatifs de toute l'Asie de l'Est, du Japon à la Corée du Sud.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans la culture populaire mondiale</h4>
+    <p>Cinéma d'arts martiaux, cuisine adaptée localement sur tous les continents, et essor international croissant des productions audiovisuelles et des jeux vidéo chinois auprès d'un public mondial de plus en plus large.</p>
+  </div>
+
+  <p class="heritage-caution">Un point de vigilance s'impose en toute honnêteté : si l'héritage civilisationnel chinois est immense, la situation politique contemporaine du pays fait l'objet de préoccupations internationales documentées et toujours débattues — surveillance de masse et internement de la minorité ouïghoure au Xinjiang, restrictions des libertés politiques à Hong Kong depuis 2020, statut non résolu de Taïwan, censure d'Internet et absence de pluralisme politique. Célébrer la richesse historique et culturelle de la Chine n'empêche pas de regarder ces enjeux contemporains avec lucidité — ils méritent, comme pour tout pays, un examen indépendant plutôt qu'un jugement tranché à sens unique.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">天下大同</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série : <strong>Culture Indienne</strong></p>
+</footer>
+
+</body>
+</html>

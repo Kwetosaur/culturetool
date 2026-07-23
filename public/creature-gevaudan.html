@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Bête du Gévaudan — Créatures Légendaires du Monde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #121a14;
+    --bg-deep: #0b100c;
+    --panel: #1c2620;
+    --panel-alt: #212c24;
+    --panel-border: #3c4a3c;
+    --parchment: #e6d9b8;
+    --parchment-dim: #c7b78e;
+    --stone: #8b9186;
+    --moss: #4f6b4c;
+    --moss-bright: #789a72;
+    --blood: #5c2323;
+    --blood-bright: #9a3535;
+    --brass: #a9884f;
+    --brass-bright: #d1ab6a;
+    --text: #e6e2d3;
+    --text-dim: #a4aa98;
+    --glow: rgba(154,53,53,0.32);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at top, #182420 0%, #121a14 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{
+    font-family:'Cinzel', serif;
+    color:var(--parchment);
+    letter-spacing:0.03em;
+    font-weight:700;
+  }
+  a{color:var(--brass-bright);}
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.05) 3px);
+    z-index:1;
+    opacity:0.5;
+  }
+
+  .fog-strip{display:block; width:100%; height:20px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 20px;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 12%, rgba(90,35,35,0.18), transparent 55%),
+      linear-gradient(180deg, #182420 0%, #121a14 55%, #0c120d 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 20% 90%, rgba(10,14,10,0.7), transparent 60%),
+      radial-gradient(ellipse at 85% 85%, rgba(10,14,10,0.7), transparent 55%);
+    pointer-events:none;
+  }
+  .epigraph-row{
+    font-family:'Cinzel', serif;
+    font-size:16px;
+    letter-spacing:6px;
+    color:var(--brass);
+    opacity:0.8;
+    margin-bottom:26px;
+    position:relative;
+    z-index:2;
+  }
+  .hero h1{
+    font-family:'Cinzel Decorative', serif;
+    font-size:clamp(2.4rem, 6.6vw, 4.9rem);
+    margin:0;
+    position:relative;
+    z-index:2;
+    background:linear-gradient(180deg, var(--parchment), var(--brass) 65%, #6e5427);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 50px rgba(0,0,0,0.4);
+  }
+  .hero .subtitle{
+    font-family:'Cinzel', serif;
+    font-size:1.02rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--blood-bright);
+    margin-top:16px;
+    position:relative;
+    z-index:2;
+  }
+  .hero .tagline{
+    max-width:640px;
+    margin:30px auto 0;
+    font-style:italic;
+    color:var(--text-dim);
+    font-size:1.1rem;
+    position:relative;
+    z-index:2;
+  }
+  .verdict-badge{
+    position:relative;
+    z-index:2;
+    display:inline-flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    margin:34px auto 0;
+    padding:14px 28px;
+    border:1px solid var(--blood-bright);
+    border-radius:3px;
+    background:linear-gradient(160deg, rgba(90,35,35,0.18), rgba(20,26,20,0.6));
+    box-shadow:0 0 24px var(--glow);
+    max-width:600px;
+  }
+  .verdict-badge .verdict-label{
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--blood-bright);
+  }
+  .verdict-badge .verdict-text{
+    font-family:'EB Garamond', serif;
+    font-size:1rem;
+    color:var(--parchment);
+    line-height:1.5;
+  }
+  .divider{
+    width:120px;
+    height:2px;
+    margin:34px auto;
+    background:linear-gradient(90deg, transparent, var(--brass), transparent);
+    position:relative;
+    z-index:2;
+  }
+  .nav-pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+    max-width:860px;
+    position:relative;
+    z-index:2;
+  }
+  .nav-pills a{
+    text-decoration:none;
+    border:1px solid var(--panel-border);
+    padding:9px 20px;
+    border-radius:2px;
+    font-family:'Cinzel', serif;
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    background:rgba(20,28,22,0.5);
+    transition:all .25s ease;
+  }
+  .nav-pills a:hover{
+    color:var(--parchment);
+    border-color:var(--brass);
+    box-shadow:0 0 14px rgba(169,136,79,0.2);
+  }
+
+  /* ===== STICKY NAV ===== */
+  .sticky-nav{
+    position:sticky;
+    top:0;
+    z-index:40;
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px 18px;
+    justify-content:center;
+    padding:14px 20px;
+    background:rgba(15,20,16,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none;
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    padding:4px 2px;
+    border-bottom:1px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--blood-bright); border-color:var(--blood-bright);}
+
+  /* ===== SECTIONS ===== */
+  section{
+    position:relative;
+    z-index:2;
+    max-width:1000px;
+    margin:0 auto;
+    padding:100px 24px;
+  }
+  .section-label{
+    text-align:center;
+    font-family:'Cinzel', serif;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--blood-bright);
+    font-size:0.78rem;
+    margin-bottom:12px;
+  }
+  .section-title{
+    text-align:center;
+    font-size:clamp(1.9rem,4.2vw,2.8rem);
+    margin:0 0 16px;
+  }
+  .section-intro{
+    text-align:center;
+    max-width:680px;
+    margin:0 auto 60px;
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  /* ===== GENERIC CARD GRID ===== */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:22px;
+  }
+  .info-card{
+    background:linear-gradient(160deg, var(--panel), var(--panel-alt));
+    border:1px solid var(--panel-border);
+    border-radius:3px;
+    padding:26px 24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .info-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--blood-bright), var(--brass));
+  }
+  .info-card h3{
+    margin:0 0 4px;
+    font-size:1.2rem;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .info-num{
+    color:var(--brass);
+    font-size:1rem;
+    opacity:0.9;
+    font-family:'Cinzel', serif;
+  }
+  .info-card .info-sub{
+    font-size:0.82rem;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:12px;
+  }
+  .info-card p{margin:0; font-size:0.97rem;}
+  .info-card p + p{margin-top:10px;}
+
+  /* ===== FIGURE / WITNESS CARDS ===== */
+  .figure-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+    gap:26px;
+  }
+  .figure-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    padding:0;
+    border-radius:4px;
+    overflow:hidden;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .figure-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--brass);
+  }
+  .figure-header{
+    padding:22px 24px 16px;
+    border-bottom:1px solid var(--panel-border);
+    background:linear-gradient(160deg, rgba(90,35,35,0.12), transparent);
+  }
+  .figure-name{font-size:1.35rem; margin:0;}
+  .figure-role{
+    font-size:0.82rem;
+    color:var(--blood-bright);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin-top:4px;
+  }
+  .figure-body{padding:18px 24px 24px;}
+  .figure-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    border:1px solid var(--panel-border);
+    color:var(--text-dim);
+    padding:3px 10px;
+    border-radius:20px;
+  }
+  .figure-body p{margin:0 0 10px; font-size:0.96rem;}
+  .figure-body p:last-child{margin-bottom:0;}
+  .figure-body strong{color:var(--parchment); font-weight:600;}
+
+  /* ===== PORTRAIT ===== */
+  .pull-quote{
+    border-left:3px solid var(--brass);
+    padding:6px 24px;
+    margin:24px 0;
+    font-style:italic;
+    color:var(--parchment);
+    font-size:1.08rem;
+  }
+  .source-note{
+    font-size:0.85rem;
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{
+    content:"";
+    position:absolute; left:50%; top:0; bottom:0; width:2px;
+    background:linear-gradient(180deg, transparent, var(--brass) 6%, var(--blood-bright) 50%, var(--brass) 94%, transparent);
+    transform:translateX(-50%);
+  }
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{
+    position:absolute; top:3px; width:13px; height:13px; border-radius:50%;
+    background:var(--bg); border:3px solid var(--brass-bright);
+    box-shadow:0 0 10px var(--glow);
+  }
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{
+    font-family:'Cinzel', serif; color:var(--blood-bright); font-size:0.98rem;
+    letter-spacing:0.05em; display:block; margin-bottom:6px;
+  }
+  .timeline-content h4{margin:0 0 6px; font-size:1.02rem; color:var(--parchment);}
+  .timeline-content p{margin:0; font-size:0.9rem; color:var(--text-dim);}
+
+  /* ===== CULTURE GRID ===== */
+  .culture-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:18px;
+    margin-top:20px;
+  }
+  .culture-card{
+    border:1px solid var(--panel-border);
+    border-top:2px solid var(--moss-bright);
+    padding:18px 20px;
+    background:var(--panel);
+    border-radius:3px;
+  }
+  .culture-card h4{margin:0 0 6px; font-size:0.98rem; color:var(--parchment);}
+  .culture-card .culture-tag{
+    display:block;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--text-dim);
+    margin-bottom:8px;
+  }
+  .culture-card p{margin:0; font-size:0.9rem;}
+
+  /* ===== SCIENCE ===== */
+  .science-block{
+    margin-bottom:44px;
+    padding-bottom:40px;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .science-block:last-child{border-bottom:none;}
+  .science-block h3{font-size:1.4rem; margin:0 0 14px;}
+  .science-block p{margin:0 0 14px; font-size:1rem;}
+  .science-block p:last-child{margin-bottom:0;}
+  .caution-box{
+    border-left:3px solid var(--blood-bright);
+    padding:10px 22px;
+    margin-top:20px;
+    font-size:0.92rem; color:var(--text-dim); font-style:italic;
+    background:rgba(90,35,35,0.08);
+  }
+
+  /* ===== THEORIES ===== */
+  .theory-block{
+    margin-bottom:40px;
+    padding:24px 26px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:3px;
+    position:relative;
+  }
+  .theory-block::before{
+    content:"";
+    position:absolute; top:0; left:0; bottom:0; width:3px;
+    background:linear-gradient(180deg, var(--brass), var(--blood-bright));
+  }
+  .theory-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .theory-block h3{margin:0; font-size:1.25rem;}
+  .theory-status{
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+  .theory-block p{margin:0 0 10px; font-size:0.97rem;}
+  .theory-block p:last-child{margin-bottom:0;}
+  .theory-attrib{
+    font-size:0.85rem;
+    color:var(--text-dim);
+    font-style:italic;
+    margin-top:10px;
+  }
+
+  /* ===== HERITAGE ===== */
+  .heritage-block{margin-bottom:32px;}
+  .heritage-block h4{
+    font-size:0.92rem; color:var(--parchment); margin:0 0 10px;
+    text-transform:uppercase; letter-spacing:0.05em;
+  }
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{
+    border-left:3px solid var(--blood-bright);
+    padding:4px 20px; margin-top:32px;
+    font-size:0.9rem; color:var(--text-dim); font-style:italic;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    text-align:center;
+    padding:80px 24px 60px;
+    border-top:1px solid var(--panel-border);
+    color:var(--text-dim);
+  }
+  footer .epigraph-row{margin-bottom:20px; font-size:15px;}
+  footer .next-up{
+    font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--text-dim);
+  }
+  footer .next-up strong{color:var(--parchment);}
+
+  ::selection{background:var(--blood-bright); color:#f4ece0;}
+
+  @media (max-width:640px){
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.6rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){
+      width:100%; left:0; text-align:left; padding:0 10px 44px 50px;
+    }
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{
+      left:13px; right:auto;
+    }
+    .theory-header{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+<style>
+  #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+  #side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+  #side-menu-overlay.open{opacity:1; pointer-events:auto;}
+  #side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+  #side-menu.open{transform:translateX(0);}
+  #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+  #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+  #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+  #side-menu .side-home{margin:0 14px 16px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+  #side-menu .side-label{padding:14px 22px 6px; margin-top:4px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0;}
+  #side-menu .side-label:first-of-type{padding-top:0;}
+</style>
+</head>
+<body>
+<button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
+<div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <div class="side-divider"></div>
+  <div class="side-label">Mythologies</div>
+    <a href="mythologie-nordique.html">Nordique</a>
+    <a href="mythologie-grecque.html">Grecque</a>
+    <a href="mythologie-egyptienne.html">Égyptienne</a>
+    <a href="mythologie-romaine.html">Romaine</a>
+    <a href="mythologie-celtique.html">Celtique</a>
+    <a href="mythologie-mesopotamienne.html">Mésopotamienne</a>
+    <a href="mythologie-hindoue.html">Hindoue</a>
+    <a href="mythologie-japonaise.html">Japonaise</a>
+    <a href="mythologie-azteque-maya.html">Aztèque & Maya</a>
+    <a href="mythologie-slave.html">Slave</a>
+  <div class="side-label">Cultures</div>
+    <a href="culture-chinoise.html">Chine</a>
+  <div class="side-label">Créatures</div>
+    <a href="creature-gevaudan.html" class="active">Bête du Gévaudan</a>
+  <div class="side-label">Mystères</div>
+    <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
+</nav>
+
+
+<header class="hero">
+  <div class="epigraph-row">GÉVAUDAN • 1764 – 1767</div>
+  <h1>La Bête du Gévaudan</h1>
+  <div class="subtitle">France, Province du Gévaudan — Règne de Louis XV</div>
+  <p class="tagline">« Une bête de la grosseur d'un veau, mais faite comme un loup. » Pendant près de trois ans, une province entière vit dans la terreur d'un prédateur que ni les battues royales ni les meilleurs chasseurs de France ne parviennent à identifier avec certitude.</p>
+  <div class="verdict-badge">
+    <span class="verdict-label">Verdict</span>
+    <span class="verdict-text">Événement historique réel et abondamment documenté — l'explication la plus probable reste un loup ou une petite meute de loups, peut-être dressés ou hybridés, sans certitude absolue à ce jour.</span>
+  </div>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#origine">Origine</a>
+    <a href="#portrait">Portrait</a>
+    <a href="#temoins-recits">Témoins &amp; Récits</a>
+    <a href="#culture-populaire">Culture Populaire</a>
+    <a href="#science">Science</a>
+    <a href="#theories">Théories</a>
+    <a href="#heritage">Héritage</a>
+  </nav>
+</header>
+
+<svg class="fog-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="branch0" width="40" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 15 H10 V5 H20 V15 H30 V5 H40" stroke="#a9884f" stroke-width="2" fill="none" opacity="0.45"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#branch0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#origine">Origine</a>
+  <a href="#portrait">Portrait</a>
+  <a href="#temoins-recits">Témoins</a>
+  <a href="#culture-populaire">Culture</a>
+  <a href="#science">Science</a>
+  <a href="#theories">Théories</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ORIGINE ================= -->
+<section id="origine">
+  <div class="section-label">Contexte</div>
+  <h2 class="section-title">Un Pays Rural au Bord de la Terreur</h2>
+  <p class="section-intro">Avant d'être une légende, le Gévaudan est un territoire bien réel — et c'est précisément ce qui rend cette affaire différente des autres créatures de cette série.</p>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <h3><span class="info-num">I</span>Le Gévaudan, une terre précise</h3>
+      <p>Le Gévaudan n'est pas un lieu de légende mais une ancienne province française, héritière du <em>pagus</em> gaulois des Gabales, correspondant approximativement à l'actuel département de la Lozère et à des franges du Vivarais et de l'Auvergne voisins. Au milieu du XVIIIe siècle, sous le règne de Louis XV, c'est une région pauvre, montagneuse, boisée et peu peuplée, vivant essentiellement de l'élevage ovin — un terrain idéal pour qu'un prédateur isolé multiplie les attaques loin des regards.</p>
+    </div>
+    <div class="info-card">
+      <h3><span class="info-num">II</span>Une première attaque datée</h3>
+      <p>L'affaire s'ouvre officiellement le <strong>30 juin 1764</strong>, lorsque Jeanne Boulet, quatorze ans, est tuée près de Saint-Étienne-de-Lugdarès, à la lisière du Gévaudan et du Vivarais. D'autres attaques, moins bien documentées, l'auraient peut-être précédée dès le printemps — mais c'est ce meurtre-là que les registres paroissiaux retiennent comme point de départ officiel de la légende.</p>
+    </div>
+    <div class="info-card">
+      <h3><span class="info-num">III</span>Pourquoi « la Bête » et pas « le loup »</h3>
+      <p>Le choix des mots est révélateur : dès les premières attaques, les paysans et les autorités locales parlent d'une « bête » plutôt que d'un loup ordinaire, animal pourtant familier dans la France rurale du XVIIIe siècle où les attaques de loups sur l'homme, bien que rares, ne sont pas inconnues. Ce vocabulaire trahit d'emblée un doute : l'animal decrit ne ressemble pas tout à fait à ce que l'on connaît déjà.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTRAIT ================= -->
+<section id="portrait">
+  <div class="section-label">Description</div>
+  <h2 class="section-title">Ce que les Témoins Disent Avoir Vu</h2>
+  <p class="section-intro">Aucune photographie, aucun spécimen conservé de l'animal original — seulement des dépositions, des lettres d'époque et des gravures postérieures. Ce portrait est donc, par nécessité, un portrait rapporté.</p>
+
+  <p>Les témoignages recueillis à l'époque, souvent transmis par les autorités locales au pouvoir royal, dressent un tableau relativement cohérent d'un animal massif. Un gentilhomme du Gévaudan, M. de la Barthe, la décrit avec une tête large, allongée « comme celle d'un veau » et se terminant par un museau de lévrier, un pelage roux rayé de noir sur le dos, un poitrail large tirant sur le gris, des pattes de devant assez basses, et une queue extraordinairement large et touffue.</p>
+
+  <p>D'autres relevés officiels, notamment ceux attribués à l'officier Duhamel, la comparent à « un taureau d'un an », avec des pattes aussi fortes que celles d'un ours munies de six griffes, une gueule extrêmement large, un poitrail puissant comme celui d'un cheval, un corps long comme celui d'un léopard, et une queue épaisse comme un bras mesurant au moins quatre pieds.</p>
+
+  <div class="pull-quote">« Une bête de la grosseur d'un veau, mais faite comme un loup, dont le poil est roussâtre, la tête grosse, le museau allongé, avec une raie noire sur le dos. »</div>
+  <p class="source-note">— formule récurrente dans les descriptions administratives et journalistiques de l'époque, reprise par de nombreuses sources d'archives du Gévaudan.</p>
+
+  <p>Le comportement qu'on lui prête est tout aussi frappant que son apparence : les témoins la disent capable de bonds impressionnants, indifférente aux chiens de berger, peu effrayée par la présence humaine, et visant préférentiellement la tête, le cou ou la gorge de ses victimes plutôt que de se contenter de mordre au hasard — un détail qui reviendra sans cesse dans les débats scientifiques et les théories plus tard.</p>
+
+  <p>Il faut cependant garder une prudence de méthode : dans un contexte de panique collective, de récits colportés de village en village et de rapports rédigés pour impressionner une administration royale déjà mobilisée, chaque nouveau témoignage a pu, consciemment ou non, se conformer aux précédents plutôt que décrire une observation strictement indépendante. Le « portrait » de la Bête est donc autant un portrait de ce que les gens du Gévaudan s'attendaient à voir que de ce qu'ils ont réellement vu.</p>
+</section>
+
+<!-- ================= TEMOINS & RECITS ================= -->
+<section id="temoins-recits">
+  <div class="section-label">Archives</div>
+  <h2 class="section-title">Attaques, Témoins et Chasseurs du Roi</h2>
+  <p class="section-intro">Peu d'affaires de créature légendaire disposent d'une documentation officielle aussi dense : rapports d'intendants, correspondance royale, registres paroissiaux. Voici les figures et les épisodes que l'histoire a retenus.</p>
+
+  <div class="figure-grid">
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Jeanne Boulet</h3>
+        <div class="figure-role">Première victime officielle</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">30 juin 1764</span><span class="tag">Saint-Étienne-de-Lugdarès</span></div>
+        <p>Jeune bergère de quatorze ans, tuée alors qu'elle gardait son troupeau. Son décès, consigné dans les registres paroissiaux comme survenu sans les derniers sacrements, ouvre officiellement la chronologie de l'affaire.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Marie-Jeanne Vallet</h3>
+        <div class="figure-role">La « Pucelle du Gévaudan »</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Été 1765</span><span class="tag">Auvers</span></div>
+        <p>Jeune paysanne qui aurait repoussé l'animal à coups de baïonnette lors d'une attaque, sans être blessée mortellement — un épisode resté célèbre, aujourd'hui commémoré par une statue dans le village d'Auvers, en Lozère.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Les d'Enneval, père et fils</h3>
+        <div class="figure-role">Chasseurs de loups normands</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Février 1765</span></div>
+        <p>Réputés pour avoir traqué des centaines de loups en Normandie, ils sont dépêchés par Louis XV avec meutes et équipages spécialisés. Après plusieurs mois d'échecs répétés face à un animal insaisissable, ils sont rappelés et remplacés.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">François Antoine</h3>
+        <div class="figure-role">Porte-arquebuse du roi</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">21 septembre 1765</span><span class="tag">Bois de Chazes</span></div>
+        <p>Envoyé de Versailles à la suite de l'échec des d'Enneval, il abat un grand loup dans les bois de l'abbaye royale de Chazes. L'animal, empaillé, est présenté à la cour comme étant la Bête, ce qui vaut à Antoine gloire et récompense royale — avant que de nouvelles attaques ne relancent le doute.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Jean Chastel</h3>
+        <div class="figure-role">Chasseur local, tueur présumé final</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">19 juin 1767</span><span class="tag">La Besseyre-Saint-Mary</span></div>
+        <p>Paysan de la région, il abat un grand loup à la Sogne d'Auvers lors d'une battue organisée par le marquis d'Apcher. Après cette date, les attaques attribuées à la Bête cessent définitivement — sans que l'identité exacte de l'animal abattu ce jour-là ait jamais été établie avec une certitude absolue.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:90px; font-size:1.6rem;">Chronologie de la Terreur</h3>
+  <p class="section-intro" style="margin-bottom:20px;">Trois années d'attaques documentées, ponctuées d'expéditions royales successives — une frise que peu de créatures légendaires peuvent revendiquer avec un tel niveau de précision archivistique.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">30 juin 1764</span>
+        <h4>Première victime officielle</h4>
+        <p>Jeanne Boulet est tuée près de Saint-Étienne-de-Lugdarès. Les attaques se multiplient dans les mois suivants en Margeride et en Gévaudan.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Automne 1764</span>
+        <h4>La panique s'installe</h4>
+        <p>Plusieurs dizaines de victimes en quelques mois ; le capitaine Duhamel est envoyé avec des dragons pour organiser des battues, sans succès décisif.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Février 1765</span>
+        <h4>Arrivée des chasseurs normands</h4>
+        <p>Les d'Enneval, père et fils, réputés spécialistes du loup, sont mandatés par Louis XV avec meutes et équipages.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Été 1765</span>
+        <h4>Marie-Jeanne Vallet résiste</h4>
+        <p>Près d'Auvers, une jeune bergère repousse l'animal à coups de baïonnette et survit à l'attaque — un épisode qui marquera durablement la mémoire locale.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">21 septembre 1765</span>
+        <h4>Le loup de Chazes</h4>
+        <p>François Antoine abat un grand loup dans les bois de l'abbaye de Chazes. Présenté à Versailles, il est un temps considéré comme la Bête — les attaques cessent quelques mois avant de reprendre.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1766 – printemps 1767</span>
+        <h4>La terreur reprend</h4>
+        <p>De nouvelles attaques surviennent, suggérant qu'un second animal — voire plusieurs — pourrait être en cause, indépendamment du loup tué par Antoine.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">19 juin 1767</span>
+        <h4>La mort de Jean Chastel</h4>
+        <p>Jean Chastel abat un loup de grande taille à la Sogne d'Auvers, lors d'une battue organisée par le marquis d'Apcher. Aucune attaque significative n'est plus rapportée après cette date.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CULTURE POPULAIRE ================= -->
+<section id="culture-populaire">
+  <div class="section-label">Postérité Culturelle</div>
+  <h2 class="section-title">D'un Fait Divers Régional à un Mythe National</h2>
+  <p class="section-intro">Peu d'affaires locales du XVIIIe siècle ont conservé une telle place dans l'imaginaire collectif français, sans cesse réinterprétée par chaque génération.</p>
+
+  <div class="culture-grid">
+    <div class="culture-card">
+      <h4>Le Pacte des Loups (2001)</h4>
+      <span class="culture-tag">Cinéma</span>
+      <p>Réalisé par Christophe Gans avec Samuel Le Bihan, ce film mêle librement histoire et fiction fantastique. Immense succès populaire en France (plusieurs millions d'entrées), il a fortement contribué à faire redécouvrir l'affaire à un public international.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Littérature régionale et populaire</h4>
+      <span class="culture-tag">Romans &amp; essais</span>
+      <p>De nombreux romans historiques et essais d'enquête, dont ceux de l'historien Michel Louis, ont contribué à faire vivre l'affaire au-delà des cercles universitaires et à populariser ses différentes hypothèses.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Documentaires et émissions</h4>
+      <span class="culture-tag">Télévision</span>
+      <p>L'affaire revient régulièrement dans les documentaires d'histoire et les émissions consacrées aux mystères non résolus, généralement présentée comme l'un des rares cas où légende et archives se recoupent aussi précisément.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Tourisme de mémoire</h4>
+      <span class="culture-tag">Lozère aujourd'hui</span>
+      <p>Sentiers de randonnée « sur les pas de la Bête », visites guidées et animations locales font aujourd'hui de l'affaire un axe touristique à part entière pour le département de la Lozère.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:40px;">Le passage d'un fait divers rural à un phénomène culturel national tient à plusieurs facteurs réunis rarement ailleurs : une couverture médiatique déjà dense à l'époque — la Gazette de France suit l'affaire de près et l'imprimerie diffuse gravures et estampes dans tout le royaume —, l'implication directe de la couronne de Louis XV, et surtout la persistance d'un doute jamais totalement levé, qui laisse à chaque époque la possibilité de se réapproprier l'histoire à sa manière.</p>
+</section>
+
+<!-- ================= SCIENCE ================= -->
+<section id="science">
+  <div class="section-label">Section Pivot</div>
+  <h2 class="section-title">Ce que Disent les Historiens et les Scientifiques</h2>
+  <p class="section-intro">Contrairement à la plupart des créatures de cette série, la Bête du Gévaudan bénéficie d'une historiographie abondante — mais cela n'a pas suffi à trancher définitivement la question.</p>
+
+  <div class="science-block">
+    <h3>Un décompte des victimes qui reste débattu</h3>
+    <p>Les historiens ne s'accordent pas sur un chiffre exact. Les estimations les plus courantes situent le nombre de morts entre environ 88 et un peu plus de 120 personnes sur la période 1764-1767, la plupart des victimes étant des femmes et des enfants gardant seuls des troupeaux. Si l'on inclut les blessés survivants, certains décomptes dépassent les 200 personnes affectées. Cet écart n'est pas anodin : il illustre les limites des sources d'époque, entre registres paroissiaux incomplets, rapports d'intendants parfois exagérés pour justifier l'aide royale, et récits populaires amplifiés au fil du bouche-à-oreille.</p>
+  </div>
+
+  <div class="science-block">
+    <h3>L'hypothèse dominante : un ou plusieurs loups</h3>
+    <p>La majorité des historiens et zoologistes contemporains s'accordent sur l'explication la plus parcimonieuse : un loup, ou plus probablement une succession de plusieurs loups différents au fil des trois années, certains d'une taille et d'une agressivité inhabituelles. Le contexte plaide en ce sens : la France du XVIIIe siècle compte une population de loups nettement plus importante qu'aujourd'hui, des hivers rigoureux poussant les meutes affamées vers les habitations, et d'autres attaques de loups sur des humains sont attestées ailleurs dans le royaume durant la même période, sans jamais atteindre la notoriété du Gévaudan.</p>
+  </div>
+
+  <div class="science-block">
+    <h3>Le doute qui persiste : un comportement jugé anormal</h3>
+    <p>Ce qui maintient le débat ouvert, ce sont les détails de comportement rapportés par de multiples témoins indépendants : une audace inhabituelle face aux humains et aux chiens, une capacité à échapper systématiquement aux battues bien organisées, et une tendance à cibler la tête et la gorge des victimes plutôt qu'un mode d'attaque de prédation classique. Ces éléments ont nourri, dès l'époque, l'hypothèse d'un animal dressé ou d'un hybride chien-loup — sans qu'aucune preuve matérielle irréfutable ne vienne jamais confirmer cette piste.</p>
+  </div>
+
+  <div class="science-block">
+    <h3>Des analyses scientifiques modernes, mais non concluantes</h3>
+    <p>Des restes présumés de la Bête, conservés notamment au Muséum national d'Histoire naturelle, ont fait l'objet d'analyses paléogénétiques à l'époque contemporaine. Ces examens n'ont pas permis de trancher définitivement la question de l'identité exacte de l'animal ou des animaux impliqués, faute de matériel biologique suffisamment fiable et clairement rattaché aux évènements de 1764-1767.</p>
+    <div class="caution-box">Il faut le dire clairement : aucune preuve matérielle du XVIIIe siècle ne permet aujourd'hui d'identifier l'espèce exacte de l'animal ou des animaux responsables avec une certitude scientifique absolue. Le consensus historique penche fortement vers le loup, mais reste un consensus de probabilité, pas une certitude établie.</div>
+  </div>
+</section>
+
+<!-- ================= THEORIES ================= -->
+<section id="theories">
+  <div class="section-label">Panorama</div>
+  <h2 class="section-title">Les Théories en Présence</h2>
+  <p class="section-intro">Aucune de ces explications n'est présentée ici comme acquise : chacune est attribuée à qui la défend, avec son niveau de crédibilité propre.</p>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Un loup, ou une succession de loups</h3>
+      <span class="theory-status">Dominante</span>
+    </div>
+    <p>Explication soutenue par la majorité des historiens et zoologistes contemporains, notamment ceux associés au Muséum national d'Histoire naturelle et aux travaux universitaires sur la question. Elle s'appuie sur le contexte écologique du XVIIIe siècle et sur la cohérence générale des descriptions avec la morphologie d'un grand loup, éventuellement de couleur ou de gabarit inhabituels.</p>
+    <p class="theory-attrib">Défendue par : la majorité des historiens et naturalistes actuels du dossier.</p>
+  </div>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Un animal dressé ou dompté pour attaquer</h3>
+      <span class="theory-status">Minoritaire mais sérieuse</span>
+    </div>
+    <p>Certains historiens, dont Michel Louis dans son ouvrage <em>La Bête du Gévaudan, l'innocence des loups</em> (1992), estiment que le comportement rapporté de l'animal — audace face à l'homme, échecs répétés des battues, attaques ciblées — ne correspond pas à celui d'un loup sauvage ordinaire. Michel Louis avance l'hypothèse d'un hybride chien-loup dressé pour tuer, possiblement à l'instigation d'une figure locale, le comte Jean-François Charles de Molette de Morangiès, dont la responsabilité resterait toutefois entièrement spéculative et n'a jamais été établie par une quelconque preuve judiciaire.</p>
+    <p class="theory-attrib">Défendue par : l'historien Michel Louis et une partie de la littérature de vulgarisation qui s'en inspire.</p>
+  </div>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Un animal exotique échappé d'une ménagerie</h3>
+      <span class="theory-status">Marginale</span>
+    </div>
+    <p>Une hypothèse plus ancienne, parfois relancée, propose une hyène ou un autre grand carnivore exotique échappé d'une ménagerie privée, ce qui expliquerait certains détails de pelage ou de silhouette jugés atypiques pour un loup dans les descriptions les plus fantaisistes. Aucune trace documentaire d'une telle ménagerie dans la région n'a toutefois été retrouvée, et cette piste reste considérée comme peu probable par la majorité des historiens.</p>
+    <p class="theory-attrib">Défendue par : quelques auteurs isolés, davantage relayée dans la culture populaire que dans la recherche académique.</p>
+  </div>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Un tueur en série humain masqué en « bête »</h3>
+      <span class="theory-status">Spéculative</span>
+    </div>
+    <p>Une théorie plus romanesque, popularisée surtout par la fiction contemporaine (dont des éléments du film <em>Le Pacte des Loups</em>), imagine qu'un ou plusieurs meurtres humains auraient été maquillés en attaques animales pour couvrir un tueur. Elle s'appuie sur le caractère ciblé de certaines attaques, mais ne repose sur aucune preuve archivistique sérieuse et est généralement écartée par les historiens comme une reconstruction a posteriori plutôt qu'une hypothèse de recherche.</p>
+    <p class="theory-attrib">Défendue par : essentiellement des œuvres de fiction et certains ouvrages à sensation, non par la recherche historique établie.</p>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Ce qu'il en Reste Aujourd'hui</h2>
+  <p class="section-intro">Deux siècles et demi plus tard, la Bête du Gévaudan est devenue un pilier de l'identité touristique et culturelle de la Lozère, bien au-delà du cercle des passionnés d'histoire.</p>
+
+  <div class="heritage-block">
+    <h4>Des musées dédiés</h4>
+    <p>Le Musée du Gévaudan à Mende consacre plusieurs salles permanentes à l'affaire, tandis que le musée fantastique de la Bête, à Saugues, propose une scénographie immersive centrée entièrement sur la légende et son contexte historique.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Des statues et un territoire balisé</h4>
+    <p>Une statue de la Bête se dresse à Saint-Privat-d'Allier, une autre commémore la résistance de Marie-Jeanne Vallet à Auvers. Des sentiers de randonnée thématiques, balisés « sur les pas de la Bête », permettent aujourd'hui de parcourir les lieux mêmes des attaques historiques.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Une identité régionale assumée</h4>
+    <p>Loin d'être fuie comme un stigmate, l'affaire est aujourd'hui pleinement intégrée à l'identité touristique de la Lozère, département par ailleurs le moins peuplé de France métropolitaine, qui en a fait un argument de curiosité patrimoniale plutôt qu'un simple fait divers macabre.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Un nom passé dans le vocabulaire médiatique</h4>
+    <p>Le patron linguistique « la Bête de [lieu] », popularisé par cette affaire, a durablement marqué la manière dont la presse française nomme certains prédateurs ou criminels marquants dans les décennies qui suivent — un héritage plus discret, mais bien réel, dans le vocabulaire du fait divers français.</p>
+  </div>
+
+  <p class="heritage-caution">Un point de méthode s'impose en refermant ce dossier : contrairement à beaucoup d'autres créatures de cette série, la Bête du Gévaudan n'est pas une légende sans ancrage — c'est un événement dont la réalité des victimes n'est pas en cause. Ce qui reste incertain, ce n'est pas « si » quelque chose s'est passé, mais bien la nature exacte de l'animal, ou des animaux, qui en a été responsable.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">GÉVAUDAN, 1764 – 1767</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>à venir</strong></p>
+</footer>
+
+</body>
+</html>

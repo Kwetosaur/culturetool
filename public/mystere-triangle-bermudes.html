@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Triangle des Bermudes — Grands Mystères du Monde</title>
+<meta name="description" content="Le Triangle des Bermudes passé au crible : faits établis, naissance de la légende, et ce que les études sérieuses (Lloyd's, Garde côtière, NOAA) démontrent réellement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #e7e1c9;
+    --bg-deep: #dcd2ac;
+    --panel: #f8f3e2;
+    --panel-border: #c3b78d;
+    --navy: #0e2c46;
+    --navy-bright: #1f6690;
+    --copper: #a3552a;
+    --copper-bright: #c97b45;
+    --foam: #eef6f4;
+    --text: #182430;
+    --text-dim: #5c6a6c;
+    --glow: rgba(31,102,144,0.28);
+    --verdict: #3c6e52;
+    --verdict-bright: #4f8a6a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at top, #f1ead2 0%, #e7e1c9 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{
+    font-family:'Cinzel', serif;
+    color:var(--navy);
+    letter-spacing:0.03em;
+    font-weight:700;
+  }
+  a{color:var(--navy-bright);}
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(14,44,70,0.02) 0px, transparent 1px, transparent 2px, rgba(14,44,70,0.02) 3px);
+    z-index:1;
+    opacity:0.6;
+  }
+
+  .wave-strip{display:block; width:100%; height:20px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:70px 20px 60px;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 10%, rgba(31,102,144,0.35), transparent 55%),
+      linear-gradient(180deg, #0a2036 0%, #0e2c46 45%, #123a5c 100%);
+    border-bottom:1px solid var(--copper);
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(238,246,244,0.5) 0, transparent 100%),
+      radial-gradient(1px 1px at 70% 20%, rgba(238,246,244,0.4) 0, transparent 100%),
+      radial-gradient(1px 1px at 40% 60%, rgba(238,246,244,0.3) 0, transparent 100%),
+      radial-gradient(1px 1px at 85% 70%, rgba(238,246,244,0.4) 0, transparent 100%),
+      radial-gradient(1px 1px at 10% 80%, rgba(238,246,244,0.3) 0, transparent 100%);
+    opacity:0.5;
+  }
+  .compass-rose{position:absolute; top:50%; left:50%; width:min(720px,92vw); height:min(720px,92vw); transform:translate(-50%,-50%); opacity:0.10; pointer-events:none;}
+  .epigraph-row{
+    position:relative;
+    font-family:'Cinzel', serif;
+    font-size:16px;
+    letter-spacing:7px;
+    color:var(--copper-bright);
+    opacity:0.85;
+    margin-bottom:26px;
+  }
+  .hero h1{
+    position:relative;
+    font-family:'Cinzel Decorative', serif;
+    font-size:clamp(2.4rem, 6.6vw, 4.9rem);
+    margin:0;
+    background:linear-gradient(180deg, var(--foam), #bcd9e6 55%, var(--copper-bright));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 44px rgba(31,102,144,0.35);
+  }
+  .hero .subtitle{
+    position:relative;
+    font-family:'Cinzel', serif;
+    font-size:1.05rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:#cfd9d5;
+    margin-top:14px;
+  }
+  .hero .tagline{
+    position:relative;
+    max-width:640px;
+    margin:30px auto 0;
+    font-style:italic;
+    color:#b7c3c2;
+    font-size:1.1rem;
+  }
+  .verdict-badge{
+    position:relative;
+    margin:36px auto 0;
+    max-width:560px;
+    border:2px solid var(--verdict-bright);
+    border-radius:6px;
+    padding:16px 28px;
+    background:rgba(60,110,82,0.14);
+    backdrop-filter:blur(2px);
+  }
+  .verdict-label{
+    font-family:'Cinzel', serif;
+    font-size:0.7rem;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--verdict-bright);
+    margin-bottom:8px;
+  }
+  .verdict-text{
+    font-family:'Cinzel', serif;
+    font-size:1.15rem;
+    color:var(--foam);
+    letter-spacing:0.01em;
+    line-height:1.4;
+  }
+  .verdict-note{
+    margin-top:8px;
+    font-size:0.86rem;
+    font-style:italic;
+    color:#a9bcb8;
+  }
+  .divider{
+    width:120px;
+    height:2px;
+    margin:34px auto;
+    background:linear-gradient(90deg, transparent, var(--copper-bright), transparent);
+  }
+  .nav-pills{
+    position:relative;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+    max-width:860px;
+  }
+  .nav-pills a{
+    text-decoration:none;
+    border:1px solid rgba(238,246,244,0.3);
+    padding:9px 20px;
+    border-radius:2px;
+    font-family:'Cinzel', serif;
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#cfd9d5;
+    background:rgba(238,246,244,0.06);
+    transition:all .25s ease;
+  }
+  .nav-pills a:hover{
+    color:var(--foam);
+    border-color:var(--copper-bright);
+    box-shadow:0 0 14px rgba(201,123,69,0.25);
+  }
+
+  /* ===== STICKY NAV ===== */
+  .sticky-nav{
+    position:sticky;
+    top:0;
+    z-index:40;
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px 18px;
+    justify-content:center;
+    padding:14px 20px;
+    background:rgba(247,240,214,0.93);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none;
+    font-family:'Cinzel', serif;
+    font-size:0.7rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    padding:4px 2px;
+    border-bottom:1px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--copper); border-color:var(--copper);}
+
+  /* ===== SECTIONS ===== */
+  section{
+    position:relative;
+    z-index:2;
+    max-width:1000px;
+    margin:0 auto;
+    padding:100px 24px;
+  }
+  .section-label{
+    text-align:center;
+    font-family:'Cinzel', serif;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--copper);
+    font-size:0.8rem;
+    margin-bottom:12px;
+  }
+  .section-title{
+    text-align:center;
+    font-size:clamp(2rem,4.5vw,3rem);
+    margin:0 0 16px;
+  }
+  .section-intro{
+    text-align:center;
+    max-width:700px;
+    margin:0 auto 60px;
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  /* ===== MAP DIAGRAM ===== */
+  .map-diagram{text-align:center; margin:10px 0 60px; opacity:0.97;}
+  .map-diagram svg{max-width:100%; height:auto;}
+  .map-caption{text-align:center; font-size:0.82rem; color:var(--text-dim); font-style:italic; margin-top:-30px; margin-bottom:50px;}
+
+  /* ===== FACT GRID (contexte) ===== */
+  .fact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(270px,1fr));
+    gap:22px;
+  }
+  .fact-card{
+    background:linear-gradient(160deg, var(--panel), #f0e8cf);
+    border:1px solid var(--panel-border);
+    border-radius:3px;
+    padding:26px 24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .fact-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--navy-bright), var(--copper-bright));
+  }
+  .fact-card h3{margin:0 0 12px; font-size:1.2rem;}
+  .fact-card p{margin:0; font-size:0.97rem;}
+  .fact-card p + p{margin-top:10px;}
+
+  /* ===== ENIGME BOX ===== */
+  .enigma-box{
+    background:linear-gradient(160deg, rgba(14,44,70,0.06), var(--panel));
+    border:1px solid var(--panel-border);
+    border-left:4px solid var(--copper);
+    border-radius:3px;
+    padding:30px 34px;
+    margin-bottom:40px;
+  }
+  .enigma-q{
+    font-family:'Cinzel', serif;
+    color:var(--navy);
+    font-size:1.15rem;
+    margin:0 0 16px;
+    line-height:1.5;
+  }
+  .enigma-q:last-child{margin-bottom:0;}
+  .enigma-q span{
+    display:inline-block;
+    color:var(--copper);
+    font-family:'Cinzel Decorative', serif;
+    margin-right:10px;
+  }
+
+  /* ===== TIMELINE (decouverte) ===== */
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{
+    content:"";
+    position:absolute; left:50%; top:0; bottom:0; width:2px;
+    background:linear-gradient(180deg, transparent, var(--copper-bright) 6%, var(--navy-bright) 94%, transparent);
+    transform:translateX(-50%);
+  }
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{
+    position:absolute; top:3px; width:13px; height:13px; border-radius:50%;
+    background:var(--bg); border:3px solid var(--copper-bright);
+    box-shadow:0 0 10px var(--glow);
+  }
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{
+    font-family:'Cinzel', serif; color:var(--copper); font-size:1rem;
+    letter-spacing:0.05em; display:block; margin-bottom:6px;
+  }
+  .timeline-content h4{margin:0 0 6px; font-size:1.05rem; color:var(--navy);}
+  .timeline-content p{margin:0; font-size:0.92rem; color:var(--text-dim);}
+
+  /* ===== CULTURE GRID ===== */
+  .culture-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+    gap:22px;
+  }
+  .culture-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:4px;
+    padding:22px 24px;
+  }
+  .culture-card h4{
+    margin:0 0 4px; font-size:1.05rem; color:var(--navy);
+    display:flex; align-items:center; gap:8px;
+  }
+  .culture-card .culture-years{
+    font-size:0.78rem; color:var(--copper); text-transform:uppercase; letter-spacing:0.08em;
+    margin-bottom:10px; display:block;
+  }
+  .culture-card p{margin:0; font-size:0.95rem;}
+
+  /* ===== SCIENCE BLOCKS ===== */
+  .science-block{
+    margin-bottom:52px;
+    padding-bottom:48px;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .science-block:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  .science-number{
+    font-family:'Cinzel Decorative', serif;
+    font-size:0.9rem;
+    color:var(--copper);
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .science-block h3{font-size:1.55rem; margin:0 0 18px;}
+  .science-block p{margin:0 0 15px; font-size:1rem;}
+  .science-block p:last-child{margin-bottom:0;}
+  .pull-quote{
+    border-left:3px solid var(--copper);
+    padding:6px 24px;
+    margin:22px 0;
+    font-style:italic;
+    color:var(--navy);
+    font-size:1.05rem;
+  }
+  .pull-quote cite{
+    display:block; margin-top:8px; font-style:normal; font-size:0.8rem;
+    color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em;
+  }
+  .verdict-callout{
+    background:linear-gradient(160deg, rgba(60,110,82,0.10), var(--panel));
+    border:1px solid var(--verdict-bright);
+    border-radius:4px;
+    padding:26px 30px;
+    margin-top:10px;
+  }
+  .verdict-callout h4{margin:0 0 10px; color:var(--verdict); font-size:1rem; text-transform:uppercase; letter-spacing:0.06em;}
+  .verdict-callout p{margin:0; font-size:0.98rem;}
+
+  /* ===== THEORIES ===== */
+  .theory-grid{display:grid; gap:20px;}
+  .theory-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:4px;
+    padding:22px 26px;
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:20px;
+  }
+  .theory-tag{
+    align-self:start;
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:6px 12px;
+    border-radius:20px;
+    text-align:center;
+    height:fit-content;
+  }
+  .theory-tag.consensus{background:rgba(60,110,82,0.16); color:var(--verdict); border:1px solid var(--verdict-bright);}
+  .theory-tag.plausible{background:rgba(31,102,144,0.14); color:var(--navy-bright); border:1px solid var(--navy-bright);}
+  .theory-tag.folklore{background:transparent; color:var(--text-dim); border:1px dashed var(--text-dim);}
+  .theory-body h4{margin:0 0 8px; font-size:1.08rem; color:var(--navy);}
+  .theory-body p{margin:0; font-size:0.96rem;}
+
+  /* ===== HERITAGE ===== */
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{
+    font-size:0.95rem; color:var(--navy); margin:0 0 10px;
+    text-transform:uppercase; letter-spacing:0.05em;
+  }
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{
+    border-left:3px solid var(--copper);
+    padding:4px 20px; margin-top:32px;
+    font-size:0.92rem; color:var(--text-dim); font-style:italic;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    text-align:center;
+    padding:80px 24px 60px;
+    border-top:1px solid var(--panel-border);
+    color:var(--text-dim);
+  }
+  footer .epigraph-row{margin-bottom:20px; font-size:15px; color:var(--copper);}
+  footer .next-up{
+    font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--text-dim);
+  }
+  footer .next-up strong{color:var(--navy);}
+
+  ::selection{background:var(--copper-bright); color:#fffaf0;}
+
+  @media (max-width:640px){
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:700px; max-width:none;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.62rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){
+      width:100%; left:0; text-align:left; padding:0 10px 44px 50px;
+    }
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{
+      left:13px; right:auto;
+    }
+    .theory-card{grid-template-columns:1fr;}
+    .theory-tag{width:fit-content;}
+  }
+</style>
+<style>
+  #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+  #side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+  #side-menu-overlay.open{opacity:1; pointer-events:auto;}
+  #side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+  #side-menu.open{transform:translateX(0);}
+  #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+  #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+  #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+  #side-menu .side-home{margin:0 14px 16px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+  #side-menu .side-label{padding:14px 22px 6px; margin-top:4px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0;}
+  #side-menu .side-label:first-of-type{padding-top:0;}
+</style>
+</head>
+<body>
+<button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
+<div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <div class="side-divider"></div>
+  <div class="side-label">Mythologies</div>
+    <a href="mythologie-nordique.html">Nordique</a>
+    <a href="mythologie-grecque.html">Grecque</a>
+    <a href="mythologie-egyptienne.html">Égyptienne</a>
+    <a href="mythologie-romaine.html">Romaine</a>
+    <a href="mythologie-celtique.html">Celtique</a>
+    <a href="mythologie-mesopotamienne.html">Mésopotamienne</a>
+    <a href="mythologie-hindoue.html">Hindoue</a>
+    <a href="mythologie-japonaise.html">Japonaise</a>
+    <a href="mythologie-azteque-maya.html">Aztèque & Maya</a>
+    <a href="mythologie-slave.html">Slave</a>
+  <div class="side-label">Cultures</div>
+    <a href="culture-chinoise.html">Chine</a>
+  <div class="side-label">Créatures</div>
+    <a href="creature-gevaudan.html">Bête du Gévaudan</a>
+  <div class="side-label">Mystères</div>
+    <a href="mystere-triangle-bermudes.html" class="active">Triangle des Bermudes</a>
+</nav>
+
+
+<header class="hero">
+  <svg class="compass-rose" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="95" fill="none" stroke="#eef6f4" stroke-width="0.6"/>
+    <circle cx="100" cy="100" r="70" fill="none" stroke="#eef6f4" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="45" fill="none" stroke="#eef6f4" stroke-width="0.4"/>
+    <g stroke="#eef6f4" stroke-width="0.5">
+      <line x1="100" y1="5" x2="100" y2="195"/>
+      <line x1="5" y1="100" x2="195" y2="100"/>
+      <line x1="30" y1="30" x2="170" y2="170"/>
+      <line x1="170" y1="30" x2="30" y2="170"/>
+    </g>
+    <polygon points="100,15 106,90 100,80 94,90" fill="#c97b45"/>
+    <text x="100" y="12" text-anchor="middle" fill="#eef6f4" font-size="9" font-family="Cinzel, serif">N</text>
+    <text x="100" y="196" text-anchor="middle" fill="#eef6f4" font-size="9" font-family="Cinzel, serif">S</text>
+    <text x="4" y="103" text-anchor="middle" fill="#eef6f4" font-size="9" font-family="Cinzel, serif">O</text>
+    <text x="196" y="103" text-anchor="middle" fill="#eef6f4" font-size="9" font-family="Cinzel, serif">E</text>
+  </svg>
+  <div class="epigraph-row">ATLANTIQUE NORD &bull; 25°N 71°O</div>
+  <h1>Le Triangle des Bermudes</h1>
+  <div class="subtitle">Miami &bull; Bermudes &bull; San Juan de Porto Rico</div>
+  <p class="tagline">Premier chapitre de la série "Grands Mystères du Monde" : le dossier le plus célèbre de la mer des Sargasses, examiné pièce par pièce — des disparitions bien réelles à la légende qui les a recouvertes.</p>
+  <div class="verdict-badge">
+    <div class="verdict-label">Verdict de l'enquête</div>
+    <div class="verdict-text">Largement expliqué par la science — pas de mystère surnaturel</div>
+    <div class="verdict-note">Le taux d'incidents n'y est pas statistiquement supérieur à celui d'autres zones océaniques très fréquentées.</div>
+  </div>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#contexte">Contexte</a>
+    <a href="#enigme">L'Énigme</a>
+    <a href="#decouverte">Naissance du Mythe</a>
+    <a href="#culture-populaire">Culture Populaire</a>
+    <a href="#science">Ce Que Dit la Science</a>
+    <a href="#theories">Les Théories</a>
+    <a href="#heritage">Héritage</a>
+  </nav>
+</header>
+
+<svg class="wave-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="wave0" width="40" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 12 Q10 4 20 12 T40 12" stroke="#a3552a" stroke-width="2" fill="none" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#wave0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#contexte">Contexte</a>
+  <a href="#enigme">Énigme</a>
+  <a href="#decouverte">Découverte</a>
+  <a href="#culture-populaire">Culture Pop.</a>
+  <a href="#science">Science</a>
+  <a href="#theories">Théories</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= CONTEXTE ================= -->
+<section id="contexte">
+  <div class="section-label">Ce Qui Est Établi</div>
+  <h2 class="section-title">Un Lieu, un Trafic, des Pertes Réelles</h2>
+  <p class="section-intro">Avant la légende, il y a une géographie précise, une circulation maritime et aérienne considérable, et une poignée de disparitions authentiques, étalées sur près d'un siècle. C'est ce socle factuel qu'il faut poser avant d'aborder ce qui relève, lui, de la construction médiatique.</p>
+
+  <div class="map-diagram diagram-scroll">
+    <svg viewBox="0 0 700 460" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#bcd9e6"/>
+          <stop offset="100%" stop-color="#8fb9cb"/>
+        </linearGradient>
+      </defs>
+      <rect x="20" y="20" width="660" height="420" fill="url(#ocean)" opacity="0.45" rx="4"/>
+      <!-- landmasses (stylisées, non à l'échelle) -->
+      <path d="M90 60 L150 55 L165 110 L140 190 L110 250 L85 220 L95 150 Z" fill="#dccf9e" opacity="0.9"/>
+      <text x="70" y="80" font-family="Cinzel, serif" font-size="13" fill="#0e2c46">Floride</text>
+      <circle cx="120" cy="230" r="16" fill="#dccf9e" opacity="0.9"/>
+      <text x="60" y="255" font-family="Cinzel, serif" font-size="12" fill="#0e2c46">Miami</text>
+      <ellipse cx="560" cy="90" rx="14" ry="9" fill="#dccf9e" opacity="0.9"/>
+      <text x="500" y="72" font-family="Cinzel, serif" font-size="12" fill="#0e2c46">Bermudes</text>
+      <path d="M470 340 L560 335 L565 365 L480 372 Z" fill="#dccf9e" opacity="0.9"/>
+      <text x="470" y="400" font-family="Cinzel, serif" font-size="12" fill="#0e2c46">San Juan (Porto Rico)</text>
+
+      <!-- triangle -->
+      <polygon points="120,230 560,90 520,352" fill="rgba(163,85,42,0.10)" stroke="#a3552a" stroke-width="2.5" stroke-dasharray="8 6"/>
+      <circle cx="120" cy="230" r="5" fill="#a3552a"/>
+      <circle cx="560" cy="90" r="5" fill="#a3552a"/>
+      <circle cx="520" cy="352" r="5" fill="#a3552a"/>
+
+      <text x="330" y="235" text-anchor="middle" font-family="Cinzel, serif" font-size="14" fill="#0e2c46" font-weight="700">Mer des Sargasses</text>
+      <text x="330" y="255" text-anchor="middle" font-family="EB Garamond, serif" font-style="italic" font-size="11" fill="#3a4a4c">~1,3 à 3,9 millions de km² selon les tracés</text>
+
+      <!-- gulf stream arrow -->
+      <path d="M60 300 Q200 250 300 200 Q400 150 520 100" fill="none" stroke="#c97b45" stroke-width="3" stroke-linecap="round" opacity="0.8" marker-end="url(#arrow)"/>
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#c97b45"/>
+        </marker>
+      </defs>
+      <text x="150" y="290" font-family="EB Garamond, serif" font-style="italic" font-size="12" fill="#7a3e1c">Courant du Gulf Stream</text>
+
+      <text x="480" y="330" font-family="EB Garamond, serif" font-style="italic" font-size="11" fill="#0e2c46">Fosse de Porto Rico</text>
+      <text x="480" y="345" font-family="EB Garamond, serif" font-style="italic" font-size="11" fill="#0e2c46">−8 376 m (point le plus profond de l'Atlantique)</text>
+    </svg>
+  </div>
+  <p class="map-caption">Carte simplifiée, non à l'échelle — les trois sommets usuels du Triangle et les traits géographiques les plus souvent cités.</p>
+
+  <div class="fact-grid">
+    <div class="fact-card">
+      <h3>Une délimitation officieuse</h3>
+      <p>Le "Triangle des Bermudes" n'a jamais été reconnu par aucune autorité géographique : le Conseil américain des noms géographiques ne tient aucun dossier à son sujet et la Garde côtière américaine précise ne pas reconnaître son existence comme zone de danger spécifique.</p>
+      <p>Dans l'usage courant, popularisé par la presse à partir des années 1950-1960, ses trois sommets sont situés à Miami (Floride), aux Bermudes et à San Juan (Porto Rico) — une zone de l'Atlantique Nord-Ouest dont la superficie varie, selon les auteurs, entre environ 1,3 et 3,9 millions de km². Elle recouvre une partie de la mer des Sargasses, une portion du Gulf Stream, et la fosse de Porto Rico, qui atteint 8 376 mètres, le point le plus profond de tout l'Atlantique.</p>
+    </div>
+    <div class="fact-card">
+      <h3>Un des couloirs les plus fréquentés au monde</h3>
+      <p>Loin d'être une étendue isolée, cette portion d'océan concentre un trafic maritime et aérien considérable : routes commerciales entre la côte est des États-Unis, les Caraïbes et l'Amérique du Sud, croisières touristiques vers les Bahamas et les Antilles, aviation privée et commerciale dense entre la Floride et les îles voisines.</p>
+      <p>Mécaniquement, un tel volume de trajets produit, sur plusieurs décennies, un nombre brut d'incidents plus élevé qu'une zone peu fréquentée — sans que cela traduise, en soi, un danger particulier.</p>
+    </div>
+    <div class="fact-card">
+      <h3>Des pertes documentées, jamais contestées</h3>
+      <p>Le 4 mars 1918, le collier USS <em>Cyclops</em> de l'US Navy disparaît entre la Barbade et Baltimore avec 306 personnes à bord, sans épave ni signal de détresse — la plus lourde perte non liée au combat de toute l'histoire de la marine américaine.</p>
+      <p>Le 5 décembre 1945, cinq bombardiers-torpilleurs TBM Avenger de l'US Navy (Vol 19) et l'hydravion PBM Mariner envoyé à leur recherche disparaissent au large de la Floride, emportant 27 hommes. Ces pertes sont réelles et documentées ; ce qui l'est beaucoup moins, c'est leur regroupement a posteriori, des décennies plus tard, en un phénomène unique et anormal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ENIGME ================= -->
+<section id="enigme">
+  <div class="section-label">La Question Posée</div>
+  <h2 class="section-title">Ce que la Légende Prétendait Expliquer</h2>
+  <p class="section-intro">Réduite à l'essentiel, l'énigme popularisée à partir des années 1960 tient en deux questions — le reste n'est qu'ornement narratif accumulé au fil des rééditions.</p>
+
+  <div class="enigma-box">
+    <p class="enigma-q"><span>I.</span>Pourquoi des navires et des avions ont-ils disparu dans cette zone sans laisser d'épave, de débris identifiables ni de signal de détresse exploitable ?</p>
+    <p class="enigma-q"><span>II.</span>Le nombre de disparitions y est-il réellement supérieur à celui d'autres zones océaniques comparables, ou bien s'agit-il d'une impression construite après coup, par sélection des cas les plus frappants ?</p>
+  </div>
+
+  <p>La première question a une réponse en grande partie prosaïque, développée plus loin dans la section consacrée à la science : les profondeurs abyssales de la fosse de Porto Rico et les courants puissants du Gulf Stream dispersent rapidement les débris et rendent la recherche d'épaves difficile, y compris pour des naufrages parfaitement ordinaires. Une disparition "sans trace" n'a donc, en elle-même, rien d'anormal dans une zone aussi profonde et aussi agitée.</p>
+
+  <p>La seconde question, en revanche, est celle qui a longtemps été mal posée. Des auteurs successifs ont compilé des listes d'incidents survenus sur plus d'un siècle, dans des zones aux contours flous et changeants d'un livre à l'autre, sans les comparer au volume de trafic réel ni aux taux d'incidents observés ailleurs. Le résultat donne l'impression d'un motif — alors qu'il s'agit, pour l'essentiel, de l'attrition ordinaire d'une des routes maritimes et aériennes les plus fréquentées du globe, mise en récit après coup.</p>
+</section>
+
+<!-- ================= DECOUVERTE ================= -->
+<section id="decouverte">
+  <div class="section-label">Naissance du Mythe</div>
+  <h2 class="section-title">Des Faits Épars à la Légende Fabriquée</h2>
+  <p class="section-intro">Entre les premières disparitions et la naissance du "Triangle des Bermudes" comme phénomène médiatique, il s'écoule parfois plusieurs décennies. Cette chronologie distingue les événements bruts de leur transformation, bien plus tardive, en mystère grand public.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">4 mars 1918</span>
+        <h4>Disparition de l'USS Cyclops</h4>
+        <p>306 personnes perdues sans trace — un fait brut, non encore associé à une quelconque zone maléfique.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">5 décembre 1945</span>
+        <h4>Disparition du Vol 19</h4>
+        <p>Cinq Avenger de l'US Navy et leur hydravion de secours disparaissent au large de la Floride ; l'enquête officielle conclura à des "causes ou raisons inconnues" après une désorientation du commandant de bord.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">17 septembre 1950</span>
+        <h4>Premier article de presse</h4>
+        <p>Le journaliste Edward Van Winkle Jones publie, via l'Associated Press, "Sea's Puzzles Still Baffle Men in Pushbutton Age" : une liste de pertes maritimes dans le secteur, sans nom ni tracé encore définis.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Octobre 1952</span>
+        <h4>Premier tracé de la zone</h4>
+        <p>Dans le magazine <em>Fate</em>, George X. Sand ("Sea Mystery at Our Back Door") est le premier à dessiner la zone triangulaire aujourd'hui familière, sans encore la nommer.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Février 1964</span>
+        <h4>Naissance du nom</h4>
+        <p>Vincent Gaddis publie dans <em>Argosy</em> "The Deadly Bermuda Triangle" et invente l'expression, en fixant ses sommets à Miami, San Juan et les Bermudes.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1974</span>
+        <h4>Le best-seller de Charles Berlitz</h4>
+        <p>Son livre <em>The Bermuda Triangle</em> se vend à près de 20 millions d'exemplaires en 30 langues et installe durablement le mythe dans la culture de masse — Atlantide engloutie comprise.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1975</span>
+        <h4>La contre-enquête de Larry Kusche</h4>
+        <p><em>The Bermuda Triangle Mystery: Solved</em> ré-examine chaque cas allégué entre 1840 et 1973 et révèle des erreurs, exagérations et récits déformés d'un auteur à l'autre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CULTURE POPULAIRE ================= -->
+<section id="culture-populaire">
+  <div class="section-label">Dans l'Imaginaire Collectif</div>
+  <h2 class="section-title">Une Légende Devenue Genre à Part Entière</h2>
+  <p class="section-intro">En quelques décennies, le Triangle des Bermudes a quitté les colonnes de faits divers pour devenir un motif culturel autonome — au prix, presque systématiquement, d'un éloignement croissant vis-à-vis des faits documentés.</p>
+
+  <div class="culture-grid">
+    <div class="culture-card">
+      <h4>Livres</h4>
+      <span class="culture-years">1974 &amp; 1975</span>
+      <p>Le best-seller de Charles Berlitz (1974) impose le mythe au grand public mondial ; l'année suivante, l'enquête méthodique de Larry Kusche tente, avec un succès plus discret, de le démonter cas par cas — saluée par Carl Sagan et Isaac Asimov.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Cinéma et télévision</h4>
+      <span class="culture-years">1976 – 1979</span>
+      <p>Un épisode de la série documentaire <em>In Search of...</em>, présenté par Leonard Nimoy (1977), puis le docudrame <em>The Bermuda Triangle</em> (1979, Sunn Classic Pictures, adapté du livre de Berlitz) et un film d'horreur italo-mexicain la même vague (1978) ancrent le sujet dans l'audiovisuel populaire.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Documentaires contemporains</h4>
+      <span class="culture-years">Depuis les années 1990</span>
+      <p>Chaînes comme History ou Discovery continuent de produire des spéciaux sur le sujet, mêlant souvent, sans toujours le préciser, faits vérifiés et hypothèses depuis longtemps écartées par la recherche.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Théories conspirationnistes populaires</h4>
+      <span class="culture-years">Folklore, non validé</span>
+      <p>Portails dimensionnels, enlèvements extraterrestres, cité engloutie de l'Atlantide émettant des champs d'énergie perturbateurs : ces explications, popularisées notamment par Berlitz lui-même, appartiennent au folklore construit autour du mystère — jamais à un consensus scientifique quelconque.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCIENCE (pivot) ================= -->
+<section id="science">
+  <div class="section-label">Section Pivot</div>
+  <h2 class="section-title">Ce Que Disent Réellement les Études Sérieuses</h2>
+  <p class="section-intro">C'est ici que la légende rencontre les chiffres. Depuis les années 1970, plusieurs organismes indépendants — assureurs maritimes, garde-côtes, agences océanographiques — ont examiné la question sans a priori. Leurs conclusions convergent, et elles sont nettement moins spectaculaires que le mythe.</p>
+
+  <div class="science-block">
+    <div class="science-number">I</div>
+    <h3>Aucune anomalie statistique démontrée</h3>
+    <p>Le marché de l'assurance maritime Lloyd's of London, dont l'intérêt commercial serait pourtant de facturer une prime plus élevée pour une zone réellement plus dangereuse, a conclu que le Triangle n'est pas plus risqué qu'aucune autre portion d'océan et ne pratique aucune surprime pour les traversées qui le concernent.</p>
+    <p>La Garde côtière américaine aboutit à la même conclusion après examen répété des pertes aériennes et maritimes de la zone : "rien n'a été découvert qui indiquerait que ces pertes résultent d'autre chose que de causes physiques ordinaires." L'agence océanographique américaine NOAA le formule de façon tout aussi directe :</p>
+    <p class="pull-quote">"Il n'existe aucune preuve que des disparitions mystérieuses se produisent avec une fréquence plus élevée dans le Triangle des Bermudes que dans n'importe quelle autre grande zone océanique très fréquentée."<cite>NOAA, Office of Ocean Exploration and Research</cite></p>
+  </div>
+
+  <div class="science-block">
+    <div class="science-number">II</div>
+    <h3>Le travail de contre-enquête de Larry Kusche</h3>
+    <p>En 1975, le bibliothécaire et pilote Larry Kusche publie <em>The Bermuda Triangle Mystery: Solved</em>, fruit d'un examen systématique de chaque cas allégué entre 1840 et 1973. Ses conclusions sont sans appel : nombre de "mystères" reposaient sur des navires dont l'épave avait en réalité été retrouvée mais omise dans les récits ultérieurs, des tempêtes connues mais passées sous silence, des dates ou des positions inexactes recopiées sans vérification d'un livre à l'autre, voire des bateaux qui ne se trouvaient tout simplement pas dans la zone au moment des faits.</p>
+    <p>Son travail a été salué par des figures aussi exigeantes que l'astronome Carl Sagan ou l'écrivain scientifique Isaac Asimov, qui y voyait "un verre d'eau de source pétillante après n'avoir eu droit qu'à de la boue."</p>
+  </div>
+
+  <div class="science-block">
+    <div class="science-number">III</div>
+    <h3>Des explications naturelles, cas par cas</h3>
+    <p>Pour les incidents individuels les mieux documentés, les hypothèses avancées restent volontairement modestes et n'invoquent jamais de mécanisme unique :</p>
+    <p><strong>Le Gulf Stream</strong>, courant chaud et rapide qui traverse la zone, peut générer des changements météorologiques brutaux et localisés, et disperser en quelques heures les débris d'un naufrage — rendant plus difficile la reconstitution des faits, sans pour autant les provoquer.</p>
+    <p><strong>Les tempêtes tropicales et ouragans</strong> sont statistiquement plus fréquents dans cette portion de l'Atlantique qu'ailleurs sur le globe, ce qui explique mécaniquement une partie du volume de pertes recensées.</p>
+    <p><strong>L'erreur humaine de navigation</strong> reste l'explication retenue pour le Vol 19 : son commandant, désorienté après une panne de boussole, a confondu des îlots des Bahamas, entraînant le groupe loin de la côte jusqu'à épuisement du carburant. La zone est par ailleurs l'une des rares portions du globe traversées, à certaines époques, par la ligne agonique — l'endroit où le nord magnétique et le nord géographique coïncident. Ce phénomène géomagnétique parfaitement documenté et cartographié, qui se déplace lentement avec le temps, a pu ajouter à la confusion de navigateurs peu avertis, sans qu'il s'agisse d'une anomalie mystérieuse.</p>
+    <p><strong>La topographie sous-marine</strong>, avec la fosse de Porto Rico atteignant 8 376 mètres, rend la récupération d'épaves extrêmement difficile — contribuant directement à l'impression de disparition "totale" qui alimente la légende.</p>
+  </div>
+
+  <div class="science-block">
+    <div class="science-number">IV</div>
+    <h3>Une hypothèse partielle : les hydrates de méthane</h3>
+    <p>D'importants gisements d'hydrates de méthane — du gaz piégé dans une structure glacée, sous haute pression et basse température — existent au large, notamment sur la crête de Blake, au nord du Triangle. Une libération brutale de ces poches de gaz pourrait, en théorie, réduire soudainement la flottabilité d'un navire jusqu'à le faire couler quasi instantanément.</p>
+    <p>Une étude publiée en 2003 dans l'<em>American Journal of Physics</em> a confirmé ce mécanisme sur une maquette en laboratoire. Mais aucun naufrage réel dans le Triangle n'a jamais été formellement attribué à ce phénomène : il s'agit d'une hypothèse plausible pour un cas isolé et hypothétique, jamais démontrée pour un incident précis et documenté.</p>
+  </div>
+
+  <div class="verdict-callout">
+    <h4>En résumé</h4>
+    <p>Aucun organisme scientifique ou maritime sérieux — Lloyd's, Garde côtière américaine, NOAA, Conseil américain des noms géographiques — ne reconnaît au Triangle des Bermudes une dangerosité anormale. Les cas individuels les plus célèbres trouvent, au cas par cas, des explications ordinaires : météo brutale, erreur humaine, profondeur abyssale rendant les épaves introuvables. Le mystère, en tant que phénomène unique et anormal, est largement résolu — ce qui n'enlève rien à la réalité des vies perdues dans chacun de ces incidents.</p>
+  </div>
+</section>
+
+<!-- ================= THEORIES ================= -->
+<section id="theories">
+  <div class="section-label">Panorama</div>
+  <h2 class="section-title">Les Théories, Classées Sans Complaisance</h2>
+  <p class="section-intro">Toutes les théories qui circulent autour du Triangle des Bermudes n'ont pas le même poids. Les classer clairement évite de leur accorder, par la seule proximité du texte, une crédibilité qu'elles n'ont pas.</p>
+
+  <div class="theory-grid">
+    <div class="theory-card">
+      <span class="theory-tag consensus">Consensus scientifique</span>
+      <div class="theory-body">
+        <h4>Pas de mystère réel — un artefact statistique et médiatique</h4>
+        <p>Position soutenue par Lloyd's of London, la Garde côtière américaine, la NOAA et la contre-enquête de Larry Kusche : le taux d'incidents dans la zone correspond à celui attendu compte tenu de son trafic, et la plupart des cas emblématiques reposent sur des récits exagérés ou déformés au fil des rééditions.</p>
+      </div>
+    </div>
+    <div class="theory-card">
+      <span class="theory-tag plausible">Hypothèse naturelle sérieuse</span>
+      <div class="theory-body">
+        <h4>Le Gulf Stream et les tempêtes soudaines</h4>
+        <p>Un courant rapide capable de générer des conditions météorologiques brutales et de disperser rapidement les débris, dans une région par ailleurs exposée aux tempêtes tropicales.</p>
+      </div>
+    </div>
+    <div class="theory-card">
+      <span class="theory-tag plausible">Hypothèse naturelle sérieuse</span>
+      <div class="theory-body">
+        <h4>Erreur humaine et désorientation</h4>
+        <p>Explication retenue pour le Vol 19 : panne de boussole, confusion géographique, épuisement du carburant — aggravés, potentiellement, par la traversée de la ligne agonique où la navigation magnétique demande une attention particulière.</p>
+      </div>
+    </div>
+    <div class="theory-card">
+      <span class="theory-tag plausible">Hypothèse partielle, non démontrée</span>
+      <div class="theory-body">
+        <h4>Les hydrates de méthane</h4>
+        <p>Mécanisme confirmé en laboratoire sur une maquette, jamais formellement établi pour un naufrage réel dans le Triangle.</p>
+      </div>
+    </div>
+    <div class="theory-card">
+      <span class="theory-tag folklore">Folklore, non scientifique</span>
+      <div class="theory-body">
+        <h4>Portails dimensionnels et distorsions spatio-temporelles</h4>
+        <p>Théorie récurrente dans la littérature grand public depuis les années 1970, sans le moindre fondement observable ou testable.</p>
+      </div>
+    </div>
+    <div class="theory-card">
+      <span class="theory-tag folklore">Folklore, non scientifique</span>
+      <div class="theory-body">
+        <h4>Intervention extraterrestre</h4>
+        <p>Reprise notamment par l'épisode de <em>In Search of...</em> de 1977, jamais étayée par le moindre élément vérifiable.</p>
+      </div>
+    </div>
+    <div class="theory-card">
+      <span class="theory-tag folklore">Folklore, non scientifique</span>
+      <div class="theory-body">
+        <h4>L'Atlantide engloutie</h4>
+        <p>Hypothèse avancée par Charles Berlitz lui-même dans son livre de 1974 : des cristaux ou technologies atlantes immergés perturberaient instruments et navigation — une spéculation sans aucun support archéologique ou scientifique.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Une Légende qui Survit à sa Propre Résolution</h2>
+  <p class="section-intro">Le Triangle des Bermudes illustre un cas de figure rare dans cette série : un mystère largement résolu par la science, dont la légende continue pourtant de prospérer, portée par une économie et une culture populaire qui n'ont plus vraiment besoin du mystère pour perdurer.</p>
+
+  <div class="heritage-block">
+    <h4>Une économie touristique bien réelle</h4>
+    <p>Les Bermudes comme le sud de la Floride entretiennent, sans grand secret, une industrie touristique appuyée sur la légende : croisières à thème, boutiques de souvenirs, visites guidées et produits dérivés continuent d'attirer les visiteurs, indépendamment de toute preuve d'un danger réel.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Une industrie culturelle toujours active</h4>
+    <p>Des décennies après la contre-enquête de Kusche, documentaires, ouvrages, séries télévisées et jeux vidéo continuent de puiser dans l'imagerie du Triangle — souvent en mêlant, sans le préciser, faits vérifiés et théories depuis longtemps écartées par la recherche.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Un motif durable de la culture mondiale</h4>
+    <p>Peu de légendes maritimes modernes ont autant essaimé : le nom même du "Triangle des Bermudes" est devenu, dans le langage courant, une métaphore pour toute disparition inexpliquée — bien au-delà de son sens géographique d'origine.</p>
+  </div>
+
+  <p class="heritage-caution">Un rappel s'impose en clôture de cette page : derrière la légende, l'USS <em>Cyclops</em> et le Vol 19 restent des tragédies humaines bien réelles, avec des équipages et des familles concernées. Le fait que la science ait, dans l'ensemble, dissipé le mystère qui les entourait ne doit jamais faire oublier ces vies perdues en mer.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">&#9875;</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain dossier de la série : <strong>Stonehenge</strong></p>
+</footer>
+
+</body>
+</html>
