@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Égypte Antique — Pharaons, Peuples &amp; Civilisation du Nil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #e9d9ae;
+    --bg-deep: #ddc78e;
+    --panel: #f8efd6;
+    --panel-border: #b98d42;
+    --ink: #2b1f12;
+    --red: #b5502e;
+    --red-bright: #d1653f;
+    --gold: #b8860b;
+    --gold-bright: #d4a017;
+    --jade: #1f8478;
+    --jade-bright: #2aa89a;
+    --text: #2b1f12;
+    --text-dim: #7a6440;
+    --glow: rgba(181,80,46,0.25);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #f5ead0 0%, #e9d9ae 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{font-family:'Cinzel', serif; color:var(--red); letter-spacing:0.03em; font-weight:700;}
+  a{color:var(--red-bright);}
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, rgba(43,31,18,0.015) 0px, transparent 2px, transparent 4px, rgba(43,31,18,0.015) 6px);
+    z-index:1;
+  }
+  .meander-strip{display:block; width:100%; height:20px;}
+
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 18%, rgba(181,80,46,0.12), transparent 55%),
+      linear-gradient(180deg, #f5ead0 0%, #e9d9ae 60%, #ddc78e 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .epigraph-row{font-size:22px; letter-spacing:8px; color:var(--red); opacity:0.85; margin-bottom:28px; font-family:'Cinzel', serif;}
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.4rem, 6.5vw, 4.9rem); margin:0;
+    background:linear-gradient(180deg, var(--red-bright), var(--gold) 55%, var(--jade) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 40px rgba(181,80,46,0.15);
+  }
+  .hero .subtitle{font-family:'Cinzel', serif; font-size:1.05rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-top:14px;}
+  .hero .tagline{max-width:660px; margin:34px auto 0; font-style:italic; color:var(--text-dim); font-size:1.15rem;}
+  .divider{width:120px; height:2px; margin:36px auto; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+  .nav-pills{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:900px;}
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(181,80,46,0.04); transition:all .25s ease;
+  }
+  .nav-pills a:hover{color:var(--red); border-color:var(--gold); box-shadow:0 0 14px var(--glow);}
+
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 16px; justify-content:center;
+    padding:14px 20px; background:rgba(233,217,174,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.07em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--red); border-color:var(--red);}
+
+  section{position:relative; z-index:2; max-width:1040px; margin:0 auto; padding:100px 24px;}
+  .section-label{text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); font-size:0.8rem; margin-bottom:12px;}
+  .section-title{text-align:center; font-size:clamp(2rem,4.5vw,3rem); margin:0 0 16px;}
+  .section-intro{text-align:center; max-width:700px; margin:0 auto 60px; color:var(--text-dim); font-style:italic;}
+
+  .epistemic-note{background:rgba(184,134,11,0.06); border:1px dashed var(--panel-border); border-radius:3px; padding:18px 26px; margin:0 auto 50px; max-width:780px; font-size:0.93rem; color:var(--text-dim); font-style:italic;}
+
+  /* --- Crest strip (bordure de cartouches) --- */
+  .crest-strip{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:0 auto 30px; max-width:960px;}
+  .crest-badge{
+    background:linear-gradient(160deg, var(--red), #7a3319); color:#f5ead0; border:1px solid var(--gold);
+    border-radius:3px; padding:6px 12px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.04em;
+    text-align:center; min-width:64px;
+  }
+  .crest-badge .cn{display:block; font-size:0.78rem; margin-bottom:2px; color:var(--gold-bright); font-style:italic;}
+
+  /* --- Map frame --- */
+  .map-frame{
+    border:2px solid var(--panel-border); border-radius:4px; background:var(--panel);
+    padding:20px; margin:0 auto 26px; max-width:1000px;
+    box-shadow:0 10px 40px rgba(43,31,18,0.12);
+  }
+  .map-frame svg{max-width:100%; height:auto; display:block; margin:0 auto;}
+  .map-legend{display:flex; flex-wrap:wrap; gap:18px; justify-content:center; margin:0 auto 50px; max-width:900px; font-size:0.85rem; color:var(--text-dim);}
+  .map-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend-swatch{display:inline-block; width:22px; height:3px; background:var(--red);}
+  .legend-swatch.river{background:#2f74a5; height:2px;}
+  .legend-swatch.wall{background:repeating-linear-gradient(90deg, var(--gold) 0 4px, transparent 4px 8px); height:3px;}
+  .legend-swatch.silk{background:repeating-linear-gradient(90deg, var(--jade) 0 2px, transparent 2px 5px); height:2px;}
+  .legend-dot{display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--red); border:2px solid var(--gold);}
+
+  .region-wrap{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .region-card{background:linear-gradient(160deg, var(--panel), #f2e3bc); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden;}
+  .region-card::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--red), var(--gold));}
+  .region-card h3{margin:0 0 4px; font-size:1.2rem;}
+  .region-card .region-sub{font-size:0.82rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:12px;}
+  .region-card p{margin:0; font-size:0.97rem;}
+
+  .people-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .people-card{background:var(--panel); border:1px solid var(--panel-border); border-left:4px solid var(--jade-bright); border-radius:3px; padding:22px 24px;}
+  .people-card h3{margin:0 0 4px; font-size:1.15rem;}
+  .people-card .people-pct{font-size:0.78rem; color:var(--jade-bright); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; font-family:'Cinzel', serif;}
+  .people-card p{margin:0; font-size:0.95rem;}
+
+  .figure-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px;}
+  .figure-card{background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;}
+  .figure-card:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(43,31,18,0.15), 0 0 0 1px var(--gold);}
+  .figure-header{padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(181,80,46,0.07), transparent);}
+  .figure-name{font-size:1.45rem; margin:0;}
+  .figure-dates{font-size:0.85rem; color:var(--red); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px;}
+  .figure-body{padding:18px 24px 24px;}
+  .figure-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px;}
+  .figure-body p{margin:0 0 10px; font-size:0.97rem;}
+  .figure-body p:last-child{margin-bottom:0;}
+
+  .invention-list{display:grid; gap:18px;}
+  .invention-item{display:grid; grid-template-columns:200px 1fr; gap:24px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:20px 24px;}
+  .invention-name{font-family:'Cinzel', serif; color:var(--red); font-size:1.1rem; align-self:start;}
+  .invention-name span{display:block; font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; font-family:'EB Garamond', serif; font-style:italic;}
+
+  .story-block{margin-bottom:56px; padding-bottom:52px; border-bottom:1px solid var(--panel-border);}
+  .story-block:last-child{border-bottom:none;}
+  .story-number{font-family:'Cinzel Decorative', serif; font-size:0.95rem; color:var(--red); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;}
+  .story-block h3{font-size:1.65rem; margin:0 0 10px;}
+  .story-date{font-size:0.85rem; color:var(--gold); font-family:'Cinzel', serif; letter-spacing:0.05em; margin-bottom:16px; display:block;}
+  .story-block p{margin:0 0 16px; font-size:1.02rem;}
+  .story-block p:last-child{margin-bottom:0;}
+  .pull-quote{border-left:3px solid var(--gold); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--red); font-size:1.1rem;}
+
+  .anecdote-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;}
+  .anecdote-card{background:linear-gradient(160deg, rgba(181,80,46,0.05), var(--panel)); border:1px solid var(--panel-border); border-left:3px solid var(--jade-bright); padding:20px 22px; border-radius:3px;}
+  .anecdote-card h4{font-size:1rem; margin:0 0 8px; color:var(--red); text-transform:uppercase; letter-spacing:0.04em;}
+  .anecdote-card p{margin:0; font-size:0.95rem; color:var(--text);}
+
+  .life-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .life-card{background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:24px 26px; border-top:3px solid var(--gold);}
+  .life-card h4{margin:0 0 10px; font-size:1.1rem; color:var(--red);}
+  .life-card p{margin:0; font-size:0.96rem;}
+
+  .reach-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:50px;}
+  .reach-card{border:1px solid var(--panel-border); border-top:2px solid var(--jade-bright); padding:18px 20px; background:var(--panel); border-radius:3px;}
+  .reach-card h4{margin:0 0 6px; font-size:1rem; color:var(--red);}
+  .reach-card .reach-dist{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px;}
+  .reach-card p{margin:0; font-size:0.92rem;}
+
+  .tree-diagram{text-align:center; margin:50px 0 70px; opacity:0.97;}
+  .tree-diagram svg{max-width:100%; height:auto;}
+
+  .timeline{position:relative; max-width:840px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg, transparent, var(--gold) 6%, var(--gold) 94%, transparent); transform:translateX(-50%);}
+  .timeline-item{position:relative; width:50%; padding:0 42px 50px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--red); box-shadow:0 0 10px var(--glow);}
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{font-family:'Cinzel', serif; color:var(--red); font-size:0.95rem; letter-spacing:0.05em; display:block; margin-bottom:6px;}
+  .timeline-content h4{margin:0 0 6px; font-size:1.02rem; color:var(--gold);}
+  .timeline-content p{margin:0; font-size:0.9rem; color:var(--text-dim);}
+
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{font-size:0.95rem; color:var(--jade); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{border-left:3px solid var(--red); padding:4px 20px; margin-top:32px; font-size:0.92rem; color:var(--text-dim); font-style:italic;}
+
+  footer{text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim);}
+  footer .epigraph-row{margin-bottom:20px; font-size:18px;}
+  footer .next-up{font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim);}
+  footer .next-up strong{color:var(--red);}
+
+  ::selection{background:var(--red); color:#f5ead0;}
+
+  @media (max-width:640px){
+    .invention-item{grid-template-columns:1fr;}
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:640px; max-width:none;}
+    .sticky-nav{gap:4px 8px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.6rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){width:100%; left:0; text-align:left; padding:0 10px 40px 50px;}
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{left:13px; right:auto;}
+  }
+</style>
+<style>
+  #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+  #side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+  #side-menu-overlay.open{opacity:1; pointer-events:auto;}
+  #side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+  #side-menu.open{transform:translateX(0);}
+  #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+  #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+  #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+  #side-menu .side-home{margin:0 14px 16px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+  #side-menu .side-label{padding:14px 22px 6px; margin-top:4px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0;}
+  #side-menu .side-label:first-of-type{padding-top:0;}
+</style>
+<style>
+  .sticky-nav a.nav-active{font-weight:700; text-decoration:underline; text-underline-offset:5px;}
+  .reveal-init{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+<button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
+<div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <div class="side-divider"></div>
+  <div class="side-label">Mythologies</div>
+    <a href="mythologie-nordique.html">Nordique</a>
+    <a href="mythologie-grecque.html">Grecque</a>
+    <a href="mythologie-egyptienne.html">Égyptienne</a>
+    <a href="mythologie-romaine.html">Romaine</a>
+    <a href="mythologie-celtique.html">Celtique</a>
+    <a href="mythologie-mesopotamienne.html">Mésopotamienne</a>
+    <a href="mythologie-hindoue.html">Hindoue</a>
+    <a href="mythologie-japonaise.html">Japonaise</a>
+    <a href="mythologie-azteque-maya.html">Aztèque & Maya</a>
+    <a href="mythologie-slave.html">Slave</a>
+  <div class="side-label">Cultures</div>
+    <a href="culture-chinoise.html">Chine</a>
+    <a href="culture-egypte-antique.html" class="active">Égypte Antique</a>
+  <div class="side-label">Créatures</div>
+    <a href="creature-gevaudan.html">Bête du Gévaudan</a>
+    <a href="creature-loch-ness.html">Monstre du Loch Ness</a>
+  <div class="side-label">Mystères</div>
+    <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
+    <a href="mystere-stonehenge.html">Stonehenge</a>
+</nav>
+
+
+<header class="hero">
+  <div class="epigraph-row">☥ KEMET · TA SHEMAU · TA MEHU ☥</div>
+  <h1>Égypte Antique</h1>
+  <div class="subtitle">Pharaons, Peuples &amp; Civilisation du Nil</div>
+  <p class="tagline">Trois mille ans de continuité politique et religieuse le long d'un fleuve unique — pharaons, scribes, paysans et bâtisseurs, deuxième chapitre d'un voyage à travers les peuples et les histoires du monde.</p>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#carte">Carte-Récit</a>
+    <a href="#peuples">Les Peuples</a>
+    <a href="#figures">Grandes Figures</a>
+    <a href="#recits">Grands Récits</a>
+    <a href="#inventions">Inventions</a>
+    <a href="#anecdotes">Anecdotes</a>
+    <a href="#style-de-vie">Style de Vie</a>
+    <a href="#monde">Rayonnement</a>
+    <a href="#frise">Frise Chronologique</a>
+    <a href="#heritage">Héritage Actuel</a>
+  </nav>
+</header>
+
+<svg class="meander-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="waveband0" width="32" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 12 Q8 4 16 12 T32 12" stroke="#b5502e" stroke-width="1.6" fill="none" opacity="0.4"/>
+      <path d="M0 16 Q8 8 16 16 T32 16" stroke="#1f8478" stroke-width="1.6" fill="none" opacity="0.35"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#waveband0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#carte">Carte</a>
+  <a href="#peuples">Peuples</a>
+  <a href="#figures">Figures</a>
+  <a href="#recits">Récits</a>
+  <a href="#inventions">Inventions</a>
+  <a href="#anecdotes">Anecdotes</a>
+  <a href="#style-de-vie">Style de Vie</a>
+  <a href="#monde">Rayonnement</a>
+  <a href="#frise">Frise</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= CARTE ================= -->
+<section id="carte">
+  <div class="section-label">Géographie &amp; Territoire</div>
+  <h2 class="section-title">La Carte-Récit de l'Égypte Antique</h2>
+  <p class="section-intro">"L'Égypte est un don du Nil", écrivait Hérodote — un ruban de vie de moins de vingt kilomètres de large, cerné par le désert sur toute sa longueur. Les Égyptiens eux-mêmes pensaient leur pays en deux moitiés bien distinctes : Ta Shemau, la Haute-Égypte au sud, étroite vallée fluviale, et Ta Mehu, la Basse-Égypte au nord, large delta agricole — d'où la double couronne portée par chaque pharaon dès l'unification. Les régions présentées plus bas suivent une logique de sites et de repères contemporains plutôt que le découpage administratif antique exact en 42 "nomes".</p>
+
+  <div class="crest-strip">
+    <div class="crest-badge"><span class="cn">Kemet</span>Terre Noire</div>
+    <div class="crest-badge"><span class="cn">Ta Shemau</span>Haute-Égypte</div>
+    <div class="crest-badge"><span class="cn">Ta Mehu</span>Basse-Égypte</div>
+    <div class="crest-badge"><span class="cn">Waset</span>Thèbes</div>
+    <div class="crest-badge"><span class="cn">Ineb-Hedj</span>Memphis</div>
+    <div class="crest-badge"><span class="cn">Abu</span>Éléphantine</div>
+    <div class="crest-badge"><span class="cn">Iunu</span>Héliopolis</div>
+    <div class="crest-badge"><span class="cn">Akhetaten</span>Amarna</div>
+    <div class="crest-badge"><span class="cn">Kush</span>Nubie</div>
+    <div class="crest-badge"><span class="cn">Rakotis</span>Alexandrie</div>
+  </div>
+
+  <div class="map-frame diagram-scroll">
+    <svg viewBox="0 0 640 900" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;">
+      <rect x="150" y="14" width="340" height="46" rx="4" fill="#f8efd6" stroke="#b98d42" stroke-width="1.5"/>
+      <text x="320" y="34" text-anchor="middle" font-family="Cinzel, serif" font-size="15" fill="#b5502e" letter-spacing="2">TA MERY</text>
+      <text x="320" y="52" text-anchor="middle" font-family="Cinzel, serif" font-size="11" fill="#7a6440" letter-spacing="1.5">CARTE-RÉCIT DE L'ÉGYPTE (STYLISÉE)</text>
+
+      <!-- Mediterranean -->
+      <rect x="0" y="80" width="640" height="34" fill="#bcd7e6" opacity="0.6"/>
+      <text x="120" y="102" font-size="10" fill="#2f74a5" font-family="EB Garamond, serif" font-style="italic">Mer Méditerranée</text>
+
+      <!-- Western & Eastern desert -->
+      <path d="M60,114 L280,114 L300,830 L40,830 Z" fill="#f2e3bc" opacity="0.7"/>
+      <text x="110" y="470" font-size="10" fill="#a3854f" font-family="EB Garamond, serif" font-style="italic" transform="rotate(-90 110 470)">Désert Occidental (Libyque)</text>
+      <path d="M420,114 L560,114 L520,830 L360,830 Z" fill="#ecd9ae" opacity="0.7"/>
+      <text x="480" y="470" font-size="10" fill="#a3854f" font-family="EB Garamond, serif" font-style="italic" transform="rotate(90 480 470)">Désert Oriental</text>
+
+      <!-- Sinai -->
+      <path d="M520,120 L620,150 L560,270 L500,180 Z" fill="#ecd9ae" stroke="#b98d42" stroke-width="1.2" opacity="0.85"/>
+      <text x="585" y="200" font-size="9.5" fill="#7a6440" font-family="EB Garamond, serif" font-style="italic">Sinaï</text>
+
+      <!-- Red sea -->
+      <path d="M560,270 L610,340 L600,560 L555,520 L545,340 Z" fill="#bcd7e6" opacity="0.6"/>
+      <text x="610" y="440" font-size="9.5" fill="#2f74a5" font-family="EB Garamond, serif" font-style="italic" transform="rotate(90 610 440)">Mer Rouge</text>
+
+      <!-- Delta fan -->
+      <path d="M320,225 L150,114 L490,114 Z" fill="#dcead0" stroke="#8a9a5b" stroke-width="1.6" opacity="0.9"/>
+      <path d="M320,225 Q270,170 220,114" fill="none" stroke="#2f74a5" stroke-width="2.2" opacity="0.75"/>
+      <path d="M320,225 Q330,170 340,114" fill="none" stroke="#2f74a5" stroke-width="2.2" opacity="0.75"/>
+      <path d="M320,225 Q380,175 420,114" fill="none" stroke="#2f74a5" stroke-width="1.8" opacity="0.6"/>
+      <text x="320" y="145" text-anchor="middle" font-size="10" fill="#3f6b2e" font-family="Cinzel, serif" letter-spacing="1">LE DELTA</text>
+
+      <!-- Nile valley ribbon -->
+      <path d="M320,225 Q305,400 325,560 Q340,680 335,830" fill="none" stroke="#dcead0" stroke-width="26" opacity="0.55"/>
+      <path d="M320,225 Q305,400 325,560 Q340,680 335,830" fill="none" stroke="#2f74a5" stroke-width="4" opacity="0.85"/>
+      <text x="270" y="360" font-size="10" fill="#2f74a5" font-family="EB Garamond, serif" font-style="italic">Le Nil</text>
+
+      <!-- Desert route (Horus road / caravan route) -->
+      <path d="M420,150 Q470,220 540,300 Q560,380 545,460" fill="none" stroke="#1f8478" stroke-width="2" stroke-dasharray="2,5" opacity="0.75"/>
+      <text x="470" y="255" font-size="9" fill="#1f8478" font-family="EB Garamond, serif" font-style="italic">Route d'Horus →</text>
+
+      <!-- Nubia band (south) -->
+      <rect x="270" y="780" width="130" height="60" fill="none" stroke="#b5502e" stroke-width="1.4" stroke-dasharray="4,4" opacity="0.6"/>
+      <text x="335" y="875" text-anchor="middle" font-size="10" fill="#b5502e" font-family="Cinzel, serif" letter-spacing="1">FRONTIÈRE DE NUBIE (KOUSH)</text>
+
+      <!-- Pins -->
+      <g font-family="EB Garamond, serif">
+        <circle cx="230" cy="150" r="6" fill="#b5502e" stroke="#b8860b" stroke-width="2"/>
+        <text x="150" y="147" font-size="11" fill="#2b1f12" font-weight="600" text-anchor="end">Alexandrie</text>
+        <text x="150" y="160" font-size="9" fill="#7a6440" text-anchor="end">Phare &amp; Bibliothèque</text>
+
+        <circle cx="320" cy="228" r="6" fill="#b5502e" stroke="#b8860b" stroke-width="2"/>
+        <text x="345" y="222" font-size="11" fill="#2b1f12" font-weight="600">Memphis</text>
+        <text x="345" y="235" font-size="9" fill="#7a6440">Première capitale</text>
+
+        <circle cx="300" cy="250" r="5.5" fill="#b5502e" stroke="#b8860b" stroke-width="2"/>
+        <text x="215" y="253" font-size="11" fill="#2b1f12" font-weight="600" text-anchor="end">Gizeh &amp; Saqqara</text>
+        <text x="215" y="266" font-size="9" fill="#7a6440" text-anchor="end">Pyramides &amp; nécropoles</text>
+
+        <circle cx="270" cy="310" r="5.5" fill="#b5502e" stroke="#b8860b" stroke-width="2"/>
+        <text x="185" y="313" font-size="11" fill="#2b1f12" font-weight="600" text-anchor="end">Le Fayoum</text>
+        <text x="185" y="326" font-size="9" fill="#7a6440" text-anchor="end">Oasis &amp; culte de Sobek</text>
+
+        <circle cx="326" cy="430" r="5.5" fill="#b5502e" stroke="#b8860b" stroke-width="2"/>
+        <text x="352" y="426" font-size="11" fill="#2b1f12" font-weight="600">Amarna</text>
+        <text x="352" y="439" font-size="9" fill="#7a6440">Capitale d'Akhenaton</text>
+
+        <circle cx="322" cy="530" r="5.5" fill="#b5502e" stroke="#b8860b" stroke-width="2"/>
+        <text x="240" y="534" font-size="11" fill="#2b1f12" font-weight="600" text-anchor="end">Abydos</text>
+        <text x="240" y="547" font-size="9" fill="#7a6440" text-anchor="end">Culte d'Osiris</text>
+
+        <circle cx="332" cy="605" r="6" fill="#b5502e" stroke="#b8860b" stroke-width="2"/>
+        <text x="358" y="600" font-size="11" fill="#2b1f12" font-weight="600">Thèbes (Louxor-Karnak)</text>
+        <text x="358" y="613" font-size="9" fill="#7a6440">Vallée des Rois &amp; grands temples</text>
+
+        <circle cx="340" cy="760" r="6" fill="#b5502e" stroke="#b8860b" stroke-width="2"/>
+        <text x="365" y="756" font-size="11" fill="#2b1f12" font-weight="600">Assouan &amp; Éléphantine</text>
+        <text x="365" y="769" font-size="9" fill="#7a6440">Carrières de granit, frontière sud</text>
+
+        <circle cx="338" cy="850" r="5.5" fill="#b5502e" stroke="#b8860b" stroke-width="2"/>
+        <text x="315" y="852" font-size="11" fill="#2b1f12" font-weight="600" text-anchor="end">Abou Simbel</text>
+        <text x="315" y="865" font-size="9" fill="#7a6440" text-anchor="end">Temples de Ramsès II</text>
+
+        <circle cx="500" cy="185" r="5.5" fill="#b5502e" stroke="#b8860b" stroke-width="2"/>
+        <text x="486" y="182" font-size="11" fill="#2b1f12" font-weight="600" text-anchor="end">Sinaï</text>
+        <text x="486" y="195" font-size="9" fill="#7a6440" text-anchor="end">Mines de turquoise &amp; cuivre</text>
+      </g>
+
+      <!-- Compass rose -->
+      <g transform="translate(80,780)">
+        <circle r="30" fill="none" stroke="#8a7248" stroke-width="1.2"/>
+        <path d="M0,-26 L5,0 L0,26 L-5,0 Z" fill="#b5502e" opacity="0.85"/>
+        <path d="M-26,0 L0,5 L26,0 L0,-5 Z" fill="#b8860b" opacity="0.7"/>
+        <text x="0" y="-35" text-anchor="middle" font-size="10" fill="#2b1f12" font-family="Cinzel, serif">N</text>
+        <text x="0" y="43" text-anchor="middle" font-size="10" fill="#2b1f12" font-family="Cinzel, serif">S</text>
+        <text x="37" y="4" text-anchor="middle" font-size="10" fill="#2b1f12" font-family="Cinzel, serif">E</text>
+        <text x="-37" y="4" text-anchor="middle" font-size="10" fill="#2b1f12" font-family="Cinzel, serif">O</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="map-legend">
+    <span><i class="legend-swatch"></i> Mer / navigation</span>
+    <span><i class="legend-swatch river"></i> Le Nil</span>
+    <span><i class="legend-swatch wall"></i> Frontière de Nubie</span>
+    <span><i class="legend-swatch silk"></i> Route caravanière</span>
+    <span><i class="legend-dot"></i> Lieu marquant</span>
+  </div>
+
+  <div class="epistemic-note">Note de style : cette carte est une reconstitution artistique et non un tracé géographique de précision — elle privilégie la lisibilité narrative (position relative des sites, logique du fleuve) sur l'exactitude cartographique, notamment pour les branches du delta, aujourd'hui réduites à deux contre sept dans l'Antiquité.</div>
+
+  <div class="crest-strip">
+    <div class="crest-badge"><span class="cn">Sau</span>Saïs</div>
+    <div class="crest-badge"><span class="cn">Per-Bastet</span>Bubastis</div>
+    <div class="crest-badge"><span class="cn">Djanet</span>Tanis</div>
+    <div class="crest-badge"><span class="cn">Djeba</span>Edfou</div>
+    <div class="crest-badge"><span class="cn">Iunet</span>Dendérah</div>
+    <div class="crest-badge"><span class="cn">Nekheb</span>Elkab</div>
+    <div class="crest-badge"><span class="cn">Nubt</span>Kom Ombo</div>
+    <div class="crest-badge"><span class="cn">Pilak</span>Philae</div>
+    <div class="crest-badge"><span class="cn">Pe</span>Bouto</div>
+    <div class="crest-badge"><span class="cn">Shedet</span>Fayoum</div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:70px; font-size:1.7rem;">Grandes régions, grandes histoires</h3>
+  <p class="section-intro" style="margin-bottom:50px;">Du delta marchand tourné vers la Méditerranée à la frontière nubienne gardant les mines d'or du sud, chaque grande région égyptienne a joué un rôle distinct dans un même récit civilisationnel vieux de trois millénaires.</p>
+
+  <div class="region-wrap">
+    <div class="region-card">
+      <h3>Basse-Égypte &amp; le Delta</h3>
+      <div class="region-sub">Ta Mehu — le grenier du pays</div>
+      <p>Vaste éventail fertile où le Nil se divisait autrefois en sept branches, cœur agricole et commercial tourné vers la Méditerranée, porte d'entrée historique des invasions comme des échanges avec le Levant.</p>
+    </div>
+    <div class="region-card">
+      <h3>Haute-Égypte</h3>
+      <div class="region-sub">Ta Shemau — l'étroite vallée</div>
+      <p>Longue bande cultivable resserrée entre deux déserts, foyer religieux et dynastique du pays, berceau du pouvoir royal dès la période prédynastique autour de sites comme Hiérakonpolis et Abydos.</p>
+    </div>
+    <div class="region-card">
+      <h3>Memphis &amp; Saqqara</h3>
+      <div class="region-sub">Ineb-Hedj — la première capitale</div>
+      <p>Fondée selon la tradition par le roi Narmer à la charnière des deux terres, Memphis reste centre administratif et religieux durant presque toute l'histoire pharaonique ; sa nécropole de Saqqara abrite la pyramide à degrés de Djoser, premier grand monument de pierre taillée au monde.</p>
+    </div>
+    <div class="region-card">
+      <h3>Gizeh</h3>
+      <div class="region-sub">Le plateau des pyramides</div>
+      <p>Site funéraire de l'Ancien Empire dominé par les trois grandes pyramides de Khéops, Khephren et Mykérinos et par le Grand Sphinx, dernière des Sept Merveilles du monde antique encore debout aujourd'hui.</p>
+    </div>
+    <div class="region-card">
+      <h3>Thèbes (Louxor-Karnak)</h3>
+      <div class="region-sub">Waset — capitale du Nouvel Empire</div>
+      <p>Capitale religieuse et politique de l'apogée impériale, abritant le gigantesque complexe de temples de Karnak dédié à Amon, ainsi que la Vallée des Rois et des Reines sur la rive occidentale du Nil.</p>
+    </div>
+    <div class="region-card">
+      <h3>Nubie &amp; Assouan</h3>
+      <div class="region-sub">Frontière sud, or et granit</div>
+      <p>Zone tampon et carrefour d'échanges avec le royaume de Koush, source de l'or, de l'ivoire et du granit rose des obélisques ; les Nubiens gouverneront même l'Égypte entière comme 25e dynastie au VIIIe siècle av. J.-C.</p>
+    </div>
+    <div class="region-card">
+      <h3>Le Fayoum</h3>
+      <div class="region-sub">Shedet — l'oasis fertile</div>
+      <p>Dépression fertile reliée au Nil par un canal naturel, considérablement agrandie par de grands travaux d'irrigation sous le Moyen Empire, sanctuaire du dieu-crocodile Sobek.</p>
+    </div>
+    <div class="region-card">
+      <h3>Le Sinaï</h3>
+      <div class="region-sub">Mafkat — la terre de turquoise</div>
+      <p>Péninsule désertique exploitée dès l'Ancien Empire pour ses mines de turquoise et de cuivre, et jalonnée de forteresses gardant la "route d'Horus" vers le Levant.</p>
+    </div>
+    <div class="region-card">
+      <h3>Alexandrie</h3>
+      <div class="region-sub">Rakotis — la capitale hellénistique</div>
+      <p>Fondée par Alexandre le Grand en 331 av. J.-C., elle devient sous les Ptolémées la plus grande ville du monde méditerranéen, abritant son célèbre phare et sa non moins célèbre bibliothèque — dernière capitale de l'Égypte pharaonique sous Cléopâtre VII.</p>
+    </div>
+    <div class="region-card">
+      <h3>Désert Occidental &amp; Oasis</h3>
+      <div class="region-sub">Siwa, Kharga, Dakhla</div>
+      <p>Chapelet d'oasis isolées reliant des routes caravanières transsahariennes ; Siwa abritait l'oracle d'Amon consulté par Alexandre le Grand lui-même en 331 av. J.-C.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PEUPLES ================= -->
+<section id="peuples">
+  <div class="section-label">Société &amp; Groupes Sociaux</div>
+  <h2 class="section-title">Les Peuples de l'Égypte Antique</h2>
+  <p class="section-intro">Plus qu'une mosaïque ethnique, l'Égypte antique est une société très hiérarchisée mais relativement fluide : la naissance compte, mais l'alphabétisation et la fonction administrative permettent une réelle mobilité sociale, rare pour l'époque.</p>
+
+  <div class="people-grid">
+    <div class="people-card">
+      <h3>Paysans (fellahin)</h3>
+      <div class="people-pct">L'écrasante majorité de la population</div>
+      <p>Cultivateurs de la vallée, rythmés par les trois saisons du calendrier agricole liées à la crue du Nil ; soumis à la corvée (travail obligatoire pour l'État) durant la saison basse, notamment sur les grands chantiers royaux.</p>
+    </div>
+    <div class="people-card">
+      <h3>Artisans &amp; bâtisseurs</h3>
+      <div class="people-pct">Spécialistes salariés, non des esclaves</div>
+      <p>Tailleurs de pierre, peintres, menuisiers et orfèvres organisés en équipes ; le village d'ouvriers de Deir el-Medina, qui construisit les tombes royales de la Vallée des Rois, a livré des archives détaillées sur leurs salaires, congés et même une grève.</p>
+    </div>
+    <div class="people-card">
+      <h3>Scribes</h3>
+      <div class="people-pct">L'élite lettrée, voie de promotion sociale</div>
+      <p>Formés dès l'enfance dans les "maisons de vie" attenantes aux temples, ils tiennent la comptabilité, l'administration et la justice ; savoir écrire ouvrait, pour un fils de paysan doué, une des rares portes vers l'ascension sociale.</p>
+    </div>
+    <div class="people-card">
+      <h3>Prêtres</h3>
+      <div class="people-pct">Un pouvoir économique considérable</div>
+      <p>Gestionnaires des immenses domaines fonciers rattachés aux temples ; le clergé d'Amon à Thèbes devient si riche et puissant au Nouvel Empire qu'il rivalise par moments avec l'autorité du pharaon lui-même.</p>
+    </div>
+    <div class="people-card">
+      <h3>Noblesse &amp; hauts fonctionnaires</h3>
+      <div class="people-pct">Vizirs, nomarques, généraux</div>
+      <p>Administrateurs de haut rang dirigeant les provinces (nomes) au nom du roi ; le vizir, second personnage de l'État, supervise justice, fiscalité et grands travaux.</p>
+    </div>
+    <div class="people-card">
+      <h3>Pharaon &amp; famille royale</h3>
+      <div class="people-pct">Intermédiaire divin entre les dieux et les hommes</div>
+      <p>Le roi n'est pas seulement souverain mais garant de Maât, l'ordre cosmique ; la "grande épouse royale" occupe un rang religieux et politique important, certaines reines ayant elles-mêmes exercé le pouvoir suprême.</p>
+    </div>
+    <div class="people-card">
+      <h3>Serviteurs &amp; captifs</h3>
+      <div class="people-pct">Une servitude différente du modèle antique classique</div>
+      <p>Prisonniers de guerre et débiteurs pouvaient être astreints à un travail contraint, mais rien de comparable à l'esclavage de plantation ; contrairement à une idée reçue tenace, les pyramides ont été bâties par des équipes de travailleurs égyptiens rémunérés et nourris, pas par des esclaves hébreux ou étrangers.</p>
+    </div>
+    <div class="people-card">
+      <h3>Nubiens &amp; étrangers</h3>
+      <div class="people-pct">Voisins, soldats, parfois souverains</div>
+      <p>Mercenaires et éclaireurs nubiens (Medjay), marchands du Levant et de la mer Égée, colons libyens dans le delta — et, en 747 av. J.-C., des rois nubiens du royaume de Koush qui conquièrent et gouvernent l'Égypte entière comme 25e dynastie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIGURES ================= -->
+<section id="figures">
+  <div class="section-label">Portraits</div>
+  <h2 class="section-title">Grandes Figures Historiques</h2>
+  <p class="section-intro">Rois unificateurs, bâtisseurs, réformateurs et une dernière reine hors norme — une sélection resserrée sur ce qui a vraiment marqué l'histoire pharaonique, pas une liste remplie pour atteindre un chiffre rond.</p>
+
+  <div class="figure-grid">
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Narmer (Ménès)</h3><div class="figure-dates">v. 3100 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Unification</span><span class="tag">Ire dynastie</span></div>
+        <p>Roi identifié à l'unification légendaire de la Haute et de la Basse-Égypte, connu principalement par la célèbre "palette de Narmer" le montrant coiffé des deux couronnes — point de départ conventionnel de toute l'histoire pharaonique.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Djoser</h3><div class="figure-dates">v. 2670 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">IIIe dynastie</span><span class="tag">Ancien Empire</span></div>
+        <p>Commanditaire de la pyramide à degrés de Saqqara, premier grand monument entièrement bâti en pierre taillée de l'histoire humaine — jalon décisif dans l'affirmation du pouvoir royal par l'architecture funéraire.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Imhotep</h3><div class="figure-dates">v. 2650 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Architecte</span><span class="tag">Scribe déifié</span></div>
+        <p>Vizir, architecte et médecin de Djoser, concepteur de sa pyramide à degrés ; figure si admirée qu'elle sera progressivement déifiée après sa mort, devenant, deux mille ans plus tard, un dieu de la médecine et du savoir.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Khéops (Khufu)</h3><div class="figure-dates">v. 2589 – 2566 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Grande Pyramide</span><span class="tag">IVe dynastie</span></div>
+        <p>Commanditaire de la Grande Pyramide de Gizeh, plus haute construction humaine pendant près de trente-huit siècles ; on sait étonnamment peu de choses biographiques sur ce roi dont l'ombre monumentale domine tout l'imaginaire égyptien.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Hatchepsout</h3><div class="figure-dates">v. 1479 – 1458 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Femme pharaon</span><span class="tag">XVIIIe dynastie</span></div>
+        <p>Reine régente devenue pharaon à part entière, parfois représentée avec les attributs masculins de la fonction royale (fausse barbe incluse) ; son règne prospère est marqué par une expédition commerciale majeure vers le pays de Pount et un vaste programme de constructions.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Akhenaton</h3><div class="figure-dates">v. 1353 – 1336 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Révolution religieuse</span><span class="tag">Amarna</span></div>
+        <p>Roi ayant imposé le culte quasi exclusif du disque solaire Aton, déplacé la capitale à Akhetaton (Amarna) et bousculé les codes artistiques traditionnels ; réforme si radicale qu'elle sera effacée par ses successeurs, qui feront disparaître son nom des listes royales officielles.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Toutânkhamon</h3><div class="figure-dates">v. 1332 – 1323 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Roi enfant</span><span class="tag">Tombe intacte</span></div>
+        <p>Jeune roi mort vers dix-neuf ans, historiquement mineur par son règne bref mais devenu la figure la plus célèbre de l'Égypte antique grâce à la découverte quasi intacte de sa tombe par Howard Carter en 1922.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Ramsès II</h3><div class="figure-dates">v. 1279 – 1213 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Bâtisseur</span><span class="tag">Traité de Qadesh</span></div>
+        <p>L'un des plus longs règnes de l'histoire égyptienne, marqué par la bataille de Qadesh contre les Hittites et le traité de paix qui s'ensuit — le plus ancien traité international dont le texte intégral nous soit parvenu — et par un programme de construction colossal, dont les temples d'Abou Simbel.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Ramsès III</h3><div class="figure-dates">v. 1186 – 1155 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Peuples de la Mer</span><span class="tag">Fin du Nouvel Empire</span></div>
+        <p>Dernier grand pharaon guerrier, il repousse une invasion des mystérieux "Peuples de la Mer" qui bouleversent alors tout le Proche-Orient ; son règne s'achève par une conspiration de palais, révélée par des papyrus judiciaires détaillant le procès des conjurés.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Cléopâtre VII</h3><div class="figure-dates">69 – 30 av. J.-C.</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Dernière pharaonne</span><span class="tag">Fin de l'indépendance</span></div>
+        <p>Descendante grecque de la dynastie ptolémaïque, l'une des rares de sa lignée à avoir appris l'égyptien ; alliée puis amante de Jules César et Marc Antoine, sa défaite face à Octave en 30 av. J.-C. marque la fin de trois mille ans de royauté pharaonique et l'annexion de l'Égypte par Rome.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= RECITS ================= -->
+<section id="recits">
+  <div class="section-label">Histoire</div>
+  <h2 class="section-title">Grands Récits Historiques</h2>
+
+  <div class="story-block">
+    <div class="story-number">Récit I</div>
+    <h3>L'Unification de la Haute et de la Basse-Égypte</h3>
+    <span class="story-date">v. 3100 av. J.-C.</span>
+    <p>Selon la tradition, le roi Narmer (parfois identifié à Ménès) conquiert la Basse-Égypte depuis son royaume du sud et réunit les deux terres sous une seule couronne double. Cet événement fondateur, immortalisé sur la célèbre palette de schiste portant son nom, ouvre l'ère dynastique et donne naissance à l'un des premiers États centralisés de l'histoire humaine.</p>
+    <p>Dès lors, chaque pharaon portera le titre de "Roi de Haute et Basse-Égypte" et la double couronne (pschent), rappel constant que l'unité du pays reste une construction politique à entretenir, pas un fait acquis une fois pour toutes.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit II</div>
+    <h3>L'Ère des Pyramides — l'Ancien Empire</h3>
+    <span class="story-date">v. 2686 – 2181 av. J.-C.</span>
+    <p>Sous l'impulsion de Djoser et de son architecte Imhotep naît la première grande construction en pierre de l'humanité, la pyramide à degrés de Saqqara. Le concept est perfectionné en quelques générations jusqu'à la Grande Pyramide de Khéops à Gizeh, chef-d'œuvre de précision architecturale mobilisant des dizaines de milliers de travailleurs saisonniers.</p>
+    <p class="pull-quote">Contrairement à une idée popularisée par le cinéma, les fouilles des cités ouvrières de Gizeh montrent des équipes de bâtisseurs égyptiens organisées, nourries de pain et de bière, et non des esclaves hébreux fouettés — mythe sans fondement archéologique.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit III</div>
+    <h3>Fragmentation et Renaissance — Première Période Intermédiaire et Moyen Empire</h3>
+    <span class="story-date">2181 – 1650 av. J.-C.</span>
+    <p>L'effondrement de l'autorité centrale, sans doute aggravé par des crues du Nil irrégulières, ouvre près d'un siècle et demi de fragmentation politique. La réunification par Mentouhotep II inaugure le Moyen Empire, âge classique de la littérature égyptienne, marqué aussi par d'ambitieux travaux d'irrigation qui transforment le Fayoum en grenier agricole.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit IV</div>
+    <h3>L'Occupation Hyksos et la Naissance de l'Empire</h3>
+    <span class="story-date">v. 1650 – 1550 av. J.-C.</span>
+    <p>Des populations venues du Levant, les Hyksos, prennent le contrôle du delta et y introduisent le char de guerre et de nouvelles techniques militaires. Leur expulsion par Ahmosis Ier vers 1550 av. J.-C. inaugure le Nouvel Empire, période durant laquelle l'Égypte, forte des leçons militaires tirées de cette occupation, se transforme en puissance impériale conquérante.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit V</div>
+    <h3>La Révolution Religieuse d'Akhenaton</h3>
+    <span class="story-date">v. 1353 – 1336 av. J.-C.</span>
+    <p>Le pharaon Amenhotep IV rompt avec le clergé traditionnel d'Amon, se renomme Akhenaton ("utile à Aton") et impose le culte quasi exclusif du disque solaire, tout en fondant une capitale entièrement nouvelle, Akhetaton (Amarna). L'art de cette période rompt lui aussi avec les conventions rigides antérieures, adoptant un style plus naturaliste, parfois presque expressionniste.</p>
+    <p>La réforme ne survit pas à son règne : ses successeurs, dont le jeune Toutânkhamon, rétablissent le culte d'Amon, et la mémoire d'Akhenaton sera activement effacée des monuments et des listes royales officielles — une véritable damnatio memoriae qui n'a été comprise qu'après la redécouverte du site d'Amarna au XIXe siècle.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit VI</div>
+    <h3>Ramsès II, Qadesh et le Premier Traité de Paix Connu</h3>
+    <span class="story-date">1274 – 1259 av. J.-C.</span>
+    <p>Face à l'empire hittite, Ramsès II mène en 1274 av. J.-C. la bataille de Qadesh, l'un des plus grands affrontements de chars de l'Antiquité, dont l'issue reste militairement indécise malgré la propagande égyptienne qui la présente comme une victoire. Quinze ans plus tard, en 1259 av. J.-C., les deux puissances signent un traité de paix et de non-agression dont le texte, gravé en égyptien et en akkadien, constitue le plus ancien accord international intégralement conservé.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit VII</div>
+    <h3>Déclin, Fragmentation et Conquêtes Étrangères</h3>
+    <span class="story-date">1069 – 332 av. J.-C.</span>
+    <p>Après l'apogée du Nouvel Empire, l'Égypte connaît une longue Troisième Période intermédiaire de fragmentation politique, brièvement unifiée sous des rois nubiens de la 25e dynastie venus du royaume de Koush. Le pays tombe ensuite sous domination perse en 525 av. J.-C., retrouve une indépendance éphémère, puis repasse sous contrôle perse avant l'arrivée d'Alexandre le Grand en 332 av. J.-C., accueilli comme un libérateur.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit VIII</div>
+    <h3>L'Égypte Ptolémaïque et Cléopâtre</h3>
+    <span class="story-date">332 – 30 av. J.-C.</span>
+    <p>À la mort d'Alexandre, son général Ptolémée fonde une dynastie grecque qui règne depuis Alexandrie, alors capitale intellectuelle du monde méditerranéen abritant sa bibliothèque et son phare légendaires. La dernière représentante de cette lignée, Cléopâtre VII, s'allie tour à tour à Jules César puis à Marc Antoine pour tenter de préserver l'indépendance égyptienne face à l'expansion romaine.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit IX</div>
+    <h3>La Conquête Romaine et la Fin de l'Indépendance</h3>
+    <span class="story-date">30 av. J.-C. et suivants</span>
+    <p>Vaincus par Octave à la bataille d'Actium, Cléopâtre VII et Marc Antoine se donnent la mort en 30 av. J.-C. ; l'Égypte devient province romaine, domaine personnel de l'empereur en raison de son importance stratégique comme grenier à blé de Rome. Trois mille ans de royauté pharaonique s'achèvent ainsi, même si les temples et le culte des dieux égyptiens perdurent encore plusieurs siècles sous domination étrangère.</p>
+    <p>La dernière inscription hiéroglyphique connue, gravée au temple de Philae, date de 394 apr. J.-C. — clôturant, dans l'indifférence quasi générale de l'époque, l'usage vivant d'un système d'écriture vieux de plus de trois mille cinq cents ans.</p>
+  </div>
+</section>
+
+<!-- ================= INVENTIONS ================= -->
+<section id="inventions">
+  <div class="section-label">Contributions au Monde</div>
+  <h2 class="section-title">Grandes Réalisations</h2>
+  <p class="section-intro">De l'écriture à la médecine en passant par la mesure du temps, l'Égypte antique a posé des jalons que le monde méditerranéen, puis l'Europe, hériteront souvent sans toujours en connaître l'origine exacte.</p>
+
+  <h3 style="text-align:center; font-size:1.3rem; color:var(--gold); margin-bottom:30px;">Écriture, savoir et mesure du temps</h3>
+  <div class="invention-list">
+    <div class="invention-item">
+      <div class="invention-name">L'Écriture Hiéroglyphique<span>Dès v. 3200 av. J.-C. — déchiffrée en 1822</span></div>
+      <p>Système d'écriture à la fois pictographique et phonétique, décliné en trois formes selon l'usage (hiéroglyphes monumentaux, hiératique cursif, démotique administratif tardif) ; resté illisible pendant plus de mille quatre cents ans, il est percé par Jean-François Champollion en 1822 grâce à la pierre de Rosette, trilingue égyptien-grec découverte en 1799.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">Le Calendrier Solaire<span>365 jours, dès l'Ancien Empire</span></div>
+      <p>Calendrier civil de douze mois de trente jours plus cinq jours épagomènes, calé sur le cycle agricole du Nil et l'observation de l'étoile Sirius ; sa logique influencera directement, via Rome, le calendrier julien puis grégorien encore utilisé aujourd'hui.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">Mathématiques &amp; Géométrie Appliquée<span>Papyrus Rhind, v. 1650 av. J.-C.</span></div>
+      <p>Système de fractions et méthodes de calcul de surfaces et de volumes développés notamment pour réarpenter les champs après chaque crue du Nil et pour calculer les proportions exactes des monuments — une géométrie avant tout pratique plutôt que théorique.</p>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; font-size:1.3rem; color:var(--gold); margin:56px 0 30px;">Médecine, architecture et grands travaux</h3>
+  <div class="invention-list">
+    <div class="invention-item">
+      <div class="invention-name">La Médecine Égyptienne<span>Papyrus Edwin Smith &amp; Ebers</span></div>
+      <p>Traités médicaux distinguant déjà observation clinique et pratiques magico-religieuses, décrivant fractures, chirurgie et pharmacopée végétale ; le papyrus Edwin Smith, consacré à la traumatologie, est considéré comme l'un des plus anciens textes de raisonnement médical rationnel connus.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">La Momification<span>Perfectionnée dès l'Ancien Empire</span></div>
+      <p>Technique de conservation des corps par dessiccation au natron, ablation des organes internes et bandelettage rituel sur environ soixante-dix jours, fondée sur la croyance qu'un corps intact était nécessaire à la survie dans l'au-delà.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">L'Architecture Monumentale en Pierre<span>Pyramides, temples, obélisques</span></div>
+      <p>Maîtrise précoce de la taille, du transport et de l'assemblage de blocs de plusieurs tonnes sans machinerie complexe, de la construction de colonnes massives et d'obélisques monolithes de plus de trente mètres extraits d'une seule pièce de granit.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">L'Irrigation &amp; la Gestion de la Crue<span>Bassins d'épandage, nilomètres</span></div>
+      <p>Réseau de canaux et de bassins captant la crue annuelle du Nil pour fertiliser les terres, complété par des nilomètres gradués mesurant précisément la hauteur de la crue afin d'anticiper les récoltes et de calculer l'impôt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ANECDOTES ================= -->
+<section id="anecdotes">
+  <div class="section-label">Le Saviez-Vous</div>
+  <h2 class="section-title">Anecdotes &amp; Curiosités</h2>
+
+  <div class="anecdote-grid">
+    <div class="anecdote-card">
+      <h4>Cléopâtre est plus proche de nous que des pyramides</h4>
+      <p>Quand Cléopâtre VII règne, en 30 av. J.-C., la Grande Pyramide de Khéops a déjà environ 2 500 ans — soit un écart plus grand que celui qui sépare Cléopâtre de nous aujourd'hui.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les pyramides n'ont pas été bâties par des esclaves</h4>
+      <p>Les fouilles des villages ouvriers de Gizeh révèlent des équipes de travailleurs égyptiens organisés en brigades, rémunérés en pain, bière et viande — un mythe hollywoodien tenace démenti par l'archéologie.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>La première grève de l'Histoire</h4>
+      <p>Sous Ramsès III, les artisans du village de Deir el-Medina cessent le travail faute d'avoir reçu leurs rations alimentaires — le plus ancien mouvement social documenté connu à ce jour.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Cléopâtre était grecque, pas égyptienne de naissance</h4>
+      <p>Descendante de Ptolémée, général macédonien d'Alexandre le Grand, elle est l'une des seules souveraines de sa dynastie à avoir appris la langue égyptienne, parlée aussi par ses sujets.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les chats étaient sacrés</h4>
+      <p>Liés à la déesse Bastet, les chats étaient protégés par la loi ; tuer un chat, même accidentellement, pouvait exposer son auteur à de lourdes sanctions selon plusieurs sources antiques.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le déchiffrement a pris plus de vingt ans</h4>
+      <p>Découverte en 1799, la pierre de Rosette n'est réellement déchiffrée qu'en 1822 par Champollion, qui s'appuie notamment sur sa connaissance du copte, dernier état de la langue égyptienne ancienne.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le senet, un jeu vieux de cinq mille ans</h4>
+      <p>Ce jeu de plateau, retrouvé jusque dans la tombe de Toutânkhamon, est l'un des plus anciens jeux de société connus au monde et se jouait aussi bien de son vivant que symboliquement dans l'au-delà.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STYLE DE VIE ================= -->
+<section id="style-de-vie">
+  <div class="section-label">Vie Quotidienne</div>
+  <h2 class="section-title">Style de Vie &amp; Traditions</h2>
+  <p class="section-intro">Au-delà des monuments et des pharaons, ce qui façonnait le quotidien égyptien : alimentation, habitat, croyances domestiques et rites funéraires partagés par l'ensemble de la société.</p>
+
+  <div class="life-grid">
+    <div class="life-card">
+      <h4>Alimentation</h4>
+      <p>Pain et bière (peu alcoolisée, presque un aliment de base) constituaient l'ossature du régime quotidien, complétés d'oignons, de légumineuses, de poisson du Nil et, pour les plus aisés, de viande et de vin.</p>
+    </div>
+    <div class="life-card">
+      <h4>Habitat</h4>
+      <p>Maisons de briques crues séchées au soleil pour les vivants, réservant la pierre — matériau durable — aux temples des dieux et aux tombes, conçues comme des "demeures d'éternité" par opposition aux habitations temporaires des vivants.</p>
+    </div>
+    <div class="life-card">
+      <h4>Religion Domestique</h4>
+      <p>À côté des grands cultes officiels, des divinités protectrices du foyer comme Bès (protecteur des naissances) et Taouret étaient invoquées quotidiennement par le biais d'amulettes et de petits autels privés.</p>
+    </div>
+    <div class="life-card">
+      <h4>Funérailles &amp; l'Au-delà</h4>
+      <p>Le Livre des Morts guidait le défunt à travers un jugement où son cœur était pesé face à la plume de Maât, déesse de la vérité et de l'équilibre cosmique ; ne pas passer cette épreuve valait l'anéantissement définitif, plus redouté que la mort elle-même.</p>
+    </div>
+    <div class="life-card">
+      <h4>Jeux &amp; Loisirs</h4>
+      <p>Le senet, jeu de plateau parmi les plus anciens connus, la lutte, la natation et la navigation sur le Nil ainsi que la musique et la danse rythmaient les moments de détente de toutes les classes sociales.</p>
+    </div>
+    <div class="life-card">
+      <h4>Beauté &amp; Hygiène</h4>
+      <p>Kohl autour des yeux (aussi utile contre l'éblouissement et les infections que décoratif), perruques portées par-dessus des crânes rasés pour l'hygiène, huiles parfumées et bijoux complétaient une véritable culture du soin corporel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MONDE ================= -->
+<section id="monde">
+  <div class="section-label">Rayonnement</div>
+  <h2 class="section-title">Un Rayonnement Ancien et Actuel</h2>
+  <p class="section-intro">De l'admiration des voyageurs grecs antiques à la fièvre mondiale déclenchée par la découverte de la tombe de Toutânkhamon, l'Égypte a fasciné selon des logiques très différentes à travers les âges.</p>
+
+  <div class="tree-diagram diagram-scroll">
+    <svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" style="max-width:900px;">
+      <g stroke="#b98d42" stroke-width="1.3" fill="none" stroke-dasharray="2,4">
+        <line x1="500" y1="230" x2="200" y2="170"/>
+        <line x1="500" y1="230" x2="170" y2="320"/>
+        <line x1="500" y1="230" x2="640" y2="110"/>
+        <line x1="500" y1="230" x2="810" y2="200"/>
+        <line x1="500" y1="230" x2="840" y2="360"/>
+      </g>
+      <circle cx="500" cy="230" r="9" fill="#b5502e"/>
+      <text x="500" y="205" fill="#1f8478" font-family="Cinzel, serif" font-size="14" text-anchor="middle" font-weight="700">ÉGYPTE</text>
+      <g font-family="EB Garamond, serif" font-size="12" fill="#2b1f12" text-anchor="middle">
+        <text x="200" y="162" fill="#b5502e">Grèce Antique</text>
+        <text x="200" y="178" font-size="10" fill="#7a6440">Hérodote, sciences, mystères d'Isis</text>
+        <text x="170" y="312" fill="#b5502e">Rome &amp; le Levant Biblique</text>
+        <text x="170" y="328" font-size="10" fill="#7a6440">province, obélisques, culte d'Isis</text>
+        <text x="640" y="102" fill="#b5502e">Nubie &amp; Afrique</text>
+        <text x="640" y="118" font-size="10" fill="#7a6440">échanges, or, royaume de Koush</text>
+        <text x="810" y="192" fill="#b5502e">Égyptomanie Moderne</text>
+        <text x="810" y="208" font-size="10" fill="#7a6440">Bonaparte, Champollion, Tutmania</text>
+        <text x="840" y="352" fill="#b5502e">Monde Contemporain</text>
+        <text x="840" y="368" font-size="10" fill="#7a6440">tourisme, égyptologie, culture populaire</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="reach-grid">
+    <div class="reach-card">
+      <h4>L'Admiration Grecque</h4>
+      <span class="reach-dist">à partir du VIe siècle av. J.-C.</span>
+      <p>Hérodote visite l'Égypte et la décrit comme "un don du Nil" ; plusieurs penseurs grecs, dont Thalès et Pythagore, auraient étudié auprès des prêtres égyptiens, selon une tradition antique difficile à vérifier mais révélatrice du prestige intellectuel du pays.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Province Romaine et Culte d'Isis</h4>
+      <span class="reach-dist">30 av. J.-C. – IVe siècle apr. J.-C.</span>
+      <p>Grenier à blé de l'Empire romain, l'Égypte voit son culte de la déesse Isis se répandre dans tout le monde romain, jusqu'en Gaule et en Bretagne, tandis que ses obélisques sont transportés jusqu'à Rome.</p>
+    </div>
+    <div class="reach-card">
+      <h4>L'Expédition de Bonaparte</h4>
+      <span class="reach-dist">1798 – 1801</span>
+      <p>La campagne militaire française s'accompagne d'une mission scientifique d'ampleur, la "Description de l'Égypte" ; la découverte de la pierre de Rosette lors de cette expédition marque la naissance de l'égyptologie moderne.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Champollion et le Déchiffrement</h4>
+      <span class="reach-dist">1822</span>
+      <p>Le décryptage des hiéroglyphes ouvre d'un coup l'accès à des milliers de textes muets depuis quatorze siècles, transformant la civilisation égyptienne, de mythe vaguement connu, en histoire documentée.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La "Tutmania"</h4>
+      <span class="reach-dist">1922 et suivants</span>
+      <p>La découverte par Howard Carter de la tombe quasi intacte de Toutânkhamon déclenche un engouement mondial pour l'esthétique égyptienne, influençant mode, architecture Art déco et cinéma pendant tout le XXe siècle.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Tourisme &amp; Égyptologie Aujourd'hui</h4>
+      <span class="reach-dist">Aujourd'hui</span>
+      <p>Gizeh, Louxor et Assouan comptent parmi les sites archéologiques les plus visités au monde ; de nouvelles découvertes continuent d'être annoncées chaque année, entretenant une fascination jamais démentie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FRISE CHRONOLOGIQUE ================= -->
+<section id="frise">
+  <div class="section-label">Chronologie</div>
+  <h2 class="section-title">Frise Chronologique</h2>
+  <p class="section-intro">Trois millénaires de continuité pharaonique, de l'unification légendaire des deux terres à la redécouverte moderne d'une civilisation restée longtemps indéchiffrable.</p>
+
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 3100 av. J.-C.</span><h4>Unification de la Haute et Basse-Égypte</h4>
+      <p>Narmer réunit les deux terres, début de l'ère dynastique pharaonique.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 2686 – 2181 av. J.-C.</span><h4>Ancien Empire</h4>
+      <p>Âge des pyramides : Djoser à Saqqara, Khéops à Gizeh.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">2181 – 2055 av. J.-C.</span><h4>Première Période Intermédiaire</h4>
+      <p>Fragmentation politique et affaiblissement de l'autorité royale centrale.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">2055 – 1650 av. J.-C.</span><h4>Moyen Empire</h4>
+      <p>Réunification, essor littéraire et grands travaux d'irrigation du Fayoum.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 1650 – 1550 av. J.-C.</span><h4>Deuxième Période Intermédiaire</h4>
+      <p>Domination des Hyksos sur le delta, introduction du char de guerre.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1550 – 1069 av. J.-C.</span><h4>Nouvel Empire</h4>
+      <p>Apogée impériale : Hatchepsout, Akhenaton, Toutânkhamon, Ramsès II.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 1353 – 1336 av. J.-C.</span><h4>Révolution Religieuse d'Akhenaton</h4>
+      <p>Épisode amarnien, culte du disque solaire Aton, ensuite effacé.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1274 – 1259 av. J.-C.</span><h4>Qadesh puis Traité de Paix</h4>
+      <p>Affrontement avec les Hittites suivi du plus ancien traité international conservé.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1069 – 664 av. J.-C.</span><h4>Troisième Période Intermédiaire</h4>
+      <p>Fragmentation puis unification par la dynastie nubienne de Koush (25e dynastie).</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">525 av. J.-C.</span><h4>Conquête Perse</h4>
+      <p>Cambyse II fait de l'Égypte une satrapie de l'empire achéménide.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">332 av. J.-C.</span><h4>Conquête d'Alexandre le Grand</h4>
+      <p>Fondation d'Alexandrie, future capitale hellénistique du pays.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">305 – 30 av. J.-C.</span><h4>Dynastie Ptolémaïque</h4>
+      <p>Règne grec depuis Alexandrie, jusqu'à Cléopâtre VII.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">30 av. J.-C.</span><h4>Annexion Romaine</h4>
+      <p>Mort de Cléopâtre VII, fin de l'indépendance pharaonique.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">394 apr. J.-C.</span><h4>Dernière Inscription Hiéroglyphique</h4>
+      <p>Temple de Philae : fin de l'usage vivant de l'écriture antique.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1798 – 1801</span><h4>Expédition de Bonaparte</h4>
+      <p>Naissance de l'égyptologie moderne, découverte de la pierre de Rosette.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1822</span><h4>Déchiffrement par Champollion</h4>
+      <p>Les hiéroglyphes redeviennent lisibles après quatorze siècles de silence.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1922</span><h4>Découverte de la Tombe de Toutânkhamon</h4>
+      <p>Howard Carter déclenche un engouement mondial pour l'Égypte antique.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">Aujourd'hui</span><h4>Une Destination Archéologique Majeure</h4>
+      <p>Gizeh, Louxor et Assouan attirent des millions de visiteurs, découvertes régulières et nouveau Grand Musée Égyptien près de Gizeh.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Un Héritage Bien Vivant</h2>
+  <p class="section-intro">Entre continuité linguistique discrète et fascination mondiale ininterrompue, l'empreinte de l'Égypte antique sur le monde contemporain reste étonnamment présente.</p>
+
+  <div class="heritage-block">
+    <h4>Dans la langue et l'écriture</h4>
+    <p>Le copte, dernier état de la langue égyptienne ancienne, reste la langue liturgique de l'Église copte d'Égypte ; des mots comme "papier" (papyrus), "oasis", "ébène" ou "chimie" (via l'arabe al-kimiya, lui-même dérivé de Kemet) sont passés jusque dans les langues européennes modernes.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans l'architecture et l'art</h4>
+    <p>Obélisques égyptiens authentiques trônent aujourd'hui à Paris, Rome, Londres et New York ; la découverte de la tombe de Toutânkhamon en 1922 a durablement influencé l'esthétique Art déco et continue d'inspirer mode et design.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans la science et l'archéologie</h4>
+    <p>L'égyptologie s'est constituée en discipline académique à part entière depuis Champollion, et des techniques modernes comme le scanner médical permettent aujourd'hui d'étudier les momies royales sans les endommager, révélant régulièrement de nouvelles données historiques.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Dans la culture populaire mondiale</h4>
+    <p>Cinéma, bandes dessinées, jeux vidéo et tourisme de masse entretiennent depuis un siècle une fascination continue pour les pharaons, les pyramides et les malédictions de momie, jusqu'à devenir l'un des imaginaires historiques les plus universellement reconnaissables au monde.</p>
+  </div>
+
+  <p class="heritage-caution">Un point de vigilance s'impose en toute honnêteté : l'histoire de l'égyptologie moderne est indissociable du contexte colonial dans lequel elle est née, avec un débat toujours vif sur le retrait et la conservation à l'étranger d'objets majeurs (la pierre de Rosette au British Museum, par exemple) que l'Égypte réclame en partie. Les origines ethniques et culturelles précises des anciens Égyptiens font par ailleurs l'objet de débats historiographiques persistants, parfois politisés, entre lectures afrocentriques et eurocentriques du sujet. Apprécier la richesse de cette civilisation n'empêche pas de regarder ces débats contemporains avec lucidité — ils méritent, comme pour tout patrimoine mondial, un examen indépendant plutôt qu'un jugement tranché à sens unique.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">☥ ⚖ ☥</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série : <strong>Culture Indienne</strong></p>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var navLinks = document.querySelectorAll('.sticky-nav a[href^="#"]');
+  var sections = [];
+  navLinks.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({link: a, el: el});
+  });
+  function onScroll(){
+    var pos = window.scrollY + window.innerHeight * 0.3;
+    var current = null;
+    sections.forEach(function(s){ if (s.el.offsetTop <= pos) current = s; });
+    navLinks.forEach(function(a){ a.classList.remove('nav-active'); });
+    if (current) current.link.classList.add('nav-active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  var revealTargets = document.querySelectorAll(
+    'section > h2, .realm-card, .god-card, .legend-block, .timeline-item, .creature-item, .anecdote-card, .reach-card, .card, .placeholder-card, .theory-card, .verdict-badge'
+  );
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('reveal-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.1});
+  revealTargets.forEach(function(el){ el.classList.add('reveal-init'); io.observe(el); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Monstre du Loch Ness — Créatures Légendaires du Monde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0d1a1a;
+    --bg-deep: #071012;
+    --panel: #16262a;
+    --panel-alt: #1c2f33;
+    --panel-border: #33494c;
+    --parchment: #e4ecea;
+    --parchment-dim: #bcccc9;
+    --stone: #7f9498;
+    --moss: #3f6b5a;
+    --moss-bright: #62a68c;
+    --blood: #1e4a52;
+    --blood-bright: #4fa8c9;
+    --brass: #a9884f;
+    --brass-bright: #d1ab6a;
+    --text: #dce6e4;
+    --text-dim: #93a6a8;
+    --glow: rgba(79,168,201,0.32);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at top, #142526 0%, #0d1a1a 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{
+    font-family:'Cinzel', serif;
+    color:var(--parchment);
+    letter-spacing:0.03em;
+    font-weight:700;
+  }
+  a{color:var(--brass-bright);}
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.05) 3px);
+    z-index:1;
+    opacity:0.5;
+  }
+
+  .fog-strip{display:block; width:100%; height:20px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 20px;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 12%, rgba(79,168,201,0.15), transparent 55%),
+      linear-gradient(180deg, #142526 0%, #0d1a1a 55%, #081112 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 20% 90%, rgba(7,16,18,0.7), transparent 60%),
+      radial-gradient(ellipse at 85% 85%, rgba(7,16,18,0.7), transparent 55%);
+    pointer-events:none;
+  }
+  .epigraph-row{
+    font-family:'Cinzel', serif;
+    font-size:16px;
+    letter-spacing:6px;
+    color:var(--brass);
+    opacity:0.8;
+    margin-bottom:26px;
+    position:relative;
+    z-index:2;
+  }
+  .hero h1{
+    font-family:'Cinzel Decorative', serif;
+    font-size:clamp(2.4rem, 6.6vw, 4.9rem);
+    margin:0;
+    position:relative;
+    z-index:2;
+    background:linear-gradient(180deg, var(--parchment), var(--brass) 65%, #6e5427);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 50px rgba(0,0,0,0.4);
+  }
+  .hero .subtitle{
+    font-family:'Cinzel', serif;
+    font-size:1.02rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--blood-bright);
+    margin-top:16px;
+    position:relative;
+    z-index:2;
+  }
+  .hero .tagline{
+    max-width:640px;
+    margin:30px auto 0;
+    font-style:italic;
+    color:var(--text-dim);
+    font-size:1.1rem;
+    position:relative;
+    z-index:2;
+  }
+  .verdict-badge{
+    position:relative;
+    z-index:2;
+    display:inline-flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    margin:34px auto 0;
+    padding:14px 28px;
+    border:1px solid var(--blood-bright);
+    border-radius:3px;
+    background:linear-gradient(160deg, rgba(79,168,201,0.16), rgba(20,26,20,0.6));
+    box-shadow:0 0 24px var(--glow);
+    max-width:600px;
+  }
+  .verdict-badge .verdict-label{
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--blood-bright);
+  }
+  .verdict-badge .verdict-text{
+    font-family:'EB Garamond', serif;
+    font-size:1rem;
+    color:var(--parchment);
+    line-height:1.5;
+  }
+  .divider{
+    width:120px;
+    height:2px;
+    margin:34px auto;
+    background:linear-gradient(90deg, transparent, var(--brass), transparent);
+    position:relative;
+    z-index:2;
+  }
+  .nav-pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+    max-width:860px;
+    position:relative;
+    z-index:2;
+  }
+  .nav-pills a{
+    text-decoration:none;
+    border:1px solid var(--panel-border);
+    padding:9px 20px;
+    border-radius:2px;
+    font-family:'Cinzel', serif;
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    background:rgba(20,28,22,0.5);
+    transition:all .25s ease;
+  }
+  .nav-pills a:hover{
+    color:var(--parchment);
+    border-color:var(--brass);
+    box-shadow:0 0 14px rgba(169,136,79,0.2);
+  }
+
+  /* ===== STICKY NAV ===== */
+  .sticky-nav{
+    position:sticky;
+    top:0;
+    z-index:40;
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px 18px;
+    justify-content:center;
+    padding:14px 20px;
+    background:rgba(11,18,19,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none;
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    padding:4px 2px;
+    border-bottom:1px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--blood-bright); border-color:var(--blood-bright);}
+
+  /* ===== SECTIONS ===== */
+  section{
+    position:relative;
+    z-index:2;
+    max-width:1000px;
+    margin:0 auto;
+    padding:100px 24px;
+  }
+  .section-label{
+    text-align:center;
+    font-family:'Cinzel', serif;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--blood-bright);
+    font-size:0.78rem;
+    margin-bottom:12px;
+  }
+  .section-title{
+    text-align:center;
+    font-size:clamp(1.9rem,4.2vw,2.8rem);
+    margin:0 0 16px;
+  }
+  .section-intro{
+    text-align:center;
+    max-width:680px;
+    margin:0 auto 60px;
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  /* ===== GENERIC CARD GRID ===== */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:22px;
+  }
+  .info-card{
+    background:linear-gradient(160deg, var(--panel), var(--panel-alt));
+    border:1px solid var(--panel-border);
+    border-radius:3px;
+    padding:26px 24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .info-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--blood-bright), var(--brass));
+  }
+  .info-card h3{
+    margin:0 0 4px;
+    font-size:1.2rem;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .info-num{
+    color:var(--brass);
+    font-size:1rem;
+    opacity:0.9;
+    font-family:'Cinzel', serif;
+  }
+  .info-card .info-sub{
+    font-size:0.82rem;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:12px;
+  }
+  .info-card p{margin:0; font-size:0.97rem;}
+  .info-card p + p{margin-top:10px;}
+
+  /* ===== FIGURE / WITNESS CARDS ===== */
+  .figure-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+    gap:26px;
+  }
+  .figure-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    padding:0;
+    border-radius:4px;
+    overflow:hidden;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .figure-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--brass);
+  }
+  .figure-header{
+    padding:22px 24px 16px;
+    border-bottom:1px solid var(--panel-border);
+    background:linear-gradient(160deg, rgba(79,168,201,0.12), transparent);
+  }
+  .figure-name{font-size:1.35rem; margin:0;}
+  .figure-role{
+    font-size:0.82rem;
+    color:var(--blood-bright);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin-top:4px;
+  }
+  .figure-body{padding:18px 24px 24px;}
+  .figure-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    border:1px solid var(--panel-border);
+    color:var(--text-dim);
+    padding:3px 10px;
+    border-radius:20px;
+  }
+  .figure-body p{margin:0 0 10px; font-size:0.96rem;}
+  .figure-body p:last-child{margin-bottom:0;}
+  .figure-body strong{color:var(--parchment); font-weight:600;}
+
+  /* ===== PORTRAIT ===== */
+  .pull-quote{
+    border-left:3px solid var(--brass);
+    padding:6px 24px;
+    margin:24px 0;
+    font-style:italic;
+    color:var(--parchment);
+    font-size:1.08rem;
+  }
+  .source-note{
+    font-size:0.85rem;
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{
+    content:"";
+    position:absolute; left:50%; top:0; bottom:0; width:2px;
+    background:linear-gradient(180deg, transparent, var(--brass) 6%, var(--blood-bright) 50%, var(--brass) 94%, transparent);
+    transform:translateX(-50%);
+  }
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{
+    position:absolute; top:3px; width:13px; height:13px; border-radius:50%;
+    background:var(--bg); border:3px solid var(--brass-bright);
+    box-shadow:0 0 10px var(--glow);
+  }
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{
+    font-family:'Cinzel', serif; color:var(--blood-bright); font-size:0.98rem;
+    letter-spacing:0.05em; display:block; margin-bottom:6px;
+  }
+  .timeline-content h4{margin:0 0 6px; font-size:1.02rem; color:var(--parchment);}
+  .timeline-content p{margin:0; font-size:0.9rem; color:var(--text-dim);}
+
+  /* ===== CULTURE GRID ===== */
+  .culture-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:18px;
+    margin-top:20px;
+  }
+  .culture-card{
+    border:1px solid var(--panel-border);
+    border-top:2px solid var(--moss-bright);
+    padding:18px 20px;
+    background:var(--panel);
+    border-radius:3px;
+  }
+  .culture-card h4{margin:0 0 6px; font-size:0.98rem; color:var(--parchment);}
+  .culture-card .culture-tag{
+    display:block;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--text-dim);
+    margin-bottom:8px;
+  }
+  .culture-card p{margin:0; font-size:0.9rem;}
+
+  /* ===== SCIENCE ===== */
+  .science-block{
+    margin-bottom:44px;
+    padding-bottom:40px;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .science-block:last-child{border-bottom:none;}
+  .science-block h3{font-size:1.4rem; margin:0 0 14px;}
+  .science-block p{margin:0 0 14px; font-size:1rem;}
+  .science-block p:last-child{margin-bottom:0;}
+  .caution-box{
+    border-left:3px solid var(--blood-bright);
+    padding:10px 22px;
+    margin-top:20px;
+    font-size:0.92rem; color:var(--text-dim); font-style:italic;
+    background:rgba(79,168,201,0.08);
+  }
+
+  /* ===== THEORIES ===== */
+  .theory-block{
+    margin-bottom:40px;
+    padding:24px 26px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:3px;
+    position:relative;
+  }
+  .theory-block::before{
+    content:"";
+    position:absolute; top:0; left:0; bottom:0; width:3px;
+    background:linear-gradient(180deg, var(--brass), var(--blood-bright));
+  }
+  .theory-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .theory-block h3{margin:0; font-size:1.25rem;}
+  .theory-status{
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+  .theory-block p{margin:0 0 10px; font-size:0.97rem;}
+  .theory-block p:last-child{margin-bottom:0;}
+  .theory-attrib{
+    font-size:0.85rem;
+    color:var(--text-dim);
+    font-style:italic;
+    margin-top:10px;
+  }
+
+  /* ===== HERITAGE ===== */
+  .heritage-block{margin-bottom:32px;}
+  .heritage-block h4{
+    font-size:0.92rem; color:var(--parchment); margin:0 0 10px;
+    text-transform:uppercase; letter-spacing:0.05em;
+  }
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{
+    border-left:3px solid var(--blood-bright);
+    padding:4px 20px; margin-top:32px;
+    font-size:0.9rem; color:var(--text-dim); font-style:italic;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    text-align:center;
+    padding:80px 24px 60px;
+    border-top:1px solid var(--panel-border);
+    color:var(--text-dim);
+  }
+  footer .epigraph-row{margin-bottom:20px; font-size:15px;}
+  footer .next-up{
+    font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--text-dim);
+  }
+  footer .next-up strong{color:var(--parchment);}
+
+  ::selection{background:var(--blood-bright); color:#04141a;}
+
+  @media (max-width:640px){
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.6rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){
+      width:100%; left:0; text-align:left; padding:0 10px 44px 50px;
+    }
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{
+      left:13px; right:auto;
+    }
+    .theory-header{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+<style>
+  .sticky-nav a.nav-active{font-weight:700; text-decoration:underline; text-underline-offset:5px;}
+  .reveal-init{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-in{opacity:1; transform:translateY(0);}
+</style>
+<style>
+  #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+  #side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+  #side-menu-overlay.open{opacity:1; pointer-events:auto;}
+  #side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+  #side-menu.open{transform:translateX(0);}
+  #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+  #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+  #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+  #side-menu .side-home{margin:0 14px 16px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+  #side-menu .side-label{padding:14px 22px 6px; margin-top:4px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0;}
+  #side-menu .side-label:first-of-type{padding-top:0;}
+</style>
+</head>
+<body>
+<button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
+<div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <div class="side-divider"></div>
+  <div class="side-label">Mythologies</div>
+    <a href="mythologie-nordique.html">Nordique</a>
+    <a href="mythologie-grecque.html">Grecque</a>
+    <a href="mythologie-egyptienne.html">Égyptienne</a>
+    <a href="mythologie-romaine.html">Romaine</a>
+    <a href="mythologie-celtique.html">Celtique</a>
+    <a href="mythologie-mesopotamienne.html">Mésopotamienne</a>
+    <a href="mythologie-hindoue.html">Hindoue</a>
+    <a href="mythologie-japonaise.html">Japonaise</a>
+    <a href="mythologie-azteque-maya.html">Aztèque & Maya</a>
+    <a href="mythologie-slave.html">Slave</a>
+  <div class="side-label">Cultures</div>
+    <a href="culture-chinoise.html">Chine</a>
+    <a href="culture-egypte-antique.html">Égypte Antique</a>
+  <div class="side-label">Créatures</div>
+    <a href="creature-gevaudan.html">Bête du Gévaudan</a>
+    <a href="creature-loch-ness.html" class="active">Monstre du Loch Ness</a>
+  <div class="side-label">Mystères</div>
+    <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
+    <a href="mystere-stonehenge.html">Stonehenge</a>
+</nav>
+
+
+<header class="hero">
+  <div class="epigraph-row">LOCH NESS • ÉCOSSE, DEPUIS 1933</div>
+  <h1>Le Monstre du Loch Ness</h1>
+  <div class="subtitle">Highlands d'Écosse — Loch Ness, Great Glen</div>
+  <p class="tagline">« Nessie. » Depuis près d'un siècle, un long cou et des bosses sombres émergeant de l'eau la plus profonde de Grande-Bretagne alimentent l'un des mystères les plus célèbres au monde — et l'un des mieux étudiés scientifiquement, sans qu'aucune preuve n'ait jamais confirmé l'existence d'un animal inconnu.</p>
+  <div class="verdict-badge">
+    <span class="verdict-label">Verdict</span>
+    <span class="verdict-text">Mystère populaire mondialement connu — la grande majorité des observations et « preuves » historiques ont depuis été expliquées ou discréditées (canulars documentés, méprises optiques), sans qu'aucune preuve scientifique crédible d'un animal inconnu n'ait jamais été apportée.</span>
+  </div>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#origine">Origine</a>
+    <a href="#portrait">Portrait</a>
+    <a href="#temoins-recits">Témoins &amp; Récits</a>
+    <a href="#culture-populaire">Culture Populaire</a>
+    <a href="#science">Science</a>
+    <a href="#theories">Théories</a>
+    <a href="#heritage">Héritage</a>
+  </nav>
+</header>
+
+<svg class="fog-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="wave0" width="40" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 12 Q10 4 20 12 T40 12" stroke="#a9884f" stroke-width="2" fill="none" opacity="0.45"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#wave0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#origine">Origine</a>
+  <a href="#portrait">Portrait</a>
+  <a href="#temoins-recits">Témoins</a>
+  <a href="#culture-populaire">Culture</a>
+  <a href="#science">Science</a>
+  <a href="#theories">Théories</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ORIGINE ================= -->
+<section id="origine">
+  <div class="section-label">Contexte</div>
+  <h2 class="section-title">Un Loch Bien Réel, une Légende Récente</h2>
+  <p class="section-intro">Avant de devenir un mythe mondial, le Loch Ness est un lieu géologique précis — et la légende telle qu'on la connaît aujourd'hui est beaucoup plus jeune qu'on ne le croit souvent.</p>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <h3><span class="info-num">I</span>Le plus grand volume d'eau douce de Grande-Bretagne</h3>
+      <p>Le Loch Ness est un lac d'eau douce des Highlands écossaises, long d'environ 37 kilomètres, creusé le long de la faille géologique du Great Glen. Ses eaux, profondes de plus de 200 mètres par endroits, sont si sombres — chargées de particules de tourbe — que la visibilité y dépasse rarement quelques mètres. Le loch s'est formé après le retrait des glaciers, il y a environ 10 000 ans : un détail qui aura son importance dans le débat scientifique.</p>
+    </div>
+    <div class="info-card">
+      <h3><span class="info-num">II</span>La légende de Saint Colomba, souvent citée mais à nuancer</h3>
+      <p>La première mention souvent avancée remonte à l'an 565, dans la <em>Vita Columbae</em> d'Adomnán, rédigée près d'un siècle et demi plus tard : le moine irlandais Colomba y aurait repoussé une bête aquatique menaçant un nageur, non dans le loch lui-même mais dans la rivière Ness toute proche. Le récit appartient à un genre hagiographique où les miracles contre des monstres sont fréquents ; en faire la « première preuve » de Nessie relève davantage de la reconstruction rétrospective que d'un lien direct établi.</p>
+    </div>
+    <div class="info-card">
+      <h3><span class="info-num">III</span>1933, l'année qui invente vraiment la légende moderne</h3>
+      <p>L'explosion médiatique commence en réalité en 1933, avec la construction d'une nouvelle route longeant la rive nord du loch, qui offre pour la première fois des vues dégagées sur l'eau à un grand nombre de voyageurs. En mai 1933, Aldie Mackay rapporte avoir vu une créature dans le loch ; le récit, publié dans l'<em>Inverness Courier</em> sous la plume du rédacteur Alex Campbell, popularise le terme de « monster ». La vague d'observations modernes — et le nom de « Nessie » — naissent véritablement à ce moment-là.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTRAIT ================= -->
+<section id="portrait">
+  <div class="section-label">Description</div>
+  <h2 class="section-title">Ce que les Témoins Disent Avoir Vu</h2>
+  <p class="section-intro">Aucun spécimen, aucune preuve physique conservée — seulement des témoignages oculaires, des photographies contestées et des relevés sonar ambigus. Ce portrait reste, par nécessité, un portrait rapporté.</p>
+
+  <p>Les descriptions les plus fréquentes, rassemblées depuis 1933, dressent le portrait d'un animal aquatique de grande taille, au long cou fin surmonté d'une petite tête, et dont le dos ferait apparaître une ou plusieurs bosses sombres à la surface de l'eau. La peau serait grise à noire, sans écailles visibles rapportées avec certitude, et l'animal se déplacerait par ondulations verticales plutôt qu'horizontales — un détail qui a nourri, dès les années 1930, le rapprochement avec la silhouette d'un plésiosaure, ce grand reptile marin disparu à la fin du Crétacé.</p>
+
+  <div class="pull-quote">« Un objet noir énorme roulait et bondissait à la surface » — description attribuée à Aldie Mackay lors de l'observation de mai 1933, telle que rapportée par l'<em>Inverness Courier</em>.</div>
+  <p class="source-note">— formule reprise et largement diffusée par la presse britannique de l'époque, qui a contribué à fixer le vocabulaire descriptif encore utilisé aujourd'hui.</p>
+
+  <p>D'autres témoins, notamment George Spicer et son épouse en juillet 1933, décrivent une observation terrestre plutôt qu'aquatique : une créature massive, au long cou ondulant, traversant la route devant leur voiture pour rejoindre le loch — un récit sans point commun morphologique évident avec les silhouettes aquatiques rapportées par ailleurs, ce qui illustre à quel point les descriptions varient d'un témoignage à l'autre.</p>
+
+  <p>Il faut ici une prudence de méthode particulière : dès 1933-1934, la couverture médiatique intense et la diffusion de la « photo du chirurgien » (voir plus loin) ont fourni à chaque nouveau témoin une image de référence à laquelle comparer, consciemment ou non, sa propre observation. Le « portrait » de Nessie doit donc autant à un siècle de représentations culturelles cumulées qu'à des observations strictement indépendantes les unes des autres.</p>
+</section>
+
+<!-- ================= TEMOINS & RECITS ================= -->
+<section id="temoins-recits">
+  <div class="section-label">Archives</div>
+  <h2 class="section-title">Observations, Photographies et Expéditions</h2>
+  <p class="section-intro">Peu de créatures légendaires disposent d'une documentation aussi continue sur près d'un siècle — de la presse locale des années 1930 aux campagnes scientifiques les plus récentes.</p>
+
+  <div class="figure-grid">
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Aldie Mackay</h3>
+        <div class="figure-role">Observation fondatrice de l'ère moderne</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Mai 1933</span><span class="tag">Loch Ness</span></div>
+        <p>Gérante d'un hôtel au bord du loch, elle rapporte avoir vu « une baleine » agiter la surface de l'eau. Son récit, publié dans l'<em>Inverness Courier</em>, marque le point de départ conventionnel de la légende moderne de Nessie.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">George Spicer</h3>
+        <div class="figure-role">Témoin de la traversée routière</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Juillet 1933</span><span class="tag">Route A82</span></div>
+        <p>Avec son épouse, il affirme avoir vu une créature massive au long cou traverser la route devant leur voiture pour disparaître dans le loch — l'un des rares témoignages terrestres de la première vague de 1933.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Robert Kenneth Wilson</h3>
+        <div class="figure-role">Auteur nominal de la « photo du chirurgien »</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">21 avril 1934</span><span class="tag">Daily Mail</span></div>
+        <p>Gynécologue londonien, il publie dans le <em>Daily Mail</em> le cliché le plus célèbre de Nessie, montrant un long cou émergeant de l'eau. Présenté pendant six décennies comme une preuve photographique majeure, il sera révélé comme un canular en 1994.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Christian Spurling</h3>
+        <div class="figure-role">L'homme qui a révélé le canular</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">1994</span><span class="tag">Confession posthume</span></div>
+        <p>Peu avant sa mort à 90 ans, il confesse avoir fabriqué la maquette utilisée pour la photo de 1934 — un sous-marin jouet muni d'une fausse tête de serpent — à la demande de son beau-père Marmaduke Wetherell, désireux de se venger d'une humiliation médiatique antérieure.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Adrian Shine et Operation Deepscan</h3>
+        <div class="figure-role">La plus grande campagne sonar</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Octobre 1987</span></div>
+        <p>Une flottille de 24 bateaux équipés de sonars balaie simultanément l'ensemble du loch. L'opération enregistre quelques contacts sonar non identifiés mais aucune preuve concluante de la présence d'un grand animal inconnu.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Neil Gemmell</h3>
+        <div class="figure-role">L'étude ADN environnemental</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">2018 – 2019</span><span class="tag">University of Otago</span></div>
+        <p>Généticien néo-zélandais, il dirige la première étude d'ADN environnemental à grande échelle du loch : 250 échantillons d'eau analysés pour recenser toute la vie génétiquement détectable présente dans le loch, sans exception.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:90px; font-size:1.6rem;">Chronologie d'une Légende Presque Centenaire</h3>
+  <p class="section-intro" style="margin-bottom:20px;">De la légende médiévale nuancée à l'étude génétique la plus récente, une frise qui traverse près de mille cinq cents ans — mais dont l'essentiel se joue en moins d'un siècle.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">565 apr. J.-C.</span>
+        <h4>La légende de Saint Colomba</h4>
+        <p>Récit hagiographique rédigé un siècle et demi plus tard, souvent cité comme première trace — mais concernant la rivière Ness, non le loch, et appartenant à un genre littéraire où les monstres vaincus sont fréquents.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Mai 1933</span>
+        <h4>Naissance de la légende moderne</h4>
+        <p>L'ouverture d'une nouvelle route au bord du loch et l'observation d'Aldie Mackay, relayée par l'<em>Inverness Courier</em>, déclenchent la vague médiatique moderne.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Juillet 1933</span>
+        <h4>La traversée des Spicer</h4>
+        <p>Le témoignage de George Spicer, rare observation terrestre, alimente encore davantage l'intérêt de la presse nationale britannique.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">21 avril 1934</span>
+        <h4>La « photo du chirurgien »</h4>
+        <p>Le <em>Daily Mail</em> publie le cliché de Robert Kenneth Wilson, qui devient pour six décennies l'image de référence mondiale de Nessie.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Octobre 1987</span>
+        <h4>Operation Deepscan</h4>
+        <p>Vingt-quatre bateaux sondent simultanément le loch. Résultats non concluants, malgré quelques contacts sonar restés sans explication définitive.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1994</span>
+        <h4>Le canular enfin révélé</h4>
+        <p>Christian Spurling confesse avoir fabriqué la maquette de 1934, mettant fin à six décennies de statut quasi-officiel accordé à la photo du chirurgien.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">2018 – 2019</span>
+        <h4>L'étude ADN environnemental</h4>
+        <p>L'équipe de Neil Gemmell publie ses résultats en septembre 2019 : aucune trace d'ADN de grand reptile, mais une quantité considérable d'ADN d'anguille européenne.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CULTURE POPULAIRE ================= -->
+<section id="culture-populaire">
+  <div class="section-label">Postérité Culturelle</div>
+  <h2 class="section-title">D'une Rumeur de Presse Locale à une Icône Mondiale</h2>
+  <p class="section-intro">Peu de créatures légendaires ont autant voyagé au-delà de leur région d'origine, au point de devenir un symbole reconnu bien au-delà de l'Écosse.</p>
+
+  <div class="culture-grid">
+    <div class="culture-card">
+      <h4>Cinéma et télévision</h4>
+      <span class="culture-tag">Films &amp; séries</span>
+      <p>Nessie apparaît dans de nombreuses productions, du film familial <em>Le Cheval d'eau</em> (2007) à d'innombrables documentaires et téléfilms, en passant par des apparitions dans des dessins animés et séries grand public à travers le monde.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Littérature et bande dessinée</h4>
+      <span class="culture-tag">Fiction &amp; jeunesse</span>
+      <p>Le monstre inspire romans jeunesse, ouvrages d'enquête cryptozoologique et bandes dessinées depuis des décennies, souvent présenté comme un personnage attachant plutôt que réellement menaçant.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Produits dérivés</h4>
+      <span class="culture-tag">Souvenirs &amp; merchandising</span>
+      <p>Peluches, tasses, tee-shirts et figurines à l'effigie de Nessie constituent aujourd'hui une part significative de l'économie touristique locale, vendus toute l'année à Drumnadrochit et dans l'ensemble des Highlands.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Un symbole national écossais</h4>
+      <span class="culture-tag">Identité &amp; tourisme</span>
+      <p>Aux côtés du kilt et du whisky, Nessie figure parmi les images les plus immédiatement associées à l'Écosse à l'international, largement reprise dans la communication touristique officielle du pays.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:40px;">Le basculement d'une rumeur de presse locale à un phénomène culturel mondial doit beaucoup à un concours de circonstances propre aux années 1930 : une couverture par la presse nationale britannique quasiment immédiate, la diffusion internationale de la photo du chirurgien dès 1934, puis, à partir des années 1960-1970, l'essor du tourisme automobile et de la télévision qui ont fait du loch une destination à part entière — bien avant l'ère d'internet qui a ensuite démultiplié sa notoriété.</p>
+</section>
+
+<!-- ================= SCIENCE ================= -->
+<section id="science">
+  <div class="section-label">Section Pivot</div>
+  <h2 class="section-title">Ce que Disent Réellement les Scientifiques</h2>
+  <p class="section-intro">Peu de créatures légendaires ont fait l'objet d'autant de campagnes scientifiques sérieuses — sonar, submersibles, photographie, et désormais génétique environnementale.</p>
+
+  <div class="science-block">
+    <h3>Des décennies de sondages sonar sans résultat concluant</h3>
+    <p>Depuis les années 1960, le loch a été sondé à de multiples reprises par sonar, dont la campagne <em>Operation Deepscan</em> de 1987, qui mobilise vingt-quatre bateaux balayant simultanément l'ensemble du plan d'eau. Plusieurs contacts sonar non identifiés ont été enregistrés au fil des décennies, généralement attribués après coup à des bancs de poissons, des mouvements d'eau ou des artefacts techniques — aucun n'a jamais été confirmé comme correspondant à un grand animal inconnu.</p>
+  </div>
+
+  <div class="science-block">
+    <h3>L'étude ADN environnemental de 2019 : le résultat le plus rigoureux à ce jour</h3>
+    <p>En 2018-2019, l'équipe du généticien Neil Gemmell (université d'Otago, Nouvelle-Zélande) prélève 250 échantillons d'eau à travers tout le loch et en séquence l'ADN environnemental pour dresser l'inventaire de toutes les espèces génétiquement détectables. Résultat : aucune trace d'ADN de reptile de grande taille, aucune trace de requin, de silure géant ou d'esturgeon — mais une quantité très significative d'ADN d'anguille européenne, retrouvée dans la quasi-totalité des points de prélèvement.</p>
+    <p>Cette découverte a conduit à formuler, avec prudence, l'hypothèse d'une anguille de taille inhabituelle comme explication possible d'une partie des observations. Gemmell lui-même a souligné que l'ADN environnemental ne permet pas de mesurer la taille des individus présents, et qu'une anguille de plusieurs mètres resterait un événement statistiquement exceptionnel, sans être formellement exclue par la biologie de l'espèce.</p>
+  </div>
+
+  <div class="science-block">
+    <h3>Les explications sceptiques dominantes</h3>
+    <p>La communauté scientifique privilégie très largement des explications naturelles ordinaires aux observations rapportées : troncs de pins sylvestres gorgés de résine qui, sous l'effet de gaz de décomposition, peuvent brusquement remonter à la surface puis replonger en créant des sillages trompeurs ; sillages de bateaux se propageant longtemps après leur passage sur une eau très calme ; phoques ou loutres isolés s'aventurant loin dans le loch ; cerfs traversant l'eau à la nage ; et effets d'optique liés aux <em>seiches</em>, ondes internes propres à certains lacs profonds qui déforment la surface de manière inhabituelle.</p>
+  </div>
+
+  <div class="science-block">
+    <h3>Des canulars documentés, auteurs identifiés</h3>
+    <p>Contrairement à beaucoup de cryptides, Nessie compte plusieurs canulars formellement établis, avec leurs auteurs nommés : la « photo du chirurgien » de 1934, confessée comme montage par Christian Spurling en 1994 à l'instigation de Marmaduke Wetherell ; et les fameuses empreintes de « pattes de monstre » découvertes en 1933, qui se sont révélées avoir été laissées par un pied d'hippopotame séché, alors utilisé comme pied de parapluie — également attribuées à Wetherell.</p>
+    <div class="caution-box">Il faut le dire clairement : après près d'un siècle d'observations, de campagnes sonar, de submersibles et d'une étude génétique environnementale complète du loch, aucune preuve scientifique crédible n'a jamais démontré l'existence d'un grand animal inconnu dans le Loch Ness. Ce constat n'exclut pas que des observations sincères correspondent à des phénomènes naturels mal identifiés sur le moment — mais rien n'étaye la présence d'une créature inconnue de la science.</div>
+  </div>
+</section>
+
+<!-- ================= THEORIES ================= -->
+<section id="theories">
+  <div class="section-label">Panorama</div>
+  <h2 class="section-title">Les Théories en Présence</h2>
+  <p class="section-intro">Aucune de ces explications n'est présentée ici comme acquise : chacune est attribuée à qui la défend, avec son niveau de crédibilité propre.</p>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>La survivance d'un plésiosaure</h3>
+      <span class="theory-status">Rejetée par la biologie</span>
+    </div>
+    <p>L'hypothèse la plus populaire dans l'imaginaire collectif, largement fixée par la photo de 1934, propose la survie d'un reptile marin du Mésozoïque. Elle se heurte cependant à des objections biologiques et géologiques difficilement surmontables : les plésiosaures se sont éteints il y a environ 66 millions d'années, tandis que le Loch Ness ne s'est formé qu'il y a environ 10 000 ans après le retrait des glaciers — le loch n'a donc tout simplement jamais pu abriter de plésiosaures. Une population viable nécessiterait par ailleurs plusieurs dizaines d'individus reproducteurs, jamais détectés par aucun sondage.</p>
+    <p class="theory-attrib">Défendue par : la culture populaire et une partie du tourisme local, mais écartée par la quasi-totalité des paléontologues et biologistes.</p>
+  </div>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Une grosse anguille, ou un esturgeon égaré</h3>
+      <span class="theory-status">Prise au sérieux</span>
+    </div>
+    <p>Relancée par l'abondance d'ADN d'anguille détectée en 2019, cette hypothèse propose qu'une partie des observations corresponde à des anguilles européennes de taille inhabituelle, ou plus ponctuellement à des esturgeons égarés depuis des cours d'eau voisins — une espèce déjà connue pour sa silhouette allongée et ses remontées occasionnelles pouvant surprendre des observateurs peu familiers avec elle.</p>
+    <p class="theory-attrib">Défendue par : plusieurs biologistes, dont Neil Gemmell lui-même, avec une prudence explicitement assumée sur la taille réelle des individus concernés.</p>
+  </div>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Un phénomène optique ou psychologique</h3>
+      <span class="theory-status">Dominante</span>
+    </div>
+    <p>Pour la majorité des scientifiques, la plupart des observations s'expliquent par des phénomènes naturels mal interprétés sur le moment : troncs flottants, sillages de bateaux, seiches, jeux de lumière sur une eau sombre et sans repère d'échelle. L'effet d'attente créé par près d'un siècle de couverture médiatique intense joue également un rôle bien documenté en psychologie de la perception : on tend à interpréter une forme ambiguë à la lumière de ce que l'on s'attend déjà à voir.</p>
+    <p class="theory-attrib">Défendue par : la majorité des scientifiques et sceptiques ayant étudié le dossier, notamment les équipes ayant mené les campagnes sonar successives.</p>
+  </div>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Un mythe entretenu pour des raisons touristiques</h3>
+      <span class="theory-status">Facteur reconnu, non exclusif</span>
+    </div>
+    <p>Certains observateurs soulignent que la légende profite directement à l'économie locale des Highlands, ce qui crée une incitation structurelle à entretenir le mystère plutôt qu'à le clore. Cette dimension économique est réelle et documentée, mais elle n'explique pas à elle seule l'origine des observations sincères rapportées depuis 1933 par des témoins sans intérêt commercial apparent.</p>
+    <p class="theory-attrib">Défendue par : des commentateurs critiques du phénomène ; reconnue comme un facteur réel, mais non comme explication unique, par la plupart des chercheurs.</p>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Ce qu'il en Reste Aujourd'hui</h2>
+  <p class="section-intro">Près d'un siècle après la vague de 1933, Nessie reste un pilier économique et identitaire majeur pour les Highlands écossaises — bien au-delà du simple folklore.</p>
+
+  <div class="heritage-block">
+    <h4>Un centre d'exposition dédié</h4>
+    <p>Le Loch Ness Centre, à Drumnadrochit, propose une scénographie consacrée à l'histoire complète du mystère — des premiers témoignages aux dernières recherches scientifiques — et reste l'un des sites touristiques les plus fréquentés des Highlands.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Une économie touristique considérable</h4>
+    <p>Le tourisme lié à Nessie représente chaque année plusieurs dizaines de millions de livres sterling pour l'économie locale des Highlands, entre croisières d'observation sur le loch, hébergements, restauration et vente de souvenirs — un poids économique que peu de créatures légendaires peuvent revendiquer à cette échelle.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Des recherches citoyennes toujours actives</h4>
+    <p>Des groupes comme Loch Ness Exploration continuent d'organiser des week-ends d'observation rassemblant des centaines de bénévoles équipés de drones, hydrophones et caméras thermiques — une forme de recherche amateur qui perpétue la tradition d'enquête populaire née dans les années 1930.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Une identité écossaise assumée</h4>
+    <p>Loin d'être une simple curiosité folklorique, Nessie fait aujourd'hui partie de l'image officielle de l'Écosse à l'international, aux côtés du whisky et du kilt, largement reprise par les organismes de tourisme national eux-mêmes.</p>
+  </div>
+
+  <p class="heritage-caution">Un point de méthode s'impose en refermant ce dossier : contrairement à d'autres créatures de cette série, Nessie a été soumise à un siècle presque continu d'enquêtes scientifiques sérieuses — sonar, submersibles, photographie, génétique environnementale — sans qu'aucune n'ait jamais produit de preuve crédible. Ce qui subsiste n'est donc pas un doute scientifique réel sur l'existence de la créature, mais une légende culturelle solidement installée, entretenue par des observations sincères, des canulars documentés, et près d'un siècle d'imaginaire collectif partagé.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">LOCH NESS, ÉCOSSE — DEPUIS 1933</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>à venir</strong></p>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var navLinks = document.querySelectorAll('.sticky-nav a[href^="#"]');
+  var sections = [];
+  navLinks.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({link: a, el: el});
+  });
+  function onScroll(){
+    var pos = window.scrollY + window.innerHeight * 0.3;
+    var current = null;
+    sections.forEach(function(s){ if (s.el.offsetTop <= pos) current = s; });
+    navLinks.forEach(function(a){ a.classList.remove('nav-active'); });
+    if (current) current.link.classList.add('nav-active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  var revealTargets = document.querySelectorAll(
+    'section > h2, .realm-card, .god-card, .legend-block, .timeline-item, .creature-item, .anecdote-card, .reach-card, .card, .placeholder-card, .theory-card, .verdict-badge'
+  );
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('reveal-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.1});
+  revealTargets.forEach(function(el){ el.classList.add('reveal-init'); io.observe(el); });
+})();
+</script>
+</body>
+</html>
