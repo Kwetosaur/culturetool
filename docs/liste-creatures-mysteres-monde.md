@@ -9,7 +9,7 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Créature | Score | Origine | Verdict probable |
 |---|---|---|---|
 | Le Monstre du Loch Ness (Nessie) | 10 | Écosse | Mystère populaire, majorité des indices explicables (canulars connus, méprises) |
-| Bigfoot / Sasquatch | 9 | Amérique du Nord | Non prouvé, dossier riche en canulars documentés |
+| Bigfoot / Sasquatch ✅ | 9 | Amérique du Nord | Non prouvé, dossier riche en canulars documentés |
 | Le Yeti (Abominable Snowman) | 9 | Himalaya | Non prouvé, plusieurs traces attribuées depuis à des ours |
 | La Bête du Gévaudan | 9 | France, XVIIIe siècle | Événement réel documenté, explication la plus probable : loups (éventuellement hybrides ou dressés) |
 | Le Chupacabra | 8 | Porto Rico / Amérique latine | Phénomène récent (1990s), cas attribués à des canidés galeux |
@@ -43,7 +43,7 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Mystère | Score | Lieu / Époque | Verdict probable |
 |---|---|---|---|
 | Le Triangle des Bermudes | 10 | Atlantique Nord | Largement expliqué statistiquement (pas plus d'incidents que la moyenne océanique) |
-| L'Incident du Col Dyatlov | 9 | Oural, URSS, 1959 | Événement réel et tragique, hypothèse scientifique récente (avalanche particulière) jugée crédible — à traiter avec sobriété envers les victimes |
+| L'Incident du Col Dyatlov ✅ | 9 | Oural, URSS, 1959 | Événement réel et tragique, hypothèse scientifique récente (avalanche particulière) jugée crédible — à traiter avec sobriété envers les victimes |
 | Stonehenge | 9 | Angleterre | Fonction et méthode de construction partiellement comprises, plusieurs zones d'ombre réelles subsistent |
 | Le Mécanisme d'Anticythère | 8 | Grèce antique | Largement résolu : calculateur astronomique antique d'une sophistication redécouverte par la science moderne |
 | Les Lignes de Nazca | 8 | Pérou | Fonction rituelle/astronomique largement documentée par l'archéologie, malgré la persistance de théories marginales |

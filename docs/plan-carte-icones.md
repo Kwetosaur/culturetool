@@ -124,7 +124,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 ### Europe
 | Page | Statut | Icône |
 |---|---|---|
-| Rome antique | icône prête | Casque + glaive |
+| Rome antique | ✅ fait | Casque + glaive |
 | Grèce antique | icône prête | Amphore |
 | Vikings/Scandinavie médiévale | icône prête | Drakkar (bateau viking) |
 | Celtes (Gaule/Îles britanniques) | icône prête | Bouclier celtique/torque |
@@ -192,7 +192,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 ### Amérique du Nord
 | Page | Statut | Icône |
 |---|---|---|
-| Bigfoot | icône prête | Empreinte de pas géante |
+| Bigfoot | ✅ fait | Empreinte de pas géante |
 | Le Mothman | icône prête | Silhouette ailée, yeux rouges |
 | Le Wendigo | icône prête | Silhouette décharnée (sobre, respect culturel) |
 | Le Skinwalker | icône prête | Symbole abstrait, pas de représentation frontale (respect culturel) |
@@ -276,7 +276,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 |---|---|---|
 | Lignes de Nazca | icône prête | Colibri au trait |
 | Île de Pâques | icône prête | Moaï stylisé |
-| Col Dyatlov | icône prête | Tente/montagne, très sobre |
+| Col Dyatlov | ✅ fait | Tente/montagne, très sobre |
 
 ### Amérique du Nord (affaires réelles)
 | Page | Statut | Icône |

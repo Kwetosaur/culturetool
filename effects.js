@@ -532,6 +532,82 @@
     ], { duration: 4600, easing: 'ease-in-out', fill: 'forwards' });
   }
 
+  // Rome antique — trois colonnes de temple se révèlent de bas en haut.
+  function romanColumns() {
+    var l = layer(3600);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:6vh;transform:translateX(-50%);display:flex;gap:26px;opacity:0;';
+    var cols = [];
+    for (var i = 0; i < 3; i++) {
+      var col = document.createElement('div');
+      col.style.cssText = 'width:34px;height:min(38vh,260px);clip-path:inset(100% 0 0 0);transition:clip-path .9s ease-out;';
+      col.innerHTML =
+        '<svg viewBox="0 0 34 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">' +
+          '<rect x="0" y="0" width="34" height="14" fill="#c9a13f"/>' +
+          '<rect x="4" y="14" width="26" height="190" fill="#f0e6cf"/>' +
+          '<rect x="-2" y="204" width="38" height="16" fill="#c9a13f"/>' +
+        '</svg>';
+      wrap.appendChild(col);
+      cols.push(col);
+    }
+    l.appendChild(wrap);
+    cols.forEach(function (col, i) {
+      setTimeout(function () { col.style.clipPath = 'inset(0% 0 0 0)'; }, 120 + i * 260);
+    });
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .12 }, { opacity: 1, offset: .82 }, { opacity: 0 }],
+      { duration: 3600, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Bigfoot — une série d'empreintes apparaît en diagonale, jamais la silhouette entière.
+  function bigfootTracks() {
+    var l = layer(4200);
+    for (var i = 0; i < 5; i++) {
+      (function (i) {
+        var left = 20 + i * 12 + rand(-3, 3);
+        var top = 70 - i * 10 + rand(-3, 3);
+        var rotate = (i % 2 === 0 ? -18 : 18) + rand(-6, 6);
+        var track = document.createElement('div');
+        track.style.cssText = 'position:absolute;left:' + left + 'vw;top:' + top + 'vh;width:34px;' +
+          'transform:rotate(' + rotate + 'deg) scale(.5);opacity:0;';
+        track.innerHTML =
+          '<svg viewBox="0 0 40 70" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+            '<ellipse cx="20" cy="46" rx="15" ry="22" fill="#3a2a1a" opacity=".8"/>' +
+            '<circle cx="8" cy="12" r="6" fill="#3a2a1a" opacity=".8"/>' +
+            '<circle cx="20" cy="6" r="6.5" fill="#3a2a1a" opacity=".8"/>' +
+            '<circle cx="32" cy="12" r="6" fill="#3a2a1a" opacity=".8"/>' +
+          '</svg>';
+        l.appendChild(track);
+        track.animate([
+          { transform: 'rotate(' + rotate + 'deg) scale(.5)', opacity: 0 },
+          { transform: 'rotate(' + rotate + 'deg) scale(1)', opacity: .75, offset: .25 },
+          { opacity: .75, offset: .7 },
+          { opacity: 0 }
+        ], { duration: 2400, delay: i * 420, easing: 'ease-out', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Col Dyatlov — quelques flocons portés par le vent ; effet volontairement sobre, aucune mise en scène narrative.
+  function dyatlovSnow() {
+    var l = layer(5200);
+    for (var i = 0; i < 14; i++) {
+      (function (i) {
+        var size = rand(2, 4);
+        var flake = document.createElement('div');
+        flake.style.cssText = 'position:absolute;left:' + rand(-5, 20) + 'vw;top:' + rand(0, 60) + 'vh;' +
+          'width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:#eef3f6;opacity:0;' +
+          'box-shadow:0 0 4px rgba(238,243,246,.6);will-change:transform,opacity;';
+        l.appendChild(flake);
+        flake.animate([
+          { transform: 'translate(0,0)', opacity: 0 },
+          { opacity: .7, offset: .15 },
+          { opacity: .7, offset: .8 },
+          { transform: 'translate(' + rand(55, 85) + 'vw,' + rand(30, 55) + 'vh)', opacity: 0 }
+        ], { duration: rand(4200, 5200), delay: i * 90, easing: 'linear', fill: 'forwards' });
+      })(i);
+    }
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -625,7 +701,10 @@
     starsZiggurat: starsZiggurat,
     lotusBloom: lotusBloom,
     toriiGlow: toriiGlow,
-    serpentGlide: serpentGlide
+    serpentGlide: serpentGlide,
+    romanColumns: romanColumns,
+    bigfootTracks: bigfootTracks,
+    dyatlov: dyatlovSnow
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -667,6 +746,9 @@
     bermudes:      bermudes,
     stonehenge:    solstice,
     gevaudan:      eyes,
+    rome:          function () { glyphShower({ glyphs: ROMAN, mode: 'fall' }); romanColumns(); },
+    bigfoot:       bigfootTracks,
+    dyatlov:       dyatlovSnow,
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }
@@ -683,12 +765,16 @@
         setTimeout(function () { busy = false; }, 1500);
       }
 
-      // Déclencheur discret : le titre du hero devient cliquable.
-      var title = document.querySelector('.hero h1, header.hero h1');
+      // Déclencheur discret : le titre du hero (ou le bandeau sur la carte) devient cliquable.
+      var title = document.querySelector('.hero h1, header.hero h1, #topbar .brand');
       if (title) {
         title.style.cursor = 'pointer';
         title.addEventListener('click', trigger);
       }
+
+      // Sur la carte : cliquer directement le fond (pas un pin) déclenche aussi l'egg,
+      // exposé ici pour que map.html puisse l'appeler depuis son propre gestionnaire de clic.
+      if (key === 'carte') window.triggerCarteEgg = trigger;
 
       // Déclencheur caché : le code Konami.
       var seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65], idx = 0;

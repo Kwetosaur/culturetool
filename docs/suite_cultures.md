@@ -6,9 +6,9 @@ Même principe de score /10 que les autres listes, basé sur la richesse du doss
 
 ---
 
-## Déjà couvertes (2/2)
+## Déjà couvertes (3/3)
 
-Chine · Égypte Antique
+Chine · Égypte Antique · Rome antique
 
 ---
 
@@ -16,7 +16,7 @@ Chine · Égypte Antique
 
 | Culture | Score | Ce qui la rend unique |
 |---|---|---|
-| Rome antique | 10 | Droit romain encore fondateur des systèmes juridiques actuels, ingénierie (routes, aqueducs), expansion culturelle sur trois continents |
+| Rome antique ✅ | 10 | Droit romain encore fondateur des systèmes juridiques actuels, ingénierie (routes, aqueducs), expansion culturelle sur trois continents |
 | Grèce antique | 10 | Cité-État, naissance de la démocratie et de la philosophie occidentale, jeux panhelléniques |
 | Vikings / Scandinavie médiévale | 9 | Navigation océanique précoce, sociétés complexes (Thing, lois orales), expansion de l'Islande à Terre-Neuve — angle civilisationnel distinct de `mythologie-nordique.html` |
 | Celtes (Gaule &amp; Îles britanniques) | 7 | Société tribale/druidique, artisanat métallurgique (art de La Tène), résistance à la romanisation — angle civilisationnel distinct de `mythologie-celtique.html` |

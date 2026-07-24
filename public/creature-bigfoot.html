@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bigfoot — Créatures Légendaires du Monde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10190f;
+    --bg-deep: #0a110a;
+    --panel: #1a2418;
+    --panel-alt: #202c1d;
+    --panel-border: #3a4a34;
+    --parchment: #e7e1c6;
+    --parchment-dim: #c8c19d;
+    --stone: #8b9483;
+    --moss: #44643a;
+    --moss-bright: #74a35c;
+    --blood: #563c22;
+    --blood-bright: #c1863f;
+    --brass: #a9884f;
+    --brass-bright: #d1ab6a;
+    --text: #e2e6d5;
+    --text-dim: #9ba38d;
+    --glow: rgba(193,134,63,0.32);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at top, #182617 0%, #10190f 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{
+    font-family:'Cinzel', serif;
+    color:var(--parchment);
+    letter-spacing:0.03em;
+    font-weight:700;
+  }
+  a{color:var(--brass-bright);}
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.05) 3px);
+    z-index:1;
+    opacity:0.5;
+  }
+
+  .fog-strip{display:block; width:100%; height:20px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 20px;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 12%, rgba(193,134,63,0.16), transparent 55%),
+      linear-gradient(180deg, #182617 0%, #10190f 55%, #0a110a 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 20% 90%, rgba(10,17,10,0.7), transparent 60%),
+      radial-gradient(ellipse at 85% 85%, rgba(10,17,10,0.7), transparent 55%);
+    pointer-events:none;
+  }
+  .epigraph-row{
+    font-family:'Cinzel', serif;
+    font-size:16px;
+    letter-spacing:6px;
+    color:var(--brass);
+    opacity:0.8;
+    margin-bottom:26px;
+    position:relative;
+    z-index:2;
+  }
+  .hero h1{
+    font-family:'Cinzel Decorative', serif;
+    font-size:clamp(2.4rem, 6.6vw, 4.9rem);
+    margin:0;
+    position:relative;
+    z-index:2;
+    background:linear-gradient(180deg, var(--parchment), var(--brass) 65%, #6e5427);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 50px rgba(0,0,0,0.4);
+  }
+  .hero .subtitle{
+    font-family:'Cinzel', serif;
+    font-size:1.02rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--blood-bright);
+    margin-top:16px;
+    position:relative;
+    z-index:2;
+  }
+  .hero .tagline{
+    max-width:640px;
+    margin:30px auto 0;
+    font-style:italic;
+    color:var(--text-dim);
+    font-size:1.1rem;
+    position:relative;
+    z-index:2;
+  }
+  .verdict-badge{
+    position:relative;
+    z-index:2;
+    display:inline-flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    margin:34px auto 0;
+    padding:14px 28px;
+    border:1px solid var(--blood-bright);
+    border-radius:3px;
+    background:linear-gradient(160deg, rgba(193,134,63,0.16), rgba(20,26,20,0.6));
+    box-shadow:0 0 24px var(--glow);
+    max-width:600px;
+  }
+  .verdict-badge .verdict-label{
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--blood-bright);
+  }
+  .verdict-badge .verdict-text{
+    font-family:'EB Garamond', serif;
+    font-size:1rem;
+    color:var(--parchment);
+    line-height:1.5;
+  }
+  .divider{
+    width:120px;
+    height:2px;
+    margin:34px auto;
+    background:linear-gradient(90deg, transparent, var(--brass), transparent);
+    position:relative;
+    z-index:2;
+  }
+  .nav-pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+    max-width:860px;
+    position:relative;
+    z-index:2;
+  }
+  .nav-pills a{
+    text-decoration:none;
+    border:1px solid var(--panel-border);
+    padding:9px 20px;
+    border-radius:2px;
+    font-family:'Cinzel', serif;
+    font-size:0.8rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    background:rgba(20,28,22,0.5);
+    transition:all .25s ease;
+  }
+  .nav-pills a:hover{
+    color:var(--parchment);
+    border-color:var(--brass);
+    box-shadow:0 0 14px rgba(169,136,79,0.2);
+  }
+
+  /* ===== STICKY NAV ===== */
+  .sticky-nav{
+    position:sticky;
+    top:0;
+    z-index:40;
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px 18px;
+    justify-content:center;
+    padding:14px 20px;
+    background:rgba(13,19,12,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none;
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    padding:4px 2px;
+    border-bottom:1px solid transparent;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--blood-bright); border-color:var(--blood-bright);}
+
+  /* ===== SECTIONS ===== */
+  section{
+    position:relative;
+    z-index:2;
+    max-width:1000px;
+    margin:0 auto;
+    padding:100px 24px;
+  }
+  .section-label{
+    text-align:center;
+    font-family:'Cinzel', serif;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--blood-bright);
+    font-size:0.78rem;
+    margin-bottom:12px;
+  }
+  .section-title{
+    text-align:center;
+    font-size:clamp(1.9rem,4.2vw,2.8rem);
+    margin:0 0 16px;
+  }
+  .section-intro{
+    text-align:center;
+    max-width:680px;
+    margin:0 auto 60px;
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  /* ===== GENERIC CARD GRID ===== */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:22px;
+  }
+  .info-card{
+    background:linear-gradient(160deg, var(--panel), var(--panel-alt));
+    border:1px solid var(--panel-border);
+    border-radius:3px;
+    padding:26px 24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .info-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--blood-bright), var(--brass));
+  }
+  .info-card h3{
+    margin:0 0 4px;
+    font-size:1.2rem;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .info-num{
+    color:var(--brass);
+    font-size:1rem;
+    opacity:0.9;
+    font-family:'Cinzel', serif;
+  }
+  .info-card .info-sub{
+    font-size:0.82rem;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:12px;
+  }
+  .info-card p{margin:0; font-size:0.97rem;}
+  .info-card p + p{margin-top:10px;}
+
+  /* ===== FIGURE / WITNESS CARDS ===== */
+  .figure-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+    gap:26px;
+  }
+  .figure-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    padding:0;
+    border-radius:4px;
+    overflow:hidden;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .figure-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--brass);
+  }
+  .figure-header{
+    padding:22px 24px 16px;
+    border-bottom:1px solid var(--panel-border);
+    background:linear-gradient(160deg, rgba(193,134,63,0.12), transparent);
+  }
+  .figure-name{font-size:1.35rem; margin:0;}
+  .figure-role{
+    font-size:0.82rem;
+    color:var(--blood-bright);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin-top:4px;
+  }
+  .figure-body{padding:18px 24px 24px;}
+  .figure-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    border:1px solid var(--panel-border);
+    color:var(--text-dim);
+    padding:3px 10px;
+    border-radius:20px;
+  }
+  .figure-body p{margin:0 0 10px; font-size:0.96rem;}
+  .figure-body p:last-child{margin-bottom:0;}
+  .figure-body strong{color:var(--parchment); font-weight:600;}
+
+  /* ===== PORTRAIT ===== */
+  .pull-quote{
+    border-left:3px solid var(--brass);
+    padding:6px 24px;
+    margin:24px 0;
+    font-style:italic;
+    color:var(--parchment);
+    font-size:1.08rem;
+  }
+  .source-note{
+    font-size:0.85rem;
+    color:var(--text-dim);
+    font-style:italic;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{
+    content:"";
+    position:absolute; left:50%; top:0; bottom:0; width:2px;
+    background:linear-gradient(180deg, transparent, var(--brass) 6%, var(--blood-bright) 50%, var(--brass) 94%, transparent);
+    transform:translateX(-50%);
+  }
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{
+    position:absolute; top:3px; width:13px; height:13px; border-radius:50%;
+    background:var(--bg); border:3px solid var(--brass-bright);
+    box-shadow:0 0 10px var(--glow);
+  }
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{
+    font-family:'Cinzel', serif; color:var(--blood-bright); font-size:0.98rem;
+    letter-spacing:0.05em; display:block; margin-bottom:6px;
+  }
+  .timeline-content h4{margin:0 0 6px; font-size:1.02rem; color:var(--parchment);}
+  .timeline-content p{margin:0; font-size:0.9rem; color:var(--text-dim);}
+
+  /* ===== CULTURE GRID ===== */
+  .culture-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:18px;
+    margin-top:20px;
+  }
+  .culture-card{
+    border:1px solid var(--panel-border);
+    border-top:2px solid var(--moss-bright);
+    padding:18px 20px;
+    background:var(--panel);
+    border-radius:3px;
+  }
+  .culture-card h4{margin:0 0 6px; font-size:0.98rem; color:var(--parchment);}
+  .culture-card .culture-tag{
+    display:block;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--text-dim);
+    margin-bottom:8px;
+  }
+  .culture-card p{margin:0; font-size:0.9rem;}
+
+  /* ===== SCIENCE ===== */
+  .science-block{
+    margin-bottom:44px;
+    padding-bottom:40px;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .science-block:last-child{border-bottom:none;}
+  .science-block h3{font-size:1.4rem; margin:0 0 14px;}
+  .science-block p{margin:0 0 14px; font-size:1rem;}
+  .science-block p:last-child{margin-bottom:0;}
+  .caution-box{
+    border-left:3px solid var(--blood-bright);
+    padding:10px 22px;
+    margin-top:20px;
+    font-size:0.92rem; color:var(--text-dim); font-style:italic;
+    background:rgba(193,134,63,0.08);
+  }
+
+  /* ===== THEORIES ===== */
+  .theory-block{
+    margin-bottom:40px;
+    padding:24px 26px;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:3px;
+    position:relative;
+  }
+  .theory-block::before{
+    content:"";
+    position:absolute; top:0; left:0; bottom:0; width:3px;
+    background:linear-gradient(180deg, var(--brass), var(--blood-bright));
+  }
+  .theory-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .theory-block h3{margin:0; font-size:1.25rem;}
+  .theory-status{
+    font-family:'Cinzel', serif;
+    font-size:0.68rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+  .theory-block p{margin:0 0 10px; font-size:0.97rem;}
+  .theory-block p:last-child{margin-bottom:0;}
+  .theory-attrib{
+    font-size:0.85rem;
+    color:var(--text-dim);
+    font-style:italic;
+    margin-top:10px;
+  }
+
+  /* ===== HERITAGE ===== */
+  .heritage-block{margin-bottom:32px;}
+  .heritage-block h4{
+    font-size:0.92rem; color:var(--parchment); margin:0 0 10px;
+    text-transform:uppercase; letter-spacing:0.05em;
+  }
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{
+    border-left:3px solid var(--blood-bright);
+    padding:4px 20px; margin-top:32px;
+    font-size:0.9rem; color:var(--text-dim); font-style:italic;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    text-align:center;
+    padding:80px 24px 60px;
+    border-top:1px solid var(--panel-border);
+    color:var(--text-dim);
+  }
+  footer .epigraph-row{margin-bottom:20px; font-size:15px;}
+  footer .next-up{
+    font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--text-dim);
+  }
+  footer .next-up strong{color:var(--parchment);}
+
+  ::selection{background:var(--blood-bright); color:#241705;}
+
+  @media (max-width:640px){
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.6rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){
+      width:100%; left:0; text-align:left; padding:0 10px 44px 50px;
+    }
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{
+      left:13px; right:auto;
+    }
+    .theory-header{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+<style>
+  .sticky-nav a.nav-active{font-weight:700; text-decoration:underline; text-underline-offset:5px;}
+  .reveal-init{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-in{opacity:1; transform:translateY(0);}
+</style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+  #side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+  #side-menu-overlay.open{opacity:1; pointer-events:auto;}
+  #side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+  #side-menu.open{transform:translateX(0);}
+  #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+  #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+  #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+  #side-menu a.search-hide{display:none;}
+  #side-menu .side-home{margin:0 14px 14px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+  #side-menu .side-search{padding:0 22px 14px;}
+  #side-menu .side-search input{width:100%; box-sizing:border-box; padding:8px 10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:5px; color:#e9e6db; font-family:'EB Garamond', Georgia, serif; font-size:0.9rem;}
+  #side-menu .side-search input::placeholder{color:#7a7b8c;}
+  #side-menu .side-search input:focus{outline:none; border-color:#c9982f;}
+  #side-menu .side-label{padding:12px 22px 6px; margin-top:2px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:space-between;}
+  #side-menu .side-label::after{content:'\25BE'; font-size:0.65rem; transition:transform 0.2s ease; color:#6d6e7e;}
+  #side-menu .side-label.collapsed::after{transform:rotate(-90deg);}
+  #side-menu .side-group{overflow:hidden; max-height:600px; transition:max-height 0.25s ease;}
+  #side-menu .side-group.collapsed{max-height:0;}
+</style>
+</head>
+<body data-egg="bigfoot">
+<button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
+<div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <a href="map.html" class="side-home">&#128506; Carte du Monde</a>
+  <div class="side-divider"></div>
+  <div class="side-search"><input type="text" id="side-search-input" placeholder="Rechercher une page..." autocomplete="off"></div>
+    <div class="side-label">Mythologies</div>
+  <div class="side-group">
+    <a href="mythologie-nordique.html">Nordique</a>
+    <a href="mythologie-grecque.html">Grecque</a>
+    <a href="mythologie-egyptienne.html">Égyptienne</a>
+    <a href="mythologie-romaine.html">Romaine</a>
+    <a href="mythologie-celtique.html">Celtique</a>
+    <a href="mythologie-mesopotamienne.html">Mésopotamienne</a>
+    <a href="mythologie-hindoue.html">Hindoue</a>
+    <a href="mythologie-japonaise.html">Japonaise</a>
+    <a href="mythologie-azteque-maya.html">Aztèque & Maya</a>
+    <a href="mythologie-slave.html">Slave</a>
+  </div>
+    <div class="side-label">Cultures</div>
+  <div class="side-group">
+    <a href="culture-chinoise.html">Chine</a>
+    <a href="culture-egypte-antique.html">Égypte Antique</a>
+    <a href="culture-rome-antique.html">Rome antique</a>
+  </div>
+    <div class="side-label">Créatures</div>
+  <div class="side-group">
+    <a href="creature-gevaudan.html">Bête du Gévaudan</a>
+    <a href="creature-loch-ness.html">Monstre du Loch Ness</a>
+    <a href="creature-bigfoot.html" class="active">Bigfoot</a>
+  </div>
+    <div class="side-label">Mystères</div>
+  <div class="side-group">
+    <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
+    <a href="mystere-stonehenge.html">Stonehenge</a>
+    <a href="mystere-dyatlov.html">Col Dyatlov</a>
+  </div>
+</nav>
+<script>
+(function(){
+  var menu = document.getElementById('side-menu');
+  if(!menu) return;
+  var labels = Array.prototype.slice.call(menu.querySelectorAll('.side-label'));
+  labels.forEach(function(label){
+    var group = label.nextElementSibling;
+    if(!group) return;
+    var hasActive = group.querySelector('a.active');
+    if(!hasActive){ label.classList.add('collapsed'); group.classList.add('collapsed'); }
+    label.addEventListener('click', function(){
+      label.classList.toggle('collapsed');
+      group.classList.toggle('collapsed');
+    });
+  });
+  var input = document.getElementById('side-search-input');
+  if(input){
+    var links = Array.prototype.slice.call(menu.querySelectorAll('.side-group a'));
+    function restoreCollapse(){
+      labels.forEach(function(label){
+        var group = label.nextElementSibling;
+        if(!group) return;
+        var hasActive = group.querySelector('a.active');
+        label.classList.toggle('collapsed', !hasActive);
+        group.classList.toggle('collapsed', !hasActive);
+      });
+    }
+    input.addEventListener('input', function(){
+      var q = input.value.trim().toLowerCase();
+      if(!q){
+        links.forEach(function(a){ a.classList.remove('search-hide'); });
+        restoreCollapse();
+        return;
+      }
+      links.forEach(function(a){
+        var match = a.textContent.toLowerCase().indexOf(q) !== -1;
+        a.classList.toggle('search-hide', !match);
+      });
+      labels.forEach(function(label){
+        label.classList.remove('collapsed');
+        if(label.nextElementSibling) label.nextElementSibling.classList.remove('collapsed');
+      });
+    });
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        var first = links.filter(function(a){ return !a.classList.contains('search-hide'); })[0];
+        if(first) window.location.href = first.getAttribute('href');
+      }
+    });
+  }
+})();
+</script>
+
+
+
+
+<header class="hero">
+  <div class="epigraph-row">AMÉRIQUE DU NORD • PACIFIQUE NORD-OUEST, DEPUIS 1958</div>
+  <h1>Bigfoot</h1>
+  <div class="subtitle">Sasquatch — Forêts du Nord-Ouest Pacifique</div>
+  <p class="tagline">« Bigfoot. » C'est ainsi que les bûcherons d'un chantier forestier de Bluff Creek, en Californie, surnomment à l'été 1958 l'auteur inconnu d'empreintes géantes retrouvées dans la boue — donnant, sans le savoir, son nom définitif à l'un des cryptides les plus célèbres au monde.</p>
+  <div class="verdict-badge">
+    <span class="verdict-label">Verdict</span>
+    <span class="verdict-text">Non prouvé — aucune preuve scientifique crédible (spécimen, ADN fiable, restes) n'a jamais confirmé l'existence de ce grand primate nord-américain, dans un dossier par ailleurs riche en canulars documentés et en aveux d'auteurs, des empreintes truquées de 1958 aux montages plus récents.</span>
+  </div>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#origine">Origine</a>
+    <a href="#portrait">Portrait</a>
+    <a href="#temoins-recits">Témoins &amp; Récits</a>
+    <a href="#culture-populaire">Culture Populaire</a>
+    <a href="#science">Science</a>
+    <a href="#theories">Théories</a>
+    <a href="#heritage">Héritage</a>
+  </nav>
+</header>
+
+<svg class="fog-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="pine0" width="40" height="20" patternUnits="userSpaceOnUse">
+      <path d="M4 18 L9 6 L14 18 M18 18 L23 2 L28 18 M32 18 L36 9 L40 18" stroke="#a9884f" stroke-width="2" fill="none" opacity="0.45"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#pine0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#origine">Origine</a>
+  <a href="#portrait">Portrait</a>
+  <a href="#temoins-recits">Témoins</a>
+  <a href="#culture-populaire">Culture</a>
+  <a href="#science">Science</a>
+  <a href="#theories">Théories</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ORIGINE ================= -->
+<section id="origine">
+  <div class="section-label">Contexte</div>
+  <h2 class="section-title">Une Tradition Ancienne, un Nom Tout Neuf</h2>
+  <p class="section-intro">Avant de devenir une vedette médiatique, « Bigfoot » désigne un nom d'à peine soixante-dix ans — plaqué a posteriori sur des récits autochtones qui, eux, se comptent en générations.</p>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <h3><span class="info-num">I</span>Un territoire immense et boisé</h3>
+      <p>Les observations attribuées à Bigfoot couvrent, en théorie, la quasi-totalité du continent nord-américain, mais se concentrent très majoritairement dans les forêts denses et peu peuplées du Nord-Ouest Pacifique : l'État de Washington, l'Oregon, le nord de la Californie et la Colombie-Britannique. Un relief accidenté, des forêts de conifères immenses et une faune abondante — notamment des ours noirs — composent le décor géographique de la quasi-totalité des récits.</p>
+    </div>
+    <div class="info-card">
+      <h3><span class="info-num">II</span>Des récits autochtones bien plus anciens</h3>
+      <p>De nombreux peuples autochtones du Nord-Ouest Pacifique, dont les Sts'ailes (Chehalis) de Colombie-Britannique et d'autres nations de langue salish, transmettent depuis longtemps des récits d'êtres velus, bipèdes et vivant en forêt, connus sous des noms propres à chaque langue. Ces traditions relèvent d'un cadre culturel et parfois spirituel qui leur est propre — bien distinct de la figure de « cryptide à capturer » que la culture populaire du XXe siècle en tirera ensuite.</p>
+    </div>
+    <div class="info-card">
+      <h3><span class="info-num">III</span>1958, Bluff Creek : la naissance du nom « Bigfoot »</h3>
+      <p>C'est dans les années 1920 que l'enseignant et écrivain J.W. Burns, en recueillant des récits auprès des Sts'ailes de Colombie-Britannique, francise le mot salish <em>sásq'ets</em> en « Sasquatch » pour ses publications en anglais. Mais c'est à l'été 1958, sur un chantier de coupe forestière de Bluff Creek, en Californie, que le nom « Bigfoot » apparaît : le bulldozeriste Jerry Crew y découvre d'immenses empreintes de pas, dont le moulage, relayé par la presse locale puis par les agences nationales, popularise durablement ce surnom auprès du grand public américain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTRAIT ================= -->
+<section id="portrait" data-scroll-fx="bigfootTracks">
+  <div class="section-label">Description</div>
+  <h2 class="section-title">Ce que les Témoins Disent Avoir Vu</h2>
+  <p class="section-intro">Aucun spécimen, aucun ossement conservé — seulement des empreintes de pas, des dépositions et un film muet de dix-huit secondes resté célèbre. Ce portrait reste, par nécessité, un portrait rapporté.</p>
+
+  <p>Les témoins décrivent le plus souvent une créature bipède à l'allure générale de grand singe, mesurant selon les récits entre 2 et 3 mètres — certains témoignages plus anciens évoquant même des tailles proches de 2,50 à 3 mètres — pour un poids estimé, toujours de façon spéculative, entre 200 et 400 kilogrammes. Le corps serait entièrement recouvert d'une fourrure sombre, brune, noire ou parfois rousse, les bras disproportionnellement longs, le cou peu marqué et le sommet du crâne surmonté d'une crête sagittale rappelant celle de certains grands singes actuels.</p>
+
+  <p>Deux détails reviennent avec une régularité frappante dans les récits recueillis par les associations d'observateurs : une odeur forte et désagréable, souvent comparée à une odeur de fauve ou d'œuf pourri, et des vocalisations distinctives — cris aigus, grondements ou séquences de « claquements de bois » contre les arbres, que certains chercheurs amateurs interprètent comme une forme de communication territoriale.</p>
+
+  <div class="pull-quote">« Une créature bipède, couverte de poils sombres, dégageant une odeur âcre et se déplaçant avec un balancement des bras inhabituel chez un primate. » — formulation-type revenant dans un grand nombre de dépositions recueillies depuis les années 1960.</div>
+  <p class="source-note">— synthèse générique reprise dans la littérature cryptozoologique et dans les bases de témoignages tenues par des associations d'observateurs comme la Bigfoot Field Researchers Organization (BFRO).</p>
+
+  <p>Le comportement qu'on lui prête est presque systématiquement discret : les témoins la décrivent comme farouche, nocturne, évitant activement le contact humain et fuyant dès qu'elle se sait repérée — un profil qui, notent d'emblée les sceptiques, rend structurellement impossible toute vérification indépendante et concourt à expliquer, plus d'un demi-siècle après Bluff Creek, l'absence persistante de preuve matérielle incontestable.</p>
+
+  <p>Il faut ici une prudence de méthode : depuis 1958, la diffusion massive de dessins, de reconstitutions et surtout du film Patterson-Gimlin de 1967 a fourni à chaque témoin ultérieur une image de référence à laquelle comparer, consciemment ou non, sa propre observation. Le « portrait » de Bigfoot doit donc en partie à des décennies de représentations culturelles cumulées, et pas uniquement à des observations strictement indépendantes les unes des autres.</p>
+</section>
+
+<!-- ================= TEMOINS & RECITS ================= -->
+<section id="temoins-recits">
+  <div class="section-label">Archives</div>
+  <h2 class="section-title">Empreintes, Films et Chercheurs de Terrain</h2>
+  <p class="section-intro">Peu de cryptides disposent d'une chronologie aussi continue sur près d'un siècle — des premiers récits autochtones consignés par écrit aux campagnes d'analyse génétique les plus récentes.</p>
+
+  <div class="figure-grid">
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Jerry Crew</h3>
+        <div class="figure-role">L'homme des empreintes de Bluff Creek</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Été 1958</span><span class="tag">Bluff Creek, Californie</span></div>
+        <p>Conducteur de bulldozer sur un chantier de coupe forestière, il découvre d'immenses empreintes de pas autour de son engin et en réalise un moulage en plâtre. Sa photographie, publiée dans la presse locale puis reprise nationalement, donne naissance au surnom « Bigfoot ».</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Roger Patterson</h3>
+        <div class="figure-role">Coréalisateur du film de 1967</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">20 octobre 1967</span><span class="tag">Bluff Creek, Californie</span></div>
+        <p>Cavalier et cinéaste amateur passionné par le sujet, il filme avec Robert Gimlin dix-huit secondes de pellicule montrant une silhouette bipède velue traversant un banc de sable — le document le plus discuté de toute l'histoire de la cryptozoologie. Il meurt en 1972 sans jamais revenir sur l'authenticité du film.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Robert Gimlin</h3>
+        <div class="figure-role">Témoin et coréalisateur du film</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">1967 — aujourd'hui</span></div>
+        <p>Compagnon de Roger Patterson lors du tournage, il défend depuis plus de cinquante ans l'authenticité de ce qu'il affirme avoir observé ce jour-là, malgré les accusations répétées de canular formulées à son encontre au fil des décennies.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">René Dahinden</h3>
+        <div class="figure-role">Chercheur de terrain de longue date</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Années 1950 – 2001</span></div>
+        <p>Immigré suisse installé au Canada, il consacre l'essentiel de sa vie à traquer Sasquatch sur le terrain et devient copropriétaire des droits du film Patterson-Gimlin. Figure incontournable, quoique controversée, de la cryptozoologie nord-américaine jusqu'à sa mort en 2001.</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Grover Krantz</h3>
+        <div class="figure-role">Anthropologue physique, Washington State University</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">1969 — années 1990</span></div>
+        <p>L'un des rares universitaires à avoir pris publiquement le sujet au sérieux, il étudie notamment le moulage dit « Cripple Foot », retrouvé près de Bossburg, Washington, en 1969. Ses positions lui vaudront une reconnaissance mitigée au sein du monde académique.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin-top:90px; font-size:1.6rem;">Chronologie d'une Légende Devenue Dossier</h3>
+  <p class="section-intro" style="margin-bottom:20px;">Des récits autochtones consignés dans les années 1920 aux dernières analyses génétiques, une frise qui traverse un siècle — et qui compte, fait rare, plusieurs canulars révélés avec leurs auteurs nommés.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Années 1920</span>
+        <h4>Naissance du mot « Sasquatch »</h4>
+        <p>L'enseignant J.W. Burns francise le terme salish <em>sásq'ets</em>, recueilli auprès des Sts'ailes de Colombie-Britannique, pour désigner en anglais les êtres velus de leurs récits traditionnels.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Été 1958</span>
+        <h4>Les empreintes de Bluff Creek</h4>
+        <p>Jerry Crew découvre et moule d'immenses empreintes sur un chantier forestier. La presse locale, puis les agences nationales, popularisent le surnom « Bigfoot » dans tous les États-Unis.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">20 octobre 1967</span>
+        <h4>Le film Patterson-Gimlin</h4>
+        <p>Roger Patterson et Robert Gimlin filment à Bluff Creek dix-huit secondes montrant une silhouette bipède velue — la pièce la plus célèbre et la plus débattue de tout le dossier Bigfoot.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1969</span>
+        <h4>L'empreinte « Cripple Foot »</h4>
+        <p>Une série d'empreintes présentant une déformation évoquant un pied bot est découverte près de Bossburg, Washington, et étudiée par l'anthropologue Grover Krantz, qui y voit un argument contre l'hypothèse du simple canular grossier.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">2002</span>
+        <h4>La révélation Ray Wallace</h4>
+        <p>À la mort de l'entrepreneur forestier Ray Wallace, sa famille affirme publiquement qu'il avait lui-même fabriqué et posé les empreintes de 1958 à l'aide de fausses pattes en bois — sans que ce seul aveu ne suffise pour autant à clore le débat sur l'ensemble des autres témoignages.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">2004</span>
+        <h4>La confession Heironimus</h4>
+        <p>Bob Heironimus affirme, dans l'ouvrage <em>The Making of Bigfoot</em> du journaliste Greg Long, avoir porté un costume de gorille lors du tournage du film Patterson-Gimlin de 1967 — une allégation qui relance vivement la controverse sans emporter une adhésion unanime.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">2008</span>
+        <h4>Le canular du « cadavre » de Géorgie</h4>
+        <p>Deux chercheurs amateurs affirment avoir trouvé un corps de Bigfoot conservé dans un congélateur. L'examen du contenu, quelques jours plus tard, révèle un costume en caoutchouc rempli d'entrailles d'animaux — l'un des canulars les plus médiatisés de l'histoire récente du sujet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CULTURE POPULAIRE ================= -->
+<section id="culture-populaire">
+  <div class="section-label">Postérité Culturelle</div>
+  <h2 class="section-title">D'une Légende Forestière à une Icône Populaire</h2>
+  <p class="section-intro">Peu de créatures légendaires ont autant essaimé dans la culture de masse nord-américaine, au point de devenir un motif publicitaire et touristique à part entière.</p>
+
+  <div class="culture-grid">
+    <div class="culture-card">
+      <h4>Harry dans un Panier (1987)</h4>
+      <span class="culture-tag">Cinéma</span>
+      <p>Cette comédie familiale américaine, connue en anglais sous le titre <em>Harry and the Hendersons</em>, met en scène un Bigfoot débonnaire adopté par une famille de banlieue. Immense succès populaire, le film contribue durablement à humaniser l'image de la créature dans l'imaginaire grand public.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Finding Bigfoot (2011-2018)</h4>
+      <span class="culture-tag">Télévision</span>
+      <p>Diffusée sur la chaîne Animal Planet, cette émission suit une équipe de chercheurs de terrain, dont Matt Moneymaker, fondateur de la Bigfoot Field Researchers Organization (BFRO), lors de campagnes d'observation à travers tout le continent nord-américain.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Willow Creek, capitale autoproclamée</h4>
+      <span class="culture-tag">Tourisme, Californie</span>
+      <p>Cette petite ville du comté de Humboldt, proche de Bluff Creek, s'est rebaptisée « capitale mondiale du Bigfoot » : musée dédié, statue de bois sculptée et route touristique baptisée « Bigfoot Scenic Byway » structurent aujourd'hui son économie locale.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Publicité et produits dérivés</h4>
+      <span class="culture-tag">Marketing &amp; merchandising</span>
+      <p>La créature prête régulièrement son image à des campagnes publicitaires nationales, à des festivals de musique en plein air et à une abondante production de souvenirs, panneaux routiers et figurines vendus dans l'ensemble du Nord-Ouest Pacifique.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:40px;">Le basculement d'un récit forestier régional à un phénomène culturel de masse tient largement à la conjonction de deux éléments : la couverture médiatique nationale immédiate obtenue dès 1958, puis la diffusion, à partir de 1967, du film Patterson-Gimlin — devenu à lui seul une image de référence mondiale, rediffusée et parodiée sans discontinuer depuis plus d'un demi-siècle.</p>
+</section>
+
+<!-- ================= SCIENCE ================= -->
+<section id="science">
+  <div class="section-label">Section Pivot</div>
+  <h2 class="section-title">Ce que Disent Réellement les Scientifiques</h2>
+  <p class="section-intro">Malgré des décennies de recherches, aucune découverte n'a jamais franchi le seuil de la preuve scientifique — un constat que la communauté académique formule avec constance.</p>
+
+  <div class="science-block">
+    <h3>Aucun spécimen, aucun reste, malgré des décennies de présence humaine</h3>
+    <p>Les forêts du Nord-Ouest Pacifique sont parcourues chaque année par des millions de randonneurs, chasseurs, bûcherons et, plus récemment, par un maillage dense de caméras de chasse automatiques. Aucun corps, aucun squelette, aucune trace de collision routière n'a jamais été formellement rattaché à un grand primate inconnu. Pour la biologie de la conservation, une population reproductrice viable de grands mammifères nécessiterait un nombre minimal d'individus suffisant pour éviter l'extinction génétique — une population qui, à cette échelle, laisserait nécessairement des traces détectables : cadavres, ossements, empreintes génétiques dans l'environnement.</p>
+  </div>
+
+  <div class="science-block">
+    <h3>Le film Patterson-Gimlin sous la loupe</h3>
+    <p>Le document de 1967 a été examiné par de nombreux spécialistes, avec des conclusions divergentes : le primatologue britannique John Napier, dans son ouvrage <em>Bigfoot: The Yeti and Sasquatch in Myth and Reality</em> (1973), relève une démarche qu'il juge incohérente avec celle d'un grand singe connu, sans trancher définitivement ; l'anthropologue Grover Krantz a longtemps défendu son authenticité potentielle ; d'autres analystes en biomécanique concluent à une allure compatible avec un costume porté par un être humain. L'allégation de Bob Heironimus en 2004, affirmant avoir porté ce costume, n'a jamais été confirmée de façon indépendante et irréfutable, mais elle s'ajoute à un faisceau d'éléments qui fragilise fortement le statut de preuve du film.</p>
+  </div>
+
+  <div class="science-block">
+    <h3>Des empreintes largement rattachées à des canulars ou à des méprises</h3>
+    <p>La très grande majorité des empreintes attribuées à Bigfoot s'expliquent, selon les zoologistes, par deux mécanismes bien identifiés : des faux fabriqués — comme les empreintes de Bluff Creek de 1958, dont la famille de Ray Wallace a reconnu la fabrication après sa mort en 2002 — ou des traces d'ours noir mal interprétées, l'animal ayant tendance, lorsqu'il marche en surimpression de ses pattes arrière sur ses pattes avant, à laisser une empreinte allongée pouvant, dans certaines conditions de sol, prendre une apparence trompeusement humanoïde.</p>
+  </div>
+
+  <div class="science-block">
+    <h3>Des analyses génétiques qui n'ont rien trouvé de convaincant</h3>
+    <p>En 2012-2013, la vétérinaire Melba Ketchum publie les résultats de son « Sasquatch Genome Project », affirmant avoir séquencé l'ADN d'un hybride entre l'humain et un primate inconnu. L'étude, publiée dans une revue scientifique créée pour l'occasion plutôt que soumise à une évaluation par les pairs indépendante, est largement rejetée par la communauté scientifique ; des analyses ultérieures des échantillons ont identifié de l'ADN provenant d'espèces déjà connues, dont l'opossum. Aucune étude génétique menée selon les standards scientifiques usuels n'a, à ce jour, mis en évidence de matériel génétique correspondant à un grand primate nord-américain non répertorié.</p>
+    <div class="caution-box">Il faut le dire clairement : après plus de soixante ans d'expéditions, de moulages d'empreintes et de tentatives d'analyse génétique, aucune preuve scientifique crédible n'a jamais démontré l'existence d'un grand primate inconnu en Amérique du Nord. Ce constat n'implique pas que chaque témoin ait menti ou hallucine — mais rien, à ce jour, n'étaye scientifiquement la présence d'une telle créature.</div>
+  </div>
+</section>
+
+<!-- ================= THEORIES ================= -->
+<section id="theories">
+  <div class="section-label">Panorama</div>
+  <h2 class="section-title">Les Théories en Présence</h2>
+  <p class="section-intro">Aucune de ces explications n'est présentée ici comme acquise : chacune est attribuée à qui la défend, avec son niveau de crédibilité propre.</p>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Canulars et méprises sur des animaux connus</h3>
+      <span class="theory-status">Dominante</span>
+    </div>
+    <p>Pour la majorité des zoologistes et anthropologues, l'ensemble du dossier s'explique par une combinaison de canulars documentés — les empreintes de 1958, le possible costume du film de 1967 — et de méprises sincères sur des animaux réels, principalement l'ours noir, dont la silhouette dressée sur ses pattes arrière et les empreintes surimposées peuvent, dans de mauvaises conditions d'observation, suggérer une silhouette humanoïde.</p>
+    <p class="theory-attrib">Défendue par : la majorité des zoologistes, anthropologues et sceptiques ayant étudié le dossier.</p>
+  </div>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Un grand primate relique non répertorié</h3>
+      <span class="theory-status">Minoritaire mais prise au sérieux</span>
+    </div>
+    <p>Une poignée de chercheurs, dont l'anthropologue Grover Krantz en son temps et le professeur d'anatomie Jeff Meldrum (Idaho State University) aujourd'hui, estime que la cohérence de certaines empreintes et de certains témoignages justifie l'hypothèse, biologiquement audacieuse mais non totalement écartée par ses défenseurs, d'un grand primate nord-américain resté scientifiquement non décrit.</p>
+    <p class="theory-attrib">Défendue par : un très petit nombre d'universitaires spécialisés en anatomie ou en anthropologie physique, en marge du consensus académique.</p>
+  </div>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Une figure culturelle et spirituelle autochtone</h3>
+      <span class="theory-status">Cadre distinct, à respecter</span>
+    </div>
+    <p>Pour de nombreuses nations autochtones du Nord-Ouest Pacifique, les récits d'êtres velus de la forêt ne relèvent pas d'une chasse au spécimen zoologique mais d'un cadre culturel, narratif et parfois spirituel propre, transmis de génération en génération bien avant l'apparition du mot « Bigfoot ». Réduire ces récits à une simple variante locale du cryptide médiatique reviendrait à effacer leur sens et leur contexte d'origine.</p>
+    <p class="theory-attrib">Défendue par : plusieurs nations et porte-parole autochtones du Nord-Ouest Pacifique, dans un registre volontairement distinct de la cryptozoologie de recherche.</p>
+  </div>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Un mythe collectif nourri par l'attente culturelle</h3>
+      <span class="theory-status">Explication complémentaire</span>
+    </div>
+    <p>Certains folkloristes et psychologues proposent une lecture intermédiaire : les récits autochtones anciens, la couverture médiatique de 1958 et la diffusion massive du film de 1967 se seraient progressivement mêlés pour créer un cadre d'interprétation partagé, à travers lequel des observations ambiguës — un animal furtif, un bruit nocturne, une ombre dans les arbres — sont réinterprétées à la lumière d'une figure culturelle déjà bien installée.</p>
+    <p class="theory-attrib">Défendue par : des folkloristes et chercheurs en sciences sociales étudiant la construction culturelle du phénomène, plutôt que sa réalité biologique.</p>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Ce qu'il en Reste Aujourd'hui</h2>
+  <p class="section-intro">Plus de soixante ans après Bluff Creek, Bigfoot demeure un pilier économique, identitaire et touristique majeur pour tout le Nord-Ouest Pacifique.</p>
+
+  <div class="heritage-block">
+    <h4>Une économie touristique régionale</h4>
+    <p>Musées locaux, routes touristiques thématiques, sentiers balisés « territoire de Bigfoot » et commerces spécialisés font vivre une part significative du tourisme rural de petites villes forestières comme Willow Creek, en Californie, ou Harrison Hot Springs, en Colombie-Britannique.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Des festivals annuels dédiés</h4>
+    <p>Willow Creek organise chaque année des animations autour de la créature, tandis qu'Harrison Hot Springs accueille depuis des décennies un rassemblement thématique consacré au Sasquatch — deux exemples parmi plusieurs autres fêtes locales organisées à travers le Nord-Ouest Pacifique.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Une curiosité juridique bien réelle</h4>
+    <p>Le comté de Skamania, dans l'État de Washington, a adopté en 1969 une ordonnance interdisant explicitement de tuer un Sasquatch sur son territoire, sous peine d'amende ; le texte, amendé en 1984, classe désormais l'espèce comme protégée sur le plan local — une curiosité administrative devenue elle-même un symbole régional.</p>
+  </div>
+
+  <div class="heritage-block">
+    <h4>Un réseau de recherche amateur toujours actif</h4>
+    <p>Des organisations comme la Bigfoot Field Researchers Organization (BFRO), fondée en 1995, continuent de recenser des milliers de témoignages à travers l'Amérique du Nord et d'organiser des expéditions de terrain, perpétuant une tradition d'enquête citoyenne vieille de plusieurs décennies.</p>
+  </div>
+
+  <p class="heritage-caution">Un point de méthode s'impose en refermant ce dossier : le phénomène médiatique « Bigfoot », né en 1958 et amplifié par le film de 1967, ne doit pas être confondu avec les traditions orales autochtones bien plus anciennes qui l'ont précédé et qui continuent d'exister indépendamment de lui. Traiter ces récits culturels et spirituels comme de simples variantes précoces d'un cryptide à traquer risquerait d'effacer leur signification propre au profit d'un folklore commercial qui leur est, historiquement, largement postérieur.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">AMÉRIQUE DU NORD, PACIFIQUE NORD-OUEST — DEPUIS 1958</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>Le Yeti</strong></p>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var navLinks = document.querySelectorAll('.sticky-nav a[href^="#"]');
+  var sections = [];
+  navLinks.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({link: a, el: el});
+  });
+  function onScroll(){
+    var pos = window.scrollY + window.innerHeight * 0.3;
+    var current = null;
+    sections.forEach(function(s){ if (s.el.offsetTop <= pos) current = s; });
+    navLinks.forEach(function(a){ a.classList.remove('nav-active'); });
+    if (current) current.link.classList.add('nav-active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  var revealTargets = document.querySelectorAll(
+    'section > h2, .realm-card, .god-card, .legend-block, .timeline-item, .creature-item, .anecdote-card, .reach-card, .card, .placeholder-card, .theory-card, .verdict-badge'
+  );
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('reveal-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.1});
+  revealTargets.forEach(function(el){ el.classList.add('reveal-init'); io.observe(el); });
+})();
+</script>
+<script src="./effects.js" defer></script>
+</body>
+</html>
