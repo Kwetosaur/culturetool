@@ -73,7 +73,11 @@
     display:block; width:1672px; height:941px; max-width:none; user-select:none; -webkit-user-drag:none;
     box-shadow:0 0 60px rgba(0,0,0,0.6);
   }
-  #pins{ position:absolute; inset:0; }
+  /* #pins n'est plus a l'interieur de #canvas : plus de flou sous-pixel du a l'ancetre
+     zoome (transform:scale non-entier), et les badges gardent une taille ecran fixe
+     quel que soit le zoom, comme des marqueurs de carte classiques. Repositionnement
+     en JS (positionPins(), appele a chaque zoom/pan) plutot qu'en % CSS. */
+  #pins{ position:absolute; inset:0; pointer-events:none; }
   #calib-grid{ position:absolute; inset:0; width:100%; height:100%; display:none; pointer-events:none; }
   #calib-grid.on{ display:block; }
   #calib-grid line{ stroke:#2a4f8a; stroke-width:0.15; }
@@ -94,19 +98,35 @@
   }
   #calib-toast.show{ opacity:1; }
 
-  /* ---------- badges ---------- */
+  /* ---------- badges ----------
+     Taille (largeur/hauteur du badge + de l'icone) recalculee en JS a chaque
+     zoom (positionPins()) pour grossir avec la carte comme avant, tout en
+     restant net : #pins est hors de #canvas, donc jamais rendu via un
+     transform:scale() d'ancetre (plus de flou sous-pixel). */
   .pin{
-    position:absolute; width:30px; height:30px; margin:-15px 0 0 -15px;
+    position:absolute; left:0; top:0; width:34px; height:34px;
+    transform:translate(-50%,-50%);
     border-radius:50%; background:var(--cream-panel);
     border:3px solid var(--pin-color, var(--gold));
     display:flex; align-items:center; justify-content:center;
     cursor:pointer; text-decoration:none;
     box-shadow:0 2px 8px rgba(0,0,0,0.45);
     transition:transform .15s ease;
+    pointer-events:auto;
   }
-  .pin:hover{transform:scale(1.28); z-index:50;}
-  .pin svg{width:16px; height:16px; color:var(--ink);}
+  .pin:hover{transform:translate(-50%,-50%) scale(1.28); z-index:50;}
+  .pin svg{width:24px; height:24px; color:var(--ink);}
+  #pins .pin img{width:24px; height:24px; max-width:none; object-fit:contain; pointer-events:none; display:block; box-shadow:none;}
   .pin.hidden-cat{display:none;}
+  .pin.hidden-future{display:none;}
+  .pin-future{
+    background:rgba(242,233,210,0.35);
+    border-style:dashed;
+    opacity:0.62;
+    cursor:pointer;
+  }
+  .pin-future:hover{opacity:1;}
+  .pin-future img{opacity:0.85;}
 
   /* ---------- panneau filtres (haut gauche) ---------- */
   #filters{
@@ -297,6 +317,8 @@
   <label><input type="checkbox" data-filter="creature" checked><span class="swatch sw-creature"></span>Créatures</label>
   <label><input type="checkbox" data-filter="mystere" checked><span class="swatch sw-mystere"></span>Mystères</label>
   <div class="side-divider" style="margin:10px 0;"></div>
+  <label><input type="checkbox" id="toggle-future"><span class="swatch" style="background:transparent; border:1.5px dashed #b8ab8c;"></span>Pages à venir (aperçu)</label>
+  <div class="side-divider" style="margin:10px 0;"></div>
   <label><input type="checkbox" id="calib-toggle"><span class="swatch" style="background:#4a76bf;"></span>Mode calibrage</label>
 </div>
 
@@ -306,8 +328,8 @@
   <div id="canvas">
     <img id="map-img" src="map.png" alt="Carte du monde stylisée" draggable="false">
     <svg id="calib-grid" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
-    <div id="pins"></div>
   </div>
+  <div id="pins"></div>
 </div>
 
 <button id="resetview">&#8634; Réinitialiser la vue</button>
@@ -320,36 +342,174 @@
 
 <script>
 /* =========================================================================
-   Données des pages — POSITIONS APPROXIMATIVES ("simulation"), à affiner.
-   icon: forme générique provisoire (voir ICONS plus bas). À terme, chaque
-   entrée recevra sa vraie icône (voir plan-carte-icones.md) — il suffira
-   de changer ce champ `icon`, rien d'autre à toucher dans le moteur.
+   Données des pages en ligne — icônes réelles (docs/plan-carte-icones.md).
+   Positions recalibrées visuellement sur map.png (carte stylisée, pas une
+   projection géographique précise) — utiliser le mode calibrage (bouton
+   dans le panneau filtres) pour affiner au clic si un point semble décalé.
    ========================================================================= */
-// Coordonnees recalibrees visuellement sur map.png (grille de reference %) le 24/07.
-// Encore approximatif par endroits (carte stylisee, pas une projection precise) -
-// utiliser le mode calibrage (bouton dans le panneau filtres) pour affiner au clic.
+var MAP_W = 1672, MAP_H = 941;
+
 var PLACES = [
   // Mythologies
-  { id:'myth-nordique',   title:'Mythologie Nordique',    cat:'mythologie', href:'mythologie-nordique.html',        x:50, y:14, icon:'star' },
-  { id:'myth-grecque',    title:'Mythologie Grecque',     cat:'mythologie', href:'mythologie-grecque.html',         x:58, y:30, icon:'diamond' },
-  { id:'myth-egyptienne', title:'Mythologie Égyptienne',  cat:'mythologie', href:'mythologie-egyptienne.html',      x:58, y:42, icon:'circle' },
-  { id:'myth-romaine',    title:'Mythologie Romaine',     cat:'mythologie', href:'mythologie-romaine.html',         x:54, y:28, icon:'hex' },
-  { id:'myth-celtique',   title:'Mythologie Celtique',    cat:'mythologie', href:'mythologie-celtique.html',        x:43, y:20, icon:'triangle' },
-  { id:'myth-mesopo',     title:'Mythologie Mésopotamienne', cat:'mythologie', href:'mythologie-mesopotamienne.html', x:62, y:36, icon:'drop' },
-  { id:'myth-hindoue',    title:'Mythologie Hindoue',     cat:'mythologie', href:'mythologie-hindoue.html',         x:68, y:46, icon:'star' },
-  { id:'myth-japonaise',  title:'Mythologie Japonaise',   cat:'mythologie', href:'mythologie-japonaise.html',       x:88, y:29, icon:'diamond' },
-  { id:'myth-azteque',    title:'Mythologie Aztèque & Maya', cat:'mythologie', href:'mythologie-azteque-maya.html', x:17, y:44, icon:'circle' },
-  { id:'myth-slave',      title:'Mythologie Slave',       cat:'mythologie', href:'mythologie-slave.html',           x:61, y:17, icon:'hex' },
+  { id:'myth-nordique',   title:'Mythologie Nordique',    cat:'mythologie', href:'mythologie-nordique.html',        x:54, y:13, icon:'myth-nordique.png' },
+  { id:'myth-grecque',    title:'Mythologie Grecque',     cat:'mythologie', href:'mythologie-grecque.html',         x:64, y:33, icon:'myth-grecque.png' },
+  { id:'myth-egyptienne', title:'Mythologie Égyptienne',  cat:'mythologie', href:'mythologie-egyptienne.html',      x:56, y:42, icon:'myth-egyptienne.png' },
+  { id:'myth-romaine',    title:'Mythologie Romaine',     cat:'mythologie', href:'mythologie-romaine.html',         x:60, y:36, icon:'myth-romaine.png' },
+  { id:'myth-celtique',   title:'Mythologie Celtique',    cat:'mythologie', href:'mythologie-celtique.html',        x:43, y:28, icon:'myth-celtique.png' },
+  { id:'myth-mesopo',     title:'Mythologie Mésopotamienne', cat:'mythologie', href:'mythologie-mesopotamienne.html', x:68, y:42, icon:'myth-mesopo.png' },
+  { id:'myth-hindoue',    title:'Mythologie Hindoue',     cat:'mythologie', href:'mythologie-hindoue.html',         x:59, y:40, icon:'myth-hindoue.png' },
+  { id:'myth-japonaise',  title:'Mythologie Japonaise',   cat:'mythologie', href:'mythologie-japonaise.html',       x:88, y:32, icon:'myth-japonaise.png' },
+  { id:'myth-azteque',    title:'Mythologie Aztèque & Maya', cat:'mythologie', href:'mythologie-azteque-maya.html', x:15, y:42, icon:'myth-azteque.png' },
+  { id:'myth-slave',      title:'Mythologie Slave',       cat:'mythologie', href:'mythologie-slave.html',           x:75, y:13, icon:'myth-slave.png' },
   // Cultures
-  { id:'cult-chine',      title:'Culture Chinoise',       cat:'culture', href:'culture-chinoise.html',              x:79, y:28, icon:'triangle' },
-  { id:'cult-egypte',     title:'Égypte Antique',         cat:'culture', href:'culture-egypte-antique.html',        x:59, y:48, icon:'drop' },
+  { id:'cult-chine',      title:'Culture Chinoise',       cat:'culture', href:'culture-chinoise.html',              x:74, y:22, icon:'cult-chine.png' },
+  { id:'cult-egypte',     title:'Égypte Antique',         cat:'culture', href:'culture-egypte-antique.html',        x:56, y:47, icon:'cult-egypte.png' },
   // Créatures
-  { id:'crea-gevaudan',   title:'Bête du Gévaudan',       cat:'creature', href:'creature-gevaudan.html',            x:48, y:25, icon:'star' },
-  { id:'crea-lochness',   title:'Monstre du Loch Ness',   cat:'creature', href:'creature-loch-ness.html',           x:43, y:15, icon:'diamond' },
+  { id:'crea-gevaudan',   title:'Bête du Gévaudan',       cat:'creature', href:'creature-gevaudan.html',            x:51, y:32, icon:'crea-gevaudan.png' },
+  { id:'crea-lochness',   title:'Monstre du Loch Ness',   cat:'creature', href:'creature-loch-ness.html',           x:48, y:20, icon:'crea-lochness.png' },
   // Mystères
-  { id:'myst-bermudes',   title:'Triangle des Bermudes',  cat:'mystere', href:'mystere-triangle-bermudes.html',     x:26, y:38, icon:'circle' },
-  { id:'myst-stonehenge', title:'Stonehenge',             cat:'mystere', href:'mystere-stonehenge.html',            x:44, y:21, icon:'hex' }
+  { id:'myst-bermudes',   title:'Triangle des Bermudes',  cat:'mystere', href:'mystere-triangle-bermudes.html',     x:29, y:40, icon:'myst-bermudes.png' },
+  { id:'myst-stonehenge', title:'Stonehenge',             cat:'mystere', href:'mystere-stonehenge.html',            x:48, y:28, icon:'myst-stonehenge.png' }
 ];
+
+var PLACES_FUTURE = [
+  // mythologie — box (46, 80, 6, 24) — 7 pages
+  { id:'myth-finnoise', title:'Mythologie Finnoise', cat:'mythologie', status:'future', x:48.2, y:8.5, icon:'myth-finnoise.png' },
+  { id:'myth-sami', title:'Mythologie Sami', cat:'mythologie', status:'future', x:59.5, y:9.7, icon:'myth-sami.png' },
+  { id:'myth-balte', title:'Mythologie Balte', cat:'mythologie', status:'future', x:66.8, y:10.9, icon:'myth-balte.png' },
+  { id:'myth-basque', title:'Mythologie Basque', cat:'mythologie', status:'future', x:74.2, y:12.1, icon:'myth-basque.png' },
+  { id:'myth-georgienne', title:'Mythologie Géorgienne / caucasienne', cat:'mythologie', status:'future', x:51.5, y:18.3, icon:'myth-georgienne.png' },
+  { id:'myth-armenienne', title:'Mythologie Arménienne', cat:'mythologie', status:'future', x:58.8, y:19.5, icon:'myth-armenienne.png' },
+  { id:'myth-etrusque', title:'Mythologie Étrusque', cat:'mythologie', status:'future', x:66.0, y:20.7, icon:'myth-etrusque.png' },
+  // mythologie — box (62, 78, 32, 48) — 4 pages
+  { id:'myth-perse', title:'Mythologie Perse / zoroastrienne', cat:'mythologie', status:'future', x:64.0, y:34.0, icon:'myth-perse.png' },
+  { id:'myth-cananeenne', title:'Mythologie Cananéenne / ougaritique', cat:'mythologie', status:'future', x:74.8, y:35.2, icon:'myth-cananeenne.png' },
+  { id:'myth-hittite', title:'Mythologie Hittite', cat:'mythologie', status:'future', x:65.6, y:44.4, icon:'myth-hittite.png' },
+  { id:'myth-arabe-preislamique', title:'Mythologie Arabe préislamique', cat:'mythologie', status:'future', x:72.4, y:45.6, icon:'myth-arabe-preislamique.png' },
+  // mythologie — box (68, 92, 16, 46) — 7 pages
+  { id:'myth-chinoise', title:'Mythologie Chinoise', cat:'mythologie', status:'future', x:72.0, y:17.8, icon:'myth-chinoise.png' },
+  { id:'myth-coreenne', title:'Mythologie Coréenne', cat:'mythologie', status:'future', x:86.8, y:18.9, icon:'myth-coreenne.png' },
+  { id:'myth-tibetaine', title:'Mythologie Tibétaine / Bön', cat:'mythologie', status:'future', x:73.6, y:27.6, icon:'myth-tibetaine.png' },
+  { id:'myth-mongole', title:'Mythologie Mongole', cat:'mythologie', status:'future', x:84.4, y:28.9, icon:'myth-mongole.png' },
+  { id:'myth-vietnamienne', title:'Mythologie Vietnamienne', cat:'mythologie', status:'future', x:75.2, y:33.5, icon:'myth-vietnamienne.png' },
+  { id:'myth-turque', title:'Mythologie Turque / Asie centrale', cat:'mythologie', status:'future', x:86.0, y:34.8, icon:'myth-turque.png' },
+  { id:'myth-bouddhiste', title:'Mythologie Cosmologie bouddhiste', cat:'mythologie', status:'future', x:72.8, y:43.5, icon:'myth-bouddhiste.png' },
+  // mythologie — box (44, 66, 50, 78) — 5 pages
+  { id:'myth-yoruba', title:'Mythologie Yoruba', cat:'mythologie', status:'future', x:47.5, y:52.7, icon:'myth-yoruba.png' },
+  { id:'myth-dogon', title:'Mythologie Dogon', cat:'mythologie', status:'future', x:61.3, y:53.9, icon:'myth-dogon.png' },
+  { id:'myth-ashanti', title:'Mythologie Ashanti / Akan', cat:'mythologie', status:'future', x:49.1, y:64.4, icon:'myth-ashanti.png' },
+  { id:'myth-zoulou', title:'Mythologie Zoulou', cat:'mythologie', status:'future', x:58.9, y:65.6, icon:'myth-zoulou.png' },
+  { id:'myth-ethiopienne', title:'Mythologie Éthiopienne', cat:'mythologie', status:'future', x:50.7, y:72.1, icon:'myth-ethiopienne.png' },
+  // mythologie — box (4, 32, 14, 62) — 6 pages
+  { id:'myth-inca', title:'Mythologie Inca', cat:'mythologie', status:'future', x:9.0, y:20.0, icon:'myth-inca.png' },
+  { id:'myth-navajo', title:'Mythologie Navajo / Diné', cat:'mythologie', status:'future', x:25.8, y:21.2, icon:'myth-navajo.png' },
+  { id:'myth-haudenosaunee', title:'Mythologie Haudenosaunee', cat:'mythologie', status:'future', x:10.6, y:38.4, icon:'myth-haudenosaunee.png' },
+  { id:'myth-lakota', title:'Mythologie Lakota / Sioux', cat:'mythologie', status:'future', x:23.4, y:39.6, icon:'myth-lakota.png' },
+  { id:'myth-pacifique-no', title:'Mythologie Pacifique Nord-Ouest', cat:'mythologie', status:'future', x:12.2, y:52.8, icon:'myth-pacifique-no.png' },
+  { id:'myth-taino', title:'Mythologie Taïno', cat:'mythologie', status:'future', x:25.0, y:54.0, icon:'myth-taino.png' },
+  // mythologie — box (6, 30, 2, 14) — 1 pages
+  { id:'myth-inuit', title:'Mythologie Inuit', cat:'mythologie', status:'future', x:16.0, y:6.0, icon:'myth-inuit.png' },
+  // mythologie — box (80, 98, 58, 80) — 3 pages
+  { id:'myth-aborigene', title:'Mythologie Aborigène australienne', cat:'mythologie', status:'future', x:82.5, y:61.5, icon:'myth-aborigene.png' },
+  { id:'myth-polynesienne', title:'Mythologie Polynésienne', cat:'mythologie', status:'future', x:94.3, y:62.7, icon:'myth-polynesienne.png' },
+  { id:'myth-melanesienne', title:'Mythologie Mélanésienne', cat:'mythologie', status:'future', x:84.1, y:74.9, icon:'myth-melanesienne.png' },
+  // culture — box (44, 72, 8, 38) — 6 pages
+  { id:'cult-rome-antique', title:'Rome antique', cat:'culture', status:'future', x:49.0, y:11.0, icon:'cult-rome-antique.png' },
+  { id:'cult-grece-antique', title:'Grèce antique', cat:'culture', status:'future', x:65.8, y:12.2, icon:'cult-grece-antique.png' },
+  { id:'cult-vikings', title:'Vikings / Scandinavie médiévale', cat:'culture', status:'future', x:50.6, y:23.4, icon:'cult-vikings.png' },
+  { id:'cult-celtes', title:'Celtes (Gaule / Îles britanniques)', cat:'culture', status:'future', x:63.4, y:24.6, icon:'cult-celtes.png' },
+  { id:'cult-byzantin', title:'Empire byzantin', cat:'culture', status:'future', x:52.2, y:31.8, icon:'cult-byzantin.png' },
+  { id:'cult-cites-italiennes', title:'Cités-États italiennes', cat:'culture', status:'future', x:65.0, y:33.0, icon:'cult-cites-italiennes.png' },
+  // culture — box (60, 78, 30, 46) — 4 pages
+  { id:'cult-mesopotamie', title:'Mésopotamie (culture)', cat:'culture', status:'future', x:62.5, y:32.0, icon:'cult-mesopotamie.png' },
+  { id:'cult-perse-achemenide', title:'Empire perse achéménide', cat:'culture', status:'future', x:74.3, y:33.2, icon:'cult-perse-achemenide.png' },
+  { id:'cult-pheniciens', title:'Phéniciens', cat:'culture', status:'future', x:64.1, y:42.4, icon:'cult-pheniciens.png' },
+  { id:'cult-ottoman', title:'Empire ottoman', cat:'culture', status:'future', x:71.9, y:43.6, icon:'cult-ottoman.png' },
+  // culture — box (58, 92, 16, 52) — 6 pages
+  { id:'cult-inde', title:'Inde (culture)', cat:'culture', status:'future', x:64.5, y:20.0, icon:'cult-inde.png' },
+  { id:'cult-empire-mongol', title:'Empire mongol', cat:'culture', status:'future', x:84.3, y:21.2, icon:'cult-empire-mongol.png' },
+  { id:'cult-indus', title:'Civilisation de l\'Indus', cat:'culture', status:'future', x:66.1, y:34.4, icon:'cult-indus.png' },
+  { id:'cult-japon', title:'Japon (culture)', cat:'culture', status:'future', x:81.9, y:35.6, icon:'cult-japon.png' },
+  { id:'cult-coree', title:'Corée', cat:'culture', status:'future', x:67.7, y:44.8, icon:'cult-coree.png' },
+  { id:'cult-khmers', title:'Khmers (Angkor)', cat:'culture', status:'future', x:83.5, y:46.0, icon:'cult-khmers.png' },
+  // culture — box (40, 66, 44, 78) — 4 pages
+  { id:'cult-mali', title:'Empire du Mali', cat:'culture', status:'future', x:44.5, y:50.5, icon:'cult-mali.png' },
+  { id:'cult-nubie-koush', title:'Nubie / Koush', cat:'culture', status:'future', x:60.3, y:51.7, icon:'cult-nubie-koush.png' },
+  { id:'cult-grand-zimbabwe', title:'Grand Zimbabwe (culture)', cat:'culture', status:'future', x:46.1, y:69.9, icon:'cult-grand-zimbabwe.png' },
+  { id:'cult-ethiopie-aksoum', title:'Éthiopie / Aksoum', cat:'culture', status:'future', x:57.9, y:71.1, icon:'cult-ethiopie-aksoum.png' },
+  // culture — box (4, 30, 14, 58) — 4 pages
+  { id:'cult-incas', title:'Incas (culture)', cat:'culture', status:'future', x:8.5, y:23.0, icon:'cult-incas.png' },
+  { id:'cult-maya', title:'Maya (culture)', cat:'culture', status:'future', x:24.3, y:24.2, icon:'cult-maya.png' },
+  { id:'cult-azteques', title:'Aztèques (culture)', cat:'culture', status:'future', x:10.1, y:47.4, icon:'cult-azteques.png' },
+  { id:'cult-peuples-plaines', title:'Peuples des Plaines', cat:'culture', status:'future', x:21.9, y:48.6, icon:'cult-peuples-plaines.png' },
+  // culture — box (80, 98, 58, 80) — 2 pages
+  { id:'cult-polynesie', title:'Polynésie (navigation)', cat:'culture', status:'future', x:87.0, y:61.5, icon:'cult-polynesie.png' },
+  { id:'cult-aborigenes-australie', title:'Aborigènes d\'Australie (culture)', cat:'culture', status:'future', x:89.8, y:73.7, icon:'cult-aborigenes-australie.png' },
+  // creature — box (34, 54, 10, 32) — 4 pages
+  { id:'crea-kraken', title:'Le Kraken', cat:'creature', status:'future', x:37.0, y:13.5, icon:'crea-kraken.png' },
+  { id:'crea-sirenes', title:'Les Sirènes', cat:'creature', status:'future', x:49.8, y:14.7, icon:'crea-sirenes.png' },
+  { id:'crea-loup-garou', title:'Le Loup-Garou', cat:'creature', status:'future', x:38.6, y:26.9, icon:'crea-loup-garou.png' },
+  { id:'crea-black-shuck', title:'Black Shuck', cat:'creature', status:'future', x:47.4, y:28.1, icon:'crea-black-shuck.png' },
+  // creature — box (2, 30, 12, 42) — 10 pages
+  { id:'crea-bigfoot', title:'Bigfoot', cat:'creature', status:'future', x:4.7, y:13.8, icon:'crea-bigfoot.png' },
+  { id:'crea-mothman', title:'Le Mothman', cat:'creature', status:'future', x:16.8, y:14.9, icon:'crea-mothman.png' },
+  { id:'crea-wendigo', title:'Le Wendigo', cat:'creature', status:'future', x:24.9, y:16.1, icon:'crea-wendigo.png' },
+  { id:'crea-skinwalker', title:'Le Skinwalker', cat:'creature', status:'future', x:5.1, y:24.9, icon:'crea-skinwalker.png' },
+  { id:'crea-ogopogo', title:'Ogopogo', cat:'creature', status:'future', x:17.2, y:22.1, icon:'crea-ogopogo.png' },
+  { id:'crea-jersey-devil', title:'Le Jersey Devil', cat:'creature', status:'future', x:25.3, y:23.2, icon:'crea-jersey-devil.png' },
+  { id:'crea-rougarou', title:'Le Rougarou', cat:'creature', status:'future', x:5.5, y:31.9, icon:'crea-rougarou.png' },
+  { id:'crea-loveland', title:'Créature de Loveland', cat:'creature', status:'future', x:17.6, y:29.1, icon:'crea-loveland.png' },
+  { id:'crea-champ', title:'Champ', cat:'creature', status:'future', x:25.7, y:30.4, icon:'crea-champ.png' },
+  { id:'crea-bray-road', title:'Bête de Bray Road', cat:'creature', status:'future', x:5.9, y:39.0, icon:'crea-bray-road.png' },
+  // creature — box (6, 26, 44, 66) — 2 pages
+  { id:'crea-chupacabra', title:'Le Chupacabra', cat:'creature', status:'future', x:14.0, y:47.5, icon:'crea-chupacabra.png' },
+  { id:'crea-nahuelito', title:'Nahuelito', cat:'creature', status:'future', x:16.8, y:59.7, icon:'crea-nahuelito.png' },
+  // creature — box (66, 94, 18, 52) — 4 pages
+  { id:'crea-yeti', title:'Le Yeti', cat:'creature', status:'future', x:71.0, y:24.5, icon:'crea-yeti.png' },
+  { id:'crea-kappa', title:'Le Kappa', cat:'creature', status:'future', x:87.8, y:25.7, icon:'crea-kappa.png' },
+  { id:'crea-orang-pendek', title:'L\'Orang Pendek', cat:'creature', status:'future', x:72.6, y:43.9, icon:'crea-orang-pendek.png' },
+  { id:'crea-yeren', title:'Le Yeren', cat:'creature', status:'future', x:85.4, y:45.1, icon:'crea-yeren.png' },
+  // creature — box (44, 66, 48, 76) — 3 pages
+  { id:'crea-popobawa', title:'Le Popobawa', cat:'creature', status:'future', x:47.5, y:53.0, icon:'crea-popobawa.png' },
+  { id:'crea-grootslang', title:'Le Grootslang', cat:'creature', status:'future', x:61.3, y:54.2, icon:'crea-grootslang.png' },
+  { id:'crea-mngwa', title:'Le Mngwa', cat:'creature', status:'future', x:49.1, y:69.4, icon:'crea-mngwa.png' },
+  // creature — box (80, 98, 58, 80) — 2 pages
+  { id:'crea-yowie', title:'Le Yowie', cat:'creature', status:'future', x:87.0, y:61.5, icon:'crea-yowie.png' },
+  { id:'crea-bunyip', title:'Le Bunyip', cat:'creature', status:'future', x:89.8, y:73.7, icon:'crea-bunyip.png' },
+  // mystere — box (14, 34, 30, 50) — 4 pages
+  { id:'myst-amelia-earhart', title:'Amelia Earhart', cat:'mystere', status:'future', x:17.0, y:33.0, icon:'myst-amelia-earhart.png' },
+  { id:'myst-mary-celeste', title:'Le Mary Celeste', cat:'mystere', status:'future', x:29.8, y:34.2, icon:'myst-mary-celeste.png' },
+  { id:'myst-roanoke', title:'Colonie de Roanoke', cat:'mystere', status:'future', x:18.6, y:45.4, icon:'myst-roanoke.png' },
+  { id:'myst-paititi-el-dorado', title:'Cité de Paititi / El Dorado', cat:'mystere', status:'future', x:27.4, y:46.6, icon:'myst-paititi-el-dorado.png' },
+  // mystere — box (42, 62, 12, 30) — 5 pages
+  { id:'myst-voynich', title:'Manuscrit de Voynich', cat:'mystere', status:'future', x:45.0, y:13.0, icon:'myst-voynich.png' },
+  { id:'myst-suaire-turin', title:'Suaire de Turin', cat:'mystere', status:'future', x:57.8, y:14.2, icon:'myst-suaire-turin.png' },
+  { id:'myst-crop-circles', title:'Crop circles', cat:'mystere', status:'future', x:46.6, y:21.4, icon:'myst-crop-circles.png' },
+  { id:'myst-piltdown', title:'Homme de Piltdown', cat:'mystere', status:'future', x:55.4, y:22.6, icon:'myst-piltdown.png' },
+  { id:'myst-newgrange', title:'Newgrange', cat:'mystere', status:'future', x:48.2, y:25.8, icon:'myst-newgrange.png' },
+  // mystere — box (52, 72, 30, 56) — 6 pages
+  { id:'myst-antikythera', title:'Mécanisme d\'Anticythère', cat:'mystere', status:'future', x:55.0, y:32.3, icon:'myst-antikythera.png' },
+  { id:'myst-atlantide', title:'Atlantide', cat:'mystere', status:'future', x:67.8, y:33.5, icon:'myst-atlantide.png' },
+  { id:'myst-heracleion', title:'Cité d\'Héracléion', cat:'mystere', status:'future', x:56.6, y:43.4, icon:'myst-heracleion.png' },
+  { id:'myst-batterie-bagdad', title:'Batterie de Bagdad', cat:'mystere', status:'future', x:65.4, y:44.6, icon:'myst-batterie-bagdad.png' },
+  { id:'myst-toutankhamon', title:'Malédiction de Toutânkhamon', cat:'mystere', status:'future', x:58.2, y:50.5, icon:'myst-toutankhamon.png' },
+  { id:'myst-grand-zimbabwe', title:'Grand Zimbabwe (mystère)', cat:'mystere', status:'future', x:67.0, y:51.7, icon:'myst-grand-zimbabwe.png' },
+  // mystere — box (66, 92, 22, 50) — 4 pages
+  { id:'myst-sanxingdui', title:'Sanxingdui', cat:'mystere', status:'future', x:70.5, y:27.0, icon:'myst-sanxingdui.png' },
+  { id:'myst-triangle-dragon', title:'Triangle du Dragon (Devil\'s Sea)', cat:'mystere', status:'future', x:86.3, y:28.2, icon:'myst-triangle-dragon.png' },
+  { id:'myst-pierres-dropa', title:'Pierres de Dropa', cat:'mystere', status:'future', x:72.1, y:43.4, icon:'myst-pierres-dropa.png' },
+  { id:'myst-dwarka', title:'Dwarka engloutie', cat:'mystere', status:'future', x:83.9, y:44.6, icon:'myst-dwarka.png' },
+  // mystere — box (6, 26, 52, 70) — 2 pages
+  { id:'myst-nazca', title:'Lignes de Nazca', cat:'mystere', status:'future', x:14.0, y:54.5, icon:'myst-nazca.png' },
+  { id:'myst-ile-de-paques', title:'Île de Pâques', cat:'mystere', status:'future', x:16.8, y:64.7, icon:'myst-ile-de-paques.png' },
+  // mystere — box (66, 80, 10, 24) — 1 pages
+  { id:'myst-dyatlov', title:'Col Dyatlov', cat:'mystere', status:'future', x:71.0, y:15.0, icon:'myst-dyatlov.png' },
+  // mystere — box (8, 26, 16, 36) — 1 pages
+  { id:'myst-zodiac-killer', title:'Zodiac Killer', cat:'mystere', status:'future', x:15.0, y:24.0, icon:'myst-zodiac-killer.png' },
+  // mystere — box (76, 92, 48, 64) — 1 pages
+  { id:'myst-mh370', title:'Vol MH370', cat:'mystere', status:'future', x:82.0, y:54.0, icon:'myst-mh370.png' },
+];
+// total: 108
 
 var ICONS = {
   star:     '<path d="M12 2 L14.4 9 L22 9.5 L16 14.2 L18 21.5 L12 17.3 L6 21.5 L8 14.2 L2 9.5 L9.6 9 Z"/>',
@@ -360,27 +520,73 @@ var ICONS = {
   hex:      '<path d="M12 2 L20.5 7 L20.5 17 L12 22 L3.5 17 L3.5 7 Z"/>'
 };
 
-/* ---------- rendu des pins ---------- */
+// Icônes générées en plusieurs tailles (32/64/128px, + le master 300px sans suffixe)
+// dans public/icons/<cat>/. On choisit la taille la plus proche de l'affichage réel
+// pour rester net sans charger inutilement le master pleine résolution.
+function iconUrl(p, size){
+  var stem = p.icon.replace(/\.png$/, '');
+  var sized = (size && size !== 300) ? (stem + '-' + size + '.png') : (stem + '.png');
+  return 'icons/' + p.cat + '/' + sized;
+}
+
+/* ---------- rendu des pins ----------
+   #pins est hors de #canvas (pas affecte par le transform:scale du zoom) : chaque
+   pin garde ses coordonnees carte en px (mapX/mapY) et se repositionne en ecran
+   via positionPins(), appele a chaque pan/zoom (voir plus bas). Rendu net a tout
+   niveau de zoom, taille ecran constante. */
 var pinsLayer = document.getElementById('pins');
-PLACES.forEach(function(p){
-  var a = document.createElement('a');
-  a.className = 'pin';
-  a.href = p.href;
-  a.style.left = p.x + '%';
-  a.style.top = p.y + '%';
+var calibToast = document.getElementById('calib-toast');
+var allPins = [];
+function renderPin(p){
+  var future = p.status === 'future';
+  var a = document.createElement(future ? 'div' : 'a');
+  a.className = 'pin' + (future ? ' pin-future' : '');
+  if (!future) a.href = p.href;
+  else a.tabIndex = 0;
   a.style.setProperty('--pin-color', 'var(--' + p.cat + ')');
   a.setAttribute('data-cat', p.cat);
-  a.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor">' + (ICONS[p.icon] || ICONS.circle) + '</svg>';
+  if (p.icon && p.icon.indexOf('.png') !== -1) {
+    a.innerHTML = '<img src="' + iconUrl(p, 128) + '" alt="" draggable="false">';
+  } else {
+    a.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor">' + (ICONS[p.icon] || ICONS.circle) + '</svg>';
+  }
   a.addEventListener('mouseenter', function(e){ showTooltip(e, p); });
   a.addEventListener('mousemove', function(e){ moveTooltip(e); });
   a.addEventListener('mouseleave', hideTooltip);
+  if (future) {
+    a.addEventListener('click', function(){
+      calibToast.textContent = '« ' + p.title + ' » — page pas encore publiée';
+      calibToast.classList.add('show');
+      clearTimeout(calibToast._t);
+      calibToast._t = setTimeout(function(){ calibToast.classList.remove('show'); }, 1800);
+    });
+  }
   pinsLayer.appendChild(a);
-});
+  allPins.push({ el:a, mapX: p.x / 100 * MAP_W, mapY: p.y / 100 * MAP_H });
+}
+PLACES.forEach(renderPin);
+PLACES_FUTURE.forEach(renderPin);
+document.querySelectorAll('.pin-future').forEach(function(p){ p.classList.add('hidden-future'); });
+var BASE_PIN_SIZE = 34, BASE_ICON_SIZE = 24;
+function positionPins(){
+  var pinSize = BASE_PIN_SIZE * scale;
+  var iconSize = BASE_ICON_SIZE * scale;
+  for (var i = 0; i < allPins.length; i++){
+    var o = allPins[i];
+    o.el.style.left = (o.mapX * scale + tx) + 'px';
+    o.el.style.top = (o.mapY * scale + ty) + 'px';
+    o.el.style.width = pinSize + 'px';
+    o.el.style.height = pinSize + 'px';
+    var iconEl = o.el.firstElementChild;
+    if (iconEl){ iconEl.style.width = iconSize + 'px'; iconEl.style.height = iconSize + 'px'; }
+  }
+}
 
 var CAT_LABELS = { mythologie:'Mythologie', culture:'Culture', creature:'Créature', mystere:'Mystère' };
 var tooltip = document.getElementById('tooltip');
 function showTooltip(e, p){
-  tooltip.innerHTML = p.title + '<span class="cat">' + CAT_LABELS[p.cat] + '</span>';
+  var tag = p.status === 'future' ? '<span class="cat">' + CAT_LABELS[p.cat] + ' · à venir</span>' : '<span class="cat">' + CAT_LABELS[p.cat] + '</span>';
+  tooltip.innerHTML = p.title + tag;
   tooltip.classList.add('show');
   moveTooltip(e);
 }
@@ -400,6 +606,12 @@ document.querySelectorAll('#filters input[data-filter]').forEach(function(cb){
     });
   });
 });
+var futureToggle = document.getElementById('toggle-future');
+futureToggle.addEventListener('change', function(){
+  document.querySelectorAll('.pin-future').forEach(function(pin){
+    pin.classList.toggle('hidden-future', !futureToggle.checked);
+  });
+});
 
 /* ---------- zoom / pan ---------- */
 var stage = document.getElementById('stage');
@@ -407,8 +619,6 @@ var canvas = document.getElementById('canvas');
 var img = document.getElementById('map-img');
 var scale = 1, tx = 0, ty = 0;
 var MIN_SCALE = 0.6, MAX_SCALE = 5;
-
-var MAP_W = 1672, MAP_H = 941;
 
 function fitInitial(){
   var sw = stage.clientWidth, sh = stage.clientHeight;
@@ -419,6 +629,7 @@ function fitInitial(){
 }
 function apply(){
   canvas.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+  positionPins();
 }
 function clamp(){
   scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale));
