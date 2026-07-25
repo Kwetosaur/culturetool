@@ -125,7 +125,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 | Page | Statut | Icône |
 |---|---|---|
 | Rome antique | ✅ fait | Casque + glaive |
-| Grèce antique | icône prête | Amphore |
+| Grèce antique | ✅ fait | Amphore |
 | Vikings/Scandinavie médiévale | icône prête | Drakkar (bateau viking) |
 | Celtes (Gaule/Îles britanniques) | icône prête | Bouclier celtique/torque |
 | Empire byzantin | icône prête | Aigle bicéphale |
@@ -212,7 +212,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 ### Asie
 | Page | Statut | Icône |
 |---|---|---|
-| Le Yeti | icône prête | Empreinte dans la neige |
+| Le Yeti | ✅ fait | Empreinte dans la neige |
 | Le Kappa | icône prête | Carapace + bec stylisés |
 | L'Orang Pendek | icône prête | Silhouette de primate accroupi |
 | Le Yeren | icône prête | Silhouette de primate poilu debout |
@@ -247,7 +247,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 | Page | Statut | Icône |
 |---|---|---|
 | Stonehenge | ✅ fait | Cercle de pierres |
-| Manuscrit de Voynich | icône prête | Page/plume stylisée |
+| Manuscrit de Voynich | ✅ fait | Page/plume stylisée |
 | Suaire de Turin | icône prête | Tissu drapé |
 | Crop circles | icône prête | Cercle géométrique dans un champ |
 | Homme de Piltdown | icône prête | Crâne fissuré |

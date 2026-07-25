@@ -608,6 +608,95 @@
     }
   }
 
+  // Grèce antique (culture) — un masque de théâtre pivote de la comédie à la tragédie.
+  function greekMaskFlip() {
+    var l = layer(3400);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);' +
+      'width:min(30vw,180px);perspective:600px;opacity:0;';
+    var inner = document.createElement('div');
+    inner.style.cssText = 'position:relative;width:100%;padding-top:100%;transform-style:preserve-3d;transition:transform 1.1s ease-in-out;';
+    var comedy = document.createElement('div');
+    comedy.style.cssText = 'position:absolute;inset:0;backface-visibility:hidden;';
+    comedy.innerHTML =
+      '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">' +
+        '<circle cx="50" cy="50" r="46" fill="#f0e6cf" stroke="#8a6a2a" stroke-width="3"/>' +
+        '<circle cx="34" cy="42" r="5" fill="#2a2a2a"/><circle cx="66" cy="42" r="5" fill="#2a2a2a"/>' +
+        '<path d="M28 62 Q50 84 72 62" fill="none" stroke="#2a2a2a" stroke-width="4" stroke-linecap="round"/>' +
+      '</svg>';
+    var tragedy = document.createElement('div');
+    tragedy.style.cssText = 'position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg);';
+    tragedy.innerHTML =
+      '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">' +
+        '<circle cx="50" cy="50" r="46" fill="#e2d3ae" stroke="#5a4118" stroke-width="3"/>' +
+        '<circle cx="34" cy="42" r="5" fill="#2a2a2a"/><circle cx="66" cy="42" r="5" fill="#2a2a2a"/>' +
+        '<path d="M28 72 Q50 50 72 72" fill="none" stroke="#2a2a2a" stroke-width="4" stroke-linecap="round"/>' +
+      '</svg>';
+    inner.appendChild(comedy);
+    inner.appendChild(tragedy);
+    wrap.appendChild(inner);
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .85 }, { opacity: 0 }],
+      { duration: 3400, easing: 'ease-out', fill: 'forwards' });
+    setTimeout(function () { inner.style.transform = 'rotateY(180deg)'; }, 900);
+  }
+
+  // Le Yeti — rafale de neige dense et une silhouette floue qui apparaît puis se dissout sans jamais se préciser.
+  function yetiBlizzard() {
+    var l = layer(4800);
+    for (var i = 0; i < 22; i++) {
+      (function (i) {
+        var size = rand(2, 5);
+        var flake = document.createElement('div');
+        flake.style.cssText = 'position:absolute;left:' + rand(-10, 30) + 'vw;top:' + rand(-5, 70) + 'vh;' +
+          'width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:#eef4fa;opacity:0;' +
+          'box-shadow:0 0 5px rgba(238,244,250,.7);will-change:transform,opacity;';
+        l.appendChild(flake);
+        flake.animate([
+          { transform: 'translate(0,0)', opacity: 0 },
+          { opacity: .85, offset: .1 },
+          { opacity: .85, offset: .75 },
+          { transform: 'translate(' + rand(70, 100) + 'vw,' + rand(35, 60) + 'vh)', opacity: 0 }
+        ], { duration: rand(3200, 4200), delay: i * 70, easing: 'linear', fill: 'forwards' });
+      })(i);
+    }
+    var sil = document.createElement('div');
+    sil.style.cssText = 'position:absolute;left:58%;top:40%;width:min(16vw,110px);height:min(28vh,220px);' +
+      'transform:translate(-50%,-50%);opacity:0;filter:blur(7px);' +
+      'background:radial-gradient(ellipse at 50% 30%,rgba(200,210,220,.55),transparent 70%);border-radius:50% 50% 40% 40%;';
+    l.appendChild(sil);
+    sil.animate([
+      { opacity: 0, filter: 'blur(10px)' },
+      { opacity: .5, offset: .35, filter: 'blur(6px)' },
+      { opacity: .5, offset: .55, filter: 'blur(8px)' },
+      { opacity: 0, filter: 'blur(12px)' }
+    ], { duration: 3600, delay: 500, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Manuscrit de Voynich — des glyphes inventés (jamais un vrai alphabet) défilent puis se brouillent sans jamais se lire.
+  function voynichScript() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:min(50vw,380px);opacity:0;';
+    var rows = '';
+    for (var r = 0; r < 5; r++) {
+      for (var c = 0; c < 9; c++) {
+        var x = c * 22, y = r * 30;
+        var h1 = rand(4, 14), h2 = rand(-10, 10);
+        rows += '<path d="M' + x + ' ' + (y + 14) + ' q4 ' + (-h1) + ' 8 0 q4 ' + h2 + ' 8 0" ' +
+          'fill="none" stroke="#3a4a1e" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>';
+      }
+    }
+    wrap.innerHTML = '<svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' + rows + '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([
+      { opacity: 0, filter: 'blur(3px)' },
+      { opacity: .9, offset: .25, filter: 'blur(0px)' },
+      { opacity: .9, offset: .65, filter: 'blur(0px)' },
+      { opacity: 0, filter: 'blur(5px)' }
+    ], { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -704,7 +793,10 @@
     serpentGlide: serpentGlide,
     romanColumns: romanColumns,
     bigfootTracks: bigfootTracks,
-    dyatlov: dyatlovSnow
+    dyatlov: dyatlovSnow,
+    greekMaskFlip: greekMaskFlip,
+    yetiBlizzard: yetiBlizzard,
+    voynichScript: voynichScript
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -749,6 +841,9 @@
     rome:          function () { glyphShower({ glyphs: ROMAN, mode: 'fall' }); romanColumns(); },
     bigfoot:       bigfootTracks,
     dyatlov:       dyatlovSnow,
+    grece:         function () { glyphShower({ glyphs: GREEK, mode: 'rise' }); greekMaskFlip(); },
+    yeti:          yetiBlizzard,
+    voynich:       voynichScript,
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }
