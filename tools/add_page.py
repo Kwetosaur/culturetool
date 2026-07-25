@@ -40,6 +40,9 @@ import re
 import subprocess
 import sys
 
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAP_FILES = [os.path.join(ROOT, 'map.html'), os.path.join(ROOT, 'public', 'map.html')]
 INDEX_ASTRO = os.path.join(ROOT, 'src', 'pages', 'index.astro')
@@ -71,7 +74,9 @@ def activate_pin(map_path, page_id, href, cat):
         return None
 
     entry_line = lines[future_idx]
-    title = re.search(r"title:'([^']*)'", entry_line).group(1)
+    # (?:[^'\\]|\\.)* gere les apostrophes echappees (\') dans les titres, ex.
+    # "Mécanisme d\'Anticythère" - un [^']* naif tronquerait au premier \'.
+    title = re.search(r"title:'((?:[^'\\]|\\.)*)'", entry_line).group(1).replace("\\'", "'")
     x = re.search(r"x:([\d.]+)", entry_line).group(1)
     y = re.search(r"y:([\d.]+)", entry_line).group(1)
     icon = re.search(r"icon:'([^']*)'", entry_line).group(1)
@@ -98,8 +103,9 @@ def activate_pin(map_path, page_id, href, cat):
     if not lines[last_entry_idx].rstrip().endswith(','):
         lines[last_entry_idx] = lines[last_entry_idx].rstrip() + ','
 
+    title_escaped = title.replace("'", "\\'")
     new_entry = (
-        f"  {{ id:'{page_id}', title:'{title}', cat:'{cat}', href:'{href}', "
+        f"  {{ id:'{page_id}', title:'{title_escaped}', cat:'{cat}', href:'{href}', "
         f"x:{x}, y:{y}, icon:'{icon}' }}"
     )
     next_line = lines[insert_idx] if insert_idx < len(lines) else '];'
