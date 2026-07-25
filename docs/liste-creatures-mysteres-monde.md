@@ -12,7 +12,7 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Bigfoot / Sasquatch ✅ | 9 | Amérique du Nord | Non prouvé, dossier riche en canulars documentés |
 | Le Yeti (Abominable Snowman) ✅ | 9 | Himalaya | Non prouvé, plusieurs traces attribuées depuis à des ours |
 | La Bête du Gévaudan | 9 | France, XVIIIe siècle | Événement réel documenté, explication la plus probable : loups (éventuellement hybrides ou dressés) |
-| Le Chupacabra | 8 | Porto Rico / Amérique latine | Phénomène récent (1990s), cas attribués à des canidés galeux |
+| Le Chupacabra ✅ | 8 | Porto Rico / Amérique latine | Phénomène récent (1990s), cas attribués à des canidés galeux |
 | Le Kraken | 8 | Scandinavie | Légende ancienne, probablement inspirée du calmar géant, réellement découvert bien plus tard |
 | Les Sirènes / Femmes-poissons | 7 | Mondiale | Croyance ancienne largement attribuée à des méprises sur des mammifères marins (lamantins, dugongs) |
 | Le Mothman | 7 | Point Pleasant, États-Unis | Panique collective documentée, explication sceptique dominante (hibou mal identifié) |
@@ -46,7 +46,7 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | L'Incident du Col Dyatlov ✅ | 9 | Oural, URSS, 1959 | Événement réel et tragique, hypothèse scientifique récente (avalanche particulière) jugée crédible — à traiter avec sobriété envers les victimes |
 | Stonehenge | 9 | Angleterre | Fonction et méthode de construction partiellement comprises, plusieurs zones d'ombre réelles subsistent |
 | Le Mécanisme d'Anticythère | 8 | Grèce antique | Largement résolu : calculateur astronomique antique d'une sophistication redécouverte par la science moderne |
-| Les Lignes de Nazca | 8 | Pérou | Fonction rituelle/astronomique largement documentée par l'archéologie, malgré la persistance de théories marginales |
+| Les Lignes de Nazca ✅ | 8 | Pérou | Fonction rituelle/astronomique largement documentée par l'archéologie, malgré la persistance de théories marginales |
 | Le Manuscrit de Voynich ✅ | 8 | Europe, XVe siècle | Non déchiffré à ce jour malgré des décennies d'efforts, dossier scientifique sérieux et actif |
 | La Disparition d'Amelia Earhart | 8 | Pacifique, 1937 | Non résolu officiellement, plusieurs hypothèses sérieuses en concurrence |
 | Le Mary Celeste | 8 | Atlantique, 1872 | Événement réel, explication la plus probable aujourd'hui : évacuation précipitée par erreur d'appréciation, pas de mystère surnaturel |

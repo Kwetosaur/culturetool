@@ -697,6 +697,84 @@
     ], { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
   }
 
+  // Vikings — un drakkar à voile rayée traverse l'écran.
+  function vikingLonghship() {
+    var l = layer(4400);
+    var top = rand(30, 55);
+    var ship = document.createElement('div');
+    ship.style.cssText = 'position:absolute;top:' + top + 'vh;left:-22vw;width:180px;opacity:0;will-change:transform,opacity;';
+    ship.innerHTML =
+      '<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<path d="M10 110 Q100 130 190 110 L175 100 Q100 112 25 100 Z" fill="#4a3320"/>' +
+        '<rect x="96" y="20" width="4" height="80" fill="#6b4a2a"/>' +
+        '<path d="M60 28 L140 28 L128 78 L72 78 Z" fill="#e2d3ae" stroke="#8a1f1f" stroke-width="6" stroke-dasharray="14 14"/>' +
+        '<path d="M96 15 Q104 5 96 -2 Q88 5 96 15" fill="#c9a13f"/>' +
+      '</svg>';
+    l.appendChild(ship);
+    ship.animate([
+      { transform: 'translateX(0) translateY(0)', opacity: 0 },
+      { opacity: 1, offset: .12 },
+      { transform: 'translate(132vw,' + rand(-3, 3) + 'vh)', opacity: 1, offset: .85 },
+      { opacity: 0 }
+    ], { duration: 4400, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Chupacabra — deux yeux rouges dans une palette désertique et une ombre qui bondit entre les cactus.
+  function chupacabraEyes() {
+    var l = layer(3600);
+    for (var c = 0; c < 3; c++) {
+      var cactus = document.createElement('div');
+      cactus.style.cssText = 'position:absolute;bottom:0;left:' + (15 + c * 30 + rand(-4, 4)) + 'vw;width:18px;height:' + rand(60, 100) + 'px;background:#2e4a2a;border-radius:8px;opacity:.5;';
+      l.appendChild(cactus);
+    }
+    var eyes = document.createElement('div');
+    eyes.style.cssText = 'position:absolute;left:' + rand(30, 60) + 'vw;top:' + rand(35, 55) + 'vh;opacity:0;display:flex;gap:14px;';
+    eyes.innerHTML =
+      '<div style="width:10px;height:10px;border-radius:50%;background:#ff2b2b;box-shadow:0 0 12px #ff2b2b,0 0 24px #b30000;"></div>' +
+      '<div style="width:10px;height:10px;border-radius:50%;background:#ff2b2b;box-shadow:0 0 12px #ff2b2b,0 0 24px #b30000;"></div>';
+    l.appendChild(eyes);
+    eyes.animate([
+      { opacity: 0, transform: 'scale(.6)' },
+      { opacity: 1, offset: .2, transform: 'scale(1)' },
+      { opacity: 1, offset: .5 },
+      { opacity: 0, transform: 'translateX(40vw) scale(.7)' }
+    ], { duration: 3200, delay: 300, easing: 'ease-in-out', fill: 'forwards' });
+    var shadow = document.createElement('div');
+    shadow.style.cssText = 'position:absolute;bottom:6vh;left:20vw;width:50px;height:26px;border-radius:50%;background:rgba(20,10,5,.6);filter:blur(2px);opacity:0;';
+    l.appendChild(shadow);
+    shadow.animate([
+      { transform: 'translate(0,0)', opacity: 0 },
+      { opacity: .8, offset: .15 },
+      { transform: 'translate(20vw,-10vh)', opacity: .8, offset: .4 },
+      { transform: 'translate(40vw,0)', opacity: .8, offset: .65 },
+      { transform: 'translate(60vw,-8vh)', opacity: 0 }
+    ], { duration: 3400, delay: 200, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Lignes de Nazca — un géoglyphe de colibri se dessine trait par trait.
+  function nazcaLines() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:min(40vw,280px);opacity:0;';
+    wrap.innerHTML =
+      '<svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<path id="nazca-bird" d="M20 90 Q40 40 80 50 Q100 30 130 45 Q160 35 180 60 Q150 65 140 90 Q160 110 150 130 Q120 110 100 120 Q70 130 50 115 Q30 110 20 90 Z" ' +
+          'fill="none" stroke="#8a5a2a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .06 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4200, easing: 'linear', fill: 'forwards' });
+    requestAnimationFrame(function () {
+      var path = wrap.querySelector('#nazca-bird');
+      if (!path || !path.getTotalLength) return;
+      var len = path.getTotalLength();
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+      path.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }],
+        { duration: 3000, delay: 200, easing: 'ease-in-out', fill: 'forwards' });
+    });
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -796,7 +874,10 @@
     dyatlov: dyatlovSnow,
     greekMaskFlip: greekMaskFlip,
     yetiBlizzard: yetiBlizzard,
-    voynichScript: voynichScript
+    voynichScript: voynichScript,
+    vikingLonghship: vikingLonghship,
+    chupacabraEyes: chupacabraEyes,
+    nazcaLines: nazcaLines
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -844,6 +925,9 @@
     grece:         function () { glyphShower({ glyphs: GREEK, mode: 'rise' }); greekMaskFlip(); },
     yeti:          yetiBlizzard,
     voynich:       voynichScript,
+    vikings:       vikingLonghship,
+    chupacabra:    chupacabraEyes,
+    nazca:         nazcaLines,
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }

@@ -24,7 +24,7 @@ Tout est encapsulé en `try/catch` — un effet cassé ne doit jamais casser la 
 
 **Règle de priorité** : livrer la page avec le générique d'abord si le temps manque, upgrader vers le sur-mesure ensuite. Ne jamais retarder la mise en ligne d'une page pour finir un easter egg.
 
-## Déjà fait (22 pages)
+## Déjà fait (25 pages)
 
 Les 10 pages mythologie combinent désormais leur pluie de glyphes générique **et** une scène sur-mesure (au clic du titre **et** en happening au scroll sur `#pantheon`) — plus du niveau "minimum" décrit ci-dessus.
 
@@ -52,6 +52,9 @@ Les 10 pages mythologie combinent désormais leur pluie de glyphes générique *
 | Grèce antique (culture) | `grece` | montée de lettres grecques | **sur-mesure** : masque de théâtre qui pivote de la comédie à la tragédie | `#style-de-vie` |
 | Le Yeti | `yeti` | — | **sur-mesure** : rafale de neige + silhouette floue qui se dissout sans jamais se préciser | `#portrait` |
 | Manuscrit de Voynich | `voynich` | — | **sur-mesure** : glyphes inventés qui défilent puis se brouillent sans jamais se lire | `#enigme` |
+| Vikings / Scandinavie médiévale (culture) | `vikings` | — | **sur-mesure** : drakkar à voile rayée qui traverse l'écran | `#style-de-vie` |
+| Le Chupacabra | `chupacabra` | — | **sur-mesure** : yeux rouges désertiques + ombre qui bondit entre les cactus | `#portrait` |
+| Lignes de Nazca | `nazca` | — | **sur-mesure** : géoglyphe de colibri qui se dessine trait par trait | `#enigme` |
 | Accueil | `accueil` | mélange de glyphes de toutes les cultures | — | — |
 
 ## Stratégie par famille de page
@@ -59,9 +62,9 @@ Les 10 pages mythologie combinent désormais leur pluie de glyphes générique *
 Chaque série a sa propre logique d'effet dominant (en plus du décor commun ci-dessus) — c'est le principe à suivre pour toute nouvelle page :
 
 - **Mythologies** → déchiffrement des titres de section (mécanisme 3, obligatoire et "simple" — voir plus bas) **+**, quand le temps le permet, une scène sur-mesure rejouée au clic du titre et en happening sur `#pantheon` (mécanisme 4). Les 10 pages existantes ont les deux niveaux. Pour une nouvelle mythologie : le déchiffrement des titres reste le minimum non négociable ; la scène sur-mesure est un bonus, jamais un blocage pour livrer.
-- **Créatures** → "happenings" au scroll (mécanisme 4) qui rejouent l'effet sur-mesure de la créature (pas seulement au clic du titre) sur une section clé — typiquement `#portrait` ou `#temoins-recits`. Déjà fait : Gévaudan (`eyes`, sur `#portrait`), Loch Ness (`nessie`, sur `#portrait`), Bigfoot (`bigfootTracks`, empreintes en diagonale, sur `#portrait`), Yeti (`yetiBlizzard`, blizzard + silhouette floue, sur `#portrait`).
-- **Mystères** → décors ou effets simples au scroll, même mécanisme 4, sur une section clé — typiquement `#enigme` ou `#decouverte`. Déjà fait : Triangle des Bermudes (`bermudes`, sur `#enigme`), Stonehenge (`solstice`, sur `#enigme`), Col Dyatlov (`dyatlov`, flocons sobres, sur `#enigme`), Manuscrit de Voynich (`voynichScript`, glyphes inventés, sur `#enigme`).
-- **Cultures** → effets qui jouent sur un élément matériel/iconique de la culture (danse, soie, poterie...) plutôt que sur des glyphes abstraits. Déjà fait : Chine (`silk`, ruban de soie qui ondule, sur `#style-de-vie`), Égypte Antique (réutilise `sunrise`, sur `#style-de-vie`), Rome antique (`romanColumns`, colonnes qui se révèlent, sur `#style-de-vie`), Grèce antique (`greekMaskFlip`, masque comédie/tragédie, sur `#style-de-vie`).
+- **Créatures** → "happenings" au scroll (mécanisme 4) qui rejouent l'effet sur-mesure de la créature (pas seulement au clic du titre) sur une section clé — typiquement `#portrait` ou `#temoins-recits`. Déjà fait : Gévaudan (`eyes`, sur `#portrait`), Loch Ness (`nessie`, sur `#portrait`), Bigfoot (`bigfootTracks`, empreintes en diagonale, sur `#portrait`), Yeti (`yetiBlizzard`, blizzard + silhouette floue, sur `#portrait`), Chupacabra (`chupacabraEyes`, yeux rouges désertiques + ombre bondissante, sur `#portrait`).
+- **Mystères** → décors ou effets simples au scroll, même mécanisme 4, sur une section clé — typiquement `#enigme` ou `#decouverte`. Déjà fait : Triangle des Bermudes (`bermudes`, sur `#enigme`), Stonehenge (`solstice`, sur `#enigme`), Col Dyatlov (`dyatlov`, flocons sobres, sur `#enigme`), Manuscrit de Voynich (`voynichScript`, glyphes inventés, sur `#enigme`), Lignes de Nazca (`nazcaLines`, géoglyphe qui se dessine, sur `#enigme`).
+- **Cultures** → effets qui jouent sur un élément matériel/iconique de la culture (danse, soie, poterie...) plutôt que sur des glyphes abstraits. Déjà fait : Chine (`silk`, ruban de soie qui ondule, sur `#style-de-vie`), Égypte Antique (réutilise `sunrise`, sur `#style-de-vie`), Rome antique (`romanColumns`, colonnes qui se révèlent, sur `#style-de-vie`), Grèce antique (`greekMaskFlip`, masque comédie/tragédie, sur `#style-de-vie`), Vikings (`vikingLonghship`, drakkar qui traverse l'écran, sur `#style-de-vie`).
 
 ## Comment ajouter le déchiffrement de titres à une nouvelle page mythologie
 
@@ -90,11 +93,9 @@ Pour chaque page, 1 à 3 pistes — choisir celle qui se prête le mieux au mome
 - **Mexique/Aztèque (culture)**, distincte de la page mythologie — (1) un motif de tissage ou de céramique qui se complète progressivement ; (2) une pyramide à degrés qui se dessine en silhouette ; (3) un éclat de jade qui scintille (symbole de richesse).
 
 **Créatures à venir** (`liste-creatures-mysteres-monde.md`) :
-- **Le Chupacabra** — (1) deux yeux rouges façon Gévaudan mais palette désertique (varier la mise en scène, pas juste recolorer `eyes()`) ; (2) une ombre qui bondit furtivement d'un cactus à l'autre ; (3) un nuage de poussière/sable soulevé au ras du sol.
 - **Le Mothman** — (1) une grande ombre ailée qui passe rapidement devant un halo de lumière (référence au pont de Point Pleasant) ; (2) deux points rouges qui clignotent brièvement dans le noir ; (3) un vol erratique de silhouette autour d'une structure de pont stylisée.
 
 **Mystères à venir** :
-- **Les lignes de Nazca** — (1) un tracé de colibri ou de singe qui se dessine vu du ciel ; (2) une ombre de survol qui balaie lentement le motif ; (3) les lignes qui s'illuminent point par point comme un dessin au trait continu.
 - **Le mécanisme d'Anticythère** (mystère résolu — bon contrepoint) — engrenages antiques qui s'assemblent et se mettent à tourner, révélant leur sophistication.
 - **La disparition d'Amelia Earhart** — un avion qui s'estompe progressivement dans un brouillard du Pacifique, traité sobrement (pas de mise en scène de catastrophe).
 - **L'île de Pâques** — un moai qui se dresse en silhouette, très sobre.

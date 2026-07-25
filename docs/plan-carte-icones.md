@@ -126,7 +126,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 |---|---|---|
 | Rome antique | ✅ fait | Casque + glaive |
 | Grèce antique | ✅ fait | Amphore |
-| Vikings/Scandinavie médiévale | icône prête | Drakkar (bateau viking) |
+| Vikings/Scandinavie médiévale | ✅ fait | Drakkar (bateau viking) |
 | Celtes (Gaule/Îles britanniques) | icône prête | Bouclier celtique/torque |
 | Empire byzantin | icône prête | Aigle bicéphale |
 | Cités-États italiennes | icône prête | Lion ailé (Venise) |
@@ -206,7 +206,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 ### Amérique latine
 | Page | Statut | Icône |
 |---|---|---|
-| Le Chupacabra | icône prête | Yeux rouges, teinte désertique |
+| Le Chupacabra | ✅ fait | Yeux rouges, teinte désertique |
 | Nahuelito | icône prête | Silhouette de vague/serpent de lac (variante Ogopogo) |
 
 ### Asie
@@ -274,7 +274,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 ### Amérique du Sud & Russie
 | Page | Statut | Icône |
 |---|---|---|
-| Lignes de Nazca | icône prête | Colibri au trait |
+| Lignes de Nazca | ✅ fait | Colibri au trait |
 | Île de Pâques | icône prête | Moaï stylisé |
 | Col Dyatlov | ✅ fait | Tente/montagne, très sobre |
 

@@ -248,7 +248,7 @@
   <a href="map.html" class="side-home active">&#128506; Carte du Monde</a>
   <div class="side-divider"></div>
   <div class="side-search"><input type="text" id="side-search-input" placeholder="Rechercher une page..." autocomplete="off"></div>
-      <div class="side-label">Mythologies</div>
+        <div class="side-label">Mythologies</div>
   <div class="side-group">
     <a href="mythologie-nordique.html">Nordique</a>
     <a href="mythologie-grecque.html">Grecque</a>
@@ -261,26 +261,29 @@
     <a href="mythologie-azteque-maya.html">Aztèque & Maya</a>
     <a href="mythologie-slave.html">Slave</a>
   </div>
-      <div class="side-label">Cultures</div>
+        <div class="side-label">Cultures</div>
   <div class="side-group">
     <a href="culture-chinoise.html">Chine</a>
     <a href="culture-egypte-antique.html">Égypte Antique</a>
     <a href="culture-rome-antique.html">Rome antique</a>
     <a href="culture-grece-antique.html">Grèce antique</a>
+    <a href="culture-vikings.html">Vikings</a>
   </div>
-      <div class="side-label">Créatures</div>
+        <div class="side-label">Créatures</div>
   <div class="side-group">
     <a href="creature-gevaudan.html">Bête du Gévaudan</a>
     <a href="creature-loch-ness.html">Monstre du Loch Ness</a>
     <a href="creature-bigfoot.html">Bigfoot</a>
     <a href="creature-yeti.html">Le Yeti</a>
+    <a href="creature-chupacabra.html">Le Chupacabra</a>
   </div>
-      <div class="side-label">Mystères</div>
+        <div class="side-label">Mystères</div>
   <div class="side-group">
     <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
     <a href="mystere-stonehenge.html">Stonehenge</a>
     <a href="mystere-dyatlov.html">Col Dyatlov</a>
     <a href="mystere-voynich.html">Manuscrit de Voynich</a>
+    <a href="mystere-nazca.html">Lignes de Nazca</a>
   </div>
 </nav>
 <script>
@@ -403,16 +406,19 @@ var PLACES = [
   { id:'cult-egypte',     title:'Égypte Antique',         cat:'culture', href:'culture-egypte-antique.html',        x:54.1, y:44.1, icon:'cult-egypte.png' },
   { id:'cult-rome-antique', title:'Rome antique',         cat:'culture', href:'culture-rome-antique.html',          x:50.9, y:36.1, icon:'cult-rome-antique.png' },
   { id:'cult-grece-antique', title:'Grèce antique',       cat:'culture', href:'culture-grece-antique.html',         x:52.6, y:37.0, icon:'cult-grece-antique.png' },
+  { id:'cult-vikings',    title:'Vikings / Scandinavie médiévale', cat:'culture', href:'culture-vikings.html',      x:49.8, y:25.8, icon:'cult-vikings.png' },
   // Créatures
   { id:'crea-gevaudan',   title:'Bête du Gévaudan',       cat:'creature', href:'creature-gevaudan.html',            x:47.7, y:31.9, icon:'crea-gevaudan.png' },
   { id:'crea-lochness',   title:'Monstre du Loch Ness',   cat:'creature', href:'creature-loch-ness.html',           x:45.5, y:25.9, icon:'crea-lochness.png' },
   { id:'crea-bigfoot',    title:'Bigfoot',                cat:'creature', href:'creature-bigfoot.html',             x:15.6, y:33.0, icon:'crea-bigfoot.png' },
   { id:'crea-yeti',       title:'Le Yeti',                cat:'creature', href:'creature-yeti.html',                x:68.1, y:42.2, icon:'crea-yeti.png' },
+  { id:'crea-chupacabra', title:'Le Chupacabra',          cat:'creature', href:'creature-chupacabra.html',          x:29.7, y:49.8, icon:'crea-chupacabra.png' },
   // Mystères
   { id:'myst-bermudes',   title:'Triangle des Bermudes',  cat:'mystere', href:'mystere-triangle-bermudes.html',     x:27.6, y:43.7, icon:'myst-bermudes.png' },
   { id:'myst-stonehenge', title:'Stonehenge',             cat:'mystere', href:'mystere-stonehenge.html',            x:46.7, y:30.5, icon:'myst-stonehenge.png' },
   { id:'myst-dyatlov',    title:'Col Dyatlov',            cat:'mystere', href:'mystere-dyatlov.html',               x:63.0, y:23.0, icon:'myst-dyatlov.png' },
-  { id:'myst-voynich',    title:'Manuscrit de Voynich',   cat:'mystere', href:'mystere-voynich.html',               x:50.2, y:34.5, icon:'myst-voynich.png' }
+  { id:'myst-voynich',    title:'Manuscrit de Voynich',   cat:'mystere', href:'mystere-voynich.html',               x:50.2, y:34.5, icon:'myst-voynich.png' },
+  { id:'myst-nazca',      title:'Lignes de Nazca',        cat:'mystere', href:'mystere-nazca.html',                 x:27.1, y:66.3, icon:'myst-nazca.png' }
 ];
 
 var PLACES_FUTURE = [
@@ -457,7 +463,6 @@ var PLACES_FUTURE = [
   { id:'myth-polynesienne', title:'Mythologie Polynésienne', cat:'mythologie', status:'future', x:89.1, y:66.7, icon:'myth-polynesienne.png' },
   { id:'myth-melanesienne', title:'Mythologie Mélanésienne', cat:'mythologie', status:'future', x:83.9, y:62.7, icon:'myth-melanesienne.png' },
   // culture — box (44, 72, 8, 38) — 6 pages
-  { id:'cult-vikings', title:'Vikings / Scandinavie médiévale', cat:'culture', status:'future', x:49.8, y:25.8, icon:'cult-vikings.png' },
   { id:'cult-celtes', title:'Celtes (Gaule / Îles britanniques)', cat:'culture', status:'future', x:46.3, y:28.6, icon:'cult-celtes.png' },
   { id:'cult-byzantin', title:'Empire byzantin', cat:'culture', status:'future', x:55.5, y:39.1, icon:'cult-byzantin.png' },
   { id:'cult-cites-italiennes', title:'Cités-États italiennes', cat:'culture', status:'future', x:49.9, y:37.1, icon:'cult-cites-italiennes.png' },
@@ -502,7 +507,6 @@ var PLACES_FUTURE = [
   { id:'crea-champ', title:'Champ', cat:'creature', status:'future', x:27.6, y:32.9, icon:'crea-champ.png' },
   { id:'crea-bray-road', title:'Bête de Bray Road', cat:'creature', status:'future', x:23.6, y:34.2, icon:'crea-bray-road.png' },
   // creature — box (6, 26, 44, 66) — 2 pages
-  { id:'crea-chupacabra', title:'Le Chupacabra', cat:'creature', status:'future', x:29.7, y:49.8, icon:'crea-chupacabra.png' },
   { id:'crea-nahuelito', title:'Nahuelito', cat:'creature', status:'future', x:32.2, y:75.0, icon:'crea-nahuelito.png' },
   // creature — box (66, 94, 18, 52) — 4 pages
   { id:'crea-kappa', title:'Le Kappa', cat:'creature', status:'future', x:81.9, y:38.7, icon:'crea-kappa.png' },
@@ -538,7 +542,6 @@ var PLACES_FUTURE = [
   { id:'myst-pierres-dropa', title:'Pierres de Dropa', cat:'mystere', status:'future', x:73.1, y:40.5, icon:'myst-pierres-dropa.png' },
   { id:'myst-dwarka', title:'Dwarka engloutie', cat:'mystere', status:'future', x:65.1, y:47.5, icon:'myst-dwarka.png' },
   // mystere — box (6, 26, 52, 70) — 2 pages
-  { id:'myst-nazca', title:'Lignes de Nazca', cat:'mystere', status:'future', x:27.1, y:66.3, icon:'myst-nazca.png' },
   { id:'myst-ile-de-paques', title:'Île de Pâques', cat:'mystere', status:'future', x:14.9, y:71.1, icon:'myst-ile-de-paques.png' },
   // mystere — box (66, 80, 10, 24) — 1 pages
     // mystere — box (8, 26, 16, 36) — 1 pages

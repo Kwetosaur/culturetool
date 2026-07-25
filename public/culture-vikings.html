@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vikings — Navigateurs, Colons &amp; Législateurs de Scandinavie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #16232c;
+    --bg-deep: #101a21;
+    --panel: #1e2f39;
+    --panel-border: #3c5566;
+    --ink: #e7edf0;
+    --fjord: #3f8fae;
+    --fjord-bright: #6cb9d6;
+    --iron: #7d8b93;
+    --iron-bright: #a7b4bb;
+    --wood: #6b4a30;
+    --wood-bright: #8f6540;
+    --blood: #8a3527;
+    --blood-bright: #b8503c;
+    --text: #dbe4e8;
+    --text-dim: #8fa0a8;
+    --glow: rgba(63,143,174,0.32);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #1c2c37 0%, #16232c 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{font-family:'Cinzel', serif; color:var(--fjord-bright); letter-spacing:0.03em; font-weight:700;}
+  a{color:var(--fjord-bright);}
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, rgba(231,237,240,0.015) 0px, transparent 2px, transparent 4px, rgba(231,237,240,0.015) 6px);
+    z-index:1;
+  }
+  .meander-strip{display:block; width:100%; height:20px;}
+
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 18%, rgba(63,143,174,0.16), transparent 55%),
+      linear-gradient(180deg, #1c2c37 0%, #16232c 60%, #101a21 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .epigraph-row{font-size:20px; letter-spacing:6px; color:var(--fjord-bright); opacity:0.9; margin-bottom:28px; font-family:'Cinzel', serif;}
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.4rem, 6.5vw, 4.9rem); margin:0;
+    background:linear-gradient(180deg, var(--fjord-bright), var(--wood-bright) 55%, var(--blood-bright) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 40px rgba(63,143,174,0.25);
+  }
+  .hero .subtitle{font-family:'Cinzel', serif; font-size:1.05rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--iron-bright); margin-top:14px;}
+  .hero .tagline{max-width:660px; margin:34px auto 0; font-style:italic; color:var(--text-dim); font-size:1.15rem;}
+  .divider{width:120px; height:2px; margin:36px auto; background:linear-gradient(90deg, transparent, var(--iron), transparent);}
+  .nav-pills{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:900px;}
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(63,143,174,0.06); transition:all .25s ease;
+  }
+  .nav-pills a:hover{color:var(--fjord-bright); border-color:var(--iron); box-shadow:0 0 14px var(--glow);}
+
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 16px; justify-content:center;
+    padding:14px 20px; background:rgba(22,35,44,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.07em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--fjord-bright); border-color:var(--fjord-bright);}
+
+  section{position:relative; z-index:2; max-width:1040px; margin:0 auto; padding:100px 24px;}
+  .section-label{text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--iron-bright); font-size:0.8rem; margin-bottom:12px;}
+  .section-title{text-align:center; font-size:clamp(2rem,4.5vw,3rem); margin:0 0 16px;}
+  .section-intro{text-align:center; max-width:700px; margin:0 auto 60px; color:var(--text-dim); font-style:italic;}
+
+  .epistemic-note{background:rgba(125,139,147,0.09); border:1px dashed var(--panel-border); border-radius:3px; padding:18px 26px; margin:0 auto 50px; max-width:780px; font-size:0.93rem; color:var(--text-dim); font-style:italic;}
+
+  .crest-strip{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:0 auto 30px; max-width:960px;}
+  .crest-badge{
+    background:linear-gradient(160deg, var(--fjord), #103241); color:#e7edf0; border:1px solid var(--iron);
+    border-radius:3px; padding:6px 12px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.04em;
+    text-align:center; min-width:64px;
+  }
+  .crest-badge .cn{display:block; font-size:0.78rem; margin-bottom:2px; color:var(--fjord-bright); font-style:italic;}
+
+  .map-frame{
+    border:2px solid var(--panel-border); border-radius:4px; background:var(--panel);
+    padding:20px; margin:0 auto 26px; max-width:1000px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.35);
+  }
+  .map-frame svg{max-width:100%; height:auto; display:block; margin:0 auto;}
+  .map-legend{display:flex; flex-wrap:wrap; gap:18px; justify-content:center; margin:0 auto 50px; max-width:900px; font-size:0.85rem; color:var(--text-dim);}
+  .map-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend-swatch{display:inline-block; width:22px; height:3px; background:var(--fjord);}
+  .legend-swatch.river{background:#2f7fa5; height:2px;}
+  .legend-swatch.wall{background:repeating-linear-gradient(90deg, var(--iron) 0 4px, transparent 4px 8px); height:3px;}
+  .legend-swatch.silk{background:repeating-linear-gradient(90deg, var(--wood-bright) 0 2px, transparent 2px 5px); height:2px;}
+  .legend-dot{display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--blood-bright); border:2px solid var(--iron);}
+
+  .region-wrap{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .region-card{background:linear-gradient(160deg, var(--panel), #223642); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden;}
+  .region-card::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--fjord), var(--iron));}
+  .region-card h3{margin:0 0 4px; font-size:1.2rem;}
+  .region-card .region-sub{font-size:0.82rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:12px;}
+  .region-card p{margin:0; font-size:0.97rem;}
+
+  .people-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .people-card{background:var(--panel); border:1px solid var(--panel-border); border-left:4px solid var(--blood-bright); border-radius:3px; padding:22px 24px;}
+  .people-card h3{margin:0 0 4px; font-size:1.15rem;}
+  .people-card .people-pct{font-size:0.78rem; color:var(--blood-bright); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; font-family:'Cinzel', serif;}
+  .people-card p{margin:0; font-size:0.95rem;}
+
+  .figure-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px;}
+  .figure-card{background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;}
+  .figure-card:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--iron);}
+  .figure-header{padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(63,143,174,0.09), transparent);}
+  .figure-name{font-size:1.45rem; margin:0;}
+  .figure-dates{font-size:0.85rem; color:var(--fjord-bright); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px;}
+  .figure-body{padding:18px 24px 24px;}
+  .figure-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px;}
+  .figure-body p{margin:0 0 10px; font-size:0.97rem;}
+  .figure-body p:last-child{margin-bottom:0;}
+
+  .invention-list{display:grid; gap:18px;}
+  .invention-item{display:grid; grid-template-columns:200px 1fr; gap:24px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:20px 24px;}
+  .invention-name{font-family:'Cinzel', serif; color:var(--fjord-bright); font-size:1.1rem; align-self:start;}
+  .invention-name span{display:block; font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; font-family:'EB Garamond', serif; font-style:italic;}
+
+  .story-block{margin-bottom:56px; padding-bottom:52px; border-bottom:1px solid var(--panel-border);}
+  .story-block:last-child{border-bottom:none;}
+  .story-number{font-family:'Cinzel Decorative', serif; font-size:0.95rem; color:var(--fjord-bright); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;}
+  .story-block h3{font-size:1.65rem; margin:0 0 10px;}
+  .story-date{font-size:0.85rem; color:var(--iron-bright); font-family:'Cinzel', serif; letter-spacing:0.05em; margin-bottom:16px; display:block;}
+  .story-block p{margin:0 0 16px; font-size:1.02rem;}
+  .story-block p:last-child{margin-bottom:0;}
+  .pull-quote{border-left:3px solid var(--iron); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--fjord-bright); font-size:1.1rem;}
+
+  .anecdote-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;}
+  .anecdote-card{background:linear-gradient(160deg, rgba(63,143,174,0.07), var(--panel)); border:1px solid var(--panel-border); border-left:3px solid var(--blood-bright); padding:20px 22px; border-radius:3px;}
+  .anecdote-card h4{font-size:1rem; margin:0 0 8px; color:var(--fjord-bright); text-transform:uppercase; letter-spacing:0.04em;}
+  .anecdote-card p{margin:0; font-size:0.95rem; color:var(--text);}
+
+  .life-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .life-card{background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:24px 26px; border-top:3px solid var(--iron);}
+  .life-card h4{margin:0 0 10px; font-size:1.1rem; color:var(--fjord-bright);}
+  .life-card p{margin:0; font-size:0.96rem;}
+
+  .reach-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:50px;}
+  .reach-card{border:1px solid var(--panel-border); border-top:2px solid var(--blood-bright); padding:18px 20px; background:var(--panel); border-radius:3px;}
+  .reach-card h4{margin:0 0 6px; font-size:1rem; color:var(--fjord-bright);}
+  .reach-card .reach-dist{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px;}
+  .reach-card p{margin:0; font-size:0.92rem;}
+
+  .timeline{position:relative; max-width:840px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg, transparent, var(--iron) 6%, var(--iron) 94%, transparent); transform:translateX(-50%);}
+  .timeline-item{position:relative; width:50%; padding:0 42px 50px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--fjord-bright); box-shadow:0 0 10px var(--glow);}
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{font-family:'Cinzel', serif; color:var(--fjord-bright); font-size:0.95rem; letter-spacing:0.05em; display:block; margin-bottom:6px;}
+  .timeline-content h4{margin:0 0 6px; font-size:1.02rem; color:var(--iron-bright);}
+  .timeline-content p{margin:0; font-size:0.9rem; color:var(--text-dim);}
+
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{font-size:0.95rem; color:var(--blood-bright); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{border-left:3px solid var(--fjord); padding:4px 20px; margin-top:32px; font-size:0.92rem; color:var(--text-dim); font-style:italic;}
+
+  footer{text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim);}
+  footer .epigraph-row{margin-bottom:20px; font-size:18px;}
+  footer .next-up{font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim);}
+  footer .next-up strong{color:var(--fjord-bright);}
+
+  ::selection{background:var(--fjord); color:#e7edf0;}
+
+  @media (max-width:640px){
+    .invention-item{grid-template-columns:1fr;}
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:640px; max-width:none;}
+    .sticky-nav{gap:4px 8px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.6rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){width:100%; left:0; text-align:left; padding:0 10px 40px 50px;}
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{left:13px; right:auto;}
+  }
+</style>
+<style>
+  .sticky-nav a.nav-active{font-weight:700; text-decoration:underline; text-underline-offset:5px;}
+  .reveal-init{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-in{opacity:1; transform:translateY(0);}
+</style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+  #side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+  #side-menu-overlay.open{opacity:1; pointer-events:auto;}
+  #side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+  #side-menu.open{transform:translateX(0);}
+  #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+  #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+  #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+  #side-menu a.search-hide{display:none;}
+  #side-menu .side-home{margin:0 14px 14px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+  #side-menu .side-search{padding:0 22px 14px;}
+  #side-menu .side-search input{width:100%; box-sizing:border-box; padding:8px 10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:5px; color:#e9e6db; font-family:'EB Garamond', Georgia, serif; font-size:0.9rem;}
+  #side-menu .side-search input::placeholder{color:#7a7b8c;}
+  #side-menu .side-search input:focus{outline:none; border-color:#c9982f;}
+  #side-menu .side-label{padding:12px 22px 6px; margin-top:2px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:space-between;}
+  #side-menu .side-label::after{content:'\25BE'; font-size:0.65rem; transition:transform 0.2s ease; color:#6d6e7e;}
+  #side-menu .side-label.collapsed::after{transform:rotate(-90deg);}
+  #side-menu .side-group{overflow:hidden; max-height:600px; transition:max-height 0.25s ease;}
+  #side-menu .side-group.collapsed{max-height:0;}
+</style>
+</head>
+<body data-egg="vikings">
+<button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
+<div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <a href="map.html" class="side-home">&#128506; Carte du Monde</a>
+  <div class="side-divider"></div>
+  <div class="side-search"><input type="text" id="side-search-input" placeholder="Rechercher une page..." autocomplete="off"></div>
+        <div class="side-label">Mythologies</div>
+  <div class="side-group">
+    <a href="mythologie-nordique.html">Nordique</a>
+    <a href="mythologie-grecque.html">Grecque</a>
+    <a href="mythologie-egyptienne.html">Égyptienne</a>
+    <a href="mythologie-romaine.html">Romaine</a>
+    <a href="mythologie-celtique.html">Celtique</a>
+    <a href="mythologie-mesopotamienne.html">Mésopotamienne</a>
+    <a href="mythologie-hindoue.html">Hindoue</a>
+    <a href="mythologie-japonaise.html">Japonaise</a>
+    <a href="mythologie-azteque-maya.html">Aztèque & Maya</a>
+    <a href="mythologie-slave.html">Slave</a>
+  </div>
+        <div class="side-label">Cultures</div>
+  <div class="side-group">
+    <a href="culture-chinoise.html">Chine</a>
+    <a href="culture-egypte-antique.html">Égypte Antique</a>
+    <a href="culture-rome-antique.html">Rome antique</a>
+    <a href="culture-grece-antique.html">Grèce antique</a>
+    <a href="culture-vikings.html" class="active">Vikings</a>
+  </div>
+        <div class="side-label">Créatures</div>
+  <div class="side-group">
+    <a href="creature-gevaudan.html">Bête du Gévaudan</a>
+    <a href="creature-loch-ness.html">Monstre du Loch Ness</a>
+    <a href="creature-bigfoot.html">Bigfoot</a>
+    <a href="creature-yeti.html">Le Yeti</a>
+    <a href="creature-chupacabra.html">Le Chupacabra</a>
+  </div>
+        <div class="side-label">Mystères</div>
+  <div class="side-group">
+    <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
+    <a href="mystere-stonehenge.html">Stonehenge</a>
+    <a href="mystere-dyatlov.html">Col Dyatlov</a>
+    <a href="mystere-voynich.html">Manuscrit de Voynich</a>
+    <a href="mystere-nazca.html">Lignes de Nazca</a>
+  </div>
+</nav>
+<script>
+(function(){
+  var menu = document.getElementById('side-menu');
+  if(!menu) return;
+  var labels = Array.prototype.slice.call(menu.querySelectorAll('.side-label'));
+  labels.forEach(function(label){
+    var group = label.nextElementSibling;
+    if(!group) return;
+    var hasActive = group.querySelector('a.active');
+    if(!hasActive){ label.classList.add('collapsed'); group.classList.add('collapsed'); }
+    label.addEventListener('click', function(){
+      label.classList.toggle('collapsed');
+      group.classList.toggle('collapsed');
+    });
+  });
+  var input = document.getElementById('side-search-input');
+  if(input){
+    var links = Array.prototype.slice.call(menu.querySelectorAll('.side-group a'));
+    function restoreCollapse(){
+      labels.forEach(function(label){
+        var group = label.nextElementSibling;
+        if(!group) return;
+        var hasActive = group.querySelector('a.active');
+        label.classList.toggle('collapsed', !hasActive);
+        group.classList.toggle('collapsed', !hasActive);
+      });
+    }
+    input.addEventListener('input', function(){
+      var q = input.value.trim().toLowerCase();
+      if(!q){
+        links.forEach(function(a){ a.classList.remove('search-hide'); });
+        restoreCollapse();
+        return;
+      }
+      links.forEach(function(a){
+        var match = a.textContent.toLowerCase().indexOf(q) !== -1;
+        a.classList.toggle('search-hide', !match);
+      });
+      labels.forEach(function(label){
+        label.classList.remove('collapsed');
+        if(label.nextElementSibling) label.nextElementSibling.classList.remove('collapsed');
+      });
+    });
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        var first = links.filter(function(a){ return !a.classList.contains('search-hide'); })[0];
+        if(first) window.location.href = first.getAttribute('href');
+      }
+    });
+  }
+})();
+</script>
+
+
+
+
+<header class="hero">
+  <div class="epigraph-row">VESTRHAF &middot; DRAKKAR OK &THORN;ING</div>
+  <h1>Vikings</h1>
+  <div class="subtitle">Scandinavie Médiévale — Navigateurs, Colons &amp; Législateurs</div>
+  <p class="tagline">Bien plus que des pillards armés de haches : des marins capables de traverser l'Atlantique Nord des siècles avant Christophe Colomb, des colons qui bâtissent en Islande une société sans roi régie par une assemblée populaire, et des marchands dont les réseaux relient le Groenland à Byzance — cinquième chapitre d'un voyage à travers les peuples et les histoires du monde.</p>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#carte">Carte-Récit</a>
+    <a href="#peuples">Les Peuples</a>
+    <a href="#figures">Grandes Figures</a>
+    <a href="#recits">Grands Récits</a>
+    <a href="#inventions">Inventions</a>
+    <a href="#anecdotes">Anecdotes</a>
+    <a href="#style-de-vie">Style de Vie</a>
+    <a href="#monde">Rayonnement</a>
+    <a href="#frise">Frise Chronologique</a>
+    <a href="#heritage">Héritage Actuel</a>
+  </nav>
+</header>
+
+<svg class="meander-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="interlace0" width="24" height="20" patternUnits="userSpaceOnUse">
+      <path d="M2 10 C2 4, 10 4, 12 10 C14 16, 22 16, 22 10 C22 4, 14 4, 12 10 C10 16, 2 16, 2 10 Z" stroke="#3f8fae" stroke-width="1.5" fill="none" opacity="0.45"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#interlace0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#carte">Carte</a>
+  <a href="#peuples">Peuples</a>
+  <a href="#figures">Figures</a>
+  <a href="#recits">Récits</a>
+  <a href="#inventions">Inventions</a>
+  <a href="#anecdotes">Anecdotes</a>
+  <a href="#style-de-vie">Style de Vie</a>
+  <a href="#monde">Rayonnement</a>
+  <a href="#frise">Frise</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= CARTE ================= -->
+<section id="carte">
+  <div class="section-label">Géographie &amp; Territoire</div>
+  <h2 class="section-title">La Carte-Récit du Monde Viking</h2>
+  <p class="section-intro">L'âge viking n'est jamais porté par un État unifié mais par des royaumes et des chefferies scandinaves distincts, dont l'expansion suit deux axes principaux : vers l'ouest et l'Atlantique Nord (Îles Britanniques, Islande, Groenland, jusqu'au Vinland nord-américain), et vers l'est, par les fleuves russes, jusqu'à la mer Noire et Constantinople.</p>
+
+  <div class="crest-strip">
+    <div class="crest-badge"><span class="cn">Noregr</span>Norvège</div>
+    <div class="crest-badge"><span class="cn">Danmörk</span>Danemark</div>
+    <div class="crest-badge"><span class="cn">Svíþjóð</span>Suède</div>
+    <div class="crest-badge"><span class="cn">Ísland</span>Islande</div>
+    <div class="crest-badge"><span class="cn">Grænland</span>Groenland</div>
+    <div class="crest-badge"><span class="cn">Vínland</span>Vinland</div>
+    <div class="crest-badge"><span class="cn">Bretland</span>Îles Britanniques</div>
+    <div class="crest-badge"><span class="cn">Norðmandi</span>Normandie</div>
+    <div class="crest-badge"><span class="cn">Garðaríki</span>Rus' de Kiev</div>
+    <div class="crest-badge"><span class="cn">Miklagarðr</span>Miklagård</div>
+  </div>
+
+  <div class="map-frame diagram-scroll">
+    <svg viewBox="0 0 640 500" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;">
+      <rect x="170" y="10" width="300" height="42" rx="4" fill="#1e2f39" stroke="#3c5566" stroke-width="1.5"/>
+      <text x="320" y="30" text-anchor="middle" font-family="Cinzel, serif" font-size="14" fill="#6cb9d6" letter-spacing="2">VESTRHAF</text>
+      <text x="320" y="46" text-anchor="middle" font-family="Cinzel, serif" font-size="10" fill="#8fa0a8" letter-spacing="1.5">CARTE-RÉCIT DES ROUTES VIKINGS (STYLISÉE)</text>
+
+      <!-- North Atlantic / North Sea / Baltic -->
+      <ellipse cx="330" cy="255" rx="290" ry="190" fill="#2c4a5c" opacity="0.55"/>
+      <text x="150" y="245" text-anchor="middle" font-size="12" fill="#6cb9d6" font-family="EB Garamond, serif" font-style="italic">Vestrhaf</text>
+
+      <!-- Greenland (corner, far northwest) -->
+      <path d="M8,42 L95,38 L108,78 L60,88 L10,72 Z" fill="#274456" opacity="0.85" stroke="#7d8b93" stroke-width="1.2"/>
+      <text x="55" y="66" text-anchor="middle" font-size="9" fill="#a7b4bb" font-family="Cinzel, serif" letter-spacing="1">GRÆNLAND</text>
+
+      <!-- Vinland note (further southwest, beyond the map) -->
+      <path d="M5,145 L88,140 L96,178 L48,188 L6,172 Z" fill="#33291f" opacity="0.85" stroke="#8a3527" stroke-width="1.2"/>
+      <text x="50" y="167" text-anchor="middle" font-size="8.5" fill="#b8503c" font-family="Cinzel, serif" letter-spacing="1">VÍNLAND</text>
+      <text x="50" y="180" text-anchor="middle" font-size="7" fill="#8fa0a8" font-family="EB Garamond, serif" font-style="italic">(au-delà de la carte)</text>
+
+      <!-- Iceland -->
+      <path d="M60,98 L118,90 L128,122 L98,138 L62,122 Z" fill="#223642" stroke="#3f8fae" stroke-width="1.4"/>
+      <text x="93" y="115" text-anchor="middle" font-size="9" fill="#e7edf0" font-family="Cinzel, serif" letter-spacing="1">ÍSLAND</text>
+
+      <!-- British Isles: Ireland + Britain -->
+      <ellipse cx="128" cy="205" rx="20" ry="28" fill="#223642" stroke="#7d8b93" stroke-width="1.2" opacity="0.9"/>
+      <text x="128" y="209" text-anchor="middle" font-size="7.5" fill="#8fa0a8" font-family="EB Garamond, serif" font-style="italic">Írland</text>
+
+      <path d="M168,142 L218,136 L230,200 L212,238 L178,225 L162,180 Z" fill="#223642" stroke="#7d8b93" stroke-width="1.4"/>
+      <text x="193" y="190" text-anchor="middle" font-size="9" fill="#e7edf0" font-family="Cinzel, serif" letter-spacing="1">BRETLAND</text>
+
+      <!-- Normandy (attached south of Britain) -->
+      <path d="M183,250 L228,244 L238,282 L206,300 L178,282 Z" fill="#2e2018" opacity="0.85" stroke="#8a3527" stroke-width="1.2"/>
+      <text x="205" y="270" text-anchor="middle" font-size="8.5" fill="#b8503c" font-family="Cinzel, serif" letter-spacing="1">NORÐMANDI</text>
+
+      <!-- Scandinavia: Norway + Sweden -->
+      <path d="M300,52 L362,46 L382,118 L368,208 L332,252 L302,192 L286,118 Z" fill="#223642" stroke="#3f8fae" stroke-width="1.6"/>
+      <text x="304" y="92" font-size="9" fill="#e7edf0" font-family="Cinzel, serif" letter-spacing="1">NOREGR</text>
+      <text x="345" y="150" font-size="9" fill="#e7edf0" font-family="Cinzel, serif" letter-spacing="1">SVÍÞJÓÐ</text>
+
+      <!-- Denmark peninsula -->
+      <path d="M272,238 L308,232 L314,262 L288,278 L266,262 Z" fill="#223642" stroke="#3f8fae" stroke-width="1.2"/>
+      <text x="288" y="252" text-anchor="middle" font-size="8" fill="#e7edf0" font-family="Cinzel, serif" letter-spacing="1">DANMÖRK</text>
+
+      <!-- Rus' / Novgorod-Kiev lands (east) -->
+      <path d="M430,118 L522,108 L548,182 L522,262 L458,272 L432,198 Z" fill="#2a2a20" opacity="0.85" stroke="#7d8b93" stroke-width="1.2"/>
+      <text x="475" y="150" text-anchor="middle" font-size="9" fill="#a7b4bb" font-family="Cinzel, serif" letter-spacing="1">GARÐARÍKI</text>
+      <text x="460" y="135" text-anchor="middle" font-size="7.5" fill="#8fa0a8" font-family="EB Garamond, serif" font-style="italic">Hólmgarðr</text>
+      <text x="490" y="235" text-anchor="middle" font-size="7.5" fill="#8fa0a8" font-family="EB Garamond, serif" font-style="italic">Kænugarðr</text>
+
+      <!-- Miklagard corner (southeast) -->
+      <path d="M545,425 L620,420 L628,455 L560,462 Z" fill="#33291f" opacity="0.85" stroke="#8a3527" stroke-width="1.2"/>
+      <text x="588" y="446" text-anchor="middle" font-size="8.5" fill="#b8503c" font-family="Cinzel, serif" letter-spacing="1">MIKLAGARÐR</text>
+
+      <!-- Routes -->
+      <g fill="none" stroke-width="1.6">
+        <path d="M290,120 C220,98 160,92 108,104" stroke="#3f8fae" stroke-dasharray="4 3"/>
+        <path d="M70,98 C58,82 48,68 58,54" stroke="#3f8fae" stroke-dasharray="4 3"/>
+        <path d="M52,80 C40,105 42,128 48,145" stroke="#8a3527" stroke-dasharray="3 3"/>
+        <path d="M288,160 C255,158 225,158 200,163" stroke="#3f8fae" stroke-dasharray="4 3"/>
+        <path d="M278,258 C252,266 228,268 208,268" stroke="#8a3527" stroke-dasharray="3 3"/>
+        <path d="M372,135 C405,132 425,132 442,138" stroke="#8f6540" stroke-dasharray="2 4"/>
+        <path d="M478,205 C498,265 528,345 558,420" stroke="#8f6540" stroke-dasharray="2 4"/>
+      </g>
+
+      <!-- Pins -->
+      <g font-family="EB Garamond, serif">
+        <circle cx="318" cy="82" r="5" fill="#8a3527" stroke="#7d8b93" stroke-width="1.5"/>
+        <text x="326" y="80" font-size="9.5" fill="#e7edf0" font-weight="600">Kaupang</text>
+
+        <circle cx="292" cy="248" r="5" fill="#8a3527" stroke="#7d8b93" stroke-width="1.5"/>
+        <text x="292" y="230" font-size="9.5" fill="#e7edf0" font-weight="600" text-anchor="middle">Hedeby</text>
+
+        <circle cx="352" cy="168" r="5" fill="#8a3527" stroke="#7d8b93" stroke-width="1.5"/>
+        <text x="360" y="166" font-size="9.5" fill="#e7edf0" font-weight="600">Birka</text>
+
+        <circle cx="93" cy="118" r="4.5" fill="#8a3527" stroke="#7d8b93" stroke-width="1.5"/>
+        <text x="93" y="132" font-size="9" fill="#e7edf0" font-weight="600" text-anchor="middle">Þingvellir</text>
+
+        <circle cx="60" cy="65" r="4.5" fill="#8a3527" stroke="#7d8b93" stroke-width="1.5"/>
+        <text x="60" y="80" font-size="8.5" fill="#e7edf0" font-weight="600" text-anchor="middle">Brattahlíð</text>
+
+        <circle cx="200" cy="165" r="5" fill="#8a3527" stroke="#7d8b93" stroke-width="1.5"/>
+        <text x="208" y="163" font-size="9.5" fill="#e7edf0" font-weight="600">Jórvík</text>
+
+        <circle cx="128" cy="200" r="4.5" fill="#8a3527" stroke="#7d8b93" stroke-width="1.5"/>
+        <text x="128" y="216" font-size="9" fill="#e7edf0" font-weight="600" text-anchor="middle">Dyflin</text>
+
+        <circle cx="205" cy="268" r="4.5" fill="#8a3527" stroke="#7d8b93" stroke-width="1.5"/>
+        <text x="205" y="284" font-size="9" fill="#e7edf0" font-weight="600" text-anchor="middle">Rúðuborg</text>
+
+        <circle cx="455" cy="138" r="4.5" fill="#8a3527" stroke="#7d8b93" stroke-width="1.5"/>
+        <text x="455" y="128" font-size="9" fill="#e7edf0" font-weight="600" text-anchor="middle">Hólmgarðr</text>
+
+        <circle cx="583" cy="440" r="4.5" fill="#8a3527" stroke="#7d8b93" stroke-width="1.5"/>
+        <text x="583" y="415" font-size="9" fill="#e7edf0" font-weight="600" text-anchor="middle">Miklagarðr</text>
+      </g>
+
+      <!-- Compass rose -->
+      <g transform="translate(70,450)">
+        <circle r="26" fill="none" stroke="#7d8b93" stroke-width="1.2"/>
+        <path d="M0,-22 L4,0 L0,22 L-4,0 Z" fill="#3f8fae" opacity="0.85"/>
+        <path d="M-22,0 L0,4 L22,0 L0,-4 Z" fill="#7d8b93" opacity="0.7"/>
+        <text x="0" y="-30" text-anchor="middle" font-size="9" fill="#e7edf0" font-family="Cinzel, serif">N</text>
+        <text x="0" y="37" text-anchor="middle" font-size="9" fill="#e7edf0" font-family="Cinzel, serif">S</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="map-legend">
+    <span><i class="legend-swatch"></i> Mer / routes maritimes</span>
+    <span><i class="legend-swatch wall"></i> Zone du Danelaw (contrôle danois)</span>
+    <span><i class="legend-swatch silk"></i> Route commerciale Volga-Dniepr</span>
+    <span><i class="legend-dot"></i> Site ou comptoir marquant</span>
+  </div>
+
+  <div class="epistemic-note">Note de style : cette carte est une reconstitution artistique et non un tracé géographique de précision — elle privilégie la lisibilité narrative (position relative des régions, logique des routes d'expansion et de commerce) sur l'exactitude cartographique médiévale.</div>
+
+  <h3 style="text-align:center; margin-top:70px; font-size:1.7rem;">Grandes régions, grandes histoires</h3>
+  <p class="section-intro" style="margin-bottom:50px;">Des fjords norvégiens aux comptoirs les plus lointains de la route de la Volga, chaque région touchée par l'expansion scandinave développe sa propre trajectoire politique, tout en restant reliée par la langue norroise et des techniques navales communes.</p>
+
+  <div class="region-wrap">
+    <div class="region-card">
+      <h3>Norvège</h3>
+      <div class="region-sub">Le pays des fjords</div>
+      <p>Relief montagneux et côtes découpées de fjords qui rendent l'agriculture difficile mais poussent très tôt vers la mer ; berceau des expéditions les plus lointaines vers l'Islande et le Groenland, unifié tardivement sous Harald à la Belle Chevelure.</p>
+    </div>
+    <div class="region-card">
+      <h3>Danemark</h3>
+      <div class="region-sub">La porte vers le sud</div>
+      <p>Position charnière entre la Baltique et la mer du Nord, terre agricole plus riche que sa voisine norvégienne, qui organise les raids et les conquêtes les plus systématiques contre l'Angleterre et la Frise carolingienne.</p>
+    </div>
+    <div class="region-card">
+      <h3>Suède &amp; Baltique</h3>
+      <div class="region-sub">La route de l'est</div>
+      <p>Tournée vers la Baltique plutôt que l'Atlantique, elle donne naissance aux Varègues, marchands-guerriers qui remontent les fleuves russes vers la mer Noire et la mer Caspienne plutôt que vers l'ouest.</p>
+    </div>
+    <div class="region-card">
+      <h3>Islande</h3>
+      <div class="region-sub">La république sans roi</div>
+      <p>Colonisée à partir de 874 par des familles norvégiennes fuyant l'autorité royale naissante, elle développe une société d'un genre rare : aucune monarchie, mais une assemblée annuelle, l'Althing, qui vote les lois et tranche les litiges.</p>
+    </div>
+    <div class="region-card">
+      <h3>Groenland</h3>
+      <div class="region-sub">La colonie du bout du monde</div>
+      <p>Fondée par Erik le Rouge vers 985, la colonie norroise du Groenland prospère plusieurs siècles avant de s'éteindre discrètement au XVe siècle, victime probable du refroidissement climatique et de son isolement croissant.</p>
+    </div>
+    <div class="region-card">
+      <h3>Vinland (Terre-Neuve)</h3>
+      <div class="region-sub">L'Amérique cinq siècles avant Colomb</div>
+      <p>Repéré puis brièvement habité par Leif Erikson vers l'an 1000, ce site du nord-est de l'Amérique, confirmé archéologiquement à L'Anse aux Meadows, marque la limite occidentale extrême de l'expansion viking.</p>
+    </div>
+    <div class="region-card">
+      <h3>Îles Britanniques &amp; Danelaw</h3>
+      <div class="region-sub">Un royaume dans le royaume</div>
+      <p>De Dublin à York, les colons scandinaves fondent des villes marchandes et imposent, dans le nord-est de l'Angleterre (le Danelaw), leurs propres lois et leur propre langue pendant plus d'un siècle.</p>
+    </div>
+    <div class="region-card">
+      <h3>Normandie</h3>
+      <div class="region-sub">Le duché des Hommes du Nord</div>
+      <p>Cédée en 911 au chef viking Rollon par le roi franc Charles le Simple, cette région prend le nom des "Normands" et donne un siècle et demi plus tard les conquérants de l'Angleterre.</p>
+    </div>
+    <div class="region-card">
+      <h3>Rus' de Kiev &amp; route de la Volga</h3>
+      <div class="region-sub">Des marchands devenus princes</div>
+      <p>Fondée selon la tradition chronique par des chefs varègues invités par des tribus slaves, la Rus' de Kiev relie par voie fluviale la Baltique à la mer Noire et donne son nom à la future Russie.</p>
+    </div>
+    <div class="region-card">
+      <h3>Miklagård (Constantinople)</h3>
+      <div class="region-sub">La grande ville</div>
+      <p>Terme ultime de la route commerciale scandinave, la capitale byzantine attire marchands et mercenaires varègues, dont la célèbre garde varangienne qui protège les empereurs eux-mêmes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PEUPLES ================= -->
+<section id="peuples">
+  <div class="section-label">Société &amp; Groupes Sociaux</div>
+  <h2 class="section-title">Les Peuples du Monde Viking</h2>
+  <p class="section-intro">Il n'existe pas un peuple viking unifié mais des sociétés scandinaves distinctes, reliées par une langue commune (le vieux norrois), des techniques navales partagées et une même culture juridique orale — dont l'expansion, entre raids, commerce et colonisation, redessine en trois siècles la carte de l'Atlantique Nord et de l'Europe de l'Est.</p>
+
+  <div class="people-grid">
+    <div class="people-card">
+      <h3>Norvégiens</h3>
+      <div class="people-pct">Marins des fjords</div>
+      <p>Organisés en petits royaumes régionaux avant l'unification tardive de Harald à la Belle Chevelure à la fin du IXe siècle, ils fournissent l'essentiel des colons de l'Atlantique Nord, de l'Écosse à l'Islande et au Groenland.</p>
+    </div>
+    <div class="people-card">
+      <h3>Danois</h3>
+      <div class="people-pct">Raiders et rois de mer du Nord</div>
+      <p>Les plus proches du continent, ils mènent les campagnes les plus soutenues contre la Francie et l'Angleterre, jusqu'à placer temporairement un roi danois, Cnut le Grand, sur le trône anglais.</p>
+    </div>
+    <div class="people-card">
+      <h3>Suédois &amp; Varègues</h3>
+      <div class="people-pct">Marchands du fleuve</div>
+      <p>Tournés vers la Baltique et les fleuves russes, les Varègues combinent commerce de fourrures et d'esclaves, mercenariat et fondation de principautés le long de la route commerciale reliant la Baltique à Byzance.</p>
+    </div>
+    <div class="people-card">
+      <h3>Colons d'Islande</h3>
+      <div class="people-pct">Une société d'assemblée</div>
+      <p>Descendants de familles norvégiennes et de leurs esclaves d'origine celtique, ils bâtissent dès 930 une société organisée autour de l'Althing, l'une des plus anciennes assemblées législatives connues au monde.</p>
+    </div>
+    <div class="people-card">
+      <h3>Colons du Groenland</h3>
+      <div class="people-pct">Aux confins du monde connu</div>
+      <p>Deux colonies norroises, l'Établissement de l'Est et celui de l'Ouest, subsistent plusieurs siècles par l'élevage et la chasse au phoque, avant de disparaître sans laisser de témoins directs de leur fin.</p>
+    </div>
+    <div class="people-card">
+      <h3>Colons de Normandie</h3>
+      <div class="people-pct">Devenus Francs en trois générations</div>
+      <p>Installés par traité en 911, les hommes de Rollon adoptent rapidement la langue et la religion locales, tout en conservant une identité guerrière distincte qui fera la réputation militaire du duché normand.</p>
+    </div>
+    <div class="people-card">
+      <h3>La Rus' de Kiev</h3>
+      <div class="people-pct">Une dynastie d'origine scandinave</div>
+      <p>Gouvernée par la dynastie riourikide, d'origine varègue selon la tradition chronique, elle se slavise progressivement tout en conservant des liens commerciaux et dynastiques étroits avec la Scandinavie pendant plusieurs générations.</p>
+    </div>
+    <div class="people-card">
+      <h3>Colons des Îles britanniques (Danelaw)</h3>
+      <div class="people-pct">Villes marchandes et lois propres</div>
+      <p>À Dublin, à York (Jórvík) ou dans les Cinq Bourgs des Midlands, les colons scandinaves fondent des centres urbains actifs et imposent des usages juridiques qui laisseront une empreinte durable dans le droit anglais.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIGURES ================= -->
+<section id="figures">
+  <div class="section-label">Portraits</div>
+  <h2 class="section-title">Grandes Figures Historiques</h2>
+  <p class="section-intro">Rois, explorateurs, colonisatrices et chefs de guerre : des figures documentées par des sources contemporaines ou quasi contemporaines, à l'exception notable de Ragnar Lodbrok et de Riourik, dont l'existence historique précise reste débattue par les spécialistes.</p>
+
+  <div class="figure-grid">
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Ragnar Lodbrok</h3><div class="figure-dates">IXe siècle (figure semi-légendaire)</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Semi-légendaire</span><span class="tag">Sagas tardives</span></div>
+        <p>Chef viking dont l'existence historique en tant qu'individu unique reste débattue ; il s'agit probablement d'une figure composite née de la fusion de plusieurs chefs réels dans les sagas islandaises rédigées des siècles après les faits — sa popularité récente dans la fiction télévisuelle ne doit pas être confondue avec une biographie établie.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Harald Ier à la Belle Chevelure</h3><div class="figure-dates">v. 850 – v. 932</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Roi de Norvège</span><span class="tag">Unificateur</span></div>
+        <p>Traditionnellement crédité d'avoir unifié la Norvège sous une autorité royale unique à la fin du IXe siècle, poussant selon la tradition plusieurs familles récalcitrantes à l'exil — dont une partie vers l'Islande alors inhabitée.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Erik le Rouge</h3><div class="figure-dates">v. 950 – v. 1003</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Explorateur</span><span class="tag">Groenland</span></div>
+        <p>Banni d'Islande pour meurtre, il explore puis colonise vers 985 la côte sud-ouest du Groenland, dont il choisit le nom flatteur ("terre verte") pour attirer des colons vers cette terre en réalité largement englacée.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Leif Erikson</h3><div class="figure-dates">v. 970 – v. 1020</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Explorateur</span><span class="tag">Vinland</span></div>
+        <p>Fils d'Erik le Rouge, il atteint selon les sagas les côtes d'Amérique du Nord vers l'an 1000, bien avant Christophe Colomb ; la réalité de cette expédition est confirmée par les fouilles archéologiques de L'Anse aux Meadows, à Terre-Neuve.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Gudrid Thorbjarnardóttir</h3><div class="figure-dates">v. 980 – v. 1050</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Voyageuse</span><span class="tag">Vinland</span></div>
+        <p>Figure féminine centrale des sagas du Vinland, elle participe à une tentative de colonisation en Amérique du Nord, y donne naissance à un fils, puis effectue plus tard un pèlerinage à Rome — l'une des femmes médiévales les plus voyagées connues par les sources.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Aud la Profonde</h3><div class="figure-dates">IXe siècle</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Colonisatrice</span><span class="tag">Islande</span></div>
+        <p>Veuve d'un roi viking d'Irlande, elle organise elle-même l'expédition qui l'installe avec sa maisonnée en Islande et y distribue des terres à ses compagnons, illustrant l'autorité économique et sociale que pouvaient exercer certaines femmes de haut rang.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Rollon</h3><div class="figure-dates">v. 846 – v. 932</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Chef viking</span><span class="tag">Normandie</span></div>
+        <p>Chef scandinave installé en basse Seine, il obtient du roi franc Charles le Simple, par le traité de Saint-Clair-sur-Epte en 911, un territoire qui devient le duché de Normandie, dont il est considéré comme le premier souverain.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Riourik</h3><div class="figure-dates">m. v. 879 (figure semi-légendaire)</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Semi-légendaire</span><span class="tag">Rus' de Novgorod</span></div>
+        <p>Chef varègue à qui la tradition chronique de la Chronique des temps passés (XIIe siècle) attribue la fondation de la principauté de Novgorod vers 862, à l'origine de la dynastie riourikide qui régnera sur les terres russes pendant plus de sept siècles.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Cnut le Grand</h3><div class="figure-dates">v. 995 – 1035</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Roi</span><span class="tag">Empire de la mer du Nord</span></div>
+        <p>Roi danois devenu également roi d'Angleterre et de Norvège, il gouverne un vaste "empire de la mer du Nord" et cultive une image de souverain chrétien légitime, popularisée par l'anecdote tardive où il ordonne à la marée de reculer pour démontrer les limites du pouvoir royal.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Harald III Hardrada</h3><div class="figure-dates">1015 – 1066</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Roi de Norvège</span><span class="tag">Dernier viking</span></div>
+        <p>Ancien mercenaire de la garde varangienne à Byzance devenu roi de Norvège, il meurt à la bataille de Stamford Bridge en 1066 en tentant de conquérir l'Angleterre ; sa mort est souvent présentée comme la fin symbolique de l'âge viking.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Ivar le Désossé</h3><div class="figure-dates">IXe siècle</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Chef de guerre</span><span class="tag">Grande Armée païenne</span></div>
+        <p>Chef présenté par les sagas tardives comme fils de Ragnar Lodbrok, associé au commandement de la Grande Armée païenne qui envahit l'Angleterre à partir de 865 ; son surnom, d'origine et de sens débattus, pourrait renvoyer à une infirmité physique ou à une image poétique de souplesse martiale.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Ottar de Hålogaland</h3><div class="figure-dates">fin IXe siècle</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Navigateur</span><span class="tag">Norvège du nord</span></div>
+        <p>Marchand-explorateur norvégien dont le récit de voyage, rapporté à la cour du roi anglo-saxon Alfred le Grand et conservé par écrit, fournit l'une des descriptions les plus précises connues de la géographie et des peuples de la Scandinavie arctique de son temps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RECITS ================= -->
+<section id="recits">
+  <div class="section-label">Histoire</div>
+  <h2 class="section-title">Grands Récits Historiques</h2>
+  <p class="section-intro">Du premier raid documenté sur les côtes anglaises à la bataille qui clôt conventionnellement l'âge viking, les tournants militaires, politiques et institutionnels qui ont façonné le monde scandinave médiéval.</p>
+
+  <div class="story-block">
+    <div class="story-number">Récit I</div>
+    <h3>Le Raid de Lindisfarne</h3>
+    <span class="story-date">793</span>
+    <p>Le raid mené en juin 793 contre le monastère de Lindisfarne, sur une île au large du nord-est de l'Angleterre, choque le monde chrétien occidental par sa violence contre un lieu saint et marque conventionnellement, pour les historiens modernes, le début de l'âge viking — même si des incursions scandinaves ponctuelles antérieures ont sans doute déjà eu lieu sans laisser de trace comparable.</p>
+    <p class="pull-quote">« Jamais pareille terreur n'était apparue en Bretagne » — mot attribué au moine et lettré Alcuin d'York, contemporain du raid, dans une lettre décrivant l'événement.</p>
+    <p>Les chroniques anglo-saxonnes contemporaines décrivent l'événement comme un présage funeste, associé à des signes célestes inquiétants relatés la même année — une lecture religieuse du désastre typique de l'historiographie monastique de l'époque.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit II</div>
+    <h3>Les Sièges de Paris</h3>
+    <span class="story-date">845 et 885-886</span>
+    <p>En 845, une flotte viking remonte la Seine jusqu'à Paris ; le roi franc Charles le Chauve préfère payer une lourde rançon en argent plutôt que de risquer une bataille, inaugurant une pratique de tribut (le "danegeld") que d'autres souverains d'Europe occidentale reproduiront à leur tour dans les décennies suivantes.</p>
+    <p>Un second siège, bien plus long, immobilise la ville de novembre 885 à octobre 886 : la défense obstinée du comte Eudes de Paris, aidé d'une garnison réduite, empêche la prise de la cité et vaut à son défenseur un prestige qui préparera l'accession de sa famille au trône de France quelques années plus tard.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit III</div>
+    <h3>La Fondation de la Rus' de Kiev</h3>
+    <span class="story-date">862 et suivants</span>
+    <p>Selon la Chronique des temps passés, rédigée à Kiev au XIIe siècle, des tribus slaves et finnoises en conflit auraient invité en 862 le chef varègue Riourik à venir régner sur elles depuis Novgorod — un récit fondateur dont la part de légende reste débattue par les historiens, mais dont la présence scandinave réelle dans la région est bien attestée archéologiquement.</p>
+    <p>Vers 882, le successeur de Riourik, Oleg, déplace le centre du pouvoir vers Kiev, plus au sud sur le Dniepr, fondant l'entité politique qui donnera son nom à la future Russie et qui contrôle, pendant plusieurs siècles, l'essentiel du commerce fluvial entre la Baltique et la mer Noire.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit IV</div>
+    <h3>La Colonisation de l'Islande et l'Althing</h3>
+    <span class="story-date">874-930</span>
+    <p>À partir de 874, des familles norvégiennes, souvent fuyant l'autorité royale croissante de Harald à la Belle Chevelure, s'installent sur une île jusque-là quasiment inhabitée : c'est le Landnám, la "prise de terre", documenté a posteriori dans le Landnámabók, qui recense les principaux colons et leurs domaines.</p>
+    <p>En 930, les chefs de clans islandais fondent l'Althing, assemblée annuelle en plein air où se votent les lois et se règlent les litiges devant l'ensemble des hommes libres — une des plus anciennes institutions législatives assemblées de ce type documentées au monde, fonctionnant durablement sans monarchie locale.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit V</div>
+    <h3>Erik le Rouge et la Colonie du Groenland</h3>
+    <span class="story-date">985</span>
+    <p>Banni d'Islande pour meurtre pendant trois ans, Erik le Rouge explore la côte sud-ouest du Groenland et y organise, dès la fin de son exil, une expédition de colonisation d'environ vingt-cinq navires, dont la moitié seulement atteint sa destination.</p>
+    <p>Les deux colonies fondées, l'Établissement de l'Est et celui de l'Ouest, prospèrent par l'élevage bovin et ovin, la chasse au phoque et au morse, et le commerce d'ivoire de morse vers l'Europe, avant de décliner progressivement et de s'éteindre au XVe siècle pour des raisons encore débattues (refroidissement climatique, isolement commercial, conflits avec les populations inuites voisines).</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit VI</div>
+    <h3>Leif Erikson et la Découverte du Vinland</h3>
+    <span class="story-date">v. 1000</span>
+    <p>Selon les sagas islandaises rédigées plusieurs siècles après les faits, Leif Erikson, fils d'Erik le Rouge, aurait mené vers l'an 1000 une expédition jusqu'à une terre boisée et fertile qu'il baptise Vinland, bien avant que Christophe Colomb n'atteigne les Caraïbes en 1492.</p>
+    <p>La découverte archéologique du site de L'Anse aux Meadows à Terre-Neuve, fouillé à partir de 1960 par les archéologues norvégiens Helge et Anne Stine Ingstad, confirme la réalité d'un établissement scandinave temporaire en Amérique du Nord — seul site de ce type formellement authentifié à ce jour sur le continent.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit VII</div>
+    <h3>Rollon et la Fondation de la Normandie</h3>
+    <span class="story-date">911</span>
+    <p>Après des décennies de raids scandinaves le long de la Seine, le roi franc Charles le Simple négocie en 911, au traité de Saint-Clair-sur-Epte, la cession d'un territoire autour de Rouen au chef viking Rollon, en échange de sa conversion au christianisme et d'une allégeance nominale.</p>
+    <p>Les descendants de Rollon, rapidement francisés dans la langue et la religion tout en conservant leur réputation militaire, bâtissent en un siècle et demi le duché de Normandie le plus puissant du royaume de France — d'où partira, en 1066, la conquête normande de l'Angleterre.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit VIII</div>
+    <h3>Le Danelaw et la Grande Armée Païenne</h3>
+    <span class="story-date">865-878</span>
+    <p>À partir de 865, une coalition scandinave de grande ampleur, la "Grande Armée païenne", envahit méthodiquement les royaumes anglo-saxons, renversant plusieurs dynasties locales et s'installant durablement dans l'est et le nord de l'Angleterre.</p>
+    <p>Seul le royaume de Wessex, sous Alfred le Grand, résiste et repousse une invasion décisive en 878 ; le traité qui s'ensuit fixe une frontière reconnaissant aux Scandinaves le contrôle du "Danelaw" (littéralement, la région soumise à la loi danoise), où lois et coutumes scandinaves resteront en usage pendant plus d'un siècle.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit IX</div>
+    <h3>Cnut le Grand, Roi de la Mer du Nord</h3>
+    <span class="story-date">1016-1035</span>
+    <p>Fils du roi danois Sven à la Barbe Fourchue, Cnut conquiert l'Angleterre en 1016 après une campagne de plusieurs années, puis hérite du trône du Danemark et conquiert celui de Norvège, réunissant sous une même couronne un vaste ensemble de royaumes de la mer du Nord.</p>
+    <p>Contrairement à l'image du roi barbare, Cnut gouverne en s'appuyant sur les institutions locales anglo-saxonnes existantes, se présente comme un souverain chrétien pieux et effectue un pèlerinage à Rome — une stratégie de légitimation qui n'empêche pas son empire de se fragmenter rapidement après sa mort en 1035.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit X</div>
+    <h3>Stamford Bridge, Hastings et la Fin de l'Âge Viking</h3>
+    <span class="story-date">1066</span>
+    <p>En septembre 1066, le roi de Norvège Harald Hardrada envahit le nord de l'Angleterre mais est vaincu et tué à la bataille de Stamford Bridge par le roi anglo-saxon Harold Godwinson, qui doit aussitôt marcher vers le sud affronter une seconde invasion, normande celle-là, menée par Guillaume le Conquérant.</p>
+    <p class="pull-quote">« On donna à chaque Norvégien à peine assez de terre pour y être enterré » — formule tardive résumant, dans la tradition historiographique anglaise, l'ampleur du désastre norvégien à Stamford Bridge.</p>
+    <p>La victoire normande à Hastings, quelques semaines plus tard, installe en Angleterre une dynastie elle-même d'origine scandinave par Rollon ; la mort de Harald Hardrada à Stamford Bridge est traditionnellement retenue comme la fin symbolique de l'âge des grandes expéditions vikings, même si des raids scandinaves isolés se poursuivent encore quelques décennies.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="story-number">Récit XI</div>
+    <h3>La Christianisation Progressive de la Scandinavie</h3>
+    <span class="story-date">Xe – XIIe siècle</span>
+    <p>La conversion au christianisme s'étale sur plus de deux siècles et procède rarement par simple conviction spontanée : rois danois, norvégiens et suédois l'imposent souvent par la force ou l'intérêt diplomatique, en particulier pour faciliter les relations avec les royaumes chrétiens voisins et asseoir leur propre autorité royale face aux chefferies locales.</p>
+    <p>L'Islande adopte le christianisme par un vote de l'Althing vers l'an 1000, dans un compromis notable qui tolère encore un temps certaines pratiques païennes privées ; la Suède, dernière touchée, ne bascule complètement qu'au XIIe siècle, la religion ancienne se maintenant plus longtemps dans ses régions les plus reculées.</p>
+  </div>
+</section>
+
+<!-- ================= INVENTIONS ================= -->
+<section id="inventions">
+  <div class="section-label">Génie Civilisationnel</div>
+  <h2 class="section-title">Grandes Réalisations</h2>
+  <p class="section-intro">Techniques navales, institutions juridiques et savoir-faire artisanal conçus dans le monde scandinave continuent, sous des formes transformées, d'influencer la navigation, le droit et le vocabulaire contemporains.</p>
+
+  <h3 style="text-align:center; margin:0 0 30px; font-size:1.3rem;">Navigation &amp; construction navale</h3>
+  <div class="invention-list">
+    <div class="invention-item">
+      <div class="invention-name">Drakkar &amp; knarr<span>Langskip / Knörr</span></div>
+      <p>Construits à clins, planches se chevauchant et rivetées, légers et flexibles, le drakkar de guerre rapide et le knarr marchand, plus large et ventru, permettent aussi bien des raids éclairs en rivière que la traversée de l'Atlantique Nord chargée de bétail et de provisions.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">Navigation astronomique &amp; pierre de soleil<span>Sólarsteinn</span></div>
+      <p>En l'absence de boussole, les marins scandinaves s'orientent aux étoiles, à la position du soleil et à des repères empiriques (direction des vagues, vol des oiseaux) ; une pierre biréfringente permettant de localiser le soleil même par ciel couvert reste une hypothèse expérimentalement plausible, mais dont l'usage réel demeure débattu faute de preuve archéologique directe.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">Voile &amp; métier à tisser vertical<span>Vefstaðr</span></div>
+      <p>L'adoption de la voile carrée en laine, tissée sur un métier vertical à poids de pierre par les femmes du foyer, transforme au VIIIe siècle les capacités de propulsion des navires scandinaves et rend possible l'expansion océanique elle-même.</p>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin:50px 0 30px; font-size:1.3rem;">Société, droit &amp; écriture</h3>
+  <div class="invention-list">
+    <div class="invention-item">
+      <div class="invention-name">Le Thing<span>Þing</span></div>
+      <p>Assemblée d'hommes libres qui vote les lois, juge les litiges et proclame les rois, tenue en plein air à date fixe ; faute d'écriture administrative généralisée, les lois sont mémorisées et récitées publiquement par un "diseur de lois" (lögsögumaðr) désigné, notamment en Islande.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">Runes &amp; futhark<span>Rúnar</span></div>
+      <p>Système d'écriture aux formes anguleuses adaptées à la gravure sur bois et sur pierre, utilisé pour des inscriptions commémoratives, magiques ou commerciales bien avant l'introduction de l'alphabet latin par la christianisation.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">Comptoirs commerciaux<span>Kaupangr</span></div>
+      <p>Villes marchandes fondées ou développées par les Scandinaves (Hedeby, Birka, Kaupang, Dublin, York), nœuds d'un réseau reliant fourrures et esclaves du nord à l'argent islamique et à la soie byzantine.</p>
+    </div>
+    <div class="invention-item">
+      <div class="invention-name">Métallurgie &amp; armement<span>Ulfberht</span></div>
+      <p>Épées portant l'inscription "+VLFBERH+T", forgées à partir d'un acier au carbone d'une pureté remarquable pour l'époque, probablement importé du monde islamique, témoignent d'un savoir-faire métallurgique et d'un réseau d'approvisionnement dépassant largement les frontières scandinaves.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ANECDOTES ================= -->
+<section id="anecdotes">
+  <div class="section-label">Petite Histoire</div>
+  <h2 class="section-title">Anecdotes &amp; Curiosités</h2>
+  <p class="section-intro">Des détails qui disent parfois plus long sur une civilisation que ses grandes batailles.</p>
+
+  <div class="anecdote-grid">
+    <div class="anecdote-card">
+      <h4>"Viking", un métier plus qu'un peuple</h4>
+      <p>Le mot norrois "víkingr" désignait à l'origine l'activité de pillage ou d'expédition maritime elle-même, pas une identité ethnique fixe ; un paysan scandinave pouvait "partir en viking" une saison puis rentrer cultiver ses terres, sans que cela définisse son statut social permanent.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Les casques à cornes, une invention du XIXe siècle</h4>
+      <p>Aucune sépulture ni source contemporaine ne montre de casque à cornes porté au combat ; cette image, popularisée par les costumes d'opéra romantiques et l'illustration du XIXe siècle, reste la représentation la plus tenace et la plus fausse des Vikings dans la culture populaire.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le Groenland, un coup de communication</h4>
+      <p>Erik le Rouge choisit délibérément le nom flatteur de "terre verte" pour une côte en réalité largement englacée, espérant attirer des colons islandais vers cette terre difficile — l'un des premiers exemples documentés de "marketing" territorial de l'histoire.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Des runes gravées à Constantinople</h4>
+      <p>Des graffitis runiques scandinaves, probablement laissés par des membres de la garde varangienne, ont été retrouvés gravés sur une balustrade de marbre de Sainte-Sophie à Istanbul, preuve tangible de la présence scandinave au cœur même de la capitale byzantine.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Le débat de la guerrière de Birka</h4>
+      <p>L'analyse ADN en 2017 d'une sépulture richement armée de Birka (Suède), longtemps supposée masculine du fait de son mobilier funéraire guerrier, a révélé un squelette féminin, relançant un débat toujours vif sur la participation de femmes aux activités guerrières scandinaves.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Des Vikings jugés trop propres</h4>
+      <p>Selon le chroniqueur anglais du XIIe siècle Jean de Wallingford, les Scandinaves installés en Angleterre se peignaient les cheveux, se baignaient le samedi et changeaient de vêtements bien plus souvent que leurs hôtes anglo-saxons — un soin corporel qui, selon lui, leur valait un succès certain auprès des femmes locales.</p>
+    </div>
+    <div class="anecdote-card">
+      <h4>Des mots de tous les jours venus du norrois</h4>
+      <p>"Window" en anglais, littéralement "œil du vent" (vindauga), mais aussi "law", "sky", "egg", "husband" ou "knife" : l'anglais moderne conserve plusieurs centaines de mots empruntés directement au vieux norrois, hérités du contact prolongé avec les colons scandinaves du Danelaw.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STYLE DE VIE ================= -->
+<section id="style-de-vie" data-scroll-fx="vikingLonghship">
+  <div class="section-label">Quotidien &amp; Traditions</div>
+  <h2 class="section-title">Style de Vie &amp; Traditions</h2>
+  <p class="section-intro">De la ferme longue au marché saisonnier, la vie quotidienne scandinave oscille entre un travail agricole et artisanal exigeant, une vie collective centrée sur la ferme familiale, et une mobilité saisonnière — commerciale ou guerrière — qui distingue nettement cette société des mondes paysans immobiles voisins.</p>
+
+  <div class="life-grid">
+    <div class="life-card">
+      <h4>La ferme &amp; le longhouse</h4>
+      <p>Unité économique de base de la société scandinave, la ferme regroupe sous un même toit long l'habitation familiale, les étables et parfois l'atelier, autour d'un foyer central dont la fumée s'échappe par une ouverture au faîte du toit.</p>
+    </div>
+    <div class="life-card">
+      <h4>Le statut des femmes</h4>
+      <p>Comparées à d'autres sociétés européennes contemporaines, les femmes scandinaves libres jouissent d'un statut relativement favorable : droit de divorcer et de récupérer leur dot, gestion des clés du foyer et du commerce domestique en l'absence du mari, capacité économique attestée par des sépultures richement dotées.</p>
+    </div>
+    <div class="life-card">
+      <h4>L'esclavage (les thralls)</h4>
+      <p>Institution économique centrale et non marginale : les thralls, capturés lors de raids ou achetés sur des marchés actifs de l'Irlande à la Volga, effectuent l'essentiel du travail agricole et domestique, sans aucun droit reconnu, et peuvent être vendus, affranchis, ou selon certains récits funéraires, sacrifiés.</p>
+    </div>
+    <div class="life-card">
+      <h4>L'alimentation</h4>
+      <p>Régime fondé sur l'orge et le seigle (pain, bouillie), les produits laitiers dont le skyr islandais, le poisson séché ou salé conservé pour l'hiver, la viande d'élevage et de chasse, complété par l'hydromel et une bière d'orge consommés lors des fêtes collectives.</p>
+    </div>
+    <div class="life-card">
+      <h4>Jeux &amp; sports</h4>
+      <p>Lutte, natation, courses et un jeu de balle collectif et rude, le knattleikr, occupent les temps de loisir ; le jeu de plateau stratégique hnefatafl, où un roi assiégé tente d'échapper à des assaillants, est pratiqué dans toute la Scandinavie et ses colonies.</p>
+    </div>
+    <div class="life-card">
+      <h4>L'artisanat</h4>
+      <p>Orfèvrerie en argent et en bronze, sculpture sur bois aux entrelacs animaliers complexes, tissage de laine sur métier vertical : un artisanat technique raffiné, souvent sous-estimé face à l'image belliqueuse dominante des Vikings dans la mémoire populaire.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MONDE ================= -->
+<section id="monde">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Un Rayonnement Ancien et Actuel</h2>
+  <p class="section-intro">De la colonisation de l'Atlantique Nord aux dynasties fondées sur trois continents, l'empreinte scandinave traverse des canaux de transmission multiples, parfois indirects, mais rarement interrompus.</p>
+
+  <div class="reach-grid">
+    <div class="reach-card">
+      <h4>Islande</h4>
+      <span class="reach-dist">Colonisée dès 874</span>
+      <p>Seule société d'assemblée sans monarchie du monde scandinave médiéval, elle produit les sagas islandaises, corpus littéraire médiéval majeur qui reste la principale source narrative sur l'ensemble du monde viking.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Groenland</h4>
+      <span class="reach-dist">Colonies éteintes vers 1450</span>
+      <p>Les colonies norroises disparaissent sans témoin direct de leur fin, laissant aux archéologues le soin de reconstituer, par les ruines et les sépultures, les dernières décennies d'une société isolée aux confins du monde connu.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Vinland / Terre-Neuve</h4>
+      <span class="reach-dist">L'Anse aux Meadows, seul site confirmé</span>
+      <p>Longtemps considéré comme purement légendaire, le contact scandinave avec l'Amérique du Nord est confirmé par la fouille de L'Anse aux Meadows dans les années 1960, seule preuve archéologique tangible d'une présence viking sur le continent.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Rus' de Kiev</h4>
+      <span class="reach-dist">Dynastie riourikide, IXe-XIIe s.</span>
+      <p>Entité politique fondatrice revendiquée aujourd'hui par plusieurs États d'Europe de l'Est, dont la dynastie d'origine scandinave gouverne pendant des siècles un espace s'étendant de la Baltique à la mer Noire.</p>
+    </div>
+    <div class="reach-card">
+      <h4>La Normandie</h4>
+      <span class="reach-dist">Duché normand, 911-1204</span>
+      <p>De la cession initiale à Rollon jusqu'à la conquête de l'Angleterre en 1066, le duché normand transforme durablement la langue, l'aristocratie et l'administration du royaume anglais.</p>
+    </div>
+    <div class="reach-card">
+      <h4>Le royaume normand de Sicile</h4>
+      <span class="reach-dist">Descendants normands, XIe-XIIe s.</span>
+      <p>Partis comme simples mercenaires, les chevaliers normands de la famille de Hauteville conquièrent l'Italie du Sud et la Sicile, y fondant un royaume hybride mêlant traditions normandes, byzantines et arabo-musulmanes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FRISE ================= -->
+<section id="frise">
+  <div class="section-label">Chronologie</div>
+  <h2 class="section-title">Frise Chronologique</h2>
+  <p class="section-intro">De l'essor des premiers comptoirs scandinaves à la fin conventionnelle de l'âge viking — près de quatre siècles d'expansion maritime, de colonisation et de transformation institutionnelle.</p>
+
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 750</span><h4>Essor des comptoirs scandinaves</h4><p>Développement de Kaupang, Hedeby et Birka.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">793</span><h4>Raid de Lindisfarne</h4><p>Début conventionnel de l'âge viking.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">841</span><h4>Fondation de Dublin</h4><p>Établissement d'un campement viking permanent en Irlande.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">845</span><h4>Siège de Paris</h4><p>Rançon versée par Charles le Chauve.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">862</span><h4>Fondation de la Rus' de Novgorod</h4><p>Riourik, selon la tradition chronique.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">865-878</span><h4>Grande Armée païenne</h4><p>Invasion et conquête partielle de l'Angleterre.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">874</span><h4>Landnám, colonisation de l'Islande</h4><p>Premières installations norvégiennes durables.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">878</span><h4>Traité de Wedmore</h4><p>Alfred le Grand fixe la frontière du Danelaw.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">911</span><h4>Traité de Saint-Clair-sur-Epte</h4><p>Rollon et la fondation de la Normandie.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">930</span><h4>Fondation de l'Althing</h4><p>Assemblée législative islandaise.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">985</span><h4>Colonisation du Groenland</h4><p>Erik le Rouge fonde les premières colonies.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 1000</span><h4>Vinland &amp; christianisation de l'Islande</h4><p>Leif Erikson ; conversion votée à l'Althing.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1016-1035</span><h4>Règne de Cnut le Grand</h4><p>Empire de la mer du Nord.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1066</span><h4>Stamford Bridge &amp; Hastings</h4><p>Fin symbolique de l'âge viking.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 1100</span><h4>Christianisation complète de la Suède</h4><p>Dernier royaume scandinave converti.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1130</span><h4>Fondation du royaume normand de Sicile</h4><p>Dynastie de Hauteville, Roger II.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">1261</span><h4>L'Islande se soumet à la Norvège</h4><p>Fin de l'indépendance du Commonwealth islandais.</p>
+    </div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">v. 1450</span><h4>Disparition des colonies du Groenland</h4><p>Fin des établissements norrois de l'Atlantique Nord.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Aujourd'hui</div>
+  <h2 class="section-title">Un Héritage Bien Vivant</h2>
+  <p class="section-intro">Les Vikings ne sont pas qu'un souvenir de manuel scolaire : ils continuent de fournir un vocabulaire, des institutions et des repères archéologiques encore actifs dans le monde contemporain.</p>
+
+  <div class="heritage-block">
+    <h4>Un vocabulaire toujours vivant</h4>
+    <p>Les langues scandinaves modernes descendent directement du vieux norrois, tandis que l'anglais lui-même conserve plusieurs centaines de mots courants empruntés au contact prolongé avec les colons du Danelaw — de "sky" à "law" en passant par "window" ou "husband".</p>
+  </div>
+  <div class="heritage-block">
+    <h4>Une empreinte juridique et institutionnelle</h4>
+    <p>Le nom des parlements scandinaves modernes (le Storting norvégien, le Folketing danois, l'Althing islandais) descend directement du Thing médiéval ; sur l'île de Man, le Tynwald, assemblée d'origine viking, fonctionne encore aujourd'hui en continu depuis plus de mille ans.</p>
+  </div>
+  <div class="heritage-block">
+    <h4>Les sagas islandaises, un patrimoine littéraire mondial</h4>
+    <p>Rédigées en Islande aux XIIIe et XIVe siècles à partir d'une tradition orale plus ancienne, les sagas constituent l'une des littératures médiévales vernaculaires les plus riches d'Europe ; plusieurs manuscrits islandais médiévaux figurent au Registre international Mémoire du monde de l'UNESCO.</p>
+  </div>
+  <div class="heritage-block">
+    <h4>La redécouverte archéologique du Vinland</h4>
+    <p>La fouille de L'Anse aux Meadows dans les années 1960 par les archéologues Helge et Anne Stine Ingstad transforme un récit longtemps jugé légendaire en fait historique établi, et vaut au site un classement au patrimoine mondial de l'UNESCO.</p>
+  </div>
+
+  <div class="heritage-caution">Note de vigilance : depuis le XIXe siècle et jusqu'à aujourd'hui, des symboles réels de la culture scandinave médiévale — le marteau de Thor, le nœud valknut, certaines runes comme la rune odal — ont été détournés par des mouvements suprémacistes blancs et néonazis pour construire un fantasme de "pureté" nordique totalement étranger à la réalité historique d'une société viking largement multiethnique, mêlée par le commerce, l'esclavage et les migrations à des populations slaves, celtiques, sames et méditerranéennes. Cette appropriation idéologique moderne, documentée et toujours active dans certains milieux extrémistes contemporains, doit être clairement distinguée de l'histoire viking elle-même, qu'elle déforme et instrumentalise.</div>
+</section>
+
+<footer>
+  <div class="epigraph-row">VESTRHAF</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série : <strong>Empire du Mali</strong></p>
+</footer>
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sticky-nav a'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  function onScroll(){
+    var y = window.scrollY + 120;
+    var current = sections[0];
+    sections.forEach(function(s){ if (s.offsetTop <= y) current = s; });
+    links.forEach(function(a){
+      var target = document.querySelector(a.getAttribute('href'));
+      a.classList.toggle('nav-active', target === current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) entry.target.classList.add('reveal-in');
+    });
+  }, { threshold:0.12 });
+  document.querySelectorAll(
+    'section > h2, .region-card, .people-card, .figure-card, .story-block, .anecdote-card, .life-card, .reach-card, .timeline-item, .heritage-block'
+  ).forEach(function(el){ el.classList.add('reveal-init'); io.observe(el); });
+})();
+</script>
+<script src="./effects.js" defer></script>
+</body>
+</html>
