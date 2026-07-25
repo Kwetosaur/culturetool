@@ -1,0 +1,573 @@
+<!--
+GABARIT LÉGER — série "Créatures Légendaires du Monde"
+========================================================
+Squelette structurel extrait de creature-chupacabra.html (CSS/classes/nav 100%
+fidèles à l'original), contenu narratif réduit à UN exemple par bloc répétitif.
+Voir docs/plan-serie-creatures.md pour les principes de fond (rigueur
+scientifique, badge de verdict obligatoire, PAS de frise par défaut sauf si
+le sujet a une vraie histoire de témoignages datés).
+
+Ce qui NE change JAMAIS : classes CSS, structure du <head>, bloc
+<nav id="side-menu"> + script, script de scroll-spy/reveal en fin de page
+(attention : le querySelectorAll du reveal doit lister LES VRAIES classes de
+cette page — .info-card/.figure-card/.culture-card/.science-block/
+.theory-block/.heritage-block ci-dessous, PAS une liste copiée d'une autre
+série, c'est un bug déjà rencontré).
+
+Ce qui change à chaque page : <title>, palette :root, badge de verdict,
+contenu de chaque section, data-egg / data-scroll-fx (voir plan-effets.md).
+
+Structure obligatoire (7 sections, ordre fixe, PAS de frise par défaut) :
+#origine #portrait #temoins-recits #culture-populaire #science #theories #heritage
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOM DE LA CRÉATURE — Créatures Légendaires du Monde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ADAPTER : palette distincte de toutes les pages créatures déjà en ligne
+       (forêt Bigfoot/Gévaudan, glacial Yeti, désertique Chupacabra...) —
+       vérifier docs/plan-effets.md. Garder ces noms de variable exacts. */
+    --bg: #23140a;
+    --bg-deep: #170d06;
+    --panel: #3a2415;
+    --panel-alt: #452c19;
+    --panel-border: #6b4526;
+    --parchment: #f2e0c0;
+    --parchment-dim: #d9c19b;
+    --stone: #a68865;
+    --moss: #52632c;
+    --moss-bright: #86a34a;
+    --blood: #6b1f14;
+    --blood-bright: #e0392a;
+    --brass: #b9862f;
+    --brass-bright: #e8b45a;
+    --text: #ecdcc4;
+    --text-dim: #b39a78;
+    --glow: rgba(224,57,42,0.32);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #3a2313 0%, #23140a 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{ font-family:'Cinzel', serif; color:var(--parchment); letter-spacing:0.03em; font-weight:700; }
+  a{color:var(--brass-bright);}
+
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.05) 3px);
+    z-index:1; opacity:0.5;
+  }
+  .fog-strip{display:block; width:100%; height:20px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 12%, rgba(224,57,42,0.16), transparent 55%),
+      linear-gradient(180deg, #3a2313 0%, #23140a 55%, #170d06 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .hero::after{
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(ellipse at 20% 90%, rgba(23,13,6,0.7), transparent 60%),
+      radial-gradient(ellipse at 85% 85%, rgba(23,13,6,0.7), transparent 55%);
+    pointer-events:none;
+  }
+  .epigraph-row{ font-family:'Cinzel', serif; font-size:16px; letter-spacing:6px; color:var(--brass); opacity:0.8; margin-bottom:26px; position:relative; z-index:2; }
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.4rem, 6.6vw, 4.9rem); margin:0; position:relative; z-index:2;
+    background:linear-gradient(180deg, var(--parchment), var(--brass-bright) 65%, #8a5a2a);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 50px rgba(0,0,0,0.4);
+  }
+  .hero .subtitle{ font-family:'Cinzel', serif; font-size:1.02rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--blood-bright); margin-top:16px; position:relative; z-index:2; }
+  .hero .tagline{ max-width:640px; margin:30px auto 0; font-style:italic; color:var(--text-dim); font-size:1.1rem; position:relative; z-index:2; }
+  .verdict-badge{
+    position:relative; z-index:2; display:inline-flex; flex-direction:column; align-items:center; gap:4px;
+    margin:34px auto 0; padding:14px 28px; border:1px solid var(--blood-bright); border-radius:3px;
+    background:linear-gradient(160deg, rgba(224,57,42,0.16), rgba(23,13,6,0.6)); box-shadow:0 0 24px var(--glow); max-width:600px;
+  }
+  .verdict-badge .verdict-label{ font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--blood-bright); }
+  .verdict-badge .verdict-text{ font-family:'EB Garamond', serif; font-size:1rem; color:var(--parchment); line-height:1.5; }
+  .divider{ width:120px; height:2px; margin:34px auto; background:linear-gradient(90deg, transparent, var(--brass), transparent); position:relative; z-index:2; }
+  .nav-pills{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:860px; position:relative; z-index:2; }
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(58,35,19,0.5); transition:all .25s ease;
+  }
+  .nav-pills a:hover{ color:var(--parchment); border-color:var(--brass); box-shadow:0 0 14px rgba(185,134,47,0.2); }
+
+  /* ===== STICKY NAV ===== */
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 18px; justify-content:center;
+    padding:14px 20px; background:rgba(20,11,5,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--blood-bright); border-color:var(--blood-bright);}
+
+  /* ===== SECTIONS ===== */
+  section{ position:relative; z-index:2; max-width:1000px; margin:0 auto; padding:100px 24px; }
+  .section-label{ text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--blood-bright); font-size:0.78rem; margin-bottom:12px; }
+  .section-title{ text-align:center; font-size:clamp(1.9rem,4.2vw,2.8rem); margin:0 0 16px; }
+  .section-intro{ text-align:center; max-width:680px; margin:0 auto 60px; color:var(--text-dim); font-style:italic; }
+
+  /* ===== GENERIC CARD GRID ===== */
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:22px; }
+  .info-card{ background:linear-gradient(160deg, var(--panel), var(--panel-alt)); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden; }
+  .info-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--blood-bright), var(--brass)); }
+  .info-card h3{ margin:0 0 4px; font-size:1.2rem; display:flex; align-items:center; gap:10px; }
+  .info-num{ color:var(--brass); font-size:1rem; opacity:0.9; font-family:'Cinzel', serif; }
+  .info-card .info-sub{ font-size:0.82rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px; }
+  .info-card p{margin:0; font-size:0.97rem;}
+  .info-card p + p{margin-top:10px;}
+
+  /* ===== FIGURE / WITNESS CARDS ===== */
+  .figure-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px; }
+  .figure-card{ background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease; }
+  .figure-card:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--brass); }
+  .figure-header{ padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(224,57,42,0.12), transparent); }
+  .figure-name{font-size:1.35rem; margin:0;}
+  .figure-role{ font-size:0.82rem; color:var(--blood-bright); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px; }
+  .figure-body{padding:18px 24px 24px;}
+  .figure-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{ font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px; }
+  .figure-body p{margin:0 0 10px; font-size:0.96rem;}
+  .figure-body p:last-child{margin-bottom:0;}
+  .figure-body strong{color:var(--parchment); font-weight:600;}
+
+  /* ===== PORTRAIT ===== */
+  .pull-quote{ border-left:3px solid var(--brass); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--parchment); font-size:1.08rem; }
+  .source-note{ font-size:0.85rem; color:var(--text-dim); font-style:italic; }
+
+  /* ===== TIMELINE (optionnelle, voir plan-serie-creatures.md) ===== */
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{
+    content:""; position:absolute; left:50%; top:0; bottom:0; width:2px;
+    background:linear-gradient(180deg, transparent, var(--brass) 6%, var(--blood-bright) 50%, var(--brass) 94%, transparent);
+    transform:translateX(-50%);
+  }
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{ position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--brass-bright); box-shadow:0 0 10px var(--glow); }
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{ font-family:'Cinzel', serif; color:var(--blood-bright); font-size:0.98rem; letter-spacing:0.05em; display:block; margin-bottom:6px; }
+  .timeline-content h4{margin:0 0 6px; font-size:1.02rem; color:var(--parchment);}
+  .timeline-content p{margin:0; font-size:0.9rem; color:var(--text-dim);}
+
+  /* ===== CULTURE GRID ===== */
+  .culture-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:20px; }
+  .culture-card{ border:1px solid var(--panel-border); border-top:2px solid var(--moss-bright); padding:18px 20px; background:var(--panel); border-radius:3px; }
+  .culture-card h4{margin:0 0 6px; font-size:0.98rem; color:var(--parchment);}
+  .culture-card .culture-tag{ display:block; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px; }
+  .culture-card p{margin:0; font-size:0.9rem;}
+
+  /* ===== SCIENCE ===== */
+  .science-block{ margin-bottom:44px; padding-bottom:40px; border-bottom:1px solid var(--panel-border); }
+  .science-block:last-child{border-bottom:none;}
+  .science-block h3{font-size:1.4rem; margin:0 0 14px;}
+  .science-block p{margin:0 0 14px; font-size:1rem;}
+  .science-block p:last-child{margin-bottom:0;}
+  .caution-box{ border-left:3px solid var(--blood-bright); padding:10px 22px; margin-top:20px; font-size:0.92rem; color:var(--text-dim); font-style:italic; background:rgba(224,57,42,0.08); }
+
+  /* ===== THEORIES ===== */
+  .theory-block{ margin-bottom:40px; padding:24px 26px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; position:relative; }
+  .theory-block::before{ content:""; position:absolute; top:0; left:0; bottom:0; width:3px; background:linear-gradient(180deg, var(--brass), var(--blood-bright)); }
+  .theory-header{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .theory-block h3{margin:0; font-size:1.25rem;}
+  .theory-status{ font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass); }
+  .theory-block p{margin:0 0 10px; font-size:0.97rem;}
+  .theory-block p:last-child{margin-bottom:0;}
+  .theory-attrib{ font-size:0.85rem; color:var(--text-dim); font-style:italic; margin-top:10px; }
+
+  /* ===== HERITAGE ===== */
+  .heritage-block{margin-bottom:32px;}
+  .heritage-block h4{ font-size:0.92rem; color:var(--parchment); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em; }
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{ border-left:3px solid var(--blood-bright); padding:4px 20px; margin-top:32px; font-size:0.9rem; color:var(--text-dim); font-style:italic; }
+
+  /* ===== FOOTER ===== */
+  footer{ text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim); }
+  footer .epigraph-row{margin-bottom:20px; font-size:15px;}
+  footer .next-up{ font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); }
+  footer .next-up strong{color:var(--parchment);}
+
+  ::selection{background:var(--blood-bright); color:#241705;}
+
+  @media (max-width:640px){
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.6rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){ width:100%; left:0; text-align:left; padding:0 10px 44px 50px; }
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{ left:13px; right:auto; }
+    .theory-header{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+<style>
+  .sticky-nav a.nav-active{font-weight:700; text-decoration:underline; text-underline-offset:5px;}
+  .reveal-init{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-in{opacity:1; transform:translateY(0);}
+</style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+  #side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+  #side-menu-overlay.open{opacity:1; pointer-events:auto;}
+  #side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+  #side-menu.open{transform:translateX(0);}
+  #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+  #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+  #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+  #side-menu a.search-hide{display:none;}
+  #side-menu .side-home{margin:0 14px 14px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+  #side-menu .side-search{padding:0 22px 14px;}
+  #side-menu .side-search input{width:100%; box-sizing:border-box; padding:8px 10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:5px; color:#e9e6db; font-family:'EB Garamond', Georgia, serif; font-size:0.9rem;}
+  #side-menu .side-search input::placeholder{color:#7a7b8c;}
+  #side-menu .side-search input:focus{outline:none; border-color:#c9982f;}
+  #side-menu .side-label{padding:12px 22px 6px; margin-top:2px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:space-between;}
+  #side-menu .side-label::after{content:'\25BE'; font-size:0.65rem; transition:transform 0.2s ease; color:#6d6e7e;}
+  #side-menu .side-label.collapsed::after{transform:rotate(-90deg);}
+  #side-menu .side-group{overflow:hidden; max-height:600px; transition:max-height 0.25s ease;}
+  #side-menu .side-group.collapsed{max-height:0;}
+</style>
+</head>
+<body data-egg="CLEF_EGG">
+<!-- data-egg : clef unique, voir docs/plan-effets.md pour les clefs déjà prises -->
+<button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
+<div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
+<!--
+  IMPORTANT : bloc <nav id="side-menu"> PLACEHOLDER (1 entrée d'exemple par
+  catégorie seulement). NE PAS le compléter à la main : tools/add_page.py puis
+  tools/sync_sidebar.py le reconstruisent automatiquement après écriture de la
+  page. Le recopier tel quel suffit.
+-->
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <a href="map.html" class="side-home">&#128506; Carte du Monde</a>
+  <div class="side-divider"></div>
+  <div class="side-search"><input type="text" id="side-search-input" placeholder="Rechercher une page..." autocomplete="off"></div>
+  <div class="side-label">Mythologies</div>
+  <div class="side-group">
+    <a href="mythologie-nordique.html">Nordique</a>
+  </div>
+  <div class="side-label">Cultures</div>
+  <div class="side-group">
+    <a href="culture-chinoise.html">Chine</a>
+  </div>
+  <div class="side-label">Créatures</div>
+  <div class="side-group">
+    <a href="creature-gevaudan.html">Bête du Gévaudan</a>
+  </div>
+  <div class="side-label">Mystères</div>
+  <div class="side-group">
+    <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
+  </div>
+</nav>
+<script>
+(function(){
+  var menu = document.getElementById('side-menu');
+  if(!menu) return;
+  var labels = Array.prototype.slice.call(menu.querySelectorAll('.side-label'));
+  labels.forEach(function(label){
+    var group = label.nextElementSibling;
+    if(!group) return;
+    var hasActive = group.querySelector('a.active');
+    if(!hasActive){ label.classList.add('collapsed'); group.classList.add('collapsed'); }
+    label.addEventListener('click', function(){
+      label.classList.toggle('collapsed');
+      group.classList.toggle('collapsed');
+    });
+  });
+  var input = document.getElementById('side-search-input');
+  if(input){
+    var links = Array.prototype.slice.call(menu.querySelectorAll('.side-group a'));
+    function restoreCollapse(){
+      labels.forEach(function(label){
+        var group = label.nextElementSibling;
+        if(!group) return;
+        var hasActive = group.querySelector('a.active');
+        label.classList.toggle('collapsed', !hasActive);
+        group.classList.toggle('collapsed', !hasActive);
+      });
+    }
+    input.addEventListener('input', function(){
+      var q = input.value.trim().toLowerCase();
+      if(!q){
+        links.forEach(function(a){ a.classList.remove('search-hide'); });
+        restoreCollapse();
+        return;
+      }
+      links.forEach(function(a){
+        var match = a.textContent.toLowerCase().indexOf(q) !== -1;
+        a.classList.toggle('search-hide', !match);
+      });
+      labels.forEach(function(label){
+        label.classList.remove('collapsed');
+        if(label.nextElementSibling) label.nextElementSibling.classList.remove('collapsed');
+      });
+    });
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        var first = links.filter(function(a){ return !a.classList.contains('search-hide'); })[0];
+        if(first) window.location.href = first.getAttribute('href');
+      }
+    });
+  }
+})();
+</script>
+
+<header class="hero">
+  <div class="epigraph-row">LIEU/RÉGION D'ORIGINE • PÉRIODE</div>
+  <h1>Nom de la Créature</h1>
+  <div class="subtitle">Nom Complet / Variantes — Région d'Origine</div>
+  <p class="tagline">Paragraphe d'accroche : première mention, contexte, ce qui rend ce dossier singulier dans la série. Rappeler sa place dans la série si pertinent.</p>
+  <div class="verdict-badge">
+    <span class="verdict-label">Verdict</span>
+    <span class="verdict-text">Formulation honnête et vérifiable : non prouvé / résolu / mystère non résolu — jamais racoleur, toujours justifiable dans #science.</span>
+  </div>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#origine">Origine</a>
+    <a href="#portrait">Portrait</a>
+    <a href="#temoins-recits">Témoins &amp; Récits</a>
+    <a href="#culture-populaire">Culture Populaire</a>
+    <a href="#science">Science</a>
+    <a href="#theories">Théories</a>
+    <a href="#heritage">Héritage</a>
+  </nav>
+</header>
+
+<!-- Bandeau décoratif : motif SVG adapté au décor géographique de la créature -->
+<svg class="fog-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="pattern0" width="40" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 16 Q10 8 20 16 T40 16" stroke="#e8b45a" stroke-width="2" fill="none" opacity="0.45"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#pattern0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#origine">Origine</a>
+  <a href="#portrait">Portrait</a>
+  <a href="#temoins-recits">Témoins</a>
+  <a href="#culture-populaire">Culture</a>
+  <a href="#science">Science</a>
+  <a href="#theories">Théories</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ORIGINE ================= -->
+<!-- ~3 info-card dans un card-grid : étymologie, première mention/contexte,
+     diffusion géographique. Toujours distinguer origine folklorique ancienne
+     vs origine récente/médiatique si c'est le cas (beaucoup de cryptides
+     "anciens" sont en réalité des inventions du XXe siècle). -->
+<section id="origine">
+  <div class="section-label">Contexte</div>
+  <h2 class="section-title">Titre évoquant l'origine du nom/du phénomène</h2>
+  <p class="section-intro">Ce qui distingue ce dossier des autres créatures de la série (ancienneté, densité documentaire, nature du phénomène).</p>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <h3><span class="info-num">I</span>Titre du premier point</h3>
+      <p>2-3 phrases factuelles.</p>
+    </div>
+    <!-- Répéter ~3 info-card -->
+  </div>
+</section>
+
+<!-- ================= PORTRAIT ================= -->
+<!-- Description au conditionnel/discours rapporté ("les témoins décrivent...").
+     C'EST ICI que va data-scroll-fx (convention créatures : rejoue l'effet
+     sur-mesure de la créature, voir docs/plan-effets.md). -->
+<section id="portrait" data-scroll-fx="CLEF_SCROLL_FX">
+  <div class="section-label">Description</div>
+  <h2 class="section-title">Ce que les Témoins Disent Avoir Vu</h2>
+  <p class="section-intro">Ce qui caractérise le portrait rapporté (stabilité ou évolution dans le temps, variantes régionales...).</p>
+
+  <p>Paragraphe descriptif au conditionnel, basé sur les témoignages.</p>
+  <div class="pull-quote">« Citation-type d'un témoin ou formulation récurrente. » — attribution/contexte.</div>
+  <p class="source-note">— note sur la source de cette citation.</p>
+  <p>Paragraphe complémentaire (évolution du portrait, variantes, etc.).</p>
+</section>
+
+<!-- ================= TEMOINS & RECITS ================= -->
+<!-- ~4 figure-card (témoins/chercheurs/enquêteurs nommés) + une frise
+     OPTIONNELLE (seulement si le sujet a une vraie histoire de témoignages
+     datés sur plusieurs décennies/siècles - sinon l'omettre, ne jamais la
+     remplir artificiellement). -->
+<section id="temoins-recits">
+  <div class="section-label">Archives</div>
+  <h2 class="section-title">Titre évoquant les témoignages/l'enquête</h2>
+  <p class="section-intro">Ce qui structure cette sélection de témoins/récits.</p>
+
+  <div class="figure-grid">
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Nom</h3>
+        <div class="figure-role">Rôle bref (témoin fondateur / enquêteur / éleveur...)</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Date</span><span class="tag">Lieu</span></div>
+        <p>2-3 phrases factuelles sur ce témoin/récit.</p>
+      </div>
+    </div>
+    <!-- Répéter ~4 figure-card -->
+  </div>
+
+  <!-- Frise optionnelle : ne l'inclure que si le sujet le justifie vraiment -->
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Date</span>
+        <h4>Titre du jalon</h4>
+        <p>Description courte.</p>
+      </div>
+    </div>
+    <!-- Répéter selon la richesse réelle du dossier, pas de nombre imposé -->
+  </div>
+</section>
+
+<!-- ================= CULTURE POPULAIRE ================= -->
+<!-- ~4 culture-card : toujours faire le lien légende locale -> phénomène
+     mondial (ou pas), pas juste une liste de références. -->
+<section id="culture-populaire">
+  <div class="section-label">Postérité Culturelle</div>
+  <h2 class="section-title">Titre évoquant le passage à la culture populaire</h2>
+  <p class="section-intro">Comment on est passé (ou pas) d'une légende locale à un phénomène mondial.</p>
+
+  <div class="culture-grid">
+    <div class="culture-card">
+      <h4>Titre de la référence culturelle</h4>
+      <span class="culture-tag">Type (télévision / tourisme / produits dérivés...)</span>
+      <p>2-3 phrases factuelles.</p>
+    </div>
+    <!-- Répéter ~4 culture-card -->
+  </div>
+</section>
+
+<!-- ================= SCIENCE ================= -->
+<!-- Section pivot : ~3 science-block. Si aucune preuve n'existe, le dire
+     explicitement plutôt que de rester dans le flou (voir .caution-box). -->
+<section id="science">
+  <div class="section-label">Section Pivot</div>
+  <h2 class="section-title">Ce que Disent Réellement les Scientifiques</h2>
+  <p class="section-intro">Ce que la science a réellement pu établir sur ce dossier.</p>
+
+  <div class="science-block">
+    <h3>Titre du point scientifique 1</h3>
+    <p>Paragraphe factuel et sourcé.</p>
+  </div>
+  <!-- Répéter ~3 science-block -->
+  <div class="science-block">
+    <h3>Titre du dernier point</h3>
+    <p>Paragraphe factuel.</p>
+    <div class="caution-box">Formulation explicite du niveau de preuve réel (ce qui a été établi, ce qui ne l'a pas été).</div>
+  </div>
+</section>
+
+<!-- ================= THEORIES ================= -->
+<!-- ~4 theory-block, chacune attribuée à qui la défend, avec un theory-status
+     honnête (Dominante / Marginale / Explication complémentaire...). -->
+<section id="theories">
+  <div class="section-label">Panorama</div>
+  <h2 class="section-title">Les Théories en Présence</h2>
+  <p class="section-intro">Aucune théorie n'est présentée ici comme acquise sans preuve.</p>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Titre de la théorie</h3>
+      <span class="theory-status">Dominante / Marginale / Explication complémentaire</span>
+    </div>
+    <p>Description de la théorie.</p>
+    <p class="theory-attrib">Défendue par : qui exactement.</p>
+  </div>
+  <!-- Répéter ~4 theory-block -->
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<!-- ~4 heritage-block + 1 .heritage-caution final (nuance de fond honnête). -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Ce qu'il en Reste Aujourd'hui</h2>
+  <p class="section-intro">Ce que cette créature "fait" encore aujourd'hui à l'endroit/la culture qui l'a vue naître.</p>
+
+  <div class="heritage-block">
+    <h4>Titre du bloc</h4>
+    <p>2-3 phrases factuelles (tourisme, identité régionale, économie locale...).</p>
+  </div>
+  <!-- Répéter ~4 heritage-block -->
+
+  <p class="heritage-caution">Nuance de fond honnête sur la coexistence croyance/science, ou point de méthode qui referme le dossier sans trancher artificiellement.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">RÉGION(S) — PÉRIODE</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>Nom du prochain sujet</strong></p>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var navLinks = document.querySelectorAll('.sticky-nav a[href^="#"]');
+  var sections = [];
+  navLinks.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({link: a, el: el});
+  });
+  function onScroll(){
+    var pos = window.scrollY + window.innerHeight * 0.3;
+    var current = null;
+    sections.forEach(function(s){ if (s.el.offsetTop <= pos) current = s; });
+    navLinks.forEach(function(a){ a.classList.remove('nav-active'); });
+    if (current) current.link.classList.add('nav-active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ATTENTION : cette liste doit lister les VRAIES classes de CETTE page
+     (celles définies dans le <style> ci-dessus), pas être recopiée d'une
+     autre série sans vérification - bug déjà rencontré sur plusieurs pages
+     créatures/mystères existantes (liste copiée du gabarit mythologie). */
+  var revealTargets = document.querySelectorAll(
+    'section > h2, .info-card, .figure-card, .culture-card, .science-block, .theory-block, .heritage-block, .timeline-item, .verdict-badge'
+  );
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('reveal-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.1});
+  revealTargets.forEach(function(el){ el.classList.add('reveal-init'); io.observe(el); });
+})();
+</script>
+<script src="./effects.js" defer></script>
+</body>
+</html>

@@ -775,6 +775,98 @@
     });
   }
 
+  // Empire du Mali — une caravane de chameaux silhouette traverse l'écran dans un nuage de poussière dorée.
+  function maliCaravan() {
+    var l = layer(4600);
+    var y = rand(45, 62);
+    for (var i = 0; i < 4; i++) {
+      (function (i) {
+        var cam = document.createElement('div');
+        cam.style.cssText = 'position:absolute;top:' + (y + i * 2.2) + 'vh;left:-14vw;width:70px;opacity:0;will-change:transform,opacity;';
+        cam.innerHTML =
+          '<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+            '<path d="M8 50 Q10 30 20 28 Q24 14 32 22 Q36 10 42 22 Q50 16 52 28 Q62 26 64 42 Q70 40 74 50 Z" fill="#2a1c0e" opacity="0.88"/>' +
+            '<rect x="14" y="48" width="4" height="10" fill="#2a1c0e"/><rect x="60" y="48" width="4" height="10" fill="#2a1c0e"/>' +
+          '</svg>';
+        l.appendChild(cam);
+        cam.animate([
+          { transform: 'translateX(0)', opacity: 0 },
+          { opacity: .85, offset: .12 },
+          { transform: 'translate(128vw,0)', opacity: .85, offset: .85 },
+          { opacity: 0 }
+        ], { duration: 4800 + i * 200, delay: i * 260, easing: 'linear', fill: 'forwards' });
+      })(i);
+    }
+    for (var d = 0; d < 16; d++) {
+      var dust = document.createElement('div');
+      var size = rand(2, 4);
+      dust.style.cssText = 'position:absolute;top:' + rand(y + 4, y + 14) + 'vh;left:' + rand(-10, 20) + 'vw;' +
+        'width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:#e0b25a;opacity:0;box-shadow:0 0 6px #f2c96a;';
+      l.appendChild(dust);
+      dust.animate([
+        { transform: 'translate(0,0)', opacity: 0 },
+        { opacity: .7, offset: .2 },
+        { transform: 'translate(' + rand(90, 130) + 'vw,' + rand(-3, 3) + 'vh)', opacity: 0 }
+      ], { duration: rand(4200, 5200), delay: rand(0, 800), easing: 'linear', fill: 'forwards' });
+    }
+  }
+
+  // Le Mothman — une grande ombre ailée passe rapidement devant un halo de lumière (pont de Point Pleasant).
+  function mothmanShadow() {
+    var l = layer(3200);
+    var halo = document.createElement('div');
+    halo.style.cssText = 'position:absolute;left:50%;top:38%;width:180px;height:180px;transform:translate(-50%,-50%);' +
+      'border-radius:50%;background:radial-gradient(circle,rgba(255,240,200,.35),transparent 70%);opacity:0;';
+    l.appendChild(halo);
+    halo.animate([{ opacity: 0 }, { opacity: 1, offset: .25 }, { opacity: 1, offset: .7 }, { opacity: 0 }],
+      { duration: 3200, easing: 'ease-in-out', fill: 'forwards' });
+
+    var shadow = document.createElement('div');
+    shadow.style.cssText = 'position:absolute;top:' + rand(28, 42) + 'vh;left:-20vw;width:220px;opacity:0;will-change:transform,opacity;';
+    shadow.innerHTML =
+      '<svg viewBox="0 0 220 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<path d="M110 40 L60 4 L70 44 L4 30 L54 56 L4 82 L70 66 L60 96 L110 60 L160 96 L150 66 L216 82 L166 56 L216 30 L150 44 L160 4 Z" fill="#0c0c10" opacity="0.92"/>' +
+        '<circle cx="104" cy="42" r="3" fill="#c1272d"/><circle cx="116" cy="42" r="3" fill="#c1272d"/>' +
+      '</svg>';
+    l.appendChild(shadow);
+    shadow.animate([
+      { transform: 'translateX(0)', opacity: 0 },
+      { opacity: .95, offset: .18 },
+      { transform: 'translate(140vw,' + rand(-4, 4) + 'vh)', opacity: .95, offset: .6 },
+      { opacity: 0 }
+    ], { duration: 2600, delay: 300, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Mécanisme d'Anticythère — des engrenages antiques s'assemblent et se mettent à tourner.
+  function antikytheraGears() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:min(26vw,170px);opacity:0;';
+    function gearSvg(r, teeth, color) {
+      var path = '';
+      for (var i = 0; i < teeth; i++) {
+        var a = (i / teeth) * 360;
+        path += '<rect x="' + (50 - 4) + '" y="' + (50 - r - 6) + '" width="8" height="7" fill="' + color + '" transform="rotate(' + a + ' 50 50)"/>';
+      }
+      return '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<circle cx="50" cy="50" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="6"/>' + path +
+        '<circle cx="50" cy="50" r="5" fill="' + color + '"/></svg>';
+    }
+    var g1 = document.createElement('div');
+    g1.style.cssText = 'position:absolute;left:0;top:10%;width:60%;';
+    g1.innerHTML = gearSvg(30, 10, '#b9862f');
+    var g2 = document.createElement('div');
+    g2.style.cssText = 'position:absolute;right:-6%;top:38%;width:42%;';
+    g2.innerHTML = gearSvg(30, 8, '#8f6a24');
+    wrap.appendChild(g1);
+    wrap.appendChild(g2);
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0, transform: 'translate(-50%,-50%) scale(.85)' }, { opacity: 1, offset: .15, transform: 'translate(-50%,-50%) scale(1)' },
+      { opacity: 1, offset: .82 }, { opacity: 0 }], { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    g1.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(120deg)' }], { duration: 3600, delay: 400, easing: 'linear', fill: 'forwards' });
+    g2.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(-150deg)' }], { duration: 3600, delay: 400, easing: 'linear', fill: 'forwards' });
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -877,7 +969,10 @@
     voynichScript: voynichScript,
     vikingLonghship: vikingLonghship,
     chupacabraEyes: chupacabraEyes,
-    nazcaLines: nazcaLines
+    nazcaLines: nazcaLines,
+    maliCaravan: maliCaravan,
+    mothmanShadow: mothmanShadow,
+    antikytheraGears: antikytheraGears
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -928,6 +1023,9 @@
     vikings:       vikingLonghship,
     chupacabra:    chupacabraEyes,
     nazca:         nazcaLines,
+    mali:          maliCaravan,
+    mothman:       mothmanShadow,
+    antikythera:   antikytheraGears,
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }

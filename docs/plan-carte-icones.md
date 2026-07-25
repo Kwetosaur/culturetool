@@ -154,7 +154,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 | Page | Statut | Icône |
 |---|---|---|
 | Égypte Antique | ✅ fait | Pyramide + soleil levant |
-| Empire du Mali | icône prête | Pièce d'or / manuscrit (Tombouctou) |
+| Empire du Mali | ✅ fait | Pièce d'or / manuscrit (Tombouctou) |
 | Nubie/Koush | icône prête | Pyramide méroïtique (fine et pointue) |
 | Grand Zimbabwe (culture) | icône prête | Mur de pierre courbe — *voir note redondance ci-dessous* |
 | Éthiopie/Aksoum | icône prête | Stèle/obélisque |
@@ -193,7 +193,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 | Page | Statut | Icône |
 |---|---|---|
 | Bigfoot | ✅ fait | Empreinte de pas géante |
-| Le Mothman | icône prête | Silhouette ailée, yeux rouges |
+| Le Mothman | ✅ fait | Silhouette ailée, yeux rouges |
 | Le Wendigo | icône prête | Silhouette décharnée (sobre, respect culturel) |
 | Le Skinwalker | icône prête | Symbole abstrait, pas de représentation frontale (respect culturel) |
 | Ogopogo | icône prête | Silhouette de vague/serpent de lac |
@@ -256,7 +256,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 ### Méditerranée & Afrique
 | Page | Statut | Icône |
 |---|---|---|
-| Mécanisme d'Anticythère | icône prête | Engrenage |
+| Mécanisme d'Anticythère | ✅ fait | Engrenage |
 | Atlantide | icône prête | Colonne engloutie |
 | Cité d'Héracléion | icône prête | Statue engloutie |
 | Batterie de Bagdad | icône prête | Jarre stylisée |

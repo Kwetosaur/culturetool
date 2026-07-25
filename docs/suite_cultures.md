@@ -47,7 +47,7 @@ Chine · Égypte Antique · Rome antique · Grèce antique · Vikings / Scandina
 
 | Culture | Score | Ce qui la rend unique |
 |---|---|---|
-| Empire du Mali | 9 | Richesse légendaire de Mansa Moussa, Tombouctou comme centre intellectuel, contrôle du commerce transsaharien de l'or et du sel |
+| Empire du Mali ✅ | 9 | Richesse légendaire de Mansa Moussa, Tombouctou comme centre intellectuel, contrôle du commerce transsaharien de l'or et du sel |
 | Nubie / Koush | 8 | Rivale puis conquérante de l'Égypte (pharaons noirs, XXVe dynastie), pyramides méroïtiques plus nombreuses que les égyptiennes |
 | Grand Zimbabwe | 7 | Cité de pierre commerciale médiévale, mystère de sa construction longtemps nié pour des raisons coloniales — bon lien avec `liste-creatures-mysteres-monde.md` |
 | Éthiopie / Aksoum | 7 | Christianisme d'État parmi les plus anciens au monde, stèles monumentales, continuité historique rare en Afrique |

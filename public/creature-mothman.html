@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Mothman — Créatures Légendaires du Monde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #1a2027;
+    --bg-deep: #0e1216;
+    --panel: #232b33;
+    --panel-alt: #2c3640;
+    --panel-border: #47555f;
+    --parchment: #e8e4d8;
+    --parchment-dim: #c3beac;
+    --stone: #8a9096;
+    --moss: #4a5a4e;
+    --moss-bright: #6f8a72;
+    --blood: #6b0f0f;
+    --blood-bright: #d81e1e;
+    --brass: #7a6a4a;
+    --brass-bright: #c9a24a;
+    --text: #dcd8cc;
+    --text-dim: #9aa0a6;
+    --glow: rgba(216,30,30,0.36);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #232b33 0%, #1a2027 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{ font-family:'Cinzel', serif; color:var(--parchment); letter-spacing:0.03em; font-weight:700; }
+  a{color:var(--brass-bright);}
+
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.05) 3px);
+    z-index:1; opacity:0.5;
+  }
+  .fog-strip{display:block; width:100%; height:20px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 12%, rgba(216,30,30,0.16), transparent 55%),
+      linear-gradient(180deg, #232b33 0%, #1a2027 55%, #0e1216 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .hero::after{
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(ellipse at 20% 90%, rgba(14,18,22,0.7), transparent 60%),
+      radial-gradient(ellipse at 85% 85%, rgba(14,18,22,0.7), transparent 55%);
+    pointer-events:none;
+  }
+  .epigraph-row{ font-family:'Cinzel', serif; font-size:16px; letter-spacing:6px; color:var(--brass); opacity:0.8; margin-bottom:26px; position:relative; z-index:2; }
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.4rem, 6.6vw, 4.9rem); margin:0; position:relative; z-index:2;
+    background:linear-gradient(180deg, var(--parchment), var(--brass-bright) 65%, #6a5326);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 50px rgba(0,0,0,0.4);
+  }
+  .hero .subtitle{ font-family:'Cinzel', serif; font-size:1.02rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--blood-bright); margin-top:16px; position:relative; z-index:2; }
+  .hero .tagline{ max-width:640px; margin:30px auto 0; font-style:italic; color:var(--text-dim); font-size:1.1rem; position:relative; z-index:2; }
+  .verdict-badge{
+    position:relative; z-index:2; display:inline-flex; flex-direction:column; align-items:center; gap:4px;
+    margin:34px auto 0; padding:14px 28px; border:1px solid var(--blood-bright); border-radius:3px;
+    background:linear-gradient(160deg, rgba(216,30,30,0.16), rgba(14,18,22,0.6)); box-shadow:0 0 24px var(--glow); max-width:600px;
+  }
+  .verdict-badge .verdict-label{ font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--blood-bright); }
+  .verdict-badge .verdict-text{ font-family:'EB Garamond', serif; font-size:1rem; color:var(--parchment); line-height:1.5; }
+  .divider{ width:120px; height:2px; margin:34px auto; background:linear-gradient(90deg, transparent, var(--brass), transparent); position:relative; z-index:2; }
+  .nav-pills{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:860px; position:relative; z-index:2; }
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(35,43,51,0.5); transition:all .25s ease;
+  }
+  .nav-pills a:hover{ color:var(--parchment); border-color:var(--brass); box-shadow:0 0 14px rgba(201,162,74,0.2); }
+
+  /* ===== STICKY NAV ===== */
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 18px; justify-content:center;
+    padding:14px 20px; background:rgba(12,15,18,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--blood-bright); border-color:var(--blood-bright);}
+
+  /* ===== SECTIONS ===== */
+  section{ position:relative; z-index:2; max-width:1000px; margin:0 auto; padding:100px 24px; }
+  .section-label{ text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--blood-bright); font-size:0.78rem; margin-bottom:12px; }
+  .section-title{ text-align:center; font-size:clamp(1.9rem,4.2vw,2.8rem); margin:0 0 16px; }
+  .section-intro{ text-align:center; max-width:680px; margin:0 auto 60px; color:var(--text-dim); font-style:italic; }
+
+  /* ===== GENERIC CARD GRID ===== */
+  .card-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:22px; }
+  .info-card{ background:linear-gradient(160deg, var(--panel), var(--panel-alt)); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden; }
+  .info-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--blood-bright), var(--brass)); }
+  .info-card h3{ margin:0 0 4px; font-size:1.2rem; display:flex; align-items:center; gap:10px; }
+  .info-num{ color:var(--brass); font-size:1rem; opacity:0.9; font-family:'Cinzel', serif; }
+  .info-card .info-sub{ font-size:0.82rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px; }
+  .info-card p{margin:0; font-size:0.97rem;}
+  .info-card p + p{margin-top:10px;}
+
+  /* ===== FIGURE / WITNESS CARDS ===== */
+  .figure-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px; }
+  .figure-card{ background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease; }
+  .figure-card:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--brass); }
+  .figure-header{ padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(216,30,30,0.12), transparent); }
+  .figure-name{font-size:1.35rem; margin:0;}
+  .figure-role{ font-size:0.82rem; color:var(--blood-bright); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px; }
+  .figure-body{padding:18px 24px 24px;}
+  .figure-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{ font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px; }
+  .figure-body p{margin:0 0 10px; font-size:0.96rem;}
+  .figure-body p:last-child{margin-bottom:0;}
+  .figure-body strong{color:var(--parchment); font-weight:600;}
+
+  /* ===== PORTRAIT ===== */
+  .pull-quote{ border-left:3px solid var(--brass); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--parchment); font-size:1.08rem; }
+  .source-note{ font-size:0.85rem; color:var(--text-dim); font-style:italic; }
+
+  /* ===== TIMELINE (optionnelle, voir plan-serie-creatures.md) ===== */
+  .timeline{position:relative; max-width:820px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{
+    content:""; position:absolute; left:50%; top:0; bottom:0; width:2px;
+    background:linear-gradient(180deg, transparent, var(--brass) 6%, var(--blood-bright) 50%, var(--brass) 94%, transparent);
+    transform:translateX(-50%);
+  }
+  .timeline-item{position:relative; width:50%; padding:0 42px 54px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{ position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--brass-bright); box-shadow:0 0 10px var(--glow); }
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{ font-family:'Cinzel', serif; color:var(--blood-bright); font-size:0.98rem; letter-spacing:0.05em; display:block; margin-bottom:6px; }
+  .timeline-content h4{margin:0 0 6px; font-size:1.02rem; color:var(--parchment);}
+  .timeline-content p{margin:0; font-size:0.9rem; color:var(--text-dim);}
+
+  /* ===== CULTURE GRID ===== */
+  .culture-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:20px; }
+  .culture-card{ border:1px solid var(--panel-border); border-top:2px solid var(--moss-bright); padding:18px 20px; background:var(--panel); border-radius:3px; }
+  .culture-card h4{margin:0 0 6px; font-size:0.98rem; color:var(--parchment);}
+  .culture-card .culture-tag{ display:block; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px; }
+  .culture-card p{margin:0; font-size:0.9rem;}
+
+  /* ===== SCIENCE ===== */
+  .science-block{ margin-bottom:44px; padding-bottom:40px; border-bottom:1px solid var(--panel-border); }
+  .science-block:last-child{border-bottom:none;}
+  .science-block h3{font-size:1.4rem; margin:0 0 14px;}
+  .science-block p{margin:0 0 14px; font-size:1rem;}
+  .science-block p:last-child{margin-bottom:0;}
+  .caution-box{ border-left:3px solid var(--blood-bright); padding:10px 22px; margin-top:20px; font-size:0.92rem; color:var(--text-dim); font-style:italic; background:rgba(216,30,30,0.08); }
+
+  /* ===== THEORIES ===== */
+  .theory-block{ margin-bottom:40px; padding:24px 26px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; position:relative; }
+  .theory-block::before{ content:""; position:absolute; top:0; left:0; bottom:0; width:3px; background:linear-gradient(180deg, var(--brass), var(--blood-bright)); }
+  .theory-header{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .theory-block h3{margin:0; font-size:1.25rem;}
+  .theory-status{ font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass); }
+  .theory-block p{margin:0 0 10px; font-size:0.97rem;}
+  .theory-block p:last-child{margin-bottom:0;}
+  .theory-attrib{ font-size:0.85rem; color:var(--text-dim); font-style:italic; margin-top:10px; }
+
+  /* ===== HERITAGE ===== */
+  .heritage-block{margin-bottom:32px;}
+  .heritage-block h4{ font-size:0.92rem; color:var(--parchment); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em; }
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{ border-left:3px solid var(--blood-bright); padding:4px 20px; margin-top:32px; font-size:0.9rem; color:var(--text-dim); font-style:italic; }
+
+  /* ===== FOOTER ===== */
+  footer{ text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim); }
+  footer .epigraph-row{margin-bottom:20px; font-size:15px;}
+  footer .next-up{ font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); }
+  footer .next-up strong{color:var(--parchment);}
+
+  ::selection{background:var(--blood-bright); color:#241705;}
+
+  @media (max-width:640px){
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .sticky-nav{gap:4px 10px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.6rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){ width:100%; left:0; text-align:left; padding:0 10px 44px 50px; }
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{ left:13px; right:auto; }
+    .theory-header{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+<style>
+  .sticky-nav a.nav-active{font-weight:700; text-decoration:underline; text-underline-offset:5px;}
+  .reveal-init{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-in{opacity:1; transform:translateY(0);}
+</style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+  #side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+  #side-menu-overlay.open{opacity:1; pointer-events:auto;}
+  #side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+  #side-menu.open{transform:translateX(0);}
+  #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+  #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+  #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+  #side-menu a.search-hide{display:none;}
+  #side-menu .side-home{margin:0 14px 14px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+  #side-menu .side-search{padding:0 22px 14px;}
+  #side-menu .side-search input{width:100%; box-sizing:border-box; padding:8px 10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:5px; color:#e9e6db; font-family:'EB Garamond', Georgia, serif; font-size:0.9rem;}
+  #side-menu .side-search input::placeholder{color:#7a7b8c;}
+  #side-menu .side-search input:focus{outline:none; border-color:#c9982f;}
+  #side-menu .side-label{padding:12px 22px 6px; margin-top:2px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:space-between;}
+  #side-menu .side-label::after{content:'\25BE'; font-size:0.65rem; transition:transform 0.2s ease; color:#6d6e7e;}
+  #side-menu .side-label.collapsed::after{transform:rotate(-90deg);}
+  #side-menu .side-group{overflow:hidden; max-height:600px; transition:max-height 0.25s ease;}
+  #side-menu .side-group.collapsed{max-height:0;}
+</style>
+</head>
+<body data-egg="mothman">
+<!-- data-egg : clef unique, voir docs/plan-effets.md pour les clefs déjà prises -->
+<button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
+<div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
+<!--
+  IMPORTANT : bloc <nav id="side-menu"> PLACEHOLDER (1 entrée d'exemple par
+  catégorie seulement). NE PAS le compléter à la main : tools/add_page.py puis
+  tools/sync_sidebar.py le reconstruisent automatiquement après écriture de la
+  page. Le recopier tel quel suffit.
+-->
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <a href="map.html" class="side-home">&#128506; Carte du Monde</a>
+  <div class="side-divider"></div>
+  <div class="side-search"><input type="text" id="side-search-input" placeholder="Rechercher une page..." autocomplete="off"></div>
+  <div class="side-label">Mythologies</div>
+  <div class="side-group">
+    <a href="mythologie-nordique.html">Nordique</a>
+    <a href="mythologie-grecque.html">Grecque</a>
+    <a href="mythologie-egyptienne.html">Égyptienne</a>
+    <a href="mythologie-romaine.html">Romaine</a>
+    <a href="mythologie-celtique.html">Celtique</a>
+    <a href="mythologie-mesopotamienne.html">Mésopotamienne</a>
+    <a href="mythologie-hindoue.html">Hindoue</a>
+    <a href="mythologie-japonaise.html">Japonaise</a>
+    <a href="mythologie-azteque-maya.html">Aztèque & Maya</a>
+    <a href="mythologie-slave.html">Slave</a>
+  </div>
+  <div class="side-label">Cultures</div>
+  <div class="side-group">
+    <a href="culture-chinoise.html">Chine</a>
+    <a href="culture-egypte-antique.html">Égypte Antique</a>
+    <a href="culture-rome-antique.html">Rome antique</a>
+    <a href="culture-grece-antique.html">Grèce antique</a>
+    <a href="culture-vikings.html">Vikings</a>
+    <a href="culture-mali.html">Empire du Mali</a>
+  </div>
+  <div class="side-label">Créatures</div>
+  <div class="side-group">
+    <a href="creature-gevaudan.html">Bête du Gévaudan</a>
+    <a href="creature-loch-ness.html">Monstre du Loch Ness</a>
+    <a href="creature-bigfoot.html">Bigfoot</a>
+    <a href="creature-yeti.html">Le Yeti</a>
+    <a href="creature-chupacabra.html">Le Chupacabra</a>
+    <a href="creature-mothman.html" class="active">Le Mothman</a>
+  </div>
+  <div class="side-label">Mystères</div>
+  <div class="side-group">
+    <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
+    <a href="mystere-stonehenge.html">Stonehenge</a>
+    <a href="mystere-dyatlov.html">Col Dyatlov</a>
+    <a href="mystere-voynich.html">Manuscrit de Voynich</a>
+    <a href="mystere-nazca.html">Lignes de Nazca</a>
+    <a href="mystere-anticythere.html">Mécanisme d'Anticythère</a>
+  </div>
+</nav>
+<script>
+(function(){
+  var menu = document.getElementById('side-menu');
+  if(!menu) return;
+  var labels = Array.prototype.slice.call(menu.querySelectorAll('.side-label'));
+  labels.forEach(function(label){
+    var group = label.nextElementSibling;
+    if(!group) return;
+    var hasActive = group.querySelector('a.active');
+    if(!hasActive){ label.classList.add('collapsed'); group.classList.add('collapsed'); }
+    label.addEventListener('click', function(){
+      label.classList.toggle('collapsed');
+      group.classList.toggle('collapsed');
+    });
+  });
+  var input = document.getElementById('side-search-input');
+  if(input){
+    var links = Array.prototype.slice.call(menu.querySelectorAll('.side-group a'));
+    function restoreCollapse(){
+      labels.forEach(function(label){
+        var group = label.nextElementSibling;
+        if(!group) return;
+        var hasActive = group.querySelector('a.active');
+        label.classList.toggle('collapsed', !hasActive);
+        group.classList.toggle('collapsed', !hasActive);
+      });
+    }
+    input.addEventListener('input', function(){
+      var q = input.value.trim().toLowerCase();
+      if(!q){
+        links.forEach(function(a){ a.classList.remove('search-hide'); });
+        restoreCollapse();
+        return;
+      }
+      links.forEach(function(a){
+        var match = a.textContent.toLowerCase().indexOf(q) !== -1;
+        a.classList.toggle('search-hide', !match);
+      });
+      labels.forEach(function(label){
+        label.classList.remove('collapsed');
+        if(label.nextElementSibling) label.nextElementSibling.classList.remove('collapsed');
+      });
+    });
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        var first = links.filter(function(a){ return !a.classList.contains('search-hide'); })[0];
+        if(first) window.location.href = first.getAttribute('href');
+      }
+    });
+  }
+})();
+</script>
+
+<header class="hero">
+  <div class="epigraph-row">POINT PLEASANT, ÉTATS-UNIS • 1966-1967</div>
+  <h1>Le Mothman</h1>
+  <div class="subtitle">L'Homme-Papillon — Point Pleasant, Virginie-Occidentale</div>
+  <p class="tagline">Pendant treize mois, une ville de Virginie-Occidentale rapporte des rencontres avec une silhouette ailée aux yeux rouges. L'affaire se referme sur une tragédie bien réelle, le pont de Silver Bridge, dont le lien avec la créature reste l'un des exemples les plus étudiés de construction de légende a posteriori.</p>
+  <div class="verdict-badge">
+    <span class="verdict-label">Verdict</span>
+    <span class="verdict-text">Non prouvé — l'explication ornithologique (un grand hibou mal identifié dans un climat d'anxiété collective) reste la plus solidement étayée, et le lien avec l'effondrement du pont de Silver Bridge n'a aucun fondement causal établi.</span>
+  </div>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#origine">Origine</a>
+    <a href="#portrait">Portrait</a>
+    <a href="#temoins-recits">Témoins &amp; Récits</a>
+    <a href="#culture-populaire">Culture Populaire</a>
+    <a href="#science">Science</a>
+    <a href="#theories">Théories</a>
+    <a href="#heritage">Héritage</a>
+  </nav>
+</header>
+
+<!-- Bandeau décoratif : silhouette de charpente métallique / grillage industriel, écho à la "TNT area" -->
+<svg class="fog-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="pattern0" width="40" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 16 Q10 8 20 16 T40 16" stroke="#c9a24a" stroke-width="2" fill="none" opacity="0.45"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#pattern0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#origine">Origine</a>
+  <a href="#portrait">Portrait</a>
+  <a href="#temoins-recits">Témoins</a>
+  <a href="#culture-populaire">Culture</a>
+  <a href="#science">Science</a>
+  <a href="#theories">Théories</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= ORIGINE ================= -->
+<section id="origine">
+  <div class="section-label">Contexte</div>
+  <h2 class="section-title">Une nuit de novembre près de la « TNT area »</h2>
+  <p class="section-intro">Contrairement à des créatures issues d'un folklore ancien, le Mothman naît d'un événement précis, daté à la nuit près, et d'un nom inventé quasi immédiatement par la presse locale.</p>
+
+  <div class="card-grid">
+    <div class="info-card">
+      <h3><span class="info-num">I</span>La nuit du 15 novembre 1966</h3>
+      <p>Deux jeunes couples de Point Pleasant, en Virginie-Occidentale — Roger Scarberry, Steve Mallette et leurs compagnes — affirment avoir croisé une créature ailée sur le site d'une ancienne usine de munitions désaffectée pendant la Seconde Guerre mondiale, surnommée localement la « TNT area ». Ils se rendent directement au bureau du shérif du comté de Mason pour rapporter les faits.</p>
+    </div>
+    <div class="info-card">
+      <h3><span class="info-num">II</span>Un nom forgé par la presse</h3>
+      <p>Le nom « Mothman » n'appartient à aucune tradition locale antérieure : il est inventé par un journaliste du quotidien <em>Point Pleasant Register</em> dans les jours qui suivent, en clin d'œil au super-vilain « Killer Moth » alors récent dans la série télévisée Batman. La créature est donc, dès l'origine, un objet autant médiatique que rapporté.</p>
+    </div>
+    <div class="info-card">
+      <h3><span class="info-num">III</span>Une diffusion rapide et locale</h3>
+      <p>L'affaire reste concentrée sur la région de Point Pleasant et ses environs immédiats pendant toute sa période active, de novembre 1966 à décembre 1967, avant de connaître une diffusion nationale bien plus large a posteriori, portée par les livres et le cinéma plutôt que par les témoignages eux-mêmes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTRAIT ================= -->
+<section id="portrait" data-scroll-fx="mothmanShadow">
+  <div class="section-label">Description</div>
+  <h2 class="section-title">Ce que les Témoins Disent Avoir Vu</h2>
+  <p class="section-intro">Un portrait resté remarquablement stable d'un témoignage à l'autre durant toute la période active, ce qui alimente autant la thèse d'un phénomène réel identifiable que celle d'une image collective vite figée par la couverture médiatique.</p>
+
+  <p>Les témoins décrivent une créature humanoïde d'environ deux mètres de haut, aux ailes largement déployées, capable selon plusieurs récits de voler à grande vitesse en ligne droite sans jamais les battre. Le détail le plus systématiquement rapporté est l'absence de tête distincte : deux immenses yeux rouges, décrits comme lumineux ou réfléchissants, seraient situés directement à hauteur des épaules ou du haut du torse.</p>
+  <div class="pull-quote">« On ne voyait pas de visage, juste ces deux yeux rouges qui nous regardaient, et puis elle a décollé sans un battement d'aile. » — reconstitution du récit attribué aux témoins de la nuit du 15 novembre 1966.</div>
+  <p class="source-note">— formulation composite reprise des comptes-rendus de l'époque et des entretiens ultérieurs, aucun enregistrement audio d'origine ne subsistant.</p>
+  <p>D'un témoignage à l'autre sur les treize mois de la vague, le portrait varie peu : ni plumes, ni pelage détaillé, un vol jugé anormalement silencieux et rapide, et un comportement décrit comme davantage fuyant ou observateur qu'agressif — aucune attaque physique n'est rapportée dans les dossiers de l'époque.</p>
+</section>
+
+<!-- ================= TEMOINS & RECITS ================= -->
+<section id="temoins-recits">
+  <div class="section-label">Archives</div>
+  <h2 class="section-title">Treize Mois de Témoignages</h2>
+  <p class="section-intro">De la première rencontre à la catastrophe qui referme l'affaire, une chronologie suffisamment resserrée et datée pour justifier une frise à part entière.</p>
+
+  <div class="figure-grid">
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Roger Scarberry &amp; Steve Mallette</h3>
+        <div class="figure-role">Témoins fondateurs</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">15 novembre 1966</span><span class="tag">TNT area, Point Pleasant</span></div>
+        <p>Accompagnés de leurs compagnes, ces deux jeunes hommes sont à l'origine du tout premier rapport déposé auprès des autorités locales, point de départ officiel de l'affaire.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">John Keel</h3>
+        <div class="figure-role">Écrivain enquêteur</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">1966-1975</span><span class="tag">Point Pleasant</span></div>
+        <p>Journaliste et auteur venu enquêter sur place pendant la vague, il publie en 1975 <em>The Mothman Prophecies</em>, ouvrage qui relie la créature à une série d'événements qu'il documente localement : pannes électriques inexpliquées, apparitions rapportées de « Men in Black », et prémonitions relatées par des habitants.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Habitants de Point Pleasant</h3>
+        <div class="figure-role">Témoins multiples, novembre 1966 - décembre 1967</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">1966-1967</span><span class="tag">Comté de Mason</span></div>
+        <p>Plusieurs dizaines de rapports s'accumulent dans la presse locale durant cette période, décrivant des rencontres similaires près de la TNT area et sur les routes environnantes, sans qu'aucune preuve matérielle ne soit jamais recueillie.</p>
+      </div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-header">
+        <h3 class="figure-name">Ingénieurs de la commission d'enquête</h3>
+        <div class="figure-role">Enquêteurs techniques</div>
+      </div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Après le 15 décembre 1967</span><span class="tag">Silver Bridge</span></div>
+        <p>Après l'effondrement du pont, une enquête technique fédérale établit la cause structurelle du drame, sans le moindre lien avec les rapports de créature qui l'avaient précédé de treize mois.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">15 novembre 1966</span>
+        <h4>Première rencontre rapportée</h4>
+        <p>Deux couples signalent la créature près de la TNT area et déposent une plainte au bureau du shérif.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">Fin novembre 1966</span>
+        <h4>Baptême médiatique</h4>
+        <p>Le <em>Point Pleasant Register</em> forge le nom « Mothman », en référence au personnage de fiction « Killer Moth ».</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1966-1967</span>
+        <h4>La vague de témoignages</h4>
+        <p>John Keel enquête sur place et consigne rencontres, pannes électriques et événements étranges rapportés par les habitants.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">15 décembre 1967</span>
+        <h4>Effondrement du Silver Bridge</h4>
+        <p>Le pont reliant Point Pleasant à l'Ohio s'effondre, faisant 46 morts. Les témoignages sur le Mothman cessent presque totalement après cette date.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-year">1975</span>
+        <h4>Publication de <em>The Mothman Prophecies</em></h4>
+        <p>John Keel relie a posteriori la créature à la catastrophe du pont, fixant durablement le récit populaire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CULTURE POPULAIRE ================= -->
+<section id="culture-populaire">
+  <div class="section-label">Postérité Culturelle</div>
+  <h2 class="section-title">D'une Ville de Virginie-Occidentale au Grand Écran</h2>
+  <p class="section-intro">Peu de créatures de la série doivent autant leur notoriété mondiale à un seul livre et un seul film — le passage à la culture populaire ici précède largement le tourisme local, plutôt que l'inverse.</p>
+
+  <div class="culture-grid">
+    <div class="culture-card">
+      <h4>The Mothman Prophecies (2002)</h4>
+      <span class="culture-tag">Cinéma</span>
+      <p>Adaptation du livre de John Keel avec Richard Gere, qui fait connaître l'affaire à un public international bien au-delà de la Virginie-Occidentale.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Le Mothman Festival</h4>
+      <span class="culture-tag">Tourisme</span>
+      <p>Festival annuel organisé à Point Pleasant depuis 2002, qui attire chaque année des milliers de visiteurs autour de conférences, stands et animations sur le thème de la créature.</p>
+    </div>
+    <div class="culture-card">
+      <h4>La statue métallique du Mothman</h4>
+      <span class="culture-tag">Monument</span>
+      <p>Une statue en acier poli représentant la créature trône en centre-ville de Point Pleasant, devenue le symbole visuel le plus reproduit de l'affaire.</p>
+    </div>
+    <div class="culture-card">
+      <h4>Le Mothman Museum</h4>
+      <span class="culture-tag">Musée</span>
+      <p>Un musée dédié, installé à Point Pleasant, rassemble coupures de presse d'époque, objets et souvenirs liés à la vague de témoignages de 1966-1967.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCIENCE ================= -->
+<section id="science">
+  <div class="section-label">Section Pivot</div>
+  <h2 class="section-title">Ce que Disent Réellement les Scientifiques</h2>
+  <p class="section-intro">L'explication sceptique dominante ne nie pas les rencontres rapportées : elle propose une cause naturelle précise à ce que les témoins ont réellement vu.</p>
+
+  <div class="science-block">
+    <h3>Une confusion avec un grand rapace nocturne</h3>
+    <p>L'hypothèse la plus solidement défendue par des biologistes et enquêteurs sceptiques est celle d'une confusion avec le grand-duc d'Amérique (<em>Bubo virginianus</em>), un hibou de grande taille dont l'envergure, les yeux capables de réfléchir fortement la lumière dans l'obscurité et le vol peuvent, de nuit et à distance, produire une impression de silhouette humanoïde bien plus grande que sa taille réelle.</p>
+  </div>
+  <div class="science-block">
+    <h3>Un contexte local propice à l'anxiété collective</h3>
+    <p>La proximité immédiate de la TNT area, ancien site industriel de fabrication de munitions resté partiellement contaminé et à l'abandon, associée au climat général d'inquiétude de la Guerre froide, crée un terrain particulièrement favorable à l'interprétation anxieuse d'une observation nocturne ambiguë.</p>
+  </div>
+  <div class="science-block">
+    <h3>Aucune preuve matérielle recueillie</h3>
+    <p>Aucune trace, empreinte, photographie exploitable ou reste biologique n'a jamais été produit en treize mois de témoignages, malgré l'affluence de curieux et de journalistes sur la zone durant toute la période active.</p>
+    <div class="caution-box">Ce qui est établi : une vague de témoignages réelle et bien documentée dans la presse d'époque, et une explication ornithologique cohérente avec l'ensemble des éléments rapportés. Ce qui ne l'est pas : l'existence d'une créature inconnue de la science, et tout lien de causalité entre ces témoignages et l'effondrement du Silver Bridge.</div>
+  </div>
+</section>
+
+<!-- ================= THEORIES ================= -->
+<section id="theories">
+  <div class="section-label">Panorama</div>
+  <h2 class="section-title">Les Théories en Présence</h2>
+  <p class="section-intro">Un dossier où l'explication naturelle domine largement, mais où la dimension de présage reste centrale dans la légende populaire — sans jamais reposer sur un lien factuel démontré.</p>
+
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>L'explication ornithologique</h3>
+      <span class="theory-status">Dominante</span>
+    </div>
+    <p>Un grand-duc d'Amérique mal identifié de nuit, dans un contexte local anxiogène, suffit à expliquer l'essentiel des descriptions rapportées : grande taille apparente, yeux lumineux, vol impressionnant.</p>
+    <p class="theory-attrib">Défendue par : biologistes et enquêteurs sceptiques ayant étudié le dossier après les années 1960.</p>
+  </div>
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>La panique collective amplifiée par les médias</h3>
+      <span class="theory-status">Explication complémentaire</span>
+    </div>
+    <p>Une fois le nom « Mothman » lancé par la presse locale, chaque observation nocturne ambiguë dans la région tend à être réinterprétée à travers ce même récit déjà établi, ce qui gonfle artificiellement le nombre de rapports en quelques semaines.</p>
+    <p class="theory-attrib">Défendue par : sociologues des phénomènes de rumeur et historiens de la presse régionale.</p>
+  </div>
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Le présage annonçant le Silver Bridge</h3>
+      <span class="theory-status">Marginale</span>
+    </div>
+    <p>Popularisée par John Keel, cette lecture présente la créature comme un signe avant-coureur de la catastrophe du pont, intégrée à un cadre plus large de « synchronicité » entre phénomènes étranges qu'il dit avoir observés sur place.</p>
+    <p class="theory-attrib">Défendue par : John Keel dans <em>The Mothman Prophecies</em> (1975), et largement reprise depuis par la culture populaire.</p>
+  </div>
+  <div class="theory-block">
+    <div class="theory-header">
+      <h3>Une créature inconnue de la science</h3>
+      <span class="theory-status">Marginale</span>
+    </div>
+    <p>Une minorité de partisans du dossier continue de défendre l'idée d'un animal réel non répertorié, en s'appuyant sur la cohérence relative des descriptions d'un témoin à l'autre — sans qu'aucun élément matériel nouveau ne soit venu appuyer cette hypothèse depuis 1967.</p>
+    <p class="theory-attrib">Défendue par : une partie de la communauté cryptozoologique amateur.</p>
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<section id="heritage">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Ce qu'il en Reste Aujourd'hui</h2>
+  <p class="section-intro">Peu d'exemples de la série illustrent aussi nettement comment une petite ville a transformé une légende locale en identité touristique assumée.</p>
+
+  <div class="heritage-block">
+    <h4>Une économie locale bâtie sur la légende</h4>
+    <p>Le festival annuel, la statue et le musée génèrent aujourd'hui une part significative de la fréquentation touristique de Point Pleasant, une ville de quelques milliers d'habitants qui aurait autrement peu de visibilité nationale.</p>
+  </div>
+  <div class="heritage-block">
+    <h4>Une identité pleinement revendiquée</h4>
+    <p>Contrairement à d'autres légendes locales parfois traitées avec gêne par les autorités municipales, Point Pleasant a choisi d'embrasser complètement son cryptide, jusqu'à en faire l'image officielle de la ville sur ses supports touristiques.</p>
+  </div>
+  <div class="heritage-block">
+    <h4>Un cas d'école sur la construction du récit</h4>
+    <p>L'affaire du Mothman est régulièrement citée par les chercheurs en sociologie des rumeurs comme un exemple documenté de la façon dont un événement tragique réel peut être rattaché après coup à une légende préexistante, sans lien causal.</p>
+  </div>
+  <div class="heritage-block">
+    <h4>Une mémoire qui reste liée à une tragédie réelle</h4>
+    <p>L'effondrement du Silver Bridge a coûté la vie à 46 personnes le 15 décembre 1967 ; toute évocation actuelle du Mothman à Point Pleasant se fait dans l'ombre de cet événement, que la ville commémore aussi pour lui-même.</p>
+  </div>
+
+  <p class="heritage-caution">Le dossier Mothman illustre avec une clarté rare la distinction entre un fait établi (une vague de témoignages réelle, une catastrophe réelle et sa cause structurelle connue) et une construction narrative a posteriori (le lien entre les deux) : la rigueur impose de les traiter comme deux objets distincts, jamais comme une seule et même preuve.</p>
+</section>
+
+<footer>
+  <div class="epigraph-row">POINT PLEASANT, VIRGINIE-OCCIDENTALE — 1966-1967</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>Le Kraken</strong></p>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var navLinks = document.querySelectorAll('.sticky-nav a[href^="#"]');
+  var sections = [];
+  navLinks.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({link: a, el: el});
+  });
+  function onScroll(){
+    var pos = window.scrollY + window.innerHeight * 0.3;
+    var current = null;
+    sections.forEach(function(s){ if (s.el.offsetTop <= pos) current = s; });
+    navLinks.forEach(function(a){ a.classList.remove('nav-active'); });
+    if (current) current.link.classList.add('nav-active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  var revealTargets = document.querySelectorAll(
+    'section > h2, .info-card, .figure-card, .culture-card, .science-block, .theory-block, .heritage-block, .timeline-item, .verdict-badge'
+  );
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add('reveal-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.1});
+  revealTargets.forEach(function(el){ el.classList.add('reveal-init'); io.observe(el); });
+})();
+</script>
+<script src="./effects.js" defer></script>
+</body>
+</html>

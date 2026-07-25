@@ -1,0 +1,619 @@
+<!--
+GABARIT LÉGER — série "Cultures du Monde"
+==========================================
+Ceci N'EST PAS une page à publier telle quelle. C'est un squelette structurel
+extrait de culture-vikings.html (CSS/classes/nav 100% fidèles à l'original) où
+le CONTENU narratif répété a été réduit à UN seul exemple par bloc, pour éviter
+d'avoir à lire une page complète de ~1100 lignes juste pour en retrouver le
+patron. Chaque bloc répétitif porte un commentaire indiquant combien en
+reproduire et ce qui varie.
+
+Ce qui NE change JAMAIS d'une page à l'autre : les noms de classes CSS, la
+structure du <head>, le bloc <nav id="side-menu"> et son script, le script de
+scroll-spy/reveal en fin de page, l'inclusion d'effects.js.
+
+Ce qui change à chaque page : le contenu de <title>, la palette :root (10-12
+variables), le contenu de chaque section, et les 2 attributs data-egg /
+data-scroll-fx (voir docs/plan-effets.md pour la clé à utiliser).
+
+Structure obligatoire (10 sections, ordre fixe) :
+#carte #peuples #figures #recits #inventions #anecdotes #style-de-vie #monde #frise #heritage
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOM DE LA CULTURE — Sous-titre évocateur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ADAPTER : nouvelle palette de 10-12 couleurs, distincte de toutes les
+       pages culture déjà en ligne (vérifier docs/plan-effets.md pour la liste).
+       Garder EXACTEMENT ces noms de variable, seules les valeurs changent. */
+    --bg: #16232c;
+    --bg-deep: #101a21;
+    --panel: #1e2f39;
+    --panel-border: #3c5566;
+    --ink: #e7edf0;
+    --primary: #3f8fae;
+    --primary-bright: #6cb9d6;
+    --secondary: #7d8b93;
+    --secondary-bright: #a7b4bb;
+    --accent: #6b4a30;
+    --accent-bright: #8f6540;
+    --blood: #8a3527;
+    --blood-bright: #b8503c;
+    --text: #dbe4e8;
+    --text-dim: #8fa0a8;
+    --glow: rgba(63,143,174,0.32);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #1c2c37 0%, #16232c 55%), var(--bg);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:18px;
+    line-height:1.7;
+  }
+  h1,h2,h3,h4{font-family:'Cinzel', serif; color:var(--primary-bright); letter-spacing:0.03em; font-weight:700;}
+  a{color:var(--primary-bright);}
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background-image: repeating-linear-gradient(0deg, rgba(231,237,240,0.015) 0px, transparent 2px, transparent 4px, rgba(231,237,240,0.015) 6px);
+    z-index:1;
+  }
+  .meander-strip{display:block; width:100%; height:20px;}
+
+  .hero{
+    position:relative; min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+    background: radial-gradient(circle at 50% 18%, rgba(63,143,174,0.16), transparent 55%),
+      linear-gradient(180deg, #1c2c37 0%, #16232c 60%, #101a21 100%);
+    border-bottom:1px solid var(--panel-border);
+  }
+  .epigraph-row{font-size:20px; letter-spacing:6px; color:var(--primary-bright); opacity:0.9; margin-bottom:28px; font-family:'Cinzel', serif;}
+  .hero h1{
+    font-family:'Cinzel Decorative', serif; font-size:clamp(2.4rem, 6.5vw, 4.9rem); margin:0;
+    background:linear-gradient(180deg, var(--primary-bright), var(--accent-bright) 55%, var(--blood-bright) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 40px rgba(63,143,174,0.25);
+  }
+  .hero .subtitle{font-family:'Cinzel', serif; font-size:1.05rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--secondary-bright); margin-top:14px;}
+  .hero .tagline{max-width:660px; margin:34px auto 0; font-style:italic; color:var(--text-dim); font-size:1.15rem;}
+  .divider{width:120px; height:2px; margin:36px auto; background:linear-gradient(90deg, transparent, var(--secondary), transparent);}
+  .nav-pills{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:900px;}
+  .nav-pills a{
+    text-decoration:none; border:1px solid var(--panel-border); padding:9px 20px; border-radius:2px;
+    font-family:'Cinzel', serif; font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-dim); background:rgba(63,143,174,0.06); transition:all .25s ease;
+  }
+  .nav-pills a:hover{color:var(--primary-bright); border-color:var(--secondary); box-shadow:0 0 14px var(--glow);}
+
+  .sticky-nav{
+    position:sticky; top:0; z-index:40; display:flex; flex-wrap:wrap; gap:4px 16px; justify-content:center;
+    padding:14px 20px; background:rgba(22,35,44,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--panel-border);
+  }
+  .sticky-nav a{
+    text-decoration:none; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.07em; text-transform:uppercase;
+    color:var(--text-dim); padding:4px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+  }
+  .sticky-nav a:hover{color:var(--primary-bright); border-color:var(--primary-bright);}
+
+  section{position:relative; z-index:2; max-width:1040px; margin:0 auto; padding:100px 24px;}
+  .section-label{text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--secondary-bright); font-size:0.8rem; margin-bottom:12px;}
+  .section-title{text-align:center; font-size:clamp(2rem,4.5vw,3rem); margin:0 0 16px;}
+  .section-intro{text-align:center; max-width:700px; margin:0 auto 60px; color:var(--text-dim); font-style:italic;}
+
+  .epistemic-note{background:rgba(125,139,147,0.09); border:1px dashed var(--panel-border); border-radius:3px; padding:18px 26px; margin:0 auto 50px; max-width:780px; font-size:0.93rem; color:var(--text-dim); font-style:italic;}
+
+  .crest-strip{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:0 auto 30px; max-width:960px;}
+  .crest-badge{
+    background:linear-gradient(160deg, var(--primary), #103241); color:#e7edf0; border:1px solid var(--secondary);
+    border-radius:3px; padding:6px 12px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.04em;
+    text-align:center; min-width:64px;
+  }
+  .crest-badge .cn{display:block; font-size:0.78rem; margin-bottom:2px; color:var(--primary-bright); font-style:italic;}
+
+  .map-frame{
+    border:2px solid var(--panel-border); border-radius:4px; background:var(--panel);
+    padding:20px; margin:0 auto 26px; max-width:1000px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.35);
+  }
+  .map-frame svg{max-width:100%; height:auto; display:block; margin:0 auto;}
+  .map-legend{display:flex; flex-wrap:wrap; gap:18px; justify-content:center; margin:0 auto 50px; max-width:900px; font-size:0.85rem; color:var(--text-dim);}
+  .map-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend-swatch{display:inline-block; width:22px; height:3px; background:var(--primary);}
+  .legend-dot{display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--blood-bright); border:2px solid var(--secondary);}
+
+  .region-wrap{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .region-card{background:linear-gradient(160deg, var(--panel), #223642); border:1px solid var(--panel-border); border-radius:3px; padding:26px 24px; position:relative; overflow:hidden;}
+  .region-card::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--primary), var(--secondary));}
+  .region-card h3{margin:0 0 4px; font-size:1.2rem;}
+  .region-card .region-sub{font-size:0.82rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:12px;}
+  .region-card p{margin:0; font-size:0.97rem;}
+
+  .people-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .people-card{background:var(--panel); border:1px solid var(--panel-border); border-left:4px solid var(--blood-bright); border-radius:3px; padding:22px 24px;}
+  .people-card h3{margin:0 0 4px; font-size:1.15rem;}
+  .people-card .people-pct{font-size:0.78rem; color:var(--blood-bright); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; font-family:'Cinzel', serif;}
+  .people-card p{margin:0; font-size:0.95rem;}
+
+  .figure-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:26px;}
+  .figure-card{background:var(--panel); border:1px solid var(--panel-border); padding:0; border-radius:4px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;}
+  .figure-card:hover{transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--secondary);}
+  .figure-header{padding:22px 24px 16px; border-bottom:1px solid var(--panel-border); background:linear-gradient(160deg, rgba(63,143,174,0.09), transparent);}
+  .figure-name{font-size:1.45rem; margin:0;}
+  .figure-dates{font-size:0.85rem; color:var(--primary-bright); text-transform:uppercase; letter-spacing:0.08em; margin-top:4px;}
+  .figure-body{padding:18px 24px 24px;}
+  .figure-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .tag{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--panel-border); color:var(--text-dim); padding:3px 10px; border-radius:20px;}
+  .figure-body p{margin:0 0 10px; font-size:0.97rem;}
+  .figure-body p:last-child{margin-bottom:0;}
+
+  .invention-list{display:grid; gap:18px;}
+  .invention-item{display:grid; grid-template-columns:200px 1fr; gap:24px; background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:20px 24px;}
+  .invention-name{font-family:'Cinzel', serif; color:var(--primary-bright); font-size:1.1rem; align-self:start;}
+  .invention-name span{display:block; font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; font-family:'EB Garamond', serif; font-style:italic;}
+
+  .story-block{margin-bottom:56px; padding-bottom:52px; border-bottom:1px solid var(--panel-border);}
+  .story-block:last-child{border-bottom:none;}
+  .story-number{font-family:'Cinzel Decorative', serif; font-size:0.95rem; color:var(--primary-bright); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px;}
+  .story-block h3{font-size:1.65rem; margin:0 0 10px;}
+  .story-date{font-size:0.85rem; color:var(--secondary-bright); font-family:'Cinzel', serif; letter-spacing:0.05em; margin-bottom:16px; display:block;}
+  .story-block p{margin:0 0 16px; font-size:1.02rem;}
+  .story-block p:last-child{margin-bottom:0;}
+  .pull-quote{border-left:3px solid var(--secondary); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--primary-bright); font-size:1.1rem;}
+
+  .anecdote-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px;}
+  .anecdote-card{background:linear-gradient(160deg, rgba(63,143,174,0.07), var(--panel)); border:1px solid var(--panel-border); border-left:3px solid var(--blood-bright); padding:20px 22px; border-radius:3px;}
+  .anecdote-card h4{font-size:1rem; margin:0 0 8px; color:var(--primary-bright); text-transform:uppercase; letter-spacing:0.04em;}
+  .anecdote-card p{margin:0; font-size:0.95rem; color:var(--text);}
+
+  .life-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:22px;}
+  .life-card{background:var(--panel); border:1px solid var(--panel-border); border-radius:3px; padding:24px 26px; border-top:3px solid var(--secondary);}
+  .life-card h4{margin:0 0 10px; font-size:1.1rem; color:var(--primary-bright);}
+  .life-card p{margin:0; font-size:0.96rem;}
+
+  .reach-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:50px;}
+  .reach-card{border:1px solid var(--panel-border); border-top:2px solid var(--blood-bright); padding:18px 20px; background:var(--panel); border-radius:3px;}
+  .reach-card h4{margin:0 0 6px; font-size:1rem; color:var(--primary-bright);}
+  .reach-card .reach-dist{display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px;}
+  .reach-card p{margin:0; font-size:0.92rem;}
+
+  .timeline{position:relative; max-width:840px; margin:60px auto 0; padding:20px 0 10px;}
+  .timeline::before{content:""; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg, transparent, var(--secondary) 6%, var(--secondary) 94%, transparent); transform:translateX(-50%);}
+  .timeline-item{position:relative; width:50%; padding:0 42px 50px; box-sizing:border-box;}
+  .timeline-item:nth-child(odd){left:0; text-align:right;}
+  .timeline-item:nth-child(even){left:50%; text-align:left;}
+  .timeline-dot{position:absolute; top:3px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--primary-bright); box-shadow:0 0 10px var(--glow);}
+  .timeline-item:nth-child(odd) .timeline-dot{right:-7px;}
+  .timeline-item:nth-child(even) .timeline-dot{left:-7px;}
+  .timeline-year{font-family:'Cinzel', serif; color:var(--primary-bright); font-size:0.95rem; letter-spacing:0.05em; display:block; margin-bottom:6px;}
+  .timeline-content h4{margin:0 0 6px; font-size:1.02rem; color:var(--secondary-bright);}
+  .timeline-content p{margin:0; font-size:0.9rem; color:var(--text-dim);}
+
+  .heritage-block{margin-bottom:34px;}
+  .heritage-block h4{font-size:0.95rem; color:var(--blood-bright); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em;}
+  .heritage-block p{margin:0; font-size:1rem;}
+  .heritage-caution{border-left:3px solid var(--primary); padding:4px 20px; margin-top:32px; font-size:0.92rem; color:var(--text-dim); font-style:italic;}
+
+  footer{text-align:center; padding:80px 24px 60px; border-top:1px solid var(--panel-border); color:var(--text-dim);}
+  footer .epigraph-row{margin-bottom:20px; font-size:18px;}
+  footer .next-up{font-family:'Cinzel', serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim);}
+  footer .next-up strong{color:var(--primary-bright);}
+
+  ::selection{background:var(--primary); color:#e7edf0;}
+
+  @media (max-width:640px){
+    .invention-item{grid-template-columns:1fr;}
+    section{padding:70px 18px;}
+    .diagram-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:12px;}
+    .diagram-scroll svg{min-width:640px; max-width:none;}
+    .sticky-nav{gap:4px 8px; padding:10px 14px;}
+    .sticky-nav a{font-size:0.6rem;}
+    .timeline::before{left:20px;}
+    .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even){width:100%; left:0; text-align:left; padding:0 10px 40px 50px;}
+    .timeline-item:nth-child(odd) .timeline-dot, .timeline-item:nth-child(even) .timeline-dot{left:13px; right:auto;}
+  }
+</style>
+<style>
+  .sticky-nav a.nav-active{font-weight:700; text-decoration:underline; text-underline-offset:5px;}
+  .reveal-init{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-in{opacity:1; transform:translateY(0);}
+</style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  #side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+  #side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+  #side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+  #side-menu-overlay.open{opacity:1; pointer-events:auto;}
+  #side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+  #side-menu.open{transform:translateX(0);}
+  #side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+  #side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+  #side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+  #side-menu a.search-hide{display:none;}
+  #side-menu .side-home{margin:0 14px 14px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+  #side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+  #side-menu .side-search{padding:0 22px 14px;}
+  #side-menu .side-search input{width:100%; box-sizing:border-box; padding:8px 10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:5px; color:#e9e6db; font-family:'EB Garamond', Georgia, serif; font-size:0.9rem;}
+  #side-menu .side-search input::placeholder{color:#7a7b8c;}
+  #side-menu .side-search input:focus{outline:none; border-color:#c9982f;}
+  #side-menu .side-label{padding:12px 22px 6px; margin-top:2px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:space-between;}
+  #side-menu .side-label::after{content:'\25BE'; font-size:0.65rem; transition:transform 0.2s ease; color:#6d6e7e;}
+  #side-menu .side-label.collapsed::after{transform:rotate(-90deg);}
+  #side-menu .side-group{overflow:hidden; max-height:600px; transition:max-height 0.25s ease;}
+  #side-menu .side-group.collapsed{max-height:0;}
+</style>
+</head>
+<body data-egg="CLEF_EGG">
+<!-- data-egg : clef unique, voir docs/plan-effets.md pour les clefs déjà prises -->
+<button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
+<div id="side-menu-overlay" onclick="document.getElementById('side-menu').classList.remove('open'); this.classList.remove('open');"></div>
+<!--
+  IMPORTANT : le bloc <nav id="side-menu"> ci-dessous est un PLACEHOLDER minimal
+  (une seule entrée d'exemple par catégorie, pas la liste réelle). NE PAS le
+  compléter à la main : tools/add_page.py puis tools/sync_sidebar.py
+  reconstruisent ce bloc automatiquement avec la liste réelle et à jour après
+  écriture de la page. Le recopier tel quel suffit.
+-->
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <a href="map.html" class="side-home">&#128506; Carte du Monde</a>
+  <div class="side-divider"></div>
+  <div class="side-search"><input type="text" id="side-search-input" placeholder="Rechercher une page..." autocomplete="off"></div>
+  <div class="side-label">Mythologies</div>
+  <div class="side-group">
+    <a href="mythologie-nordique.html">Nordique</a>
+  </div>
+  <div class="side-label">Cultures</div>
+  <div class="side-group">
+    <a href="culture-chinoise.html">Chine</a>
+  </div>
+  <div class="side-label">Créatures</div>
+  <div class="side-group">
+    <a href="creature-gevaudan.html">Bête du Gévaudan</a>
+  </div>
+  <div class="side-label">Mystères</div>
+  <div class="side-group">
+    <a href="mystere-triangle-bermudes.html">Triangle des Bermudes</a>
+  </div>
+</nav>
+<script>
+(function(){
+  var menu = document.getElementById('side-menu');
+  if(!menu) return;
+  var labels = Array.prototype.slice.call(menu.querySelectorAll('.side-label'));
+  labels.forEach(function(label){
+    var group = label.nextElementSibling;
+    if(!group) return;
+    var hasActive = group.querySelector('a.active');
+    if(!hasActive){ label.classList.add('collapsed'); group.classList.add('collapsed'); }
+    label.addEventListener('click', function(){
+      label.classList.toggle('collapsed');
+      group.classList.toggle('collapsed');
+    });
+  });
+  var input = document.getElementById('side-search-input');
+  if(input){
+    var links = Array.prototype.slice.call(menu.querySelectorAll('.side-group a'));
+    function restoreCollapse(){
+      labels.forEach(function(label){
+        var group = label.nextElementSibling;
+        if(!group) return;
+        var hasActive = group.querySelector('a.active');
+        label.classList.toggle('collapsed', !hasActive);
+        group.classList.toggle('collapsed', !hasActive);
+      });
+    }
+    input.addEventListener('input', function(){
+      var q = input.value.trim().toLowerCase();
+      if(!q){
+        links.forEach(function(a){ a.classList.remove('search-hide'); });
+        restoreCollapse();
+        return;
+      }
+      links.forEach(function(a){
+        var match = a.textContent.toLowerCase().indexOf(q) !== -1;
+        a.classList.toggle('search-hide', !match);
+      });
+      labels.forEach(function(label){
+        label.classList.remove('collapsed');
+        if(label.nextElementSibling) label.nextElementSibling.classList.remove('collapsed');
+      });
+    });
+    input.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        var first = links.filter(function(a){ return !a.classList.contains('search-hide'); })[0];
+        if(first) window.location.href = first.getAttribute('href');
+      }
+    });
+  }
+})();
+</script>
+
+<header class="hero">
+  <div class="epigraph-row">ÉPIGRAPHE DÉCORATIVE (langue/écriture d'origine)</div>
+  <h1>Nom de la Culture</h1>
+  <div class="subtitle">Sous-titre — Angle Civilisationnel Choisi</div>
+  <p class="tagline">Un paragraphe d'accroche qui pose l'angle (pas les dieux/mythes si une page mythologie existe déjà pour ce sujet), la portée géographique/temporelle, et rappelle sa place dans la série ("Neuvième chapitre d'un voyage à travers les peuples...").</p>
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    <a href="#carte">Carte-Récit</a>
+    <a href="#peuples">Les Peuples</a>
+    <a href="#figures">Grandes Figures</a>
+    <a href="#recits">Grands Récits</a>
+    <a href="#inventions">Inventions</a>
+    <a href="#anecdotes">Anecdotes</a>
+    <a href="#style-de-vie">Style de Vie</a>
+    <a href="#monde">Rayonnement</a>
+    <a href="#frise">Frise Chronologique</a>
+    <a href="#heritage">Héritage Actuel</a>
+  </nav>
+</header>
+
+<!-- Bandeau décoratif : motif SVG répété adapté à la culture (entrelacs, méandre, motif géométrique...) -->
+<svg class="meander-strip" viewBox="0 0 400 20" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="interlace0" width="24" height="20" patternUnits="userSpaceOnUse">
+      <path d="M2 10 C2 4, 10 4, 12 10 C14 16, 22 16, 22 10 C22 4, 14 4, 12 10 C10 16, 2 16, 2 10 Z" stroke="#3f8fae" stroke-width="1.5" fill="none" opacity="0.45"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="20" fill="url(#interlace0)"/>
+</svg>
+
+<nav class="sticky-nav">
+  <a href="#carte">Carte</a>
+  <a href="#peuples">Peuples</a>
+  <a href="#figures">Figures</a>
+  <a href="#recits">Récits</a>
+  <a href="#inventions">Inventions</a>
+  <a href="#anecdotes">Anecdotes</a>
+  <a href="#style-de-vie">Style de Vie</a>
+  <a href="#monde">Rayonnement</a>
+  <a href="#frise">Frise</a>
+  <a href="#heritage">Héritage</a>
+</nav>
+
+<!-- ================= CARTE ================= -->
+<!-- Carte-récit SVG faite main (régions/sites labellisés + boussole + légende),
+     ~8-11 .region-card en dessous. Voir culture-vikings.html #carte pour un
+     exemple complet de SVG de carte stylisée (pas une projection géographique
+     réelle - lisibilité narrative avant tout). -->
+<section id="carte">
+  <div class="section-label">Géographie &amp; Territoire</div>
+  <h2 class="section-title">La Carte-Récit de [Culture]</h2>
+  <p class="section-intro">Phrase de cadrage géographique/politique (unité ou fragmentation, axes d'expansion...).</p>
+
+  <div class="crest-strip">
+    <div class="crest-badge"><span class="cn">Nom local</span>Nom français</div>
+    <!-- Répéter un badge par région/site majeur de la carte -->
+  </div>
+
+  <div class="map-frame diagram-scroll">
+    <!-- SVG de carte stylisée sur mesure, ~600x450-500 viewBox, régions en <path>,
+         routes en <path> pointillés, pins <circle>+<text>, boussole en <g>. -->
+  </div>
+
+  <div class="map-legend">
+    <span><i class="legend-swatch"></i> Légende 1</span>
+    <span><i class="legend-dot"></i> Site ou comptoir marquant</span>
+  </div>
+
+  <div class="epistemic-note">Note de style : cette carte est une reconstitution artistique et non un tracé géographique de précision — elle privilégie la lisibilité narrative sur l'exactitude cartographique.</div>
+
+  <h3 style="text-align:center; margin-top:70px; font-size:1.7rem;">Grandes régions, grandes histoires</h3>
+  <p class="section-intro" style="margin-bottom:50px;">Phrase de transition.</p>
+
+  <div class="region-wrap">
+    <div class="region-card">
+      <h3>Nom de la région</h3>
+      <div class="region-sub">Sous-titre évocateur de la région</div>
+      <p>2-3 phrases sur la spécificité géographique/politique de cette région.</p>
+    </div>
+    <!-- Répéter ~8-11 region-card, une par grande région/zone de la carte -->
+  </div>
+</section>
+
+<!-- ================= PEUPLES ================= -->
+<!-- ~8 people-card : groupes ethniques/sociaux/régionaux distincts. -->
+<section id="peuples">
+  <div class="section-label">Société &amp; Groupes Sociaux</div>
+  <h2 class="section-title">Les Peuples de [Culture]</h2>
+  <p class="section-intro">Ce qui relie/distingue ces groupes (langue commune, techniques partagées, fragmentation politique...).</p>
+
+  <div class="people-grid">
+    <div class="people-card">
+      <h3>Nom du peuple/groupe</h3>
+      <div class="people-pct">Épithète courte évocatrice</div>
+      <p>2-3 phrases factuelles sur ce groupe : rôle, particularité, place dans l'ensemble.</p>
+    </div>
+    <!-- Répéter ~8 people-card -->
+  </div>
+</section>
+
+<!-- ================= FIGURES ================= -->
+<!-- ~10-12 figure-card : rois/explorateurs/penseurs/artisans documentés.
+     Toujours distinguer les figures semi-légendaires (tag "Semi-légendaire")
+     des figures solidement attestées par les sources. Inclure au moins 1-2
+     figures féminines si le dossier le permet. -->
+<section id="figures">
+  <div class="section-label">Portraits</div>
+  <h2 class="section-title">Grandes Figures Historiques</h2>
+  <p class="section-intro">Nature des sources disponibles, avec mention explicite si certaines figures restent débattues.</p>
+
+  <div class="figure-grid">
+    <div class="figure-card">
+      <div class="figure-header"><h3 class="figure-name">Nom</h3><div class="figure-dates">Dates ou siècle</div></div>
+      <div class="figure-body">
+        <div class="figure-tags"><span class="tag">Rôle</span><span class="tag">Contexte</span></div>
+        <p>2-4 phrases factuelles et sourcées sur cette figure.</p>
+      </div>
+    </div>
+    <!-- Répéter ~10-12 figure-card -->
+  </div>
+</section>
+
+<!-- ================= RECITS ================= -->
+<!-- ~9-11 story-block : tournants historiques majeurs, chacun avec une date/
+     période, 2-3 paragraphes, et optionnellement une pull-quote (citation
+     d'époque ou formule historiographique marquante). -->
+<section id="recits">
+  <div class="section-label">Histoire</div>
+  <h2 class="section-title">Grands Récits Historiques</h2>
+  <p class="section-intro">Ce qui structure cette sélection de récits (du premier événement documenté au dernier tournant symbolique).</p>
+
+  <div class="story-block">
+    <div class="story-number">Récit I</div>
+    <h3>Titre du récit</h3>
+    <span class="story-date">Date ou période</span>
+    <p>Paragraphe factuel 1.</p>
+    <p class="pull-quote">« Citation d'époque ou formule marquante. » — attribution.</p>
+    <p>Paragraphe factuel 2.</p>
+  </div>
+  <!-- Répéter ~9-11 story-block, numérotés Récit I, II, III... -->
+</section>
+
+<!-- ================= INVENTIONS ================= -->
+<!-- ~6-8 invention-item, groupés en 2 sous-catégories via un <h3> intermédiaire
+     (ex: "Navigation & artisanat" / "Société & écriture"). -->
+<section id="inventions">
+  <div class="section-label">Génie Civilisationnel</div>
+  <h2 class="section-title">Grandes Réalisations</h2>
+  <p class="section-intro">Ce qui de cet héritage technique/institutionnel a traversé le temps.</p>
+
+  <h3 style="text-align:center; margin:0 0 30px; font-size:1.3rem;">Première sous-catégorie</h3>
+  <div class="invention-list">
+    <div class="invention-item">
+      <div class="invention-name">Nom de l'invention<span>Nom dans la langue d'origine</span></div>
+      <p>2-3 phrases factuelles sur cette invention/technique/institution.</p>
+    </div>
+    <!-- Répéter ~3-4 invention-item par sous-catégorie, 2 sous-catégories -->
+  </div>
+</section>
+
+<!-- ================= ANECDOTES ================= -->
+<!-- ~6-8 anecdote-card : détails curieux, démystifications (ex. casques à
+     cornes vikings = invention XIXe s.), petites histoires vérifiables. -->
+<section id="anecdotes">
+  <div class="section-label">Petite Histoire</div>
+  <h2 class="section-title">Anecdotes &amp; Curiosités</h2>
+  <p class="section-intro">Des détails qui disent parfois plus long qu'une grande bataille.</p>
+
+  <div class="anecdote-grid">
+    <div class="anecdote-card">
+      <h4>Titre accrocheur de l'anecdote</h4>
+      <p>2-3 phrases factuelles, idéalement sourcées.</p>
+    </div>
+    <!-- Répéter ~6-8 anecdote-card -->
+  </div>
+</section>
+
+<!-- ================= STYLE DE VIE ================= -->
+<!-- ~6 life-card. C'EST ICI que va l'attribut data-scroll-fx (voir
+     docs/plan-effets.md : la convention "Cultures" est de jouer sur un objet/
+     geste matériel reconnaissable, pas sur des glyphes abstraits). -->
+<section id="style-de-vie" data-scroll-fx="CLEF_SCROLL_FX">
+  <div class="section-label">Quotidien &amp; Traditions</div>
+  <h2 class="section-title">Style de Vie &amp; Traditions</h2>
+  <p class="section-intro">Ce qui structure le quotidien (habitat, rôle des groupes sociaux, subsistance, loisirs, artisanat).</p>
+
+  <div class="life-grid">
+    <div class="life-card">
+      <h4>Thème (habitat / statut social / alimentation / loisirs / artisanat...)</h4>
+      <p>2-3 phrases factuelles. Traiter l'esclavage/les hiérarchies sociales sans euphémisme si le sujet en comporte.</p>
+    </div>
+    <!-- Répéter ~6 life-card -->
+  </div>
+</section>
+
+<!-- ================= MONDE ================= -->
+<!-- ~6 reach-card : où et comment cette culture a rayonné/essaimé. -->
+<section id="monde">
+  <div class="section-label">Postérité</div>
+  <h2 class="section-title">Un Rayonnement Ancien et Actuel</h2>
+  <p class="section-intro">Canaux de transmission de cette influence, directs ou indirects.</p>
+
+  <div class="reach-grid">
+    <div class="reach-card">
+      <h4>Lieu/entité</h4>
+      <span class="reach-dist">Période/statut bref</span>
+      <p>2-3 phrases sur ce foyer de rayonnement.</p>
+    </div>
+    <!-- Répéter ~6 reach-card -->
+  </div>
+</section>
+
+<!-- ================= FRISE ================= -->
+<!-- ~16-18 timeline-item, mélange dates factuelles + jalons de réception/
+     redécouverte moderne (ex. fouille archéologique du XXe s. qui confirme
+     un récit longtemps jugé légendaire). -->
+<section id="frise">
+  <div class="section-label">Chronologie</div>
+  <h2 class="section-title">Frise Chronologique</h2>
+  <p class="section-intro">Portée temporelle couverte par cette frise.</p>
+
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content">
+      <span class="timeline-year">Date</span><h4>Titre du jalon</h4><p>Description courte (une phrase).</p>
+    </div></div>
+    <!-- Répéter ~16-18 timeline-item -->
+  </div>
+</section>
+
+<!-- ================= HERITAGE ================= -->
+<!-- ~4 heritage-block + toujours 1 .heritage-caution final (nuance sur les
+     usages/récupérations modernes problématiques de cette culture, si le
+     sujet s'y prête - ex. récupération idéologique, folklorisation, etc.). -->
+<section id="heritage">
+  <div class="section-label">Aujourd'hui</div>
+  <h2 class="section-title">Un Héritage Bien Vivant</h2>
+  <p class="section-intro">Ce que cette culture "fait" encore aujourd'hui, concrètement.</p>
+
+  <div class="heritage-block">
+    <h4>Titre du bloc</h4>
+    <p>2-4 phrases factuelles.</p>
+  </div>
+  <!-- Répéter ~4 heritage-block -->
+
+  <div class="heritage-caution">Nuance de fond, honnête, sur un usage moderne problématique ou une idée reçue à corriger — voir l'exemple de récupération idéologique des symboles vikings dans culture-vikings.html #heritage pour le ton attendu.</div>
+</section>
+
+<footer>
+  <div class="epigraph-row">ÉPIGRAPHE (même que le hero, ou variante courte)</div>
+  <div class="divider"></div>
+  <p class="next-up">Prochain chapitre de la série : <strong>Nom du prochain sujet</strong></p>
+</footer>
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.sticky-nav a'));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  function onScroll(){
+    var y = window.scrollY + 120;
+    var current = sections[0];
+    sections.forEach(function(s){ if (s.offsetTop <= y) current = s; });
+    links.forEach(function(a){
+      var target = document.querySelector(a.getAttribute('href'));
+      a.classList.toggle('nav-active', target === current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) entry.target.classList.add('reveal-in');
+    });
+  }, { threshold:0.12 });
+  document.querySelectorAll(
+    'section > h2, .region-card, .people-card, .figure-card, .story-block, .anecdote-card, .life-card, .reach-card, .timeline-item, .heritage-block'
+  ).forEach(function(el){ el.classList.add('reveal-init'); io.observe(el); });
+})();
+</script>
+<script src="./effects.js" defer></script>
+</body>
+</html>
