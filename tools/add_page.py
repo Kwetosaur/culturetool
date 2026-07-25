@@ -102,6 +102,9 @@ def activate_pin(map_path, page_id, href, cat):
         f"  {{ id:'{page_id}', title:'{title}', cat:'{cat}', href:'{href}', "
         f"x:{x}, y:{y}, icon:'{icon}' }}"
     )
+    next_line = lines[insert_idx] if insert_idx < len(lines) else '];'
+    if next_line.strip() != '];':
+        new_entry += ','
     lines.insert(insert_idx, new_entry)
 
     open(map_path, 'w', encoding='utf-8').write('\n'.join(lines))
@@ -161,6 +164,23 @@ def flag_status_doc(path, status_name):
     return True
 
 
+def _dump_compact(data):
+    """Serialise avec un objet par ligne (plus lisible/diffable que json.dump indent=2)."""
+    order = ['mythologies', 'cultures', 'creatures', 'mysteres']
+    lines = ['{', f'  "_comment": {json.dumps(data["_comment"], ensure_ascii=False)},']
+    for i, key in enumerate(order):
+        lines.append(f'  "{key}": [')
+        items = data[key]
+        for j, item in enumerate(items):
+            comma = ',' if j < len(items) - 1 else ''
+            entry = json.dumps(item, ensure_ascii=False)
+            lines.append(f'    {entry}{comma}')
+        comma = ',' if i < len(order) - 1 else ''
+        lines.append(f'  ]{comma}')
+    lines.append('}')
+    return '\n'.join(lines) + '\n'
+
+
 def update_pages_json(cat, href, menu_title):
     with open(PAGES_JSON, encoding='utf-8') as f:
         data = json.load(f)
@@ -170,8 +190,7 @@ def update_pages_json(cat, href, menu_title):
         return
     data[key].append({'href': href, 'title': menu_title})
     with open(PAGES_JSON, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-        f.write('\n')
+        f.write(_dump_compact(data))
 
 
 def main():
