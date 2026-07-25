@@ -1,0 +1,36 @@
+{
+  "_comment": "Source unique de verite pour l'ordre et les titres des pages du site. Lu par tools/sync_sidebar.py (menu lateral) et tools/add_page.py (integration transverse d'une nouvelle page). Ne pas trier alphabetiquement : l'ordre ici est l'ordre de publication, reproduit tel quel dans le menu.",
+  "mythologies": [
+    { "href": "mythologie-nordique.html", "title": "Nordique" },
+    { "href": "mythologie-grecque.html", "title": "Grecque" },
+    { "href": "mythologie-egyptienne.html", "title": "Égyptienne" },
+    { "href": "mythologie-romaine.html", "title": "Romaine" },
+    { "href": "mythologie-celtique.html", "title": "Celtique" },
+    { "href": "mythologie-mesopotamienne.html", "title": "Mésopotamienne" },
+    { "href": "mythologie-hindoue.html", "title": "Hindoue" },
+    { "href": "mythologie-japonaise.html", "title": "Japonaise" },
+    { "href": "mythologie-azteque-maya.html", "title": "Aztèque & Maya" },
+    { "href": "mythologie-slave.html", "title": "Slave" }
+  ],
+  "cultures": [
+    { "href": "culture-chinoise.html", "title": "Chine" },
+    { "href": "culture-egypte-antique.html", "title": "Égypte Antique" },
+    { "href": "culture-rome-antique.html", "title": "Rome antique" },
+    { "href": "culture-grece-antique.html", "title": "Grèce antique" },
+    { "href": "culture-vikings.html", "title": "Vikings" }
+  ],
+  "creatures": [
+    { "href": "creature-gevaudan.html", "title": "Bête du Gévaudan" },
+    { "href": "creature-loch-ness.html", "title": "Monstre du Loch Ness" },
+    { "href": "creature-bigfoot.html", "title": "Bigfoot" },
+    { "href": "creature-yeti.html", "title": "Le Yeti" },
+    { "href": "creature-chupacabra.html", "title": "Le Chupacabra" }
+  ],
+  "mysteres": [
+    { "href": "mystere-triangle-bermudes.html", "title": "Triangle des Bermudes" },
+    { "href": "mystere-stonehenge.html", "title": "Stonehenge" },
+    { "href": "mystere-dyatlov.html", "title": "Col Dyatlov" },
+    { "href": "mystere-voynich.html", "title": "Manuscrit de Voynich" },
+    { "href": "mystere-nazca.html", "title": "Lignes de Nazca" }
+  ]
+}
