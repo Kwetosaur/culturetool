@@ -38,6 +38,14 @@
     {"href": "mystere-anticythere.html", "title": "Mécanisme d'Anticythère", "epigraph": "Grèce antique", "hook": "Un calculateur astronomique antique d'une sophistication redécouverte par la science moderne."}
   ],
   "objets": [
-    {"href": "objet-excalibur.html", "title": "Excalibur", "epigraph": "Caledfwlch", "hook": "L'épée la plus célèbre du monde n'a jamais existé : un nom en 1136, une pierre cinquante ans plus tard, et une seule relique — offerte en 1191, disparue depuis."}
+    {"href": "objet-excalibur.html", "title": "Excalibur", "epigraph": "Caledfwlch", "hook": "L'épée la plus célèbre du monde n'a jamais existé : un nom en 1136, une pierre cinquante ans plus tard, et une seule relique — offerte en 1191, disparue depuis."},
+    {"href": "objet-arche-alliance.html", "title": "L'Arche d'Alliance", "epigraph": "Sinaï · Jérusalem · Aksoum", "hook": "Le seul objet de la série dont le texte fondateur donne les dimensions et le procédé de fabrication : disparue en 587 av. J.-C., revendiquée à Aksoum, jamais montrée."},
+    {"href": "objet-tresors-japon.html", "title": "Les Trois Trésors du Japon", "epigraph": "三種の神器", "hook": "Épée, miroir et joyau : les insignes du trône japonais ne sont montrés à personne, pas même à l'empereur. Le secret comme mode de conservation du sacré."},
+    {"href": "objet-tabouret-or.html", "title": "Le Tabouret d'or des Ashanti", "epigraph": "Asanteman · Ghana", "hook": "Un tabouret d'or descendu du ciel selon la tradition, qui ne touche jamais le sol : la demande d'un gouverneur britannique de s'y asseoir a déclenché une guerre réelle en 1900."},
+    {"href": "objet-mjollnir.html", "title": "Mjöllnir", "epigraph": "ᛗᛁᚦᚴᚨᚱᚦᚱ · Scandinavie", "hook": "Le seul objet de la série dont les amulettes retrouvées sont aussi anciennes que le mythe qui les explique. Symbole religieux vivant, aujourd'hui disputé avec l'extrême droite."},
+    {"href": "objet-cheval-troie.html", "title": "Le Cheval de Troie", "epigraph": "Ilion · Hisarlik", "hook": "Absent de l'Iliade, à peine mentionné dans l'Odyssée : le récit complet n'existe que grâce à Virgile, sept siècles après la guerre de Troie qu'il raconte."},
+    {"href": "objet-pierre-soleil.html", "title": "La Pierre du Soleil aztèque", "epigraph": "Nahui Ollin · Mexico", "hook": "24 tonnes de basalte universellement appelées « calendrier aztèque » — ce qu'elle n'a probablement jamais été. Enterrée en 1521, redécouverte par hasard en 1790."},
+    {"href": "objet-hamecon-maui.html", "title": "L'hameçon de Maui", "epigraph": "Te Moana-nui-a-Kiwa", "hook": "Un hameçon qui pêche des îles entières, raconté d'Hawaï à la Nouvelle-Zélande, et identifié à une constellation bien réelle : la queue du Scorpion."},
+    {"href": "objet-koh-i-noor.html", "title": "Le Koh-i-Noor", "epigraph": "Golconde · Londres", "hook": "105,6 carats, une malédiction réputée frapper ses possesseurs masculins, et un contentieux de restitution actif entre l'Inde, le Pakistan, l'Iran et l'Afghanistan."}
   ]
 }

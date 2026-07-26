@@ -38,7 +38,7 @@ Tout est encapsulé en `try/catch` — un effet cassé ne doit jamais casser la 
 
 **Règle de priorité** : livrer la page avec le générique d'abord si le temps manque, upgrader vers le sur-mesure ensuite. Ne jamais retarder la mise en ligne d'une page pour finir un easter egg.
 
-## Déjà fait (30 pages de contenu + l'accueil)
+## Déjà fait (38 pages de contenu + l'accueil)
 
 Les 11 pages mythologie combinent désormais leur pluie de glyphes générique **et** une scène sur-mesure (au clic du titre **et** en happening au scroll sur `#pantheon`) — plus du niveau "minimum" décrit ci-dessus.
 
@@ -76,6 +76,14 @@ Câblage vérifié le 26/07/2026 (voir `docs/audit-existant.md` § E) : les 30 c
 | Mécanisme d'Anticythère | `antikythera` | — | **sur-mesure** : engrenages antiques qui s'assemblent et se mettent à tourner | `#enigme` |
 | Chinoise (mythologie) | `chinoise` | pluie de sinogrammes (福龍鳳春) | **sur-mesure** : dragon qui serpente à travers des nuages stylisés | `#pantheon` |
 | Excalibur (objet) | `excalibur` | — | **sur-mesure** : l'épée se dégage de la pierre en un seul mouvement, éclat de lame au sommet | `#description` |
+| L'Arche d'Alliance (objet) | `arche` | — | **sur-mesure** : deux ailes de chérubins d'or se déploient au-dessus du coffre, qui ne s'ouvre jamais | `#description` |
+| Les Trois Trésors du Japon (objet) | `tresors` | — | **sur-mesure** : trois coffres scellés s'alignent et restent fermés — le refus de montrer est l'effet | `#description` |
+| Le Tabouret d'or des Ashanti (objet) | `tabouret` | — | **sur-mesure sobre** : le tabouret descend se poser sur un coussin, sans jamais toucher le sol | `#description` |
+| Mjöllnir (objet) | `mjollnir` | — | **sur-mesure** : un marteau se forge sous des coups d'enclume, étincelles à chaque frappe | `#facture` |
+| Le Cheval de Troie (objet) | `chevaltroie` | — | **sur-mesure** : un cheval de bois s'assemble planche par planche puis roule hors de l'écran | `#description` |
+| La Pierre du Soleil aztèque (objet) | `pierresoleil` | — | **sur-mesure** : un disque tourne d'un cran puis s'arrête net — jamais un défilement continu | `#description` |
+| L'hameçon de Maui (objet) | `hamecon` | — | **sur-mesure** : un hameçon tire une île hors de l'eau, puis sa courbe se prolonge en constellation | `#description` |
+| Le Koh-i-Noor (objet) | `kohinoor` | — | **sur-mesure** : un diamant dont les facettes s'allument une à une, chacune projetant un éclat bref | `#description` |
 | Accueil | `accueil` | mélange de glyphes de toutes les cultures | — | — |
 
 ## Stratégie par famille de page
@@ -264,26 +272,22 @@ parenthèses.
 | Le Somerton Man | Un bout de papier déchiré qui se pose, et rien d'autre — sobriété absolue, une mort réelle |
 | Les Sphères du Costa Rica | Trois sphères qui roulent se ranger en ligne, puis une flèche qui les déplace hors du cadre (la perte du contexte archéologique) |
 
-**Les 36 objets légendaires restants** (Excalibur est publié) — l'objet s'assemble, se forge
-ou s'illumine. Section porteuse du `data-scroll-fx` : `#description` ou `#facture`.
+**Les 28 objets légendaires restants** (Excalibur, l'Arche d'Alliance, les Trois Trésors du
+Japon, le Tabouret d'or des Ashanti, Mjöllnir, le Cheval de Troie, la Pierre du Soleil
+aztèque, l'hameçon de Maui et le Koh-i-Noor sont publiés) — l'objet s'assemble, se forge ou
+s'illumine. Section porteuse du `data-scroll-fx` : `#description` ou `#facture`.
 
 | Page | Piste d'effet |
 |---|---|
 | Le Saint Graal | Un calice qui se remplit de lumière plutôt que de liquide, halo qui s'éteint doucement |
-| L'Arche d'Alliance | Deux ailes de chérubins qui se déploient au-dessus du coffre, sans jamais l'ouvrir |
-| Mjöllnir | Un marteau qui se forge sous des coups d'enclume, étincelles à chaque frappe (attention : rien qui ressemble à un usage emblématique moderne, cf. note de vigilance) |
-| Les Trois Trésors du Japon | Trois coffres fermés qui s'alignent — et qui **ne s'ouvrent pas** : l'effet est le refus de montrer |
 | L'Épée de Goujian | Une lame de bronze qui se dépatine, la corrosion reculant pour révéler l'inscription (bon candidat `fx-decode` en écriture-oiseau) |
-| Le Koh-i-Noor | Un diamant dont les facettes s'allument une à une, chacune projetant un éclat bref |
 | La Lance Sacrée | Un fer de lance qui se dédouble en quatre silhouettes superposées puis se recompose — les quatre reliques concurrentes en une image |
 | La Chambre d'Ambre | Un panneau d'ambre qui se remplit tesson par tesson, puis dont les pièces s'éteignent une à une |
 | Les épées Ulfberht | Une signature `+VLFBERH+T` qui s'inscrit dans la lame, la croix se déplaçant pour révéler une contrefaçon (`fx-decode` + décalage final) |
 | La Toison d'Or | Une peau de mouton plongée dans un courant, dont les paillettes d'or s'accrochent une à une |
-| Le Cheval de Troie | Un cheval de bois qui s'assemble planche par planche, puis roule hors de l'écran |
 | La Boîte de Pandore | Une **jarre** qui s'entrouvre, laisse échapper des points sombres, et retient le dernier |
 | La Pierre de Scone | Un bloc de pierre qui glisse d'un socle à un autre, aller-retour (1296 → 1996) |
 | Durandal | Une lame qui s'enfonce **horizontalement** dans une paroi, éclats de roche |
-| Le Tabouret d'or des Ashanti | Un tabouret qui se pose sur un coussin sans jamais toucher le sol — sobre, respectueux, aucun trône monumental |
 | Zulfiqar | Une lame bifide qui s'illumine brièvement, strictement neutre, aucune mise en scène religieuse |
 | La Ménorah | Sept flammes qui s'allument de gauche à droite, puis un relief de pierre qui les recouvre (l'arc de Titus) |
 | Le Sceau de jade impérial | Un sceau qui s'imprime en rouge sur un document, puis dont l'empreinte s'efface |
@@ -301,9 +305,7 @@ ou s'illumine. Section porteuse du `data-scroll-fx` : `#description` ou `#factur
 | Les regalia du Dahomey | Un trône qui traverse l'écran en caisse de transport, dans un sens puis dans l'autre (1892 → 2021) |
 | Le trésor de Lobengula | Des perles qui roulent et se dispersent hors du cadre |
 | Les crânes de cristal | Un crâne facetté dont les traces d'outil apparaissent en surbrillance sous un microscope |
-| La Pierre du Soleil aztèque | Un disque qui tourne d'un cran puis s'arrête — jamais un calendrier qui défile, c'est justement l'erreur que la page corrige |
 | Le trésor de Moctezuma | Une barre d'or qui s'enfonce dans une eau trouble et disparaît |
-| L'hameçon de Maui | Un hameçon qui tire une île hors de l'eau, puis dont la courbe se prolonge en constellation |
 | Le mere pounamu | Une massue de jade qui passe de main en main (silhouettes suggérées), s'assombrissant de patine à chaque passage |
 
 ## Contraintes à respecter pour tout nouvel effet

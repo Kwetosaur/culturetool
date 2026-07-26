@@ -1,0 +1,291 @@
+---
+/*
+  Le Tabouret d'or des Ashanti — quatrième page de la série « Objets
+  Légendaires du Monde ».
+
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections dans cet
+  ordre, badge de nature dans le hero. Sujet listé avec prudence maximale
+  (même traitement que les pages Wendigo/Skinwalker côté créatures) : un objet
+  sacré toujours en usage, dont une simple demande de s'y asseoir a déclenché
+  une guerre réelle en 1900. Aucune mise en scène de trône monumental, aucun
+  contact avec le sol dans le texte comme dans l'effet.
+
+  Effets (docs/plans/plan-effets.md) : data-egg="tabouret" sur <body> et
+  data-scroll-fx="tabouretSuspendu" sur #description, tous deux vers
+  tabouretSuspendu() dans public/effects.js — le tabouret se pose sur un
+  coussin sans jamais toucher le sol. Pas de fx-decode : aucune inscription
+  connue sur l'objet.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Or battu et kente noir et rouge : la matière et les couleurs de l'objet,
+   pas la géographie générique de l'Afrique de l'Ouest. */
+const palette = {
+  bg: '#1c130f',
+  'bg-deep': '#100a07',
+  surface: '#291c14',
+  'surface-alt': '#33241a',
+  border: '#5a3f26',
+  ink: '#f7ecd8',
+  text: '#e3d2b8',
+  'text-dim': '#b09570',
+  accent: '#d8b021',
+  'accent-bright': '#f0d24a',
+  accent2: '#7a1f2b',
+  'accent2-bright': '#a6293a',
+  verdict: '#8a6a1f',
+  'verdict-bright': '#d8b021',
+  glow: 'rgba(216,176,33,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Sika Dwa Kofi', sub: 'Twi — « le tabouret d\'or né un vendredi »',
+    body: "Le nom porte la date de sa manifestation dans le calendrier akan à jour de naissance : <em>Kofi</em> désigne un enfant né un vendredi. Le tabouret est nommé comme une personne, pas comme un objet.",
+  },
+  {
+    num: 'II', title: "L'union des clans", sub: 'v. 1701, règne d\'Osei Tutu I<sup>er</sup>',
+    body: "La tradition orale asante situe l'événement fondateur sous le prêtre <strong>Okomfo Anokye</strong>, au moment précis où les chefferies akan se fédèrent en une seule confédération asante.",
+  },
+  {
+    num: 'III', title: 'La première trace écrite', sub: 'XIXe-XXe siècle',
+    body: "Aucun témoin européen n'assiste à l'événement fondateur. La première mission britannique à Kumasi (Bowdich, 1817) décrit déjà une cour asante puissante ; c'est l'ethnographe R. S. Rattray qui, dans les années 1920, consigne la tradition orale dans le détail qu'on lui connaît aujourd'hui.",
+  },
+];
+---
+<PageLayout
+  title="Le Tabouret d'or des Ashanti"
+  serie="Objets Légendaires du Monde"
+  description="Sika Dwa Kofi : un tabouret d'or descendu du ciel selon la tradition asante, qui ne touche jamais le sol et sur lequel personne ne s'assoit — pas même le roi. La demande d'un gouverneur britannique de s'y asseoir a déclenché une guerre réelle en 1900."
+  href="objet-tabouret-or.html"
+  egg="tabouret"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ASANTEMAN · GHANA"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>Mjöllnir</strong>"
+>
+  <p class="subtitle" slot="hero">Sika Dwa Kofi</p>
+  <p class="tagline" slot="hero">
+    Un tabouret d'or que personne ne pose au sol et sur lequel personne ne s'assoit — la
+    demande d'un gouverneur colonial de s'y asseoir a déclenché une guerre réelle en 1900.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet mythologique"
+    note="Le tabouret existe réellement et sa garde n'est pas contestée : ce qui relève du mythe, c'est sa descente du ciel et la croyance qu'il abrite l'âme de la nation asante — une foi vivante, pas une question d'authenticité matérielle."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Un événement fondateur, un récit consigné plus tard"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet. Ici, la datation traditionnelle de l'événement (v. 1701) précède de deux siècles sa mise par écrit détaillée par un observateur extérieur.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Contrairement à Excalibur ou à l'Arche d'Alliance, l'écart ici ne porte pas sur
+      l'existence de l'objet — personne ne conteste que le tabouret est réel et gardé en
+      continu depuis sa fondation — mais sur la nature surnaturelle de son apparition,
+      affaire de foi et non d'archive.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et interdits"
+    title="Ce que la tradition en dit"
+    intro="Rédigé en discours rapporté : ce que la tradition asante prête au tabouret, pas une description clinique d'objet de musée — d'autant qu'il n'est presque jamais montré en entier."
+    scrollFx="tabouretSuspendu">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Le tabouret"
+        role="Forme et matière"
+        tags={['Bois recouvert d\'or', 'Forme dwa']}
+        body={["Un tabouret de bois sculpté selon la forme traditionnelle akan — assise incurvée, base pleine — entièrement recouvert de feuilles d'or, orné de clochettes et de figures métalliques. Sa taille reste celle d'un siège individuel, jamais celle d'un trône monumental.",
+               "Il se distingue de tous les autres tabourets akan par un statut unique : il n'appartient à aucun individu, vivant ou mort."]}
+      />
+      <FigureCard
+        name="Ce qu'il abrite"
+        role="Selon la tradition"
+        tags={['Sunsum', 'Âme de la nation']}
+        body={["La tradition dit qu'il porte le <em>sunsum</em> — le souffle, l'esprit — de la nation asante tout entière, et non celui d'un roi en particulier : à la différence des tabourets noirs ancestraux, qui portent l'esprit d'un défunt précis.",
+               "C'est cette fonction collective qui en fait un objet d'État plutôt qu'un bien personnel, même du souverain régnant."]}
+      />
+      <FigureCard
+        name="Ce qu'on ne fait jamais"
+        role="Les interdits rapportés"
+        tags={['Jamais au sol', 'Jamais assis']}
+        body={["Le tabouret ne touche jamais le sol : il repose toujours sur sa propre étoffe ou sur un siège dédié. Personne ne s'y assoit — ni le peuple, ni les chefs, ni l'<em>Asantehene</em> lui-même, qui a son propre trône distinct.",
+               "Lors des rares occasions publiques, il est porté incliné, jamais présenté de face comme un siège qu'on pourrait occuper."]}
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où le tabouret agit">
+    <StoryBlock
+      num="Récit I"
+      title="La descente du ciel"
+      body={[
+        "Selon la tradition, le prêtre Okomfo Anokye convoque un ciel qui s'assombrit, un tonnerre qui gronde trois vendredis de suite, puis fait descendre du ciel un tabouret d'or qui vient se poser doucement sur les genoux du roi Osei Tutu I<sup>er</sup>, devant les chefs des clans akan réunis.",
+        "Le geste qui suit compte autant que l'objet : Anokye y enterre des rognures d'ongles et de cheveux de chaque chef présent, scellant symboliquement leur union en une seule nation — le tabouret ne couronne pas un roi, il <strong>fonde une fédération</strong>.",
+      ]}
+      quote="Ce tabouret contient le sunsum de la nation asante — sa force, sa santé, son courage."
+      cite="Formule rapportée de la tradition orale"
+    />
+    <StoryBlock
+      num="Récit II"
+      title="La guerre du Tabouret d'or"
+      body={[
+        "En 1900, le gouverneur britannique Frederick Hodgson, réuni avec les chefs asante à Kumasi, exige de s'asseoir sur le tabouret d'or comme symbole de la souveraineté britannique sur le royaume — une demande qui viole l'interdit le plus fondamental attaché à l'objet.",
+        "La réponse ne se fait pas dans la négociation : la reine-mère d'Ejisu, <strong>Yaa Asantewaa</strong>, lève une armée et prend la tête de ce qui devient la dernière grande guerre anglo-asante. Le tabouret lui-même reste caché tout le conflit — sa protection, pas sa possession, est l'enjeu réel des combats.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit III"
+      title="La crise de 1920-1921"
+      body="Des ouvriers construisant une route découvrent un tabouret orné d'or enterré et le dépouillent de ses parures. La nouvelle déclenche une onde de choc à travers le royaume asante — profaner un tabouret d'or, même s'il s'avère finalement ne pas être l'original, suffit à faire craindre une nouvelle guerre. Les autorités britanniques organisent un procès pour désamorcer la crise, tandis que le véritable Sika Dwa Kofi reste, comme toujours, hors de vue."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="L'orfèvrerie et l'ébénisterie akan"
+    intro="La section propre à cette série : même un objet sacré et rarement montré s'inscrit dans un savoir-faire matériel réel, documenté par ailleurs sur des milliers de pièces akan qui, elles, ont été étudiées.">
+    <div class="card-grid compact">
+      <MiniCard title="Le tabouret dwa" tag="Ébénisterie akan" body="Chaque tabouret akan est taillé dans un seul bloc de bois — souvent de l'osese — assise, colonne centrale et base sculptées d'un seul tenant, jamais assemblées." />
+      <MiniCard title="La feuille d'or" tag="Dorure" body="L'or, martelé en feuilles très fines, est appliqué sur le bois sculpté : la même famille de technique que la dorure égyptienne ou celle prescrite pour l'Arche d'Alliance, appliquée ici à un objet politique plutôt que cultuel." />
+      <MiniCard title="La fonte à la cire perdue" tag="Orfèvrerie akan" body="Les poids à peser l'or (<em>abrammuo</em>) et les ornements métalliques de la cour asante sont coulés à la cire perdue — une maîtrise métallurgique bien documentée par les collections akan conservées dans les musées." />
+      <MiniCard title="Les tabourets noirs" tag="Tradition funéraire" body="À la mort d'un chef, son tabouret personnel est noirci à la suie et au jaune d'œuf et devient un « tabouret noir » ancestral — un rituel qui montre, par contraste, pourquoi le tabouret d'or, lui, ne sera <strong>jamais</strong> noirci : il n'appartient à la mémoire d'aucun défunt." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Une remarque de méthode : l'orfèvrerie et l'ébénisterie akan sont parmi les mieux
+      documentées d'Afrique de l'Ouest, grâce aux milliers de poids à peser l'or et de
+      tabourets personnels conservés dans les collections publiques. C'est cette abondance de
+      comparaison qui permet de décrire la fabrication du tabouret d'or sans jamais l'avoir
+      soi-même examiné.
+    </p>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Garde et possession"
+    title="Une garde continue depuis trois siècles"
+    intro="À la différence des reliques disputées de cette série, il n'y a ici ni recherche ni collection rivale : un seul objet, une seule autorité de garde, ininterrompue depuis sa fondation.">
+    <Timeline items={[
+      { year: 'v. 1701', title: 'La fédération asante', body: "Le tabouret d'or scelle, selon la tradition, l'union des clans akan sous Osei Tutu Ier." },
+      { year: '1817', title: 'La mission Bowdich', body: "La première description européenne détaillée de la cour de Kumasi, sans mention directe du tabouret lui-même — resté hors de vue des visiteurs." },
+      { year: '1900', title: 'La guerre du Tabouret d\'or', body: "La demande du gouverneur Hodgson de s'y asseoir déclenche le soulèvement mené par Yaa Asantewaa." },
+      { year: '1920-1921', title: 'La crise du tabouret profané', body: "Un tabouret orné d'or, distinct de l'original selon l'enquête menée, est mis au jour et dépouillé — l'affaire manque de rallumer un conflit." },
+      { year: '1935', title: 'La restauration de la confédération', body: "Les Britanniques restaurent officiellement la confédération asante ; le tabouret d'or retrouve un rôle cérémoniel pleinement reconnu." },
+      { year: 'Aujourd\'hui', title: 'Manhyia Palace, Kumasi', body: "Gardé par l'autorité royale asante, montré à de très rares occasions cérémonielles, jamais posé au sol ni proposé comme siège." },
+    ]} />
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la légende au phénomène"
+    title="Un symbole national plus qu'un phénomène mondial">
+    <div class="card-grid compact">
+      <MiniCard title="Yaa Asantewaa" tag="Mémoire historique" body="La reine-mère qui a mené la guerre de 1900 est aujourd'hui célébrée au Ghana et dans les études panafricaines comme une figure majeure de résistance à la colonisation." />
+      <MiniCard title="Timbres et symboles nationaux" tag="Ghana" body="Le tabouret d'or figure sur des timbres et supports officiels ghanéens comme emblème de l'identité asante au sein de la nation ghanéenne." />
+      <MiniCard title="Étude académique de l'art akan" tag="Histoire de l'art" body="Les collections de poids à peser l'or et d'orfèvrerie akan conservées dans les musées occidentaux ont fait du tabouret d'or une référence classique des cours d'histoire de l'art ouest-africain, même sans jamais l'exposer lui-même." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      À la différence d'Excalibur ou du Graal, ce n'est pas un phénomène de culture populaire
+      mondiale : c'est un symbole national et régional puissant, resté largement à l'écart du
+      marketing et de la fiction grand public — une différence qui dit quelque chose du respect
+      dont il continue de bénéficier.
+    </p>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Ici, la question n'est pas « l'objet existe-t-il ? » — il existe, sans dispute — mais ce que sa légende de fondation permet, ou non, d'établir historiquement.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Un objet réel, une origine de foi"
+      body={[
+        "Le tabouret d'or asante n'est pas mis en doute comme objet matériel : sa garde continue depuis le début du XVIIIe siècle est admise par les historiens comme par la tradition orale elle-même. Ce qui n'est pas vérifiable, et n'a pas vocation à l'être, c'est le récit de sa descente surnaturelle du ciel.",
+        "Les historiens s'accordent en revanche sur la <strong>fonction politique réelle</strong> de l'épisode fondateur : quelle que soit sa part surnaturelle, il a servi à fédérer des clans akan jusque-là indépendants en une seule confédération, l'Asanteman.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="L'incident de 1920, un cas d'école de protection"
+      body="Les enquêtes menées après la découverte du tabouret profané en 1920 concluent qu'il ne s'agissait probablement pas de l'original — un signe, plutôt qu'une preuve, du soin avec lequel le véritable Sika Dwa Kofi a toujours été soustrait à la vue, y compris dans les moments de plus grande tension avec l'administration coloniale."
+    />
+    <TheoryCard
+      title="Le récit de fondation a joué un rôle politique réel de fédération"
+      level="consensus"
+      status="Consensus"
+      body="Que le tabouret soit ou non descendu du ciel, les historiens s'accordent sur le fait que l'épisode d'Okomfo Anokye a servi à unifier des chefferies akan rivales sous une autorité commune vers 1701."
+      attrib="Position dominante de l'historiographie akan"
+    />
+    <TheoryCard
+      title="La cérémonie a formalisé des symboles de pouvoir déjà existants"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Certains chercheurs avancent que les tabourets étaient déjà, avant 1701, des sièges de pouvoir reconnus chez les peuples akan, et que l'événement fondateur dramatise une pratique préexistante plutôt qu'il n'invente le symbole de toutes pièces."
+      attrib="Hypothèse discutée en anthropologie historique akan"
+    />
+    <TheoryCard
+      title="Une descente surnaturelle du ciel"
+      level="folklore"
+      status="Croyance sacrée vivante"
+      body="La part surnaturelle du récit relève d'une tradition religieuse et politique toujours honorée par la nation asante — elle est rapportée ici comme telle, sans jugement sur sa vérité."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le tabouret fait encore">
+    <HeritageBlock
+      title="Une institution vivante au sein du Ghana"
+      body="Le royaume asante conserve, dans le cadre constitutionnel ghanéen de la chefferie traditionnelle, une autorité réelle autour de l'Asantehene — le tabouret d'or reste le symbole central de cette continuité politique."
+    />
+    <HeritageBlock
+      title="Aucune restitution à réclamer"
+      body="À la différence du trône du Dahomey ou du Koh-i-Noor, le tabouret d'or n'a jamais quitté la garde asante : il n'existe ici aucun contentieux de restitution, seulement une continuité de possession rare dans cette série."
+    />
+    <HeritageBlock
+      title="Le festival Akwasidae"
+      body="Les cérémonies périodiques de la cour de Kumasi, où les régalia asante — mais pas nécessairement le tabouret d'or lui-même — sont montrés au peuple, perpétuent le lien entre l'objet fondateur et la vie civique du royaume."
+    />
+    <HeritageBlock
+      title="Une mémoire de résistance"
+      body="La guerre de 1900 fait aujourd'hui du tabouret un symbole de résistance à la domination coloniale autant que d'unité nationale, porté par la mémoire de Yaa Asantewaa."
+    />
+    <CautionBox>
+      Cette page décrit un objet sacré toujours en usage au sein d'une nation vivante, dont la
+      simple demande de s'y asseoir a coûté une guerre. Le traiter comme une curiosité
+      exotique ou une pièce de musée serait un contresens sur son sujet même : la prudence
+      appliquée ici aux pages Wendigo et Skinwalker de la série créatures s'applique de la
+      même façon ici.
+    </CautionBox>
+  </Section>
+</PageLayout>

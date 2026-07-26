@@ -957,6 +957,370 @@
       { duration: 4200, easing: 'ease-out', fill: 'forwards' });
   }
 
+  // Arche d'Alliance — deux ailes de chérubins en or se déploient au-dessus du
+  // coffre, qui reste fermé : l'effet est la protection, jamais l'ouverture.
+  function archeCherubins() {
+    var l = layer(4400);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:10vh;transform:translateX(-50%);' +
+      'width:min(38vh,280px);height:min(26vh,190px);';
+
+    var box = document.createElement('div');
+    box.style.cssText = 'position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:74%;height:56%;z-index:2;';
+    box.innerHTML =
+      '<svg viewBox="0 0 200 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">' +
+        '<defs><linearGradient id="fx-ark-g" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0" stop-color="#f0d27a"/><stop offset="1" stop-color="#b9862f"/></linearGradient></defs>' +
+        '<rect x="10" y="26" width="180" height="74" rx="4" fill="url(#fx-ark-g)" stroke="#6b4a1f" stroke-width="3"/>' +
+        '<rect x="10" y="14" width="180" height="16" rx="3" fill="#d8b45a" stroke="#6b4a1f" stroke-width="2"/>' +
+      '</svg>';
+
+    var wingL = document.createElement('div');
+    wingL.style.cssText = 'position:absolute;left:50%;bottom:52%;width:46%;height:60%;z-index:1;' +
+      'transform:translate(-98%,0) rotate(24deg) scale(.7);transform-origin:100% 100%;opacity:0;';
+    wingL.innerHTML =
+      '<svg viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<path d="M118 128 Q60 100 30 40 Q10 4 60 10 Q40 40 60 70 Q80 40 118 128 Z" fill="#d8b45a" stroke="#6b4a1f" stroke-width="2"/>' +
+      '</svg>';
+
+    var wingR = document.createElement('div');
+    wingR.style.cssText = 'position:absolute;right:50%;bottom:52%;width:46%;height:60%;z-index:1;' +
+      'transform:translate(98%,0) rotate(-24deg) scale(.7);transform-origin:0% 100%;opacity:0;';
+    wingR.innerHTML =
+      '<svg viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<path d="M2 128 Q60 100 90 40 Q110 4 60 10 Q80 40 60 70 Q40 40 2 128 Z" fill="#d8b45a" stroke="#6b4a1f" stroke-width="2"/>' +
+      '</svg>';
+
+    wrap.appendChild(box);
+    wrap.appendChild(wingL);
+    wrap.appendChild(wingR);
+    l.appendChild(wrap);
+
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .84 }, { opacity: 0 }],
+      { duration: 4400, easing: 'ease-out', fill: 'forwards' });
+    wingL.animate([
+      { opacity: 0, transform: 'translate(-98%,0) rotate(24deg) scale(.7)' },
+      { opacity: 1, offset: .4, transform: 'translate(-98%,0) rotate(0deg) scale(1)' },
+      { opacity: 1, offset: .82 },
+      { opacity: 0 }
+    ], { duration: 4400, delay: 250, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+    wingR.animate([
+      { opacity: 0, transform: 'translate(98%,0) rotate(-24deg) scale(.7)' },
+      { opacity: 1, offset: .4, transform: 'translate(98%,0) rotate(0deg) scale(1)' },
+      { opacity: 1, offset: .82 },
+      { opacity: 0 }
+    ], { duration: 4400, delay: 250, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+  }
+
+  // Trois Trésors du Japon — trois coffres scellés s'alignent et restent
+  // fermés : le refus de montrer est l'effet, jamais l'ouverture.
+  function tresorsCoffres() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:16vh;transform:translateX(-50%);' +
+      'display:flex;gap:min(4vw,32px);opacity:0;';
+    [-1, 0, 1].forEach(function (p, i) {
+      var box = document.createElement('div');
+      var startY = 30 * Math.abs(p);
+      box.style.cssText = 'width:min(11vh,86px);height:min(9vh,70px);opacity:0;transform:translateY(' + startY + 'px);';
+      box.innerHTML =
+        '<svg viewBox="0 0 90 74" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">' +
+          '<rect x="4" y="26" width="82" height="44" rx="3" fill="#26211c" stroke="#8a6a2f" stroke-width="2"/>' +
+          '<rect x="4" y="14" width="82" height="16" rx="3" fill="#332b23" stroke="#8a6a2f" stroke-width="2"/>' +
+          '<rect x="40" y="26" width="10" height="14" fill="#c9982f"/>' +
+        '</svg>';
+      wrap.appendChild(box);
+      box.animate([
+        { opacity: 0, transform: 'translateY(' + startY + 'px)' },
+        { opacity: 1, offset: .3, transform: 'translateY(0)' },
+        { opacity: 1, offset: .8 },
+        { opacity: .55 }
+      ], { duration: 4200, delay: i * 260, easing: 'ease-out', fill: 'forwards' });
+    });
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .06 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+
+    var sheen = document.createElement('div');
+    sheen.style.cssText = 'position:absolute;left:50%;bottom:16vh;transform:translateX(-50%) translateX(-30%);' +
+      'width:min(40vh,320px);height:min(11vh,90px);pointer-events:none;opacity:0;' +
+      'background:linear-gradient(100deg,transparent 30%,rgba(232,193,100,.35) 50%,transparent 70%);';
+    l.appendChild(sheen);
+    sheen.animate([
+      { opacity: 0, transform: 'translateX(-50%) translateX(-30%)' },
+      { opacity: .9, offset: .5, transform: 'translateX(-50%) translateX(30%)' },
+      { opacity: 0, transform: 'translateX(-50%) translateX(60%)' }
+    ], { duration: 2400, delay: 1600, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Tabouret d'or des Ashanti — le tabouret descend se poser sur un coussin
+  // sans jamais toucher le sol : sobre, respectueux, aucune mise en scène de trône.
+  function tabouretSuspendu() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);width:min(20vh,150px);opacity:0;';
+
+    var cushion = document.createElement('div');
+    cushion.style.cssText = 'position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:120%;';
+    cushion.innerHTML =
+      '<svg viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">' +
+        '<ellipse cx="90" cy="24" rx="82" ry="14" fill="#7a1f2b"/>' +
+        '<ellipse cx="90" cy="18" rx="82" ry="14" fill="#a6293a"/>' +
+      '</svg>';
+
+    var stool = document.createElement('div');
+    stool.style.cssText = 'position:absolute;left:50%;bottom:22%;transform:translate(-50%,-70px);width:64%;';
+    stool.innerHTML =
+      '<svg viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;filter:drop-shadow(0 0 10px rgba(216,180,90,.5))">' +
+        '<defs><linearGradient id="fx-stool-g" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0" stop-color="#f0d27a"/><stop offset="1" stop-color="#b9862f"/></linearGradient></defs>' +
+        '<path d="M14 30 Q60 -6 106 30 L96 46 Q60 20 24 46 Z" fill="url(#fx-stool-g)"/>' +
+        '<path d="M30 46 Q60 66 90 46 L84 120 L74 120 L70 60 Q60 66 50 60 L46 120 L36 120 Z" fill="url(#fx-stool-g)"/>' +
+      '</svg>';
+
+    wrap.appendChild(cushion);
+    wrap.appendChild(stool);
+    l.appendChild(wrap);
+
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .84 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    stool.animate([
+      { transform: 'translate(-50%,-70px)' },
+      { transform: 'translate(-50%,-6px)', offset: .5 },
+      { transform: 'translate(-50%,-6px)' }
+    ], { duration: 4000, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+  }
+
+  // Mjöllnir — un marteau se forge sous des coups d'enclume répétés,
+  // étincelles à chaque frappe. Aucune mise en scène d'usage moderne du
+  // symbole : seulement la forge, conformément à la note de vigilance.
+  function mjollnirForge() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:10vh;transform:translateX(-50%);width:min(26vh,190px);';
+
+    var anvil = document.createElement('div');
+    anvil.style.cssText = 'position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:90%;';
+    anvil.innerHTML =
+      '<svg viewBox="0 0 160 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">' +
+        '<path d="M10 58 L20 30 L60 24 L140 24 L150 40 L150 58 Z" fill="#33383f" stroke="#14171b" stroke-width="2"/>' +
+        '<rect x="70" y="10" width="18" height="16" fill="#33383f" stroke="#14171b" stroke-width="2"/>' +
+      '</svg>';
+
+    var hammer = document.createElement('div');
+    hammer.style.cssText = 'position:absolute;left:50%;bottom:44%;width:52%;transform:translate(-50%,-60px) rotate(-18deg);opacity:0;';
+    hammer.innerHTML =
+      '<svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<rect x="44" y="30" width="12" height="58" rx="3" fill="#8a6a2f"/>' +
+        '<rect x="10" y="4" width="80" height="34" rx="6" fill="#7fb8e0" style="filter:drop-shadow(0 0 8px #7fb8e0)"/>' +
+      '</svg>';
+
+    wrap.appendChild(anvil);
+    wrap.appendChild(hammer);
+    l.appendChild(wrap);
+
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .06 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    hammer.animate([
+      { opacity: 1, transform: 'translate(-50%,-60px) rotate(-18deg)' },
+      { transform: 'translate(-50%,6px) rotate(6deg)', offset: .18 },
+      { transform: 'translate(-50%,-50px) rotate(-16deg)', offset: .32 },
+      { transform: 'translate(-50%,6px) rotate(6deg)', offset: .48 },
+      { transform: 'translate(-50%,-50px) rotate(-16deg)', offset: .62 },
+      { transform: 'translate(-50%,6px) rotate(6deg)', offset: .78 },
+      { transform: 'translate(-50%,-20px) rotate(-10deg)', offset: .9 },
+      { opacity: 1 }
+    ], { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+
+    [0.18, 0.48, 0.78].forEach(function (t) {
+      setTimeout(function () {
+        for (var i = 0; i < 8; i++) {
+          var spark = document.createElement('div');
+          var ang = rand(-70, -110), dist = rand(20, 50);
+          spark.style.cssText = 'position:absolute;left:50%;bottom:44%;width:3px;height:3px;border-radius:50%;' +
+            'background:#f4a34a;box-shadow:0 0 6px #f4a34a;opacity:0;';
+          wrap.appendChild(spark);
+          var dx = Math.cos(ang * Math.PI / 180) * dist, dy = Math.sin(ang * Math.PI / 180) * dist;
+          spark.animate([
+            { transform: 'translate(0,0)', opacity: 1 },
+            { transform: 'translate(' + dx + 'px,' + (-Math.abs(dy)) + 'px)', opacity: 0 }
+          ], { duration: 500, easing: 'ease-out', fill: 'forwards' });
+        }
+      }, t * 4200);
+    });
+  }
+
+  // Le Cheval de Troie — un cheval de bois s'assemble planche par planche,
+  // puis roule hors de l'écran.
+  function chevalTroieAssemble() {
+    var l = layer(4600);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:38%;bottom:10vh;width:min(30vh,220px);';
+
+    var pieces = [
+      { d: 'M20 130 L26 60 L34 60 L34 130 Z', y: -40 },
+      { d: 'M150 130 L156 60 L164 60 L164 130 Z', y: -40 },
+      { d: 'M10 40 Q90 6 170 40 L166 74 Q90 46 14 74 Z', y: -60 },
+      { d: 'M158 10 Q186 6 190 34 Q182 50 160 46 Z', y: -70 },
+      { d: 'M10 44 L-4 70 L10 66 Z', y: -50 }
+    ];
+    var els = pieces.map(function (p) {
+      var el = document.createElement('div');
+      el.style.cssText = 'position:absolute;inset:0;opacity:0;transform:translateY(' + p.y + 'px);';
+      el.innerHTML = '<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<path d="' + p.d + '" fill="#7a5c34" stroke="#4a3820" stroke-width="2"/></svg>';
+      wrap.appendChild(el);
+      return el;
+    });
+    l.appendChild(wrap);
+
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .04 }, { opacity: 1, offset: .86 }, { opacity: 0 }],
+      { duration: 4600, easing: 'ease-out', fill: 'forwards' });
+
+    els.forEach(function (el, i) {
+      el.animate([
+        { opacity: 0, transform: 'translateY(' + pieces[i].y + 'px)' },
+        { opacity: 1, offset: .5, transform: 'translateY(0)' },
+        { opacity: 1 }
+      ], { duration: 600, delay: 200 + i * 260, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+    });
+
+    var rollStart = (200 + pieces.length * 260 + 500) / 4600;
+    wrap.animate([
+      { transform: 'translateX(0) rotate(0deg)' },
+      { transform: 'translateX(0) rotate(0deg)', offset: Math.min(rollStart, .9) },
+      { transform: 'translateX(60vw) rotate(14deg)' }
+    ], { duration: 4600, easing: 'ease-in', fill: 'forwards' });
+  }
+
+  // La Pierre du Soleil aztèque — un disque tourne d'un cran puis s'arrête
+  // net : jamais un défilement continu façon calendrier, c'est justement
+  // l'erreur que la page corrige.
+  function pierreSoleilTourne() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(28vh,200px);opacity:0;';
+    wrap.innerHTML =
+      '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<circle cx="100" cy="100" r="92" fill="#2a3324" stroke="#5ad0c8" stroke-width="3"/>' +
+        '<circle cx="100" cy="100" r="70" fill="none" stroke="#e8c164" stroke-width="2" stroke-dasharray="4 7"/>' +
+        '<circle cx="100" cy="100" r="48" fill="none" stroke="#5ad0c8" stroke-width="2"/>' +
+        '<circle cx="100" cy="100" r="26" fill="#3a2a1c" stroke="#e8c164" stroke-width="3"/>' +
+        '<circle cx="100" cy="100" r="6" fill="#e8c164"/>' +
+      '</svg>';
+    l.appendChild(wrap);
+
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .86 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    wrap.animate([
+      { transform: 'translate(-50%,-50%) rotate(0deg)' },
+      { transform: 'translate(-50%,-50%) rotate(0deg)', offset: .3 },
+      { transform: 'translate(-50%,-50%) rotate(51deg)', offset: .55 },
+      { transform: 'translate(-50%,-50%) rotate(51deg)' }
+    ], { duration: 4000, easing: 'cubic-bezier(.3,1.4,.3,1)', fill: 'forwards' });
+  }
+
+  // L'hameçon de Maui — un hameçon tire une île hors de l'eau, puis sa
+  // courbe se prolonge en constellation.
+  function hameconMaui() {
+    var l = layer(4600);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);width:min(34vh,260px);height:min(30vh,220px);';
+
+    var water = document.createElement('div');
+    water.style.cssText = 'position:absolute;left:0;right:0;bottom:0;height:30%;' +
+      'background:linear-gradient(180deg,rgba(63,160,201,.15),rgba(63,160,201,.4));opacity:0;';
+    wrap.appendChild(water);
+
+    var hook = document.createElement('div');
+    hook.style.cssText = 'position:absolute;left:50%;bottom:22%;width:46%;transform:translate(-50%,60px);opacity:0;';
+    hook.innerHTML =
+      '<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<path d="M50 4 L50 80 Q50 116 82 112 Q106 108 96 80" fill="none" stroke="#e8dcc0" stroke-width="10" ' +
+          'stroke-linecap="round" style="filter:drop-shadow(0 0 6px #e8dcc0)"/>' +
+      '</svg>';
+    wrap.appendChild(hook);
+
+    var island = document.createElement('div');
+    island.style.cssText = 'position:absolute;left:50%;bottom:26%;width:58%;transform:translate(-50%,40px);opacity:0;';
+    island.innerHTML =
+      '<svg viewBox="0 0 160 50" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">' +
+        '<path d="M4 46 Q30 4 70 20 Q100 2 140 24 Q156 30 156 46 Z" fill="#2ea6a0"/>' +
+      '</svg>';
+    wrap.appendChild(island);
+
+    var starPts = [[50, 4], [54, 26], [64, 46], [80, 58], [96, 54]];
+    var starsWrap = document.createElement('div');
+    starsWrap.style.cssText = 'position:absolute;left:50%;bottom:52%;width:46%;transform:translateX(-50%);opacity:0;';
+    starsWrap.innerHTML = '<svg viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      starPts.map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2.6" fill="#f7ecd0" style="filter:drop-shadow(0 0 5px #f7ecd0)"/>'; }).join('') +
+      '<path d="M' + starPts.map(function (p) { return p[0] + ' ' + p[1]; }).join(' L ') + '" fill="none" stroke="#f7ecd0" stroke-width="1" opacity=".5"/>' +
+    '</svg>';
+    wrap.appendChild(starsWrap);
+
+    l.appendChild(wrap);
+
+    water.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .85 }, { opacity: 0 }],
+      { duration: 4600, easing: 'ease-out', fill: 'forwards' });
+    hook.animate([
+      { opacity: 0, transform: 'translate(-50%,60px)' },
+      { opacity: 1, offset: .15, transform: 'translate(-50%,20px)' },
+      { opacity: 1, offset: .5, transform: 'translate(-50%,-30px)' },
+      { opacity: 0, offset: .72 },
+      { opacity: 0 }
+    ], { duration: 4600, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+    island.animate([
+      { opacity: 0, transform: 'translate(-50%,40px)' },
+      { opacity: 0, offset: .28 },
+      { opacity: 1, offset: .45, transform: 'translate(-50%,-20px)' },
+      { opacity: 1, offset: .86, transform: 'translate(-50%,-34px)' },
+      { opacity: 0 }
+    ], { duration: 4600, easing: 'ease-out', fill: 'forwards' });
+    starsWrap.animate([{ opacity: 0 }, { opacity: 0, offset: .62 }, { opacity: 1, offset: .8 },
+      { opacity: 1, offset: .94 }, { opacity: 0 }],
+      { duration: 4600, easing: 'ease-in', fill: 'forwards' });
+  }
+
+  // Le Koh-i-Noor — un diamant dont les facettes s'allument une à une,
+  // chacune projetant un éclat bref.
+  function kohINoorFacettes() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(22vh,160px);opacity:0;';
+    var facets = [
+      'M100 20 L140 70 L100 100 Z', 'M100 20 L60 70 L100 100 Z',
+      'M60 70 L20 100 L100 100 Z', 'M140 70 L180 100 L100 100 Z',
+      'M20 100 L60 150 L100 100 Z', 'M180 100 L140 150 L100 100 Z',
+      'M60 150 L100 180 L100 100 Z', 'M140 150 L100 180 L100 100 Z'
+    ];
+    wrap.innerHTML =
+      '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        facets.map(function (d, i) {
+          return '<path class="fx-koh-f" data-i="' + i + '" d="' + d + '" fill="rgba(207,216,240,.12)" stroke="#cfd8f0" stroke-width="1.4"/>';
+        }).join('') +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+
+    var els = wrap.querySelectorAll('.fx-koh-f');
+    els.forEach(function (el, i) {
+      var delay = 260 + i * 360;
+      el.animate([
+        { fill: 'rgba(207,216,240,.12)' },
+        { fill: 'rgba(255,255,255,.95)', offset: .5 },
+        { fill: 'rgba(207,216,240,.28)' }
+      ], { duration: 500, delay: delay, easing: 'ease-out', fill: 'forwards' });
+      var flash = document.createElement('div');
+      flash.style.cssText = 'position:absolute;left:50%;top:50%;width:10%;height:10%;border-radius:50%;' +
+        'transform:translate(-50%,-50%);opacity:0;pointer-events:none;' +
+        'background:radial-gradient(circle,rgba(255,255,255,.9),transparent 70%);';
+      wrap.appendChild(flash);
+      flash.animate([{ opacity: 0 }, { opacity: 1, offset: .5 }, { opacity: 0 }],
+        { duration: 420, delay: delay, easing: 'ease-out', fill: 'forwards' });
+    });
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -1070,7 +1434,15 @@
     mothmanShadow: mothmanShadow,
     antikytheraGears: antikytheraGears,
     excaliburDraw: excaliburDraw,
-    dragonCloudGlide: dragonCloudGlide
+    dragonCloudGlide: dragonCloudGlide,
+    archeCherubins: archeCherubins,
+    tresorsCoffres: tresorsCoffres,
+    tabouretSuspendu: tabouretSuspendu,
+    mjollnirForge: mjollnirForge,
+    chevalTroieAssemble: chevalTroieAssemble,
+    pierreSoleilTourne: pierreSoleilTourne,
+    hameconMaui: hameconMaui,
+    kohINoorFacettes: kohINoorFacettes
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -1126,6 +1498,14 @@
     antikythera:   antikytheraGears,
     excalibur:     excaliburDraw,
     chinoise:      function () { glyphShower({ glyphs: '福龍鳳春', mode: 'fall', color: '#d8443a' }); dragonCloudGlide(); },
+    arche:         archeCherubins,
+    tresors:       tresorsCoffres,
+    tabouret:      tabouretSuspendu,
+    mjollnir:      mjollnirForge,
+    chevaltroie:   chevalTroieAssemble,
+    pierresoleil:  pierreSoleilTourne,
+    hamecon:       hameconMaui,
+    kohinoor:      kohINoorFacettes,
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }

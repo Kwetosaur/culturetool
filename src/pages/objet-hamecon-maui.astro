@@ -1,0 +1,283 @@
+---
+/*
+  L'hameçon de Maui — huitième page de la série « Objets Légendaires du
+  Monde ».
+
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections dans cet
+  ordre, badge de nature dans le hero. Cas particulier : pas de relique
+  disputée ni de site fouillé — un motif oral partagé sur l'ensemble du
+  triangle polynésien, avant toute mise par écrit occidentale. #traces
+  documente donc une diffusion culturelle plutôt qu'une chaîne de possession
+  matérielle ; pas de frise chronologique, conformément à la règle de
+  Timeline.astro (elle n'apparaît que si le sujet a une histoire datée).
+
+  Effets (docs/plans/plan-effets.md) : data-egg="hamecon" sur <body> et
+  data-scroll-fx="hameconMaui" sur #description, tous deux vers
+  hameconMaui() dans public/effects.js — un hameçon qui tire une île hors de
+  l'eau, puis dont la courbe se prolonge en constellation. Pas de fx-decode :
+  tradition orale, aucun texte gravé sur l'objet.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Nuit océanique, nacre et étoiles : la matière et le ciel de l'objet plutôt
+   que la géographie générique du Pacifique. */
+const palette = {
+  bg: '#0f1620',
+  'bg-deep': '#080c12',
+  surface: '#182234',
+  'surface-alt': '#202e44',
+  border: '#38506b',
+  ink: '#f2f6fa',
+  text: '#cfe0ee',
+  'text-dim': '#87a0b8',
+  accent: '#e8dcc0',
+  'accent-bright': '#f7ecd0',
+  accent2: '#3fa0c9',
+  'accent2-bright': '#7ecbe8',
+  verdict: '#2a6a8a',
+  'verdict-bright': '#5aa0c0',
+  glow: 'rgba(232,220,192,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Manaiakalani', sub: 'Hawaï',
+    body: "Le nom hawaïen de l'hameçon, associé à la mâchoire d'une ancêtre de Maui dans plusieurs versions du récit.",
+  },
+  {
+    num: 'II', title: 'Te Matau a Māui', sub: 'Aotearoa / Nouvelle-Zélande',
+    body: "Le nom māori du même objet, au cœur du récit de la pêche de l'île du Nord — <em>Te Ika-a-Māui</em>, « le poisson de Maui ».",
+  },
+  {
+    num: 'III', title: 'Une tradition orale, une mise par écrit tardive', sub: 'XIXe siècle',
+    body: "Aucun de ces récits n'est mis par écrit avant l'arrivée d'ethnographes et de missionnaires européens au XIXe siècle — Grey pour les traditions māories, Fornander pour les hawaïennes. L'ancienneté réelle du motif oral reste, par nature, indéterminable.",
+  },
+];
+---
+<PageLayout
+  title="L'hameçon de Maui"
+  serie="Objets Légendaires du Monde"
+  description="Un hameçon qui pêche des îles entières, présent sous des noms différents d'Hawaï à la Nouvelle-Zélande, et identifié à une constellation bien réelle — la queue du Scorpion. Le seul objet légendaire de la série qu'on peut littéralement montrer dans le ciel."
+  href="objet-hamecon-maui.html"
+  egg="hamecon"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="TE MOANA-NUI-A-KIWA"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>le Koh-i-Noor</strong>"
+>
+  <p class="subtitle" slot="hero">Manaiakalani · Te Matau a Māui</p>
+  <p class="tagline" slot="hero">
+    Un hameçon qui pêche des îles hors de l'océan, raconté d'Hawaï à la Nouvelle-Zélande — et
+    qu'on peut encore montrer aujourd'hui, dans le ciel, sous la forme d'une constellation.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet mythologique"
+    note="Aucun hameçon matériel n'est réclamé comme relique : la tradition elle-même le place dans le ciel. Ce qui est bien réel, en revanche, c'est l'identification de cette forme à une constellation observable."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Une tradition orale plus vaste que n'importe quel texte"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit. Ici, il n'existe pas d'« objet » séparable du récit — mais la mise par écrit, elle, est datable avec précision, et très tardive au regard de la tradition qu'elle transcrit.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Le motif de l'hameçon qui pêche des îles se retrouve, sous des formes locales
+      distinctes, sur l'ensemble du triangle polynésien — Hawaï, Aotearoa, les îles Cook, les
+      Tonga, les Samoa — un territoire océanique parmi les plus vastes jamais couvert par une
+      seule famille de traditions orales apparentées.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et pouvoirs"
+    title="Ce que la tradition en dit"
+    intro="Rédigé en discours rapporté : ce que les récits prêtent à l'hameçon, avec des variantes réelles et assumées d'une île à l'autre."
+    scrollFx="hameconMaui">
+    <div class="card-grid wide">
+      <FigureCard
+        name="La mâchoire ancestrale"
+        role="Une origine, pas un objet fabriqué"
+        tags={['Muriranga-whenua', 'Don']}
+        body="Dans plusieurs traditions, l'hameçon n'est pas façonné par un artisan : il est taillé dans la mâchoire d'une ancêtre de Maui, Muriranga-whenua, qui la lui cède — un armement obtenu par filiation, pas par fabrication."
+      />
+      <FigureCard
+        name="Pêcher des îles"
+        role="Le pouvoir central du récit"
+        tags={['Îles', 'Sang']}
+        body="Amorcé au propre sang de Maui — souvent tiré de son propre nez — l'hameçon accroche non pas un poisson mais le fond marin lui-même, et Maui le hisse à la surface pour en faire une terre émergée."
+      />
+      <FigureCard
+        name="Une forme dans le ciel"
+        role="Le seul objet de la série visible aujourd'hui"
+        tags={['Astronomie', 'Scorpion']}
+        body="La tradition place l'hameçon dans le ciel après son usage terrestre : sa courbe correspond à celle que les astronomes occidentaux appellent la queue du Scorpion — un repère de navigation traditionnelle toujours utilisé."
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où l'hameçon agit">
+    <StoryBlock
+      num="Récit I"
+      title="La pêche de l'île du Nord"
+      body={[
+        "Dans la tradition māorie, Maui convainc ses frères de l'emmener pêcher au large, en cachette, avant d'amorcer son hameçon avec son propre sang et de le laisser filer par-dessus bord. La prise qui remonte n'est pas un poisson : c'est une terre entière, <em>Te Ika-a-Māui</em>, « le poisson de Maui ».",
+        "Maui ordonne à ses frères d'attendre l'arrivée d'un prêtre avant de découper la prise selon les règles rituelles. Impatients, ils commencent à la taillader eux-mêmes — ce qui explique, dans le récit, le relief accidenté et montagneux de l'île du Nord de la Nouvelle-Zélande.",
+      ]}
+      quote="Ce que vous voyez de montagnes et de vallées, ce sont les coups de couteau donnés trop tôt."
+      cite="Résumé du récit māori rapporté par George Grey, XIXe siècle"
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Réunir les îles d'Hawaï"
+      body="Dans la version hawaïenne, Maui tente d'utiliser Manaiakalani pour tirer l'ensemble des îles de l'archipel en une seule masse de terre. Il est près de réussir lorsqu'un compagnon — selon les versions, un frère ou une femme du village — enfreint l'interdit de regarder en arrière pendant la manœuvre : la ligne se rompt, et les îles restent séparées comme on les connaît aujourd'hui."
+    />
+    <StoryBlock
+      num="Récit III"
+      title="Une place dans le ciel"
+      body="Après ses exploits terrestres, la tradition place l'hameçon parmi les étoiles — un repère que les navigateurs polynésiens ont utilisé pendant des siècles pour s'orienter en haute mer, bien avant que les astronomes européens ne cataloguent la même forme sous le nom de Scorpion."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Comment on fabriquait vraiment un hameçon polynésien"
+    intro="La section propre à cette série. L'hameçon de Maui échappe à toute fabrication humaine dans le récit — mais l'hameçon polynésien, lui, est un objet technique réel et bien documenté par l'archéologie du Pacifique.">
+    <div class="card-grid compact">
+      <MiniCard title="Os et nacre" tag="Matériaux" body="Les hameçons traditionnels sont taillés dans l'os (souvent humain ou animal selon l'usage et le statut), la nacre ou le bois dur, chacun donnant une prise et une flottabilité différentes." />
+      <MiniCard title="Hameçons composites" tag="Technique de pêche au leurre" body="Certains hameçons associent une hampe de nacre brillante à une pointe d'os distincte, imitant un petit poisson pour attirer les prédateurs — une technologie de leurre sophistiquée, pas un simple crochet." />
+      <MiniCard title="Objets de statut" tag="Hameçons cérémoniels" body="Les plus grands hameçons ornés, trop massifs pour un usage courant, sont portés comme insignes de rang plutôt qu'utilisés pour pêcher — un parallèle direct avec l'objet mythique, plus symbole que simple outil." />
+      <MiniCard title="Navigation stellaire" tag="Wayfinding" body="La reconnaissance de la constellation du Scorpion comme repère de navigation s'inscrit dans un système bien plus large d'orientation par les étoiles, les courants et le vol des oiseaux, aujourd'hui documenté et enseigné à nouveau." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Des hameçons d'os et de nacre vieux de plusieurs millénaires ont été retrouvés sur des
+      sites archéologiques du Pacifique, contemporains des grandes migrations polynésiennes —
+      la preuve d'une maîtrise technique réelle, indépendamment de tout pouvoir surnaturel
+      prêté à un exemplaire précis.
+    </p>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Une diffusion, pas une relique"
+    title="Le même motif, d'un bout à l'autre de l'océan"
+    intro="Aucune frise chronologique ici : il n'existe pas de chaîne de possession datée pour un objet que la tradition elle-même place dans le ciel. Ce qui se documente, c'est l'ampleur géographique du motif.">
+    <div class="card-grid">
+      <InfoCard
+        title="Aotearoa / Nouvelle-Zélande"
+        sub="Te Matau a Māui"
+        body="La version la plus détaillée sur le plan géographique : l'hameçon explique directement la forme de l'île du Nord tout entière."
+      />
+      <InfoCard
+        title="Hawaï"
+        sub="Manaiakalani"
+        body="La version centrée sur la tentative — inaboutie — de réunir l'ensemble de l'archipel hawaïen en une seule masse de terre."
+      />
+      <InfoCard
+        title="Îles Cook, Tonga, Samoa"
+        sub="Variantes régionales"
+        body="Des versions locales, recueillies par les mêmes ethnographes du XIXe siècle, confirment la diffusion du motif sur l'ensemble du triangle polynésien plutôt qu'une origine unique exportée depuis une seule île."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la légende au phénomène"
+    title="De la tradition orale au film d'animation">
+    <div class="card-grid compact">
+      <MiniCard title="Moana (2016)" tag="Disney" body="Le film popularise Maui et son hameçon géant auprès d'un public mondial — une adaptation qui a aussi suscité, chez des commentateurs et artistes polynésiens, une discussion publique sur la fidélité et le respect dus aux traditions représentées." />
+      <MiniCard title="Le renouveau de la navigation traditionnelle" tag="Depuis les années 1970" body="Le pirogue-laboratoire Hōkūleʻa et le mouvement de renaissance du <em>wayfinding</em> polynésien ont remis à l'honneur la navigation par les étoiles, dont la constellation de l'hameçon fait partie." />
+      <MiniCard title="Toponymie et éducation" tag="Pacifique" body="Le récit reste enseigné et raconté dans les écoles et les familles à travers le Pacifique, sous ses formes locales distinctes plutôt que sous une version unique standardisée." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Sans réduire une tradition religieuse et culturelle vivante à une seule question de vérité matérielle.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Aucun objet, une astronomie bien réelle"
+      body={[
+        "Aucun hameçon matériel n'est revendiqué comme relique par la tradition elle-même, qui place l'objet dans le ciel plutôt que dans un sanctuaire. Ce choix narratif rend la question de l'authenticité matérielle hors sujet, à la différence de la plupart des autres pages de cette série.",
+        "Ce qui est en revanche vérifiable : l'identification de la forme du Scorpion à un hameçon est un fait ethnoastronomique documenté de façon indépendante dans plusieurs cultures polynésiennes distinctes, pas une invention rétrospective unique.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Une diffusion qui documente une vraie expansion humaine"
+      body="La présence du même motif, sous des formes apparentées mais distinctes, sur un territoire océanique de plusieurs milliers de kilomètres correspond à l'expansion historiquement documentée des peuples polynésiens à travers le Pacifique — la mythologie comme trace culturelle d'une migration réelle."
+    />
+    <TheoryCard
+      title="Le motif de la pêche des îles est un récit étiologique partagé"
+      level="consensus"
+      status="Consensus"
+      body="La fonction du récit — expliquer l'origine et la forme de terres réelles à travers un exploit ancestral — est reconnue comme un schéma narratif commun à l'ensemble des traditions polynésiennes de Maui."
+      attrib="Position dominante des études polynésiennes"
+    />
+    <TheoryCard
+      title="Le récit garderait la mémoire poétique de voyages de découverte réels"
+      level="plausible"
+      status="Hypothèse discutée"
+      body="Certains chercheurs en mythologie comparée avancent que la « pêche » des îles pourrait métaphoriser les expéditions de découverte des navigateurs polynésiens historiques — une lecture évocatrice, mais impossible à démontrer formellement."
+      attrib="Hypothèse discutée en mythologie comparée"
+    />
+    <TheoryCard
+      title="Les mythes polynésiens dériveraient d'un contact avec l'Ancien Monde"
+      level="folklore"
+      status="Rejeté par la recherche actuelle"
+      body="Des théories diffusionnistes du XIXe et du début du XXe siècle cherchaient une origine externe aux traditions polynésiennes ; la recherche actuelle privilégie largement un développement culturel austronésien endogène, documenté par la linguistique comparée et l'archéologie."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que l'hameçon fait encore">
+    <HeritageBlock
+      title="Une tradition orale toujours transmise"
+      body="Le récit continue d'être raconté, sous ses formes locales, dans les familles et les écoles à travers le Pacifique — une transmission vivante, pas une survivance figée."
+    />
+    <HeritageBlock
+      title="Une astronomie de navigation en plein renouveau"
+      body="Le mouvement de renaissance de la navigation traditionnelle polynésienne, porté par des pirogues comme le Hōkūleʻa, s'appuie activement sur les repères stellaires hérités de cette tradition, dont la constellation de l'hameçon."
+    />
+    <HeritageBlock
+      title="Une popularisation mondiale récente"
+      body="Le succès international de <em>Moana</em> a fait connaître Maui bien au-delà du Pacifique — une visibilité nouvelle, mais qui ne remplace pas la diversité des versions locales que le film ne pouvait, à lui seul, toutes représenter."
+    />
+    <CautionBox>
+      Cette page rassemble des versions provenant de plusieurs cultures polynésiennes
+      distinctes — māorie, hawaïenne, et d'autres îles du Pacifique — qui ne racontent pas
+      toutes exactement la même histoire. Les présenter côte à côte sert à montrer l'ampleur
+      d'une tradition partagée, pas à les fondre en une seule version unique qui effacerait
+      leurs différences réelles.
+    </CautionBox>
+  </Section>
+</PageLayout>

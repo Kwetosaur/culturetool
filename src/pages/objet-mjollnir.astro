@@ -1,0 +1,300 @@
+---
+/*
+  Mjöllnir — cinquième page de la série « Objets Légendaires du Monde ».
+
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections dans cet
+  ordre, badge de nature dans le hero. Cas inhabituel dans cette série : le
+  corpus archéologique (environ un millier d'amulettes-marteaux) est
+  contemporain de l'âge viking, alors que sa mise par écrit dans les Eddas
+  attend le XIIIe siècle — l'inverse du schéma habituel où l'objet écrit
+  précède de loin toute trace matérielle.
+
+  Effets (docs/plans/plan-effets.md) : data-egg="mjollnir" sur <body> et
+  data-scroll-fx="mjollnirForge" sur #facture (la section forge, l'autre choix
+  autorisé par le plan de série), tous deux vers mjollnirForge() dans
+  public/effects.js — un marteau qui se forge sous des coups d'enclume,
+  étincelles à chaque frappe. fx-decode utilisé sur l'inscription runique
+  réelle du pendentif de Købelev (Danemark, 2014), pool "rune" déjà existant.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+
+/* Fer battu et étincelles bleu-blanc de forge : la matière de l'objet plutôt
+   que la géographie du sujet, principe visuel propre à la série objets. */
+const palette = {
+  bg: '#12161c',
+  'bg-deep': '#080a0e',
+  surface: '#1b212a',
+  'surface-alt': '#242c37',
+  border: '#3d4b5c',
+  ink: '#eef3fa',
+  text: '#d3dce5',
+  'text-dim': '#8fa1b1',
+  accent: '#7fb8e0',
+  'accent-bright': '#b8dff5',
+  accent2: '#e0722a',
+  'accent2-bright': '#f4a34a',
+  verdict: '#4a7fa5',
+  'verdict-bright': '#8fbfe0',
+  glow: 'rgba(127,184,224,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Mjöllnir', sub: 'Vieux norrois — étymologie discutée',
+    body: "Un nom qu'aucune étymologie ne fixe avec certitude : rapproché du verbe « broyer », ou d'une racine partagée avec le slave <em>molnija</em>, « éclair » — deux pistes sérieuses, aucune tranchée.",
+  },
+  {
+    num: 'II', title: 'Les Eddas', sub: 'XIIIe siècle — mise par écrit',
+    body: "L'<em>Edda poétique</em> et l'<em>Edda en prose</em> de Snorri Sturluson fixent par écrit, en Islande déjà christianisée, des récits oraux dont l'ancienneté réelle reste indéterminée.",
+  },
+  {
+    num: 'III', title: 'Un ordre inversé', sub: 'Le cas particulier de cette page',
+    body: "À la différence de la plupart des objets de cette série, le corpus matériel — les amulettes — est <strong>contemporain de l'âge viking</strong>, donc potentiellement antérieur à la rédaction des Eddas qui les expliquent.",
+  },
+];
+---
+<PageLayout
+  title="Mjöllnir"
+  serie="Objets Légendaires du Monde"
+  description="Le marteau de Thor est le seul objet de la série dont le corpus matériel — un millier d'amulettes vikings — est aussi ancien, sinon plus, que le texte qui le raconte. Symbole religieux vivant et, depuis peu, récupéré par l'extrême droite : vigilance obligatoire."
+  href="objet-mjollnir.html"
+  egg="mjollnir"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ᛗᛁᚦᚴᚨᚱᚦᚱ · SCANDINAVIE"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>le Cheval de Troie</strong>"
+>
+  <p class="subtitle" slot="hero">Le marteau de Thor</p>
+  <p class="tagline" slot="hero">
+    Le seul objet de la série dont les traces matérielles sont aussi anciennes — sinon plus —
+    que le texte qui les explique. Et le seul dont le symbole est aujourd'hui disputé entre
+    une religion vivante et une récupération d'extrême droite.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet mythologique"
+    note="Aucun marteau divin n'a jamais existé, mais le millier d'amulettes retrouvées font de Mjöllnir l'objet de cette série le mieux documenté par l'archéologie plutôt que par le seul texte."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Un texte tardif pour un objet ancien"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet. Ici, le sens habituel du décalage s'inverse presque : le corpus archéologique des amulettes précède, ou accompagne, plutôt qu'il ne suit la mise par écrit du mythe.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Les amulettes-marteaux sont produites du IXe au XIe siècle. Les Eddas qui racontent
+      leur origine mythologique sont composées au XIIIe siècle, par un auteur chrétien
+      décrivant une religion déjà en net recul dans son propre pays.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et pouvoirs"
+    title="Ce que la tradition prête au marteau"
+    intro="Rédigé en discours rapporté — ce que les Eddas racontent, pas un inventaire d'objet retrouvé.">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Le manche trop court"
+        role="Un accident de fabrication"
+        tags={['Snorri Sturluson', 'Sabotage']}
+        body={["Selon la <em>Skáldskaparmál</em>, le manche est plus court que prévu parce que le dieu Loki, transformé en mouche, a mordu la paupière du forgeron Brokkr au moment critique, l'obligeant à interrompre le soufflet.",
+               "Un défaut de fabrication devenu trait canonique de l'objet — Thor doit porter des gants de fer (<em>Járngreipr</em>) rien que pour l'empoigner."]}
+      />
+      <FigureCard
+        name="Les pouvoirs rapportés"
+        role="Ne jamais manquer sa cible"
+        tags={['Retour', 'Ceinture de force']}
+        body={["Le marteau revient dans la main de celui qui le lance, ne manque jamais sa cible, et peut rapetisser pour se cacher sous une tunique. Thor porte aussi une ceinture, <em>Megingjörð</em>, qui double sa force pour le manier.",
+               "Un détail souvent oublié : le marteau ne sert pas qu'au combat. Il <strong>consacre</strong> — bénit un mariage, une naissance, un bûcher funéraire."]}
+      />
+      <FigureCard
+        name="L'inscription de Købelev"
+        role="La seule preuve écrite sur l'objet lui-même"
+        tags={['Runes', 'Découverte de 2014']}
+        body={["Un pendentif retrouvé à Købelev, au Danemark, porte une inscription runique lue comme « ceci est un marteau » — la seule fois où un exemplaire matériel se désigne lui-même, plutôt qu'un texte littéraire qui en parle."]}
+      />
+    </div>
+    <blockquote class="pull-quote" style="margin-top:34px;">
+      <Decode glyphs="rune">Hmar x is</Decode>
+      <cite>Inscription runique du pendentif de Købelev, Danemark, Xe siècle</cite>
+    </blockquote>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où le marteau agit">
+    <StoryBlock
+      num="Récit I"
+      title="La forge et le pari"
+      body={[
+        "Loki, pour réparer une plaisanterie qui a mal tourné, mise sa propre tête contre les nains Sindri et Brokkr : ils ne pourront pas forger d'objets plus merveilleux que ceux des fils d'Ivaldi. Pendant qu'ils travaillent, Loki, changé en mouche, sabote chaque pièce.",
+        "Sur Mjöllnir, sa dernière morsure, à la paupière de Brokkr, interrompt le soufflage un instant de trop : le manche sort plus court que prévu. Malgré le défaut, les dieux jugent le marteau supérieur à tous les autres présents — Loki perd son pari, mais sauve sa tête par un argument de procédure.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Le marteau volé"
+      body={[
+        "Dans la <em>Þrymskviða</em>, Thor se réveille sans son marteau. Le géant Thrym avoue l'avoir enterré à neuf lieues sous terre et exige la déesse Freyja en mariage pour le rendre.",
+        "Sur les conseils de Loki, Thor se déguise en Freyja — voile, robe, marteau caché sous les jupons du repas de noces — et se fait passer pour la mariée. Quand Thrym fait apporter le marteau pour sceller l'union selon la coutume, Thor le récupère et massacre l'assemblée des géants.",
+      ]}
+      quote="Vieux et rouge de colère parut le cœur de Thor sous le voile de mariée."
+      cite="Þrymskviða, Edda poétique"
+    />
+    <StoryBlock
+      num="Récit III"
+      title="Le duel contre Hrungnir"
+      body="Le marteau tue le géant Hrungnir en plein duel, mais un fragment de la pierre à aiguiser de son adversaire reste fiché dans le crâne de Thor — un rappel que même l'arme invincible laisse des traces sur celui qui la manie."
+    />
+    <StoryBlock
+      num="Récit IV"
+      title="Consacrer plutôt que frapper"
+      body="Au-delà du combat, le marteau bénit : il consacre le bûcher de Baldr, et la tradition rapporte qu'on l'invoquait pour sanctifier les mariages — un usage rituel que la seule image du dieu guerrier laisse souvent de côté."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Ce qu'un millier d'amulettes racontent"
+    intro="La section propre à cette série. Ici, elle porte sur un corpus réel plutôt que sur une hypothèse : l'archéologie des amulettes-marteaux est l'une des mieux documentées d'Europe du Nord."
+    scrollFx="mjollnirForge">
+    <div class="card-grid compact">
+      <MiniCard title="Un corpus d'environ mille pièces" tag="Scandinavie, îles Britanniques, Baltique" body="Argent, bronze, fer : les amulettes en forme de marteau sont l'un des objets funéraires les plus répandus de l'âge viking tardif." />
+      <MiniCard title="Le moule de Trendgaarden" tag="Danemark" body="Un moule capable de couler à la fois une croix chrétienne et un marteau de Thor — la preuve matérielle d'une période de transition religieuse où artisans et clients pouvaient hésiter entre les deux symboles." />
+      <MiniCard title="La fonte à la cire perdue" tag="Orfèvrerie viking" body="Les petites amulettes se coulent en série dans des moules de pierre ou d'argile, une technique rapide adaptée à une production de masse pour un usage funéraire et votif." />
+      <MiniCard title="Le manche court, un vrai problème d'équilibre" tag="Métallurgie" body="Un marteau de guerre ou d'outil réel exige un rapport précis entre le poids de la tête et la longueur du manche : le défaut « mythologique » du récit correspond à une contrainte bien réelle de forge." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Une remarque de méthode : contrairement à Excalibur, il ne s'agit pas ici de décrire un
+      savoir-faire pour un objet absent — le corpus matériel est là, mesurable, daté. La
+      question n'est pas « une telle chose est-elle fabricable ? » mais « ce marteau divin
+      est-il autre chose qu'une amulette agrandie par le récit ? ».
+    </p>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Candidats matériels"
+    title="Pas une relique, mille amulettes"
+    intro="Aucun exemplaire ne prétend être le marteau de Thor lui-même — la logique de cette page est inverse à celle du Graal ou de la Lance Sacrée : un objet mythique, des centaines de témoins matériels modestes.">
+    <Timeline items={[
+      { year: 'IXe-XIe siècle', title: 'Production des amulettes', body: "Le pic de fabrication et de port des pendentifs-marteaux, dans toute la Scandinavie et sur les routes vikings jusqu'aux îles Britanniques." },
+      { year: '2014', title: 'La découverte de Købelev', body: "Un pendentif runique inscrit « ceci est un marteau » est mis au jour au Danemark — la pièce la plus explicite du corpus." },
+      { year: 'v. 1220-1270', title: 'Les Eddas', body: "Snorri Sturluson puis le Codex Regius fixent par écrit les récits qui expliquent l'objet, dans une Islande déjà christianisée." },
+      { year: '1973', title: 'Reconnaissance légale de l\'Ásatrú en Islande', body: "Le paganisme nordique moderne obtient un statut religieux officiel, avec le marteau comme symbole central." },
+    ]} />
+    <div class="card-grid" style="margin-top:44px;">
+      <InfoCard
+        title="Musées scandinaves"
+        sub="Copenhague, Stockholm, Oslo"
+        body="Les principales collections d'amulettes-marteaux sont conservées et exposées dans les grands musées nationaux d'archéologie d'Europe du Nord."
+      />
+      <InfoCard
+        title="Une diffusion qui suit les routes vikings"
+        sub="Îles Britanniques, Russie"
+        body="Des exemplaires retrouvés jusqu'en Angleterre et le long des routes fluviales russes documentent l'ampleur du commerce et des raids vikings, pas seulement leur foyer scandinave."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la légende au phénomène"
+    title="Du panthéon viking au blockbuster">
+    <div class="card-grid compact">
+      <MiniCard title="Marvel Comics" tag="1962" body="Le comics invente le critère « digne de le soulever » — absent des sources norroises — qui deviendra la version la plus connue du grand public mondial." />
+      <MiniCard title="Le cinéma Marvel" tag="Depuis 2011" body="Les films Thor généralisent cette mécanique de « dignité » à l'échelle planétaire, loin devant la connaissance directe des Eddas." />
+      <MiniCard title="Jeux vidéo" tag="God of War Ragnarök et autres" body="Le marteau reste un objet jouable récurrent, souvent réinventé avec des pouvoirs éloignés des textes d'origine." />
+      <MiniCard title="Bijouterie et tatouage" tag="Depuis les années 1990" body="Le pendentif redevient un objet porté, comme à l'âge viking — mais désormais chargé de significations identitaires que l'archéologie ne peut pas trancher à la place de qui le porte." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Ici, la question n'est pas seulement littéraire : un vrai corpus matériel existe, daté et localisé, à côté du récit.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Un objet mythique, un symbole bien réel"
+      body={[
+        "Aucune arme divine n'a jamais existé. Mais l'amulette-marteau, elle, est l'un des objets funéraires et votifs les mieux attestés de l'âge viking tardif — plusieurs centaines d'exemplaires recensés, avec une répartition géographique et chronologique bien documentée.",
+        "L'inscription de Købelev est la seule pièce du corpus qui se désigne elle-même comme un marteau : elle confirme que le port de ces amulettes avait un sens religieux explicite pour ceux qui les portaient, et pas seulement décoratif.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Un basculement religieux documenté par un simple moule"
+      body="Le moule bivalve de Trendgaarden, capable de couler indifféremment une croix ou un marteau, est une pièce rare et précieuse : elle montre, à l'échelle d'un seul atelier, la coexistence commerciale du paganisme nordique finissant et du christianisme montant — un fait daté et matériel, pas une reconstitution."
+    />
+    <TheoryCard
+      title="Les amulettes sont des objets de dévotion à Thor"
+      level="consensus"
+      status="Consensus"
+      body="La fonction religieuse et protectrice des pendentifs-marteaux, en lien avec le culte de Thor, est la lecture dominante en archéologie scandinave."
+      attrib="Position dominante de l'archéologie nordique"
+    />
+    <TheoryCard
+      title="Un lien étymologique avec le slave molnija (l'éclair)"
+      level="plausible"
+      status="Hypothèse discutée"
+      body="Le rapprochement entre Mjöllnir et les mots slaves désignant la foudre suggère une parenté indo-européenne plus large avec d'autres armes de dieux du tonnerre (Perун, Indra) — une piste comparative sérieuse, non tranchée."
+      attrib="Hypothèse discutée en linguistique comparée"
+    />
+    <TheoryCard
+      title="Porter un marteau protégeait activement de la conversion chrétienne"
+      level="folklore"
+      status="Surinterprétation"
+      body="Une lecture parfois avancée dans la vulgarisation, that le port du marteau aurait été un acte de résistance organisée — le moule de Trendgaarden suggère plutôt une coexistence commerciale pragmatique qu'un combat symbolique délibéré."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le marteau fait encore">
+    <HeritageBlock
+      title="Une religion reconnue"
+      body="L'Ásatrú et les mouvements païens nordiques contemporains, officiellement reconnus en Islande, au Danemark et en Norvège, utilisent le marteau comme symbole central de culte — un usage religieux vivant, pas une reconstitution folklorique."
+    />
+    <HeritageBlock
+      title="Des cérémonies toujours célébrées"
+      body="Des communautés Ásatrú contemporaines intègrent le marteau dans des mariages et des rites de passage, en écho direct au rôle consécratoire que lui prêtait déjà la <em>Þrymskviða</em>."
+    />
+    <HeritageBlock
+      title="Un symbole disputé"
+      body="Depuis plusieurs décennies, des mouvances d'extrême droite s'approprient le marteau et d'autres symboles nordiques hors de tout contexte religieux — un usage que la majorité des pratiquants Ásatrú rejette et combat activement."
+    />
+    <CautionBox>
+      Cette page décrit un symbole religieux aujourd'hui pratiqué de bonne foi par des
+      communautés reconnues, et simultanément détourné par des mouvances identitaires
+      violentes qui n'ont rien demandé aux Vikings. Confondre les deux usages serait aussi
+      injuste envers les pratiquants d'aujourd'hui que de laisser le second passer sous
+      silence.
+    </CautionBox>
+  </Section>
+</PageLayout>

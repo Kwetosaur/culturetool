@@ -1,0 +1,272 @@
+---
+/*
+  Le Koh-i-Noor — neuvième page de la série « Objets Légendaires du Monde ».
+
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections dans cet
+  ordre, badge de nature dans le hero. Cas rare dans la série : la chaîne de
+  possession est presque continue depuis 1739, ce qui déplace le débat de
+  « l'objet a-t-il existé ? » vers « à qui appartient-il légitimement ? » —
+  contentieux de restitution à assumer factuellement, jamais à trancher à la
+  place des États demandeurs ni du Royaume-Uni.
+
+  Effets (docs/plans/plan-effets.md) : data-egg="kohinoor" sur <body> et
+  data-scroll-fx="kohINoorFacettes" sur #description, tous deux vers
+  kohINoorFacettes() dans public/effects.js — un diamant dont les facettes
+  s'allument une à une, chacune projetant un éclat bref. Pas de fx-decode :
+  aucune inscription portée par la pierre elle-même.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Éclat de diamant et velours royal : la matière de la pierre plutôt que la
+   géographie du sujet, principe visuel propre à la série objets. */
+const palette = {
+  bg: '#12111a',
+  'bg-deep': '#08070d',
+  surface: '#1c1a29',
+  'surface-alt': '#252235',
+  border: '#453f5e',
+  ink: '#f7f5fc',
+  text: '#ddd8ea',
+  'text-dim': '#9d94b8',
+  accent: '#cfd8f0',
+  'accent-bright': '#f0f4ff',
+  accent2: '#5a3f8a',
+  'accent2-bright': '#8a6ac0',
+  verdict: '#3a2f5a',
+  'verdict-bright': '#6a4f9a',
+  glow: 'rgba(207,216,240,0.25)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Koh-i-Noor', sub: 'Persan — « Montagne de lumière »',
+    body: "Le nom serait apparu en 1739, quand Nader Shah, découvrant la pierre cachée dans le turban de l'empereur moghol Muhammad Shah, se serait exclamé en la voyant — une anecdote largement reprise, mais dont l'authenticité même est débattue par les historiens.",
+  },
+  {
+    num: 'II', title: 'Une légende reconstruite', sub: 'Textes sanskrits invoqués a posteriori',
+    body: "Des récits populaires relient la pierre à des textes indiens anciens ou au joyau mythique Syamantaka. Les historiens contemporains jugent ces filiations largement fabriquées après coup, une fois le diamant devenu célèbre.",
+  },
+  {
+    num: 'III', title: 'Une histoire sûre à partir de 1739', sub: 'Recherche historique récente',
+    body: "Les travaux historiques les plus récents (Dalrymple et Anand, 2017) font remonter la documentation fiable de la pierre au seul XVIIIe siècle — tout ce qui précède relève de la reconstruction légendaire.",
+  },
+];
+---
+<PageLayout
+  title="Le Koh-i-Noor"
+  serie="Objets Légendaires du Monde"
+  description="105,6 carats, une malédiction réputée frapper ses possesseurs masculins, et un contentieux de restitution actif entre l'Inde, le Pakistan, l'Iran et l'Afghanistan. L'histoire sûre de la pierre ne remonte qu'à 1739 — tout ce qu'on lui prête avant relève de la légende reconstruite."
+  href="objet-koh-i-noor.html"
+  egg="kohinoor"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="GOLCONDE · LONDRES"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>le Saint Graal</strong>"
+>
+  <p class="subtitle" slot="hero">« Montagne de lumière »</p>
+  <p class="tagline" slot="hero">
+    105,6 carats, une malédiction réputée frapper tout possesseur masculin — et un
+    contentieux de restitution que quatre États revendiquent aujourd'hui encore.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet réel, pouvoirs légendaires"
+    note="Le diamant existe, se trouve à la Tour de Londres, et sa chaîne de possession est bien documentée depuis 1739 : ce qui relève de la légende, c'est la malédiction qu'on lui prête et son pedigree antique reconstruit après coup."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Une pierre plus jeune que sa légende"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet. Ici, la recherche historique récente a explicitement démonté une grande partie du récit ancien qu'on prêtait à la pierre.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Une part importante du travail de Dalrymple et Anand (2017) a consisté à démêler,
+      document par document, ce qui pouvait vraiment être attribué au Koh-i-Noor de ce qui
+      relevait de confusions avec d'autres pierres indiennes tout aussi célèbres — un travail
+      d'enquête directement dans l'esprit de cette série.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et réputation"
+    title="Ce que la pierre est, ce qu'on lui prête"
+    intro="Rédigé en discours rapporté pour tout ce qui touche à la malédiction — un fait de croyance et de pratique institutionnelle, pas une propriété physique du diamant."
+    scrollFx="kohINoorFacettes">
+    <div class="card-grid wide">
+      <FigureCard
+        name="La pierre aujourd'hui"
+        role="105,6 carats, taille ovale"
+        tags={['Incolore', 'Recoupée en 1852']}
+        body="Le diamant pèse aujourd'hui 105,6 carats, contre environ 186 carats avant la recoupe britannique de 1852, ordonnée par le prince Albert pour en augmenter l'éclat selon le goût occidental — une opération qui a réduit sa masse de près de 40 %."
+      />
+      <FigureCard
+        name="La malédiction rapportée"
+        role="Une croyance, une pratique institutionnelle réelle"
+        tags={['Tradition', 'Politique de la Couronne']}
+        body={["La légende veut que la pierre porte malheur, voire la mort, à tout possesseur masculin, tout en portant chance aux femmes ou aux divinités qui la portent.",
+               "Fait vérifiable, distinct de la croyance elle-même : la famille royale britannique applique depuis des générations la règle de ne la faire porter que par des reines ou des reines consorts, jamais par un roi régnant."]}
+      />
+      <FigureCard
+        name="Origine géologique"
+        role="La mine de Kollur"
+        tags={['Golconde', 'Inde']}
+        body="Par comparaison stylistique avec d'autres pierres indiennes bien documentées, les spécialistes situent son extraction probable à la mine de Kollur, dans la région de Golconde — sans qu'aucun registre d'extraction ne nomme spécifiquement cette pierre."
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où la pierre change de mains">
+    <StoryBlock
+      num="Récit I"
+      title="Nader Shah et le turban"
+      body="En 1739, le conquérant perse Nader Shah met à sac Delhi et découvre, selon l'anecdote la plus répétée, que l'empereur moghol Muhammad Shah dissimule la pierre dans son turban. Il lui propose un échange de turbans en signe de réconciliation — puis, en le déroulant, découvre le diamant et lui donne son nom actuel."
+      quote="Koh-i-Noor — « Montagne de lumière »."
+      cite="Exclamation attribuée à Nader Shah, anecdote rapportée mais contestée"
+    />
+    <StoryBlock
+      num="Récit II"
+      title="De Kaboul à Lahore"
+      body="Après l'assassinat de Nader Shah en 1747, la pierre suit son général Ahmad Shah Durrani, fondateur de l'Afghanistan moderne, avant de passer, au début du XIXe siècle, entre les mains du maharaja sikh Ranjit Singh, qui la porte ouvertement comme insigne de pouvoir à la cour de Lahore."
+    />
+    <StoryBlock
+      num="Récit III"
+      title="Le traité de Lahore, 1849"
+      body={[
+        "Après les guerres anglo-sikhes, la Compagnie britannique des Indes orientales impose au jeune maharaja Duleep Singh — âgé de dix ans — le traité de Lahore, qui inclut la cession forcée du diamant à la Couronne britannique.",
+        "L'épisode reste aujourd'hui l'un des exemples les plus cités de transfert colonial obtenu sous contrainte, impliquant un souverain mineur, dans les débats sur la restitution des biens culturels.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit IV"
+      title="Une exposition qui déçoit, une recoupe qui suit"
+      body="Présenté à la Grande Exposition de Londres en 1851, le diamant, encore taillé à l'indienne, déçoit une partie du public et de la presse par son manque d'éclat. L'année suivante, le prince Albert le fait recouper par le lapidaire Coster, à Amsterdam — au prix d'une perte de masse considérable, déjà critiquée à l'époque par certains experts."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Ce que taille et recouper un diamant veut vraiment dire"
+    intro="La section propre à cette série. Ici, l'objet est authentique de bout en bout — la question technique porte sur ce que sa transformation en 1852 a réellement coûté et permis.">
+    <div class="card-grid compact">
+      <MiniCard title="La mine de Kollur" tag="Golconde, Inde" body="Avant les découvertes brésiliennes puis sud-africaines, les mines alluviales de la région de Golconde ont été, pendant des siècles, l'une des rares sources connues de diamants au monde." />
+      <MiniCard title="Taille indienne ancienne" tag="Avant 1852" body="La coupe d'origine, dite « à l'indienne », privilégiait la conservation du poids brut sur la brillance symétrique recherchée par la joaillerie occidentale du XIXe siècle." />
+      <MiniCard title="La taille brillant" tag="Recoupe de 1852" body="La retaille en ovale à facettes, réalisée à Amsterdam, améliore le jeu de lumière au prix d'une perte de matière importante : retirer les inclusions et gagner en symétrie coûte toujours du poids." />
+      <MiniCard title="Pourquoi une pierre « perd » 40 % de son poids" tag="Lapidairerie" body="Chaque facette taillée retire de la matière de façon irréversible : améliorer l'éclat d'une pierre brute implique presque toujours un compromis avec sa taille finale — un arbitrage que la recoupe de 1852 a tranché en faveur de l'éclat." />
+    </div>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Une chaîne de possession presque continue"
+    title="Peu d'objets de la série ont un dossier aussi complet">
+    <Timeline items={[
+      { year: '1739', title: 'Delhi, la prise par Nader Shah', body: "L'épisode fondateur du nom, rapporté par la tradition et discuté par les historiens." },
+      { year: '1747', title: 'Ahmad Shah Durrani', body: "À la mort de Nader Shah, son général hérite de la pierre et fonde l'État afghan moderne." },
+      { year: 'v. 1813', title: 'Ranjit Singh', body: "Le maharaja sikh acquiert le diamant et le porte publiquement à la cour de Lahore." },
+      { year: '1849', title: 'Le traité de Lahore', body: "Cession forcée à la Couronne britannique après l'annexion du Pendjab, imposée au jeune maharaja Duleep Singh." },
+      { year: '1851', title: 'La Grande Exposition de Londres', body: "Présentation publique, accueillie avec une déception largement rapportée par la presse de l'époque." },
+      { year: '1852', title: 'La recoupe', body: "Sur ordre du prince Albert, le lapidaire Coster retaille la pierre à Amsterdam, réduisant son poids de près de 40 %." },
+      { year: '1937 puis 2023', title: 'Couronnes successives', body: "Sertie dans la couronne de la reine mère Elizabeth en 1937 ; en 2023, la reine consort Camilla choisit délibérément de ne pas la porter à son couronnement." },
+    ]} />
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la légende au phénomène"
+    title="Un joyau devenu symbole politique">
+    <div class="card-grid compact">
+      <MiniCard title="Documentaires et essais" tag="Depuis les années 2000" body="Le diamant fait l'objet de nombreux ouvrages et documentaires, dont l'enquête approfondie de William Dalrymple et Anita Anand (2017), qui a renouvelé la connaissance publique de son histoire réelle." />
+      <MiniCard title="Un symbole dans le débat colonial" tag="Inde, Pakistan, Iran, Afghanistan" body="Le diamant revient régulièrement dans le débat public de plusieurs pays comme symbole concret des demandes de restitution des biens pris pendant la période coloniale." />
+      <MiniCard title="La Tour de Londres" tag="Tourisme" body="Exposé parmi les joyaux de la Couronne, il reste l'une des pièces les plus visitées de la Tour de Londres, souvent avec un panneau évoquant explicitement le contentieux qui l'entoure." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Sans se substituer aux États qui en réclament la restitution ni au gouvernement britannique qui la conserve : voici ce que l'histoire documente.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Une légende ancienne largement reconstruite"
+      body={[
+        "Les recherches historiques récentes montrent que la plupart des récits reliant le Koh-i-Noor à des textes ou des personnages indiens antiques ne résistent pas à l'examen des sources : ils ont été attachés à la pierre après qu'elle est devenue célèbre au XVIIIe siècle, pas transmis depuis l'Antiquité.",
+        "L'histoire documentée avec certitude ne commence qu'en 1739, avec la prise de Delhi par Nader Shah — un cas où la recherche a activement réduit, plutôt qu'étoffé, l'ancienneté supposée d'un objet.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Une malédiction sans preuve, une pratique bien réelle"
+      body="Aucune étude sérieuse n'a jamais établi de lien causal entre la possession de la pierre et le sort de ses propriétaires masculins. Ce qui est en revanche vérifiable, c'est que la croyance elle-même a durablement influencé les usages de la Couronne britannique, qui ne l'a plus fait porter que par des femmes depuis son entrée dans les joyaux royaux."
+    />
+    <TheoryCard
+      title="L'histoire documentée de la pierre commence en 1739"
+      level="consensus"
+      status="Consensus"
+      body="Position défendue par les historiens contemporains les plus récents ayant travaillé sur les sources primaires, dont Dalrymple et Anand."
+      attrib="Recherche historique récente (2017)"
+    />
+    <TheoryCard
+      title="La pierre proviendrait de la mine de Kollur"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Fondée sur la comparaison avec d'autres diamants indiens documentés de la même région et de la même période, sans registre d'extraction nommant spécifiquement cette pierre."
+      attrib="Hypothèse discutée en gemmologie historique"
+    />
+    <TheoryCard
+      title="La pierre serait mentionnée dans des textes sanskrits vieux de plusieurs millénaires"
+      level="folklore"
+      status="Écarté par la recherche récente"
+      body="Cette filiation, longtemps répétée dans la vulgarisation, est aujourd'hui considérée par les historiens comme une reconstruction a posteriori plutôt qu'une continuité documentée."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le diamant fait encore">
+    <HeritageBlock
+      title="Un contentieux de restitution ouvert"
+      body="L'Inde, le Pakistan, l'Iran et l'Afghanistan ont chacun, à des degrés divers, revendiqué le retour de la pierre ; le gouvernement britannique maintient une position constante de refus, invoquant la légalité de son acquisition en 1849."
+    />
+    <HeritageBlock
+      title="Une décision de couronnement récente"
+      body="En 2023, la reine consort Camilla a délibérément choisi de ne pas porter le Koh-i-Noor pour son couronnement, une décision largement rapportée comme un geste de prudence diplomatique face au contentieux en cours."
+    />
+    <HeritageBlock
+      title="Un cas d'école du débat sur les biens coloniaux"
+      body="Le dossier du Koh-i-Noor est régulièrement cité aux côtés des bronzes du Bénin ou des marbres du Parthénon dans les discussions plus larges sur la restitution des objets acquis pendant la période coloniale."
+    />
+    <CautionBox>
+      Cette page documente une chaîne de possession et un contentieux réels, sans se
+      substituer ni aux États qui réclament la pierre ni au Royaume-Uni qui la conserve : ce
+      n'est pas à une encyclopédie de trancher une question relevant de la diplomatie et du
+      droit international, seulement de rapporter fidèlement les positions en présence.
+    </CautionBox>
+  </Section>
+</PageLayout>

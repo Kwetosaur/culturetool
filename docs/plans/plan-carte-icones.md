@@ -348,7 +348,7 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 | Page | Statut | Icône |
 |---|---|---|
 | Excalibur | ✅ fait | Épée plantée verticalement dans une pierre |
-| Mjöllnir | icône prête | Marteau à manche court, tête massive, de profil |
+| Mjöllnir | ✅ fait | Marteau à manche court, tête massive, de profil |
 | Le Saint Graal | icône prête | Calice à pied, simple |
 | La Lance Sacrée | icône prête | Fer de lance long et fin, hampe coupée |
 | La Chambre d'Ambre | icône prête | Fragment de panneau mural orné, angle brisé |
@@ -367,13 +367,13 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 | Page | Statut | Icône |
 |---|---|---|
 | La Toison d'Or | icône prête | Peau de mouton suspendue à une branche |
-| Le Cheval de Troie | icône prête | Cheval de bois monté sur roues |
+| Le Cheval de Troie | ✅ fait | Cheval de bois monté sur roues |
 | La Boîte de Pandore | icône prête | **Jarre** (pithos) au couvercle entrouvert — jamais un coffret, c'est tout le propos de la page |
 
 ### Moyen-Orient (4)
 | Page | Statut | Icône |
 |---|---|---|
-| L'Arche d'Alliance | icône prête | Coffre à barres de transport, surmonté de deux ailes |
+| L'Arche d'Alliance | ✅ fait | Coffre à barres de transport, surmonté de deux ailes |
 | La Ménorah du Second Temple | icône prête | Chandelier à sept branches |
 | Zulfiqar | icône prête | Épée à lame bifide, strictement neutre |
 | L'Anneau de Salomon | icône prête | Anneau portant une étoile à six branches |
@@ -381,9 +381,9 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 ### Asie (7)
 | Page | Statut | Icône |
 |---|---|---|
-| Les Trois Trésors impériaux du Japon | icône prête | **Trois coffres fermés alignés** — ne jamais dessiner les objets, qui n'ont jamais été montrés : l'icône dit exactement le sujet de la page |
+| Les Trois Trésors impériaux du Japon | ✅ fait | **Trois coffres fermés alignés** — ne jamais dessiner les objets, qui n'ont jamais été montrés : l'icône dit exactement le sujet de la page |
 | L'Épée de Goujian | icône prête | Épée courte de bronze, lame large, vue de face |
-| Le Koh-i-Noor | icône prête | Diamant taillé, facettes géométriques |
+| Le Koh-i-Noor | ✅ fait | Diamant taillé, facettes géométriques |
 | Le Sceau de jade impérial | icône prête | Sceau carré à poignée sculptée |
 | Le Honjo Masamune | icône prête | Katana dans son fourreau, courbe marquée |
 | Le Vajra | icône prête | Vajra à branches symétriques |
@@ -392,7 +392,7 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 ### Afrique (3)
 | Page | Statut | Icône |
 |---|---|---|
-| Le Tabouret d'or des Ashanti | icône prête | Tabouret à assise incurvée, de profil, sans personnage |
+| Le Tabouret d'or des Ashanti | ✅ fait | Tabouret à assise incurvée, de profil, sans personnage |
 | Les regalia du Dahomey | icône prête | Trône à haut dossier |
 | Le trésor de Lobengula | icône prête | Petit coffre ouvert débordant de perles |
 
@@ -400,13 +400,13 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 | Page | Statut | Icône |
 |---|---|---|
 | Les crânes de cristal | icône prête | Crâne facetté, traits géométriques |
-| La Pierre du Soleil aztèque | icône prête | Disque circulaire à motifs concentriques |
+| La Pierre du Soleil aztèque | ✅ fait | Disque circulaire à motifs concentriques |
 | Le trésor de Moctezuma | icône prête | Barre d'or (lingot) — sobre, c'est la seule pièce réellement retrouvée |
 
 ### Océanie (2)
 | Page | Statut | Icône |
 |---|---|---|
-| L'hameçon de Maui | icône prête | Hameçon courbe **accompagné de 3-4 points d'étoiles** — *voir note de collision ci-dessous* |
+| L'hameçon de Maui | ✅ fait | Hameçon courbe **accompagné de 3-4 points d'étoiles** — *voir note de collision ci-dessous* |
 | Le mere pounamu | icône prête | Massue plate en jade, vue de face |
 
 **⚠️ Collision d'icône à trancher** : l'icône « Hameçon de Maui » est **déjà prévue et

@@ -1,0 +1,324 @@
+---
+/*
+  Arche d'Alliance — deuxième page de la série « Objets Légendaires du Monde ».
+
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections dans cet
+  ordre, badge de nature dans le hero, section #facture qui doit apprendre
+  quelque chose de vrai. Cas particulier signalé dans la liste : c'est le seul
+  objet du corpus dont le texte fondateur (Exode 25) donne à la fois les
+  dimensions et le procédé de fabrication.
+
+  Effets (docs/plans/plan-effets.md) : data-egg="arche" sur <body> et
+  data-scroll-fx="archeCherubins" sur #description, tous deux vers
+  archeCherubins() dans public/effects.js — deux ailes de chérubins qui se
+  déploient au-dessus du coffre, qui ne s'ouvre jamais. Pas de fx-decode : le
+  texte fondateur n'est pas une inscription portée par l'objet lui-même.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Or et acacia sur fond de tente nocturne : la matière de l'objet plutôt que
+   la géographie du sujet, principe visuel propre à la série objets. */
+const palette = {
+  bg: '#161226',
+  'bg-deep': '#0b0916',
+  surface: '#211c34',
+  'surface-alt': '#2a2340',
+  border: '#4a3f6b',
+  ink: '#f7f0e0',
+  text: '#ddd4e8',
+  'text-dim': '#9b8fb8',
+  accent: '#d8b45a',
+  'accent-bright': '#f0d27a',
+  accent2: '#8a5a2a',
+  'accent2-bright': '#c9982f',
+  verdict: '#6b4a9c',
+  'verdict-bright': '#9a72d4',
+  glow: 'rgba(216,180,90,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Aron HaBrit', sub: 'Hébreu — « le coffre de l\'alliance »',
+    body: "Le nom le plus courant dans le texte biblique. La Bible hébraïque emploie aussi <strong>Aron HaEdut</strong>, « le coffre du témoignage », les deux désignant le même objet sous deux angles : le pacte qu'il scelle, et les tables qu'il conserve.",
+  },
+  {
+    num: 'II', title: 'Exode 25', sub: 'Le texte fondateur',
+    body: "Un cas unique dans cette série : le texte ne se contente pas de nommer l'objet, il en donne les <strong>dimensions exactes</strong> (deux coudées et demie de long, une et demie de large et de haut) et le mode de fabrication, comme un cahier des charges.",
+  },
+  {
+    num: 'III', title: "L'objet et le texte", sub: 'Deux anciennetés à séparer',
+    body: "Le récit situe la fabrication au Sinaï, vers le XIII<sup>e</sup> siècle av. J.-C. Mais la rédaction du passage, selon la recherche biblique dominante, appartient à la <strong>source sacerdotale</strong>, compilée des siècles plus tard, à l'époque de l'exil à Babylone ou après.",
+  },
+];
+---
+<PageLayout
+  title="L'Arche d'Alliance"
+  serie="Objets Légendaires du Monde"
+  description="Le seul objet de la série dont le texte fondateur donne les dimensions et le mode de fabrication — Exode 25. Aucune trace archéologique, disparue des sources après 587 av. J.-C., revendiquée à Aksoum où elle n'est montrée à personne."
+  href="objet-arche-alliance.html"
+  egg="arche"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="SINAÏ · JÉRUSALEM · AKSOUM"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>les Trois Trésors impériaux du Japon</strong>"
+>
+  <p class="subtitle" slot="hero">Aron HaBrit · ארון הברית</p>
+  <p class="tagline" slot="hero">
+    Le seul objet de cette série dont le texte fondateur donne les dimensions et le mode de
+    fabrication — et qui disparaît des sources sans que personne ne sache jamais où.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Relique contestée"
+    note="Un texte biblique d'une précision inhabituelle, aucune trace archéologique jamais retrouvée, et une revendication vivante à Aksoum qu'aucune méthode extérieure ne peut vérifier."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Un texte qui donne un plan"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet. Ici, le texte est exceptionnellement précis — ce qui ne le rend pas pour autant contemporain des événements qu'il raconte.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Le récit place la fabrication au pied du Sinaï, sous la direction de Betsaléel. La
+      critique biblique situe la rédaction du passage bien plus tard — un décalage qui rappelle
+      celui d'Excalibur entre le roi supposé et le nom de son épée, mais compté ici en
+      siècles supplémentaires.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et contenu"
+    title="Ce que le texte décrit, au coudée près"
+    intro="Aucune autre relique de la série n'est décrite avec cette précision technique : bois, dimensions, dorure, anneaux de transport. Rédigé en discours rapporté — c'est ce que le texte prescrit, non ce qu'une fouille a mesuré."
+    scrollFx="archeCherubins">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Le coffre"
+        role="Exode 25:10-11"
+        tags={['Bois d\'acacia', 'Or pur']}
+        body={["Un coffre de bois d'acacia — l'essence disponible dans le désert du Sinaï — plaqué d'or à l'intérieur et à l'extérieur, ceint d'une moulure d'or. Une dimension pratique : le bois porte la structure, l'or ne fait qu'habiller.",
+               "Quatre anneaux d'or aux quatre pieds, dans lesquels passent deux barres, elles aussi plaquées d'or : elles ne doivent <strong>jamais être retirées</strong>, pour que personne n'ait à toucher directement le coffre."]}
+      />
+      <FigureCard
+        name="Les chérubins"
+        role="Le vrai lieu du pouvoir"
+        tags={['Or « d\'un seul tenant »', 'Présence']}
+        body={["Sur le couvercle — le <em>kapporet</em> — deux chérubins d'or battu se font face, ailes déployées et jointes au-dessus. Le texte est explicite sur le procédé : martelés à même une seule feuille, pas coulés séparément.",
+               "« C'est là que je te rencontrerai », dit le texte : l'espace entre les ailes, pas l'objet lui-même, est désigné comme le lieu de la présence."]}
+      />
+      <FigureCard
+        name="Ce qu'elle contenait"
+        role="Une réponse qui varie selon les livres"
+        tags={['Tables de la Loi', 'Traditions divergentes']}
+        body={["Le Premier Livre des Rois, au moment de son installation dans le Temple de Salomon, est catégorique : elle ne contenait <strong>que</strong> les deux tables de pierre.",
+               "L'Épître aux Hébreux, des siècles plus tard, y ajoute un vase de manne et le bâton d'Aaron — un enrichissement tardif de la tradition, pas une description d'origine."]}
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où l'arche agit">
+    <StoryBlock
+      num="Récit I"
+      title="Les eaux du Jourdain"
+      body={[
+        "Avant même d'entrer en Canaan, le peuple doit franchir le Jourdain en crue. Les prêtres qui portent l'arche entrent les premiers dans le lit du fleuve : l'eau, dit le texte, s'arrête de couler en amont, et le peuple traverse à pied sec.",
+        "La scène installe d'emblée le rôle de l'objet dans le récit : ce n'est jamais l'arme d'un individu, comme Excalibur, mais un <strong>instrument collectif</strong> porté par une caste sacerdotale, jamais par un héros seul.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Les murailles de Jéricho"
+      body="Sept prêtres, sept trompes, sept jours : l'arche est portée en procession autour de la ville fortifiée, une fois par jour pendant six jours, sept fois le septième. Au septième tour, un grand cri, une sonnerie de trompe — et les murailles s'effondrent."
+      quote="Le peuple poussa de grands cris, et les murailles s'écroulèrent."
+      cite="Josué 6"
+    />
+    <StoryBlock
+      num="Récit III"
+      title="Dans le temple de Dagon"
+      body={[
+        "Capturée par les Philistins après une défaite à Aphek, l'arche est déposée dans le temple de Dagon à Ashdod, aux pieds de la statue du dieu — un geste de soumission rituelle classique dans l'Antiquité : le dieu vaincu sous le dieu vainqueur.",
+        "Le matin suivant, la statue de Dagon gît face contre terre devant l'arche. On la relève. Le second matin, elle gît de nouveau, tête et mains brisées sur le seuil. Des épidémies frappent les villes philistines qui hébergent l'objet, jusqu'à ce qu'elles le renvoient sur un chariot tiré par deux vaches, accompagné d'une offrande de réparation.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit IV"
+      title="La mort d'Ouza"
+      body={[
+        "Sous David, l'arche est ramenée vers Jérusalem sur un chariot. À un moment où les bœufs trébuchent, Ouza tend la main pour la retenir — et meurt sur place, selon le texte, pour avoir touché ce que la loi de transport interdisait de toucher directement.",
+        "L'épisode explique, en creux, la fonction des barres de transport permanentes décrites dans Exode 25 : ce ne sont pas un détail d'ébénisterie, c'est la condition pour que l'objet reste manipulable sans être touché.",
+      ]}
+      quote="David eut peur de l'Éternel ce jour-là."
+      cite="2 Samuel 6"
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Dorer un coffre de bois, au bronze récent"
+    intro="La section propre à cette série. Le texte prescrit un procédé précis — et ce procédé, lui, est parfaitement documenté par l'archéologie du Proche-Orient ancien, indépendamment de l'existence de l'objet.">
+    <div class="card-grid compact">
+      <MiniCard title="Le bois d'acacia" tag="Shittim" body="Une essence dense, résistante aux insectes et à la pourriture, disponible dans le désert du Sinaï et du Néguev — un choix pratique autant que symbolique pour un sanctuaire itinérant." />
+      <MiniCard title="La dorure" tag="Feuille d'or" body="L'or est martelé en feuilles très fines puis fixé au bois par de petits clous ou un liant : une technique attestée dans tout le Proche-Orient ancien, pas une invention du récit." />
+      <MiniCard title="« D'un seul tenant »" tag="Miqshah" body="Le texte précise que les chérubins sont d'orfèvrerie martelée (<em>miqshah</em>), et non coulés en plusieurs pièces assemblées — une distinction technique réelle entre deux savoir-faire de l'orfèvrerie ancienne." />
+      <MiniCard title="Comparanda égyptiens" tag="XIVe s. av. J.-C." body="Les coffres et chapelles de bois doré retrouvés dans la tombe de Toutânkhamon, contemporains de la période où le récit situe l'Exode, montrent que la technique décrite était parfaitement maîtrisée dans la région." />
+      <MiniCard title="Les coudées" tag="Unité de mesure" body="Une coudée égale environ 45 cm : l'arche prescrite mesure donc environ 1,1 m de long sur 0,7 m de large et de haut — un coffre transportable par quatre hommes, pas un monument." />
+      <MiniCard title="Les barres permanentes" tag="Transport rituel" body="Des barres qu'on ne retire jamais : une solution technique à une contrainte religieuse, pas un oubli de conception — c'est tout le sujet du récit d'Ouza." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Une remarque de méthode : rien dans la description technique de l'arche n'est
+      irréaliste pour son époque supposée. Un coffre de bois doré à l'or battu, avec anses
+      de transport fixes, est un objet parfaitement fabricable au bronze récent — <strong>ce
+      que l'archéologie ne trouve pas, c'est l'arche elle-même</strong>, pas la vraisemblance
+      de sa fabrication.
+    </p>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Candidats matériels"
+    title="Une chaîne datée, puis un silence"
+    intro="Peu d'objets de la série ont une chronologie de possession aussi précisément racontée par leurs propres sources — et peu disparaissent aussi nettement des mêmes sources.">
+    <Timeline items={[
+      { year: 'v. 1250 av. J.-C.', title: 'Fabrication au Sinaï', body: "Selon le récit de l'Exode, sous la direction de Betsaléel." },
+      { year: 'v. 1200 av. J.-C.', title: 'Jéricho', body: "L'arche précède l'entrée en Canaan." },
+      { year: 'v. 1050 av. J.-C.', title: 'Capturée à Aphek', body: "Prise par les Philistins, exposée à Ashdod, puis renvoyée." },
+      { year: 'v. 1000 av. J.-C.', title: 'Montée à Jérusalem', body: "David la fait entrer dans la ville, en dansant devant elle." },
+      { year: 'v. 950 av. J.-C.', title: 'Le Temple de Salomon', body: "Installée dans le Saint des Saints." },
+      { year: '587 av. J.-C.', title: 'Dernière mention datable', body: "Le Temple est détruit par Nabuchodonosor II ; les sources bibliques ne mentionnent plus l'arche après cette date, sans jamais dire ce qu'elle est devenue." },
+      { year: 'XIVe s. apr. J.-C.', title: 'Le Kebra Nagast', body: "Le texte éthiopien fixe la légende de Ménélik I<sup>er</sup>, fils de Salomon et de la reine de Saba, emportant l'arche à Aksoum." },
+      { year: 'Aujourd\'hui', title: 'Sainte-Marie-de-Sion', body: "Gardée, selon l'Église éthiopienne, par un unique moine qui ne la quitte jamais et que personne d'autre n'est autorisé à voir." },
+    ]} />
+    <div class="card-grid" style="margin-top:44px;">
+      <InfoCard
+        title="Le mont Nebo"
+        sub="2 Maccabées 2"
+        body="Un texte plus tardif rapporte que le prophète Jérémie, avant la chute de Jérusalem, aurait caché l'arche dans une grotte du mont Nebo — un récit de sauvetage, sans confirmation indépendante."
+      />
+      <InfoCard
+        title="Sous le mont du Temple"
+        sub="Tradition rabbinique"
+        body="Une autre tradition attribue au roi Josias l'ordre de dissimuler l'arche dans une chambre souterraine du Temple, en prévision d'une destruction qu'il pressentait."
+      />
+      <InfoCard
+        title="Aksoum, Éthiopie"
+        sub="Revendication vivante"
+        body="La seule revendication contemporaine : l'Église éthiopienne affirme la posséder depuis trois mille ans, mais ne la montre — ni ne la laisse examiner — à personne, y compris à ses propres évêques."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la légende au phénomène"
+    title="Un nom que le cinéma a rendu plus célèbre que le texte">
+    <div class="card-grid compact">
+      <MiniCard title="Les Aventuriers de l'arche perdue" tag="Cinéma · 1981" body="Le film de Spielberg fixe, pour un public mondial, l'image d'une arche foudroyante, gardée par les nazis — une fiction d'aventure, pas une lecture du texte biblique." />
+      <MiniCard title="La confusion avec l'arche de Noé" tag="Idée reçue" body="Deux objets bibliques distincts, deux mots hébreux différents (<em>aron</em>, <em>tevah</em>), régulièrement confondus dans la culture populaire au seul mot commun d'« arche »." />
+      <MiniCard title="L'archéologie de fiction" tag="Documentaires" body="Plusieurs chercheurs autoproclamés (dont Ron Wyatt, dans les années 1980) ont annoncé l'avoir localisée sous Jérusalem — aucune de ces annonces n'a résisté à un examen indépendant." />
+      <MiniCard title="Tourisme religieux" tag="Aksoum" body="L'église Sainte-Marie-de-Sion attire chaque année des pèlerins et des visiteurs venus voir non pas l'arche — invisible — mais le lieu où l'Église affirme qu'elle repose." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      L'écart avec la source est ici d'un genre différent de celui d'Excalibur : le texte
+      biblique ne décrit ni éclairs ni fonte de visages humains à l'ouverture du coffre — cette
+      imagerie appartient entièrement au cinéma du XX<sup>e</sup> siècle.
+    </p>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Sans trancher une question de foi à la place de qui que ce soit : voici ce que l'histoire et l'archéologie peuvent dire, et ce qu'elles ne peuvent pas.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Aucune trace matérielle"
+      body={[
+        "Aucun objet archéologique correspondant à la description d'Exode 25 n'a jamais été mis au jour, en Israël, en Égypte ou ailleurs. Ce n'est pas faute de fouilles : le site du Temple de Jérusalem et ses environs comptent parmi les plus étudiés au monde.",
+        "La recherche biblique dominante situe par ailleurs la rédaction du passage — la source dite « sacerdotale » — à l'époque de l'exil babylonien ou après, soit plusieurs siècles après les événements qu'il décrit avec tant de précision.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Un silence documenté après 587 av. J.-C."
+      body={[
+        "La Mishna, compilée plusieurs siècles après la destruction du premier Temple, précise que dans le Saint des Saints du <strong>second</strong> Temple ne se trouvait qu'une pierre nue, à l'endroit où l'arche aurait dû reposer — une confirmation indirecte, par une source juive elle-même, que l'objet n'était déjà plus là.",
+        "Entre cette dernière trace et le texte éthiopien du Kebra Nagast qui fixe la légende de Ménélik I<sup>er</sup>, il s'écoule environ dix-neuf siècles.",
+      ]}
+    />
+    <TheoryCard
+      title="La source sacerdotale est post-exilique"
+      level="consensus"
+      status="Consensus"
+      body="La datation tardive du passage d'Exode 25, dans le cadre de l'hypothèse documentaire, est la position dominante de l'exégèse historico-critique contemporaine."
+      attrib="Position dominante des études bibliques"
+    />
+    <TheoryCard
+      title="L'arche a été détruite ou fondue lors du sac de 587"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="L'explication la plus économique de sa disparition : un objet en grande partie recouvert d'or, dans une ville mise à sac, représente un butin évident — sans qu'aucune source ne le dise explicitement."
+      attrib="Hypothèse majoritaire chez les historiens non confessionnels"
+    />
+    <TheoryCard
+      title="Elle repose intacte à Aksoum"
+      level="folklore"
+      status="Croyance religieuse vivante"
+      body="Position de l'Église orthodoxe éthiopienne, indémontrable et indéfaisable de l'extérieur puisque l'objet n'est jamais montré ni examiné — ce n'est pas à cette page de la confirmer ni de la réfuter."
+      attrib="Église orthodoxe éthiopienne tewahedo"
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que l'arche fait encore">
+    <HeritageBlock
+      title="Une garde toujours vivante"
+      body="Depuis des générations, un unique moine gardien vivrait reclus auprès de l'arche à Sainte-Marie-de-Sion, sans jamais en sortir — une institution religieuse réelle et active, indépendamment de ce qu'elle protège."
+    />
+    <HeritageBlock
+      title="Le tabot, dans chaque église"
+      body="Chaque église orthodoxe éthiopienne possède sa propre réplique consacrée, le <em>tabot</em>, portée en procession lors de la fête de Timkat : la présence symbolique de l'arche irrigue le culte quotidien bien au-delà de la seule question de l'original."
+    />
+    <HeritageBlock
+      title="Une chasse qui ne s'arrête jamais"
+      body="Chercheurs indépendants, documentaires et ouvrages de pseudo-archéologie relancent régulièrement l'idée d'une localisation nouvelle — un genre éditorial à part entière, distinct de la recherche universitaire."
+    />
+    <HeritageBlock
+      title="Une économie de pèlerinage"
+      body="Aksoum vit en partie du tourisme religieux lié à cette revendication, dans un pays où le patrimoine chrétien orthodoxe est une source d'identité nationale autant que de visiteurs."
+    />
+    <CautionBox>
+      Cette page rapporte des datations et un état de la recherche : elle n'a pas vocation à
+      authentifier ni à disqualifier une relique de dévotion vivante à la place de l'Église qui
+      la garde. La prudence vaut dans les deux sens — présenter un texte de l'âge du fer comme
+      une preuve matérielle serait aussi malhonnête que de traiter une foi religieuse
+      contemporaine comme une simple curiosité folklorique.
+    </CautionBox>
+  </Section>
+</PageLayout>

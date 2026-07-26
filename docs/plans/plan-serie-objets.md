@@ -185,8 +185,18 @@ l'inscription déchiffrée doit être la vraie (ou son sens), pas un ornement in
 
 ## Statut de la série
 
-*(À alimenter à partir de `docs/listes/suite_objets.md`. Aucune page écrite au 26/07/2026.)*
+*(À alimenter à partir de `docs/listes/suite_objets.md`, seule source de vérité pour la
+liste complète et les scores.)*
 
 | # | Objet | Statut |
 |---|---|---|
-| — | — | à démarrer |
+| 1 | Excalibur | publiée (26/07/2026) |
+| 2 | L'Arche d'Alliance | publiée (26/07/2026) |
+| 3 | Les Trois Trésors impériaux du Japon | publiée (26/07/2026) |
+| 4 | Le Tabouret d'or des Ashanti | publiée (26/07/2026) |
+| 5 | Mjöllnir | publiée (26/07/2026) |
+| 6 | Le Cheval de Troie | publiée (26/07/2026) |
+| 7 | La Pierre du Soleil aztèque | publiée (26/07/2026) |
+| 8 | L'hameçon de Maui | publiée (26/07/2026) |
+| 9 | Le Koh-i-Noor | publiée (26/07/2026) |
+| — | 28 autres sujets | à démarrer |

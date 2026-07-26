@@ -1,0 +1,276 @@
+---
+/*
+  La Pierre du Soleil aztèque — septième page de la série « Objets
+  Légendaires du Monde ».
+
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections dans cet
+  ordre, badge de nature dans le hero. Cas particulier : l'objet n'est pas
+  perdu ni contesté dans son existence — il est mal nommé. Le malentendu
+  « calendrier aztèque » est le fil rouge éditorial de la page, de #origine à
+  #verite.
+
+  Effets (docs/plans/plan-effets.md) : data-egg="pierresoleil" sur <body> et
+  data-scroll-fx="pierreSoleilTourne" sur #description, tous deux vers
+  pierreSoleilTourne() dans public/effects.js — un disque qui tourne d'un
+  cran puis s'arrête net, jamais un défilement continu façon calendrier :
+  l'effet lui-même corrige le malentendu qu'il illustre. Pas de fx-decode :
+  aucun texte alphabétique porté par l'objet, seulement une iconographie.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Basalte sombre, turquoise et or : la matière et la palette rituelle
+   mexica, plutôt que la géographie générique du Mexique. */
+const palette = {
+  bg: '#141810',
+  'bg-deep': '#0a0c08',
+  surface: '#1e241a',
+  'surface-alt': '#272e21',
+  border: '#455038',
+  ink: '#eef2e5',
+  text: '#d8e0c8',
+  'text-dim': '#9aab88',
+  accent: '#2ea6a0',
+  'accent-bright': '#5ad0c8',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#7a1f2b',
+  'verdict-bright': '#a6293a',
+  glow: 'rgba(46,166,160,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Piedra del Sol', sub: 'Nom espagnol usuel',
+    body: "Le nom sous lequel le monolithe est connu depuis sa redécouverte est une désignation post-coloniale espagnole — la pierre elle-même ne porte aucune inscription qui se nomme.",
+  },
+  {
+    num: 'II', title: 'Une datation de style', sub: 'Fin du XVe siècle',
+    body: "Aucune inscription ne donne d'année de gravure certaine. Les historiens de l'art la situent, par comparaison stylistique, sous le règne d'Axayácatl ou de Moctezuma II — une fourchette, pas une date fixe.",
+  },
+  {
+    num: 'III', title: 'Un objet enterré, puis retrouvé', sub: '1521 → 1790',
+    body: "Basculée ou enterrée après la conquête espagnole, la pierre disparaît des sources pendant près de deux siècles et demi avant d'être exhumée par hasard sous la place principale de Mexico.",
+  },
+];
+---
+<PageLayout
+  title="La Pierre du Soleil aztèque"
+  serie="Objets Légendaires du Monde"
+  description="24 tonnes de basalte gravé, universellement appelées « calendrier aztèque » — ce que la pierre n'est pas. Enterrée après la conquête espagnole, redécouverte par hasard en 1790 sous le Zócalo de Mexico, sa fonction exacte reste débattue par les spécialistes."
+  href="objet-pierre-soleil.html"
+  egg="pierresoleil"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="NAHUI OLLIN · MEXICO"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>l'hameçon de Maui</strong>"
+>
+  <p class="subtitle" slot="hero">Piedra del Sol</p>
+  <p class="tagline" slot="hero">
+    Vingt-quatre tonnes de basalte que le monde entier appelle « calendrier aztèque » — ce
+    qu'elle n'a probablement jamais été.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet réel, pouvoirs légendaires"
+    note="Le monolithe existe, se visite, et sa gravure cosmogonique est bien réelle : ce qui relève du malentendu, c'est le nom « calendrier » et les pouvoirs prédictifs qu'on lui prête parfois."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Une pierre gravée, un nom donné après coup"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet. Ici, l'écart porte moins sur une invention littéraire que sur une identité mal transmise à travers la rupture coloniale.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Entre la gravure du monolithe, à la fin du XVe siècle, et sa redécouverte en 1790, il ne
+      s'écoule pas de siècles de légende littéraire comme pour Excalibur — mais deux siècles et
+      demi de silence documentaire complet, la pierre étant physiquement absente de toute
+      description.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et iconographie"
+    title="Ce que la pierre montre — pas ce qu'elle mesure le temps"
+    intro="Rédigé avec prudence : la fonction précise du monolithe reste débattue par les spécialistes, ce que cette section signale plutôt que de trancher."
+    scrollFx="pierreSoleilTourne">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Le monolithe"
+        role="Dimensions et matière"
+        tags={['24 tonnes', 'Basalte']}
+        body={["Un disque de basalte de 3,6 mètres de diamètre, taillé et poli à l'aide d'outils de pierre et de cuivre, sans fer ni roue — un travail dont l'ampleur suppose une organisation collective considérable.",
+               "Le centre porte un visage — Tonatiuh, dieu solaire, selon la lecture la plus répandue, bien que certains spécialistes y voient plutôt Tlaltecuhtli, la divinité de la terre."]}
+      />
+      <FigureCard
+        name="Nahui Ollin"
+        role="Les quatre soleils défunts, et le cinquième"
+        tags={['Cosmogonie', 'Ère actuelle']}
+        body={["Autour du visage central, quatre cases représentent les quatre ères cosmiques antérieures, chacune détruite par un cataclysme différent — jaguars, vent, pluie de feu, déluge — avant l'ère actuelle, la cinquième.",
+               "Le nom nahuatl du glyphe central, <em>Nahui Ollin</em> (« Quatre-Mouvement »), désigne cette ère en cours, censée s'achever elle aussi par un cataclysme."]}
+      />
+      <FigureCard
+        name="Le malentendu du calendrier"
+        role="Un nom qui ne correspond pas à l'usage"
+        tags={['Idée reçue', 'XIXe siècle']}
+        body="La pierre porte les vingt signes des jours du mois rituel (le <em>tonalpohualli</em>), mais aucun mécanisme ne permet d'y lire une date au jour le jour : les vrais calendriers mexicas se tenaient dans des codex, pas sur ce monument."
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Ce que la pierre raconte : le mythe des Cinq Soleils">
+    <StoryBlock
+      num="Récit I"
+      title="Les quatre mondes détruits"
+      body={[
+        "La cosmogonie mexica que la pierre met en image raconte quatre créations successives, chacune gouvernée par un dieu-soleil différent, et chacune anéantie : les hommes du premier soleil dévorés par des jaguars, ceux du second emportés par le vent, ceux du troisième consumés par une pluie de feu, ceux du quatrième noyés dans un déluge.",
+        "Chaque fin de monde n'est pas un accident isolé : elle prépare la suivante, dans un cycle de destruction et de recréation qui structure toute la pensée cosmologique mexica.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Le sacrifice à Teotihuacan"
+      body="Pour que naisse le cinquième soleil, deux dieux se jettent dans un brasier sacrificiel à Teotihuacan : Nanahuatzin, humble et couvert de croûtes, saute sans hésiter et devient le soleil ; Tecciztecatl, plus riche et hésitant, saute après lui et devient la lune, moins brillante en punition de son retard."
+      quote="Pour que le soleil se lève, un dieu a dû se jeter dans le feu."
+      cite="Résumé du mythe de la création du cinquième soleil"
+    />
+    <StoryBlock
+      num="Récit III"
+      title="Le sang qui maintient le monde en mouvement"
+      body="Le cinquième soleil, une fois levé, refuse de se déplacer tant qu'il n'a pas reçu le sang des dieux en offrande. C'est cette exigence fondatrice qui légitime, dans la pensée religieuse mexica, la nécessité rituelle du sacrifice humain pour maintenir le mouvement du monde — <em>Ollin</em>, ce qui donne son nom au glyphe central de la pierre."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Extraire et sculpter vingt-quatre tonnes de basalte"
+    intro="La section propre à cette série : ici, l'objet est bien réel, mais sa fabrication reste un exploit logistique qu'il vaut la peine de détailler pour lui-même.">
+    <div class="card-grid compact">
+      <MiniCard title="Extraction sans métal" tag="Outils lithiques" body="Le basalte est dégagé et dégrossi avec des outils de pierre plus dure et des abrasifs, sans fer ni acier — une technique lente, exigeant une main-d'œuvre nombreuse et organisée." />
+      <MiniCard title="Un transport sans roue ni bête de trait" tag="Logistique lacustre" body="Vingt-quatre tonnes déplacées jusqu'au centre cérémoniel de Tenochtitlan par rondins, cordages et voies lacustres — sans roue ni animal de trait, les deux étant absents de la Mésoamérique précolombienne." />
+      <MiniCard title="La sculpture en relief" tag="Gravure" body="Le motif est taillé en bas-relief sur une seule face, avec une précision géométrique qui suppose un tracé préparatoire rigoureux avant la moindre entaille." />
+      <MiniCard title="Le polissage final" tag="Finition" body="Les surfaces sont polies à l'abrasif jusqu'à un fini lisse, une étape aussi longue que la taille elle-même sur une pièce de cette ampleur." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Une remarque de méthode : l'exploit technique n'est ici l'objet d'aucun débat — seule sa
+      <strong>fonction</strong> reste discutée. C'est l'inverse de la plupart des pages de
+      cette série, où c'est l'existence de l'objet qui pose question, pas sa fabrication.
+    </p>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Une chaîne de possession"
+    title="Enterrée, exhumée, déplacée trois fois"
+    intro="Un objet unique, pas de reliques concurrentes — mais une histoire de redécouverte suffisamment documentée pour justifier une frise.">
+    <Timeline items={[
+      { year: 'fin XVe siècle', title: 'Gravure du monolithe', body: "Sous le règne d'Axayácatl ou de Moctezuma II selon les auteurs, dans le centre cérémoniel de Tenochtitlan." },
+      { year: '1521', title: 'La chute de Tenochtitlan', body: "La conquête espagnole entraîne le basculement ou l'enfouissement délibéré de nombreux monuments religieux mexicas." },
+      { year: '17 décembre 1790', title: 'La redécouverte', body: "Des travaux de repavage de la Plaza Mayor de Mexico mettent au jour le monolithe, resté enfoui près de deux siècles et demi." },
+      { year: '1790-1885', title: 'Encastrée dans la cathédrale', body: "La pierre est fixée au mur extérieur de la cathédrale métropolitaine de Mexico — une juxtaposition longtemps restée telle quelle entre un monument catholique et une cosmogonie mexica." },
+      { year: '1885', title: 'Transfert au Musée national', body: "La pierre rejoint les collections du musée national mexicain, sortant enfin de son exposition murale improvisée." },
+      { year: '1964', title: 'Installation au Museo Nacional de Antropología', body: "Elle devient la pièce maîtresse de la salle mexica du nouveau musée national d'anthropologie de Mexico, où elle se trouve toujours." },
+    ]} />
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la légende au phénomène"
+    title="D'un monument religieux à un logo national">
+    <div class="card-grid compact">
+      <MiniCard title="Monnaies et billets" tag="Numismatique mexicaine" body="Le motif de la pierre a longtemps figuré sur des pièces et billets mexicains, contribuant à en faire l'un des symboles nationaux les plus reconnus du pays." />
+      <MiniCard title="« Calendrier aztèque »" tag="Malentendu populaire" body="L'appellation, apparue dans l'érudition européenne du XIXe siècle, s'est imposée dans le langage courant bien plus largement que la lecture savante qui la corrige." />
+      <MiniCard title="Tatouages et imagerie" tag="Identité et diaspora" body="Le motif circule largement, notamment dans les communautés d'origine mexicaine, comme symbole d'identité et de fierté préhispanique." />
+      <MiniCard title="Icône touristique" tag="Mexico" body="Reproduit sur d'innombrables souvenirs, le motif est aujourd'hui l'une des images les plus vendues du tourisme mexicain, souvent détachée de tout contexte religieux." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Sans trancher ce que les spécialistes eux-mêmes débattent encore : voici l'état net des connaissances.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Un objet réel, une fonction débattue"
+      body={[
+        "L'existence, la datation approximative et l'iconographie cosmogonique du monolithe ne sont pas contestées. Ce qui reste ouvert, c'est sa fonction précise : monument commémoratif, autel de sacrifice (<em>temalacatl</em>), ou plateforme cérémonielle — les spécialistes n'ont pas tranché.",
+        "Sa position horizontale au moment de la redécouverte, comparée à d'autres pierres de sacrifice gladiatorial connues, alimente l'hypothèse de l'autel sans la confirmer.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="D'où vient le mot « calendrier »"
+      body="L'appellation « calendrier aztèque » se fixe dans l'érudition européenne du XIXe siècle, à une époque où l'on cherchait dans les civilisations précolombiennes des équivalents functionnels aux instruments occidentaux de mesure du temps. Les vrais calendriers mexicas — le cycle rituel de 260 jours et l'année solaire de 365 jours — étaient tenus dans des codex peints, pas gravés sur ce monolithe."
+    />
+    <TheoryCard
+      title="La pierre représente la cosmogonie des Cinq Soleils"
+      level="consensus"
+      status="Consensus"
+      body="La lecture du glyphe central Nahui Ollin et des quatre ères antérieures comme représentation du mythe cosmogonique mexica est la position dominante des spécialistes."
+      attrib="Position dominante de l'archéologie mexicaniste"
+    />
+    <TheoryCard
+      title="La pierre aurait servi d'autel de sacrifice gladiatorial"
+      level="plausible"
+      status="Hypothèse sérieuse, non tranchée"
+      body="Comparée à d'autres pierres rondes connues pour ce type de rituel, l'hypothèse reste défendue par plusieurs chercheurs sans emporter un consensus total sur cette pièce précise."
+      attrib="Hypothèse discutée en archéologie mexicaniste"
+    />
+    <TheoryCard
+      title="La pierre serait un calendrier fonctionnel, lisible au jour le jour"
+      level="folklore"
+      status="Écarté par les spécialistes"
+      body="Cette lecture, popularisée dès le XIXe siècle et encore répandue dans le grand public, ne correspond à aucun mécanisme de lecture réel identifié sur le monolithe."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que la pierre fait encore">
+    <HeritageBlock
+      title="Un emblème national"
+      body="La Pierre du Soleil reste l'un des symboles les plus utilisés de l'identité nationale mexicaine, du tourisme officiel aux mouvements revendiquant l'héritage préhispanique."
+    />
+    <HeritageBlock
+      title="La pièce maîtresse d'un grand musée"
+      body="Elle occupe une place centrale dans la salle mexica du Museo Nacional de Antropología de Mexico, l'un des musées d'anthropologie les plus visités du monde."
+    />
+    <HeritageBlock
+      title="Un pont entre deux mondes religieux"
+      body="Son siècle passé encastrée dans le mur extérieur de la cathédrale de Mexico reste un exemple frappant, documenté, de la manière dont l'espace colonial a longtemps traité un monument religieux mexica comme une simple curiosité de façade."
+    />
+    <CautionBox>
+      Cette page distingue volontairement l'iconographie religieuse réelle — une cosmogonie où
+      le sacrifice humain fonde la légitimité du monde — de son usage contemporain comme logo
+      touristique et identitaire. Réduire la pierre à un motif décoratif efface la religion
+      vivante qu'elle a servie ; la traiter comme une simple curiosité exotique serait tout
+      aussi réducteur.
+    </CautionBox>
+  </Section>
+</PageLayout>

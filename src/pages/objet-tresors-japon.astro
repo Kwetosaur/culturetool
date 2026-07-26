@@ -1,0 +1,311 @@
+---
+/*
+  Les Trois Trésors impériaux du Japon — troisième page de la série « Objets
+  Légendaires du Monde ».
+
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections dans cet
+  ordre, badge de nature dans le hero. Angle unique du sujet, signalé dans
+  docs/listes/suite_objets.md : ce sont des objets que personne — pas même
+  l'empereur — n'a jamais vus. Le secret comme mode de conservation du sacré
+  est le fil directeur de toute la page, en particulier de #traces et #verite.
+
+  Effets (docs/plans/plan-effets.md) : data-egg="tresors" sur <body> et
+  data-scroll-fx="tresorsCoffres" sur #description, tous deux vers
+  tresorsCoffres() dans public/effects.js — trois coffres qui s'alignent et ne
+  s'ouvrent pas : l'effet est le refus de montrer, pas l'ouverture. Pas de
+  fx-decode : aucune des trois pièces ne porte d'inscription connue.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Laque noire, vermillon impérial et or terni : la matière de coffres qui ne
+   s'ouvrent jamais, plutôt que la géographie du sujet. */
+const palette = {
+  bg: '#15120f',
+  'bg-deep': '#0a0806',
+  surface: '#201a15',
+  'surface-alt': '#28211a',
+  border: '#4a3b2a',
+  ink: '#f3ece0',
+  text: '#ddd0bd',
+  'text-dim': '#a3927a',
+  accent: '#b9273a',
+  'accent-bright': '#e0475a',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#8a2030',
+  'verdict-bright': '#c9384a',
+  glow: 'rgba(201,152,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Sanshu no Jingi', sub: '三種の神器 — « les trois insignes divins »',
+    body: "Le nom collectif des trois pièces : l'épée <strong>Kusanagi no Tsurugi</strong>, le miroir <strong>Yata no Kagami</strong> et le joyau <strong>Yasakani no Magatama</strong>.",
+  },
+  {
+    num: 'II', title: 'Kojiki et Nihon Shoki', sub: '712 et 720 apr. J.-C.',
+    body: "Les deux chroniques qui fixent le récit de leur origine divine appartiennent à l'écrit — rédigées au VIII<sup>e</sup> siècle pour légitimer la lignée impériale du moment, et non pour consigner des événements contemporains de leur rédaction.",
+  },
+  {
+    num: 'III', title: "L'objet et le règne", sub: 'Un écart de plusieurs siècles',
+    body: "Le récit situe la transmission des trois trésors au moment de la descente sur terre du petit-fils d'Amaterasu, puis à l'empereur légendaire Jinmu, dont la date traditionnelle (660 av. J.-C.) est considérée par les historiens comme un artefact chronologique, non un fait daté.",
+  },
+];
+---
+<PageLayout
+  title="Les Trois Trésors impériaux du Japon"
+  serie="Objets Légendaires du Monde"
+  description="Épée, miroir et joyau : les trois insignes du trône du Japon ne sont ni montrés ni photographiés, et l'empereur lui-même ne les verrait jamais. Le secret comme mode de conservation du sacré."
+  href="objet-tresors-japon.html"
+  egg="tresors"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="三種の神器"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>le Tabouret d'or des Ashanti</strong>"
+>
+  <p class="subtitle" slot="hero">Kusanagi no Tsurugi · Yata no Kagami · Yasakani no Magatama</p>
+  <p class="tagline" slot="hero">
+    Trois objets que personne n'a jamais vus ni photographiés — et l'intronisation d'un
+    empereur se déroule aujourd'hui encore devant des coffres qui restent fermés.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Relique contestée"
+    note="Trois pièces réelles, gardées et transmises depuis des siècles, mais dont personne — pas même l'empereur pour deux d'entre elles — n'a jamais confirmé l'aspect ni l'ancienneté."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Un récit écrit pour fonder une lignée"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet. Ici, le récit est daté avec précision — VIIIe siècle — pour des objets dont l'âge matériel réel n'a jamais pu être vérifié par personne d'extérieur à la cour.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Le Kojiki et le Nihon Shoki sont rédigés sous le règne de l'impératrice Genmei, dans un
+      contexte de consolidation de l'État Yamato : raconter que les trésors viennent
+      directement d'Amaterasu revient à donner à la dynastie régnante une légitimité que
+      rien d'antérieur ne pouvait fournir par écrit.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et vertus"
+    title="Ce que la tradition en dit — sans jamais le montrer"
+    intro="Aucun des trois trésors n'a été examiné par un tiers indépendant depuis des siècles. Ce qui suit est rapporté par la tradition et l'usage rituel, jamais constaté."
+    scrollFx="tresorsCoffres">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Kusanagi no Tsurugi"
+        role="L'épée « qui fauche l'herbe »"
+        tags={['Atsuta', 'Valeur']}
+        body={["Conservée au sanctuaire d'Atsuta, près de Nagoya. Le nom rappelle l'épisode où elle aurait servi à faucher un champ en flammes pour échapper à une embuscade — l'origine du nom qu'on lui connaît aujourd'hui.",
+               "Une copie rituelle est conservée au Palais impérial pour les cérémonies ; l'original, à Atsuta, n'a plus été vu ouvertement depuis des siècles."]}
+      />
+      <FigureCard
+        name="Yata no Kagami"
+        role="Le miroir de sagesse"
+        tags={['Ise', 'Sagesse']}
+        body={["Le miroir shintai du grand sanctuaire d'Ise, transféré rituellement tous les vingt ans lors de la reconstruction du sanctuaire (le <em>shikinen sengu</em>), de nuit, dans un secret absolu.",
+               "Une copie sert de support de culte au Palais impérial de Tokyo, dans le sanctuaire du Kashikodokoro."]}
+      />
+      <FigureCard
+        name="Yasakani no Magatama"
+        role="Le joyau de bienveillance"
+        tags={['Palais impérial', 'Jamais transféré']}
+        body={["Le seul des trois trésors qui n'a jamais quitté la garde directe du souverain : conservé au Palais impérial, il accompagne physiquement l'empereur, toujours scellé.",
+               "Aux trois objets, la tradition associe une vertu confucéenne : la sagesse au miroir, la bienveillance au joyau, la vaillance à l'épée."]}
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où les trésors apparaissent">
+    <StoryBlock
+      num="Récit I"
+      title="La grotte céleste"
+      body={[
+        "Amaterasu, déesse du soleil, se retire dans une grotte après une offense de son frère Susanoo, plongeant le monde dans les ténèbres. Les autres divinités organisent une fête devant l'entrée : Ame-no-Uzume danse, et un miroir est suspendu à un arbre pour attirer sa curiosité.",
+        "Intriguée par le reflet — qu'elle prend pour une autre divinité aussi éclatante qu'elle — Amaterasu entrouvre la grotte. On l'en tire, et la lumière revient sur le monde. Le miroir, dans ce récit, n'est pas un ornement : c'est l'instrument qui ramène le soleil.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Le serpent à huit têtes"
+      body="Banni du ciel, Susanoo terrasse le serpent Yamata no Orochi en l'enivrant de saké puis en le découpant. Dans l'une des queues du monstre, il trouve une épée qu'il offre à sa sœur Amaterasu en geste de réconciliation — Kusanagi entre ainsi dans le trésor impérial par un don, pas par une forge."
+    />
+    <StoryBlock
+      num="Récit III"
+      title="La descente sur terre"
+      body={[
+        "Amaterasu confie les trois objets à son petit-fils Ninigi-no-Mikoto lorsqu'elle l'envoie gouverner la terre : ils ne sont plus seulement des objets sacrés, ils deviennent la <strong>preuve matérielle</strong> d'un droit à régner transmis par le ciel.",
+        "De Ninigi, la tradition fait descendre l'empereur légendaire Jinmu, premier souverain du Japon selon le Nihon Shoki — la même mécanique narrative qu'une épée retirée d'une pierre : l'objet ne se gagne pas, il désigne.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit IV"
+      title="Yamato Takeru et le champ en flammes"
+      body="Le prince guerrier Yamato Takeru, encerclé par des ennemis qui mettent le feu aux herbes autour de lui, utilise l'épée pour faucher l'herbe et créer un contre-feu qui le sauve. C'est cet épisode, postérieur au don initial, qui donne à l'arme son nom définitif : Kusanagi, « qui fauche l'herbe »."
+      quote="L'épée qui fauche l'herbe le sauva du feu."
+      cite="Épisode rapporté dans le Nihon Shoki"
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Ce que l'archéologie sait des objets de ce type"
+    intro="La section propre à cette série. Les trois trésors précis ne sont jamais examinés — mais le Japon de l'âge du bronze et du fer a bel et bien produit ce genre d'objets, en grand nombre, et ceux-là ont été fouillés.">
+    <div class="card-grid compact">
+      <MiniCard title="Miroirs de bronze coulé" tag="Yayoi-Kofun" body="Des centaines de miroirs de bronze, souvent de style chinois Han, ont été retrouvés dans les tumulus (kofun) de l'élite japonaise des IIIe-Ve siècles — le type d'objet, lui, est parfaitement documenté." />
+      <MiniCard title="Magatama taillées" tag="Depuis le Jōmon" body="Ces perles en virgule, en jade, jaspe ou agate, se taillent et se percent à l'aide d'outils de pierre puis de bronze — une tradition attestée bien avant la période où le récit situe le don impérial." />
+      <MiniCard title="Épées droites, pas courbes" tag="Chokutō" body="Les épées japonaises de l'époque légendaire de Kusanagi sont droites (<em>chokutō</em>) : le sabre courbe emblématique du Japon n'apparaît qu'au IXe-Xe siècle, bien après l'épisode censé fonder le trésor." />
+      <MiniCard title="La fonte en moule" tag="Bronze" body="Les miroirs coulés en bronze exigent un moule bivalve en argile ou en pierre, un alliage cuivre-étain précis, puis un polissage minutieux de la face réfléchissante — une orfèvrerie exigeante, pas un accessoire rudimentaire." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Le paradoxe de cette section, propre à cette page : on peut décrire avec précision
+      <strong>comment on fabriquait ce type d'objet</strong> au Japon ancien, sans jamais
+      pouvoir dire si les trois pièces précises conservées aujourd'hui datent réellement de
+      cette époque — puisque personne ne les examine.
+    </p>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Candidats matériels"
+    title="Perdus, remplacés, jamais montrés"
+    intro="Contrairement au Graal ou à la Lance Sacrée, il n'y a pas de multiples exemplaires concurrents : chaque trésor a un lieu de garde unique et stable. Ce qui varie, c'est la question de savoir si l'objet gardé aujourd'hui est bien celui d'origine.">
+    <Timeline items={[
+      { year: '668 apr. J.-C.', title: 'Une tentative de vol', body: "Le Nihon Shoki rapporte la tentative d'un moine venu du royaume de Silla de dérober l'épée, avant son transfert temporaire au Palais puis son retour définitif à Atsuta." },
+      { year: '1185', title: 'La bataille de Dan-no-ura', body: "Le clan Taira, vaincu, se jette à la mer avec le jeune empereur Antoku. L'épée qu'il porte — une copie rituelle, selon la tradition dominante, l'original restant à Atsuta — disparaît dans les flots." },
+      { year: 'Tous les 20 ans', title: 'Le shikinen sengu', body: "Le sanctuaire d'Ise est intégralement reconstruit, et le miroir transféré de nuit dans le plus grand secret rituel — une pratique continue depuis des siècles." },
+      { year: '2019', title: "L'intronisation de l'ère Reiwa", body: "Lors du Sokui no Rei de l'empereur Naruhito, les trésors (ou leurs substituts rituels) sont transportés dans des coffres scellés devant les caméras du monde entier — sans que personne ne les voie." },
+    ]} />
+    <div class="card-grid" style="margin-top:44px;">
+      <InfoCard
+        title="Le miroir d'Ise"
+        sub="Grand sanctuaire d'Ise"
+        body="Le shintai du sanctuaire intérieur, jamais montré même lors des reconstructions rituelles répétées du bâtiment qui l'abrite."
+      />
+      <InfoCard
+        title="L'épée d'Atsuta"
+        sub="Sanctuaire d'Atsuta, Nagoya"
+        body="Vénérée depuis la disparition présumée de la copie impériale à Dan-no-ura ; aucun prêtre en exercice n'a laissé de description publique de son état."
+      />
+      <InfoCard
+        title="Le joyau du Palais impérial"
+        sub="Tokyo"
+        body="Le seul des trois jamais confié à un sanctuaire extérieur : il reste juridiquement et physiquement lié à la personne de l'empereur en exercice."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la légende au phénomène"
+    title="Le secret comme spectacle mondial">
+    <div class="card-grid compact">
+      <MiniCard title="La couverture de 2019" tag="Presse internationale" body="L'intronisation de Naruhito a été suivie par des médias du monde entier, fascinés par l'idée même de cérémonies d'État organisées autour d'objets que la caméra ne peut pas montrer." />
+      <MiniCard title="Jeux vidéo et fiction japonaise" tag="Depuis les années 1980" body="Épée, miroir et joyau reviennent régulièrement comme triade symbolique dans la culture populaire japonaise, jusque dans des séries n'ayant aucun lien direct avec la maison impériale." />
+      <MiniCard title="Une fascination pour l'invisible" tag="Constante" body="À la différence des autres reliques de la série, l'intérêt du grand public ne porte pas sur leur apparence — inconnue — mais sur le fait même qu'elles restent cachées." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Il n'existe, à la différence d'Excalibur ou du Graal, aucune image « populaire »
+      concurrente des trois trésors : faute de original visible, la culture populaire n'a
+      jamais pu leur inventer un visage.
+    </p>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Sans se prononcer sur ce que personne n'a vérifié : voici ce que l'histoire des textes et l'archéologie comparée permettent de dire.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Une authenticité qu'aucune méthode ne peut vérifier"
+      body={[
+        "Aucun chercheur, aucun conservateur, aucun organisme indépendant n'a jamais examiné les trois trésors. Ce n'est pas un manque d'accès temporaire : c'est une règle religieuse et dynastique continue depuis des siècles, y compris envers l'empereur lui-même pour deux des trois pièces.",
+        "Il en résulte une situation unique dans la série : on ne peut ni confirmer ni infirmer leur ancienneté matérielle, faute d'avoir jamais pu les observer.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Un récit rédigé pour légitimer, pas pour documenter"
+      body={[
+        "Le Kojiki et le Nihon Shoki sont rédigés au VIIIe siècle pour asseoir la légitimité religieuse de la cour Yamato, à une époque où l'État japonais cherche justement à consolider son autorité face aux clans rivaux et à la cour chinoise.",
+        "Les historiens considèrent la chronologie des premiers empereurs, dont Jinmu, comme légendaire au moins jusqu'au VIe siècle apr. J.-C. — la lignée « ininterrompue » que les trésors sont censés garantir est un récit politique, pas un registre d'état civil.",
+      ]}
+    />
+    <TheoryCard
+      title="Le Kojiki et le Nihon Shoki sont des textes de légitimation, pas des chroniques contemporaines"
+      level="consensus"
+      status="Consensus"
+      body="Position dominante de l'historiographie japonaise moderne, y compris dans les travaux publiés au Japon depuis l'après-guerre."
+      attrib="Position dominante des études japonaises"
+    />
+    <TheoryCard
+      title="Les objets réellement conservés sont des remplacements successifs, pas les pièces d'origine"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Compte tenu des incendies, des vols rapportés et de la perte alléguée à Dan-no-ura, plusieurs historiens jugent probable qu'au moins l'épée actuellement vénérée soit une copie rituelle ancienne plutôt que l'objet du VIIIe siècle."
+      attrib="Hypothèse discutée dans l'historiographie shintoïste"
+    />
+    <TheoryCard
+      title="Les trois trésors prouvent une lignée impériale ininterrompue depuis 660 av. J.-C."
+      level="folklore"
+      status="Rejeté par l'historiographie académique"
+      body="Cette lecture littérale, centrale à l'idéologie du Japon impérial jusqu'en 1945, ne résiste pas à l'examen des sources : elle est mentionnée ici pour son poids historique, pas parce qu'elle est soutenable."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que les trésors font encore">
+    <HeritageBlock
+      title="Le cœur de l'intronisation"
+      body="Le Sokui no Rei, cérémonie d'intronisation impériale, reste organisé autour du transfert rituel des trois trésors (ou de leurs substituts) — une pratique d'État toujours en vigueur, la dernière fois en 2019."
+    />
+    <HeritageBlock
+      title="Une propriété personnelle, pas publique"
+      body="Juridiquement, les trois trésors sont considérés comme la propriété personnelle de l'empereur en exercice, transmis de souverain à souverain, et non comme un bien de l'État japonais — un statut qui les distingue des collections publiques."
+    />
+    <HeritageBlock
+      title="Un passé idéologique à ne pas oublier"
+      body="Le mythe de la lignée divine ininterrompue, garanti par ces trois objets, a été un pilier de l'idéologie impériale et du Shintō d'État jusqu'à la défaite de 1945 et à la déclaration d'humanité de l'empereur Hirohito en 1946."
+    />
+    <HeritageBlock
+      title="Une pratique religieuse toujours vivante"
+      body="Indépendamment de cette histoire politique, le culte shintoïste rendu au miroir d'Ise et à l'épée d'Atsuta continue, avec ses propres fidèles et son propre calendrier rituel, notamment le cycle vicennal du shikinen sengu."
+    />
+    <CautionBox>
+      Cette page distingue volontairement deux choses : une pratique religieuse shintoïste
+      toujours vivante, à traiter avec le même respect que les autres croyances actives de
+      cette série, et un usage politique précis — la lignée divine ininterrompue comme
+      argument de propagande impériale entre 1868 et 1945 — qu'il faut nommer sans le laisser
+      contaminer la lecture de la tradition qui l'a précédé de plus d'un millénaire.
+    </CautionBox>
+  </Section>
+</PageLayout>

@@ -24,7 +24,7 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
 | Excalibur ✅ | `obj-excalibur` | 10 | Grande-Bretagne, texte de 1136 | Objet de fiction | Apparaît comme « Caliburnus » chez Geoffroy de Monmouth, pas dans un texte celtique ancien. L'épée du rocher et l'épée du lac sont **deux motifs distincts** fusionnés tardivement. Richard Cœur de Lion a offert une « Excalibur » à Tancrède de Sicile en 1191 — la première relique arthurienne documentée. |
-| Mjöllnir | `obj-mjollnir` | 9 | Scandinavie | Objet mythologique | Le seul objet de la liste avec un **vrai corpus archéologique** : environ un millier d'amulettes-marteaux retrouvées, dont une de Købelev (2014) portant une inscription runique explicite. Manche trop court par accident, à cause du sabotage de Loki dans la *Snorra Edda*. Symbole aujourd'hui néo-païen **et** récupéré par l'extrême droite : note de vigilance obligatoire. |
+| Mjöllnir ✅ | `obj-mjollnir` | 9 | Scandinavie | Objet mythologique | Le seul objet de la liste avec un **vrai corpus archéologique** : environ un millier d'amulettes-marteaux retrouvées, dont une de Købelev (2014) portant une inscription runique explicite. Manche trop court par accident, à cause du sabotage de Loki dans la *Snorra Edda*. Symbole aujourd'hui néo-païen **et** récupéré par l'extrême droite : note de vigilance obligatoire. |
 | Le Saint Graal | `obj-graal` | 10 | France, v. 1180 | Relique contestée | Inventé par Chrétien de Troyes dans un roman **inachevé**, christianisé ensuite par Robert de Boron ; absent des Évangiles. Décrit selon les auteurs comme un plat, une coupe, un ciboire ou une pierre. Reliques concurrentes à Valence et à Gênes (celle de Gênes : verre, pas émeraude). |
 | La Lance Sacrée (de Longin) | `obj-lance-sacree` | 8 | Vienne / Rome / Etchmiadzin | Relique contestée | **Au moins quatre lances concurrentes** revendiquent le titre. Celle de Vienne, datée du VIIIe siècle par les analyses publiées en 2003, a servi d'insigne impérial à Otton Ier puis d'obsession à la propagande nazie — un objet dont l'histoire politique est mieux documentée que l'origine. |
 | La Chambre d'Ambre | `obj-chambre-ambre` | 8 | Königsberg / Tsarskoïe Selo | Objet réel disparu | Six tonnes d'ambre offertes à Pierre le Grand en 1716, démontées par la Wehrmacht en 1941, disparues en 1945. Reconstitution achevée en 2003 ; la chasse à l'original est toujours ouverte, avec de fausses pistes régulières. Le seul objet de la liste dont la disparition est datée au mois près. |
@@ -44,14 +44,14 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
 | La Toison d'Or | `obj-toison-or` | 7 | Colchide / Grèce | Objet mythologique | Hypothèse solide : l'orpaillage **à la peau de mouton** dans les rivières de Colchide (Géorgie actuelle) est une technique réellement attestée. Prolongement inattendu : l'ordre de la Toison d'or, fondé en 1430, existe toujours. |
-| Le Cheval de Troie | `obj-cheval-troie` | 7 | Anatolie | Objet de fiction | **Absent de l'Iliade** : il apparaît dans l'Odyssée puis chez Virgile. Hypothèse discutée d'une machine de siège assyrienne mal transmise. L'objet-piège archétypal, jusque dans le vocabulaire informatique. |
+| Le Cheval de Troie ✅ | `obj-cheval-troie` | 7 | Anatolie | Objet de fiction | **Absent de l'Iliade** : il apparaît dans l'Odyssée puis chez Virgile. Hypothèse discutée d'une machine de siège assyrienne mal transmise. L'objet-piège archétypal, jusque dans le vocabulaire informatique. |
 | La Boîte de Pandore | `obj-boite-pandore` | 6 | Grèce | Objet de fiction | C'est une **jarre** (*pithos*) chez Hésiode ; « boîte » vient d'une erreur de traduction d'Érasme au XVIe siècle. La démonstration la plus courte et la plus nette de la série : comment un objet légendaire naît d'un contresens. |
 
 ## Moyen-Orient
 
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
-| L'Arche d'Alliance | `obj-arche-alliance` | 10 | Israël / Éthiopie | Relique contestée | Le seul objet de la liste dont **le texte fondateur donne les dimensions et le procédé de fabrication** (Exode 25). Disparaît des sources après 587 av. J.-C. Revendiquée par l'église Sainte-Marie-de-Sion à Aksoum, où elle n'est montrée à personne. Aucun élément archéologique. |
+| L'Arche d'Alliance ✅ | `obj-arche-alliance` | 10 | Israël / Éthiopie | Relique contestée | Le seul objet de la liste dont **le texte fondateur donne les dimensions et le procédé de fabrication** (Exode 25). Disparaît des sources après 587 av. J.-C. Revendiquée par l'église Sainte-Marie-de-Sion à Aksoum, où elle n'est montrée à personne. Aucun élément archéologique. |
 | La Ménorah du Second Temple | `obj-menorah` | 7 | Jérusalem / Rome | Objet réel disparu | Objet **dont on possède le portrait sans posséder l'objet** : sculptée sur l'arc de Titus, emportée à Rome en 70, trace perdue au Ve siècle. Devenue l'emblème de l'État d'Israël. |
 | Zulfiqar | `obj-zulfiqar` | 7 | Arabie / Istanbul | Relique contestée | Épée attribuée à Ali, dont des exemplaires sont conservés au Trésor de Topkapı. Objet de dévotion vivante pour des centaines de millions de personnes **et** emblème politique contemporain — à traiter avec le même soin que les pages Wendigo/Skinwalker. |
 | L'Anneau de Salomon | `obj-anneau-salomon` | 6 | Moyen-Orient | Objet mythologique | Sceau commandant aux djinns, présent dans les traditions juive, chrétienne et islamique — et à l'origine du « sceau de Salomon » de la magie médiévale européenne. Bon fil pour montrer la circulation d'un objet entre trois corpus religieux. |
@@ -60,9 +60,9 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
-| Les Trois Trésors impériaux du Japon | `obj-tresors-japon` | 9 | Japon | Relique contestée | Épée Kusanagi, miroir Yata no Kagami, joyau Yasakani no Magatama : **jamais montrés, jamais photographiés**, l'empereur lui-même ne les verrait pas. L'intronisation de 2019 s'est déroulée devant des coffres fermés. Le secret comme mode de conservation du sacré. |
+| Les Trois Trésors impériaux du Japon ✅ | `obj-tresors-japon` | 9 | Japon | Relique contestée | Épée Kusanagi, miroir Yata no Kagami, joyau Yasakani no Magatama : **jamais montrés, jamais photographiés**, l'empereur lui-même ne les verrait pas. L'intronisation de 2019 s'est déroulée devant des coffres fermés. Le secret comme mode de conservation du sacré. |
 | L'Épée de Goujian | `obj-goujian` | 8 | Chine (Hubei) | Objet réel, pouvoirs légendaires | Exhumée en 1965, **sans corrosion après 2 500 ans et encore tranchante**, inscription en écriture-oiseau. Le seul cas de la liste où l'objet réel est plus impressionnant que sa légende — et une section `#facture` exceptionnelle (alliage, étamage). |
-| Le Koh-i-Noor | `obj-koh-i-noor` | 8 | Inde / Londres | Objet réel, pouvoirs légendaires | 105 carats, « malédiction » réputée frapper ses possesseurs masculins. Cédé en 1849 par un maharajah de dix ans. **Contentieux de restitution actif** revendiqué par l'Inde, le Pakistan, l'Iran et l'Afghanistan : la page ne peut pas éviter le sujet, et ne doit pas. |
+| Le Koh-i-Noor ✅ | `obj-koh-i-noor` | 8 | Inde / Londres | Objet réel, pouvoirs légendaires | 105 carats, « malédiction » réputée frapper ses possesseurs masculins. Cédé en 1849 par un maharajah de dix ans. **Contentieux de restitution actif** revendiqué par l'Inde, le Pakistan, l'Iran et l'Afghanistan : la page ne peut pas éviter le sujet, et ne doit pas. |
 | Le Sceau de jade impérial | `obj-sceau-jade` | 7 | Chine | Objet réel disparu | Sceau de transmission du mandat céleste pendant plus d'un millénaire, perdu au Xe siècle. Sa **disparition a servi à délégitimer des dynasties entières** — un objet dont l'absence a plus pesé que la présence. |
 | Le Honjo Masamune | `obj-honjo-masamune` | 7 | Japon | Objet réel disparu | Trésor national remis avec des milliers d'autres sabres à l'occupant américain en 1945, jamais retrouvé depuis. Dossier documenté, recherche toujours ouverte, et un vrai sujet sur ce que la défaite fait au patrimoine. |
 | Le Vajra | `obj-vajra` | 7 | Inde / Tibet | Objet mythologique | **Trajectoire inverse de tous les autres** : la foudre d'Indra est devenue un objet rituel bien réel, forgé et manipulé aujourd'hui dans tout le bouddhisme tantrique. Du mythe vers la matière, et non l'inverse. |
@@ -72,7 +72,7 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
-| Le Tabouret d'or des Ashanti | `obj-tabouret-or` | 8 | Ghana | Objet mythologique | *Sika Dwa Kofi* : descendu du ciel selon la tradition, **jamais posé au sol, personne ne s'assoit dessus**. La demande d'un gouverneur britannique de s'y asseoir a déclenché une guerre réelle en 1900, menée par Yaa Asantewaa. Objet sacré toujours en usage : prudence maximale. |
+| Le Tabouret d'or des Ashanti ✅ | `obj-tabouret-or` | 8 | Ghana | Objet mythologique | *Sika Dwa Kofi* : descendu du ciel selon la tradition, **jamais posé au sol, personne ne s'assoit dessus**. La demande d'un gouverneur britannique de s'y asseoir a déclenché une guerre réelle en 1900, menée par Yaa Asantewaa. Objet sacré toujours en usage : prudence maximale. |
 | Les regalia du Dahomey | `obj-regalia-dahomey` | 6 | Bénin / France | Objet réel, pouvoirs légendaires | Trône et insignes royaux emportés en 1892, **restitués au Bénin en 2021**. Le dossier de restitution le mieux documenté de la liste, et l'occasion de traiter la question de front plutôt qu'en note de bas de page. |
 | Le trésor de Lobengula | `obj-tresor-lobengula` | 5 | Zimbabwe | Objet réel disparu | Trésor du dernier roi ndébélé, disparu lors de sa fuite en 1893 ; recherches coloniales puis contemporaines toujours infructueuses. Dossier mince, mais l'un des rares objets légendaires d'Afrique australe documenté par des sources écrites. |
 
@@ -81,24 +81,34 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
 | Les crânes de cristal | `obj-cranes-cristal` | 7 | Mésoamérique supposée / Europe | Objet de fiction (canular) | **Aucun ne provient d'une fouille documentée.** Les analyses au microscope électronique (British Museum, Smithsonian) montrent des traces d'outils rotatifs du XIXe siècle. Canular entièrement démonté, mais increvable — le pendant objet de l'Homme de Piltdown. |
-| La Pierre du Soleil aztèque | `obj-pierre-soleil` | 6 | Mexique | Objet réel, pouvoirs légendaires | Monolithe de 24 tonnes retrouvé en 1790 sous le Zócalo, universellement appelé « calendrier aztèque » — ce qu'il n'est pas. Devenu icône nationale mexicaine, jusque sur la monnaie. |
+| La Pierre du Soleil aztèque ✅ | `obj-pierre-soleil` | 6 | Mexique | Objet réel, pouvoirs légendaires | Monolithe de 24 tonnes retrouvé en 1790 sous le Zócalo, universellement appelé « calendrier aztèque » — ce qu'il n'est pas. Devenu icône nationale mexicaine, jusque sur la monnaie. |
 | Le trésor de Moctezuma | `obj-tresor-moctezuma` | 6 | Mexique | Objet réel disparu | Butin perdu dans les canaux de Tenochtitlan pendant la *Noche Triste* (1520). **Une seule pièce a jamais été identifiée** : une barre d'or trouvée en 1981, authentifiée en 2020 par analyse — la preuve que le reste est quelque part. |
 
 ## Océanie
 
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
-| L'hameçon de Maui | `obj-hamecon-maui` | 6 | Polynésie | Objet mythologique | L'hameçon qui pêche les îles, présent d'Hawaï à la Nouvelle-Zélande sous des noms différents, et **identifié à une constellation** (la queue du Scorpion) — un objet légendaire qu'on peut littéralement montrer dans le ciel. |
+| L'hameçon de Maui ✅ | `obj-hamecon-maui` | 6 | Polynésie | Objet mythologique | L'hameçon qui pêche les îles, présent d'Hawaï à la Nouvelle-Zélande sous des noms différents, et **identifié à une constellation** (la queue du Scorpion) — un objet légendaire qu'on peut littéralement montrer dans le ciel. |
 | Le mere pounamu | `obj-mere-pounamu` | 5 | Nouvelle-Zélande | Objet réel, pouvoirs légendaires | Massue de jade māori transmise sur des générations, porteuse du *mana* des ancêtres. Certaines pièces sont **nommées et généalogisées comme des personnes** : la notion d'objet vivant, radicalement étrangère aux autres entrées de la liste. |
 
 ---
 
-## Déjà couvertes (1)
+## Déjà couvertes (9)
 
 **Excalibur** (26/07/2026) — première page de la série, et première page du site écrite avec
 le socle Astro (`src/pages/objet-excalibur.astro`).
 
-Les 36 autres ont déjà leur icône dans `public/icons/objet/` (4 tailles chacune) et leur pin
+**L'Arche d'Alliance**, **Les Trois Trésors impériaux du Japon** et **Le Tabouret d'or des
+Ashanti** (26/07/2026) — deuxième vague, rédigée en respectant la consigne d'alternance
+continentale (Europe, Moyen-Orient/Afrique, Asie, Afrique) plutôt que de suivre l'ordre des
+scores, qui aurait donné trois sujets européens de suite.
+
+**Mjöllnir**, **Le Cheval de Troie**, **La Pierre du Soleil aztèque**, **L'hameçon de Maui**
+et **Le Koh-i-Noor** (26/07/2026) — troisième vague, choisie pour couvrir les continents
+encore absents de la carte (Méditerranée antique, Amériques, Océanie) plutôt que de
+redescendre la liste par score : Europe, Méditerranée antique, Amériques, Océanie, Asie.
+
+Les 28 autres ont déjà leur icône dans `public/icons/objet/` (4 tailles chacune) et leur pin
 placé dans `PLACES_FUTURE` de `public/map.html` : il ne manque que les pages.
 
 **Objets volontairement écartés** : Suaire de Turin, Mécanisme d'Anticythère (publié) et
@@ -111,17 +121,23 @@ La Pierre Noire de la Kaaba est écartée pour les raisons de respect exposées 
 
 ## Top 5 recommandé pour la première vague
 
-1. **Excalibur** (10) — le plus connu, et le meilleur test de la thèse de la série
+1. **Excalibur** ✅ (10) — le plus connu, et le meilleur test de la thèse de la série
    (l'écart entre l'objet, le récit et les reliques y est spectaculaire et bien documenté).
    Effet bespoke évident, icône évidente.
-2. **L'Arche d'Alliance** (10) — dossier textuel exceptionnellement précis, revendication
+2. **L'Arche d'Alliance** ✅ (10) — dossier textuel exceptionnellement précis, revendication
    d'Aksoum, et une occasion de placer un pin en Éthiopie dès la première vague.
-3. **Les Trois Trésors impériaux du Japon** (9) — angle unique dans tout le site (un objet
+3. **Les Trois Trésors impériaux du Japon** ✅ (9) — angle unique dans tout le site (un objet
    que personne n'a jamais vu), et complète `mythologie-japonaise.html` sans le répéter.
-4. **Mjöllnir** (9) — le seul objet de la liste avec un vrai corpus archéologique
-   (les amulettes), et une note de vigilance nécessaire sur la récupération du symbole.
-5. **Le Tabouret d'or des Ashanti** (8) — équilibre continental (l'Afrique est sous-représentée
+4. **Le Tabouret d'or des Ashanti** ✅ (8) — équilibre continental (l'Afrique est sous-représentée
    ici, voir ci-dessous) et un cas rare d'objet sacré dont la possession a déclenché une guerre.
+   Rédigé avant Mjöllnir (point 5) pour respecter l'alternance continentale plutôt que
+   l'ordre des scores — voir la note ci-dessous.
+5. **Mjöllnir** ✅ (9) — le seul objet du corpus avec un vrai corpus archéologique (les
+   amulettes), et une note de vigilance nécessaire sur la récupération du symbole.
+
+Troisième vague (hors top 5, choisie pour l'équilibre continental — voir la note ci-dessous) :
+**Le Cheval de Troie** ✅ (7, Méditerranée antique), **La Pierre du Soleil aztèque** ✅
+(6, Amériques), **L'hameçon de Maui** ✅ (6, Océanie), **Le Koh-i-Noor** ✅ (8, Asie).
 
 ## Note d'équilibre pour la carte
 

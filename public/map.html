@@ -298,6 +298,14 @@
   <div class="side-label">Objets légendaires</div>
   <div class="side-group">
     <a href="objet-excalibur.html">Excalibur</a>
+    <a href="objet-arche-alliance.html">L'Arche d'Alliance</a>
+    <a href="objet-tresors-japon.html">Les Trois Trésors du Japon</a>
+    <a href="objet-tabouret-or.html">Le Tabouret d'or des Ashanti</a>
+    <a href="objet-mjollnir.html">Mjöllnir</a>
+    <a href="objet-cheval-troie.html">Le Cheval de Troie</a>
+    <a href="objet-pierre-soleil.html">La Pierre du Soleil aztèque</a>
+    <a href="objet-hamecon-maui.html">L'hameçon de Maui</a>
+    <a href="objet-koh-i-noor.html">Le Koh-i-Noor</a>
   </div>
 </nav>
 <script>
@@ -439,7 +447,15 @@ var PLACES = [
   { id:'myst-nazca',      title:'Lignes de Nazca',        cat:'mystere', href:'mystere-nazca.html',                 x:27.1, y:66.3, icon:'myst-nazca.png' },
   { id:'myst-antikythera', title:'Mécanisme d\'Anticythère', cat:'mystere', href:'mystere-anticythere.html', x:53.1, y:37.1, icon:'myst-antikythera.png' },
   // Objets légendaires
-  { id:'obj-excalibur', title:'Excalibur', cat:'objet', href:'objet-excalibur.html', x:45.9, y:30.0, icon:'obj-excalibur.png' }
+  { id:'obj-excalibur', title:'Excalibur', cat:'objet', href:'objet-excalibur.html', x:45.9, y:30.0, icon:'obj-excalibur.png' },
+  { id:'obj-arche-alliance', title:'L\'Arche d\'Alliance', cat:'objet', href:'objet-arche-alliance.html', x:57.6, y:56.0, icon:'obj-arche-alliance.png' },
+  { id:'obj-tresors-japon', title:'Les Trois Trésors du Japon', cat:'objet', href:'objet-tresors-japon.html', x:81.0, y:39.4, icon:'obj-tresors-japon.png' },
+  { id:'obj-tabouret-or', title:'Le Tabouret d\'or des Ashanti', cat:'objet', href:'objet-tabouret-or.html', x:46.6, y:54.3, icon:'obj-tabouret-or.png' },
+  { id:'obj-mjollnir', title:'Mjöllnir', cat:'objet', href:'objet-mjollnir.html', x:49.8, y:27.7, icon:'obj-mjollnir.png' },
+  { id:'obj-cheval-troie', title:'Le Cheval de Troie', cat:'objet', href:'objet-cheval-troie.html', x:59.5, y:37.9, icon:'obj-cheval-troie.png' },
+  { id:'obj-pierre-soleil', title:'La Pierre du Soleil aztèque', cat:'objet', href:'objet-pierre-soleil.html', x:20.4, y:48.6, icon:'obj-pierre-soleil.png' },
+  { id:'obj-hamecon-maui', title:'L\'hameçon de Maui', cat:'objet', href:'objet-hamecon-maui.html', x:94.5, y:69.1, icon:'obj-hamecon-maui.png' },
+  { id:'obj-koh-i-noor', title:'Le Koh-i-Noor', cat:'objet', href:'objet-koh-i-noor.html', x:47.3, y:30.9, icon:'obj-koh-i-noor.png' }
 ];
 
 var PLACES_FUTURE = [
@@ -600,7 +616,6 @@ var PLACES_FUTURE = [
   { id:'obj-ulfberht', title:'Les épées Ulfberht', cat:'objet', status:'future', x:51.0, y:26.7, icon:'obj-ulfberht.png' },
   { id:'obj-pierre-scone', title:'La Pierre de Scone', cat:'objet', status:'future', x:46.3, y:26.1, icon:'obj-pierre-scone.png' },
   { id:'obj-durandal', title:'Durandal', cat:'objet', status:'future', x:46.9, y:34.5, icon:'obj-durandal.png' },
-  { id:'obj-mjollnir', title:'Mjöllnir', cat:'objet', status:'future', x:49.8, y:27.7, icon:'obj-mjollnir.png' },
   { id:'obj-tresor-templiers', title:'Le Trésor des Templiers', cat:'objet', status:'future', x:47.6, y:33.7, icon:'obj-tresor-templiers.png' },
   { id:'obj-sampo', title:'Le Sampo', cat:'objet', status:'future', x:54.6, y:21.3, icon:'obj-sampo.png' },
   { id:'obj-couronne-fer', title:'La Couronne de fer de Lombardie', cat:'objet', status:'future', x:49.8, y:34.8, icon:'obj-couronne-fer.png' },
@@ -609,26 +624,19 @@ var PLACES_FUTURE = [
   { id:'obj-anneau-nibelungen', title:'L\'Anneau des Nibelungen', cat:'objet', status:'future', x:49.6, y:32.2, icon:'obj-anneau-nibelungen.png' },
   { id:'obj-table-ronde', title:'La Table Ronde', cat:'objet', status:'future', x:46.4, y:31.0, icon:'obj-table-ronde.png' },
   { id:'obj-toison-or', title:'La Toison d\'Or', cat:'objet', status:'future', x:57.3, y:34.8, icon:'obj-toison-or.png' },
-  { id:'obj-cheval-troie', title:'Le Cheval de Troie', cat:'objet', status:'future', x:59.5, y:37.9, icon:'obj-cheval-troie.png' },
   { id:'obj-boite-pandore', title:'La Boîte de Pandore', cat:'objet', status:'future', x:52.8, y:38.1, icon:'obj-boite-pandore.png' },
-  { id:'obj-arche-alliance', title:'L\'Arche d\'Alliance', cat:'objet', status:'future', x:57.6, y:56.0, icon:'obj-arche-alliance.png' },
   { id:'obj-menorah', title:'La Ménorah du Second Temple', cat:'objet', status:'future', x:50.7, y:35.8, icon:'obj-menorah.png' },
   { id:'obj-zulfiqar', title:'Zulfiqar', cat:'objet', status:'future', x:55.1, y:38.1, icon:'obj-zulfiqar.png' },
   { id:'obj-anneau-salomon', title:'L\'Anneau de Salomon', cat:'objet', status:'future', x:56.0, y:43.0, icon:'obj-anneau-salomon.png' },
-  { id:'obj-tresors-japon', title:'Les Trois Trésors du Japon', cat:'objet', status:'future', x:81.0, y:39.4, icon:'obj-tresors-japon.png' },
   { id:'obj-goujian', title:'L\'Épée de Goujian', cat:'objet', status:'future', x:73.8, y:35.9, icon:'obj-goujian.png' },
-  { id:'obj-koh-i-noor', title:'Le Koh-i-Noor', cat:'objet', status:'future', x:47.3, y:30.9, icon:'obj-koh-i-noor.png' },
   { id:'obj-sceau-jade', title:'Le Sceau de jade impérial', cat:'objet', status:'future', x:75.1, y:35.3, icon:'obj-sceau-jade.png' },
   { id:'obj-honjo-masamune', title:'Le Honjo Masamune', cat:'objet', status:'future', x:82.7, y:35.8, icon:'obj-honjo-masamune.png' },
   { id:'obj-vajra', title:'Le Vajra', cat:'objet', status:'future', x:67.0, y:43.0, icon:'obj-vajra.png' },
   { id:'obj-ruyi-jingu-bang', title:'Le Ruyi Jingu Bang', cat:'objet', status:'future', x:75.8, y:36.6, icon:'obj-ruyi-jingu-bang.png' },
-  { id:'obj-tabouret-or', title:'Le Tabouret d\'or des Ashanti', cat:'objet', status:'future', x:46.6, y:54.3, icon:'obj-tabouret-or.png' },
   { id:'obj-regalia-dahomey', title:'Les regalia du Dahomey', cat:'objet', status:'future', x:47.7, y:54.6, icon:'obj-regalia-dahomey.png' },
   { id:'obj-tresor-lobengula', title:'Le trésor de Lobengula', cat:'objet', status:'future', x:54.5, y:70.9, icon:'obj-tresor-lobengula.png' },
   { id:'obj-cranes-cristal', title:'Les crânes de cristal', cat:'objet', status:'future', x:20.4, y:47.5, icon:'obj-cranes-cristal.png' },
-  { id:'obj-pierre-soleil', title:'La Pierre du Soleil aztèque', cat:'objet', status:'future', x:20.4, y:48.6, icon:'obj-pierre-soleil.png' },
   { id:'obj-tresor-moctezuma', title:'Le trésor de Moctezuma', cat:'objet', status:'future', x:20.8, y:46.3, icon:'obj-tresor-moctezuma.png' },
-  { id:'obj-hamecon-maui', title:'L\'hameçon de Maui', cat:'objet', status:'future', x:94.5, y:69.1, icon:'obj-hamecon-maui.png' },
   { id:'obj-mere-pounamu', title:'Le mere pounamu', cat:'objet', status:'future', x:89.3, y:82.8, icon:'obj-mere-pounamu.png' },
 ];
 // total: 108

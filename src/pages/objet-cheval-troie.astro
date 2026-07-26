@@ -1,0 +1,280 @@
+---
+/*
+  Le Cheval de Troie — sixième page de la série « Objets Légendaires du
+  Monde ».
+
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections dans cet
+  ordre, badge de nature dans le hero. Le cas le plus net de la série pour la
+  règle n°1 : l'objet est absent de l'Iliade, absent des couches les plus
+  anciennes du corpus troyen, et pourtant associé à une ville, Troie, dont les
+  fouilles de Schliemann ont donné une réalité archéologique inattendue.
+
+  Effets (docs/plans/plan-effets.md) : data-egg="chevaltroie" sur <body> et
+  data-scroll-fx="chevalTroieAssemble" sur #description, tous deux vers
+  chevalTroieAssemble() dans public/effects.js — un cheval de bois qui
+  s'assemble planche par planche puis roule hors de l'écran. Pas de
+  fx-decode : l'inscription votive rapportée par les sources est secondaire au
+  récit, pas le cœur de l'identité de l'objet comme chez Excalibur ou Mjöllnir.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Bois vieilli, bronze et nuit de siège : la matière de l'objet plutôt que la
+   géographie du sujet, principe visuel propre à la série objets. */
+const palette = {
+  bg: '#181410',
+  'bg-deep': '#0d0a08',
+  surface: '#241e17',
+  'surface-alt': '#2e261c',
+  border: '#4f4030',
+  ink: '#f2e9d8',
+  text: '#ddd0b8',
+  'text-dim': '#a3927a',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#5a6a7a',
+  'accent2-bright': '#8a9aac',
+  verdict: '#8a6a2f',
+  'verdict-bright': '#c9982f',
+  glow: 'rgba(201,152,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Doureios Hippos', sub: 'Grec — « le cheval de bois »',
+    body: "Le nom grec de l'objet n'apparaît dans aucun passage conservé de l'<em>Iliade</em> : le poème s'arrête avant la fin du siège, aux funérailles d'Hector.",
+  },
+  {
+    num: 'II', title: "L'Odyssée", sub: 'Mentions brèves, pas un récit complet',
+    body: "L'<em>Odyssée</em> évoque le cheval trois fois, en quelques vers — un chant d'aède, un souvenir de Ménélas, une ombre aux Enfers — jamais une scène racontée en continu.",
+  },
+  {
+    num: 'III', title: "Le récit complet, sept siècles plus tard", sub: 'Virgile, Énéide, v. 19 av. J.-C.',
+    body: "La version détaillée que tout le monde connaît — Sinon, Laocoon, le cheval ouvert de nuit — vient du poète latin Virgile, écrivant près de sept siècles après la date traditionnelle de la guerre de Troie.",
+  },
+];
+---
+<PageLayout
+  title="Le Cheval de Troie"
+  serie="Objets Légendaires du Monde"
+  description="Absent de l'Iliade, à peine mentionné dans l'Odyssée : le récit complet du cheval de bois n'existe que grâce à Virgile, sept siècles après la guerre de Troie qu'il raconte. Troie, elle, est un site réel, fouillé — sans aucune trace du cheval."
+  href="objet-cheval-troie.html"
+  egg="chevaltroie"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ILION · HISARLIK"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>la Pierre du Soleil aztèque</strong>"
+>
+  <p class="subtitle" slot="hero">Doureios Hippos</p>
+  <p class="tagline" slot="hero">
+    L'objet-piège le plus célèbre de l'Antiquité est absent du poème qui raconte la guerre de
+    Troie — et sa version complète attend Virgile, sept siècles plus tard.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet de fiction"
+    note="Aucun cheval de bois n'a jamais existé : le motif apparaît dans des poèmes bien postérieurs à toute guerre de Troie possible. La ville, elle, est un site archéologique réel et fouillé."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Un objet absent du poème fondateur"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet. Ici, l'écart ne se compte pas seulement en siècles entre l'événement et le texte, mais entre deux textes eux-mêmes très éloignés dans le temps.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Une guerre de Troie, si elle a un noyau historique, appartiendrait à la fin de l'âge du
+      bronze (vers 1180 av. J.-C. selon les chronographes grecs). Le cheval de bois n'apparaît
+      de façon sûre que dans des poèmes du VIIe siècle av. J.-C. — et son récit complet, chez
+      Virgile, seulement vers 19 av. J.-C.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et ruse"
+    title="Ce que les textes en disent"
+    intro="Rédigé en discours rapporté : ce que la tradition prête à l'objet, avec des détails qui varient sensiblement d'une source à l'autre."
+    scrollFx="chevalTroieAssemble">
+    <div class="card-grid wide">
+      <FigureCard
+        name="La construction"
+        role="Épeios, sous l'inspiration d'Athéna"
+        tags={['Bois creux', 'Offrande']}
+        body={["Un cheval de bois creux, assez grand pour dissimuler un groupe de guerriers grecs d'élite, construit par l'artisan Épeios avec l'aide directe de la déesse Athéna selon la tradition.",
+               "Une inscription votive, rapportée par plusieurs sources antiques, le dédie à la déesse « pour un retour sans encombre » — un détail qui rend l'objet crédible aux yeux des Troyens."]}
+      />
+      <FigureCard
+        name="Combien de guerriers ?"
+        role="Un chiffre qui grossit avec le temps"
+        tags={['Variantes', 'Inflation légendaire']}
+        body={["Les sources anciennes ne s'accordent pas : certaines évoquent une vingtaine de guerriers, d'autres jusqu'à cinquante. Des versions tardives et populaires avancent des chiffres bien plus grands, jusqu'à plusieurs milliers.",
+               "Ce désaccord, à lui seul, montre à quel point le détail « réaliste » du cheval a été retravaillé à chaque nouvelle version du récit."]}
+      />
+      <FigureCard
+        name="Le piège"
+        role="Sinon et l'abandon feint"
+        tags={['Ruse', 'Flotte cachée']}
+        body="Les Grecs brûlent leur camp, font mine de rembarquer et se cachent derrière l'île voisine de Ténédos ; un seul homme, Sinon, reste volontairement en arrière pour convaincre les Troyens de faire entrer le cheval dans la ville."
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où le cheval agit">
+    <StoryBlock
+      num="Récit I"
+      title="Le mensonge de Sinon"
+      body={[
+        "Capturé, Sinon jure aux Troyens que les Grecs l'ont abandonné et que le cheval est une offrande à Athéna, assez grande pour que les Troyens ne puissent pas la faire entrer par leurs portes — un défi calculé à leur orgueil.",
+        "Il ajoute que le détruire attirerait la colère de la déesse sur Troie, tandis que l'accueillir dans la ville transférerait sa faveur aux vainqueurs — un argument religieux qui neutralise toute prudence militaire.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit II"
+      title="L'avertissement de Laocoon"
+      body="Le prêtre Laocoon met en garde ses concitoyens — « je crains les Grecs, même quand ils apportent des présents » — et lance une lance contre le flanc du cheval. Deux serpents surgissent alors de la mer et l'étranglent, lui et ses fils, sous les yeux de la foule, qui y voit un signe divin plutôt qu'un avertissement fondé."
+      quote="Timeo Danaos et dona ferentis."
+      cite="Virgile, Énéide, livre II"
+    />
+    <StoryBlock
+      num="Récit III"
+      title="Cassandre, ignorée par construction"
+      body="La prophétesse Cassandre dénonce elle aussi le piège — mais Apollon l'a condamnée à ne jamais être crue, quelle que soit l'exactitude de ses prédictions. Le récit installe ainsi deux avertissements clairs, et les rend tous deux inefficaces par construction narrative plutôt que par manque de preuves."
+    />
+    <StoryBlock
+      num="Récit IV"
+      title="La nuit du sac"
+      body="Introduit à l'intérieur des murs après que les Troyens ont eux-mêmes abattu une partie de leur rempart pour le faire passer, le cheval livre ses guerriers cachés à la nuit tombée. Ils ouvrent les portes à la flotte grecque revenue en silence : Troie brûle avant l'aube."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Charpente navale et machines de siège"
+    intro="La section propre à cette série. Un cheval creux capable de dissimuler des hommes n'est pas un délire d'imagination pure : la charpenterie et l'ingénierie de siège de l'époque permettent de poser la question sérieusement.">
+    <div class="card-grid compact">
+      <MiniCard title="Assemblage à tenons et mortaises" tag="Âge du bronze égéen" body="La technique de charpenterie navale attestée sur l'épave d'Uluburun (XIVe siècle av. J.-C.) montre que des structures de bois massives et solidaires étaient parfaitement maîtrisées dans la région et l'époque du récit." />
+      <MiniCard title="Les grandes offrandes de bois" tag="Pratique votive grecque" body="Déposer une sculpture de grande taille en offrande à une divinité est une pratique religieuse bien attestée — ce qui rend crédible, sur le plan des usages, l'idée d'un tel objet devant un sanctuaire ou une porte de ville." />
+      <MiniCard title="Les machines de siège « animales »" tag="Proche-Orient ancien" body="Des engins de siège nommés d'après des animaux existent dans plusieurs armées anciennes du Proche-Orient — une piste que des auteurs antiques eux-mêmes évoquaient déjà pour rationaliser le motif du cheval." />
+      <MiniCard title="Troie VIIa, une ville brûlée" tag="Fouilles de Blegen" body="La couche correspondant le mieux à une « Troie homérique » montre des signes de destruction violente et d'incendie vers 1180 av. J.-C. — sans qu'aucun indice archéologique ne permette de dire comment la ville est tombée." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Une remarque de méthode : rien n'interdit techniquement la construction d'un grand
+      cheval de bois creux à l'âge du bronze tardif. Ce que l'archéologie ne confirme ni
+      n'infirme, c'est qu'un tel objet ait servi à prendre une ville précise, un jour précis.
+    </p>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Candidats matériels"
+    title="Une ville fouillée, aucun cheval"
+    intro="À la différence du Graal ou de la Lance Sacrée, il n'existe aucune relique concurrente prétendant être le cheval : la seule trace matérielle disputée est celle de Troie elle-même.">
+    <Timeline items={[
+      { year: 'v. 1180 av. J.-C.', title: 'La destruction de Troie VIIa', body: "La couche archéologique la plus souvent proposée comme candidate à la « Troie homérique » montre un incendie et des signes de siège." },
+      { year: 'VIIIe siècle av. J.-C.', title: "L'Iliade et l'Odyssée", body: "Fixation écrite des poèmes homériques ; le cheval n'apparaît que dans l'Odyssée, en quelques vers." },
+      { year: 'VIIe siècle av. J.-C.', title: 'Le Cycle épique', body: "Des poèmes aujourd'hui perdus, connus par des résumés tardifs, développent pour la première fois l'épisode complet du cheval." },
+      { year: 'v. 19 av. J.-C.', title: "L'Énéide de Virgile", body: "Le récit détaillé et définitif — Sinon, Laocoon, la nuit du sac — qui fixe la version connue aujourd'hui." },
+      { year: '1870s', title: 'Les fouilles de Schliemann', body: "Heinrich Schliemann identifie le site de Hisarlik, en Turquie, comme celui de Troie — une découverte réelle, obtenue par des méthodes aujourd'hui critiquées pour leur brutalité." },
+      { year: '2004', title: 'Le cheval de Çanakkale', body: "Un cheval de bois monumental, construit comme accessoire du film <em>Troy</em>, est offert à la ville turque voisine du site et devient une attraction touristique permanente." },
+    ]} />
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la légende au phénomène"
+    title="Un objet devenu métaphore universelle">
+    <div class="card-grid compact">
+      <MiniCard title="Le « cheval de Troie » informatique" tag="Depuis les années 1970" body="Le terme désigne aujourd'hui un logiciel malveillant déguisé en programme inoffensif — l'extension la plus inattendue du motif, entrée dans le vocabulaire technique mondial." />
+      <MiniCard title="Cinéma" tag="1956, 2004 et au-delà" body="De <em>La Guerre de Troie</em> (1956) à <em>Troy</em> (2004, avec Brad Pitt), le cinéma a régulièrement remis en scène l'épisode, souvent en l'amplifiant." />
+      <MiniCard title="Tourisme à Çanakkale" tag="Turquie" body="Le cheval de bois du film de 2004, offert à la ville, attire aujourd'hui des visiteurs qui n'ont souvent aucun lien avec le site archéologique voisin." />
+      <MiniCard title="Une expression du langage courant" tag="Toutes langues européennes" body="« Cheval de Troie » désigne, bien au-delà du grec ou du latin, toute ruse consistant à faire entrer une menace sous une apparence inoffensive." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Sans détour : aucun cheval de bois n'a jamais existé. Ce qui n'empêche pas de dire des choses précises sur le site et le texte.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Un motif absent des couches les plus anciennes"
+      body={[
+        "Le cheval de bois n'apparaît dans aucun vers conservé de l'Iliade. Il est mentionné brièvement dans l'Odyssée, puis développé dans des poèmes du Cycle épique aujourd'hui perdus, connus seulement par des résumés d'auteurs plus tardifs.",
+        "Le récit complet et détaillé que le monde entier connaît — avec Sinon, Laocoon et les serpents — est une composition littéraire latine du Ier siècle av. J.-C., signée Virgile.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Un site réel, une preuve qui manque"
+      body="Les fouilles menées depuis Schliemann sur le site de Hisarlik confirment l'existence d'une ville fortifiée détruite par le feu vers 1180 av. J.-C., une date compatible avec la tradition grecque. Aucune trouvaille, en revanche, ne documente ni ne réfute la présence d'un cheval de bois : l'archéologie ne peut simplement rien dire sur ce point précis."
+    />
+    <TheoryCard
+      title="Le cheval est une invention littéraire postérieure à l'Iliade"
+      level="consensus"
+      status="Consensus"
+      body="Son absence de l'Iliade et sa première apparition complète dans des sources beaucoup plus tardives sont des faits philologiques établis, non contestés."
+      attrib="Position dominante de la philologie classique"
+    />
+    <TheoryCard
+      title="Le cheval représenterait une machine de siège mal comprise"
+      level="plausible"
+      status="Hypothèse ancienne, non tranchée"
+      body="Déjà évoquée par des auteurs antiques eux-mêmes, l'idée d'un engin de siège surnommé « cheval » — une pratique attestée ailleurs dans l'Antiquité — reste discutée sans preuve décisive dans un sens ou dans l'autre."
+      attrib="Hypothèse rationalisante, débattue depuis l'Antiquité"
+    />
+    <TheoryCard
+      title="Des milliers de guerriers auraient tenu dans le cheval"
+      level="folklore"
+      status="Écarté"
+      body="Les chiffres tardifs les plus spectaculaires sont physiquement incompatibles avec les dimensions rapportées de l'objet — un cas net d'inflation légendaire au fil des réécritures, pas une donnée à prendre au sérieux."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le cheval fait encore">
+    <HeritageBlock
+      title="Un site classé"
+      body="Troie/Hisarlik est inscrite au patrimoine mondial de l'UNESCO depuis 1998, comme site archéologique documentant plusieurs millénaires d'occupation continue, bien au-delà de la seule question homérique."
+    />
+    <HeritageBlock
+      title="Une leçon de méthode archéologique"
+      body="Les fouilles de Schliemann, menées à la dynamite et guidées par la volonté de confirmer Homère à tout prix, ont détruit des couches entières et mal attribué des trouvailles — un contre-exemple encore enseigné en archéologie."
+    />
+    <HeritageBlock
+      title="Un vocabulaire technique mondial"
+      body="Le terme informatique « cheval de Troie », aujourd'hui banal, montre à quel point l'objet a quitté le seul champ de la littérature antique."
+    />
+    <CautionBox>
+      Cette page distingue volontairement ce que Troie peut prouver — une ville détruite vers
+      1180 av. J.-C. — de ce qu'elle ne peut pas prouver : la présence d'un cheval de bois un
+      jour précis. Confondre un site réel et un motif littéraire est exactement l'erreur que
+      les fouilles hâtives du XIXe siècle ont illustrée en grand.
+    </CautionBox>
+  </Section>
+</PageLayout>
