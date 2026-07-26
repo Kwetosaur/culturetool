@@ -902,6 +902,61 @@
     ], { duration: 4600, easing: 'ease-in-out', fill: 'forwards' });
   }
 
+  // Excalibur — l'épée se dégage de la pierre en un seul mouvement, éclat de
+  // lame au sommet. Première scène de la famille « objets légendaires » : le
+  // principe de la série est que l'objet lui-même se construit, se forge ou se
+  // dégage, jamais une créature qui traverse ni des glyphes qui pleuvent.
+  function excaliburDraw() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);' +
+      'width:min(30vh,220px);height:min(56vh,420px);';
+    // La lame monte derrière la pierre (z-index), donc elle a l'air d'en sortir.
+    var blade = document.createElement('div');
+    blade.style.cssText = 'position:absolute;left:50%;bottom:26%;transform:translate(-50%,40%);' +
+      'width:38%;height:78%;z-index:1;';
+    blade.innerHTML =
+      '<svg viewBox="0 0 60 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">' +
+        '<defs><linearGradient id="fx-exc-b" x1="0" y1="0" x2="1" y2="0">' +
+          '<stop offset="0" stop-color="#7d8798"/><stop offset=".45" stop-color="#eef3fa"/>' +
+          '<stop offset="1" stop-color="#8b95a6"/></linearGradient></defs>' +
+        '<path d="M30 4 L40 40 L40 214 L30 232 L20 214 L20 40 Z" fill="url(#fx-exc-b)"/>' +
+        '<rect x="6" y="232" width="48" height="9" rx="3" fill="#c9982f"/>' +
+        '<rect x="26" y="241" width="8" height="34" fill="#8a6a2f"/>' +
+        '<circle cx="30" cy="281" r="8" fill="#c9982f"/>' +
+      '</svg>';
+    var stone = document.createElement('div');
+    stone.style.cssText = 'position:absolute;left:50%;bottom:0;transform:translateX(-50%);' +
+      'width:100%;height:30%;z-index:2;';
+    stone.innerHTML =
+      '<svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">' +
+        '<path d="M18 88 L6 40 L34 14 L104 6 L172 20 L192 56 L182 88 Z" fill="#4a4a52"/>' +
+        '<path d="M34 14 L104 6 L172 20 L150 34 L60 30 Z" fill="#5e5e67"/>' +
+        '<path d="M96 22 L112 22 L110 34 L98 34 Z" fill="#23232a"/>' +
+      '</svg>';
+    var flash = document.createElement('div');
+    flash.style.cssText = 'position:absolute;left:50%;top:2%;transform:translate(-50%,-50%);' +
+      'width:34%;aspect-ratio:1;border-radius:50%;opacity:0;z-index:3;' +
+      'background:radial-gradient(circle,rgba(255,252,235,.95),rgba(255,240,190,0) 68%);';
+    wrap.appendChild(blade);
+    wrap.appendChild(stone);
+    wrap.appendChild(flash);
+    l.appendChild(wrap);
+
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 },
+                  { opacity: 1, offset: .84 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    blade.animate([
+      { transform: 'translate(-50%,40%)' },
+      { transform: 'translate(-50%,34%)', offset: .18 },   // la résistance, puis ça cède
+      { transform: 'translate(-50%,-14%)', offset: .62 },
+      { transform: 'translate(-50%,-14%)' }
+    ], { duration: 4200, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+    flash.animate([{ opacity: 0 }, { opacity: 0, offset: .58 },
+                   { opacity: 1, offset: .68 }, { opacity: 0, offset: .86 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -916,9 +971,15 @@
   var OGHAM = 'ᚁᚂᚃᚄᚅᚆᚇᚈᚉᚊ';
   var ROMAN = 'ⅠⅤⅩⅬⅭⅮⅯ';
 
+  // Capitales lapidaires : pour les inscriptions reellement portees par un objet
+  // (serie « objets legendaires »). Pas de J, U ni W, absents de l'alphabet latin
+  // classique — c'est ce qui donne l'aspect grave plutot que dactylographie.
+  var LAPID = 'ABCDEFGHIKLMNOPQRSTVXYZ';
+
   var GLYPH_POOLS = {
     rune: RUNES, greek: GREEK, hiero: HIERO, cunei: CUNEI, ogham: OGHAM, roman: ROMAN,
-    hindu: 'ॐ☸✴◈', japan: '❀✿花結', azteque: '☀✴◈❂', slave: '☀✺❉✵', chine: '福龍鳳春'
+    hindu: 'ॐ☸✴◈', japan: '❀✿花結', azteque: '☀✴◈❂', slave: '☀✺❉✵', chine: '福龍鳳春',
+    lapidaire: LAPID
   };
 
   function glyphify(el, pool) {
@@ -1008,6 +1069,7 @@
     maliCaravan: maliCaravan,
     mothmanShadow: mothmanShadow,
     antikytheraGears: antikytheraGears,
+    excaliburDraw: excaliburDraw,
     dragonCloudGlide: dragonCloudGlide
   };
   var scrollFxLastPlayed = {};
@@ -1062,6 +1124,7 @@
     mali:          maliCaravan,
     mothman:       mothmanShadow,
     antikythera:   antikytheraGears,
+    excalibur:     excaliburDraw,
     chinoise:      function () { glyphShower({ glyphs: '福龍鳳春', mode: 'fall', color: '#d8443a' }); dragonCloudGlide(); },
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
