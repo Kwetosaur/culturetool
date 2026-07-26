@@ -27,15 +27,19 @@ from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MAP_HTML = os.path.join(ROOT, "map.html")
-PUBLIC_MAP_HTML = os.path.join(ROOT, "public", "map.html")
-MAP_IMG = os.path.join(ROOT, "map.jpg")
+# public/ est la seule source depuis le nettoyage du 26/07/2026 (les doublons de la
+# racine ont ete supprimes : identiques, et jamais lus par le deploiement).
+MAP_HTML = os.path.join(ROOT, "public", "map.html")
+MAP_IMG = os.path.join(ROOT, "public", "map.jpg")
 
+# Doit rester aligne sur les variables --<cat> de map.html (voir le commentaire
+# dans son :root : le rendu des pins fait var(--' + p.cat + ')).
 CAT_COLOR = {
     "mythologie": "#c9982f",
     "culture": "#3f7a5c",
     "creature": "#9a3535",
     "mystere": "#2a4f8a",
+    "objet": "#6b4a9c",
 }
 CANVAS_W = 1500
 MIN_ZOOM, MAX_ZOOM = 1.0, 40.0
@@ -47,6 +51,10 @@ PIN_RE = re.compile(
     r"\{\s*id:'(?P<id>[\w-]+)',\s*title:'(?P<title>(?:[^'\\]|\\.)*)',"
     r"\s*cat:'(?P<cat>\w+)',"
     r"(?:\s*status:'(?P<status>\w+)',)?"
+    # pos:'todo' = position approchee, generee automatiquement, jamais verifiee
+    # a l'oeil. Le filtre "a placer" ne montre que celles-la, et le marqueur
+    # disparait a l'enregistrement des que le pin a bouge.
+    r"(?:\s*pos:'(?P<pos>\w+)',)?"
     r"(?:\s*href:'(?P<href>[^']*)',)?"
     r"\s*x:(?P<x>-?[\d.]+),\s*y:(?P<y>-?[\d.]+),"
     r"\s*icon:'(?P<icon>[^']*)'"
@@ -62,6 +70,7 @@ def load_pins(html_text):
             "title": d["title"].replace("\\'", "'"),
             "cat": d["cat"],
             "future": d["status"] == "future",
+            "a_placer": d["pos"] == "todo",
             "x": float(d["x"]),
             "y": float(d["y"]),
             "orig_x": float(d["x"]),
@@ -100,6 +109,7 @@ class PinEditor:
         self.moved_px = 0
         self.cat_visible = {c: tk.BooleanVar(value=True) for c in CAT_COLOR}
         self.future_visible = tk.BooleanVar(value=True)
+        self.only_a_placer = tk.BooleanVar(value=False)
 
         self._build_ui()
         self._redraw()
@@ -153,6 +163,11 @@ class PinEditor:
             ttk.Checkbutton(filt, text=cat, variable=self.cat_visible[cat],
                              command=self._on_filter_change).pack(anchor="w", padx=6)
         ttk.Checkbutton(filt, text="pages a venir", variable=self.future_visible,
+                         command=self._on_filter_change).pack(anchor="w", padx=6)
+        ttk.Separator(filt, orient="horizontal").pack(fill="x", padx=6, pady=4)
+        n_todo = sum(1 for p in self.pins if p["a_placer"])
+        ttk.Checkbutton(filt, text=f"a placer uniquement ({n_todo})",
+                         variable=self.only_a_placer,
                          command=self._on_filter_change).pack(anchor="w", padx=6)
 
         info = ttk.LabelFrame(right, text="Point selectionne")
@@ -231,6 +246,8 @@ class PinEditor:
             if not self.cat_visible[p["cat"]].get():
                 continue
             if p["future"] and not self.future_visible.get():
+                continue
+            if self.only_a_placer.get() and not p["a_placer"]:
                 continue
             out.append(p)
         return out
@@ -419,7 +436,7 @@ class PinEditor:
         if not dirty:
             messagebox.showinfo("Rien a faire", "Aucune position n'a change.")
             return
-        for path in (MAP_HTML, PUBLIC_MAP_HTML):
+        for path in (MAP_HTML,):
             if not os.path.exists(path):
                 continue
             bak = path + ".bak"
@@ -436,13 +453,26 @@ class PinEditor:
                 if c:
                     txt = new_txt
                     n += 1
+                # Le pin vient d'etre place a la main : il n'est plus "a placer".
+                # Le marqueur pos:'todo' disparait, donc le filtre se vide au fur
+                # et a mesure du travail au lieu de rester bloque a 65.
+                if p["a_placer"]:
+                    todo_pat = re.compile(r"(id:'" + re.escape(p["id"]) + r"',[^\n]*?)\s*pos:'todo',")
+                    txt2, c2 = todo_pat.subn(lambda m: m.group(1), txt, count=1)
+                    if c2:
+                        txt = txt2
+                        p["a_placer"] = False
             open(path, "w", encoding="utf-8").write(txt)
             print(f"{path}: {n} point(s) mis a jour")
         for p in dirty:
             p["orig_x"], p["orig_y"] = p["x"], p["y"]
+        reste = sum(1 for q in self.pins if q["a_placer"])
+        self.chk_todo.config(text=f"a placer uniquement ({reste})")
+        self._refresh_list()
         self._redraw()
         messagebox.showinfo("Enregistre",
-                             f"{len(dirty)} point(s) enregistre(s) dans map.html et public/map.html.\n"
+                             f"{len(dirty)} point(s) enregistre(s) dans public/map.html.\n"
+                             f"Reste a placer : {reste}.\n"
                              f"Pense a relancer 'npm run build' pour voir le resultat sur le site.")
 
 

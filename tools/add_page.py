@@ -1,42 +1,49 @@
 # -*- coding: utf-8 -*-
 """
-Integration transverse automatisee d'une nouvelle page du site (culture,
-creature, mystere ou mythologie) : ce que je faisais a la main sur ~15 Edit
-par page (deplacement du pin, carte accueil, coches de statut, menu lateral)
-devient un seul appel de script.
+Integration transverse automatisee d'une nouvelle page du site (mythologie,
+culture, creature, mystere ou objet legendaire) : ce que je faisais a la main sur
+~15 Edit par page (deplacement du pin, carte accueil, coches de statut, menu
+lateral) devient un seul appel de script.
 
 Pre-requis :
-  - Le contenu de la page (root + public/) est deja ecrit et verifie.
+  - Le contenu de la page est deja ecrit et verifie : public/<nom>.html pour une
+    page statique, src/pages/<nom>.astro pour une page compilee.
   - L'id existe deja dans PLACES_FUTURE de map.html (positions pre-placees a
     la main par l'utilisateur via tools/edit_map_pins.py) - sinon le script
     s'arrete et demande de placer le pin manuellement d'abord.
 
 Ce que ce script fait, dans l'ordre :
-  1. map.html + public/map.html : deplace l'entree PLACES_FUTURE -> PLACES
+  1. public/map.html : deplace l'entree PLACES_FUTURE -> PLACES
      (ajoute href, conserve x/y/icon deja calibres).
-  2. src/pages/index.astro : ajoute une carte dans la section correspondante.
-  3. docs/suite_cultures.md | liste-creatures-mysteres-monde.md |
-     plan-carte-icones.md : coche le statut (best-effort, recherche floue
-     du nom - n'ecrit rien si 0 ou plusieurs matches, pour ne jamais
-     corrompre un doc sur une correspondance ambigue).
-  4. docs/site-pages.json : ajoute l'entree (menu lateral).
-  5. Lance tools/sync_sidebar.py automatiquement.
+  2. data/site-pages.json : ajoute l'entree avec son epigraph et son hook.
+     C'est desormais la SEULE source des cartes de la page d'accueil :
+     src/pages/index.astro les genere par boucle depuis ce fichier, donc il n'y
+     a plus rien a patcher dans index.astro (c'etait l'etape la plus fragile de
+     l'ancienne version : une expression reguliere sur du HTML).
+  3. docs/listes/*.md + docs/plans/plan-carte-icones.md : coche le statut (best-effort, recherche floue du nom - n'ecrit
+     rien si 0 ou plusieurs matches, pour ne jamais corrompre un doc sur une
+     correspondance ambigue). LIRE LES LIGNES 'SKIP' AFFICHEES : 4 pages
+     publiees sont restees non cochees pendant des semaines faute de l'avoir
+     fait (voir docs/audit-existant.md).
+  4. Lance tools/sync_sidebar.py (menu lateral des pages statiques).
+  5. Lance tools/check_map.cjs si node est disponible (validation JS de map.html).
 
 Ce que ce script NE fait PAS (laisse a la charge de l'appelant, volontairement
 non automatise car trop specifique/texte libre pour etre fiable) :
-  - Retirer la mention de la section "#a-venir" de index.astro.
+  - Ajuster la liste A_VENIR de index.astro (texte libre).
   - Choisir/ecrire le teaser "next-up" dans le footer de la page.
 
 Usage :
-  python tools/add_page.py --id cult-mali --cat culture --href culture-mali.html \
-    --menu-title "Empire du Mali" --card-title "Empire du Mali" \
-    --epigraph "Tombouctou" --hook "Mansa Moussa, l'or et le sel : l'age d'or du Sahel." \
-    --status-name "Empire du Mali"
+  python tools/add_page.py --id obj-excalibur --cat objet --href objet-excalibur.html \
+    --menu-title "Excalibur" --card-title "Excalibur" \
+    --epigraph "Bretagne, 1136" --hook "L'epee la plus celebre du monde n'a jamais existe." \
+    --status-name "Excalibur"
 """
 import argparse
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 
@@ -44,21 +51,28 @@ if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MAP_FILES = [os.path.join(ROOT, 'map.html'), os.path.join(ROOT, 'public', 'map.html')]
-INDEX_ASTRO = os.path.join(ROOT, 'src', 'pages', 'index.astro')
-PAGES_JSON = os.path.join(ROOT, 'docs', 'site-pages.json')
+# Une seule copie depuis le nettoyage du 26/07/2026 : les 31 fichiers dupliques a la
+# racine ont ete supprimes (identiques a public/, jamais lus par le deploiement, qui
+# publie dist/ genere par astro build). public/ est la seule source.
+MAP_FILES = [os.path.join(ROOT, 'public', 'map.html')]
+PAGES_JSON = os.path.join(ROOT, 'data', 'site-pages.json')
 STATUS_DOCS = [
-    os.path.join(ROOT, 'docs', 'suite_mythologies.md'),
-    os.path.join(ROOT, 'docs', 'suite_cultures.md'),
-    os.path.join(ROOT, 'docs', 'liste-creatures-mysteres-monde.md'),
-    os.path.join(ROOT, 'docs', 'plan-carte-icones.md'),
+    os.path.join(ROOT, 'docs', 'listes', 'suite_mythologies.md'),
+    os.path.join(ROOT, 'docs', 'listes', 'suite_cultures.md'),
+    os.path.join(ROOT, 'docs', 'listes', 'suite_objets.md'),
+    os.path.join(ROOT, 'docs', 'listes', 'liste-creatures-mysteres-monde.md'),
+    os.path.join(ROOT, 'docs', 'plans', 'plan-carte-icones.md'),
 ]
 
+# places_label = le commentaire qui sert d'ancre dans PLACES de map.html.
+# json_key = la cle dans data/site-pages.json (et donc l'ordre des sections
+# de l'accueil et du menu lateral).
 CAT_META = {
-    'mythologie': {'places_label': 'Mythologies', 'json_key': 'mythologies', 'astro_section': 'mythologies'},
-    'culture':    {'places_label': 'Cultures',    'json_key': 'cultures',    'astro_section': 'cultures'},
-    'creature':   {'places_label': 'Créatures',   'json_key': 'creatures',   'astro_section': 'creatures'},
-    'mystere':    {'places_label': 'Mystères',    'json_key': 'mysteres',    'astro_section': 'mysteres'},
+    'mythologie': {'places_label': 'Mythologies',        'json_key': 'mythologies'},
+    'culture':    {'places_label': 'Cultures',           'json_key': 'cultures'},
+    'creature':   {'places_label': 'Créatures',          'json_key': 'creatures'},
+    'mystere':    {'places_label': 'Mystères',           'json_key': 'mysteres'},
+    'objet':      {'places_label': 'Objets légendaires', 'json_key': 'objets'},
 }
 
 
@@ -100,9 +114,20 @@ def activate_pin(map_path, page_id, href, cat):
         if stripped.startswith('//') or stripped == '];':
             break
         insert_idx += 1
-    last_entry_idx = insert_idx - 1
-    if not lines[last_entry_idx].rstrip().endswith(','):
-        lines[last_entry_idx] = lines[last_entry_idx].rstrip() + ','
+
+    # La nouvelle entree s'insere en insert_idx : l'element juste AVANT elle doit
+    # donc finir par une virgule. Deux pieges, tous deux rencontres pour de vrai :
+    #  - si le bloc de la categorie est vide (premiere page d'une categorie neuve),
+    #    la ligne precedente est le commentaire d'ancrage : lui ajouter une virgule
+    #    produit "// Objets légendaires," et casse tout le JS de la carte ;
+    #  - dans ce meme cas, c'est la derniere entree du bloc PRECEDENT qui a besoin
+    #    de la virgule, puisque c'est elle que la nouvelle entree suit.
+    # D'ou la remontee en sautant les lignes de commentaire et les lignes vides.
+    prev_idx = insert_idx - 1
+    while prev_idx > 0 and (lines[prev_idx].strip().startswith('//') or not lines[prev_idx].strip()):
+        prev_idx -= 1
+    if lines[prev_idx].strip().endswith('}') and not lines[prev_idx].rstrip().endswith(','):
+        lines[prev_idx] = lines[prev_idx].rstrip() + ','
 
     title_escaped = title.replace("'", "\\'")
     new_entry = (
@@ -118,51 +143,10 @@ def activate_pin(map_path, page_id, href, cat):
     return {'title': title, 'x': x, 'y': y, 'icon': icon}
 
 
-def add_index_card(cat, href, epigraph, card_title, hook):
-    txt = open(INDEX_ASTRO, encoding='utf-8').read()
-
-    if cat == 'mythologie':
-        # Cas particulier : la section #mythologies est generee depuis un
-        # tableau `const mythologies = [...]` en frontmatter (pas des cartes
-        # <a> codees en dur comme les 3 autres categories) - ajouter une
-        # entree au tableau, jamais une carte brute dans le <div class="grid">.
-        pat = re.compile(r"(const mythologies = \[\n(?:.*\n)*?)(\];)")
-        m = pat.search(txt)
-        if not m:
-            print("ERREUR : tableau 'const mythologies' introuvable dans index.astro")
-            return False
-        entry = (
-            f"  {{ slug: '{href}', title: '{card_title}', hook: {json.dumps(hook, ensure_ascii=False)}, "
-            f"epigraph: '{epigraph}' }},\n"
-        )
-        txt = txt[:m.end(1)] + entry + txt[m.end(1):]
-        open(INDEX_ASTRO, 'w', encoding='utf-8').write(txt)
-        print("  Note : pense a mettre a jour le titre 'Dix Mythologies' -> nombre reel dans index.astro.")
-        return True
-
-    section_id = CAT_META[cat]['astro_section']
-    pat = re.compile(
-        r'(<section id="' + re.escape(section_id) + r'">.*?<div class="grid">\n)(.*?)(\n {4}</div>\n {2}</section>)',
-        re.DOTALL
-    )
-    m = pat.search(txt)
-    if not m:
-        print(f"ERREUR : section '{section_id}' introuvable dans index.astro")
-        return False
-    new_card = (
-        f'      <a class="card" href={{`${{base}}{href}`}}>\n'
-        f'        <div class="epigraph">{epigraph}</div>\n'
-        f'        <h3>{card_title}</h3>\n'
-        f'        <p>{hook}</p>\n'
-        f'      </a>'
-    )
-    new_middle = m.group(2) + '\n' + new_card
-    txt = txt[:m.start()] + m.group(1) + new_middle + m.group(3) + txt[m.end():]
-    open(INDEX_ASTRO, 'w', encoding='utf-8').write(txt)
-    return True
-
-
 def flag_status_doc(path, status_name):
+    if not os.path.exists(path):
+        print(f"  SKIP {os.path.basename(path)} : fichier absent")
+        return False
     txt = open(path, encoding='utf-8').read()
     lines = txt.split('\n')
     matches = []
@@ -181,9 +165,9 @@ def flag_status_doc(path, status_name):
     i = matches[0]
     parts = lines[i].split('|')
     parts[1] = parts[1].rstrip() + ' ✅ '
-    # heuristique plan-carte-icones.md : 2e colonne "icône prête" -> "✅ fait"
-    if len(parts) > 2 and 'icône prête' in parts[2]:
-        parts[2] = parts[2].replace('icône prête', '✅ fait')
+    # heuristique docs/plans/plan-carte-icones.md : 2e colonne "icône prête"/"à générer" -> "✅ fait"
+    if len(parts) > 2 and ('icône prête' in parts[2] or 'à générer' in parts[2]):
+        parts[2] = parts[2].replace('icône prête', '✅ fait').replace('à générer', '✅ fait')
         parts[1] = parts[1].replace(' ✅ ', ' ')  # pas de doublon d'un ✅ sur ce doc
     lines[i] = '|'.join(parts)
     open(path, 'w', encoding='utf-8').write('\n'.join(lines))
@@ -191,40 +175,56 @@ def flag_status_doc(path, status_name):
     return True
 
 
+# Ordre d'affichage des series (accueil + menu lateral). Une cle presente dans
+# le JSON mais absente d'ici est conservee et ecrite a la fin : ne JAMAIS
+# reintroduire une liste codee en dur qui filtre les cles, l'ancienne version
+# supprimait silencieusement toute categorie inconnue a la premiere reecriture.
+ORDER_HINT = ['mythologies', 'cultures', 'creatures', 'mysteres', 'objets']
+
+
 def _dump_compact(data):
     """Serialise avec un objet par ligne (plus lisible/diffable que json.dump indent=2)."""
-    order = ['mythologies', 'cultures', 'creatures', 'mysteres']
-    lines = ['{', f'  "_comment": {json.dumps(data["_comment"], ensure_ascii=False)},']
-    for i, key in enumerate(order):
-        lines.append(f'  "{key}": [')
+    keys = ([k for k in ORDER_HINT if k in data]
+            + [k for k in data if k not in ORDER_HINT and not k.startswith('_')])
+    lines = ['{', '  "_comment": %s,' % json.dumps(data['_comment'], ensure_ascii=False)]
+    for i, key in enumerate(keys):
+        tail = ',' if i < len(keys) - 1 else ''
         items = data[key]
+        if not items:
+            lines.append(f'  "{key}": []{tail}')
+            continue
+        lines.append(f'  "{key}": [')
         for j, item in enumerate(items):
             comma = ',' if j < len(items) - 1 else ''
-            entry = json.dumps(item, ensure_ascii=False)
-            lines.append(f'    {entry}{comma}')
-        comma = ',' if i < len(order) - 1 else ''
-        lines.append(f'  ]{comma}')
+            lines.append('    %s%s' % (json.dumps(item, ensure_ascii=False), comma))
+        lines.append(f'  ]{tail}')
     lines.append('}')
     return '\n'.join(lines) + '\n'
 
 
-def update_pages_json(cat, href, menu_title):
+def update_pages_json(cat, href, menu_title, card_title, epigraph, hook):
     with open(PAGES_JSON, encoding='utf-8') as f:
         data = json.load(f)
     key = CAT_META[cat]['json_key']
+    data.setdefault(key, [])
     if any(p['href'] == href for p in data[key]):
-        print(f"  SKIP site-pages.json : '{href}' deja present")
+        print(f"  SKIP data/site-pages.json : '{href}' deja present")
         return
-    data[key].append({'href': href, 'title': menu_title})
+    entry = {'href': href, 'title': menu_title}
+    if card_title != menu_title:
+        entry['cardTitle'] = card_title
+    entry['epigraph'] = epigraph
+    entry['hook'] = hook
+    data[key].append(entry)
     with open(PAGES_JSON, 'w', encoding='utf-8') as f:
         f.write(_dump_compact(data))
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--id', required=True, help="id du pin dans PLACES_FUTURE, ex: cult-mali")
+    ap.add_argument('--id', required=True, help="id du pin dans PLACES_FUTURE, ex: obj-excalibur")
     ap.add_argument('--cat', required=True, choices=list(CAT_META))
-    ap.add_argument('--href', required=True, help="nom de fichier, ex: culture-mali.html")
+    ap.add_argument('--href', required=True, help="nom de fichier, ex: objet-excalibur.html")
     ap.add_argument('--menu-title', required=True, help="titre affiche dans le menu lateral")
     ap.add_argument('--card-title', help="titre affiche sur la carte accueil (defaut: menu-title)")
     ap.add_argument('--epigraph', required=True)
@@ -242,24 +242,26 @@ def main():
             sys.exit(1)
         print(f"  OK {os.path.relpath(map_path, ROOT)} : x={result['x']} y={result['y']} icon={result['icon']}")
 
-    print(f"== 2. Carte accueil (index.astro) ==")
-    if not add_index_card(args.cat, args.href, args.epigraph, card_title, args.hook):
-        sys.exit(1)
-    print("  OK carte ajoutee")
+    print("== 2. data/site-pages.json (carte accueil + menu) ==")
+    update_pages_json(args.cat, args.href, args.menu_title, card_title, args.epigraph, args.hook)
+    print("  OK")
 
-    print(f"== 3. Statuts docs (best-effort) ==")
+    print("== 3. Statuts docs (best-effort) ==")
     for doc in STATUS_DOCS:
         flag_status_doc(doc, status_name)
 
-    print(f"== 4. docs/site-pages.json ==")
-    update_pages_json(args.cat, args.href, args.menu_title)
-    print("  OK")
-
-    print(f"== 5. Resynchronisation du menu lateral ==")
+    print("== 4. Resynchronisation du menu lateral ==")
     subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'sync_sidebar.py')], check=True)
 
-    print("\nTermine. Reste a faire a la main : ajuster la section #a-venir de "
-          "index.astro et verifier les SKIP ci-dessus si besoin.")
+    print("== 5. Validation JS de map.html ==")
+    node = shutil.which('node')
+    if node:
+        subprocess.run([node, os.path.join(ROOT, 'tools', 'check_map.cjs')] + MAP_FILES, check=False)
+    else:
+        print("  node introuvable - lancer a la main : node tools/check_map.cjs public/map.html")
+
+    print("\nTermine. Reste a faire a la main : ajuster la liste A_VENIR de "
+          "index.astro si besoin, et verifier les SKIP ci-dessus.")
 
 
 if __name__ == '__main__':

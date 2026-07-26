@@ -1,0 +1,41 @@
+{
+  "_comment": "Source unique de verite pour l'ordre, les titres et les cartes d'accueil des pages du site. Lu par src/pages/index.astro (cartes de la page d'accueil, generees par boucle), tools/sync_sidebar.py (menu lateral des pages statiques) et tools/add_page.py (integration transverse). Ne pas trier alphabetiquement : l'ordre ici est l'ordre de publication, reproduit tel quel dans le menu et sur l'accueil. Champs : href, title (menu lateral), cardTitle (accueil, seulement s'il differe de title), epigraph, hook. Une categorie sans page publiee garde un tableau vide : elle est alors ignoree par l'accueil et par le menu.",
+  "mythologies": [
+    {"href": "mythologie-nordique.html", "title": "Nordique", "epigraph": "ᚱᚢᚾᛖᛊ", "hook": "Neuf mondes suspendus à un frêne cosmique."},
+    {"href": "mythologie-grecque.html", "title": "Grecque", "epigraph": "ΘΕΟΙ", "hook": "Sept royaumes primordiaux, l'Olympe et les Enfers."},
+    {"href": "mythologie-egyptienne.html", "title": "Égyptienne", "epigraph": "𓁢𓂀𓆣", "hook": "Le Nil, le Douat et la pesée du cœur."},
+    {"href": "mythologie-romaine.html", "title": "Romaine", "epigraph": "S P Q R", "hook": "Un panthéon hérité, une religion d’État."},
+    {"href": "mythologie-celtique.html", "title": "Celtique", "epigraph": "ᚑᚌᚐᚋ", "hook": "Six vagues d'invasions, un Autre Monde."},
+    {"href": "mythologie-mesopotamienne.html", "title": "Mésopotamienne", "epigraph": "𒀭𒈗𒆠", "hook": "Les premières villes, les premiers mythes écrits."},
+    {"href": "mythologie-hindoue.html", "title": "Hindoue", "epigraph": "ॐ", "hook": "Quatorze mondes, un cycle cosmique sans fin."},
+    {"href": "mythologie-japonaise.html", "title": "Japonaise", "epigraph": "八百万の神", "hook": "Huit millions de kami, du ciel aux sanctuaires."},
+    {"href": "mythologie-azteque-maya.html", "title": "Aztèque & Maya", "epigraph": "ⓖ ⓔ", "hook": "Deux cosmologies voisines, un même continent."},
+    {"href": "mythologie-slave.html", "title": "Slave", "epigraph": "БОГИ", "hook": "Le monde visible et l'invisible, Yav et Nav."},
+    {"href": "mythologie-chinoise.html", "title": "Chinoise", "epigraph": "龍", "hook": "Pangu, l'Empereur de Jade et les huit immortels : la plus grande zone d'ombre de la série enfin comblée."}
+  ],
+  "cultures": [
+    {"href": "culture-chinoise.html", "title": "Chine", "epigraph": "中國", "hook": "Peuples, grandes figures, inventions et carte-récit d'une civilisation continue."},
+    {"href": "culture-egypte-antique.html", "title": "Égypte Antique", "epigraph": "𓁢𓂀𓆣", "hook": "Pharaons, société, inventions et vie quotidienne le long du Nil."},
+    {"href": "culture-rome-antique.html", "title": "Rome antique", "cardTitle": "Rome Antique", "epigraph": "AB VRBE CONDITA", "hook": "Du village du Latium à l'empire méditerranéen : droit, ingénierie et légende fondatrice."},
+    {"href": "culture-grece-antique.html", "title": "Grèce antique", "cardTitle": "Grèce Antique", "epigraph": "ΕΛΛΑΣ", "hook": "Cité-États, démocratie naissante et philosophie : le socle civilisationnel de l'Occident."},
+    {"href": "culture-vikings.html", "title": "Vikings", "epigraph": "793 — 1066", "hook": "Navigateurs, marchands et colons : la Scandinavie médiévale au-delà du cliché du pillard."},
+    {"href": "culture-mali.html", "title": "Empire du Mali", "epigraph": "Tombouctou", "hook": "Mansa Moussa, l'or du Sahel et la ville la plus riche du XIVe siècle."}
+  ],
+  "creatures": [
+    {"href": "creature-gevaudan.html", "title": "Bête du Gévaudan", "cardTitle": "La Bête du Gévaudan", "epigraph": "1764 — 1767", "hook": "Un carnage bien réel dans la France de Louis XV, entre loups, dressage et légende."},
+    {"href": "creature-loch-ness.html", "title": "Monstre du Loch Ness", "cardTitle": "Le Monstre du Loch Ness", "epigraph": "Écosse", "hook": "Photos truquées, sonars et ADN environnemental : l'enquête la plus célèbre du genre."},
+    {"href": "creature-bigfoot.html", "title": "Bigfoot", "epigraph": "Pacifique Nord-Ouest", "hook": "Du folklore autochtone au film Patterson-Gimlin de 1967 : la traque du plus célèbre cryptide d'Amérique."},
+    {"href": "creature-yeti.html", "title": "Le Yeti", "epigraph": "Himalaya", "hook": "Croyance sherpa vivante et légende d'alpinistes : ce que l'ADN a vraiment trouvé dans la neige."},
+    {"href": "creature-chupacabra.html", "title": "Le Chupacabra", "epigraph": "Porto Rico · 1995", "hook": "Un film de science-fiction, une panique régionale et des carcasses attribuées à la gale."},
+    {"href": "creature-mothman.html", "title": "Le Mothman", "epigraph": "Point Pleasant · 1966", "hook": "Une ombre ailée, un pont effondré, et une panique collective devenue légende."}
+  ],
+  "mysteres": [
+    {"href": "mystere-triangle-bermudes.html", "title": "Triangle des Bermudes", "cardTitle": "Le Triangle des Bermudes", "epigraph": "Atlantique Nord", "hook": "Comment la statistique a dégonflé l'un des plus grands mythes médiatiques du XXe siècle."},
+    {"href": "mystere-stonehenge.html", "title": "Stonehenge", "epigraph": "Plaine de Salisbury", "hook": "Comment des pierres de plusieurs tonnes ont voyagé 225 km sans roue ni métal."},
+    {"href": "mystere-dyatlov.html", "title": "Col Dyatlov", "cardTitle": "Le Col Dyatlov", "epigraph": "Oural · 1959", "hook": "Neuf randonneurs, une tente lacérée de l'intérieur — et une explication scientifique récente enfin crédible."},
+    {"href": "mystere-voynich.html", "title": "Manuscrit de Voynich", "cardTitle": "Le Manuscrit de Voynich", "epigraph": "Europe · XVe s.", "hook": "Une écriture jamais déchiffrée, authentifiée par le carbone 14 — l'énigme la plus tenace de la cryptologie."},
+    {"href": "mystere-nazca.html", "title": "Lignes de Nazca", "cardTitle": "Les Lignes de Nazca", "epigraph": "Pérou", "hook": "Un mystère largement résolu par l'archéologie, mais jamais rattrapé par la légende extraterrestre."},
+    {"href": "mystere-anticythere.html", "title": "Mécanisme d'Anticythère", "epigraph": "Grèce antique", "hook": "Un calculateur astronomique antique d'une sophistication redécouverte par la science moderne."}
+  ],
+  "objets": []
+}
