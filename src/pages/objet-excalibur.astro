@@ -1,0 +1,357 @@
+---
+/*
+  Excalibur — première page de la série « Objets Légendaires du Monde », et
+  première page du site écrite avec le socle Astro.
+
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections dans cet
+  ordre, badge de nature dans le hero, section #facture qui doit apprendre
+  quelque chose de vrai même quand l'objet est imaginaire.
+
+  Effets (docs/plans/plan-effets.md) : data-egg="excalibur" sur <body> et
+  data-scroll-fx sur #description, tous deux vers excaliburDraw() dans
+  public/effects.js. Le déchiffrement d'inscription (fx-decode) est autorisé sur
+  cette série quand l'objet porte une inscription réelle de la tradition : c'est
+  le cas de celle de la pierre, citée telle quelle dans Malory.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+
+/* Acier poli et eau de lac : la matière de l'objet, pas la géographie du sujet —
+   c'est le principe visuel propre à la série objets. */
+const palette = {
+  bg: '#131a20',
+  'bg-deep': '#0a0f14',
+  surface: '#1d2731',
+  'surface-alt': '#26323e',
+  border: '#3d505f',
+  ink: '#eef3fa',
+  text: '#d3dce5',
+  'text-dim': '#8fa1b1',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#4a7fa5',
+  'accent2-bright': '#8fbfe0',
+  verdict: '#4a7fa5',
+  'verdict-bright': '#8fbfe0',
+  glow: 'rgba(143,191,224,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Caledfwlch', sub: 'Gallois — corpus médiéval',
+    body: "Le nom le plus ancien de l'épée d'Arthur apparaît en gallois, dans le récit de <em>Culhwch ac Olwen</em>. Il est apparenté au <strong>Caladbolg</strong> irlandais, l'épée de Fergus mac Róich : la même arme circule dans deux traditions celtiques avant d'entrer dans la littérature européenne.",
+  },
+  {
+    num: 'II', title: 'Caliburnus', sub: 'Latin — vers 1136',
+    body: "Geoffroy de Monmouth latinise le nom dans son <em>Historia Regum Britanniae</em>, et lui donne au passage un lieu de fabrication : l'île d'Avalon. C'est la <strong>première attestation datable</strong> de l'épée telle que le monde la connaîtra.",
+  },
+  {
+    num: 'III', title: 'Escalibor, Excalibur', sub: 'Français, puis anglais',
+    body: "Les romans français transforment <em>Caliburnus</em> en <em>Escalibor</em>. C'est cette forme qui passe en anglais et que Malory fixe au XV<sup>e</sup> siècle sous la graphie devenue universelle.",
+  },
+  {
+    num: 'IV', title: 'Ce que le nom veut dire', sub: 'Étymologie',
+    body: "Du gallois <em>caled</em> (dur) et <em>bwlch</em> (brèche, entaille) : « dure brèche », un nom d'arme qui décrit ce qu'elle fait. Le rapprochement populaire avec le latin <em>chalybs</em> (l'acier) est séduisant, mais tardif et contesté.",
+  },
+];
+
+const attributs = [
+  {
+    name: 'La lame',
+    role: 'Ce que les textes en disent',
+    tags: ['Malory', 'Éclat'],
+    body: ["Aucun texte ne donne ses dimensions. Ce que la tradition retient, c'est sa <strong>lumière</strong> : chez Malory, elle brille dans les yeux des ennemis d'Arthur comme trente torches.",
+           "C'est un détail révélateur. On ne décrit pas une arme, on décrit un effet sur ceux qui la voient — le propre d'un objet qui n'a jamais eu à être fabriqué."],
+  },
+  {
+    name: 'Le fourreau',
+    role: 'Le vrai objet magique',
+    tags: ['Pouvoir', 'Vol'],
+    body: ["Le pouvoir n'est pas dans la lame mais dans son <strong>fourreau</strong> : qui le porte ne perd pas son sang, quelle que soit sa blessure. Merlin le dit à Arthur en toutes lettres, et lui reproche de ne pas le comprendre.",
+           "Morgane le dérobera. La suite de la légende découle de ce vol : Arthur garde l'épée et perd l'invulnérabilité, ce qui rend sa mort possible."],
+  },
+  {
+    name: "L'inscription",
+    role: 'Portée par la pierre, pas par l\'épée',
+    tags: ['Élection', 'Tradition tardive'],
+    body: ["La seule inscription de l'histoire n'est pas gravée sur l'arme : elle est sur l'enclume et la pierre qui la retiennent. Elle ne désigne pas un guerrier, elle désigne un <strong>héritier légitime</strong>.",
+           "Le déplacement est tout le sujet : ce n'est pas la force qui retire l'épée, c'est le droit."],
+  },
+];
+
+const jalons = [
+  { year: 'v. 1136', title: 'Caliburnus entre dans l\'histoire écrite', body: "Geoffroy de Monmouth nomme l'épée et la fait forger à Avalon." },
+  { year: 'v. 1190-1200', title: "L'épreuve de la pierre", body: "Robert de Boron ajoute le motif de l'épée à retirer — un signe d'élection divine, absent de Geoffroy." },
+  { year: '1191', title: 'Glastonbury annonce la tombe d\'Arthur', body: "Les moines de l'abbaye déclarent avoir exhumé Arthur et Guenièvre. Giraud de Barri en rapporte le récit." },
+  { year: '1191', title: 'Une « Excalibur » offerte à un roi', body: "Richard Cœur de Lion offre à Tancrède de Sicile une épée présentée comme celle d'Arthur. La première relique arthurienne documentée — et la seule trace matérielle jamais alléguée." },
+  { year: 'v. 1470', title: "Le Morte d'Arthur", body: "Thomas Malory réunit les versions concurrentes et fixe celle qui deviendra canonique en anglais ; Caxton l'imprime en 1485." },
+  { year: '1981', title: 'Excalibur, de John Boorman', body: "Le film qui installe l'imagerie moderne de l'épée pour le grand public." },
+];
+
+const facture = [
+  { title: 'Corroyage', tag: 'Ve-XIe siècle', body: "Des barres de dureté différente soudées et torsadées à chaud : le cœur souple encaisse le choc, les tranchants durs coupent." },
+  { title: 'Motifs damassés', tag: 'Décor', body: "La torsion des faisceaux dessine des vagues dans le métal. Longtemps prises pour de la magie — elles sont un effet de fabrication." },
+  { title: 'Tranchant carburé', tag: 'Métallurgie', body: "Le carbone est concentré au fil de la lame. Trop, elle casse ; trop peu, elle plie. Tout le savoir-faire est dans ce dosage." },
+  { title: 'Une garniture composite', tag: 'Assemblage', body: "Pommeau, fusée et garde sont des pièces séparées, souvent remontées ou remplacées. Une épée « ancienne » est presque toujours un objet réassemblé." },
+  { title: 'Le poids réel', tag: 'Idée reçue', body: "Une épée du haut Moyen Âge pèse environ 1 kg, une épée longue 1,1 à 1,5 kg. Jamais les cinq ou dix kilos de l'imagerie populaire." },
+  { title: 'Le moule de pierre', tag: 'Hypothèse', body: "À l'âge du bronze, on coule les épées dans des moules de pierre : on en retire donc littéralement une épée. Rapprochement séduisant avec le motif — mais jamais démontré." },
+];
+
+const popculture = [
+  { title: 'T. H. White', tag: 'Roman · 1938', body: "<em>The Sword in the Stone</em> fait d'Arthur un enfant maladroit et de Merlin un professeur. C'est cette lecture que le XX<sup>e</sup> siècle retiendra." },
+  { title: 'Disney', tag: 'Animation · 1963', body: "L'adaptation de White met l'épreuve de la pierre — et non le don du lac — au centre de l'histoire pour des générations d'enfants." },
+  { title: 'Monty Python', tag: 'Cinéma · 1975', body: "« Une dame de lac qui distribue des épées » n'est pas une base de gouvernement légitime. La parodie a définitivement daté le motif." },
+  { title: 'Boorman', tag: 'Cinéma · 1981', body: "Armures miroir, forêts trempées, la lame tirée de la pierre en contre-jour : l'imagerie visuelle dominante vient de là." },
+  { title: 'Le jeu vidéo', tag: 'Depuis 1980', body: "Excalibur est devenue l'archétype de l'arme nommée, la récompense de fin de quête. Un objet de fiction devenu convention de game design." },
+  { title: 'Tourisme', tag: 'Cornouailles', body: "Tintagel, Glastonbury et l'étang de Dozmary vivent en partie de l'épée. Aucun de ces lieux n'est attesté par un texte médiéval comme le sien." },
+];
+---
+<PageLayout
+  title="Excalibur"
+  serie="Objets Légendaires du Monde"
+  description="Excalibur n'a jamais existé : l'épée naît dans un texte de 1136, l'épreuve de la pierre est ajoutée cinquante ans plus tard, et la seule relique jamais alléguée fut un cadeau diplomatique de 1191."
+  href="objet-excalibur.html"
+  egg="excalibur"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="BRETAGNE · CORNOUAILLES · AVALON"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>l'Arche d'Alliance</strong>"
+>
+  <p class="subtitle" slot="hero">Caledfwlch · Caliburnus · Escalibor</p>
+  <p class="tagline" slot="hero">
+    L'épée la plus célèbre du monde n'a jamais existé — et des dizaines d'épées bien réelles
+    ont été présentées comme elle.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet de fiction"
+    note="Aucun original n'a jamais existé : l'épée naît dans un texte du XIIe siècle. Les reliques, elles, ont bel et bien circulé."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Un nom avant un objet"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet. Ici, il n'y a que du récit — mais on peut le dater précisément.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      L'Arthur historique, s'il a existé, appartiendrait aux V<sup>e</sup>-VI<sup>e</sup> siècles.
+      Le nom de son épée apparaît au XII<sup>e</sup>. Six siècles séparent le roi supposé de son
+      arme la plus célèbre.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et pouvoirs"
+    title="Ce que la tradition prête à l'épée"
+    intro="Aucune source ne décrit sa longueur, son poids ni son métal. Ce qu'elle décrit, ce sont ses effets — et le fait que l'objet vraiment magique n'est pas la lame."
+    scrollFx="excaliburDraw">
+    <div class="card-grid wide">
+      {attributs.map((a) => <FigureCard {...a} />)}
+    </div>
+    <blockquote class="pull-quote" style="margin-top:34px;">
+      <Decode glyphs="lapidaire">Qui retirera cette épée de cette pierre et de cette enclume est le roi de droit né de toute l'Angleterre</Decode>
+      <cite>Inscription de la pierre, Thomas Malory, Le Morte d'Arthur, v. 1470</cite>
+    </blockquote>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où l'épée agit">
+    <StoryBlock
+      num="Récit I"
+      title="L'épée et la pierre"
+      body={[
+        "L'épreuve n'appartient pas à la couche la plus ancienne du corpus. Elle apparaît chez Robert de Boron, vers 1190-1200, soit un demi-siècle après que Geoffroy de Monmouth a nommé l'épée. Un bloc de pierre surmonté d'une enclume paraît devant une église de Londres, l'épée plantée dedans, l'inscription gravée sur les flancs. Les barons du royaume échouent l'un après l'autre.",
+        "Arthur la retire sans savoir ce qu'il fait : il cherche une arme pour son frère adoptif, qui a oublié la sienne. Le geste est <strong>accidentel, et c'est le point</strong> — ce n'est pas la force qui délivre l'épée, ni le mérite acquis, c'est la légitimité de naissance. Le motif transforme une arme en machine à désigner un roi.",
+      ]}
+      quote="Il n'y eut personne pour la retirer, sinon celui à qui Dieu l'avait destinée."
+      cite="Structure du récit chez Robert de Boron"
+    />
+    <StoryBlock
+      num="Récit II"
+      title="La Dame du Lac"
+      body={[
+        "Dans le cycle en prose du XIII<sup>e</sup> siècle, Arthur reçoit une épée d'une main qui s'élève au-dessus d'un lac. Elle ne se gagne pas par une épreuve : elle est <strong>donnée</strong>. Merlin accompagne Arthur jusqu'à la rive et lui explique le protocole.",
+        "Deux traditions coexistent donc, avec deux logiques opposées : l'épée qu'on arrache et l'épée qu'on reçoit. Malory tranchera en décidant qu'il y avait <strong>deux épées différentes</strong> — la première se brise, la seconde vient du lac. C'est une solution de scribe, pas une révélation : elle réconcilie des sources qui se contredisaient.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit III"
+      title="Le fourreau volé"
+      body={[
+        "Merlin demande à Arthur lequel il préfère, l'épée ou le fourreau. Arthur répond l'épée. Merlin lui dit qu'il se trompe : tant qu'il porte le fourreau, il ne perdra pas une goutte de sang.",
+        "Morgane s'en emparera. Tout ce qui suit — les blessures qui comptent, la fin qui devient possible — tient à ce vol. La légende a pris soin de retirer l'invulnérabilité avant d'écrire la mort du roi.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit IV"
+      title="Le retour à l'eau"
+      body={[
+        "Mortellement blessé, Arthur ordonne à Bedivere de jeter l'épée dans le lac. Bedivere la cache et revient mentir. Deux fois. À la troisième, il obéit : une main sort de l'eau, saisit l'arme, et disparaît avec elle.",
+        "Cette scène est le geste le plus significatif de toute l'histoire de l'objet. Le récit <strong>refuse au lecteur la relique qu'il espérait</strong> : il n'y aura pas d'épée à exposer, pas de trésor à retrouver. L'hésitation de Bedivere, qui veut la garder, est exactement celle du public — et elle est présentée comme une faute.",
+      ]}
+      quote="Ce que le récit sacrifie ici, c'est la possibilité même d'une preuve."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Comment on forgeait une épée de ce temps-là"
+    intro="La section propre à cette série. Excalibur n'a pas existé, mais les épées de l'époque où on la situe, oui — et leur fabrication explique une bonne partie de ce que la légende prend pour de la magie.">
+    <div class="card-grid compact">
+      {facture.map((f) => <MiniCard {...f} />)}
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Une remarque de méthode : les « pouvoirs » attribués aux grandes lames sont presque
+      toujours des <strong>qualités de fabrication mal comprises</strong>. Une lame qui ne
+      s'ébrèche pas, qui reflète la lumière autrement, dont le métal semble porter des vagues —
+      ce sont des résultats de corroyage et de trempe, pas des enchantements. La légende
+      d'Excalibur, elle, ne prête même pas ces qualités à sa lame : elle lui prête un fourreau
+      qui empêche de saigner, ce qu'aucune technique ne produit. C'est ce qui la range du côté
+      de la fiction plutôt que de l'exagération.
+    </p>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Candidats matériels"
+    title="Une seule relique, et elle a disparu"
+    intro="Le Graal a une dizaine de prétendants, la Lance Sacrée quatre. Excalibur en a eu un — offert par un roi à un autre roi, et jamais revu depuis.">
+    <Timeline items={jalons} />
+    <div class="card-grid" style="margin-top:44px;">
+      <InfoCard
+        title="Le cadeau de 1191"
+        sub="Richard Ier à Tancrède de Sicile"
+        body="Une épée présentée comme celle d'Arthur change de mains dans un contexte diplomatique tendu, sur la route de la croisade. L'épisode est rapporté par les chroniqueurs du temps. On ignore ce qu'était réellement cette arme, et ce qu'elle est devenue."
+      />
+      <InfoCard
+        title="Le calendrier de Glastonbury"
+        sub="La même année"
+        body="L'abbaye annonce l'exhumation d'Arthur et de Guenièvre alors qu'elle se relève d'un incendie et cherche des pèlerins. La coïncidence de dates entre la tombe et le cadeau royal se commente d'elle-même."
+      />
+      <InfoCard
+        title="Ce qu'aucun musée n'expose"
+        sub="Aujourd'hui"
+        body="Il n'existe nulle part d'objet vénéré comme étant Excalibur — ni relique, ni contrefaçon installée. Pour une légende de cette ampleur, c'est remarquable, et c'est la conséquence directe du récit du lac."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la légende au phénomène"
+    title="Neuf siècles de réécriture">
+    <div class="card-grid compact">
+      {popculture.map((p) => <MiniCard {...p} />)}
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      L'écart avec les sources est spectaculaire sur un point précis : le grand public associe
+      Excalibur à l'épreuve de la pierre, alors que c'est le motif <strong>le plus tardif</strong>
+      du dossier et que Malory en fait une <strong>autre épée</strong>. La version que tout le
+      monde connaît est une synthèse de synthèse.
+    </p>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Sans détour : il n'y a rien à trouver. Ce qui n'empêche pas de dire des choses vraies et précises sur l'objet.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Aucune épée, un texte"
+      body={[
+        "Il n'existe aucune trace matérielle, archéologique ou documentaire d'une arme historique correspondant à Excalibur. Ce n'est pas un manque de preuve, au sens où une preuve pourrait encore apparaître : c'est un <strong>objet littéraire</strong>, apparu dans un texte identifiable, à une date identifiable, sous une plume identifiable.",
+        "Le dire n'enlève rien au récit. Ça déplace seulement la question intéressante : non pas « où est l'épée ? », mais « pourquoi a-t-on eu besoin de l'inventer, et à quel moment précis ? ».",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Ce que les dates disent"
+      body={[
+        "Le roi supposé appartiendrait aux V<sup>e</sup>-VI<sup>e</sup> siècles. Le nom de l'épée apparaît en gallois dans un corpus médiéval, puis en latin vers 1136. L'épreuve de la pierre est ajoutée vers 1190-1200. La version canonique date de 1470. La relique unique est offerte en 1191.",
+        "Autrement dit : <strong>l'objet est plus jeune que le récit, qui est plus jeune que le roi</strong>, et la relique arrive juste après l'invention du motif qui la rendait désirable. Cette chronologie est le résultat le plus solide de tout le dossier.",
+      ]}
+    />
+    <TheoryCard
+      title="Une origine galloise du nom"
+      level="consensus"
+      status="Consensus"
+      body="<em>Caliburnus</em> dérive du gallois <em>Caledfwlch</em>, lui-même apparenté au <em>Caladbolg</em> irlandais. La filiation est établie par la philologie celtique et n'est pas discutée."
+      attrib="Position dominante des études celtiques"
+    />
+    <TheoryCard
+      title="Le motif du retour à l'eau vient d'une pratique réelle"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Le dépôt volontaire d'armes dans les rivières et les lacs est massivement attesté par l'archéologie en Grande-Bretagne, de l'âge du bronze à l'âge du fer — épées jetées à l'eau, jamais récupérées, sans contexte funéraire. Que le récit d'Arthur s'achève par une épée rendue au lac fait écho à un geste que des gens ont réellement accompli pendant des siècles."
+      attrib="Rapprochement classique, mais qui reste un rapprochement : aucun texte ne fait le lien."
+    />
+    <TheoryCard
+      title="Excalibur viendrait du latin chalybs, « l'acier »"
+      level="plausible"
+      status="Discutée"
+      body="Étymologie ancienne et séduisante, encore souvent citée. Elle se heurte à la forme galloise, mieux documentée et plus ancienne dans la chaîne de transmission."
+      attrib="Minoritaire chez les spécialistes"
+    />
+    <TheoryCard
+      title="La pierre serait le souvenir d'un moule de fonte"
+      level="folklore"
+      status="Écarté"
+      body="L'idée qu'« extraire une épée d'une pierre » conserve la mémoire des moules de pierre de l'âge du bronze circule beaucoup. Elle est mentionnée ici pour cette raison, pas parce qu'elle est soutenable : le motif apparaît deux millénaires plus tard, dans un texte français, avec une fonction politique explicite."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que l'épée fait encore">
+    <HeritageBlock
+      title="Un argument politique"
+      body="Arthur est le roi qui doit revenir. Henri VII a nommé son fils aîné Arthur ; les Tudors ont fait de la matière arthurienne un instrument de légitimation, et l'épée qui désigne l'héritier de droit était l'outil rêvé pour cela. Le motif de la pierre n'a jamais servi qu'à ça : dire qui a le droit de régner."
+    />
+    <HeritageBlock
+      title="Une économie"
+      body="Tintagel, Glastonbury, l'étang de Dozmary : des lieux réels vivent d'un objet qui n'existe pas. Aucun n'est désigné par une source médiévale comme le site de l'épée."
+    />
+    <HeritageBlock
+      title="Une grammaire de la fiction"
+      body="Excalibur a fondé une convention : l'arme porte un nom, le nom vaut un personnage, et l'obtenir est une étape du récit. Du roman de chevalerie au jeu vidéo, la mécanique n'a pas changé."
+    />
+    <HeritageBlock
+      title="Un mot"
+      body="« Excalibur » sert aujourd'hui d'enseigne à des hôtels, des logiciels, des opérations militaires et des marques d'outillage. Le nom a survécu à son objet, et même à son histoire."
+    />
+    <CautionBox>
+      Une légende n'a pas besoin d'être vraie pour compter, et démontrer qu'Excalibur est une
+      invention n'appauvrit personne. Le travers à éviter ici est l'inverse du scepticisme :
+      présenter un texte de 1136, une tombe annoncée en 1191 ou un cadeau diplomatique de la
+      même année comme des <em>preuves</em> d'un roi du VI<sup>e</sup> siècle. La matière
+      arthurienne a servi trop de revendications dynastiques et nationales pour qu'on lise sans
+      méfiance une affirmation assurée sur « le véritable Arthur ».
+    </CautionBox>
+  </Section>
+</PageLayout>

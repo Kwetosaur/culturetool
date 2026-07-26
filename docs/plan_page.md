@@ -20,7 +20,7 @@ semble le plus évident.**
 | Cultures | `culture-*.html` | `docs/gabarits/gabarit-culture.html` | `docs/listes/suite_cultures.md` | 6 |
 | Créatures | `creature-*.html` | `docs/plans/plan-serie-creatures.md` | `docs/listes/liste-creatures-mysteres-monde.md` | 6 |
 | Mystères | `mystere-*.html` | `docs/plans/plan-serie-mysteres.md` | `docs/listes/liste-creatures-mysteres-monde.md` | 6 |
-| **Objets légendaires** | `objet-*.html` | `docs/plans/plan-serie-objets.md` | `docs/listes/suite_objets.md` | **0** |
+| **Objets légendaires** | `objet-*.astro` | `docs/plans/plan-serie-objets.md` | `docs/listes/suite_objets.md` | **1** |
 
 Une même civilisation peut légitimement avoir plusieurs pages sous des angles différents
 (l'Égypte a une page mythologie ET une page culture) — c'est le modèle, pas une exception.
@@ -54,7 +54,7 @@ liens relatifs, mêmes `href` dans `map.html`.
 3. **`docs/plans/plan-effets.md`** — ⚠️ celui qu'on oublie. Chaque page doit avoir 1 à 3 pistes
    d'effet bespoke, câblées à la fois en easter egg (`data-egg` + entrée dans `EGGS`) et en
    happening au scroll (`data-scroll-fx` sur une section clé + entrée dans `SCROLL_FX`).
-   **Les 160 pages à venir ont désormais toutes au moins une piste écrite** dans ce fichier :
+   **Les 159 pages à venir ont désormais toutes au moins une piste écrite** dans ce fichier :
    la consulter avant d'improviser. **Décider les 2 clefs et écrire les fonctions JS
    correspondantes dans `effects.js` avant ou en parallèle de la rédaction** — un agent de
    rédaction n'a besoin que de connaître les 2 clefs, il n'écrit jamais l'effet lui-même.

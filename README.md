@@ -4,8 +4,8 @@ Encyclopédie illustrée des **mythologies, cultures, créatures légendaires, g
 objets légendaires du monde**. Site statique construit avec Astro, déployé sur GitHub Pages,
 avec une carte du monde interactive où chaque page apparaît à sa position géographique.
 
-**29 pages publiées** · 5 séries · **189 pins placés sur la carte, tous avec leur icône** ·
-160 pages en réserve, toutes documentées (sujet, icône, pin, piste d'effet).
+**30 pages publiées** · 5 séries · **189 pins placés sur la carte, tous avec leur icône** ·
+159 pages en réserve, toutes documentées (sujet, icône, pin, piste d'effet).
 
 ## Démarrer
 
@@ -39,7 +39,7 @@ docs/                  documentation — voir docs/README.md pour l'index
   gabarits/            squelettes des pages statiques historiques
 
 public/                TOUT ce qui est servi tel quel
-  *.html               les 29 pages de contenu + map.html
+  *.html               les 29 pages statiques + map.html
   effects.js           easter eggs et animations, partagé par toutes les pages
   icons/<cat>/         189 icônes de carte, en 4 tailles chacune (756 fichiers)
   map.jpg              fond de la carte du monde

@@ -23,7 +23,7 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
-| Excalibur | `obj-excalibur` | 10 | Grande-Bretagne, texte de 1136 | Objet de fiction | Apparaît comme « Caliburnus » chez Geoffroy de Monmouth, pas dans un texte celtique ancien. L'épée du rocher et l'épée du lac sont **deux motifs distincts** fusionnés tardivement. Richard Cœur de Lion a offert une « Excalibur » à Tancrède de Sicile en 1191 — la première relique arthurienne documentée. |
+| Excalibur ✅ | `obj-excalibur` | 10 | Grande-Bretagne, texte de 1136 | Objet de fiction | Apparaît comme « Caliburnus » chez Geoffroy de Monmouth, pas dans un texte celtique ancien. L'épée du rocher et l'épée du lac sont **deux motifs distincts** fusionnés tardivement. Richard Cœur de Lion a offert une « Excalibur » à Tancrède de Sicile en 1191 — la première relique arthurienne documentée. |
 | Mjöllnir | `obj-mjollnir` | 9 | Scandinavie | Objet mythologique | Le seul objet de la liste avec un **vrai corpus archéologique** : environ un millier d'amulettes-marteaux retrouvées, dont une de Købelev (2014) portant une inscription runique explicite. Manche trop court par accident, à cause du sabotage de Loki dans la *Snorra Edda*. Symbole aujourd'hui néo-païen **et** récupéré par l'extrême droite : note de vigilance obligatoire. |
 | Le Saint Graal | `obj-graal` | 10 | France, v. 1180 | Relique contestée | Inventé par Chrétien de Troyes dans un roman **inachevé**, christianisé ensuite par Robert de Boron ; absent des Évangiles. Décrit selon les auteurs comme un plat, une coupe, un ciboire ou une pierre. Reliques concurrentes à Valence et à Gênes (celle de Gênes : verre, pas émeraude). |
 | La Lance Sacrée (de Longin) | `obj-lance-sacree` | 8 | Vienne / Rome / Etchmiadzin | Relique contestée | **Au moins quatre lances concurrentes** revendiquent le titre. Celle de Vienne, datée du VIIIe siècle par les analyses publiées en 2003, a servi d'insigne impérial à Otton Ier puis d'obsession à la propagande nazie — un objet dont l'histoire politique est mieux documentée que l'origine. |
@@ -93,11 +93,13 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 
 ---
 
-## Déjà couvertes (0)
+## Déjà couvertes (1)
 
-Aucune page écrite au 26/07/2026. Série à démarrer — mais **tout l'amont est prêt** : les
-37 objets ont leur icône dans `public/icons/objet/` (4 tailles chacune) et leur pin placé dans
-`PLACES_FUTURE` de `public/map.html`. Il ne manque plus que les pages.
+**Excalibur** (26/07/2026) — première page de la série, et première page du site écrite avec
+le socle Astro (`src/pages/objet-excalibur.astro`).
+
+Les 36 autres ont déjà leur icône dans `public/icons/objet/` (4 tailles chacune) et leur pin
+placé dans `PLACES_FUTURE` de `public/map.html` : il ne manque que les pages.
 
 **Objets volontairement écartés** : Suaire de Turin, Mécanisme d'Anticythère (publié) et
 Batterie de Bagdad relèvent de la série Mystères (l'intérêt est l'énigme, pas la légende de

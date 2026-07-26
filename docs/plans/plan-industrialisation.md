@@ -265,8 +265,64 @@ nouvelle catégorie.
   `add_page.py` n'a plus besoin de patcher `index.astro` par expression régulière, et le
   compte dans le titre (« Onze Mythologies ») ne peut plus être périmé.
 
-## 9. Prochaine étape immédiate
+## 9. Résultat de la phase 1 — mesure du 26/07/2026
 
-Écrire la **première page « objet légendaire » avec le socle**, dans une session dédiée,
-et mesurer la taille du fichier produit. Tant que ce chiffre n'est pas connu, tout le
-reste du plan est une hypothèse.
+**Page test : Excalibur** (`src/pages/objet-excalibur.astro`), 8 sections, effet bespoke,
+publiée et intégrée par `tools/add_page.py`.
+
+### À contenu égal — la seule comparaison honnête
+
+| | Écrit par l'agent | Rendu au visiteur |
+|---|---|---|
+| Excalibur, avec le socle | **22,9 ko** | 31,3 ko |
+| La même page en statique | 31,3 ko | 31,3 ko |
+
+**−27 % de texte à produire pour une page identique.** Les 8,3 ko d'écart sont le balisage
+fourni par le layout et les composants : `<head>`, menu latéral, nav collante, scripts,
+balises `og:`, et l'emballage de chaque carte.
+
+### Lecture préalable
+
+| | Fichier de référence | Taille |
+|---|---|---|
+| Socle | `src/pages/socle-demo.astro` | **10,2 ko** |
+| Statique | `docs/gabarits/gabarit-mystere.html` | 30,9 ko |
+
+**−67 % en entrée.** C'est le gain le plus net, et le plus sous-estimé au départ.
+
+### Cycle complet d'une page
+
+- statique : 30,9 (lecture) + 31,3 (écriture) = **62,2 ko**
+- socle : 10,2 (lecture) + 22,9 (écriture) = **33,1 ko**
+
+**−47 % de jetons sur le cycle complet.**
+
+### Ce que ce chiffre n'est pas
+
+Excalibur rend 31,3 ko, alors qu'une page mystère statique fait 51,5 ko en moyenne. Comparer
+les 22,9 ko écrits aux 51,5 ko moyens donnerait **−57 %**, mais une bonne partie de l'écart
+viendrait de la longueur du contenu et non du socle. Le chiffre à retenir est **−27 % en
+écriture, −67 % en lecture, −47 % au total**.
+
+### Gains non chiffrables mais réels
+
+- Les balises `og:` sont posées d'office. **Aucune** des 29 pages statiques n'en a.
+- Le reveal au scroll cible `[data-reveal]`, porté par les composants : le bug présent sur
+  24 des 29 pages statiques (liste de classes recopiée d'une famille à l'autre) est devenu
+  impossible.
+- Le menu latéral est généré à la compilation : aucune resynchronisation à lancer.
+- Le vocabulaire de variables est unique, donc une deuxième page objet peut réutiliser la
+  palette d'Excalibur en changeant quatre valeurs.
+
+### Décision
+
+**Go pour la phase 2** : toute page neuve passe par le socle. La phase 3 (migration des
+29 pages statiques) reste optionnelle et non engagée — son seul argument nouveau est qu'elle
+corrigerait d'un coup le bug de reveal et l'absence de balises `og:`.
+
+## 10. Prochaine étape immédiate
+
+Une deuxième page objet, pour vérifier que le socle tient sur un sujet de forme différente —
+recommandé : **l'Arche d'Alliance** (relique contestée, pas objet de fiction ; frise de
+possession réelle ; sujet religieux vivant à traiter avec retenue). C'est le test de la
+souplesse des composants, là où Excalibur n'a testé que leur suffisance.

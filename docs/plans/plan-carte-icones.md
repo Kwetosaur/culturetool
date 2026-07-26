@@ -347,7 +347,7 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 ### Europe (15)
 | Page | Statut | Icône |
 |---|---|---|
-| Excalibur | icône prête | Épée plantée verticalement dans une pierre |
+| Excalibur | ✅ fait | Épée plantée verticalement dans une pierre |
 | Mjöllnir | icône prête | Marteau à manche court, tête massive, de profil |
 | Le Saint Graal | icône prête | Calice à pied, simple |
 | La Lance Sacrée | icône prête | Fer de lance long et fin, hampe coupée |

@@ -37,5 +37,7 @@
     {"href": "mystere-nazca.html", "title": "Lignes de Nazca", "cardTitle": "Les Lignes de Nazca", "epigraph": "Pérou", "hook": "Un mystère largement résolu par l'archéologie, mais jamais rattrapé par la légende extraterrestre."},
     {"href": "mystere-anticythere.html", "title": "Mécanisme d'Anticythère", "epigraph": "Grèce antique", "hook": "Un calculateur astronomique antique d'une sophistication redécouverte par la science moderne."}
   ],
-  "objets": []
+  "objets": [
+    {"href": "objet-excalibur.html", "title": "Excalibur", "epigraph": "Caledfwlch", "hook": "L'épée la plus célèbre du monde n'a jamais existé : un nom en 1136, une pierre cinquante ans plus tard, et une seule relique — offerte en 1191, disparue depuis."}
+  ]
 }

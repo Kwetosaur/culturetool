@@ -38,7 +38,7 @@ Tout est encapsulé en `try/catch` — un effet cassé ne doit jamais casser la 
 
 **Règle de priorité** : livrer la page avec le générique d'abord si le temps manque, upgrader vers le sur-mesure ensuite. Ne jamais retarder la mise en ligne d'une page pour finir un easter egg.
 
-## Déjà fait (29 pages de contenu + l'accueil)
+## Déjà fait (30 pages de contenu + l'accueil)
 
 Les 11 pages mythologie combinent désormais leur pluie de glyphes générique **et** une scène sur-mesure (au clic du titre **et** en happening au scroll sur `#pantheon`) — plus du niveau "minimum" décrit ci-dessus.
 
@@ -75,6 +75,7 @@ Câblage vérifié le 26/07/2026 (voir `docs/audit-existant.md` § E) : les 30 c
 | Le Mothman | `mothman` | — | **sur-mesure** : grande ombre ailée qui passe devant un halo de lumière | `#portrait` |
 | Mécanisme d'Anticythère | `antikythera` | — | **sur-mesure** : engrenages antiques qui s'assemblent et se mettent à tourner | `#enigme` |
 | Chinoise (mythologie) | `chinoise` | pluie de sinogrammes (福龍鳳春) | **sur-mesure** : dragon qui serpente à travers des nuages stylisés | `#pantheon` |
+| Excalibur (objet) | `excalibur` | — | **sur-mesure** : l'épée se dégage de la pierre en un seul mouvement, éclat de lame au sommet | `#description` |
 | Accueil | `accueil` | mélange de glyphes de toutes les cultures | — | — |
 
 ## Stratégie par famille de page
@@ -99,9 +100,9 @@ Script de référence utilisé pour les 11 pages existantes (à adapter, pas com
 
 Pour chaque page, 1 à 3 pistes — choisir celle qui se prête le mieux au moment de l'écriture, pas besoin de les implémenter toutes. Toutes se construisent avec les mêmes briques que l'existant (`layer()`, `flyAcross()`, `glyphShower()`, `animate()`).
 
-**Couverture (mise à jour du 26/07/2026)** : les 160 pages à venir des 5 familles ont
+**Couverture (mise à jour du 26/07/2026)** : les 159 pages à venir des 5 familles ont
 désormais **toutes** au moins une piste écrite — 38 mythologies, 28 cultures, 30 créatures,
-27 mystères, 37 objets. Les 26 derniers sujets ont été ajoutés aux listes le même jour pour
+27 mystères, 36 objets. Les 26 derniers sujets ont été ajoutés aux listes le même jour pour
 combler des trous géographiques (voir les `suite_*.md`), et leurs pistes sont dans les
 mêmes tableaux. Avant cette mise à jour, les créatures et les mystères à venir
 n'avaient aucune piste et renvoyaient à un « niveau générique » qui n'existe pas pour ces
@@ -263,12 +264,11 @@ parenthèses.
 | Le Somerton Man | Un bout de papier déchiré qui se pose, et rien d'autre — sobriété absolue, une mort réelle |
 | Les Sphères du Costa Rica | Trois sphères qui roulent se ranger en ligne, puis une flèche qui les déplace hors du cadre (la perte du contexte archéologique) |
 
-**Les 37 objets légendaires** (aucune page écrite) — l'objet s'assemble, se forge ou
-s'illumine. Section porteuse du `data-scroll-fx` : `#description` ou `#facture`.
+**Les 36 objets légendaires restants** (Excalibur est publié) — l'objet s'assemble, se forge
+ou s'illumine. Section porteuse du `data-scroll-fx` : `#description` ou `#facture`.
 
 | Page | Piste d'effet |
 |---|---|
-| Excalibur | Une épée qui se dégage de la pierre en un mouvement unique, éclat de lame au sommet |
 | Le Saint Graal | Un calice qui se remplit de lumière plutôt que de liquide, halo qui s'éteint doucement |
 | L'Arche d'Alliance | Deux ailes de chérubins qui se déploient au-dessus du coffre, sans jamais l'ouvrir |
 | Mjöllnir | Un marteau qui se forge sous des coups d'enclume, étincelles à chaque frappe (attention : rien qui ressemble à un usage emblématique moderne, cf. note de vigilance) |
