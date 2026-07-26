@@ -1,0 +1,284 @@
+---
+/*
+  L'Épée de Goujian — treizième page de la série « Objets Légendaires du
+  Monde ». Structure imposée par docs/plans/plan-serie-objets.md : 8
+  sections, badge de nature dans le hero. Cas unique de la série signalé
+  dans docs/listes/suite_objets.md : le seul objet dont l'exemplaire réel
+  est plus impressionnant que sa légende — et une section #facture qui
+  corrige directement un mythe populaire (le placage au chrome) plutôt que
+  de se contenter de l'illustrer.
+
+  Effets : data-egg="goujian" + data-scroll-fx="goujianDepatine" sur
+  #description, piste documentée dans plan-effets.md ("une lame de bronze
+  qui se dépatine, la corrosion reculant pour révéler l'inscription — bon
+  candidat fx-decode en écriture-oiseau"). fx-decode utilisé avec le pool
+  "chine" existant : l'écriture-oiseau (鳥蟲書) est une variante stylisée du
+  chinois ancien, pas un alphabet séparé vérifiable en Unicode — réutiliser
+  les sinogrammes déjà encodés est plus honnête que d'inventer des glyphes
+  non vérifiés pour une calligraphie précise.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+
+/* Bronze patiné vert-de-gris et or de l'inscription : la matière réelle de
+   l'objet plutôt qu'une géographie générique. */
+const palette = {
+  bg: '#141a12',
+  'bg-deep': '#0a0e08',
+  surface: '#1e2819',
+  'surface-alt': '#273420',
+  border: '#4a5c3a',
+  ink: '#f0f5ea',
+  text: '#d8e0c8',
+  'text-dim': '#9aab88',
+  accent: '#8a9e4a',
+  'accent-bright': '#b8d068',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(138,158,74,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Un roi historique', sub: 'Goujian de Yue, v. 496-465 av. J.-C.',
+    body: "Contrairement à la plupart des objets de cette série, aucun écart légendaire à mesurer ici : Goujian est un souverain attesté par les grandes chroniques chinoises classiques, pas une figure de fiction tardive.",
+  },
+  {
+    num: 'II', title: 'Une tombe, pas un texte', sub: 'Découverte de 1965',
+    body: "L'épée n'est pas d'abord connue par un récit littéraire : elle est exhumée directement d'une tombe de la province du Hubei, avec son inscription encore lisible sur la lame.",
+  },
+  {
+    num: 'III', title: "L'inscription qui identifie le propriétaire", sub: 'Écriture-oiseau (鳥蟲書)',
+    body: "Une formule gravée en caractères ornementaux stylisés en forme d'oiseaux et d'insectes proclame : « le roi de Yue, Goujian, a fait forger cette épée pour son usage personnel ».",
+  },
+];
+---
+<PageLayout
+  title="L'Épée de Goujian"
+  serie="Objets Légendaires du Monde"
+  description="Exhumée en 1965 sans corrosion après 2500 ans et encore tranchante, cette épée de bronze est le seul objet de la série où le réel dépasse la légende — et sa section facture corrige directement un mythe populaire plutôt que de simplement l'illustrer."
+  href="objet-goujian.html"
+  egg="goujian"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="HUBEI · Ve SIÈCLE AV. J.-C."
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>les épées Ulfberht</strong>"
+>
+  <p class="subtitle" slot="hero">勾踐劍 · L'épée du roi Goujian</p>
+  <p class="tagline" slot="hero">
+    Exhumée en 1965, toujours tranchante après vingt-cinq siècles sous terre — le seul objet
+    de cette série où l'exemplaire réel est plus impressionnant que la légende qui l'entoure.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet réel, pouvoirs légendaires"
+    note="L'épée existe, se trouve au musée du Hubei, et son propriétaire est un roi historiquement attesté. Ce qui relève du mythe populaire, c'est l'idée d'un traitement anti-corrosion « au chrome » deux mille ans en avance sur son temps."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Un objet trouvé avant d'être raconté"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit. Ici, exceptionnellement, les deux coïncident — l'épée est un artefact daté archéologiquement, appartenant à un souverain lui-même bien attesté par l'histoire.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Le roi Goujian est connu de l'historiographie chinoise classique pour avoir enduré des
+      années d'humiliation avant de prendre sa revanche sur un royaume rival — un récit de
+      persévérance toujours cité aujourd'hui, indépendamment même de cette épée précise.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et état"
+    title="Une lame de bronze, presque intacte"
+    intro="Rédigé à partir des observations archéologiques directes — un cas rare dans cette série où la description ne dépend d'aucune source littéraire incertaine."
+    scrollFx="goujianDepatine">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Une lame de 55,7 cm"
+        role="Bronze à alliage différencié"
+        tags={['Motif losangique', 'Tranchant intact']}
+        body="Ornée d'un motif géométrique en losanges sur toute la surface, avec un tranchant réputé encore capable, au moment de sa découverte, de trancher plusieurs feuilles de papier empilées."
+      />
+      <FigureCard
+        name="La garde ornée"
+        role="Incrustations précieuses"
+        tags={['Turquoise', 'Soie décomposée']}
+        body="Le pommeau porte des incrustations de pierre bleu-vert, et la poignée conservait des restes de fil de soie, aujourd'hui largement décomposé, qui l'enveloppait à l'origine."
+      />
+      <FigureCard
+        name="L'inscription du propriétaire"
+        role="Écriture-oiseau ornementale"
+        tags={['鳥蟲書', 'Identification certaine']}
+        body="Une formule gravée près de la garde, dans une calligraphie stylisée où les traits imitent des silhouettes d'oiseaux, identifie directement le commanditaire de l'arme."
+      />
+    </div>
+    <blockquote class="pull-quote" style="margin-top:34px;">
+      <Decode glyphs="chine">越王勾踐自作用劍</Decode>
+      <cite>Inscription de la lame — « Le roi de Yue, Goujian, a fait forger cette épée pour son usage personnel »</cite>
+    </blockquote>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Le roi qui a dormi sur des branchages">
+    <StoryBlock
+      num="Récit I"
+      title="La défaite et l'humiliation"
+      body="Vaincu par le royaume rival de Wu, Goujian est contraint à une servitude humiliante pendant plusieurs années — un épisode que l'historiographie chinoise classique rapporte en détail, bien avant toute question archéologique sur son épée personnelle."
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Dormir sur les branchages, goûter le fiel"
+      body="De retour dans son royaume, Goujian s'impose volontairement l'inconfort — dormir sur du bois brut, goûter quotidiennement une vésicule biliaire amère — pour ne jamais oublier son humiliation et nourrir sa détermination. L'expression qui en résulte, « dormir sur les branchages et goûter le fiel », reste employée aujourd'hui en chinois pour désigner une persévérance patiente vers un objectif à long terme."
+      quote="臥薪嘗膽 — dormir sur les branchages, goûter le fiel."
+      cite="Expression toujours en usage aujourd'hui"
+    />
+    <StoryBlock
+      num="Récit III"
+      title="La revanche"
+      body="Après des années de préparation discrète et de reconstruction de la puissance de son royaume, Goujian finit par vaincre Wu et effacer sa défaite initiale — un des grands récits de retournement de l'historiographie chinoise antique, indépendant de toute question sur le sort matériel de ses armes personnelles."
+    />
+    <StoryBlock
+      num="Récit IV"
+      title="Une tombe loin du royaume de Yue"
+      body="L'épée est retrouvée dans une tombe du royaume de Chu, un voisin et parfois rival de Yue — une localisation qui intrigue les archéologues : don diplomatique, dot de mariage princier ou butin de guerre restent des explications possibles, sans certitude tranchée à ce jour."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Ce que la métallurgie corrige, plutôt qu'elle ne confirme"
+    intro="La section propre à cette série — et un cas inhabituel : ici, la facture ne sert pas à imaginer comment un objet légendaire aurait pu être fabriqué, mais à corriger un mythe populaire attaché à un objet bien réel.">
+    <div class="card-grid compact">
+      <MiniCard title="Un alliage différencié" tag="Métallurgie sophistiquée" body="Le bronze de la lame varie en composition d'une zone à l'autre — un cœur plus riche en cuivre pour la souplesse, des tranchants plus riches en étain pour la dureté, une technique de fonderie avancée pour l'époque." />
+      <MiniCard title="Le mythe du « chrome »" tag="Idée reçue tenace" body="Des comptes-rendus populaires ont longtemps attribué l'absence de corrosion à un placage au chrome délibéré — une prouesse qui aurait précédé la chromie industrielle moderne de plus de deux mille ans." />
+      <MiniCard title="Une explication plus sobre" tag="Environnement de la tombe" body="Des analyses plus récentes privilégient une explication moins spectaculaire : un scellement exceptionnellement hermétique et pauvre en oxygène de la tombe, plutôt qu'un traitement de surface volontaire — les traces de chrome relevées pourraient provenir d'une contamination du sol environnant." />
+      <MiniCard title="Le motif en losanges" tag="Décor de surface réel" body="Contrairement au mythe du placage anti-corrosion, la technique décorative en losanges à la surface de la lame est, elle, bien documentée et authentique — juste distincte de la question de la préservation." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Une remarque de méthode, inversée par rapport au reste de cette série : ici, la facture
+      ne comble pas un vide autour d'un objet disparu — elle vient au contraire tempérer un
+      excès d'émerveillement autour d'un objet bien réel.
+    </p>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Un seul exemplaire"
+    title="Découverte, propriété, exposition"
+    intro="Contrairement au Graal ou à la Lance Sacrée, il n'existe ici qu'un seul objet, sans relique concurrente — l'histoire de sa possession moderne est brève et bien documentée.">
+    <div class="card-grid">
+      <InfoCard
+        title="La découverte de 1965"
+        sub="Tombe du complexe de Wangshan, Hubei"
+        body="Mise au jour lors de fouilles archéologiques systématiques, dans un contexte funéraire qui permet une datation précise et fiable."
+      />
+      <InfoCard
+        title="Le musée provincial du Hubei"
+        sub="Wuhan, Chine"
+        body="Conservée comme l'une des pièces les plus prestigieuses de ses collections, classée parmi les trésors nationaux dont l'exportation est interdite."
+      />
+      <InfoCard
+        title="Des sorties très rares"
+        sub="Prêts internationaux limités"
+        body="En raison de sa fragilité et de son statut patrimonial, l'épée ne quitte que très rarement la Chine pour des expositions internationales."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la découverte au symbole national"
+    title="Une pièce de fierté patrimoniale">
+    <div class="card-grid compact">
+      <MiniCard title="« L'Excalibur chinoise »" tag="Presse occidentale" body="Un raccourci fréquent dans les médias occidentaux, qui met en avant l'écart entre l'authenticité vérifiée de l'épée chinoise et la nature purement littéraire de son équivalent britannique." />
+      <MiniCard title="Un motif d'histoire nationale" tag="Éducation et documentaires" body="L'épisode de Goujian — humiliation, persévérance, revanche — reste largement enseigné et raconté en Chine indépendamment même de la découverte archéologique de son arme." />
+      <MiniCard title="Une icône muséale" tag="Tourisme culturel" body="L'épée figure parmi les pièces les plus photographiées et commentées du musée du Hubei, souvent présentée comme une démonstration du niveau technique atteint par la métallurgie chinoise ancienne." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Un cas inversé pour cette série : il ne s'agit pas de séparer le vrai du légendaire, mais de séparer un fait technique réel (l'alliage différencié) d'un mythe de préservation largement exagéré (le placage au chrome).">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Une authenticité qui ne fait pas débat"
+      body="L'attribution à Goujian, roi de Yue, repose sur une inscription directement gravée sur l'objet, retrouvé dans un contexte archéologique daté — un niveau de certitude rare dans cette série, où la plupart des objets reposent sur des siècles de transmission littéraire incertaine."
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Une préservation exceptionnelle, mais pas magique"
+      body="L'absence de corrosion s'explique plus probablement par les conditions exceptionnelles de la tombe (étanchéité, faible teneur en oxygène) que par une technologie de placage délibérée — une explication moins spectaculaire, mais mieux étayée par les réanalyses récentes."
+    />
+    <TheoryCard
+      title="L'épée a appartenu au roi Goujian de Yue"
+      level="consensus"
+      status="Consensus"
+      body="Fondé sur l'inscription directement gravée sur la lame et sur le contexte archéologique de sa découverte, sans élément contradictoire connu."
+      attrib="Position dominante de l'archéologie chinoise"
+    />
+    <TheoryCard
+      title="La préservation s'explique par l'environnement de la tombe"
+      level="plausible"
+      status="Hypothèse la plus soutenue aujourd'hui"
+      body="Des réanalyses plus récentes des traces de chrome relevées sur la lame penchent pour une contamination du sol plutôt que pour un traitement de surface délibéré, sans trancher totalement la question dans le détail technique."
+      attrib="Hypothèse discutée en archéométrie"
+    />
+    <TheoryCard
+      title="Les artisans de Yue maîtrisaient une forme ancienne de chromage industriel"
+      level="folklore"
+      status="Largement surinterprété"
+      body="Cette lecture, longtemps répétée dans la vulgarisation, prête à l'objet une prouesse technologique que les données actuelles ne permettent plus de soutenir aussi nettement."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que l'épée fait encore">
+    <HeritageBlock
+      title="Un trésor national protégé"
+      body="Classée parmi les objets dont l'exportation est interdite, l'épée reste l'une des pièces les plus emblématiques du patrimoine archéologique chinois."
+    />
+    <HeritageBlock
+      title="Une expression toujours vivante"
+      body="« Dormir sur les branchages, goûter le fiel » continue d'être employée en chinois courant pour désigner une détermination patiente — bien au-delà du seul cercle des passionnés d'archéologie."
+    />
+    <HeritageBlock
+      title="Une référence de rigueur scientifique"
+      body="La correction progressive du mythe du placage au chrome, à mesure que de nouvelles analyses sont publiées, en fait aussi un exemple pédagogique de la façon dont la science révise ses propres explications populaires."
+    />
+    <CautionBox>
+      Cette page a délibérément consacré sa section technique à tempérer, plutôt qu'à
+      nourrir, l'émerveillement autour de cet objet : la meilleure façon de rendre justice à
+      une pièce authentiquement exceptionnelle est de ne pas lui prêter, en plus, des pouvoirs
+      qu'elle n'a jamais eus.
+    </CautionBox>
+  </Section>
+</PageLayout>

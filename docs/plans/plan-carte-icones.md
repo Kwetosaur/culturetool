@@ -122,7 +122,7 @@ fait croire le travail terminé.
 ### Amériques
 | Page | Statut | Icône |
 |---|---|---|
-| Inca | icône prête | Disque solaire (Inti) |
+| Inca | ✅ fait | Disque solaire (Inti) |
 | Navajo/Diné | icône prête | Spirale à 4 mondes |
 | Haudenosaunee | icône prête | Tortue |
 | Lakota/Sioux | icône prête | Cercle sacré + plume |
@@ -134,7 +134,7 @@ fait croire le travail terminé.
 ### Océanie & Arctique
 | Page | Statut | Icône |
 |---|---|---|
-| Aborigène australienne | icône prête | Points concentriques (Temps du Rêve) |
+| Aborigène australienne | ✅ fait | Points concentriques (Temps du Rêve) |
 | Polynésienne | icône prête | Hameçon de Maui |
 | Mélanésienne | icône prête | Masque cérémoniel |
 | Inuit | icône prête | Silhouette de baleine |
@@ -160,8 +160,8 @@ fait croire le travail terminé.
 ### Moyen-Orient & Méditerranée
 | Page | Statut | Icône |
 |---|---|---|
-| Mésopotamie (culture) | icône prête | Tablette cunéiforme |
-| Empire perse achéménide | icône prête | Colonne de Persépolis |
+| Mésopotamie (culture) | ✅ fait | Tablette cunéiforme |
+| Empire perse achéménide | ✅ fait | Colonne de Persépolis |
 | Phéniciens | icône prête | Voilier + lettre d'alphabet |
 | Empire ottoman | icône prête | Croissant + dôme |
 | Carthage | icône prête | Cheval cabré au-dessus d'une proue de navire (monnayage punique) |
@@ -242,7 +242,7 @@ fait croire le travail terminé.
 | Page | Statut | Icône |
 |---|---|---|
 | Le Chupacabra | ✅ fait | Yeux rouges, teinte désertique |
-| La Llorona | icône prête | Silhouette féminine en robe longue au bord de l'eau, **sans visage**, avec son reflet |
+| La Llorona | ✅ fait | Silhouette féminine en robe longue au bord de l'eau, **sans visage**, avec son reflet |
 | L'Hombre Caimán | icône prête | Caïman de profil surmonté d'une tête d'homme stylisée, sobre |
 | Nahuelito | icône prête | Silhouette de vague/serpent de lac (variante Ogopogo) |
 | Le Mapinguari | icône prête | Silhouette voûtée à longues griffes, sobre |
@@ -261,7 +261,7 @@ fait croire le travail terminé.
 | Le Popobawa | icône prête | Silhouette ailée sombre |
 | Le Grootslang | icône prête | Trompe + queue de serpent |
 | Le Mngwa | icône prête | Silhouette de félin, yeux luisants |
-| Mokèlé-mbembé | icône prête | Long cou émergeant d'un marais entre des palmes (marais + palmes = ce qui le distingue des serpents de lac) |
+| Mokèlé-mbembé | ✅ fait | Long cou émergeant d'un marais entre des palmes (marais + palmes = ce qui le distingue des serpents de lac) |
 
 ### Océanie
 | Page | Statut | Icône |
@@ -278,7 +278,7 @@ fait croire le travail terminé.
 |---|---|---|
 | Triangle des Bermudes | ✅ fait | Boussole/triangle |
 | Amelia Earhart | ✅ fait | Avion stylisé qui s'efface |
-| Le Mary Celeste | icône prête | Voilier fantôme |
+| Le Mary Celeste | ✅ fait | Voilier fantôme |
 | Colonie de Roanoke | icône prête | Inscription stylisée |
 | Cité de Paititi / El Dorado | icône prête | Masque/pièce d'or stylisé |
 | Oak Island | icône prête | Puits circulaire vu en coupe, couches successives |
@@ -318,7 +318,7 @@ fait croire le travail terminé.
 | Page | Statut | Icône |
 |---|---|---|
 | Lignes de Nazca | ✅ fait | Colibri au trait |
-| Île de Pâques | icône prête | Moaï stylisé |
+| Île de Pâques | ✅ fait | Moaï stylisé |
 | Col Dyatlov | ✅ fait | Tente/montagne, très sobre |
 | Explosion de la Toungouska | icône prête | Troncs d'arbres couchés en éventail |
 | Rongorongo | icône prête | Tablette de bois gravée de lignes de petits glyphes |
@@ -351,7 +351,7 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 | Mjöllnir | ✅ fait | Marteau à manche court, tête massive, de profil |
 | Le Saint Graal | ✅ fait | Calice à pied, simple |
 | La Lance Sacrée | ✅ fait | Fer de lance long et fin, hampe coupée |
-| La Chambre d'Ambre | icône prête | Fragment de panneau mural orné, angle brisé |
+| La Chambre d'Ambre | ✅ fait | Fragment de panneau mural orné, angle brisé |
 | Les épées Ulfberht | icône prête | Lame à plat portant une inscription stylisée (traits, pas de lettres lisibles) |
 | La Pierre de Scone | icône prête | Bloc de pierre rectangulaire avec ses deux anneaux de transport |
 | Durandal | icône prête | Épée fichée **horizontalement** dans une paroi rocheuse (angle volontairement différent d'Excalibur) |
@@ -382,7 +382,7 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 | Page | Statut | Icône |
 |---|---|---|
 | Les Trois Trésors impériaux du Japon | ✅ fait | **Trois coffres fermés alignés** — ne jamais dessiner les objets, qui n'ont jamais été montrés : l'icône dit exactement le sujet de la page |
-| L'Épée de Goujian | icône prête | Épée courte de bronze, lame large, vue de face |
+| L'Épée de Goujian | ✅ fait | Épée courte de bronze, lame large, vue de face |
 | Le Koh-i-Noor | ✅ fait | Diamant taillé, facettes géométriques |
 | Le Sceau de jade impérial | icône prête | Sceau carré à poignée sculptée |
 | Le Honjo Masamune | icône prête | Katana dans son fourreau, courbe marquée |

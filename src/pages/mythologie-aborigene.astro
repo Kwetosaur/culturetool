@@ -1,0 +1,234 @@
+---
+/*
+  Mythologie Aborigène australienne — quinzième mythologie de la série, et
+  la page qui demande le plus d'adaptations structurelles de tout le corpus.
+  Structure de base imposée par docs/plans/plan-serie-mythologies.md (9
+  sections), mais chaque section est repensée à la lumière du principe de
+  fond de la série sur les croyances vivantes, et de la mise en garde
+  explicite du top 5 de docs/listes/suite_mythologies.md : « à traiter avec
+  un soin particulier (croyances vivantes, sources issues des communautés
+  concernées) ».
+
+  Adaptations assumées, à ne pas reproduire ailleurs sans la même raison :
+  - PAS de "royaumes" empilés : le Temps du Rêve n'est pas un lieu, mais une
+    réalité intemporelle. La section documente sa structure conceptuelle
+    (trois dimensions) plutôt que d'inventer une géographie cosmique.
+  - PAS d'arbre généalogique : les figures citées appartiennent à des
+    nations distinctes et non apparentées entre elles (Kimberley, Arnhem
+    Land, désert de l'Ouest, Sud-Est) — un arbre unique fabriquerait un faux
+    lien. La section documente ces trois grandes aires à la place.
+  - Panthéon volontairement plus court (9, pas ~16) : gonfler la liste
+    fabriquerait un faux panthéon unifié, alors que plus de 250 nations ont
+    chacune leurs propres récits.
+  - Frise : les événements du Temps du Rêve n'ont pas de date dans leur
+    propre logique (il n'est pas "du passé"). La frise documente donc
+    l'histoire de la reconnaissance et de la transmission, pas des
+    "événements mythologiques datés" — ce serait un contresens.
+  - Sources : uniquement des récits déjà largement partagés publiquement
+    par les communautés concernées ou via des institutions ayant travaillé
+    en consultation directe avec elles (ex. l'exposition "Songlines" du
+    Musée national d'Australie, 2017) — rien qui relève d'un savoir
+    cérémoniel restreint.
+
+  Effets : data-egg="dreaming" + data-scroll-fx="songlinePath" sur
+  #pantheon — une ligne de chant tracée en pointillé lumineux à travers un
+  paysage stylisé (piste 2 du plan, préférée à la piste 1 qui aurait simulé
+  un style de peinture pointilliste précis, trop proche d'une appropriation
+  visuelle directe). Déchiffrement des titres : glyphs="dreaming", un pool
+  volontairement abstrait (points, étoiles) qui ne prétend représenter
+  aucune iconographie aborigène précise — un choix de prudence, pas une
+  écriture réelle simulée.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+
+/* Ocre, terre rouge, nuit étoilée : la matière du désert et du ciel plutôt
+   qu'une reprise des couleurs du drapeau aborigène, qui reste un symbole
+   politique et culturel distinct à ne pas simuler comme simple palette. */
+const palette = {
+  bg: '#1c130c',
+  'bg-deep': '#100a06',
+  surface: '#291c12',
+  'surface-alt': '#332415',
+  border: '#5c4020',
+  ink: '#f7ecd8',
+  text: '#e3d0b8',
+  'text-dim': '#b09570',
+  accent: '#c9682f',
+  'accent-bright': '#e8925a',
+  accent2: '#2e3a5c',
+  'accent2-bright': '#5a6a9e',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(201,104,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Le Rêve' },
+  { id: 'pantheon', nav: 'Figures' },
+  { id: 'genealogie', nav: 'Régions' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Récits' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Pays' },
+  { id: 'frise', nav: 'Reconnaissance' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const dimensions = [
+  { num: 'I', title: 'Le temps de la création', sub: 'Ce que l\'anglais traduit par « Dreamtime »', body: "L'ère où les Êtres ancestraux façonnent le monde — mais une ère qui n'est pas simplement « du passé » : elle reste active dans le présent." },
+  { num: 'II', title: 'Les pistes de rêve', sub: 'Songlines', body: "Les itinéraires suivis par les Êtres ancestraux à travers le pays, mémorisés par le chant, le récit et la cérémonie, et physiquement parcourus encore aujourd'hui." },
+  { num: 'III', title: 'La Loi', sub: 'L\'ordre moral et social', body: "Ce que le Temps du Rêve a établi continue de régir le droit coutumier, les rites de passage et les responsabilités envers la terre — une dimension juridique autant que spirituelle." },
+];
+---
+<PageLayout
+  title="Mythologie Aborigène australienne"
+  serie="Mythologies du Monde"
+  description="Le Temps du Rêve structure encore aujourd'hui le rapport au territoire de centaines de nations aborigènes distinctes — la cosmologie continue la plus ancienne du monde, plus de 250 langues et traditions, pas un mythe unique."
+  href="mythologie-aborigene.html"
+  egg="dreaming"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="PLUS DE 250 NATIONS · AU MOINS 65 000 ANS"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : <strong>la mythologie finnoise</strong>"
+>
+  <p class="subtitle" slot="hero">Le Temps du Rêve</p>
+  <p class="tagline" slot="hero">
+    Cette page ne décrit pas « la » mythologie aborigène : il n'en existe pas une seule. Plus
+    de 250 nations distinctes, chacune avec ses propres récits, partagent une structure de
+    pensée commune — présentée ici avec la prudence qu'elle impose.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Le Temps du Rêve"
+    title="Une réalité, pas un lieu"
+    intro="Contrairement aux autres chapitres de cette série, il n'y a pas de royaumes à empiler : le Temps du Rêve n'est pas un espace, mais une structure de sens à trois dimensions qui reste active dans le présent plutôt que reléguée à un passé mythique.">
+    <Fragment slot="title"><Decode glyphs="dreaming">Une réalité, pas un lieu</Decode></Fragment>
+    <div class="card-grid compact">
+      {dimensions.map((d) => <InfoCard {...d} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      L'anthropologue W. E. H. Stanner, qui popularise le terme anglais « Dreaming » dans les
+      années 1950, avertissait déjà que la traduction reste imparfaite : aucun mot occidental
+      ne rend pleinement une notion qui n'oppose pas le mythe au réel.
+    </p>
+  </Section>
+
+  <Section id="pantheon" label="9 figures, parmi des centaines" title="Quelques Êtres ancestraux, nommément situés" scrollFx="songlinePath">
+    <Fragment slot="title"><Decode glyphs="dreaming">Quelques Êtres ancestraux</Decode></Fragment>
+    <p class="section-intro" style="margin-top:-40px;">Chaque figure ci-dessous appartient à des nations précises — elle n'est pas partagée par « les Aborigènes » en général. La liste reste volontairement courte : l'allonger artificiellement fabriquerait un faux panthéon unifié.</p>
+    <div class="card-grid wide">
+      <FigureCard name="Le Serpent Arc-en-ciel" role="Sous des noms divers selon les nations" tags={['Arnhem Land et au-delà', 'Eaux']} body="Être créateur associé à l'eau et à la fertilité, connu sous des noms et des récits distincts d'une nation à l'autre — Ngalyod chez les Kunwinjku de la Terre d'Arnhem occidentale en est une des formes les mieux documentées publiquement." />
+      <FigureCard name="Baiame" role="Père du ciel" tags={['Kamilaroi, Euahlayi, Wiradjuri', 'Sud-Est']} body="Descend façonner le paysage et transmettre la Loi et les cérémonies, avant de se retirer dans le ciel d'où il continue de veiller — figure majeure de plusieurs nations du Sud-Est." />
+      <FigureCard name="Bunjil" role="Créateur-aigle" tags={['Nations Kulin', 'Victoria']} body="Façonne la terre, les rivières et les lois des nations Kulin du centre de l'actuel État de Victoria, avant de se transformer en aigle royal et de rejoindre le ciel comme étoile." />
+      <FigureCard name="Les Wandjina" role="Esprits de la pluie" tags={['Worrorra, Ngarinyin, Wunambal', 'Kimberley']} body="Amènent la mousson et façonnent le pays du Kimberley, puis impriment leur image dans la roche — des peintures que leurs descendants continuent de raviver rituellement aujourd'hui." />
+      <FigureCard name="Les Sept Sœurs (Kungkarangkalpa)" role="Ligne de chant majeure" tags={['Désert de l\'Ouest', 'Pléiades']} body="Traversent d'immenses distances du désert en fuyant une figure ancestrale, avant de s'élever au ciel sous la forme des Pléiades — une des pistes de rêve documentées avec le plus de soin, notamment par l'exposition « Songlines » du Musée national d'Australie (2017), construite avec les communautés concernées." />
+      <FigureCard name="Yhi" role="Figure solaire" tags={['Traditions du Sud-Est']} body="Associée dans certaines traditions du Sud-Est à l'apport de la lumière et de la vie sur une terre jusque-là obscure et immobile." />
+      <FigureCard name="Les Sœurs Wawalag" role="Récit cérémoniel majeur" tags={['Terre d\'Arnhem']} body="Figures centrales d'un cycle narratif documenté depuis les années 1930 par l'anthropologie australienne, associé au grand python ancestral de la région — mentionnées ici sans entrer dans le détail cérémoniel qui reste restreint." />
+      <FigureCard name="Les esprits Mimih" role="Premiers maîtres du geste" tags={['Terre d\'Arnhem', 'Art rupestre']} body="Silhouettes graciles et fragiles, représentées dans certaines des plus anciennes peintures rupestres connues, à qui la tradition attribue l'enseignement de la chasse et du rituel aux premiers humains." />
+      <FigureCard name="Les Ancêtres nommés localement" role="Une règle plus qu'une exception" tags={['Des centaines de traditions']} body="Au-delà des figures ci-dessus, l'immense majorité des Êtres ancestraux restent propres à un pays précis et à ses gardiens désignés — non répertoriés ici par respect pour cette spécificité." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="Pas un arbre, trois grandes aires"
+    title="Des traditions distinctes, pas une famille unique"
+    intro="Un arbre généalogique unique fabriquerait un lien de parenté entre des figures qui appartiennent à des nations sans rapport entre elles. Cette section documente plutôt trois grandes aires culturelles, sans les fondre en une seule histoire.">
+    <Fragment slot="title"><Decode glyphs="dreaming">Des traditions distinctes</Decode></Fragment>
+    <div class="card-grid">
+      <InfoCard title="Le Kimberley" sub="Worrorra, Ngarinyin, Wunambal" body="Traditions centrées sur les Wandjina, la mousson et un art rupestre toujours entretenu rituellement." />
+      <InfoCard title="La Terre d'Arnhem" sub="Kunwinjku et nations voisines" body="Foyer de récits comme ceux du Serpent Arc-en-ciel (Ngalyod), des esprits Mimih et du cycle des Sœurs Wawalag, documentés depuis près d'un siècle par l'anthropologie australienne." />
+      <InfoCard title="Le désert de l'Ouest" sub="Pitjantjatjara, Yankunytjatjara et voisins" body="Foyer de la ligne de chant des Sept Sœurs, qui traverse plusieurs milliers de kilomètres et les territoires de nombreuses nations distinctes." />
+      <InfoCard title="Le Sud-Est" sub="Kamilaroi, Euahlayi, Wiradjuri, nations Kulin" body="Foyer des figures de Baiame et de Bunjil, deux créateurs-législateurs aux récits bien documentés depuis le XIXe siècle." />
+    </div>
+  </Section>
+
+  <Section id="creatures" label="7 êtres notables" title="Esprits et figures du pays">
+    <Fragment slot="title"><Decode glyphs="dreaming">Esprits et figures du pays</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Le Bunyip" tag="Marais et billabongs" body="Esprit redouté des points d'eau dormante dans de nombreuses traditions du Sud-Est, à la description volontairement variable selon les récits." />
+      <MiniCard title="Les esprits Mimih" tag="Terre d'Arnhem" body="Êtres graciles et discrets, associés à l'enseignement des gestes de chasse et de rituel dans l'art rupestre le plus ancien." />
+      <MiniCard title="Le Muldjewangk" tag="Fleuve Murray" body="Esprit gardien du grand fleuve Murray dans les traditions ngarrindjeri et voisines." />
+      <MiniCard title="Bahloo" tag="Figure lunaire" body="Personnage associé à la lune dans plusieurs traditions du Sud-Est, aux récits variables selon les nations." />
+      <MiniCard title="Le Yara-ma-yha-who" tag="Folklore du Queensland" body="Petit être rouge des récits du Queensland, une figure d'avertissement plutôt qu'une créature « chassée » comme dans d'autres traditions du monde." />
+      <MiniCard title="Les esprits des pistes de rêve" tag="Gardiens de itinéraires" body="De nombreuses traditions associent des présences spirituelles précises à des points définis le long des songlines, dont la garde revient à des familles ou des clans désignés." />
+      <MiniCard title="Les figures pétrifiées" tag="Motif partagé" body="Plusieurs récits, dans des régions distinctes, expliquent des formations rocheuses précises comme des Êtres ancestraux changés en pierre — un motif largement partagé sous des formes locales très différentes." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="6 récits" title="Des récits largement partagés publiquement" intro="Six récits déjà documentés et partagés ouvertement — par choix des communautés ou par un travail muséal mené en consultation directe avec elles — jamais un savoir cérémoniel restreint.">
+    <Fragment slot="title"><Decode glyphs="dreaming">Des récits partagés publiquement</Decode></Fragment>
+    <StoryBlock num="Récit I" title="Tiddalik, la grenouille qui a bu toute l'eau" body="Dans une version largement racontée à travers plusieurs régions, une grenouille géante boit toute l'eau du pays et provoque une sécheresse générale. Les autres animaux tentent tour à tour de la faire rire pour qu'elle recrache l'eau, jusqu'à ce qu'une anguille, par ses contorsions, y parvienne enfin — un récit à la fois cosmogonique et pédagogique, raconté aujourd'hui encore aux enfants dans toute l'Australie." />
+    <StoryBlock num="Récit II" title="Le Serpent Arc-en-ciel façonne le pays" body="Dans de nombreuses traditions, un serpent ancestral immense se déplace à travers un pays encore plat et indifférencié ; son passage creuse les lits des rivières et soulève les reliefs, avant qu'il ne se retire dans un point d'eau ou ne devienne lui-même un élément du paysage." />
+    <StoryBlock num="Récit III" title="Baiame établit la Loi" body="Selon plusieurs traditions du Sud-Est, Baiame descend du ciel, façonne les traits majeurs du paysage, enseigne aux premiers hommes les lois et les cérémonies, puis remonte veiller depuis le ciel — un schéma narratif qui fait de la Loi, non de la conquête, le socle de l'autorité ancestrale." />
+    <StoryBlock num="Récit IV" title="La ligne de chant des Sept Sœurs" body="Les sept sœurs Kungkarangkalpa traversent d'immenses distances du désert de l'Ouest, poursuivies par une figure ancestrale, transformant le paysage à chaque étape de leur fuite, avant de s'élever au ciel pour devenir les Pléiades — un itinéraire réellement documenté sur plusieurs milliers de kilomètres, à travers les territoires de nombreuses nations distinctes." quote="La piste ne raconte pas seulement une histoire : elle est une carte qu'on peut encore suivre au sol." cite="Principe rapporté par les gardiens de la ligne de chant, exposition Songlines, 2017" />
+    <StoryBlock num="Récit V" title="Bunjil devient étoile" body="Après avoir façonné le pays des nations Kulin et enseigné la loi à son peuple, Bunjil se change en aigle royal et prend son envol vers le ciel, où il demeure aujourd'hui comme étoile veillant sur ses descendants." />
+    <StoryBlock num="Récit VI" title="Les Wandjina apportent la mousson" body="Les Êtres Wandjina du Kimberley arrivent avec les pluies de mousson, façonnent le pays et sa loi, puis impriment leur propre image dans la roche. La tradition veut que ces peintures perdent leur pouvoir si elles ne sont pas régulièrement ravivées — un entretien rituel toujours pratiqué par leurs descendants aujourd'hui." />
+  </Section>
+
+  <Section id="anecdotes" label="7 curiosités" title="Ce qu'il faut savoir avant de généraliser">
+    <Fragment slot="title"><Decode glyphs="dreaming">Ce qu'il faut savoir avant de généraliser</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Plus de 250 langues avant la colonisation" tag="Diversité réelle" body="Chaque langue correspond à une nation distincte, avec ses propres récits — parler d'« une » mythologie aborigène est déjà, en soi, une simplification excessive." />
+      <MiniCard title="Une traduction reconnue comme imparfaite" tag="« Dreaming » / « Temps du Rêve »" body="Le terme popularisé en anglais dans les années 1950 continue de faire débat : aucune traduction occidentale ne rend pleinement le concept d'origine." />
+      <MiniCard title="Les songlines, un système d'orientation réel" tag="Pas seulement des récits" body="Ces itinéraires chantés encodent une connaissance géographique fonctionnelle — sources d'eau, ressources, dangers — sur des milliers de kilomètres, un usage aussi pratique que spirituel." />
+      <MiniCard title="Une occupation continue parmi les plus anciennes connues" tag="Madjedbebe, Terre d'Arnhem" body="Les datations archéologiques de ce site situent une présence humaine continue en Australie à au moins 65 000 ans — l'un des étalonnages les plus anciens de l'humanité hors d'Afrique." />
+      <MiniCard title="L'art rupestre toujours entretenu" tag="Kimberley" body="Les peintures Wandjina ne sont pas des vestiges figés : leur ravivement rituel par les communautés concernées est une pratique continue, pas une restauration muséale." />
+      <MiniCard title="Une ligne de chant peut traverser plusieurs nations" tag="Coopération inter-nations" body="La piste des Sept Sœurs relie les territoires de plusieurs peuples distincts, chacun gardien d'un tronçon — une coordination culturelle à très grande échelle, antérieure à toute cartographie occidentale." />
+      <MiniCard title="Cette page reste nécessairement partielle" tag="Limite assumée" body="Aucune synthèse de cette longueur ne peut rendre justice à des centaines de traditions distinctes — elle n'a vocation qu'à orienter vers des sources plus complètes et directement issues des communautés concernées." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Quatre grandes régions" title="Un continent de traditions distinctes">
+    <Fragment slot="title"><Decode glyphs="dreaming">Un continent de traditions distinctes</Decode></Fragment>
+    <div class="card-grid">
+      <InfoCard title="Kakadu, Terre d'Arnhem" sub="Patrimoine mondial UNESCO (mixte)" body="Classé à la fois pour sa nature et pour la continuité de sa culture aborigène vivante — l'un des rares sites au monde reconnu sous ce double statut." />
+      <InfoCard title="Uluru-Kata Tjuta" sub="Rétrocédé aux Anangu en 1985" body="Le site sacré est restitué à ses propriétaires traditionnels et géré conjointement ; l'ascension du rocher est interdite depuis 2019, à la demande explicite des Anangu." />
+      <InfoCard title="Le Kimberley" sub="Wandjina" body="Une des plus anciennes traditions d'art rupestre encore rituellement entretenues au monde." />
+      <InfoCard title="Le désert central" sub="Route des Sept Sœurs" body="Une ligne de chant qui traverse plusieurs États australiens actuels et les territoires de nombreuses nations." />
+      <InfoCard title="Le Musée national d'Australie" sub="Exposition Songlines, 2017" body="Un exemple de partage culturel mené en consultation directe et continue avec les communautés concernées, plutôt qu'une simple exposition d'objets." />
+      <InfoCard title="Le cadre juridique australien" sub="Native Title" body="Depuis 1992, le droit australien reconnaît formellement des droits fonciers autochtones fondés sur la continuité de ce rapport au territoire." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Histoire de la reconnaissance" title="Pas une frise mythologique — une frise de la reconnaissance" intro="Les événements du Temps du Rêve n'ont pas de date dans leur propre logique : leur en attribuer une serait un contresens. Cette frise documente plutôt l'histoire de la rencontre coloniale, puis de la reconnaissance croissante de ces traditions.">
+    <Fragment slot="title"><Decode glyphs="dreaming">Une frise de la reconnaissance</Decode></Fragment>
+    <Timeline items={[
+      { year: 'Au moins 65 000 ans', title: 'Occupation continue attestée', body: "Datation archéologique du site de Madjedbebe, en Terre d'Arnhem." },
+      { year: '1770', title: 'Premier contact britannique', body: "L'expédition de James Cook longe la côte est de l'Australie." },
+      { year: '1788', title: 'Colonisation britannique', body: "La doctrine de <em>terra nullius</em> nie juridiquement toute souveraineté ou droit foncier aborigène préexistant." },
+      { year: 'Années 1930-1950', title: 'Premiers travaux ethnographiques majeurs', body: "Des chercheurs comme W. E. H. Stanner documentent et popularisent, non sans limites reconnues, certains concepts auprès du public anglophone." },
+      { year: '1985', title: 'Rétrocession d\'Uluru', body: "Le site est restitué à ses propriétaires traditionnels anangu, avec gestion conjointe." },
+      { year: '1992', title: 'Arrêt Mabo', body: "La Haute Cour d'Australie rejette juridiquement la doctrine de terra nullius, ouvrant la voie à la reconnaissance du titre autochtone." },
+      { year: '2017', title: 'Exposition Songlines', body: "Le Musée national d'Australie présente la ligne de chant des Sept Sœurs en collaboration directe avec les communautés gardiennes." },
+      { year: '2019', title: 'Interdiction d\'escalader Uluru', body: "Mesure appliquée à la demande explicite des Anangu, propriétaires traditionnels du site." },
+      { year: 'Aujourd\'hui', title: 'Une transmission toujours active', body: "Cérémonies, art rupestre entretenu et récits continuent d'être transmis au sein de nombreuses communautés, malgré les ruptures imposées par la colonisation." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ces traditions font encore">
+    <Fragment slot="title"><Decode glyphs="dreaming">Ce que ces traditions font encore</Decode></Fragment>
+    <HeritageBlock title="Un fondement juridique bien réel" body="La reconnaissance du titre autochtone (Native Title) depuis 1992 s'appuie directement sur la continuité démontrée du rapport spirituel et pratique au territoire." />
+    <HeritageBlock title="Des sites gérés par leurs propriétaires traditionnels" body="Uluru-Kata Tjuta et de nombreux autres lieux sont aujourd'hui cogérés ou entièrement gérés par les communautés concernées, un renversement net par rapport à la période coloniale." />
+    <HeritageBlock title="Un art et des récits toujours vivants" body="Peinture, danse, cérémonie et transmission orale continuent d'évoluer activement au sein de nombreuses communautés, en Australie comme dans sa diaspora artistique internationale." />
+    <CautionBox>
+      Cette page est nécessairement partielle et généraliste sur un sujet qui ne l'est pas :
+      des centaines de nations aborigènes distinctes, chacune avec ses propres récits, ses
+      propres gardiens et ses propres règles de transmission. Elle s'appuie uniquement sur des
+      contenus déjà partagés publiquement par les communautés concernées ou en consultation
+      directe avec elles, et exclut délibérément tout savoir cérémoniel restreint. Pour aller
+      plus loin, les sources les plus fiables restent les institutions culturelles aborigènes
+      elles-mêmes et les auteurs aborigènes publiés.
+    </CautionBox>
+  </Section>
+</PageLayout>

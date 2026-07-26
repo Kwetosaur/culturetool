@@ -1,0 +1,157 @@
+---
+/*
+  L'Île de Pâques (effondrement rapa nui) — dixième mystère de la série.
+  Structure imposée par docs/plans/plan-serie-mysteres.md : 7 sections,
+  badge de verdict.
+
+  Distincte de culture-polynesie.html (déjà publiée, angle navigation —
+  qui a déjà pris l'anecdote des moai « marchant ») : ici, l'énigme porte
+  sur les moai eux-mêmes et sur le débat scientifique de l'effondrement,
+  pas sur la colonisation océanique.
+
+  Effets : data-egg="rapanui" + data-scroll-fx="moaiSilhouette" sur
+  #enigme, piste documentée dans plan-effets.md ("un moai qui se dresse en
+  silhouette, très sobre").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Basalte volcanique et turquoise du Pacifique : la matière des statues et
+   de l'océan plutôt qu'une palette "île tropicale" générique. */
+const palette = {
+  bg: '#12161a',
+  'bg-deep': '#0a0d10',
+  surface: '#1c2226',
+  'surface-alt': '#252d32',
+  border: '#3d4a50',
+  ink: '#f0f4f5',
+  text: '#cdd8dc',
+  'text-dim': '#84989e',
+  accent: '#4a8a8a',
+  'accent-bright': '#6ab8b8',
+  accent2: '#c9682f',
+  'accent2-bright': '#e8925a',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(74,138,138,0.18)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="L'Île de Pâques"
+  serie="Grands Mystères du Monde"
+  description="Environ 900 statues de plusieurs tonnes dressées sans roue ni grand animal de trait, sur l'une des îles habitées les plus isolées du monde — et un débat scientifique toujours ouvert sur les causes réelles du déclin de la société qui les a bâties."
+  href="mystere-ile-de-paques.html"
+  egg="rapanui"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="RAPA NUI · PACIFIQUE SUD"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : <strong>le Suaire de Turin</strong>"
+>
+  <p class="subtitle" slot="hero">Rapa Nui</p>
+  <p class="tagline" slot="hero">
+    Neuf cents statues de plusieurs tonnes, dressées sur l'une des terres habitées les plus
+    isolées du monde — et deux hypothèses scientifiques concurrentes sur ce qui a vraiment
+    changé la société qui les a bâties.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Hypothèses scientifiques concurrentes sérieuses"
+    note="La déforestation massive de l'île est un fait établi. Sa cause exacte et son rôle dans l'évolution de la société rapa nui restent débattus entre spécialistes, et le déclin démographique le mieux documenté est en réalité bien plus tardif que la légende ne le laisse penser."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Une île, une forêt disparue, des statues bien réelles" intro="Avant d'aborder ce qui divise les chercheurs, ce qui ne fait pas débat : la colonisation polynésienne de l'île, la construction des moai, et la disparition de sa forêt d'origine sont des faits archéologiquement établis.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une colonisation polynésienne" sub="Entre le VIIIe et le XIIIe siècle" body="Rapa Nui est atteinte par des navigateurs polynésiens venus de l'ouest — la datation précise reste débattue, mais l'origine océanienne ne fait plus débat depuis les analyses génétiques modernes." />
+      <InfoCard num="II" title="Environ 900 moai" sub="Carrière de Rano Raraku" body="Des statues de pierre volcanique, certaines dépassant dix mètres et quatre-vingts tonnes, taillées dans une seule carrière puis déplacées à travers l'île jusqu'à leurs plateformes cérémonielles (ahu)." />
+      <InfoCard num="III" title="Une forêt aujourd'hui disparue" sub="Confirmé par l'analyse pollinique" body="L'île abritait autrefois une grande palmeraie, aujourd'hui totalement disparue — un fait confirmé par les analyses de pollen fossile, indépendamment de tout débat sur ses causes." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Comment, et pourquoi le déclin ?" scrollFx="moaiSilhouette" intro="Deux questions distinctes, souvent confondues dans la version grand public de l'histoire : comment déplaçait-on les statues, et qu'est-ce qui a vraiment changé la trajectoire de cette société ?">
+    <div class="card-grid wide">
+      <FigureCard name="Comment déplacer les moai ?" role="Une question en grande partie résolue" tags={['Expérimentation archéologique']} body="Des expériences menées en 2012 montrent qu'un moai correctement équilibré peut être « marché » debout, par un mouvement de balancement actionné à la corde — sans roue ni traîneau, contrairement à l'image longtemps répandue." />
+      <FigureCard name="Un « effondrement » auto-infligé ?" role="La thèse la plus médiatisée" tags={['Jared Diamond', 'Déforestation']} body="Une lecture largement popularisée soutient que la société rapa nui aurait provoqué elle-même son déclin en surexploitant la forêt de l'île jusqu'à l'épuisement des ressources." />
+      <FigureCard name="Ou un déclin plus tardif et plus extérieur ?" role="La contre-thèse archéologique" tags={['Hunt et Lipo', 'Rats polynésiens']} body="D'autres chercheurs soutiennent que le rat polynésien introduit, en dévorant les graines de palmier, explique une grande partie de la déforestation, et que la population serait restée relativement stable jusqu'au contact européen." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment on l'a documenté" title="De Roggeveen aux expéditions archéologiques modernes">
+    <Timeline items={[
+      { year: 'Dimanche de Pâques 1722', title: 'Premier contact européen', body: "L'amiral néerlandais Jacob Roggeveen aborde l'île, qui donne son nom actuel à la découverte — une population déjà réduite par rapport à l'âge d'or de la construction des moai." },
+      { year: '1770-1774', title: 'Visites espagnole puis britannique', body: "Les expéditions suivantes, dont celle de James Cook, rapportent de nombreux moai déjà renversés — un phénomène documenté historiquement, pas préhistorique." },
+      { year: '1862-1863', title: 'Les razzias esclavagistes péruviennes', body: "Environ la moitié de la population restante est capturée ou tuée lors de raids péruviens, un désastre démographique bien mieux documenté que tout déclin antérieur supposé." },
+      { year: '1888', title: 'Annexion par le Chili', body: "L'île devient formellement territoire chilien." },
+      { year: '1955-1956', title: 'Expéditions de Thor Heyerdahl', body: "Popularisent, comme pour le reste de la Polynésie, une hypothèse d'origine sud-américaine aujourd'hui invalidée par la génétique." },
+      { year: '2012', title: 'Expérimentation du « moai marchant »', body: "Des chercheurs démontrent qu'une statue correctement taillée peut être déplacée debout, par balancement, sans traîneau ni rondins." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="Du site archéologique au symbole mondial" title="Une île devenue icône, parfois au prix de sa complexité">
+    <div class="card-grid compact">
+      <MiniCard title="Collapse, Jared Diamond (2005)" tag="Best-seller mondial" body="Le livre installe durablement l'image d'un « effondrement » auto-infligé comme parabole environnementale pour les sociétés modernes — une lecture aujourd'hui contestée dans le détail par plusieurs archéologues spécialistes du site." />
+      <MiniCard title="Une icône visuelle mondiale" tag="Tourisme et culture pop" body="Le visage du moai est devenu l'une des images les plus reconnaissables au monde, jusque dans l'émoji qui porte son nom — souvent détaché de tout contexte historique précis." />
+      <MiniCard title="Des théories marginales persistantes" tag="Pseudo-archéologie" body="Comme pour d'autres sites monumentaux de cette série, des théories extraterrestres ou de civilisation perdue continuent de circuler, sans le moindre appui archéologique sérieux." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="La déforestation est un fait, sa cause exacte est débattue" body="Les analyses polliniques confirment sans ambiguïté la disparition de la grande palmeraie de l'île. Ce qui reste débattu, c'est la part respective de la surexploitation humaine directe et de la prédation du rat polynésien introduit sur les graines de palmier." />
+    <ScienceBlock num="Enquête 2" title="Le vrai désastre démographique est colonial, pas préhistorique" body="Le déclin de population le mieux documenté et le plus radical de l'histoire de l'île survient lors des razzias esclavagistes péruviennes de 1862-1863 et des épidémies qui suivent — un événement historique bien daté, largement postérieur à l'âge de construction des moai, et souvent éclipsé par le récit plus spectaculaire d'un effondrement préhistorique auto-infligé." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Une déforestation massive a bien eu lieu, aux causes multiples"
+      level="consensus"
+      status="Consensus"
+      body="Confirmée par l'analyse pollinique indépendamment de tout débat sur ses causes précises ou sur ses conséquences sociales exactes."
+      attrib="Consensus archéologique et paléoécologique"
+    />
+    <TheoryCard
+      title="Deux lectures concurrentes du déclin pré-européen"
+      level="plausible"
+      status="Débat scientifique actif, non tranché"
+      body="La thèse de l'effondrement auto-infligé (Diamond) et celle d'une déforestation largement portée par les rats avec une société restée relativement stable (Hunt et Lipo) restent toutes deux défendues par des chercheurs sérieux, sans consensus définitif à ce jour."
+      attrib="Débat ouvert entre spécialistes de l'archéologie pacifique"
+    />
+    <TheoryCard
+      title="Les moai auraient été érigés avec une aide extraterrestre ou une technologie perdue"
+      level="folklore"
+      status="Rejeté par l'archéologie"
+      body="La démonstration expérimentale de 2012 confirme qu'un savoir-faire humain documenté suffit à expliquer le déplacement des statues, sans qu'aucune hypothèse extraordinaire soit nécessaire."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que l'île fait encore">
+    <HeritageBlock title="Un parc national classé" body="Le Parc national de Rapa Nui est inscrit au patrimoine mondial de l'UNESCO depuis 1995, protégeant à la fois les moai et les sites archéologiques associés." />
+    <HeritageBlock title="Une communauté rapa nui bien vivante" body="Les habitants actuels de l'île, citoyens chiliens d'identité rapa nui distincte, sont directement impliqués dans la gestion du site et les débats sur sa préservation et sa restitution patrimoniale." />
+    <HeritageBlock title="Un contentieux de restitution en cours" body="La tête moai Hoa Hakananai'a, conservée au British Museum depuis le XIXe siècle, fait l'objet d'une demande de retour formulée par les autorités rapa nui en 2018 — un dossier toujours ouvert." />
+    <CautionBox>
+      Le récit d'un « effondrement » entièrement auto-infligé, devenu parabole environnementale
+      mondiale, risque de faire oublier le désastre démographique réel et bien mieux documenté
+      subi par ce peuple au XIXe siècle du fait de la traite esclavagiste et des épidémies
+      coloniales. Les deux histoires méritent d'être racontées — sans que la première,
+      spéculative, n'efface la seconde, documentée sans ambiguïté.
+    </CautionBox>
+  </Section>
+</PageLayout>

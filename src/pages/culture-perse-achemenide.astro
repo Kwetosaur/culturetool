@@ -1,0 +1,212 @@
+---
+/*
+  Empire perse achéménide — dixième page de la série « Peuples & Cultures
+  du Monde ». Même structure à 10 sections que culture-incas.astro.
+
+  Angle civilisationnel distinct de mythologie-perse.html (déjà publiée,
+  dualisme zoroastrien) : ici, administration impériale, infrastructures,
+  gouvernance multiethnique — le chaînon manquant entre la Mésopotamie et
+  le monde hellénistique.
+
+  Effets : data-egg="achemenide" + data-scroll-fx="persepolisColumn" sur
+  #style-de-vie, piste documentée dans plan-effets.md ("une colonne de
+  Persépolis qui se dresse tambour par tambour, proche de romanColumns, à
+  différencier par le chapiteau"). Clef distincte de "perse" (déjà prise
+  par la page mythologie).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Pourpre impériale et or : la matière du pouvoir de cour plutôt qu'une
+   palette régionale générique — distincte de la palette flamme/nuit déjà
+   prise par mythologie-perse.html. */
+const palette = {
+  bg: '#14101c',
+  'bg-deep': '#0a0812',
+  surface: '#201a2c',
+  'surface-alt': '#282136',
+  border: '#4a3f5c',
+  ink: '#f5f0f7',
+  text: '#ddd4e8',
+  'text-dim': '#9d90b0',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#5a3f8a',
+  'accent2-bright': '#8a6ac0',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(201,152,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Empire perse achéménide"
+  serie="Peuples & Cultures du Monde"
+  description="Une administration multiethnique tolérante, des routes royales de 2700 km, une monnaie standardisée : le plus grand empire que le monde ait connu jusqu'alors, du Nil à l'Indus — jusqu'à sa chute face à Alexandre en 330 av. J.-C."
+  href="culture-perse-achemenide.html"
+  egg="achemenide"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="PERSÉPOLIS · SUSE · PASARGADES"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : <strong>l'Empire mongol</strong>"
+>
+  <p class="subtitle" slot="hero">Le chaînon administratif</p>
+  <p class="tagline" slot="hero">
+    Le plus grand empire que le monde ait connu jusqu'alors — gouverné en plusieurs langues,
+    relié par une route royale de 2700 km, et effondré en une décennie face à Alexandre.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="Du Nil à l'Indus"
+    intro="À son apogée sous Darius Ier, l'empire s'étend de la vallée de l'Indus à la Thrace et à l'Égypte — le plus vaste jamais gouverné par un seul pouvoir jusqu'à cette date.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="330" cy="140" r="8" fill="#e8c164" stroke="#14101c" stroke-width="2"/>
+        <text x="330" y="122" text-anchor="middle" fill="#e8c164" font-family="Cinzel, serif" font-size="13">PERSÉPOLIS</text>
+        <circle cx="290" cy="130" r="5" fill="#8a6ac0"/>
+        <text x="290" y="115" text-anchor="middle" fill="#ddd4e8" font-size="10">Suse</text>
+        <circle cx="260" cy="100" r="5" fill="#8a6ac0"/>
+        <text x="240" y="88" text-anchor="middle" fill="#ddd4e8" font-size="10">Ecbatane</text>
+        <circle cx="150" cy="80" r="5" fill="#8a6ac0"/>
+        <text x="150" y="65" text-anchor="middle" fill="#ddd4e8" font-size="10">Sardes</text>
+        <circle cx="90" cy="150" r="5" fill="#8a6ac0"/>
+        <text x="90" y="168" text-anchor="middle" fill="#ddd4e8" font-size="10">Égypte</text>
+        <circle cx="470" cy="150" r="5" fill="#8a6ac0"/>
+        <text x="470" y="168" text-anchor="middle" fill="#ddd4e8" font-size="10">Vallée de l'Indus</text>
+        <path d="M150 80 Q 240 105 290 130" fill="none" stroke="#c9982f" stroke-width="2" stroke-dasharray="6 5" opacity="0.8"/>
+        <text x="210" y="95" fill="#c9982f" font-size="9" font-style="italic">Route royale</text>
+      </svg>
+    </div>
+    <p class="map-caption">Sardes-Suse par la Route royale : environ 2700 km reliés par un réseau de relais organisé — la colonne vertébrale administrative de tout l'empire.</p>
+    <div class="card-grid">
+      <InfoCard title="Persépolis" sub="Capitale cérémonielle" body="Bâtie par Darius Ier pour les grandes cérémonies impériales, notamment les tributs annuels des peuples de l'empire — incendiée par Alexandre en 330 av. J.-C." />
+      <InfoCard title="Suse" sub="Capitale administrative" body="Centre du pouvoir bureaucratique au quotidien, où sera retrouvé plus tard le code de Hammurabi emporté comme butin ancien." />
+      <InfoCard title="Pasargades" sub="Capitale de Cyrus" body="Première capitale de l'empire, où se trouve encore aujourd'hui le tombeau de Cyrus le Grand." />
+      <InfoCard title="Ecbatane" sub="Ancienne capitale mède" body="Résidence d'été des souverains, héritée du royaume mède conquis par Cyrus." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Un empire gouverné en plusieurs langues" intro="L'empire achéménide ne cherche pas à uniformiser ses sujets : il les administre dans leur diversité, une politique de gouvernance largement citée comme un cas précoce de gestion multiethnique à grande échelle.">
+    <div class="card-grid wide">
+      <FigureCard name="Les Perses" role="Peuple dirigeant" tags={['Fars', 'Élite impériale']} body="Originaires de la région du Fars, dans l'actuel Iran, ils forment le noyau militaire et administratif de l'empire aux côtés des Mèdes, avec lesquels ils fusionnent largement au pouvoir." />
+      <FigureCard name="Les Mèdes" role="Anciens souverains, alliés proches" tags={['Ecbatane']} body="Puissance dominante avant Cyrus, les Mèdes restent étroitement associés au pouvoir perse, au point que les sources grecques parlent souvent des « Mèdes et des Perses » indifféremment." />
+      <FigureCard name="Les Babyloniens et les Égyptiens" role="Provinces incorporées" tags={['Satrapies riches']} body="Intégrés avec leurs propres administrations locales largement maintenues, leurs élites continuant souvent à occuper des fonctions sous supervision perse." />
+      <FigureCard name="Les Juifs de Babylonie" role="Autorisés à rentrer" tags={['Cyrus', 'Retour d\'exil']} body="Le décret de Cyrus autorisant le retour des exilés judéens et la reconstruction du Temple de Jérusalem reste l'un des épisodes les mieux documentés de la politique religieuse achéménide." />
+      <FigureCard name="Les Grecs d'Ionie" role="Sujets occidentaux, puis rivaux" tags={['Satrapies d\'Asie Mineure']} body="Cités grecques d'Asie Mineure intégrées à l'empire, dont la révolte déclenchera la longue confrontation avec la Grèce continentale." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Ceux qui ont bâti et gouverné l'empire">
+    <div class="card-grid wide">
+      <FigureCard name="Cyrus le Grand" role="Fondateur de l'empire" tags={['v. 550-530 av. J.-C.']} body="Renverse le royaume mède, conquiert la Lydie puis Babylone, et autorise le retour des peuples déportés vers leurs terres d'origine — une politique dont la postérité a parfois exagéré la portée en « charte des droits de l'homme »." />
+      <FigureCard name="Cambyse II" role="Conquérant de l'Égypte" tags={['525 av. J.-C.']} body="Étend l'empire jusqu'à la vallée du Nil, intégrant l'une des plus anciennes civilisations du monde à l'administration perse." />
+      <FigureCard name="Darius Ier" role="Le grand organisateur" tags={['522-486 av. J.-C.']} body="Réorganise l'empire en satrapies standardisées, fait graver l'inscription de Behistun pour légitimer son accession au trône, et lance la construction de Persépolis." />
+      <FigureCard name="Xerxès Ier" role="L'invasion de la Grèce" tags={['480-479 av. J.-C.']} body="Mène la grande expédition contre la Grèce continentale, victorieuse aux Thermopyles mais finalement repoussée à Salamine puis à Platées." />
+      <FigureCard name="Alexandre le Grand" role="Celui qui met fin à l'empire" tags={['330 av. J.-C.']} body="Conquiert l'ensemble de l'empire achéménide en une décennie et incendie Persépolis — un geste dont les sources antiques elles-mêmes ne s'accordent pas à dire s'il fut calculé ou accidentel." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="D'un royaume régional au plus grand empire connu">
+    <StoryBlock num="Épisode I" title="Le cylindre de Cyrus" body="Après la prise de Babylone en 539 av. J.-C., Cyrus fait graver un cylindre d'argile proclamant le rétablissement des cultes locaux et le retour des peuples déportés vers leurs terres. Le texte est parfois présenté, de façon largement anachronique selon les historiens, comme une « première charte des droits de l'homme » — une lecture moderne à prendre avec précaution, sans nier l'importance réelle du geste politique qu'il documente." />
+    <StoryBlock num="Épisode II" title="La route royale et ses coureurs" body="Reliant Sardes à Suse sur environ 2700 km, la route royale s'appuie sur un système de relais permettant à un message de traverser l'empire en quelques jours plutôt qu'en plusieurs mois — un exploit logistique décrit avec admiration par l'historien grec Hérodote, dont la description inspirera bien plus tard la devise non officielle de services postaux modernes." />
+    <StoryBlock num="Épisode III" title="Les guerres médiques" body={["En 490 av. J.-C., une expédition punitive contre Athènes échoue à Marathon. Dix ans plus tard, Xerxès mène une invasion bien plus vaste : les Grecs résistent héroïquement aux Thermopyles avant d'être submergés, mais la flotte perse est ensuite défaite à Salamine, puis l'armée à Platées.", "Ces défaites n'entament pas durablement la puissance de l'empire, qui reste la première force du Proche-Orient pendant encore un siècle et demi — un fait souvent minimisé par une historiographie centrée sur la victoire grecque."]} />
+    <StoryBlock num="Épisode IV" title="L'incendie de Persépolis" body="En 330 av. J.-C., Alexandre le Grand fait incendier le palais cérémoniel de Persépolis. Les sources antiques divergent sur les raisons : vengeance calculée pour l'incendie d'Athènes par Xerxès un siècle et demi plus tôt, ou débordement lors d'une fête arrosée, poussé par la courtisane Thaïs selon certains récits — l'incertitude elle-même est restée dans l'histoire." />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Administrer un empire multiethnique">
+    <div class="card-grid compact">
+      <MiniCard title="Le système des satrapies" tag="Administration standardisée" body="L'empire est divisé en grandes provinces (satrapies) dirigées par un gouverneur, avec des inspecteurs royaux surnommés « les yeux et les oreilles du roi » chargés de surveiller leur loyauté." />
+      <MiniCard title="La route royale" tag="2700 km, relais organisés" body="Un réseau routier et postal reliant l'ensemble de l'empire, permettant une circulation rapide de l'information et des troupes." />
+      <MiniCard title="Le darique" tag="Monnaie standardisée" body="Une pièce d'or à l'effigie royale, utilisée dans tout l'empire pour faciliter le commerce et le paiement des troupes et fonctionnaires." />
+      <MiniCard title="L'araméen impérial" tag="Langue administrative commune" body="Plutôt que d'imposer le perse partout, l'administration utilise l'araméen comme langue véhiculaire pratique dans une grande partie de l'empire." />
+      <MiniCard title="Les qanats" tag="Irrigation souterraine" body="Des galeries souterraines acheminent l'eau par gravité sur de longues distances sans évaporation — certaines sont encore en usage aujourd'hui en Iran, après environ 2500 ans." />
+      <MiniCard title="L'écriture cunéiforme vieux-perse" tag="Créée pour Darius" body="Un système simplifié inventé spécifiquement pour les inscriptions royales de Darius — une écriture façonnée en partie à des fins de propagande claire et lisible." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="Une « charte des droits » à relativiser" tag="Prudence historique" body="La lecture du cylindre de Cyrus comme document des droits de l'homme au sens moderne est largement jugée anachronique par les historiens spécialistes, même si le geste de tolérance religieuse qu'il documente reste bien réel." />
+      <MiniCard title="Un empire aux dimensions vertigineuses" tag="Ordre de grandeur" body="Certaines estimations avancent une population représentant jusqu'à près de la moitié de l'humanité de l'époque sous une seule autorité — un chiffre à manier avec la prudence propre à toute démographie antique." />
+      <MiniCard title="Behistun a permis de lire le cunéiforme" tag="Lien direct avec la Mésopotamie" body="L'inscription trilingue de Darius à Behistun est la même que celle qui permettra, au XIXe siècle, le déchiffrement du cunéiforme mésopotamien par Henry Rawlinson." />
+      <MiniCard title="23 nations sur la pierre" tag="Reliefs de Persépolis" body="Les bas-reliefs de l'escalier de l'Apadana représentent des délégations tributaires venues de vingt-trois peuples différents — un inventaire visuel de la diversité impériale toujours lisible aujourd'hui." />
+      <MiniCard title="Un canal des Pharaons" tag="Précurseur de Suez" body="Darius Ier fait achever un canal reliant le Nil à la mer Rouge, ancêtre direct, des millénaires avant lui, de l'idée du canal de Suez." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="La cour, le vin et les délégations tributaires"
+    intro="Une vie de cour ritualisée à l'extrême, où la représentation de la diversité impériale devient elle-même un langage politique visible dans la pierre."
+    scrollFx="persepolisColumn">
+    <div class="card-grid compact">
+      <MiniCard title="Le protocole de cour" tag="Étiquette stricte" body="L'accès au roi est réglé par un cérémonial précis, hérité en partie des pratiques mèdes et babyloniennes, destiné à afficher visuellement la hiérarchie impériale." />
+      <MiniCard title="Les délégations de Persépolis" tag="Tribut annuel" body="Chaque peuple de l'empire apporte, lors de cérémonies documentées par les reliefs sculptés, des présents caractéristiques de sa région — chevaux, tissus, métaux précieux, animaux." />
+      <MiniCard title="Le vin et les banquets" tag="Culture de cour" body="Les sources grecques, souvent hostiles, décrivent des banquets fastueux à la cour perse — une image partiale mais qui reflète une culture réelle de représentation par le luxe." />
+      <MiniCard title="Les chevaux et la cavalerie" tag="Prestige aristocratique" body="L'élevage et la maîtrise du cheval restent un marqueur de statut central pour la noblesse perse, aussi bien militaire que symbolique." />
+      <MiniCard title="Les qanats du quotidien" tag="Eau et agriculture" body="L'irrigation par galeries souterraines rythme la vie agricole de nombreuses provinces sèches de l'empire, bien au-delà de la seule cour royale." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="De Persépolis à l'identité iranienne moderne">
+    <div class="card-grid">
+      <InfoCard title="Un modèle de gouvernance étudié" sub="Histoire administrative" body="La gestion multiethnique achéménide reste régulièrement citée comme un cas d'école précoce d'administration d'un vaste empire divers." />
+      <InfoCard title="Persépolis, patrimoine mondial" sub="UNESCO, 1979" body="Le site archéologique reste aujourd'hui l'une des destinations majeures du patrimoine iranien, malgré l'incendie antique qui l'a en grande partie détruit." />
+      <InfoCard title="Les qanats, un héritage technique diffusé" sub="Iran, Asie centrale, au-delà" body="La technique s'est répandue historiquement bien au-delà des frontières de l'empire d'origine, jusqu'en Afrique du Nord et en Espagne par des voies de transmission ultérieures." />
+      <InfoCard title="Le cylindre de Cyrus, objet diplomatique moderne" sub="British Museum" body="Régulièrement prêté et exposé, y compris en Iran, il continue de servir de symbole dans des discours politiques contemporains très divers." />
+      <InfoCard title="Les célébrations de 1971" sub="Persépolis, sous le Shah" body="Un anniversaire fastueux des 2500 ans de la monarchie perse organisé sur le site même, resté un événement politiquement controversé de l'histoire iranienne récente." />
+      <InfoCard title="Un symbole toujours disputé" sub="Identité nationale contemporaine" body="L'héritage achéménide continue d'être invoqué dans des discours identitaires iraniens très différents les uns des autres, sans consensus sur son sens politique actuel." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. 550 av. J.-C.', title: 'Cyrus renverse les Mèdes', body: "Fondation de l'empire achéménide." },
+      { year: '539 av. J.-C.', title: 'Prise de Babylone', body: "Cyrus fait graver le cylindre proclamant le retour des peuples déportés." },
+      { year: '525 av. J.-C.', title: 'Conquête de l\'Égypte', body: "Cambyse II étend l'empire jusqu'au Nil." },
+      { year: '522-486 av. J.-C.', title: 'Règne de Darius Ier', body: "Réorganisation en satrapies, inscription de Behistun, début de Persépolis." },
+      { year: '490 av. J.-C.', title: 'Bataille de Marathon', body: "Première expédition punitive contre Athènes, repoussée." },
+      { year: '480-479 av. J.-C.', title: 'Invasion de Xerxès', body: "Thermopyles, Salamine, Platées : l'expédition grecque échoue mais l'empire reste puissant." },
+      { year: 'IVe siècle av. J.-C.', title: 'Instabilités internes', body: "Révoltes régionales et crises de succession fragilisent progressivement l'autorité centrale." },
+      { year: '330 av. J.-C.', title: 'Conquête d\'Alexandre', body: "Chute de l'empire et incendie de Persépolis." },
+      { year: '1835-1851', title: 'Déchiffrement de Behistun', body: "L'inscription de Darius permet à Rawlinson de percer le code du cunéiforme mésopotamien." },
+      { year: '1971', title: 'Célébrations des 2500 ans', body: "Cérémonies organisées à Persépolis sous le règne du Shah Mohammad Reza Pahlavi." },
+      { year: '1979', title: 'Persépolis classée UNESCO', body: "Reconnaissance du site comme patrimoine mondial de l'humanité." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que l'empire laisse encore">
+    <HeritageBlock title="Un modèle de gouvernance encore étudié" body="La gestion administrative multiethnique achéménide reste une référence régulièrement citée dans l'histoire comparée des empires." />
+    <HeritageBlock title="Des infrastructures toujours en usage" body="Certains qanats construits ou entretenus depuis l'époque achéménide continuent d'irriguer des terres iraniennes aujourd'hui." />
+    <HeritageBlock title="Un site archéologique majeur" body="Persépolis demeure l'une des destinations patrimoniales les plus visitées d'Iran, malgré la destruction partielle qu'elle a subie il y a plus de deux millénaires." />
+    <CautionBox>
+      L'héritage achéménide a été mobilisé à des fins politiques très différentes selon les
+      époques — de la légitimation dynastique du XXe siècle aux discours identitaires
+      contemporains. Cette page rapporte l'histoire documentée de l'empire sans se prononcer
+      sur les usages politiques actuels de son souvenir, qui appartiennent à un débat qui la
+      dépasse.
+    </CautionBox>
+  </Section>
+</PageLayout>

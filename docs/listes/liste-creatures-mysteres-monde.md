@@ -35,14 +35,14 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Le Grootslang | 5 | Afrique du Sud | Hybride éléphant-serpent, légende minière (Richtersveld), aucun élément factuel connu |
 | Le Mngwa | 5 | Tanzanie | "Chat mystère" est-africain, attaques rapportées dans les années 1900-1930, explication sceptique dominante : grand félin connu mal identifié |
 | La Bête de Bray Road | 5 | Wisconsin, États-Unis | Vague de témoignages des années 1980-90 largement médiatisée, cas régional bien documenté de panique locale |
-| Mokèlé-mbembé | 8 | Bassin du Congo | Non prouvé. Le cryptide le plus recherché d'Afrique : des dizaines d'expéditions depuis un siècle, dont **plusieurs financées par des créationnistes cherchant un dinosaure vivant** — un angle critique que peu de sujets offrent aussi nettement |
+| Mokèlé-mbembé ✅ | 8 | Bassin du Congo | Non prouvé. Le cryptide le plus recherché d'Afrique : des dizaines d'expéditions depuis un siècle, dont **plusieurs financées par des créationnistes cherchant un dinosaure vivant** — un angle critique que peu de sujets offrent aussi nettement |
 | Le Thunderbird | 7 | Amérique du Nord | Figure spirituelle **vivante** dans de nombreuses nations autochtones (à traiter avec respect), doublée d'une légende moderne : une photo de 1890 montrant un oiseau géant clouté sur une grange, citée partout, que personne n'a jamais retrouvée |
 | Le Golem de Prague | 7 | Prague, tradition juive | Créature d'argile animée par un mot. Le rabbin Loew est du XVIe siècle, mais **le golem ne lui est attaché qu'à partir du XIXe** : la même structure qu'Excalibur, un objet ancien et un récit récent |
 | La Tarasque | 6 | Tarascon, France | Dragon processionnel dont la fête est inscrite au patrimoine immatériel de l'UNESCO : le seul cas de la liste où la créature est encore **promenée dans les rues** chaque année |
 | Le Basilic | 6 | Europe | Créature de bestiaire née d'un passage de Pline l'Ancien, avec un cas « documenté » à Varsovie en 1587 — parfait pour montrer comment une erreur d'histoire naturelle devient un monstre |
 | Le Mapinguari | 6 | Amazonie occidentale | Non prouvé. Hypothèse sérieusement discutée d'un souvenir de paresseux géant (*Mylodon*), disparu il y a ~10 000 ans — la piste paléontologique la plus défendable de toute la liste |
 | Le Tatzelwurm | 5 | Alpes | Folklore alpin du « ver-chat », témoignages du XIXe siècle, explication sceptique dominante : orvet ou lézard apode, bien réels et inoffensifs |
-| La Llorona | 8 | Amérique hispanique | **Revenant, pas cryptide** : personne ne la cherche au sonar, et c'est ce qui la rend intéressante ici. Sept variantes majeures recensées, une continuité probable avec Cihuacóatl (déesse mexica qui sort du lac Texcoco pleurer ses enfants), et une identification tardive à La Malinche qui en fait une lecture de la Conquête. Chantée par Chavela Vargas en 1961, portée au cinéma de 1933 à 2019 — **infanticide au cœur du récit, sobriété requise** |
+| La Llorona ✅ | 8 | Amérique hispanique | **Revenant, pas cryptide** : personne ne la cherche au sonar, et c'est ce qui la rend intéressante ici. Sept variantes majeures recensées, une continuité probable avec Cihuacóatl (déesse mexica qui sort du lac Texcoco pleurer ses enfants), et une identification tardive à La Malinche qui en fait une lecture de la Conquête. Chantée par Chavela Vargas en 1961, portée au cinéma de 1933 à 2019 — **infanticide au cœur du récit, sobriété requise** |
 | L'Hombre Caimán | 6 | Plato, Magdalena, Colombie | Légende folklorique pure, et **l'exact inverse d'un dossier de cryptide** : aucun témoignage revendiqué, mais une statue, une place et un festival annuel. Saúl Montenegro, pêcheur, obtient d'un sorcier de la Haute Guajira des potions pour se changer en caïman ; la fiole du retour renversée, il reste tête d'homme et corps de bête, et descend le Magdalena jusqu'à Bocas de Ceniza. Diffusée dans toute la Colombie par la cumbia « Se va el caimán » |
 
 ---
@@ -58,8 +58,8 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Les Lignes de Nazca ✅ | 8 | Pérou | Fonction rituelle/astronomique largement documentée par l'archéologie, malgré la persistance de théories marginales |
 | Le Manuscrit de Voynich ✅ | 8 | Europe, XVe siècle | Non déchiffré à ce jour malgré des décennies d'efforts, dossier scientifique sérieux et actif |
 | La Disparition d'Amelia Earhart ✅ | 8 | Pacifique, 1937 | Non résolu officiellement, plusieurs hypothèses sérieuses en concurrence |
-| Le Mary Celeste | 8 | Atlantique, 1872 | Événement réel, explication la plus probable aujourd'hui : évacuation précipitée par erreur d'appréciation, pas de mystère surnaturel |
-| L'Île de Pâques et l'Effondrement Rapa Nui | 8 | Polynésie | Hypothèses scientifiques concurrentes sérieuses (déforestation, maladies, esclavage colonial) |
+| Le Mary Celeste ✅ | 8 | Atlantique, 1872 | Événement réel, explication la plus probable aujourd'hui : évacuation précipitée par erreur d'appréciation, pas de mystère surnaturel |
+| L'Île de Pâques et l'Effondrement Rapa Nui ✅ | 8 | Polynésie | Hypothèses scientifiques concurrentes sérieuses (déforestation, maladies, esclavage colonial) |
 | Le Suaire de Turin | 7 | Italie | Datation au carbone 14 (1988) pointant vers le Moyen Âge, toujours contestée par certains |
 | Les Crop Circles (Cercles de Culture) | 6 | Principalement Angleterre | Majoritairement revendiqués et reproduits par des auteurs humains identifiés depuis les années 1990 |
 | L'Homme de Piltdown | 6 | Angleterre, 1912 | Canular archéologique entièrement démontré et documenté — excellent contre-exemple de mystère "résolu" |
@@ -87,19 +87,20 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 
 ---
 
-## État de la série (26/07/2026)
+## État de la série (27/07/2026)
 
-**Créatures : 8 publiées** — Bête du Gévaudan, Monstre du Loch Ness, Bigfoot, Yeti,
-Chupacabra, Mothman, **le Kraken**, **le Kappa**. **28 à venir**, dont 9 ajoutées le
-26/07/2026 (Mokèlé-mbembé, Thunderbird, Golem de Prague, Tarasque, Basilic, Mapinguari,
-Tatzelwurm, puis La Llorona et l'Hombre Caimán) — l'Afrique n'avait que 3 entrées, l'Amazonie
-aucune, et l'Amérique latine hispanique seulement le Chupacabra.
+**Créatures : 10 publiées** — Bête du Gévaudan, Monstre du Loch Ness, Bigfoot, Yeti,
+Chupacabra, Mothman, le Kraken, le Kappa, **Mokèlé-mbembé**, **La Llorona**. **26 à venir**,
+dont 9 ajoutées le 26/07/2026 (Thunderbird, Golem de Prague, Tarasque, Basilic, Mapinguari,
+Tatzelwurm, puis l'Hombre Caimán, en plus de Mokèlé-mbembé et La Llorona désormais publiées)
+— l'Afrique n'avait que 3 entrées, l'Amazonie aucune, et l'Amérique latine hispanique
+seulement le Chupacabra.
 
-**Mystères : 8 publiés** — Triangle des Bermudes, Stonehenge, Col Dyatlov, Manuscrit de
-Voynich, Lignes de Nazca, Mécanisme d'Anticythère, Göbekli Tepe, **la disparition d'Amelia
-Earhart**. **25 à venir**, dont 7 ajoutées le 26/07/2026 (disque de Phaistos, rongorongo,
-Toungouska, Somerton Man, Oak Island, sphères du Costa Rica — Göbekli Tepe, alors « l'absence
-la plus criante », est désormais publié).
+**Mystères : 10 publiés** — Triangle des Bermudes, Stonehenge, Col Dyatlov, Manuscrit de
+Voynich, Lignes de Nazca, Mécanisme d'Anticythère, Göbekli Tepe, la disparition d'Amelia
+Earhart, **le Mary Celeste**, **l'île de Pâques**. **23 à venir**, dont 7 ajoutées le
+26/07/2026 (disque de Phaistos, rongorongo, Toungouska, Somerton Man, Oak Island, sphères du
+Costa Rica — Göbekli Tepe, alors « l'absence la plus criante », est désormais publié).
 
 **Note de recoupement — rongorongo et île de Pâques.** Les deux sont dans la liste, au même
 endroit sur la carte. Ce n'est pas la redondance volontaire du type Grand Zimbabwe : l'île de

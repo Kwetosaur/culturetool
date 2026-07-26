@@ -1,0 +1,152 @@
+---
+/*
+  La Llorona — dixième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict. Cas
+  particulier signalé dans docs/listes/liste-creatures-mysteres-monde.md :
+  un revenant, pas un cryptide — personne ne la cherche au sonar, ce qui
+  déplace la section #science vers l'étude des origines et de la fonction du
+  récit plutôt que vers une preuve zoologique. Infanticide au cœur du
+  récit : sobriété requise, aucun détail graphique, ton retenu de bout en
+  bout.
+
+  Effets : data-egg="llorona" + data-scroll-fx="lloronaSilhouette" sur
+  #portrait, piste documentée dans la liste ("une silhouette blanche au
+  bord de l'eau qui s'efface, et des ondes concentriques qui s'élargissent
+  — jamais de visage, jamais de cri, la retenue est le sujet").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Nuit au bord de l'eau, robe pâle, lune froide : la matière du récit
+   plutôt qu'une palette "Mexique" générique. */
+const palette = {
+  bg: '#0e1420',
+  'bg-deep': '#080c15',
+  surface: '#182030',
+  'surface-alt': '#202c40',
+  border: '#33455f',
+  ink: '#f2f5f7',
+  text: '#cdd8e5',
+  'text-dim': '#7f93a8',
+  accent: '#c9d4de',
+  'accent-bright': '#eef3f7',
+  accent2: '#3a5a7a',
+  'accent2-bright': '#6a8aa8',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(201,212,222,0.16)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Variantes' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="La Llorona"
+  serie="Créatures Légendaires du Monde"
+  description="Une revenante qui pleure ses enfants au bord de l'eau, présente dans au moins sept variantes régionales de l'Amérique hispanique — un récit d'un deuil et d'un remords sans fin, probablement enraciné dans une figure préhispanique bien antérieure à la Conquête."
+  href="creature-llorona.html"
+  egg="llorona"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="AMÉRIQUE HISPANIQUE"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>le Golem de Prague</strong>"
+>
+  <p class="subtitle" slot="hero">La Femme qui pleure</p>
+  <p class="tagline" slot="hero">
+    Un revenant, pas un cryptide : personne ne la cherche au sonar. Cette page traite un récit
+    construit autour d'un deuil et d'un acte terrible, avec la sobriété que le sujet impose.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Légende folklorique, fonction de deuil et d'avertissement"
+    note="Aucune enquête zoologique n'a de sens ici : la question pertinente porte sur l'origine et la fonction culturelle du récit, pas sur l'existence d'un animal ou d'une preuve matérielle."
+  />
+
+  <Section id="origine" label="Première mention" title="Une figure plus ancienne que la Conquête" intro="Plusieurs éléments suggèrent une continuité entre ce récit colonial et une figure féminine pleureuse déjà attestée dans les sources mexicas antérieures à l'arrivée espagnole.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Cihuacóatl" sub="Déesse mexica" body="Des sources antérieures et immédiatement postérieures à la Conquête décrivent déjà une déesse associée à l'accouchement qui erre la nuit en pleurant — une continuité plausible, jamais strictement démontrée, avec la légende actuelle." />
+      <InfoCard num="II" title="Une légende coloniale" sub="Formulée après la Conquête" body="Le récit tel qu'on le raconte aujourd'hui prend sa forme reconnaissable pendant la période coloniale, dans un contexte social marqué par les unions et les ruptures entre colons espagnols et femmes autochtones." />
+      <InfoCard num="III" title="Sept variantes majeures recensées" sub="Amérique hispanique" body="Du Mexique à une bonne partie de l'Amérique centrale et au Sud-Ouest des États-Unis, au moins sept versions régionales distinctes du récit ont été recensées par les folkloristes." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapporte la tradition" title="Une silhouette blanche au bord de l'eau" scrollFx="lloronaSilhouette" intro="Rédigé avec sobriété : les détails varient selon les régions, mais un noyau commun revient dans presque toutes les versions.">
+    <div class="card-grid wide">
+      <FigureCard name="Une femme vêtue de blanc" role="Apparition nocturne" tags={['Bord de l\'eau', 'Nuit']} body="Aperçue près des rivières ou des points d'eau, une silhouette féminine pleure sans relâche — sa rencontre, ou même le seul fait d'entendre sa plainte, est traditionnellement considérée comme un mauvais présage." />
+      <FigureCard name="La recherche sans fin" role="Le cœur du récit" tags={['Deuil', 'Remords']} body="Selon la tradition, elle cherche pour l'éternité les enfants qu'elle a perdus — un acte que le récit attribue tantôt au désespoir, tantôt à la vengeance, selon les versions et les conteurs." />
+      <FigureCard name="Une fonction d'avertissement" role="Usage social du récit" tags={['Enfants', 'Prudence nocturne']} body="Comme de nombreuses figures aquatiques ailleurs dans le monde, elle sert traditionnellement à dissuader les enfants de s'approcher seuls de l'eau la nuit — une fonction éducative documentée par les folkloristes." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Sept variantes majeures" title="Un même noyau, des lectures régionales différentes">
+    <StoryBlock num="Variante I" title="Le récit de base" body="Une femme, souvent décrite comme pauvre ou d'origine modeste, est délaissée par l'homme qu'elle aime au profit d'un autre mariage. Dans un moment de désespoir, elle noie ses propres enfants dans une rivière avant de se donner la mort à son tour, submergée par le remords." />
+    <StoryBlock num="Variante II" title="La lecture de la Conquête" body="Une identification plus tardive rapproche la Llorona de La Malinche, la femme autochtone qui sert d'interprète à Hernán Cortés et porte l'un de ses enfants — une lecture qui transforme le récit individuel en une parabole plus large sur la colonisation, la trahison perçue et la perte." />
+    <StoryBlock num="Variante III" title="Des variantes régionales distinctes" body="Selon les régions d'Amérique centrale et du Sud-Ouest des États-Unis, le nombre d'enfants, les circonstances du drame et même la nature de la punition finale varient sensiblement — les folkloristes en recensent au moins sept versions majeures, sans qu'aucune ne s'impose comme la seule « vraie »." />
+  </Section>
+
+  <Section id="culture-populaire" label="De la légende au phénomène" title="D'un chant à un film Hollywoodien">
+    <div class="card-grid compact">
+      <MiniCard title="Chavela Vargas, 1961" tag="Chanson traditionnelle" body="La chanteuse mexicaine popularise durablement une version définitive du chant traditionnel « La Llorona », aujourd'hui reprise par de nombreux artistes." />
+      <MiniCard title="La Llorona, 1933" tag="Cinéma mexicain" body="L'un des tout premiers films d'horreur mexicains adapte déjà la légende, signe de sa notoriété bien avant l'ère des grands studios américains." />
+      <MiniCard title="The Curse of La Llorona, 2019" tag="Cinéma américain" body="Le film, rattaché à l'univers de Conjuring, porte le récit à une audience mondiale — au prix d'une simplification importante de ses racines culturelles et régionales." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que la recherche peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Une question d'origine, pas de preuve matérielle" body="Il n'y a ici aucune créature à chercher : la question pertinente porte sur l'origine et la transmission du récit, pas sur une preuve d'existence. Les folkloristes étudient sa diffusion, ses variantes et sa fonction sociale plutôt que sa réalité littérale." />
+    <ScienceBlock num="Enquête 2" title="Une continuité plausible, jamais strictement prouvée" body="Le rapprochement avec Cihuacóatl reste une hypothèse philologique et anthropologique solide, appuyée par des sources anciennes convergentes, mais aucune ligne de transmission continue et documentée ne relie formellement les deux figures sur plusieurs siècles." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Un récit syncrétique aux racines préhispaniques plausibles"
+      level="consensus"
+      status="Consensus"
+      body="La fonction du récit — deuil, avertissement, transmission d'un code moral autour de la maternité et de la perte — est largement reconnue par les folkloristes, quelle que soit l'origine exacte retenue."
+      attrib="Position dominante en folkloristique latino-américaine"
+    />
+    <TheoryCard
+      title="L'identification à La Malinche est une lecture postérieure, pas l'origine unique"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Cette lecture ajoute une dimension politique et coloniale au récit sans nécessairement en constituer la source première, largement antérieure selon d'autres versions régionales."
+      attrib="Hypothèse discutée en études culturelles mexicaines"
+    />
+    <TheoryCard
+      title="Le récit décrit un fait divers historique précis et localisé"
+      level="folklore"
+      status="Non démontré"
+      body="Plusieurs villes revendiquent chacune leur propre « vraie » histoire à l'origine du récit — aucune de ces revendications locales concurrentes n'est établie comme la source unique et avérée de la légende."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ce récit fait encore">
+    <HeritageBlock title="Un conte toujours transmis" body="La légende continue d'être racontée aux enfants dans une grande partie du monde hispanophone, avec ses variantes régionales toujours vivantes plutôt que figées dans une seule version officielle." />
+    <HeritageBlock title="Une référence musicale et cinématographique durable" body="Du chant popularisé par Chavela Vargas aux productions cinématographiques les plus récentes, le récit continue d'inspirer des œuvres nouvelles presque un siècle après ses premières adaptations." />
+    <HeritageBlock title="Une figure de la mémoire coloniale" body="Pour une partie de ses interprètes, le récit reste un moyen indirect de raconter les tensions et les pertes de la période coloniale à travers une histoire individuelle et intime." />
+    <CautionBox>
+      Cette page traite un récit centré sur un infanticide et un deuil sans fin : elle
+      s'abstient volontairement de tout détail dramatisé et de toute mise en scène, pour
+      respecter la gravité du thème plutôt que d'en faire un frisson de divertissement. La
+      retenue n'est pas une prudence éditoriale accessoire ici — elle est le sujet même de la
+      page.
+    </CautionBox>
+  </Section>
+</PageLayout>

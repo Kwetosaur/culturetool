@@ -1,0 +1,147 @@
+---
+/*
+  Le Mary Celeste — neuvième mystère de la série. Structure imposée par
+  docs/plans/plan-serie-mysteres.md : 7 sections, badge de verdict.
+
+  Effets : data-egg="maryceleste" + data-scroll-fx="maryCelesteDrift" sur
+  #enigme, piste documentée dans plan-effets.md ("un voilier immobile,
+  voiles molles, aucune silhouette à bord").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Brume grise-verte de l'Atlantique, laiton des instruments de bord : la
+   matière du navire plutôt qu'un décor générique de mer. */
+const palette = {
+  bg: '#10161c',
+  'bg-deep': '#0a0e13',
+  surface: '#1a232b',
+  'surface-alt': '#212d37',
+  border: '#38505f',
+  ink: '#eef3f5',
+  text: '#cdd9e0',
+  'text-dim': '#84a0ac',
+  accent: '#7a95a0',
+  'accent-bright': '#a8c0c8',
+  accent2: '#8a6a2f',
+  'accent2-bright': '#c9982f',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(122,149,160,0.18)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Mary Celeste"
+  serie="Grands Mystères du Monde"
+  description="Un navire retrouvé en parfait état de navigabilité, cargaison intacte, vivres pour six mois — et son équipage de dix personnes disparu sans trace en 1872. L'explication la plus probable aujourd'hui n'a rien de surnaturel."
+  href="mystere-mary-celeste.html"
+  egg="maryceleste"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ATLANTIQUE · 4 DÉCEMBRE 1872"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : <strong>l'île de Pâques et l'effondrement rapa nui</strong>"
+>
+  <p class="subtitle" slot="hero">Un navire fantôme bien réel</p>
+  <p class="tagline" slot="hero">
+    Voiles à moitié hissées, cargaison intacte, vivres pour six mois — et personne à bord.
+    L'explication la plus probable aujourd'hui tient en un mot : la peur, pas le surnaturel.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Événement réel, explication la plus probable identifiée"
+    note="Aucune preuve de piraterie, de mutinerie ni de phénomène surnaturel : la disparition de l'équipage reste non prouvée dans le détail, mais une explication matérielle cohérente domine aujourd'hui les études sérieuses."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Un navire intact, un équipage envolé" intro="Avant d'aborder ce qui reste mystérieux, ce qui ne l'est pas : l'état du navire au moment de sa découverte est documenté avec précision par le rapport d'abordage.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une découverte en mer" sub="4 décembre 1872" body="Le brigantin canadien Dei Gratia repère le Mary Celeste dérivant sans personne à la barre, à environ 740 km des côtes portugaises." />
+      <InfoCard num="II" title="Un navire en parfait état" sub="Rapport d'abordage" body="Coque saine, cargaison d'alcool dénaturé presque intacte (neuf barils vides sur plusieurs centaines), vivres pour six mois encore à bord." />
+      <InfoCard num="III" title="Un équipage de dix personnes disparu" sub="Sans trace" body="Le capitaine Benjamin Briggs, son épouse, leur fille de deux ans et sept membres d'équipage manquent à l'appel, avec la chaloupe, le chronomètre et les papiers de navigation." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Pourquoi abandonner un navire qui ne coule pas ?" scrollFx="maryCelesteDrift" intro="Le mystère se résume à une question précise : qu'est-ce qui a convaincu un capitaine expérimenté d'évacuer un navire encore en état de naviguer, par un temps qui ne semblait pas menaçant ?">
+    <div class="card-grid wide">
+      <FigureCard name="Aucun signe de violence" role="Ni piraterie ni mutinerie visible" tags={['Cargaison intacte', 'Objets de valeur laissés']} body="Rien n'indique une attaque : les biens personnels et la cargaison restent largement en place, ce qu'un acte de piraterie aurait rarement laissé intact." />
+      <FigureCard name="Une pompe démontée" role="Indice matériel clé" tags={['Tige de sonde sur le pont']} body="Le journal de bord et l'état du navire suggèrent que l'équipage vérifiait activement le niveau d'eau dans la cale juste avant l'abandon — un geste de précaution, pas de panique aveugle." />
+      <FigureCard name="La chaloupe manquante" role="Un départ organisé, pas une fuite" tags={['Emportée délibérément']} body="L'canot de sauvetage a été détaché avec soin, suggérant un abandon volontaire et temporaire plutôt qu'un événement soudain et incontrôlé." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment on l'a documenté" title="Du procès de Gibraltar aux études maritimes modernes">
+    <Timeline items={[
+      { year: '7 novembre 1872', title: 'Départ de New York', body: "Le Mary Celeste appareille avec dix personnes à bord et sa cargaison d'alcool dénaturé." },
+      { year: '25 novembre 1872', title: 'Dernière inscription au journal de bord', body: "Le dernier point de navigation connu, dix jours avant la découverte du navire." },
+      { year: '4 décembre 1872', title: 'Découverte par le Dei Gratia', body: "Le navire est repéré dérivant, sans personne à bord." },
+      { year: '1872-1873', title: 'Le procès de Gibraltar', body: "L'avocat général Frederick Solly-Flood soupçonne d'abord l'équipage du Dei Gratia de meurtre pour prime de sauvetage — aucune preuve ne viendra jamais étayer cette accusation." },
+      { year: '1885', title: 'La fin peu glorieuse du navire', body: "Revendu à plusieurs reprises, le Mary Celeste est délibérément échoué au large d'Haïti par son dernier capitaine dans le cadre d'une fraude à l'assurance — un épilogue très terre-à-terre pour un navire devenu légendaire." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="Du fait divers au mythe médiatique" title="Comment « Marie » a remplacé « Mary »">
+    <div class="card-grid compact">
+      <MiniCard title="Arthur Conan Doyle, 1884" tag="Fiction fondatrice" body="Le futur créateur de Sherlock Holmes publie une nouvelle romancée sur l'affaire, orthographiant le navire « Marie Celeste » — une erreur de fiction qui s'est imposée depuis dans une bonne partie de la mémoire populaire." />
+      <MiniCard title="Une expression passée dans la langue" tag="Idiome anglais" body="« Comme le Mary Celeste » est devenu, en anglais, une expression courante pour désigner tout lieu abandonné de façon inexpliquée." />
+      <MiniCard title="Une confusion géographique fréquente" tag="Pas le Triangle des Bermudes" body="L'affaire est parfois associée à tort au Triangle des Bermudes, alors que le navire a été retrouvé dans l'Atlantique, près des Açores, loin de cette zone." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Une hypothèse matérielle cohérente" body="Les neuf barils vides retrouvés étaient en chêne rouge, plus poreux que le chêne blanc des autres barils : des vapeurs d'alcool ont pu s'accumuler dans la cale. Combinée à une pompe démontée et à une possible surestimation de l'eau infiltrée, cette situation aurait pu convaincre le capitaine Briggs d'un risque d'explosion ou de naufrage imminent." />
+    <ScienceBlock num="Enquête 2" title="Un canot perdu plutôt qu'un équipage enlevé" body="L'hypothèse la plus économe veut que l'équipage ait évacué dans la chaloupe, remorquée par précaution derrière le navire — puis que la remorque ait cédé par mauvais temps, laissant les dix occupants dérivants sur l'Atlantique, sans jamais pouvoir regagner le Mary Celeste." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Abandon volontaire par crainte d'une explosion ou d'une voie d'eau"
+      level="plausible"
+      status="Hypothèse la plus largement retenue"
+      body="Cohérente avec l'ensemble des indices matériels (barils, pompe démontée, chaloupe manquante), sans qu'aucune preuve définitive ne permette de la confirmer avec certitude absolue."
+      attrib="Hypothèse dominante chez les historiens maritimes"
+    />
+    <TheoryCard
+      title="Mutinerie ou piraterie"
+      level="folklore"
+      status="Sans preuve, largement écartée"
+      body="Aucun signe de violence ni de vol n'a jamais été relevé à bord — une cargaison de valeur laissée intacte rend cette hypothèse peu compatible avec les faits observés."
+    />
+    <TheoryCard
+      title="Phénomène surnaturel ou créature marine"
+      level="folklore"
+      status="Rejeté"
+      body="Aucun élément de l'enquête d'époque ni des études ultérieures ne soutient une explication surnaturelle — une lecture apparue et amplifiée surtout par la fiction, à commencer par la nouvelle de Conan Doyle."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette affaire fait encore">
+    <HeritageBlock title="Un cas d'école maritime" body="L'affaire reste étudiée dans les écoles de marine et par les historiens comme un cas exemplaire d'enquête sur une disparition en mer, au-delà du seul folklore." />
+    <HeritageBlock title="Une expression toujours utilisée" body="La comparaison au Mary Celeste continue de désigner, en anglais courant, toute situation d'abandon soudain et inexpliqué." />
+    <HeritageBlock title="Une fin sans grandeur" body="Le naufrage volontaire du navire en 1885, dans une fraude à l'assurance banale, contraste nettement avec l'aura mystérieuse qui entoure encore son nom." />
+    <CautionBox>
+      Dix personnes, dont une fillette de deux ans, ont probablement péri en mer dans cette
+      affaire. Le folklore qui s'est construit autour du Mary Celeste tend à effacer cette
+      réalité humaine derrière le frisson du mystère — cette page choisit de la rappeler
+      explicitement plutôt que de la laisser de côté.
+    </CautionBox>
+  </Section>
+</PageLayout>

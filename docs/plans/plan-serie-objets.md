@@ -201,4 +201,6 @@ liste complète et les scores.)*
 | 9 | Le Koh-i-Noor | publiée (26/07/2026) |
 | 10 | Le Saint Graal | publiée (26/07/2026) |
 | 11 | La Lance Sacrée | publiée (26/07/2026) |
-| — | 26 autres sujets | à démarrer |
+| 12 | La Chambre d'Ambre | publiée (27/07/2026) |
+| 13 | L'Épée de Goujian | publiée (27/07/2026) |
+| — | 24 autres sujets | à démarrer |

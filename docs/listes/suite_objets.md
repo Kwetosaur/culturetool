@@ -27,7 +27,7 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 | Mjöllnir ✅ | `obj-mjollnir` | 9 | Scandinavie | Objet mythologique | Le seul objet de la liste avec un **vrai corpus archéologique** : environ un millier d'amulettes-marteaux retrouvées, dont une de Købelev (2014) portant une inscription runique explicite. Manche trop court par accident, à cause du sabotage de Loki dans la *Snorra Edda*. Symbole aujourd'hui néo-païen **et** récupéré par l'extrême droite : note de vigilance obligatoire. |
 | Le Saint Graal ✅ | `obj-graal` | 10 | France, v. 1180 | Relique contestée | Inventé par Chrétien de Troyes dans un roman **inachevé**, christianisé ensuite par Robert de Boron ; absent des Évangiles. Décrit selon les auteurs comme un plat, une coupe, un ciboire ou une pierre. Reliques concurrentes à Valence et à Gênes (celle de Gênes : verre, pas émeraude). |
 | La Lance Sacrée (de Longin) ✅ | `obj-lance-sacree` | 8 | Vienne / Rome / Etchmiadzin | Relique contestée | **Au moins quatre lances concurrentes** revendiquent le titre. Celle de Vienne, datée du VIIIe siècle par les analyses publiées en 2003, a servi d'insigne impérial à Otton Ier puis d'obsession à la propagande nazie — un objet dont l'histoire politique est mieux documentée que l'origine. |
-| La Chambre d'Ambre | `obj-chambre-ambre` | 8 | Königsberg / Tsarskoïe Selo | Objet réel disparu | Six tonnes d'ambre offertes à Pierre le Grand en 1716, démontées par la Wehrmacht en 1941, disparues en 1945. Reconstitution achevée en 2003 ; la chasse à l'original est toujours ouverte, avec de fausses pistes régulières. Le seul objet de la liste dont la disparition est datée au mois près. |
+| La Chambre d'Ambre ✅ | `obj-chambre-ambre` | 8 | Königsberg / Tsarskoïe Selo | Objet réel disparu | Six tonnes d'ambre offertes à Pierre le Grand en 1716, démontées par la Wehrmacht en 1941, disparues en 1945. Reconstitution achevée en 2003 ; la chasse à l'original est toujours ouverte, avec de fausses pistes régulières. Le seul objet de la liste dont la disparition est datée au mois près. |
 | Les épées Ulfberht | `obj-ulfberht` | 7 | Scandinavie / Rhénanie, IXe-XIe s. | Objet réel, pouvoirs légendaires | ~170 lames retrouvées, toutes signées `+VLFBERH+T`, en acier d'une pureté inattendue pour l'époque. Les **contrefaçons médiévales se reconnaissent à la position de la croix dans la signature** : une affaire de marque déposée au IXe siècle. Section `#facture` en or. |
 | La Pierre de Scone | `obj-pierre-scone` | 7 | Écosse | Objet réel, pouvoirs légendaires | Un simple bloc de grès — dont le seul pouvoir est politique. Saisi par Édouard Ier en 1296, encastré sous le trône de Westminster, dérobé par des étudiants nationalistes en 1950, rendu à l'Écosse en 1996. Sert encore aux couronnements britanniques. |
 | Durandal | `obj-durandal` | 7 | France (Roncevaux / Rocamadour) | Objet de fiction | Épée de Roland dans la *Chanson de Roland* (v. 1100). Une « Durandal » était scellée dans la falaise de Rocamadour depuis le Moyen Âge : **elle a été dérobée en 2024**, ce qui donne à la page une actualité que peu de sujets légendaires offrent. |
@@ -61,7 +61,7 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
 | Les Trois Trésors impériaux du Japon ✅ | `obj-tresors-japon` | 9 | Japon | Relique contestée | Épée Kusanagi, miroir Yata no Kagami, joyau Yasakani no Magatama : **jamais montrés, jamais photographiés**, l'empereur lui-même ne les verrait pas. L'intronisation de 2019 s'est déroulée devant des coffres fermés. Le secret comme mode de conservation du sacré. |
-| L'Épée de Goujian | `obj-goujian` | 8 | Chine (Hubei) | Objet réel, pouvoirs légendaires | Exhumée en 1965, **sans corrosion après 2 500 ans et encore tranchante**, inscription en écriture-oiseau. Le seul cas de la liste où l'objet réel est plus impressionnant que sa légende — et une section `#facture` exceptionnelle (alliage, étamage). |
+| L'Épée de Goujian ✅ | `obj-goujian` | 8 | Chine (Hubei) | Objet réel, pouvoirs légendaires | Exhumée en 1965, **sans corrosion après 2 500 ans et encore tranchante**, inscription en écriture-oiseau. Le seul cas de la liste où l'objet réel est plus impressionnant que sa légende — et une section `#facture` exceptionnelle (alliage, étamage). |
 | Le Koh-i-Noor ✅ | `obj-koh-i-noor` | 8 | Inde / Londres | Objet réel, pouvoirs légendaires | 105 carats, « malédiction » réputée frapper ses possesseurs masculins. Cédé en 1849 par un maharajah de dix ans. **Contentieux de restitution actif** revendiqué par l'Inde, le Pakistan, l'Iran et l'Afghanistan : la page ne peut pas éviter le sujet, et ne doit pas. |
 | Le Sceau de jade impérial | `obj-sceau-jade` | 7 | Chine | Objet réel disparu | Sceau de transmission du mandat céleste pendant plus d'un millénaire, perdu au Xe siècle. Sa **disparition a servi à délégitimer des dynasties entières** — un objet dont l'absence a plus pesé que la présence. |
 | Le Honjo Masamune | `obj-honjo-masamune` | 7 | Japon | Objet réel disparu | Trésor national remis avec des milliers d'autres sabres à l'occupant américain en 1945, jamais retrouvé depuis. Dossier documenté, recherche toujours ouverte, et un vrai sujet sur ce que la défaite fait au patrimoine. |
@@ -93,7 +93,7 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 
 ---
 
-## Déjà couvertes (9)
+## Déjà couvertes (13)
 
 **Excalibur** (26/07/2026) — première page de la série, et première page du site écrite avec
 le socle Astro (`src/pages/objet-excalibur.astro`).
@@ -108,7 +108,15 @@ et **Le Koh-i-Noor** (26/07/2026) — troisième vague, choisie pour couvrir les
 encore absents de la carte (Méditerranée antique, Amériques, Océanie) plutôt que de
 redescendre la liste par score : Europe, Méditerranée antique, Amériques, Océanie, Asie.
 
-Les 28 autres ont déjà leur icône dans `public/icons/objet/` (4 tailles chacune) et leur pin
+**Le Saint Graal** et **La Lance Sacrée** (26-27/07/2026) — quatrième vague, deux reliques
+contestées européennes rédigées coup sur coup.
+
+**La Chambre d'Ambre** et **L'Épée de Goujian** (27/07/2026) — cinquième vague : un objet
+réel disparu (le seul cas où la seule question ouverte est le sort post-1945, pas
+l'existence) et un objet réel dont la légende (chromage antique) est moins impressionnante
+que la réalité archéologique.
+
+Les 24 autres ont déjà leur icône dans `public/icons/objet/` (4 tailles chacune) et leur pin
 placé dans `PLACES_FUTURE` de `public/map.html` : il ne manque que les pages.
 
 **Objets volontairement écartés** : Suaire de Turin, Mécanisme d'Anticythère (publié) et

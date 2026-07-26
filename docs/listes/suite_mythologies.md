@@ -68,7 +68,7 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 | Mythologie | Score | Ce qui la rend unique |
 |---|---|---|
-| Aborigène australienne (Temps du Rêve) | 10 | Cosmologie continue la plus ancienne du monde (60 000+ ans), le Temps du Rêve (Dreamtime) structure encore aujourd'hui le rapport au territoire de centaines de nations aborigènes distinctes. |
+| Aborigène australienne (Temps du Rêve) ✅ | 10 | Cosmologie continue la plus ancienne du monde (60 000+ ans), le Temps du Rêve (Dreamtime) structure encore aujourd'hui le rapport au territoire de centaines de nations aborigènes distinctes. |
 | Polynésienne (maorie, hawaïenne, etc.) | 9 | Maui pêchant les îles, Pele déesse des volcans, panthéon partagé à travers un triangle océanique immense (Hawaï-Nouvelle-Zélande-Île de Pâques). |
 | Mélanésienne | 6 | Mythes du cargo cult et des esprits ancestraux (masalai), grande diversité locale sur des milliers d'îles peu documentées. |
 
@@ -80,11 +80,11 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 ---
 
-## Déjà couvertes (13)
+## Déjà couvertes (15)
 
-Nordique · Grecque · Égyptienne · Romaine · Celtique · Mésopotamienne · Hindoue · Japonaise · Aztèque/Maya · Slave · Chinoise · **Perse / zoroastrienne** · **Yoruba**
+Nordique · Grecque · Égyptienne · Romaine · Celtique · Mésopotamienne · Hindoue · Japonaise · Aztèque/Maya · Slave · Chinoise · Perse / zoroastrienne · Yoruba · **Inca** · **Aborigène australienne**
 
-**36 candidates restantes** dans les tableaux ci-dessus, dont **6 ajoutées le 26/07/2026**
+**34 candidates restantes** dans les tableaux ci-dessus. 6 avaient été ajoutées le 26/07/2026
 pour combler des trous géographiques réels : Ainu (Japon autochtone), berbère (toute
 l'Afrique du Nord non égyptienne manquait), javanaise et philippine (Asie du Sud-Est
 absente), mapuche et guarani (aucun sujet au sud de l'Amazonie).
@@ -93,10 +93,10 @@ absente), mapuche et guarani (aucun sujet au sud de l'Amazonie).
 
 ## Top 5 recommandé pour une prochaine vague
 
-*(Mis à jour le 26/07/2026 — Perse et Yoruba, qui occupaient les deux premières places, sont publiées.)*
+*(Mis à jour le 27/07/2026 — Inca et Aborigène australienne, qui occupaient les deux premières places, sont publiées.)*
 
-1. **Aborigène australienne** (10) — cosmologie la plus ancienne et la plus continue au monde ; **à traiter avec un soin particulier** (croyances vivantes, sources issues des communautés concernées).
-2. **Inca** (9) — grande civilisation andine, contrepoint naturel au chapitre aztèque/maya déjà écrit. Distinct de `culture-incas.html` (angle civilisationnel, déjà publié) : ici, panthéon et cosmogonie (Viracocha, Inti, Pachamama).
-3. **Finnoise (Kalevala)** (8) — cosmogonie née d'un œuf, héros-chamanes plutôt que guerriers, et une influence directe sur Tolkien qui parle à tout le monde.
+1. **Polynésienne** (9) — Maui pêchant les îles, Pele déesse des volcans, panthéon partagé sur un triangle océanique immense. Distincte de `culture-polynesie.html` (angle navigation/civilisationnel, déjà publié) : ici, panthéon et cosmogonie.
+2. **Finnoise (Kalevala)** (8) — cosmogonie née d'un œuf, héros-chamanes plutôt que guerriers, et une influence directe sur Tolkien qui parle à tout le monde.
+3. **Dogon** (8) — cosmologie astronomique remarquablement précise (système de Sirius), objet de débats archéo-astronomiques célèbres.
 4. **Cananéenne / ougaritique** (7) — panthéon de Baal, El et Anat redécouvert via les tablettes d'Ougarit (1929), éclaire directement les textes bibliques par contraste.
-5. **Dogon** (8) — cosmologie astronomique remarquablement précise (système de Sirius), objet de débats archéo-astronomiques célèbres.
+5. **Ashanti / Akan** (7) — cycle d'Anansi l'araignée-conteuse, dieu du ciel Nyame — a directement essaimé dans le folklore caribéen et afro-américain.

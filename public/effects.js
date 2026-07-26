@@ -1645,6 +1645,316 @@
       { duration: 4200, easing: 'ease-out', fill: 'forwards' });
   }
 
+  // Mythologie inca — une spirale dorée façon disque solaire d'Inti tourne
+  // lentement au centre de l'écran.
+  function intiSpiral() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(24vh,170px);opacity:0;';
+    var rays = '';
+    for (var i = 0; i < 12; i++) {
+      var a = i * 30;
+      rays += '<rect x="96" y="10" width="8" height="34" rx="3" fill="#f7dc8a" transform="rotate(' + a + ' 100 100)"/>';
+    }
+    wrap.innerHTML =
+      '<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<g id="fx-inti-disc" style="transform-origin:100px 100px">' +
+          rays +
+          '<circle cx="100" cy="100" r="46" fill="#e8c164" stroke="#f7dc8a" stroke-width="3"/>' +
+          '<path d="M100 66 A34 34 0 0 1 134 100 A22 22 0 0 0 100 100 Z" fill="#161020" opacity="0.35"/>' +
+        '</g>' +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .86 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var disc = wrap.querySelector('#fx-inti-disc');
+    disc.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(160deg)' }],
+      { duration: 4200, easing: 'linear', fill: 'forwards' });
+  }
+
+  // Mythologie aborigène australienne — une ligne de chant tracée en
+  // pointillé lumineux à travers un paysage stylisé, sobre et abstrait.
+  function songlinePath() {
+    var l = layer(4600);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:20vh;transform:translateX(-50%);width:min(70vh,500px);opacity:0;';
+    var pts = [[20, 60], [90, 30], [160, 55], [230, 20], [300, 50], [370, 25], [440, 55]];
+    var dots = pts.map(function (p, i) {
+      return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="5" fill="#e8925a" class="fx-song-dot" ' +
+        'style="opacity:0;filter:drop-shadow(0 0 6px #e8925a)"/>';
+    }).join('');
+    var pathD = 'M' + pts.map(function (p) { return p[0] + ' ' + p[1]; }).join(' L');
+    wrap.innerHTML =
+      '<svg viewBox="0 0 460 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<path d="M0 75 Q 230 60 460 75" fill="none" stroke="#5a6a9e" stroke-width="1" opacity="0.4"/>' +
+        '<path id="fx-song-line" d="' + pathD + '" fill="none" stroke="#e8925a" stroke-width="2" ' +
+          'stroke-dasharray="900" stroke-dashoffset="900" opacity="0.8"/>' +
+        dots +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4600, easing: 'ease-out', fill: 'forwards' });
+    var line = wrap.querySelector('#fx-song-line');
+    line.animate([{ strokeDashoffset: 900 }, { strokeDashoffset: 0 }],
+      { duration: 3200, delay: 200, easing: 'ease-in-out', fill: 'forwards' });
+    var dotEls = wrap.querySelectorAll('.fx-song-dot');
+    dotEls.forEach(function (d, i) {
+      d.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: 300 + i * 440, easing: 'ease-out', fill: 'forwards' });
+    });
+  }
+
+  // Mésopotamie (culture) — un calame imprime ses coins dans l'argile
+  // fraîche, signe après signe.
+  function calameArgile() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(30vh,220px);opacity:0;';
+    wrap.innerHTML =
+      '<svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<rect x="10" y="10" width="200" height="120" rx="6" fill="#c9a15a"/>' +
+        '<rect x="10" y="10" width="200" height="120" rx="6" fill="none" stroke="#5a4a2c" stroke-width="2"/>' +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+
+    var rows = 3, cols = 8, i = 0;
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        (function (r, c, idx) {
+          var wedge = document.createElement('div');
+          var x = 12 + c * 11, y = 20 + r * 30;
+          wedge.style.cssText = 'position:absolute;left:' + x + '%;top:' + y + '%;width:5px;height:12px;background:#5a4a2c;' +
+            'opacity:0;transform:rotate(' + rand(-15, 15) + 'deg);clip-path:polygon(0 0,100% 20%,60% 100%);';
+          wrap.appendChild(wedge);
+          wedge.animate([{ opacity: 0 }, { opacity: .85 }], { duration: 120, delay: 200 + idx * 45, easing: 'ease-out', fill: 'forwards' });
+        })(r, c, i);
+        i++;
+      }
+    }
+  }
+
+  // Empire perse achéménide — une colonne de Persépolis se dresse tambour
+  // par tambour, chapiteau à protomés distinct des colonnes romaines.
+  function persepolisColumn() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);width:min(14vh,100px);height:min(50vh,360px);opacity:0;';
+    var drums = 6;
+    for (var i = 0; i < drums; i++) {
+      (function (i) {
+        var d = document.createElement('div');
+        d.style.cssText = 'position:absolute;left:50%;bottom:' + (i * 15) + '%;transform:translateX(-50%) translateY(30px);' +
+          'width:70%;height:16%;background:linear-gradient(180deg,#e8c164,#8a6ac0);border:1px solid #4a3f5c;opacity:0;';
+        wrap.appendChild(d);
+        d.animate([
+          { opacity: 0, transform: 'translateX(-50%) translateY(30px)' },
+          { opacity: 1, transform: 'translateX(-50%) translateY(0)' }
+        ], { duration: 400, delay: 200 + i * 260, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+      })(i);
+    }
+    var capital = document.createElement('div');
+    capital.style.cssText = 'position:absolute;left:50%;bottom:' + (drums * 15) + '%;transform:translateX(-50%) translateY(-20px);' +
+      'width:110%;height:10%;opacity:0;';
+    capital.innerHTML = '<svg viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path d="M10 28 Q10 6 35 8 Q45 2 60 8 Q75 2 85 8 Q110 6 110 28 Z" fill="#e8c164" stroke="#8a6ac0" stroke-width="1.5"/>' +
+    '</svg>';
+    wrap.appendChild(capital);
+    capital.animate([
+      { opacity: 0, transform: 'translateX(-50%) translateY(-20px)' },
+      { opacity: 1, transform: 'translateX(-50%) translateY(0)' }
+    ], { duration: 400, delay: 200 + drums * 260, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .05 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Mokèlé-mbembé — des palmes de marais s'écartent sur un sillage, sans
+  // jamais rien montrer.
+  function swampParting() {
+    var l = layer(4200);
+    var water = document.createElement('div');
+    water.style.cssText = 'position:absolute;bottom:0;left:0;right:0;height:26vh;' +
+      'background:linear-gradient(180deg,rgba(58,106,74,.1),rgba(58,106,74,.35));opacity:0;';
+    l.appendChild(water);
+    water.animate([{ opacity: 0 }, { opacity: 1, offset: .15 }, { opacity: 1, offset: .8 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+
+    for (var i = 0; i < 7; i++) {
+      (function (i) {
+        var frond = document.createElement('div');
+        var x = 10 + i * 12;
+        frond.style.cssText = 'position:absolute;bottom:2vh;left:' + x + '%;width:14px;height:18vh;' +
+          'background:linear-gradient(180deg,#3a6a4a,transparent);border-radius:40% 40% 0 0;' +
+          'transform-origin:bottom center;opacity:0;';
+        l.appendChild(frond);
+        frond.animate([
+          { opacity: 0, transform: 'rotate(' + rand(-6, 6) + 'deg) translateX(0)' },
+          { opacity: .8, offset: .25 },
+          { transform: 'rotate(' + rand(14, 22) + 'deg) translateX(14px)', offset: .5 },
+          { transform: 'rotate(' + rand(-6, 6) + 'deg) translateX(0)', offset: .85 },
+          { opacity: 0 }
+        ], { duration: 4200, delay: i * 70, easing: 'ease-in-out', fill: 'forwards' });
+      })(i);
+    }
+    var wake = document.createElement('div');
+    wake.style.cssText = 'position:absolute;bottom:4vh;left:50%;width:20px;height:8px;border-radius:50%;' +
+      'background:rgba(207,227,192,.4);opacity:0;';
+    l.appendChild(wake);
+    wake.animate([
+      { opacity: 0, transform: 'translateX(-160px)' },
+      { opacity: .7, offset: .3 },
+      { opacity: .7, transform: 'translateX(160px)', offset: .75 },
+      { opacity: 0 }
+    ], { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // La Llorona — une silhouette blanche au bord de l'eau qui s'efface, et
+  // des ondes concentriques qui s'élargissent. Jamais de visage, jamais de
+  // cri : la retenue est le sujet.
+  function lloronaSilhouette() {
+    var l = layer(4200);
+    var moon = document.createElement('div');
+    moon.style.cssText = 'position:absolute;top:8vh;left:50%;transform:translateX(-50%);width:60px;height:60px;border-radius:50%;' +
+      'background:radial-gradient(circle,#eef3f7,#c9d4de);opacity:0;box-shadow:0 0 30px rgba(238,243,247,.4);';
+    l.appendChild(moon);
+    moon.animate([{ opacity: 0 }, { opacity: .8, offset: .2 }, { opacity: .8, offset: .8 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+
+    var figure = document.createElement('div');
+    figure.style.cssText = 'position:absolute;bottom:10vh;left:50%;transform:translateX(-50%);width:min(14vh,90px);opacity:0;';
+    figure.innerHTML = '<svg viewBox="0 0 60 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path d="M30 10 Q10 40 14 90 Q16 120 30 135 Q44 120 46 90 Q50 40 30 10 Z" fill="#eef3f7" opacity="0.85"/>' +
+    '</svg>';
+    l.appendChild(figure);
+    figure.animate([
+      { opacity: 0 },
+      { opacity: .85, offset: .3 },
+      { opacity: .85, offset: .55 },
+      { opacity: 0, offset: .85 },
+      { opacity: 0 }
+    ], { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+
+    [0, 1, 2].forEach(function (i) {
+      var ripple = document.createElement('div');
+      ripple.style.cssText = 'position:absolute;bottom:9vh;left:50%;width:20px;height:8px;border-radius:50%;' +
+        'border:1px solid rgba(201,212,222,.5);transform:translateX(-50%) scale(.3);opacity:0;';
+      l.appendChild(ripple);
+      ripple.animate([
+        { opacity: 0, transform: 'translateX(-50%) scale(.3)' },
+        { opacity: .7, offset: .15 },
+        { opacity: 0, transform: 'translateX(-50%) scale(' + (2.4 + i * 0.6) + ')' }
+      ], { duration: 2200, delay: 2000 + i * 300, easing: 'ease-out', fill: 'forwards' });
+    });
+  }
+
+  // Le Mary Celeste — un voilier immobile, voiles molles, aucune silhouette
+  // à bord.
+  function maryCelesteDrift() {
+    var l = layer(4400);
+    var fog = document.createElement('div');
+    fog.style.cssText = 'position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(122,149,160,.2),transparent 70%);opacity:0;';
+    l.appendChild(fog);
+    fog.animate([{ opacity: 0 }, { opacity: 1, offset: .2 }, { opacity: 1, offset: .8 }, { opacity: 0 }],
+      { duration: 4400, easing: 'ease-in-out', fill: 'forwards' });
+
+    var ship = document.createElement('div');
+    ship.style.cssText = 'position:absolute;bottom:24vh;left:50%;transform:translateX(-50%);width:min(28vh,200px);opacity:0;';
+    ship.innerHTML = '<svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path d="M30 160 L130 160 L115 175 L45 175 Z" fill="#38505f"/>' +
+      '<line x1="80" y1="160" x2="80" y2="20" stroke="#8a7050" stroke-width="4"/>' +
+      '<path d="M80 30 Q40 50 40 90 Q60 84 80 90 Z" fill="#cdd9e0" opacity="0.75"/>' +
+      '<path d="M80 40 Q115 58 115 95 Q98 88 80 95 Z" fill="#a8c0c8" opacity="0.7"/>' +
+    '</svg>';
+    l.appendChild(ship);
+    ship.animate([{ opacity: 0 }, { opacity: 1, offset: .12 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4400, easing: 'ease-out', fill: 'forwards' });
+    ship.animate([
+      { transform: 'translateX(-50%) rotate(0deg)' },
+      { transform: 'translateX(-50%) rotate(1.5deg)', offset: .5 },
+      { transform: 'translateX(-50%) rotate(0deg)' }
+    ], { duration: 4400, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // L'Île de Pâques — un moai qui se dresse en silhouette, très sobre.
+  function moaiSilhouette() {
+    var l = layer(4200);
+    var moai = document.createElement('div');
+    moai.style.cssText = 'position:absolute;bottom:6vh;left:50%;transform:translateX(-50%) translateY(40px);width:min(16vh,110px);opacity:0;';
+    moai.innerHTML = '<svg viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path d="M50 4 C 26 4 20 40 22 70 L18 210 L82 210 L78 70 C 80 40 74 4 50 4 Z" fill="#1c2226"/>' +
+      '<rect x="26" y="70" width="48" height="10" fill="#12161a"/>' +
+      '<rect x="30" y="94" width="10" height="14" fill="#12161a"/>' +
+      '<rect x="60" y="94" width="10" height="14" fill="#12161a"/>' +
+    '</svg>';
+    l.appendChild(moai);
+    moai.animate([
+      { opacity: 0, transform: 'translateX(-50%) translateY(40px)' },
+      { opacity: 1, offset: .3, transform: 'translateX(-50%) translateY(0)' },
+      { opacity: 1, offset: .82 },
+      { opacity: 0 }
+    ], { duration: 4200, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+  }
+
+  // La Chambre d'Ambre — un panneau d'ambre se remplit tesson par tesson,
+  // puis dont les pièces s'éteignent une à une.
+  function ambreMosaique() {
+    var l = layer(4400);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(30vh,220px);height:min(24vh,170px);opacity:0;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .06 }, { opacity: 1, offset: .92 }, { opacity: 0 }],
+      { duration: 4400, easing: 'ease-out', fill: 'forwards' });
+
+    var cols = 5, rows = 4, i = 0;
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        (function (r, c, idx) {
+          var shard = document.createElement('div');
+          shard.style.cssText = 'position:absolute;left:' + (c * 20) + '%;top:' + (r * 25) + '%;width:19%;height:24%;' +
+            'background:linear-gradient(135deg,#f7b85a,#e8922f);border:1px solid #8a6a2f;opacity:0;transform:scale(.5);';
+          wrap.appendChild(shard);
+          shard.animate([{ opacity: 0, transform: 'scale(.5)' }, { opacity: 1, transform: 'scale(1)' }],
+            { duration: 260, delay: 150 + idx * 70, easing: 'ease-out', fill: 'forwards' });
+          shard.animate([{ opacity: 1 }, { opacity: .08 }],
+            { duration: 260, delay: 2800 + idx * 55, easing: 'ease-in', fill: 'forwards' });
+        })(r, c, i);
+        i++;
+      }
+    }
+  }
+
+  // L'Épée de Goujian — une lame de bronze se dépatine, la corrosion
+  // reculant pour révéler l'inscription.
+  function goujianDepatine() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(8deg);width:min(10vh,70px);height:min(40vh,280px);opacity:0;';
+    wrap.innerHTML =
+      '<svg viewBox="0 0 40 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<defs><clipPath id="fx-goujian-clip"><rect x="6" y="4" width="28" height="180"/></clipPath></defs>' +
+        '<path d="M20 4 L34 40 L26 180 L14 180 L6 40 Z" fill="#4a5c3a"/>' +
+        '<rect id="fx-goujian-patina" x="0" y="4" width="40" height="180" fill="#2a3320" clip-path="url(#fx-goujian-clip)" ' +
+          'style="transform-origin:20px 4px"/>' +
+        '<rect x="12" y="184" width="16" height="10" fill="#c9982f"/>' +
+        '<rect x="16" y="194" width="8" height="20" fill="#8a6a2f"/>' +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var patina = wrap.querySelector('#fx-goujian-patina');
+    patina.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }],
+      { duration: 2600, delay: 400, easing: 'ease-in', fill: 'forwards' });
+    var glint = document.createElement('div');
+    glint.style.cssText = 'position:absolute;left:50%;top:0;width:120%;height:12%;' +
+      'background:linear-gradient(90deg,transparent,rgba(232,193,100,.9),transparent);' +
+      'transform:translate(-50%,0) rotate(8deg);opacity:0;';
+    wrap.appendChild(glint);
+    glint.animate([{ opacity: 0, top: '0%' }, { opacity: .9, top: '50%', offset: .5 }, { opacity: 0, top: '100%' }],
+      { duration: 1400, delay: 2600, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -1667,7 +1977,7 @@
   var GLYPH_POOLS = {
     rune: RUNES, greek: GREEK, hiero: HIERO, cunei: CUNEI, ogham: OGHAM, roman: ROMAN,
     hindu: 'ॐ☸✴◈', japan: '❀✿花結', azteque: '☀✴◈❂', slave: '☀✺❉✵', chine: '福龍鳳春',
-    lapidaire: LAPID, yoruba: '☀◈✦❖'
+    lapidaire: LAPID, yoruba: '☀◈✦❖', inca: '☀◈▲✦', dreaming: '●○◐◑✦'
   };
 
   function glyphify(el, pool) {
@@ -1776,7 +2086,17 @@
     gobekliPiliers: gobekliPiliers,
     graalLumiere: graalLumiere,
     earhartFade: earhartFade,
-    lanceQuadruple: lanceQuadruple
+    lanceQuadruple: lanceQuadruple,
+    intiSpiral: intiSpiral,
+    songlinePath: songlinePath,
+    calameArgile: calameArgile,
+    persepolisColumn: persepolisColumn,
+    swampParting: swampParting,
+    lloronaSilhouette: lloronaSilhouette,
+    maryCelesteDrift: maryCelesteDrift,
+    moaiSilhouette: moaiSilhouette,
+    ambreMosaique: ambreMosaique,
+    goujianDepatine: goujianDepatine
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -1850,6 +2170,16 @@
     graal:         graalLumiere,
     earhart:       earhartFade,
     lance:         lanceQuadruple,
+    viracocha:     intiSpiral,
+    dreaming:      songlinePath,
+    mesopotamie:   calameArgile,
+    achemenide:    persepolisColumn,
+    mokele:        swampParting,
+    llorona:       lloronaSilhouette,
+    maryceleste:   maryCelesteDrift,
+    rapanui:       moaiSilhouette,
+    ambre:         ambreMosaique,
+    goujian:       goujianDepatine,
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }

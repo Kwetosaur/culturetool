@@ -1,0 +1,270 @@
+---
+/*
+  Mythologie Inca — quatorzième mythologie de la série. Structure imposée
+  par docs/plans/plan-serie-mythologies.md : 9 sections fixes.
+
+  Distincte de culture-incas.html (angle civilisationnel : administration,
+  ingénierie, société, déjà publié) : ici, panthéon et cosmogonie, sans
+  répéter le quipu déjà pris comme scène sur-mesure côté culture — voir
+  docs/plans/plan-effets.md, qui recommandait explicitement la piste (1) ou
+  (3) pour cette page plutôt que la (2), déjà utilisée.
+
+  #royaumes : les Trois Pacha (Hanan, Kay, Uku) — cosmologie authentiquement
+  andine, dérivée des sources, pas alignée sur un autre chapitre (correctif
+  du 26/07/2026).
+
+  Effets : data-egg="viracocha" + data-scroll-fx="intiSpiral" sur #pantheon —
+  une spirale dorée façon disque solaire d'Inti qui tourne lentement (piste 1
+  du plan, pour ne pas répéter le geste du quipu déjà pris par la page
+  culture). Déchiffrement des titres : glyphs="inca", nouveau pool
+  symbolique (spirale solaire, montagne, éclair) — pas une écriture
+  historique au sens strict (le quipu n'est pas alphabétique), choix
+  décoratif assumé sur le même principe que les pools hindou/aztèque.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+
+/* Or d'Inti, indigo du ciel nocturne, terre volcanique : les trois Pacha en
+   couleurs plutôt qu'une palette "Amérique du Sud" générique — et distincte
+   de l'or/turquoise déjà pris par culture-incas.html. */
+const palette = {
+  bg: '#161020',
+  'bg-deep': '#0b0815',
+  surface: '#231a30',
+  'surface-alt': '#2c213c',
+  border: '#4a3a5c',
+  ink: '#f5eef5',
+  text: '#dccee0',
+  'text-dim': '#9c88a8',
+  accent: '#e8c164',
+  'accent-bright': '#f7dc8a',
+  accent2: '#2e8a9e',
+  'accent2-bright': '#5ac0d4',
+  verdict: '#7a2030',
+  'verdict-bright': '#a83a4a',
+  glow: 'rgba(232,193,100,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Pacha' },
+  { id: 'pantheon', nav: 'Panthéon' },
+  { id: 'genealogie', nav: 'Généalogie' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const pachas = [
+  { num: 'I', title: 'Hanan Pacha', sub: 'Le monde d\'en haut', body: "Séjour du Soleil, de la Lune, des étoiles et des divinités célestes — le domaine d'Inti et de Mama Quilla." },
+  { num: 'II', title: 'Kay Pacha', sub: 'Ce monde-ci', body: "Le monde des vivants, des humains, des animaux et des montagnes habitées par les Apus — le seul des trois où l'on marche." },
+  { num: 'III', title: 'Uku Pacha', sub: 'Le monde d\'en dessous', body: "Domaine des ancêtres, des morts et des êtres à naître, associé à la fertilité de la terre autant qu'à Supay — jamais un simple enfer au sens européen." },
+];
+---
+<PageLayout
+  title="Mythologie Inca"
+  serie="Mythologies du Monde"
+  description="Viracocha créateur, culte solaire d'Inti, Pachamama toujours vénérée : la cosmologie andine des Trois Pacha, structurée autour de la verticalité des montagnes plutôt que d'une généalogie de dieux."
+  href="mythologie-inca.html"
+  egg="viracocha"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="HANAN · KAY · UKU PACHA"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : <strong>la mythologie aborigène australienne</strong>"
+>
+  <p class="subtitle" slot="hero">Viracocha · Inti · Pachamama</p>
+  <p class="tagline" slot="hero">
+    Une cosmologie qui n'empile pas des royaumes comme un décor : elle organise le monde en
+    trois Pacha toujours actifs aujourd'hui — le ciel, la terre des vivants, et ce qui la
+    nourrit par-dessous.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="Les trois Pacha"
+    intro="Pas un empilement de niveaux façon Yggdrasil : la cosmologie andine authentique distingue trois mondes en tension verticale permanente, chacun accessible par le rite plutôt que par la seule mort.">
+    <Fragment slot="title"><Decode glyphs="inca">Les trois Pacha</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="250" cy="60" rx="200" ry="42" fill="none" stroke="#f7dc8a" stroke-width="2" opacity="0.8"/>
+        <text x="250" y="45" text-anchor="middle" fill="#f7dc8a" font-family="Cinzel, serif" font-size="14">HANAN PACHA</text>
+        <line x1="250" y1="102" x2="250" y2="148" stroke="#e8c164" stroke-width="2" stroke-dasharray="4 4"/>
+        <ellipse cx="250" cy="170" rx="160" ry="36" fill="none" stroke="#dccee0" stroke-width="2" opacity="0.8"/>
+        <text x="250" y="175" text-anchor="middle" fill="#dccee0" font-family="Cinzel, serif" font-size="14">KAY PACHA</text>
+        <line x1="250" y1="206" x2="250" y2="250" stroke="#5ac0d4" stroke-width="2" stroke-dasharray="4 4"/>
+        <ellipse cx="250" cy="270" rx="120" ry="30" fill="none" stroke="#5ac0d4" stroke-width="2" opacity="0.8"/>
+        <text x="250" y="275" text-anchor="middle" fill="#5ac0d4" font-family="Cinzel, serif" font-size="14">UKU PACHA</text>
+      </svg>
+    </div>
+    <p class="map-caption">Trois mondes reliés à la verticale — jamais confondus, jamais hiérarchisés en « bien » et « mal » à l'européenne.</p>
+    <div class="card-grid compact">
+      {pachas.map((p) => <InfoCard {...p} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~15 figures majeures" title="Le panthéon andin" scrollFx="intiSpiral">
+    <Fragment slot="title"><Decode glyphs="inca">Le panthéon andin</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Viracocha" role="Créateur suprême" tags={['Tiwanaku', 'Distant']} body="Crée le soleil, la lune et les premiers humains à Tiwanaku, puis parcourt le monde en enseignant avant de disparaître dans l'océan Pacifique — un créateur qui s'efface plutôt qu'un souverain qui règne." />
+      <FigureCard name="Inti" role="Dieu Soleil, ancêtre dynastique" tags={['Culte d\'État', 'Lignée royale']} body="Ancêtre revendiqué de la dynastie inca elle-même : le Sapa Inca gouverne comme « fils du Soleil », faisant du culte solaire un pilier autant politique que religieux." />
+      <FigureCard name="Pachamama" role="Terre-Mère" tags={['Fertilité', 'Culte vivant']} body="Loin d'être une figure reléguée au passé, elle reçoit encore aujourd'hui des offrandes rituelles (despachos) avant les semailles dans une grande partie des Andes." />
+      <FigureCard name="Mama Quilla" role="Déesse Lune" tags={['Calendrier', 'Mariage']} body="Épouse et sœur d'Inti, associée au calendrier rituel et aux femmes — un temple lui est dédié à Coricancha, à égalité architecturale avec celui du Soleil." />
+      <FigureCard name="Illapa" role="Dieu du tonnerre et de la pluie" tags={['Météo', 'Fronde céleste']} body="Fait gronder le tonnerre en frappant une jarre céleste tenue par sa sœur — la rivière du ciel (la Voie lactée) — pour libérer la pluie sur les cultures." />
+      <FigureCard name="Pachacamac" role="Créateur côtier, oracle majeur" tags={['Pré-inca', 'Absorbé diplomatiquement']} body="Divinité côtière bien antérieure à l'expansion inca, dont le grand temple-oracle près de l'actuelle Lima est intégré au culte impérial plutôt que détruit — une annexion religieuse, pas un effacement." />
+      <FigureCard name="Mama Cocha" role="Déesse de la mer" tags={['Pêcheurs', 'Côte']} body="Particulièrement vénérée par les populations côtières, dont l'économie dépend directement de ses faveurs." />
+      <FigureCard name="Supay" role="Seigneur de l'Uku Pacha" tags={['Ambivalent', 'Pas un diable']} body="Gouverne le monde d'en dessous sans être un principe du mal au sens chrétien — une figure redoutée et respectée, dont le culte survivra sous une forme syncrétique dans les mines coloniales." />
+      <FigureCard name="Manco Cápac" role="Premier Inca légendaire" tags={['Fondateur', 'Fils du Soleil']} body="Émerge du lac Titicaca (ou d'une grotte selon une autre tradition) avec un bâton d'or, envoyé par Inti pour fonder Cusco à l'endroit où l'outil s'enfoncerait dans le sol." />
+      <FigureCard name="Mama Ocllo" role="Première Coya, sœur-épouse de Manco Cápac" tags={['Fondatrice', 'Tissage']} body="Enseigne le tissage aux femmes de Cusco tandis que Manco Cápac enseigne l'agriculture aux hommes — un partage de savoirs fondateurs mis en scène comme un couple complémentaire." />
+      <FigureCard name="Ayar Cachi" role="Frère fondateur au pouvoir dangereux" tags={['Cycle de Pacaritambo', 'Exil']} body="Dans la tradition parallèle des quatre frères et sœurs Ayar, sa force destructrice inquiète tant ses frères qu'ils le pièdent à retourner dans une grotte scellée." />
+      <FigureCard name="Les Apus" role="Esprits des montagnes" tags={['Culte vivant', 'Ausangate']} body="Chaque grand sommet andin est une puissance personnelle qu'on continue de consulter et d'honorer — pas une allégorie, un interlocuteur rituel bien réel pour de nombreuses communautés aujourd'hui." />
+      <FigureCard name="Ekeko" role="Dieu de l'abondance" tags={['Foyer', 'Fête vivante']} body="Petite figure domestique de la prospérité, toujours au centre de la fête bolivienne des Alasitas, où l'on offre des objets miniatures pour attirer la chance de l'année." />
+      <FigureCard name="Ch'aska" role="Divinité de l'étoile du matin (Vénus)" tags={['Astronomie rituelle']} body="Associée à l'aube, aux jeunes filles et à la rosée — un exemple parmi d'autres de la richesse de l'astronomie religieuse andine, qui lit le ciel bien au-delà du seul Soleil." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 maisons, pas 3 lignées de sang"
+    title="Trois familles pour trois Pacha"
+    intro="La généalogie andine ne fonctionne pas comme un arbre grec de mariages et de naissances : elle organise plutôt trois « maisons » alignées sur les trois mondes eux-mêmes.">
+    <Fragment slot="title"><Decode glyphs="inca">Trois familles pour trois Pacha</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
+        <text x="110" y="34" text-anchor="middle" fill="#f7dc8a" font-family="Cinzel, serif" font-size="13">MAISON DE HANAN PACHA</text>
+        <circle cx="110" cy="80" r="20" fill="#e8c164" stroke="#fff" stroke-width="1.5"/>
+        <text x="110" y="85" text-anchor="middle" font-size="9" fill="#161020" font-weight="700">Inti</text>
+        <line x1="95" y1="95" x2="70" y2="150" stroke="#e8c164" stroke-width="1" stroke-dasharray="2 4"/>
+        <line x1="125" y1="95" x2="150" y2="150" stroke="#e8c164" stroke-width="1" stroke-dasharray="2 4"/>
+        <circle cx="70" cy="165" r="13" fill="#2c213c" stroke="#e8c164" stroke-width="1.3"/>
+        <text x="70" y="185" text-anchor="middle" font-size="8" fill="#dccee0">Mama Quilla</text>
+        <circle cx="150" cy="165" r="13" fill="#2c213c" stroke="#e8c164" stroke-width="1.3"/>
+        <text x="150" y="185" text-anchor="middle" font-size="8" fill="#dccee0">Illapa</text>
+
+        <text x="330" y="34" text-anchor="middle" fill="#dccee0" font-family="Cinzel, serif" font-size="13">MAISON DE KAY PACHA</text>
+        <circle cx="330" cy="80" r="20" fill="#dccee0" stroke="#fff" stroke-width="1.5"/>
+        <text x="330" y="85" text-anchor="middle" font-size="8" fill="#161020" font-weight="700">Manco Cápac</text>
+        <line x1="330" y1="100" x2="330" y2="150" stroke="#dccee0" stroke-width="1" stroke-dasharray="2 4"/>
+        <circle cx="330" cy="165" r="13" fill="#2c213c" stroke="#dccee0" stroke-width="1.3"/>
+        <text x="330" y="185" text-anchor="middle" font-size="8" fill="#dccee0">Mama Ocllo</text>
+        <text x="330" y="215" text-anchor="middle" fill="#9c88a8" font-size="9">lignée des Sapa Inca</text>
+
+        <text x="530" y="34" text-anchor="middle" fill="#5ac0d4" font-family="Cinzel, serif" font-size="13">MAISON D'UKU PACHA</text>
+        <circle cx="530" cy="80" r="20" fill="#2e8a9e" stroke="#5ac0d4" stroke-width="1.5"/>
+        <text x="530" y="85" text-anchor="middle" font-size="9" fill="#f5eef5" font-weight="700">Supay</text>
+        <line x1="530" y1="100" x2="530" y2="150" stroke="#5ac0d4" stroke-width="1" stroke-dasharray="1 3"/>
+        <circle cx="530" cy="165" r="13" fill="#2c213c" stroke="#5ac0d4" stroke-width="1"/>
+        <text x="530" y="185" text-anchor="middle" font-size="8" fill="#a0c8d0">les Apus</text>
+        <text x="530" y="215" text-anchor="middle" fill="#9c88a8" font-size="9">ancêtres et esprits de la terre</text>
+      </svg>
+    </div>
+    <p class="map-caption">Trait plein = filiation directe ; pointillé = parenté rituelle. La maison de Kay Pacha est la seule à revendiquer une descendance humaine réelle — celle des Sapa Inca.</p>
+  </Section>
+
+  <Section id="creatures" label="8 êtres notables" title="Le bestiaire des trois mondes">
+    <Fragment slot="title"><Decode glyphs="inca">Le bestiaire des trois mondes</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Le trio Puma-Condor-Serpent" tag="Les trois Pacha en bêtes" body="Le condor plane pour Hanan Pacha, le puma marche pour Kay Pacha, le serpent rampe pour Uku Pacha — un triptyque animalier si central que Cusco aurait été urbanisée en forme de puma." />
+      <MiniCard title="Amaru" tag="Serpent-dragon" body="Être chthonien parfois bicéphale, associé à la foudre et aux rivières souterraines, gravé sur de nombreuses pierres cérémonielles." />
+      <MiniCard title="Kuntur (le Condor)" tag="Messager du ciel" body="Oiseau le plus vénéré des Andes, censé transporter les âmes vers Hanan Pacha — son vol reste aujourd'hui un présage observé lors des fêtes rituelles." />
+      <MiniCard title="Ccoa" tag="Chat des tempêtes" body="Félin mythique cracheur de grêle et d'éclairs dans le folklore du sud andin, craint des paysans en altitude." />
+      <MiniCard title="Le lama prophétique" tag="Mythe du déluge" body="Refuse de manger et alerte son propriétaire d'un déluge à venir en désignant les étoiles — le couple d'éleveurs se réfugie au sommet d'une montagne et seul lui survit." />
+      <MiniCard title="Machakwa" tag="Serpent d'eau" body="Variante régionale de l'amaru, gardien des sources et des lacs de haute altitude." />
+      <MiniCard title="Le renard (Atoq)" tag="Filou des contes" body="Figure rusée et souvent punie de ses excès dans de nombreux récits populaires andins, un rôle de trickster comparable à d'autres traditions mondiales." />
+      <MiniCard title="Le crapaud (Hanp'atu)" tag="Annonciateur de pluie" body="Son chant est traditionnellement lu comme un signe météorologique fiable par les cultivateurs de montagne." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="10 légendes" title="Les grands récits andins">
+    <Fragment slot="title"><Decode glyphs="inca">Les grands récits andins</Decode></Fragment>
+    <StoryBlock num="Légende I" title="La création à Tiwanaku" body={["Insatisfait d'une première humanité de géants créée dans l'obscurité, Viracocha la détruit par un déluge, puis façonne à Tiwanaku des figures de pierre auxquelles il donne vie, peignant sur elles les vêtements et coiffures propres à chaque peuple.", "Il les envoie ensuite se disperser sous terre, pour ressurgir chacune en un lieu précis — une grotte, une source, un arbre — devenu le <em>paqarina</em>, le point d'origine sacré de chaque lignée."]} />
+    <StoryBlock num="Légende II" title="Manco Cápac et le bâton d'or" body="Envoyés par Inti depuis le lac Titicaca, Manco Cápac et Mama Ocllo reçoivent un bâton d'or et pour mission de fonder une ville à l'endroit exact où l'outil s'enfoncerait sans effort dans la terre. Ce lieu sera Cusco — le récit transforme un choix de site défensif et agricole bien réel en un mandat directement divin." />
+    <StoryBlock num="Légende III" title="Les frères Ayar" body="Une tradition parallèle fait sortir quatre frères et quatre sœurs d'une grotte de Pacaritambo. Ayar Cachi, trop puissant et destructeur, est piégé par ruse dans la grotte d'origine ; Ayar Uchu se change en pierre sacrée sur la colline de Wanakawri. Seul Ayar Manco atteint Cusco et y devient le premier souverain." />
+    <StoryBlock num="Légende IV" title="Le déluge et le lama" body="Un lama refuse soudain de manger et, interrogé, désigne les étoiles : un déluge approche. Son propriétaire rassemble sa famille et grimpe au sommet du mont Villca Coto, seul point qui restera hors de l'eau — le seul récit de cette série où l'animal, et non un dieu, avertit directement les humains." quote="Regarde les étoiles : elles annoncent notre perte si nous ne montons pas." cite="Résumé d'une version orale du mythe" />
+    <StoryBlock num="Légende V" title="Le jarre céleste d'Illapa" body="Le tonnerre gronde quand Illapa fracasse d'un coup de fronde la jarre d'eau que sa sœur transporte à travers le fleuve céleste — la pluie qui suit fertilise les champs andins, un mythe météorologique qui reste cité par des cultivateurs contemporains." />
+    <StoryBlock num="Légende VI" title="Pachacamac, le dieu qu'on n'a pas détruit" body="Lorsque l'empire inca annexe la côte, il ne rase pas le grand sanctuaire-oracle de Pachacamac : il l'intègre à son propre panthéon, y ajoutant un temple du Soleil à côté du sanctuaire préexistant — une diplomatie religieuse plutôt qu'une conquête spirituelle brutale." />
+    <StoryBlock num="Légende VII" title="Le danger du cuychu (arc-en-ciel)" body="Contrairement à l'image occidentale bienveillante, l'arc-en-ciel andin est traditionnellement redouté : on dit qu'il peut pénétrer le corps par les orifices et causer la maladie — une croyance encore rapportée dans certaines communautés rurales." />
+    <StoryBlock num="Légende VIII" title="Le jardin d'or de Coricancha" body="Les chroniqueurs espagnols décrivent, dans le grand temple du Soleil de Cusco, un jardin entier reproduit en or et en argent — épis de maïs, lamas, jusqu'aux insectes — fondu presque intégralement après la conquête pour financer les rançons et les guerres coloniales." />
+    <StoryBlock num="Légende IX" title="La colère de Pachamama" body="Les tremblements de terre, fréquents dans les Andes, sont traditionnellement lus comme des mouvements de la Terre-Mère elle-même — une lecture qui continue de motiver des offrandes rituelles avant tout grand chantier ou toute récolte, dans une bonne partie de la région andine." />
+    <StoryBlock num="Légende X" title="Supay descend dans les mines" body="Après la conquête, le culte de Supay ne disparaît pas : il se transforme, dans les mines d'argent coloniales de Potosí, en un culte à « El Tío », une figure souterraine à qui les mineurs offrent encore aujourd'hui de l'alcool et des cigarettes avant de descendre travailler." />
+  </Section>
+
+  <Section id="anecdotes" label="8 curiosités" title="Étymologies et faits marquants">
+    <Fragment slot="title"><Decode glyphs="inca">Étymologies et faits marquants</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Le paqarina, un lieu plus qu'un mythe" tag="Ancrage territorial" body="Chaque ayllu (communauté) revendique un lieu d'origine précis — grotte, source, rocher — qui fonde historiquement son droit sur une terre, bien au-delà de la simple anecdote religieuse." />
+      <MiniCard title="La Voie lactée lue en creux" tag="Astronomie andine" body="Les astronomes andins traditionnels reconnaissaient des figures animales non pas dans les étoiles elles-mêmes, mais dans les zones sombres de poussière interstellaire qui découpent la Voie lactée — un système d'observation distinct de la tradition occidentale." />
+      <MiniCard title="Le système des ceques" tag="Cusco comme calendrier vivant" body="Une quarantaine de lignes invisibles rayonnant depuis Coricancha organisaient plus de trois cents lieux sacrés (huacas) autour de la capitale, doublant d'une fonction calendaire et rituelle précise." />
+      <MiniCard title="Tiwanaku précédait déjà les Inca" tag="Un site déjà ancien" body="Le site où Viracocha crée l'humanité selon le mythe était, au moment de l'essor inca, une cité déjà en ruine depuis des siècles — les Inca mythifient un lieu qu'ils n'ont pas construit, un schéma qui rappelle Stonehenge réinterprété par des générations plus tardives." />
+      <MiniCard title="El Tío, survivance coloniale" tag="Potosí, Bolivie" body="Le culte souterrain rendu à cette figure dans les mines d'argent bolivienne est une survivance directe, quoique transformée, du culte de Supay." />
+      <MiniCard title="Les Alasitas" tag="La Paz, fête vivante" body="Chaque année, les Boliviens continuent d'offrir des miniatures à Ekeko pour s'attirer l'abondance — une pratique bien vivante, pas un folklore figé." />
+      <MiniCard title="Bolivie, des droits légaux pour la Terre-Mère" tag="Loi de 2010" body="La Bolivie adopte une loi accordant des droits juridiques à Pachamama — un cas rare où une cosmologie andine influence directement le droit positif contemporain." />
+      <MiniCard title="Cusco en forme de puma" tag="Urbanisme rituel" body="Plusieurs chroniques rapportent que le plan de la capitale inca aurait délibérément épousé la silhouette d'un puma — une lecture toujours débattue par les archéologues, mais largement reprise dans la tradition locale." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="Des Andes à la loi bolivienne">
+    <Fragment slot="title"><Decode glyphs="inca">Des Andes à la loi bolivienne</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="110" r="10" fill="#e8c164"/>
+        <text x="250" y="90" text-anchor="middle" fill="#f7dc8a" font-size="12" font-family="Cinzel, serif">CUSCO</text>
+        {[[120,60,'Titicaca / Tiwanaku'],[380,60,'Potosí — El Tío'],[100,170,'La Paz — Alasitas'],[400,170,'Ausangate — Q\'oyllur Rit\'i']].map(([x,y,label]) => (
+          <g>
+            <line x1="250" y1="110" x2={x} y2={y} stroke="#5ac0d4" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#2c213c" stroke="#e8c164" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#dccee0" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">Du lac Titicaca aux mines de Potosí et aux pèlerinages andins actuels — une cosmologie qui n'a jamais cessé d'être pratiquée.</p>
+    <div class="card-grid">
+      <InfoCard title="Lac Titicaca et Tiwanaku" sub="Berceau mythique" body="Le lieu de l'émergence de Manco Cápac et du site où Viracocha crée l'humanité selon le récit — toujours un haut lieu de pèlerinage." />
+      <InfoCard title="Potosí, Bolivie" sub="Culte souterrain" body="Le culte à El Tío, héritier de Supay, reste pratiqué par les mineurs avant chaque descente." />
+      <InfoCard title="La Paz, Bolivie" sub="Fête des Alasitas" body="Célébration annuelle toujours vivante en l'honneur d'Ekeko, le dieu de l'abondance domestique." />
+      <InfoCard title="Ausangate" sub="Pèlerinage du Q'oyllur Rit'i" body="Un immense pèlerinage andin, reconnu par l'UNESCO en 2011, mêlant dévotion catholique et culte des Apus au pied d'un sommet sacré." />
+      <InfoCard title="Coricancha / Santo Domingo" sub="Cusco" body="Les fondations incas du temple du Soleil subsistent littéralement sous le couvent colonial bâti par-dessus — la stratification religieuse rendue visible dans la pierre." />
+      <InfoCard title="Le droit bolivien" sub="2010" body="La reconnaissance légale de droits à la Terre-Mère fait de cette cosmologie l'une des rares à influencer directement une législation nationale contemporaine." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="inca">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'v. 500-1000 apr. J.-C.', title: 'Civilisation de Tiwanaku', body: "Le site où le mythe situe la création de l'humanité connaît son apogée puis son déclin, des siècles avant l'essor inca." },
+      { year: 'Date légendaire', title: 'Fondation de Cusco', body: "Manco Cápac et Mama Ocllo fondent la ville sur ordre d'Inti, selon la tradition dynastique." },
+      { year: 'v. 1438', title: 'Réforme religieuse de Pachacuti', body: "Le culte solaire d'État se structure et s'étend avec l'expansion impériale." },
+      { year: 'v. 1450', title: 'Coricancha à son apogée', body: "Le grand temple du Soleil de Cusco atteint sa splendeur décrite par les premiers chroniqueurs espagnols." },
+      { year: '1532-1533', title: 'Conquête espagnole', body: "Le pillage de Coricancha et les campagnes d'extirpation de l'idolâtrie frappent directement le culte officiel." },
+      { year: '1560s-1570s', title: 'Le mouvement Taki Onqoy', body: "Un mouvement prophétique andin annonce le retour des anciennes divinités (huacas) et le rejet du dieu chrétien — une résistance religieuse organisée, documentée par les archives coloniales elles-mêmes." },
+      { year: 'XVIIe siècle', title: 'Émergence du culte d\'El Tío', body: "Dans les mines de Potosí, le culte de Supay se transforme en dévotion syncrétique toujours pratiquée aujourd'hui." },
+      { year: '2010', title: 'Loi bolivienne des droits de la Terre-Mère', body: "La Bolivie inscrit dans son droit une reconnaissance directement héritée du culte de Pachamama." },
+      { year: '2011', title: 'Q\'oyllur Rit\'i reconnu par l\'UNESCO', body: "Le grand pèlerinage andin rejoint le patrimoine culturel immatériel de l'humanité." },
+      { year: 'Aujourd\'hui', title: 'Une cosmologie toujours pratiquée', body: "Despachos, fêtes des Alasitas et pèlerinages andins continuent d'irriguer la vie religieuse quotidienne de millions de personnes." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que la cosmologie andine fait encore">
+    <Fragment slot="title"><Decode glyphs="inca">Ce que la cosmologie andine fait encore</Decode></Fragment>
+    <HeritageBlock title="Une religion vivante, pas un vestige" body="Offrandes à Pachamama, culte des Apus, pèlerinage du Q'oyllur Rit'i : ces pratiques ne sont pas des reconstitutions, mais des gestes religieux actifs pour des millions de personnes aujourd'hui." />
+    <HeritageBlock title="Une reconnaissance juridique rare" body="La loi bolivienne de 2010 sur les droits de la Terre-Mère est l'un des rares cas au monde où une cosmologie précoloniale influence directement la législation d'un État moderne." />
+    <HeritageBlock title="Un syncrétisme documenté" body="El Tío dans les mines, la Vierge parfois assimilée à Pachamama dans certaines pratiques populaires : la cosmologie andine n'a pas disparu sous le catholicisme colonial, elle a composé avec lui." />
+    <CautionBox>
+      Le mot « Pachamama » circule aujourd'hui largement hors de son contexte andin, parfois
+      récupéré par un discours occidental de bien-être détaché de toute pratique religieuse
+      réelle. Cette page décrit une cosmologie vivante, portée par des communautés précises —
+      pas un symbole décoratif disponible pour n'importe quel usage.
+    </CautionBox>
+  </Section>
+</PageLayout>

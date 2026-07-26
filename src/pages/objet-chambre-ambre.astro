@@ -1,0 +1,285 @@
+---
+/*
+  La Chambre d'Ambre — douzième page de la série « Objets Légendaires du
+  Monde ». Structure imposée par docs/plans/plan-serie-objets.md : 8
+  sections, badge de nature dans le hero. Cas particulier de la série :
+  contrairement à la plupart des objets, son existence et sa facture ne
+  font aucun doute — abondamment photographiée avant 1941 — seul son sort
+  après 1945 reste une énigme. #traces documente donc une chaîne de
+  possession réellement datée (Timeline légitime, pas par défaut).
+
+  Effets : data-egg="ambre" + data-scroll-fx="ambreMosaique" sur
+  #description, piste documentée dans plan-effets.md ("un panneau d'ambre
+  qui se remplit tesson par tesson, puis dont les pièces s'éteignent une à
+  une").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Ambre et résine chaude, ombre de bunker : la matière de l'objet et le
+   contexte de sa disparition plutôt qu'une géographie générique. */
+const palette = {
+  bg: '#1a1206',
+  'bg-deep': '#0f0a03',
+  surface: '#291d0e',
+  'surface-alt': '#332512',
+  border: '#5c4020',
+  ink: '#f7ecd4',
+  text: '#e8d2a0',
+  'text-dim': '#b09560',
+  accent: '#e8922f',
+  'accent-bright': '#f7b85a',
+  accent2: '#5a4a3a',
+  'accent2-bright': '#8a7050',
+  verdict: '#5a2020',
+  'verdict-bright': '#8a3a3a',
+  glow: 'rgba(232,146,47,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Une commande prussienne', sub: 'Berlin, 1701-1709',
+    body: "Conçue par le sculpteur Andreas Schlüter pour le roi Frédéric Ier de Prusse — pas une légende médiévale, mais une commande princière parfaitement documentée dès l'origine.",
+  },
+  {
+    num: 'II', title: 'Un cadeau diplomatique', sub: '1716',
+    body: "Frédéric-Guillaume Ier l'offre au tsar Pierre le Grand en échange d'un régiment de soldats de haute taille et d'un navire — un troc politique, pas un mystère d'origine.",
+  },
+  {
+    num: 'III', title: "Le seul objet de la série sans doute sur son existence", sub: 'Abondamment photographiée',
+    body: "Contrairement au Graal ou à Excalibur, la Chambre d'Ambre est documentée par des photographies avant sa disparition en 1945 : l'énigme ne porte que sur son sort, jamais sur sa réalité.",
+  },
+];
+---
+<PageLayout
+  title="La Chambre d'Ambre"
+  serie="Objets Légendaires du Monde"
+  description="Six tonnes d'ambre offertes à Pierre le Grand en 1716, démontées par la Wehrmacht en 1941, disparues en 1945 : le seul objet de cette série dont l'existence ne fait aucun doute — seul son sort reste une énigme, toujours activement recherchée."
+  href="objet-chambre-ambre.html"
+  egg="ambre"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="KÖNIGSBERG · 1945"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>l'épée de Goujian</strong>"
+>
+  <p class="subtitle" slot="hero">Bernsteinzimmer · Yantarnaya komnata</p>
+  <p class="tagline" slot="hero">
+    La « huitième merveille du monde » selon ses contemporains — démontée en trente-six heures
+    par l'armée allemande en 1941, disparue sans trace en 1945.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet réel disparu"
+    note="Son existence, sa facture et son parcours jusqu'en 1945 sont documentés sans ambiguïté par des photographies d'époque — seul son sort après cette date reste une énigme non résolue, malgré des décennies de recherches."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Une commande, pas une légende"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit. Ici, il n'y a pas d'écart à mesurer — l'objet est daté avec précision dès sa création, sans aucune couche légendaire antérieure à ajouter.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Un cas rare dans cette série : il n'y a ici ni motif littéraire à dater ni relique
+      controversée à authentifier — seulement une œuvre d'art bien réelle, disparue dans le
+      chaos de la fin de la Seconde Guerre mondiale.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et matière"
+    title="Une pièce entière recouverte d'ambre"
+    intro="Ce que les photographies d'avant-guerre montrent sans ambiguïté — pas une reconstitution d'après récits incertains."
+    scrollFx="ambreMosaique">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Six tonnes d'ambre"
+        role="Panneaux muraux complets"
+        tags={['Baroque', 'Or et miroirs']}
+        body="Une pièce d'environ 55 m² entièrement revêtue de panneaux d'ambre travaillé, complétés de feuilles d'or et de miroirs — l'une des réalisations décoratives les plus ambitieuses de son époque."
+      />
+      <FigureCard
+        name="Un agrandissement impérial"
+        role="Sous l'impératrice Élisabeth"
+        tags={['1743-1755', 'Tsarskoïe Selo']}
+        body="À son arrivée en Russie, la pièce d'origine est nettement agrandie pour s'adapter aux dimensions du palais Catherine, avec un apport d'ambre supplémentaire considérable."
+      />
+      <FigureCard
+        name="Une mosaïque, pas un bloc"
+        role="Contrainte du matériau"
+        tags={['Artisanat', 'Assemblage']}
+        body="Aucun bloc d'ambre naturel n'est assez grand pour couvrir un mur : chaque panneau est un assemblage minutieux de nombreux fragments plus petits, taillés et ajustés comme une mosaïque."
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où la Chambre a voyagé">
+    <StoryBlock
+      num="Récit I"
+      title="Le troc de 1716"
+      body="Le roi de Prusse offre la pièce achevée au tsar Pierre le Grand, en pleine consolidation de leur alliance contre la Suède — en échange, la Russie fournit un régiment de soldats de très haute taille, prisés par le roi prussien pour sa garde personnelle, ainsi qu'un navire. Un objet d'art comme monnaie d'échange géopolitique, dès l'origine."
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Trente-six heures de démontage"
+      body="En 1941, lors de l'invasion allemande de l'URSS, des soldats de la Wehrmacht démontent l'intégralité de la pièce en un temps record et l'expédient à Königsberg, en Prusse-Orientale, où elle est remontée et exposée au château de la ville jusqu'en 1944."
+    />
+    <StoryBlock
+      num="Récit III"
+      title="La disparition"
+      body={[
+        "En août 1944, un bombardement britannique ravage le château de Königsberg par le feu. La ville tombe aux mains de l'Armée rouge en avril 1945, dans un chaos de destructions et de pillages.",
+        "Les panneaux de la Chambre d'Ambre disparaissent à ce moment précis — sans qu'aucun témoignage fiable ne permette de dire s'ils ont brûlé, ont été cachés, ou ont été emportés. C'est ce dernier chapitre, et lui seul, qui reste non résolu.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit IV"
+      title="Une reconstitution de réconciliation"
+      body="Entre 1979 et 2003, des artisans russes reconstituent intégralement la pièce à partir des photographies d'avant-guerre, avec un financement partiellement allemand — un geste explicite de réconciliation entre les deux pays, inauguré pour le 300e anniversaire de Saint-Pétersbourg en présence des dirigeants des deux nations."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Travailler l'ambre à l'échelle d'une pièce entière"
+    intro="La section propre à cette série. Ici, la question n'est pas « un tel objet a-t-il pu exister » — il a existé et ses techniques sont bien documentées — mais ce que sa fabrication, puis sa reconstitution, ont exigé.">
+    <div class="card-grid compact">
+      <MiniCard title="Une résine, pas une pierre" tag="Ambre fossile" body="Plus tendre que les pierres précieuses, l'ambre se travaille à la chaleur et à la découpe plutôt qu'à la taille à facettes — un savoir-faire distinct de la joaillerie classique." />
+      <MiniCard title="L'assemblage en mosaïque" tag="Contrainte de taille" body="Faute de blocs assez grands, chaque panneau mural assemble un grand nombre de petits fragments d'ambre, ajustés pièce à pièce sur un support de bois." />
+      <MiniCard title="La reconstitution de 1979-2003" tag="Vingt-quatre ans de travail" body="Les artisans russes s'appuient sur les photographies d'avant-guerre et sur de l'ambre extrait dans la région de Kaliningrad pour reproduire la pièce au plus près de l'original disparu." />
+      <MiniCard title="Un coût considérable" tag="Financement germano-russe" body="Le projet de reconstitution, financé en partie par une entreprise allemande, illustre combien la restitution d'un savoir-faire perdu peut s'avérer aussi coûteuse que sa création initiale." />
+    </div>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Une chaîne de possession, puis un vide"
+    title="De Berlin à Königsberg — et depuis, plus rien de confirmé"
+    intro="Un cas rare dans cette série : l'histoire de l'objet est datée avec précision jusqu'en 1945, où la chaîne s'interrompt net.">
+    <Timeline items={[
+      { year: '1701-1709', title: 'Fabrication à Berlin', body: "Commande du roi de Prusse, conception d'Andreas Schlüter." },
+      { year: '1716', title: 'Don au tsar Pierre le Grand', body: "Échangée contre un régiment de soldats et un navire." },
+      { year: '1743-1755', title: 'Agrandissement impérial', body: "Adaptation aux dimensions du palais Catherine sous l'impératrice Élisabeth." },
+      { year: '1941', title: 'Démontage par la Wehrmacht', body: "Expédition vers Königsberg en 36 heures." },
+      { year: '1942-1944', title: 'Exposition à Königsberg', body: "La pièce reconstituée est visible au château de la ville." },
+      { year: 'Août 1944', title: 'Incendie du château', body: "Un bombardement britannique ravage l'édifice." },
+      { year: 'Avril 1945', title: 'Chute de Königsberg', body: "La ville tombe aux mains de l'Armée rouge — dernière trace connue de la pièce." },
+      { year: '1979-2003', title: 'Reconstitution intégrale', body: "Vingt-quatre années de travail artisanal russe, avec financement partiellement allemand." },
+    ]} />
+    <div class="card-grid" style="margin-top:44px;">
+      <InfoCard
+        title="La reconstitution actuelle"
+        sub="Palais Catherine, Tsarskoïe Selo"
+        body="Seule version visible aujourd'hui, achevée en 2003 — une reconstitution fidèle, pas l'objet d'origine."
+      />
+      <InfoCard
+        title="Un fragment retrouvé en 1997"
+        sub="Une commode mosaïque"
+        body="Un élément de mobilier assorti à la pièce d'origine refait surface lors d'une transaction en Allemagne, confirmant qu'au moins certains éléments annexes ont survécu à la disparition de 1945."
+      />
+      <InfoCard
+        title="Des recherches toujours actives"
+        sub="Kaliningrad et au-delà"
+        body="Chasseurs de trésors amateurs et chercheurs continuent d'explorer bunkers et mines de la région, sans succès confirmé à ce jour."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la disparition au mythe du trésor"
+    title="Un objet devenu synonyme de trésor de guerre introuvable">
+    <div class="card-grid compact">
+      <MiniCard title="Une industrie de la recherche" tag="Documentaires, ouvrages" body="La disparition de la pièce a nourri des décennies de documentaires, de livres d'enquête et d'expéditions amateurs, avec un succès éditorial constant." />
+      <MiniCard title="Associée à d'autres légendes de trésors nazis" tag="Effet d'entraînement médiatique" body="Chaque nouvelle rumeur de « train d'or nazi » ou de cache secrète ravive régulièrement l'intérêt médiatique pour la Chambre d'Ambre, sans lien direct entre les dossiers." />
+      <MiniCard title="Un symbole de réconciliation" tag="Reconstitution de 2003" body="L'inauguration de la copie, en présence des dirigeants russe et allemand, en a fait un symbole autant diplomatique qu'artistique." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Ici, la question n'est pas de savoir si l'objet a existé, mais ce qui lui est arrivé après 1945 — un cas structurellement différent du reste de cette série.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Aucun doute sur l'existence, un vide documentaire après 1945"
+      body={[
+        "L'existence, la fabrication et le parcours de la Chambre d'Ambre jusqu'en 1944 sont établis par des photographies et des archives allemandes et soviétiques convergentes.",
+        "C'est seulement à partir de la chute de Königsberg, en avril 1945, que toute trace documentaire fiable s'interrompt — un vide de plusieurs décennies qu'aucune découverte n'est venue combler depuis.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Une reconstitution qui ne prétend pas être l'original"
+      body="La version aujourd'hui exposée à Tsarskoïe Selo est explicitement présentée comme une reconstitution moderne, réalisée à partir de photographies — un geste de restitution culturelle assumé comme tel, jamais présenté comme la récupération de l'objet perdu."
+    />
+    <TheoryCard
+      title="Les panneaux ont été détruits dans l'incendie de 1944 ou le chaos de 1945"
+      level="plausible"
+      status="Hypothèse la plus souvent retenue"
+      body="Compte tenu de l'ampleur des destructions documentées à Königsberg durant cette période, plusieurs historiens jugent la destruction plus probable qu'une dissimulation réussie ayant échappé à des décennies de recherches."
+      attrib="Hypothèse discutée chez les historiens de la période"
+    />
+    <TheoryCard
+      title="Les panneaux ont été cachés et restent quelque part en Europe centrale"
+      level="plausible"
+      status="Hypothèse également sérieuse"
+      body="Défendue par de nombreux chercheurs et chasseurs de trésors, cette hypothèse reste plausible sans qu'aucune découverte n'ait jamais permis de la confirmer malgré des fouilles répétées de bunkers et de mines."
+      attrib="Hypothèse portée par plusieurs équipes de recherche indépendantes"
+    />
+    <TheoryCard
+      title="La pièce aurait été secrètement exfiltrée hors d'Europe"
+      level="folklore"
+      status="Non étayé"
+      body="Une variante plus romanesque, sans le moindre élément de preuve documentaire, qui relève davantage du genre du récit d'aventure que de l'enquête historique sérieuse."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que la Chambre d'Ambre fait encore">
+    <HeritageBlock
+      title="Une attraction majeure à Tsarskoïe Selo"
+      body="La reconstitution de 2003 reste l'une des pièces les plus visitées du palais Catherine, près de Saint-Pétersbourg."
+    />
+    <HeritageBlock
+      title="Un symbole de réconciliation germano-russe"
+      body="Le financement partiellement allemand du projet de reconstitution en a fait, à son achèvement, un geste diplomatique autant qu'un chantier artistique."
+    />
+    <HeritageBlock
+      title="Une chasse toujours ouverte"
+      body="Des recherches amateurs et professionnelles continuent d'explorer d'anciens sites militaires allemands dans l'espoir de retrouver des fragments de l'original."
+    />
+    <CautionBox>
+      Le romantisme de la « chasse au trésor » qui entoure la Chambre d'Ambre ne doit pas
+      faire oublier le contexte réel de sa disparition : un pillage de guerre, suivi d'un
+      chaos de destructions et de morts bien plus vastes que la seule perte d'une œuvre d'art,
+      aussi exceptionnelle soit-elle.
+    </CautionBox>
+  </Section>
+</PageLayout>

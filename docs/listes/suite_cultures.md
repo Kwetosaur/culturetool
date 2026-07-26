@@ -6,15 +6,17 @@ Même principe de score /10 que les autres listes, basé sur la richesse du doss
 
 ---
 
-## Déjà couvertes (8)
+## Déjà couvertes (10)
 
 Chine · Égypte Antique · Rome antique · Grèce antique · Vikings / Scandinavie médiévale ·
-Empire du Mali · **Incas** · **Polynésie (navigation)**
+Empire du Mali · Incas · Polynésie (navigation) · **Mésopotamie (culture)** ·
+**Empire perse achéménide**
 
-**26 candidates restantes** dans les tableaux ci-dessous, dont **6 ajoutées le 26/07/2026**
-pour combler des trous réels : Al-Andalus (huit siècles d'Europe absents), Minoens (première
-civilisation européenne), Carthage (angle historiographique), côte swahilie (tout l'océan
-Indien), Empire songhaï (suite du Mali), Empire timouride (Asie centrale savante).
+**24 candidates restantes** dans les tableaux ci-dessous. 6 avaient été ajoutées le
+26/07/2026 pour combler des trous réels : Al-Andalus (huit siècles d'Europe absents),
+Minoens (première civilisation européenne), Carthage (angle historiographique), côte
+swahilie (tout l'océan Indien), Empire songhaï (suite du Mali), Empire timouride (Asie
+centrale savante).
 
 ---
 
@@ -35,8 +37,8 @@ Indien), Empire songhaï (suite du Mali), Empire timouride (Asie centrale savant
 
 | Culture | Score | Ce qui la rend unique |
 |---|---|---|
-| Mésopotamie (culture) | 9 | Premières villes, premier code de lois écrit (Hammurabi), invention de l'écriture — angle civilisationnel distinct de `mythologie-mesopotamienne.html` |
-| Empire perse achéménide | 9 | Administration multiethnique tolérante, routes royales, plus grand empire de son temps |
+| Mésopotamie (culture) ✅ | 9 | Premières villes, premier code de lois écrit (Hammurabi), invention de l'écriture — angle civilisationnel distinct de `mythologie-mesopotamienne.html` |
+| Empire perse achéménide ✅ | 9 | Administration multiethnique tolérante, routes royales, plus grand empire de son temps |
 | Phéniciens | 8 | Invention de l'alphabet consonantique (ancêtre du nôtre), thalassocratie commerciale, comptoirs de Carthage à Cadix |
 | Empire ottoman | 8 | Carrefour Europe/Asie pendant six siècles, architecture (Sinan), administration multiconfessionnelle |
 | Carthage | 8 | Thalassocratie punique rasée en 146 av. J.-C., dont il ne reste presque **aucune source propre** : on la connaît par les textes de ceux qui l'ont détruite. Angle historiographique fort, distinct de la page Phéniciens (qui traite le Levant, l'alphabet et les comptoirs) |
@@ -84,14 +86,14 @@ Indien), Empire songhaï (suite du Mali), Empire timouride (Asie centrale savant
 
 ## Top 5 recommandé pour la prochaine vague
 
-*(Mis à jour le 26/07/2026 — Incas et Polynésie (navigation), qui occupaient les deux
-premières places, sont publiées.)*
+*(Mis à jour le 27/07/2026 — Mésopotamie (culture) et Empire perse achéménide, qui
+occupaient les deux premières places, sont publiées.)*
 
-1. **Mésopotamie (culture)** (9) — premières villes, premier code de lois : l'angle civilisationnel manque alors que la page mythologie existe depuis longtemps.
-2. **Empire perse achéménide** (9) — chaînon administratif entre Mésopotamie et monde hellénistique ; distinct de `mythologie-perse.html` (angle religieux, déjà publié) : ici, administration, routes royales, satrapies.
-3. **Empire mongol** (9) — plus grand empire terrestre continu, et l'Asie centrale est un vide complet sur la carte.
-4. **Nubie / Koush** (8) — deuxième page africaine, rivale puis conquérante de l'Égypte.
-5. **Inde (culture)** (9) — pendant civilisationnel de `mythologie-hindoue.html`, encore absent de la série.
+1. **Empire mongol** (9) — plus grand empire terrestre continu, et l'Asie centrale est un vide complet sur la carte.
+2. **Inde (culture)** (9) — pendant civilisationnel de `mythologie-hindoue.html`, encore absent de la série.
+3. **Nubie / Koush** (8) — deuxième page africaine, rivale puis conquérante de l'Égypte.
+4. **Al-Andalus** (9) — Cordoue comme plus grande ville d'Europe au Xe siècle, huit siècles d'Europe musulmane toujours absents de la série.
+5. **Maya (culture)** (9) — astronomie et calendrier d'une précision remarquable, angle civilisationnel distinct de `mythologie-azteque-maya.html`.
 
 ---
 

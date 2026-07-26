@@ -1,0 +1,217 @@
+---
+/*
+  Mésopotamie (culture) — neuvième page de la série « Peuples & Cultures du
+  Monde ». Même structure à 10 sections que culture-incas.astro (voir ce
+  fichier pour le détail du choix, faute de plan-serie-cultures.md dédié).
+
+  Angle civilisationnel distinct de mythologie-mesopotamienne.html (déjà
+  publiée, panthéon An/Ki/Enlil/Inanna) : ici, villes, écriture, droit,
+  administration — l'invention de la ville elle-même.
+
+  Effets : data-egg="mesopotamie" + data-scroll-fx="calameArgile" sur
+  #style-de-vie, piste documentée dans plan-effets.md ("un calame qui
+  imprime ses coins dans l'argile fraîche, signe après signe"). Clef
+  distincte de "mesopotamienne" (déjà prise par la page mythologie).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Argile cuite, bleu lapis-lazuli, bitume noir : la matière de la ville et
+   de l'administration plutôt qu'une palette "Moyen-Orient" générique — et
+   distincte de la palette nocturne déjà prise par mythologie-mesopotamienne.html. */
+const palette = {
+  bg: '#171208',
+  'bg-deep': '#0c0905',
+  surface: '#241d12',
+  'surface-alt': '#2e2618',
+  border: '#5a4a2c',
+  ink: '#f7ecd4',
+  text: '#e0cfa8',
+  'text-dim': '#a8926a',
+  accent: '#3a6a8a',
+  'accent-bright': '#5a9ac0',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(58,106,138,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Mésopotamie"
+  serie="Peuples & Cultures du Monde"
+  description="Les premières villes, la première écriture, le premier code de lois : entre le Tigre et l'Euphrate naît l'idée même de civilisation urbaine — jusqu'à une capitale impériale, Akkad, dont personne n'a jamais retrouvé l'emplacement exact."
+  href="culture-mesopotamie.html"
+  egg="mesopotamie"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="URUK · BABYLONE · NINIVE"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : <strong>l'Empire perse achéménide</strong>"
+>
+  <p class="subtitle" slot="hero">Le pays entre les fleuves</p>
+  <p class="tagline" slot="hero">
+    La première ville, la première écriture, le premier code de lois — et une capitale
+    impériale, Akkad, que l'archéologie n'a toujours pas réussi à localiser.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="Le pays entre les fleuves"
+    intro="Entre le Tigre et l'Euphrate, sur un territoire correspondant à l'Irak actuel, se succèdent pendant plus de trois millénaires les cités-États sumériennes, les empires akkadien, babylonien et assyrien.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+        <path d="M320 20 C 300 100 280 180 260 260 C 250 300 230 330 200 360" fill="none" stroke="#5a9ac0" stroke-width="5" opacity="0.7"/>
+        <path d="M370 40 C 350 120 320 200 280 280 C 260 320 230 345 200 360" fill="none" stroke="#3a6a8a" stroke-width="5" opacity="0.7"/>
+        <text x="380" y="30" fill="#5a9ac0" font-size="11" font-style="italic">Tigre</text>
+        <text x="400" y="55" fill="#3a6a8a" font-size="11" font-style="italic">Euphrate</text>
+        <circle cx="290" cy="90" r="6" fill="#e8c164" stroke="#171208" stroke-width="2"/>
+        <text x="308" y="94" fill="#f7ecd4" font-size="12">Ninive</text>
+        <circle cx="270" cy="200" r="7" fill="#c9982f" stroke="#171208" stroke-width="2"/>
+        <text x="288" y="204" fill="#f7ecd4" font-size="13" font-weight="bold">Babylone</text>
+        <circle cx="230" cy="290" r="6" fill="#e8c164" stroke="#171208" stroke-width="2"/>
+        <text x="180" y="284" fill="#f7ecd4" font-size="12">Uruk</text>
+        <circle cx="205" cy="330" r="6" fill="#e8c164" stroke="#171208" stroke-width="2"/>
+        <text x="150" y="335" fill="#f7ecd4" font-size="12">Ur</text>
+        <circle cx="255" cy="240" r="5" fill="#8a6a35" stroke="#171208" stroke-width="1.5"/>
+        <text x="180" y="235" fill="#c9b896" font-size="10" font-style="italic">Nippur</text>
+        <text x="330" y="340" fill="#a8926a" font-size="10" font-style="italic">emplacement d'Akkad : inconnu</text>
+      </svg>
+    </div>
+    <p class="map-caption">Uruk, Ur, Nippur au sud (pays de Sumer), Babylone au centre, Ninive au nord (Assyrie) — mais Akkad, capitale du premier empire, reste introuvable à ce jour.</p>
+    <div class="card-grid">
+      <InfoCard title="Uruk" sub="La première vraie ville" body="Vers 4000-3100 av. J.-C., Uruk atteint une taille et une organisation urbaine sans précédent connu — le lieu même où naît, selon la tradition, l'écriture cunéiforme." />
+      <InfoCard title="Babylone" sub="Capitale de Hammurabi puis de Nabuchodonosor II" body="La ville la plus célèbre de la région, associée au premier grand code de lois largement diffusé et, bien plus tard, aux légendaires jardins suspendus." />
+      <InfoCard title="Ninive" sub="Capitale assyrienne" body="Siège du roi Assurbanipal et de sa bibliothèque de dizaines de milliers de tablettes, dont la redécouverte au XIXe siècle rendra lisible une grande partie de cette histoire." />
+      <InfoCard title="Akkad" sub="Jamais localisée" body="Capitale du premier empire de l'histoire sous Sargon, connue par des centaines de mentions textuelles anciennes — et pourtant toujours pas identifiée avec certitude sur le terrain." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Sumériens, Akkadiens, Babyloniens, Assyriens" intro="La Mésopotamie n'est jamais un seul peuple : c'est une succession et une coexistence de civilisations qui se transmettent l'écriture, le droit et l'administration d'une langue à l'autre.">
+    <div class="card-grid wide">
+      <FigureCard name="Les Sumériens" role="Inventeurs de l'écriture" tags={['Sud de la Mésopotamie', 'Langue isolée']} body="Locuteurs d'une langue sans parenté connue avec aucune autre, ils bâtissent les premières cités-États et développent l'écriture cunéiforme, d'abord pour la comptabilité." />
+      <FigureCard name="Les Akkadiens" role="Premier empire multiethnique" tags={['Sémitique', 'Sargon']} body="Sous Sargon, ils unifient les cités sumériennes rivales en un seul État — l'un des premiers empires attestés de l'histoire, avec une langue sémitique qui remplace progressivement le sumérien dans l'usage courant." />
+      <FigureCard name="Les Babyloniens" role="Le droit codifié" tags={['Amorrites', 'Hammurabi']} body="Dynastie d'origine amorrite qui fait de Babylone la grande capitale culturelle et juridique de la région, avec le code de lois le plus célèbre de l'Antiquité proche-orientale." />
+      <FigureCard name="Les Assyriens" role="Puissance militaire du nord" tags={['Ninive', 'Bibliothèque']} body="Bâtisseurs d'un empire redouté pour sa puissance militaire, mais aussi conservateurs méthodiques du savoir mésopotamien dans la grande bibliothèque de Ninive." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Ceux qui ont bâti et gouverné">
+    <div class="card-grid wide">
+      <FigureCard name="Sargon d'Akkad" role="Fondateur du premier empire" tags={['v. 2334-2279 av. J.-C.']} body="Selon la légende, déposé enfant dans un panier sur une rivière avant d'être élevé loin de sa naissance — un motif narratif que l'on retrouvera, bien plus tard, attaché à d'autres figures fondatrices ailleurs dans le monde." />
+      <FigureCard name="Ur-Nammu" role="Premier grand codificateur" tags={['v. 2100 av. J.-C.']} body="Son code de lois précède celui de Hammurabi de près de trois siècles — une antériorité que l'image populaire de « Hammurabi premier légiférateur » efface trop souvent." />
+      <FigureCard name="Hammurabi" role="Roi de Babylone, codificateur" tags={['v. 1792-1750 av. J.-C.']} body="Fait graver 282 lois sur une stèle de diorite dressée publiquement — retrouvée non à Babylone mais à Suse, où des conquérants élamites l'avaient emportée des siècles plus tard comme butin." />
+      <FigureCard name="Enheduanna" role="Première autrice nommée de l'histoire" tags={['v. 2285-2250 av. J.-C.']} body="Fille de Sargon et grande prêtresse d'Ur, elle signe des hymnes à la déesse Inanna — le plus ancien nom d'auteur individuel connu dans l'histoire de l'écriture, des siècles avant Homère." />
+      <FigureCard name="Assurbanipal" role="Roi bibliophile de Ninive" tags={['668-627 av. J.-C.']} body="Rassemble délibérément des dizaines de milliers de tablettes dans son palais — la bibliothèque dont la redécouverte au XIXe siècle permettra de reconstituer une grande partie de la littérature mésopotamienne, dont l'Épopée de Gilgamesh." />
+      <FigureCard name="Nabuchodonosor II" role="Dernier grand souverain babylonien" tags={['605-562 av. J.-C.']} body="Conquiert Jérusalem, reconstruit Babylone à grande échelle, et reste associé — sans preuve archéologique directe à ce jour — à la légende des jardins suspendus." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="De la première ville au déchiffrement des tablettes">
+    <StoryBlock num="Épisode I" title="La stèle qui voyage" body="Le code de Hammurabi, gravé pour être lu publiquement à Babylone, est emporté comme trophée de guerre par des conquérants élamites plusieurs siècles plus tard et enterré à Suse, en Iran actuel — c'est là que des archéologues français le retrouvent intact en 1901-1902, à des centaines de kilomètres de son lieu de gravure." />
+    <StoryBlock num="Épisode II" title="Une bibliothèque assemblée délibérément" body="Le roi assyrien Assurbanipal ne se contente pas de collectionner : il fait activement copier et rassembler à Ninive des textes venus de tout le monde mésopotamien — littérature, astronomie, médecine, rituel. Cette bibliothèque, retrouvée en grande partie intacte sous les décombres du palais incendié en 612 av. J.-C., reste la source principale de ce que l'on sait aujourd'hui de la littérature sumérienne et akkadienne." />
+    <StoryBlock num="Épisode III" title="Le déchiffrement du cunéiforme" body={["Au XIXe siècle, l'officier britannique Henry Rawlinson recopie, au péril de sa vie, une inscription trilingue gravée à flanc de falaise à Behistun, en Perse : le même texte en vieux perse, en élamite et en babylonien.", "En comparant les trois versions, les savants européens parviennent à percer le code du cunéiforme — un exploit de déchiffrement comparable à celui de la pierre de Rosette pour les hiéroglyphes égyptiens, et qui ouvre d'un coup l'accès à des millénaires de textes mésopotamiens."]} />
+    <StoryBlock num="Épisode IV" title="Une capitale toujours perdue" body="Malgré des centaines de mentions dans les textes anciens, l'emplacement exact d'Akkad, capitale du premier empire de Sargon, n'a jamais été identifié avec certitude par l'archéologie moderne — l'un des rares grands sièges de pouvoir de l'Antiquité proche-orientale dont on ignore encore où il se trouvait précisément." />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Inventer la ville, l'écrit et la loi">
+    <div class="card-grid compact">
+      <MiniCard title="L'écriture cunéiforme" tag="v. 3200 av. J.-C." body="Inventée à l'origine pour la comptabilité — grains, têtes de bétail, quantités de bière — bien avant de servir à la littérature ou à la religion." />
+      <MiniCard title="Le système sexagésimal" tag="Base 60" body="Le comptage en base 60 des Sumériens et Babyloniens nous a laissé, aujourd'hui encore, les 60 minutes de l'heure et les 360 degrés du cercle." />
+      <MiniCard title="Les codes de lois" tag="Ur-Nammu puis Hammurabi" body="Une tradition juridique écrite et publiquement affichée, avec des peines proportionnées au statut social — un principe encore débattu aujourd'hui pour son équité réelle." />
+      <MiniCard title="Les sceaux-cylindres" tag="Identification personnelle" body="De petits cylindres gravés, roulés sur l'argile fraîche pour authentifier un document ou un contrat — l'équivalent ancien d'une signature infalsifiable." />
+      <MiniCard title="Les ziggourats" tag="Architecture religieuse" body="Plateformes à degrés surmontées d'un sanctuaire, visibles de loin dans un paysage de plaine — un modèle architectural qui structure le centre de chaque grande cité." />
+      <MiniCard title="Les canaux d'irrigation" tag="Agriculture à grande échelle" body="Un réseau maîtrisé de canaux permet de cultiver des surfaces considérables dans une région aux pluies insuffisantes — la base matérielle de toute l'urbanisation mésopotamienne." />
+      <MiniCard title="La roue" tag="Attestation parmi les plus anciennes" body="Les plus anciens témoignages connus de véhicules à roues dans le monde proviennent de cette région et de cette époque, vers 3500 av. J.-C." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="L'écriture n'est pas née pour la littérature" tag="Distinction utile" body="Les tout premiers textes cunéiformes sont des listes de comptabilité — grains, animaux, ouvriers — les récits et hymnes viennent bien plus tard dans l'histoire de l'écrit." />
+      <MiniCard title="Hammurabi n'a pas inventé le code de lois" tag="Idée reçue à corriger" body="Le code d'Ur-Nammu le précède d'environ trois siècles — Hammurabi doit sa célébrité à la taille et à la conservation exceptionnelle de sa stèle, pas à une priorité historique." />
+      <MiniCard title="La première autrice connue de l'histoire" tag="Enheduanna" body="Bien avant Homère ou Sappho, une princesse-prêtresse akkadienne signe ses textes de son propre nom — un fait qui bouscule l'idée d'une littérature anonyme aux origines de l'écrit." />
+      <MiniCard title="Des rois qui règnent des milliers d'années" tag="Liste royale sumérienne" body="Le document qui recense les souverains sumériens prête aux rois d'avant un déluge légendaire des règnes de plusieurs dizaines de milliers d'années — un indice net du mélange assumé entre chronique politique et récit mythique." />
+      <MiniCard title="Le jeu royal d'Ur" tag="Déchiffré en 1980" body="Les règles d'un jeu de plateau vieux de 4500 ans, retrouvé dans les tombes royales d'Ur, n'ont été reconstituées qu'en 1980 par un conservateur du British Museum à partir d'une tablette explicative — on peut aujourd'hui y rejouer exactement." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="L'argile, la bière et le calame"
+    intro="Une vie quotidienne rythmée par l'écrit administratif, une bière omniprésente et un temps compté en base 60 — des habitudes dont plusieurs ont traversé les millénaires jusqu'à nous."
+    scrollFx="calameArgile">
+    <div class="card-grid compact">
+      <MiniCard title="Le calame et l'argile fraîche" tag="Écriture quotidienne" body="Un roseau taillé en biseau imprime les signes cunéiformes dans une tablette d'argile humide, séchée ou cuite ensuite selon l'importance du document." />
+      <MiniCard title="La bière, boisson de tous les jours" tag="Hymne à Ninkasi" body="Un hymne sumérien à la déesse de la bière, Ninkasi, décrit avec une précision suffisante le procédé de brassage pour avoir servi, des millénaires plus tard, de recette de reconstitution." />
+      <MiniCard title="Le jeu royal d'Ur" tag="Divertissement" body="Un jeu de plateau et de dés pratiqué à toutes les échelles sociales, des tombes royales aux maisons plus modestes." />
+      <MiniCard title="Le temps compté en base 60" tag="Astronomie pratique" body="Les prêtres-astronomes suivent le ciel avec une précision qui structure le calendrier et les heures — un système dont nous avons hérité directement." />
+      <MiniCard title="L'orge et les dattes" tag="Alimentation de base" body="Le régime quotidien repose largement sur l'orge, les dattes et le poisson des fleuves et canaux, complété selon les moyens de chaque foyer." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="De l'argile mésopotamienne à l'heure mondiale">
+    <div class="card-grid">
+      <InfoCard title="Le déchiffrement du XIXe siècle" sub="Naissance de l'assyriologie" body="Le décodage du cunéiforme ouvre un champ d'étude entier, encore actif aujourd'hui : des dizaines de milliers de tablettes restent non traduites dans les collections mondiales." />
+      <InfoCard title="60 minutes, 360 degrés" sub="Héritage quotidien mondial" body="Le système sexagésimal mésopotamien structure encore, sans que la plupart des gens le sachent, la mesure du temps et des angles à l'échelle de la planète." />
+      <InfoCard title="La semaine de sept jours" sub="Diffusion large" body="Le découpage du temps en semaines trouve une part de son origine dans les pratiques calendaires et astrologiques de cette région, diffusée ensuite par plusieurs civilisations successives." />
+      <InfoCard title="Une tradition brassicole ancienne" sub="Bière" body="Les techniques et hymnes mésopotamiens à la bière comptent parmi les plus anciens témoignages connus de la fabrication délibérée de cette boisson." />
+      <InfoCard title="Un patrimoine sous menace directe" sub="Irak, XXIe siècle" body="Pillages de musées en 2003 et destructions délibérées de sites comme Nimroud en 2015 ont frappé directement ce patrimoine — une perte contemporaine, pas seulement une question ancienne." />
+      <InfoCard title="Des fouilles toujours actives" sub="Recherche en cours" body="L'archéologie mésopotamienne reste un champ de recherche vivant, y compris la question toujours ouverte de la localisation exacte d'Akkad." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. 4000-3100 av. J.-C.', title: 'Uruk, la première ville', body: "Émergence d'une urbanisation sans précédent connu dans le sud mésopotamien." },
+      { year: 'v. 3200 av. J.-C.', title: 'Invention de l\'écriture cunéiforme', body: "D'abord pour des besoins de comptabilité administrative." },
+      { year: 'v. 2334-2279 av. J.-C.', title: 'Sargon et le premier empire', body: "Unification des cités-États sumériennes sous une autorité akkadienne centrale." },
+      { year: 'v. 2285-2250 av. J.-C.', title: 'Enheduanna', body: "Première autrice nommée connue de l'histoire de l'écrit." },
+      { year: 'v. 2100 av. J.-C.', title: 'Code d\'Ur-Nammu', body: "Le plus ancien grand code de lois connu, antérieur de plusieurs siècles à celui de Hammurabi." },
+      { year: 'v. 1792-1750 av. J.-C.', title: 'Règne de Hammurabi', body: "Codification du droit babylonien sur une stèle publique." },
+      { year: '934-609 av. J.-C.', title: 'Empire néo-assyrien', body: "Ninive devient la grande capitale du nord mésopotamien." },
+      { year: '668-627 av. J.-C.', title: 'Règne d\'Assurbanipal', body: "Constitution de la grande bibliothèque de tablettes de Ninive." },
+      { year: '612 av. J.-C.', title: 'Chute de Ninive', body: "La bibliothèque, enfouie sous les décombres, sera redécouverte intacte des millénaires plus tard." },
+      { year: '605-562 av. J.-C.', title: 'Règne de Nabuchodonosor II', body: "Apogée de Babylone, conquête de Jérusalem." },
+      { year: '539 av. J.-C.', title: 'Cyrus le Grand prend Babylone', body: "Fin de l'indépendance politique de la Mésopotamie ancienne." },
+      { year: '1835-1851', title: 'Déchiffrement du cunéiforme', body: "Henry Rawlinson perce le code de l'inscription trilingue de Behistun." },
+      { year: '1901-1902', title: 'Découverte du code de Hammurabi', body: "Des archéologues français le retrouvent à Suse, où il avait été emporté comme butin de guerre." },
+      { year: '2003 et 2015', title: 'Pillages et destructions modernes', body: "Le patrimoine mésopotamien d'Irak subit des pertes directes lors de conflits contemporains." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que la Mésopotamie laisse encore">
+    <HeritageBlock title="Une heure et un cercle hérités" body="Le système sexagésimal mésopotamien continue de structurer, sans que la plupart des utilisateurs le sachent, la mesure du temps et des angles dans le monde entier." />
+    <HeritageBlock title="Un champ de recherche toujours actif" body="L'assyriologie continue de traduire des tablettes encore inédites, et la question de la localisation d'Akkad reste une énigme archéologique ouverte." />
+    <HeritageBlock title="Un patrimoine directement menacé" body="Contrairement à d'autres civilisations anciennes de cette série, le patrimoine mésopotamien a subi des destructions délibérées très récentes, notamment lors du conflit en Irak à partir de 2003 et des destructions de Daech à partir de 2014." />
+    <HeritageBlock title="Un jeu qu'on peut encore jouer" sub="" body="Grâce à la reconstitution de ses règles en 1980, le jeu royal d'Ur reste jouable aujourd'hui — l'un des plus anciens jeux de société du monde, sorti du silence archéologique." />
+    <CautionBox>
+      Cette page décrit une civilisation fondatrice pour l'écrit, le droit et l'urbanisme —
+      un legs trop souvent traité comme purement ancien, alors que son patrimoine matériel a
+      subi des destructions bien réelles au cours des deux dernières décennies. S'émerveiller
+      des premières villes n'a de sens qu'en reconnaissant aussi ce qui, de ce même
+      patrimoine, a été perdu de notre vivant.
+    </CautionBox>
+  </Section>
+</PageLayout>

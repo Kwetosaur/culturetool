@@ -17,6 +17,8 @@
 | 11 | Chinoise | ✅ Fait |
 | 12 | Perse / zoroastrienne | ✅ Fait |
 | 13 | Yoruba | ✅ Fait |
+| 14 | Inca | ✅ Fait |
+| 15 | Aborigène australienne | ✅ Fait |
 
 Chaque page est un fichier HTML autonome (`mythologie-XXX.html`), sans dépendance externe hors polices Google Fonts.
 
@@ -88,10 +90,13 @@ Le détail des sources et du raisonnement par culture est conservé dans l'histo
 
 ---
 
-**13 mythologies rédigées.** La série initiale des 10 chapitres est terminée ; la Chinoise,
-puis la Perse et la Yoruba l'ont prolongée le 26/07/2026, et **36 candidates restent
-listées** dans `docs/listes/suite_mythologies.md`. La série n'est donc plus « close » :
-chaque nouvelle mythologie applique le correctif ci-dessus (nombre de royaumes dérivé des
-sources propres à la culture, jamais aligné sur un autre chapitre), ainsi que le principe du
-socle Astro (Perse et Yoruba sont les deux premières mythologies écrites avec les composants
-partagés plutôt qu'en HTML statique — voir `docs/plans/plan-industrialisation.md`).
+**15 mythologies rédigées.** La série initiale des 10 chapitres est terminée ; la Chinoise,
+puis la Perse, la Yoruba, l'Inca et l'Aborigène australienne l'ont prolongée les 26 et
+27/07/2026, et **34 candidates restent listées** dans `docs/listes/suite_mythologies.md`. La
+série n'est donc plus « close » : chaque nouvelle mythologie applique le correctif ci-dessus
+(nombre de royaumes dérivé des sources propres à la culture, jamais aligné sur un autre
+chapitre), ainsi que le principe du socle Astro (toutes écrites avec les composants partagés
+plutôt qu'en HTML statique — voir `docs/plans/plan-industrialisation.md`). La page aborigène
+adapte plus radicalement encore la structure (pas de royaumes empilés, pas d'arbre
+généalogique, panthéon volontairement court) — voir le commentaire d'en-tête de
+`mythologie-aborigene.astro` pour le détail de ces choix et leur justification.

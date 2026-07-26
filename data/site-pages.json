@@ -13,7 +13,9 @@
     {"href": "mythologie-slave.html", "title": "Slave", "epigraph": "БОГИ", "hook": "Le monde visible et l'invisible, Yav et Nav."},
     {"href": "mythologie-chinoise.html", "title": "Chinoise", "epigraph": "龍", "hook": "Pangu, l'Empereur de Jade et les huit immortels : la plus grande zone d'ombre de la série enfin comblée."},
     {"href": "mythologie-perse.html", "title": "Perse / Zoroastrienne", "epigraph": "Ahura Mazdā", "hook": "Le dualisme cosmique fondateur d'Ahura Mazda contre Angra Mainyu, chaînon manquant entre Mésopotamie, monde biblique et islam — et une religion toujours vivante de l'Iran à Mumbai."},
-    {"href": "mythologie-yoruba.html", "title": "Yoruba", "epigraph": "Àṣẹ", "hook": "Le panthéon des orishas — Shango, Oshun, Ogun, Eshu — d'une richesse comparable aux grands panthéons antiques, toujours vivant au Nigeria et diffusé mondialement via le candomblé et la santería."}
+    {"href": "mythologie-yoruba.html", "title": "Yoruba", "epigraph": "Àṣẹ", "hook": "Le panthéon des orishas — Shango, Oshun, Ogun, Eshu — d'une richesse comparable aux grands panthéons antiques, toujours vivant au Nigeria et diffusé mondialement via le candomblé et la santería."},
+    {"href": "mythologie-inca.html", "title": "Inca", "cardTitle": "Mythologie Inca", "epigraph": "Hanan · Kay · Uku Pacha", "hook": "Viracocha créateur, culte solaire d'Inti, Pachamama toujours vénérée : la cosmologie andine des Trois Pacha, structurée autour de la verticalité des montagnes."},
+    {"href": "mythologie-aborigene.html", "title": "Aborigène australienne", "epigraph": "Plus de 250 nations", "hook": "Le Temps du Rêve structure encore aujourd'hui le rapport au territoire de centaines de nations aborigènes distinctes — la cosmologie continue la plus ancienne du monde."}
   ],
   "cultures": [
     {"href": "culture-chinoise.html", "title": "Chine", "epigraph": "中國", "hook": "Peuples, grandes figures, inventions et carte-récit d'une civilisation continue."},
@@ -23,7 +25,9 @@
     {"href": "culture-vikings.html", "title": "Vikings", "epigraph": "793 — 1066", "hook": "Navigateurs, marchands et colons : la Scandinavie médiévale au-delà du cliché du pillard."},
     {"href": "culture-mali.html", "title": "Empire du Mali", "epigraph": "Tombouctou", "hook": "Mansa Moussa, l'or du Sahel et la ville la plus riche du XIVe siècle."},
     {"href": "culture-incas.html", "title": "Incas", "epigraph": "Tawantinsuyu", "hook": "Machu Picchu, 40 000 km de routes andines, le quipu comme comptabilité à nœuds : un empire administré sans écriture ni roue, effondré en cinq ans face à 168 conquistadors et une épidémie."},
-    {"href": "culture-polynesie.html", "title": "Polynésie (navigation)", "epigraph": "Vaka · Waka · Waʻa", "hook": "Comment coloniser le plus vaste espace océanique du monde sans boussole ni carte : étoiles, houle, vols d'oiseaux, jusqu'au tour du monde du Hōkūleʻa."}
+    {"href": "culture-polynesie.html", "title": "Polynésie (navigation)", "epigraph": "Vaka · Waka · Waʻa", "hook": "Comment coloniser le plus vaste espace océanique du monde sans boussole ni carte : étoiles, houle, vols d'oiseaux, jusqu'au tour du monde du Hōkūleʻa."},
+    {"href": "culture-mesopotamie.html", "title": "Mésopotamie", "epigraph": "Uruk · Babylone · Ninive", "hook": "Les premières villes, la première écriture, le premier code de lois — et une capitale impériale, Akkad, dont personne n'a jamais retrouvé l'emplacement exact."},
+    {"href": "culture-perse-achemenide.html", "title": "Empire perse achéménide", "epigraph": "Persépolis · Suse · Pasargades", "hook": "Une administration multiethnique tolérante, des routes royales de 2700 km : le plus grand empire que le monde ait connu jusqu'alors, du Nil à l'Indus."}
   ],
   "creatures": [
     {"href": "creature-gevaudan.html", "title": "Bête du Gévaudan", "cardTitle": "La Bête du Gévaudan", "epigraph": "1764 — 1767", "hook": "Un carnage bien réel dans la France de Louis XV, entre loups, dressage et légende."},
@@ -33,7 +37,9 @@
     {"href": "creature-chupacabra.html", "title": "Le Chupacabra", "epigraph": "Porto Rico · 1995", "hook": "Un film de science-fiction, une panique régionale et des carcasses attribuées à la gale."},
     {"href": "creature-mothman.html", "title": "Le Mothman", "epigraph": "Point Pleasant · 1966", "hook": "Une ombre ailée, un pont effondré, et une panique collective devenue légende."},
     {"href": "creature-kraken.html", "title": "Le Kraken", "epigraph": "Scandinavie · Mer de Norvège", "hook": "Une île qui n'en est pas une, capable d'aspirer un navire dans un tourbillon : la légende scandinave probablement inspirée du calmar géant, resté invisible vivant jusqu'en 2012."},
-    {"href": "creature-kappa.html", "title": "Le Kappa", "epigraph": "河童 · Rivières du Japon", "hook": "Un esprit aquatique japonais qui tire les imprudents sous l'eau — et qu'un simple salut poli suffit à neutraliser. Du folklore d'avertissement à la mascotte adorée des sushis au concombre."}
+    {"href": "creature-kappa.html", "title": "Le Kappa", "epigraph": "河童 · Rivières du Japon", "hook": "Un esprit aquatique japonais qui tire les imprudents sous l'eau — et qu'un simple salut poli suffit à neutraliser. Du folklore d'avertissement à la mascotte adorée des sushis au concombre."},
+    {"href": "creature-mokele-mbembe.html", "title": "Mokèlé-mbembé", "epigraph": "Bassin du Congo · Likouala", "hook": "Le cryptide le plus recherché d'Afrique : des dizaines d'expéditions, dont plusieurs financées par des créationnistes cherchant un dinosaure vivant."},
+    {"href": "creature-llorona.html", "title": "La Llorona", "epigraph": "Amérique hispanique", "hook": "Une revenante qui pleure ses enfants au bord de l'eau, présente dans au moins sept variantes régionales — un récit de deuil probablement enraciné dans une figure préhispanique."}
   ],
   "mysteres": [
     {"href": "mystere-triangle-bermudes.html", "title": "Triangle des Bermudes", "cardTitle": "Le Triangle des Bermudes", "epigraph": "Atlantique Nord", "hook": "Comment la statistique a dégonflé l'un des plus grands mythes médiatiques du XXe siècle."},
@@ -43,7 +49,9 @@
     {"href": "mystere-nazca.html", "title": "Lignes de Nazca", "cardTitle": "Les Lignes de Nazca", "epigraph": "Pérou", "hook": "Un mystère largement résolu par l'archéologie, mais jamais rattrapé par la légende extraterrestre."},
     {"href": "mystere-anticythere.html", "title": "Mécanisme d'Anticythère", "epigraph": "Grèce antique", "hook": "Un calculateur astronomique antique d'une sophistication redécouverte par la science moderne."},
     {"href": "mystere-gobekli-tepe.html", "title": "Göbekli Tepe", "epigraph": "Şanlıurfa · v. 9600 av. J.-C.", "hook": "Des piliers de dix tonnes dressés par des chasseurs-cueilleurs, six mille ans avant Stonehenge, puis enterrés volontairement — le site qui a inversé la séquence admise « d'abord les champs, ensuite les temples »."},
-    {"href": "mystere-amelia-earhart.html", "title": "Amelia Earhart", "epigraph": "Pacifique · 2 juillet 1937", "hook": "La plus grande recherche aérienne et maritime jamais menée jusqu'alors n'a rien trouvé. Non résolu à ce jour, entre amerrissage près de Howland et naufrage sur l'atoll de Nikumaroro."}
+    {"href": "mystere-amelia-earhart.html", "title": "Amelia Earhart", "epigraph": "Pacifique · 2 juillet 1937", "hook": "La plus grande recherche aérienne et maritime jamais menée jusqu'alors n'a rien trouvé. Non résolu à ce jour, entre amerrissage près de Howland et naufrage sur l'atoll de Nikumaroro."},
+    {"href": "mystere-mary-celeste.html", "title": "Le Mary Celeste", "epigraph": "Atlantique · 4 décembre 1872", "hook": "Un navire retrouvé en parfait état, cargaison intacte, vivres pour six mois — et son équipage de dix personnes disparu sans trace en 1872."},
+    {"href": "mystere-ile-de-paques.html", "title": "Île de Pâques", "epigraph": "Rapa Nui · Pacifique Sud", "hook": "Environ 900 statues de plusieurs tonnes, sur l'une des îles les plus isolées du monde — et un débat scientifique toujours ouvert sur les causes réelles du déclin de la société qui les a bâties."}
   ],
   "objets": [
     {"href": "objet-excalibur.html", "title": "Excalibur", "epigraph": "Caledfwlch", "hook": "L'épée la plus célèbre du monde n'a jamais existé : un nom en 1136, une pierre cinquante ans plus tard, et une seule relique — offerte en 1191, disparue depuis."},
@@ -56,6 +64,8 @@
     {"href": "objet-hamecon-maui.html", "title": "L'hameçon de Maui", "epigraph": "Te Moana-nui-a-Kiwa", "hook": "Un hameçon qui pêche des îles entières, raconté d'Hawaï à la Nouvelle-Zélande, et identifié à une constellation bien réelle : la queue du Scorpion."},
     {"href": "objet-koh-i-noor.html", "title": "Le Koh-i-Noor", "epigraph": "Golconde · Londres", "hook": "105,6 carats, une malédiction réputée frapper ses possesseurs masculins, et un contentieux de restitution actif entre l'Inde, le Pakistan, l'Iran et l'Afghanistan."},
     {"href": "objet-graal.html", "title": "Le Saint Graal", "epigraph": "Chrétien de Troyes · v. 1180", "hook": "Inventé comme un simple plat dans un roman inachevé de 1180, christianisé une génération plus tard, absent des Évangiles : le Graal compte aujourd'hui une dizaine de reliques concurrentes."},
-    {"href": "objet-lance-sacree.html", "title": "La Lance Sacrée", "epigraph": "Vienne · Rome · Etchmiadzin", "hook": "Un coup de lance sans nom dans l'Évangile de Jean, un soldat baptisé des siècles plus tard : au moins quatre lances concurrentes revendiquent le titre, dont une datée du VIIIe siècle."}
+    {"href": "objet-lance-sacree.html", "title": "La Lance Sacrée", "epigraph": "Vienne · Rome · Etchmiadzin", "hook": "Un coup de lance sans nom dans l'Évangile de Jean, un soldat baptisé des siècles plus tard : au moins quatre lances concurrentes revendiquent le titre, dont une datée du VIIIe siècle."},
+    {"href": "objet-chambre-ambre.html", "title": "La Chambre d'Ambre", "epigraph": "Königsberg · 1945", "hook": "Six tonnes d'ambre offertes à Pierre le Grand en 1716, démontées par la Wehrmacht en 1941, disparues en 1945 — le seul objet de la série dont l'existence ne fait aucun doute."},
+    {"href": "objet-goujian.html", "title": "L'Épée de Goujian", "epigraph": "Hubei · Ve siècle av. J.-C.", "hook": "Exhumée en 1965, sans corrosion après 2500 ans et encore tranchante — le seul objet de la série où l'exemplaire réel est plus impressionnant que la légende."}
   ]
 }

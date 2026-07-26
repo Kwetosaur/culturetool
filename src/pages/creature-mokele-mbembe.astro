@@ -1,0 +1,149 @@
+---
+/*
+  Mokèlé-mbembé — neuvième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict. Angle
+  critique signalé dans docs/listes/liste-creatures-mysteres-monde.md : le
+  cryptide le plus recherché d'Afrique, avec plusieurs expéditions
+  explicitement financées par des créationnistes en quête d'un dinosaure
+  vivant — un angle à traiter sans complaisance.
+
+  Effets : data-egg="mokele" + data-scroll-fx="swampParting" sur #portrait,
+  piste documentée dans plan-effets.md ("des palmes de marais qui
+  s'écartent sur un sillage, sans jamais rien montrer").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Vert de marais dense, brun de rivière trouble : la matière du bassin du
+   Congo plutôt qu'une palette "Afrique" générique. */
+const palette = {
+  bg: '#0f1810',
+  'bg-deep': '#080f0a',
+  surface: '#182619',
+  'surface-alt': '#203222',
+  border: '#3d5a3f',
+  ink: '#eef7ea',
+  text: '#cfe3c0',
+  'text-dim': '#8fac80',
+  accent: '#3a6a4a',
+  'accent-bright': '#5a9e6a',
+  accent2: '#6b4a2a',
+  'accent2-bright': '#9e7a42',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(58,106,74,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Témoins' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Mokèlé-mbembé"
+  serie="Créatures Légendaires du Monde"
+  description="Le cryptide le plus recherché d'Afrique : des dizaines d'expéditions dans les marais du Congo depuis un siècle, dont plusieurs financées explicitement par des créationnistes en quête d'un dinosaure vivant qui réfuterait l'évolution."
+  href="creature-mokele-mbembe.html"
+  egg="mokele"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="BASSIN DU CONGO · LIKOUALA"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>La Llorona</strong>"
+>
+  <p class="subtitle" slot="hero">« Celui qui arrête le cours des rivières »</p>
+  <p class="tagline" slot="hero">
+    Le cryptide africain le plus recherché — et le seul de cette série dont plusieurs
+    expéditions ont été financées dans l'espoir explicite de réfuter la théorie de
+    l'évolution.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Non prouvé"
+    note="Aucune preuve physique après un siècle de récits et plusieurs décennies d'expéditions ciblées — dans une région réellement difficile d'accès, ce qui explique l'absence de preuve sans en constituer une pour autant."
+  />
+
+  <Section id="origine" label="Première mention" title="Une tradition orale, une traque occidentale bien plus tardive" intro="Le nom et les récits qui l'accompagnent appartiennent à la tradition orale des peuples du bassin du Congo — leur transformation en « chasse au dinosaure vivant » est un phénomène occidental du XXe siècle, largement postérieur.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une tradition régionale ancienne" sub="Bassin du Congo, région de la Likouala" body="Le récit d'un grand animal des marais et rivières appartient à la tradition orale locale, documentée par des explorateurs occidentaux dès le début du XXe siècle." />
+      <InfoCard num="II" title="Premiers rapports occidentaux" sub="Années 1910-1920" body="Des missionnaires et explorateurs rapportent les descriptions locales, sans encore le cadrage « survivance de dinosaure » qui s'imposera plus tard." />
+      <InfoCard num="III" title="La lecture « dinosaure vivant »" sub="Années 1980" body="C'est la cryptozoologie nord-américaine, puis des réseaux créationnistes, qui popularisent l'idée d'un sauropode survivant — un cadrage ajouté après coup au récit local, pas nécessairement fidèle à son sens d'origine." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapportent les récits" title="Un animal des marais, pas nécessairement un dinosaure" scrollFx="swampParting" intro="Rédigé au conditionnel : les descriptions locales varient, et l'image de « sauropode » doit beaucoup à la reformulation occidentale du récit.">
+    <div class="card-grid wide">
+      <FigureCard name="Un habitant des marais" role="Rivières et lacs de la Likouala" tags={['Herbivore rapporté', 'Grande taille']} body="Décrit comme un animal de grande taille au long cou, vivant dans les cours d'eau et les zones marécageuses denses de la région — une zone parmi les moins accessibles d'Afrique centrale." />
+      <FigureCard name="Un régime particulier" role="La plante malombo" tags={['Détail récurrent']} body="Plusieurs témoignages locaux associent l'animal à une plante précise dont il se nourrirait — un détail spécifique qui revient dans des récits indépendants les uns des autres." />
+      <FigureCard name="Hostile aux hippopotames" role="Un comportement rapporté" tags={['Sans les manger']} body="De nombreux récits affirment que l'animal tue les hippopotames sans les consommer — un comportement territorial plutôt qu'alimentaire, si l'on prend le témoignage au pied de la lettre." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Qui en a parlé" title="Des chroniques coloniales aux expéditions créationnistes">
+    <StoryBlock num="Récit I" title="L'expédition Powell-Mackal, 1980" body="Le biochimiste américain Roy Mackal, déjà connu pour ses recherches sur le monstre du Loch Ness, mène avec James Powell une expédition dans la région de la Likouala — l'un des points de départ de la notoriété occidentale du mokèlé-mbembé." />
+    <StoryBlock num="Récit II" title="La photographie manquée de 1983" body="Le biologiste congolais Marcellin Agnagna affirme avoir observé l'animal de près lors d'une expédition, mais les clichés pris dans l'urgence se révèlent flous et non concluants — un cas fréquent dans cette série, où l'occasion décisive échoue toujours de peu." />
+    <StoryBlock num="Récit III" title="Des expéditions à motivation religieuse assumée" body="Plusieurs expéditions ultérieures, notamment américaines, sont financées par des organisations créationnistes espérant explicitement qu'un sauropode encore vivant invaliderait la chronologie de l'extinction des dinosaures et, par extension, la théorie de l'évolution — un objectif déclaré, pas une simple curiosité scientifique." />
+  </Section>
+
+  <Section id="culture-populaire" label="De la légende au phénomène" title="Le cryptide le moins médiatisé de son envergure">
+    <div class="card-grid compact">
+      <MiniCard title="Un cryptide de niche" tag="Comparaison" body="Malgré son potentiel spectaculaire, le mokèlé-mbembé reste bien moins présent dans la culture populaire mondiale que Nessie ou Bigfoot — la difficulté d'accès à la région limite le tourisme et la médiatisation." />
+      <MiniCard title="Un cas d'école cryptozoologique" tag="Documentaires" body="Régulièrement cité dans les documentaires consacrés aux cryptides comme l'exemple le plus net de recherche portée par une conviction religieuse préalable plutôt que par une hypothèse zoologique neutre." />
+      <MiniCard title="La fiction des dinosaures survivants" tag="Un thème plus large" body="S'inscrit dans un imaginaire plus vaste de fiction et de pseudo-science autour de dinosaures ayant survécu à l'extinction, dont il reste l'un des rares cas invoqués comme prétendument réel plutôt que romanesque." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que la science peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucune preuve physique après un siècle" body="Ni ossements, ni empreintes moulées de façon concluante, ni photographie ou vidéo nette n'ont jamais été produites malgré des décennies de recherche ciblée — une absence de preuve prolongée, dans une région dont l'accès reste réellement très difficile." />
+    <ScienceBlock num="Enquête 2" title="Aucune trace fossile de survivance" body="Le registre fossile ne montre aucune trace de dinosaures non aviens après l'extinction du Crétacé, il y a environ 66 millions d'années, nulle part dans le monde — une population survivante isolée pendant un tel laps de temps est incompatible avec l'ensemble des données paléontologiques disponibles." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Le récit décrit des animaux réels mal identifiés"
+      level="consensus"
+      status="Explication la plus économe"
+      body="Éléphants de forêt traversant à demi immergés, grands varans, pythons ou hippopotames aperçus dans de mauvaises conditions offrent des candidats plausibles pour une partie au moins des témoignages."
+      attrib="Position dominante chez les zoologistes sceptiques"
+    />
+    <TheoryCard
+      title="Une figure spirituelle locale réinterprétée en cryptide occidental"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Plusieurs récits centrafricains de « esprits des eaux » pourraient avoir été traduits et recadrés par des visiteurs occidentaux en créature zoologique cachée, déformant le sens initial du récit local."
+      attrib="Hypothèse discutée en anthropologie culturelle"
+    />
+    <TheoryCard
+      title="Un sauropode a survécu jusqu'à aujourd'hui dans le bassin du Congo"
+      level="folklore"
+      status="Rejeté par la paléontologie"
+      body="Aucune donnée fossile, génétique ou écologique ne soutient la survie d'une population de dinosaures non aviens sur 66 millions d'années — une hypothèse motivée avant tout par des convictions religieuses préexistantes chez plusieurs de ses promoteurs."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette quête fait encore">
+    <HeritageBlock title="Des expéditions toujours ponctuelles" body="De rares expéditions continuent d'être organisées, avec un succès médiatique et scientifique resté limité par rapport à d'autres cryptides mieux connus." />
+    <HeritageBlock title="Un cas étudié en critique des pseudosciences" body="Le financement explicitement créationniste de plusieurs recherches en fait un exemple fréquemment cité dans les analyses critiques du rapport entre convictions religieuses et méthode scientifique." />
+    <HeritageBlock title="Une tradition locale qui précède la chasse occidentale" body="Indépendamment de la traque au dinosaure, le récit continue d'appartenir aux traditions orales des peuples de la région, avec leur propre sens, non réductible à la lecture cryptozoologique qui lui a été surimposée." />
+    <CautionBox>
+      Cette page distingue volontairement une tradition orale centrafricaine, antérieure et
+      autonome, de sa récupération occidentale sous forme de chasse au « dinosaure vivant » —
+      une distinction d'autant plus nécessaire que cette seconde lecture a souvent occulté la
+      première dans les récits médiatiques occidentaux.
+    </CautionBox>
+  </Section>
+</PageLayout>
