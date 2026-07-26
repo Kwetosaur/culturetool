@@ -3,6 +3,8 @@
 Point d'entrée unique. Écrit après avoir livré 3 pages (Rome antique, Bigfoot, Col Dyatlov)
 sans les effets bespoke — l'oubli qui a motivé ce document. Objectif : ne plus jamais
 zapper une étape parce qu'un plan vivait dans un fichier qu'on n'a pas pensé à ouvrir.
+Depuis le 26/07/2026, un `CLAUDE.md` à la racine renvoie ici pour que ce fichier soit
+chargé sans qu'on ait à y penser.
 
 **Règle : avant d'écrire une nouvelle page, ou de toucher au site, lire ce fichier en
 entier, puis ouvrir chaque doc listé qui concerne la tâche en cours — pas juste celui qui
@@ -10,103 +12,172 @@ semble le plus évident.**
 
 ---
 
-## 1. Rédiger une nouvelle page de contenu (mythologie / culture / créature / mystère)
+## 0. Les cinq séries
 
-**Process industrialisé (depuis le 26/07/2026)** — objectif : ne jamais faire lire à un
-agent une page complète de ~1000 lignes juste pour en retrouver le patron, et ne jamais
-refaire à la main la même quinzaine d'edits transverses à chaque page. Deux outils portent
-maintenant ce travail :
+| Série | Fichiers | Plan de série | Liste de sujets | Publiées |
+|---|---|---|---|---|
+| Mythologies | `mythologie-*.html` | `docs/plans/plan-serie-mythologies.md` | `docs/listes/suite_mythologies.md` | 11 |
+| Cultures | `culture-*.html` | `docs/gabarits/gabarit-culture.html` | `docs/listes/suite_cultures.md` | 6 |
+| Créatures | `creature-*.html` | `docs/plans/plan-serie-creatures.md` | `docs/listes/liste-creatures-mysteres-monde.md` | 6 |
+| Mystères | `mystere-*.html` | `docs/plans/plan-serie-mysteres.md` | `docs/listes/liste-creatures-mysteres-monde.md` | 6 |
+| **Objets légendaires** | `objet-*.html` | `docs/plans/plan-serie-objets.md` | `docs/listes/suite_objets.md` | **0** |
 
-- **`docs/gabarit-culture.html` / `gabarit-creature.html` / `gabarit-mystere.html`** —
-  squelettes structurels légers (CSS/classes/nav 100% fidèles, contenu réduit à 1 exemple
-  par bloc répétitif avec un commentaire indiquant combien en reproduire). C'est CE fichier
-  qu'un agent de rédaction doit lire comme gabarit, pas une page existante complète.
-  (Pas de gabarit mythologie séparé pour l'instant — les 10 pages mythologie suivent déjà
-  `plan-serie-mythologies.md` de façon stricte, se baser sur une page récente si besoin.)
-- **`tools/add_page.py`** — script qui fait toute l'intégration transverse mécanique
-  (étapes 5 à 8 ci-dessous) en un seul appel, à partir du moment où le pin existe déjà
-  dans `PLACES_FUTURE` de `map.html` (voir section 2). Usage :
-  `python tools/add_page.py --id <id> --cat <culture|creature|mystere|mythologie> --href <fichier.html> --menu-title "..." --epigraph "..." --hook "..." [--card-title "..."] [--status-name "..."]`
-
-Lire dans l'ordre avant d'écrire :
-
-1. **Le plan de la série concernée** — structure obligatoire (sections, ordre des ids, ton) :
-   - `plan-serie-mythologies.md`
-   - `docs/gabarit-culture.html` (culture)
-   - `plan-serie-creatures.md` + `docs/gabarit-creature.html`
-   - `plan-serie-mysteres.md` + `docs/gabarit-mystere.html`
-2. **La liste de sujets** correspondante, pour choisir/valider le sujet et son score :
-   - `suite_mythologies.md` (mythologies)
-   - `suite_cultures.md` (cultures)
-   - `liste-creatures-mysteres-monde.md` (créatures et mystères, les deux dans le même fichier)
-3. **`plan-effets.md`** — ⚠️ celui qu'on oublie. Chaque page doit avoir 1 à 3 pistes d'effet
-   bespoke (au moins la version générique `glyphShower` si le temps manque), câblées à la
-   fois en easter egg (`data-egg` + entrée dans `EGGS`) et en happening au scroll
-   (`data-scroll-fx` sur une section clé + entrée dans `SCROLL_FX`). Ce fichier liste déjà
-   des idées prêtes à l'emploi pour beaucoup de sujets à venir — les consulter avant
-   d'improviser. **Décider les 2 clefs (`data-egg`, `data-scroll-fx`) et écrire les fonctions
-   JS correspondantes dans `effects.js` avant ou en parallèle de la rédaction** — un agent
-   de rédaction n'a besoin que de connaître les 2 clefs à poser sur `<body>` et sur une
-   section, il n'écrit jamais l'effet lui-même.
-4. **`plan-carte-icones.md`** — vérifier que l'icône de la page existe déjà (planches
-   générées dans `icon-sources/`) ou doit être demandée/découpée. Mettre son statut à jour
-   une fois la page publiée (fait automatiquement en best-effort par `add_page.py`, vérifier
-   les lignes `SKIP` affichées).
-
-Puis, une fois la page écrite (root **et** `public/`, toujours les deux, contenu identique,
-vérifié avec `diff`) :
-
-5. **`python tools/add_page.py ...`** — déplace le pin `PLACES_FUTURE` → `PLACES` dans
-   `map.html` **et** `public/map.html` (garde x/y déjà calés), ajoute la carte dans
-   `src/pages/index.astro`, coche le statut dans les 3 docs de suivi (best-effort — vérifier
-   les `SKIP` et corriger à la main si 0 ou plusieurs correspondances trouvées), ajoute
-   l'entrée dans `docs/site-pages.json`, et relance `tools/sync_sidebar.py` automatiquement.
-   **Après coup, valider que `map.html` reste un JS valide** (le script fait cette validation
-   lui-même en best-effort, mais un `node -e` rapide sur `var PLACES = [...]` ne coûte rien
-   et a déjà attrapé deux bugs réels du script — virgule manquante et apostrophe échappée
-   dans un titre).
-6. À la main (volontairement non automatisé, texte libre) : retirer/ajuster la mention
-   devenue obsolète dans la section `#a-venir` de `index.astro`, et vérifier les `SKIP` de
-   l'étape précédente.
-7. Vérifier `diff` entre root et `public/` sur tous les fichiers touchés (map.html en
-   particulier).
-8. Mettre à jour `plan-effets.md` (ligne "Déjà fait" + retirer l'idée de la section
-   "à venir" correspondante) si ce n'est pas déjà fait à l'étape 3.
-9. `npm run build`, vérifier dans le navigateur (page seule + carte + accueil + menu latéral
-   + easter egg/happening au scroll, sans erreur console), commit, push, surveiller le
-   déploiement GitHub Actions.
-
-**Note sur `tools/sync_sidebar.py`** : ce script (déplacé du scratchpad vers `tools/`, donc
-permanent) lit désormais `docs/site-pages.json` au lieu de listes codées en dur — ne plus
-jamais éditer ses listes internes, c'est le JSON qui est la source de vérité.
-
-## 2. Toucher à la carte interactive (`map.html`)
-
-Lire `carte-monde-interactive.md` (contexte/objectif d'origine), `plan-carte-icones.md`
-(icônes et statut), `positions-carte.md` (référence géographique — les 124 positions ont
-été vérifiées manuellement, ne pas les re-générer par formule sans relire pourquoi une
-approche géographique globale avait été abandonnée). Outil d'édition : `tools/edit_map_pins.py`.
-
-## 3. Toucher aux effets (`effects.js`)
-
-Lire `plan-effets.md` en entier — c'est le seul document qui explique l'architecture
-(couches 0 à 4, `EGGS`/`SCROLL_FX`/`GLYPH_POOLS`, pièges déjà rencontrés listés en tête de
-fichier). Toujours resynchroniser `public/effects.js` après modification.
-
-## 4. Icônes de la carte
-
-`plan-carte-icones.md` (statut par page + méthode de découpage par détection de blobs) et
-le dossier `icon-sources/` (planches brutes + `prompts-planches-icones.md` pour en
-regénérer de nouvelles).
+Une même civilisation peut légitimement avoir plusieurs pages sous des angles différents
+(l'Égypte a une page mythologie ET une page culture) — c'est le modèle, pas une exception.
+Les recoupements volontaires et ceux à éviter sont documentés dans chaque plan de série.
 
 ---
 
-## Rappels transverses (valables pour toute modification, pas seulement les nouvelles pages)
+## 1. Rédiger une nouvelle page de contenu
 
-- **Double copie systématique** : tout fichier HTML/JS à la racine a un miroir strictement
-  identique dans `public/`. Éditer un seul côté puis oublier l'autre est l'erreur la plus
-  fréquente de ce projet — vérifier avec `diff` après coup.
-- **`npm run build` régénère `dist/`** à partir de `public/` — `dist/` n'est jamais édité
-  à la main et un fichier ouvert directement dans le navigateur (`file:///.../dist/...`)
-  ne reflète pas des changements tant qu'on n'a pas rebuild.
-- Ne jamais committer/pusher sans que l'utilisateur l'ait explicitement demandé pour ce tour-ci.
+### Deux façons d'écrire une page, depuis le 26/07/2026
+
+- **Page statique** (`public/<nom>.html`) — la façon historique, celle des 29 pages en
+  ligne. Gabarits légers dans `docs/gabarits/`.
+- **Page compilée** (`src/pages/<nom>.astro`) — la nouvelle façon, à utiliser **par défaut
+  pour toute page neuve**. On n'écrit plus que le contenu : l'ossature (head, CSS, menu
+  latéral, nav collante, scripts, balises de partage) vient de `src/layouts/PageLayout.astro`,
+  et les blocs répétitifs de `src/components/`. Environ 20 ko de texte en moins par page.
+  **À lire pour savoir quoi écrire : `src/pages/socle-demo.astro`** (~200 lignes, tous les
+  composants instanciés) au lieu d'un gabarit de 580 lignes. Le raisonnement complet est
+  dans `docs/plans/plan-industrialisation.md`.
+
+Les deux mondes cohabitent sans effort : `build.format: 'file'` fait compiler
+`src/pages/objet-excalibur.astro` vers `dist/objet-excalibur.html`, donc mêmes URL, mêmes
+liens relatifs, mêmes `href` dans `map.html`.
+
+### Lire dans l'ordre avant d'écrire
+
+1. **Le plan de la série concernée** (tableau du § 0) — structure obligatoire, ordre des
+   sections, ton, principes de fond.
+2. **La liste de sujets** correspondante, pour choisir/valider le sujet et son score.
+3. **`docs/plans/plan-effets.md`** — ⚠️ celui qu'on oublie. Chaque page doit avoir 1 à 3 pistes
+   d'effet bespoke, câblées à la fois en easter egg (`data-egg` + entrée dans `EGGS`) et en
+   happening au scroll (`data-scroll-fx` sur une section clé + entrée dans `SCROLL_FX`).
+   **Les 160 pages à venir ont désormais toutes au moins une piste écrite** dans ce fichier :
+   la consulter avant d'improviser. **Décider les 2 clefs et écrire les fonctions JS
+   correspondantes dans `effects.js` avant ou en parallèle de la rédaction** — un agent de
+   rédaction n'a besoin que de connaître les 2 clefs, il n'écrit jamais l'effet lui-même.
+4. **`docs/plans/plan-carte-icones.md`** — **au 26/07/2026, les 189 sujets des listes ont déjà
+   leur icône et leur pin placé.** Pour n'importe quelle page candidate, il n'y a donc rien à
+   générer : l'icône est dans `public/icons/<catégorie>/` (4 tailles) et le pin attend dans
+   `PLACES_FUTURE`. Vérifier quand même le statut de la ligne — `icône prête` = icône et pin
+   OK, page à écrire.
+
+   Pour un sujet **hors** des listes actuelles, le circuit complet est dans
+   `icon-sources/README.md` : écrire le prompt dans `icon-sources/new/prompts-a-generer.md`,
+   générer la planche, la déposer dans `icon-sources/new/<catégorie>/`, puis
+   `python tools/make_icons.py <planche.png> --cat <catégorie> --slugs a,b,c` (découpe, fond
+   transparent, 4 tailles, nommage), et enfin placer le pin.
+
+### Puis, une fois la page écrite
+
+Un seul fichier dans les deux cas : `public/<nom>.html` ou `src/pages/<nom>.astro`.
+
+5. **`python tools/add_page.py ...`** — fait toute l'intégration transverse en un appel :
+   déplace le pin `PLACES_FUTURE` → `PLACES` dans `public/map.html`, ajoute l'entrée
+   (titre + épigraphe + accroche) dans `data/site-pages.json`, coche le statut dans les
+   4 docs de suivi, relance `sync_sidebar.py`, et valide le JS de `map.html`.
+
+   ```bash
+   python tools/add_page.py --id obj-excalibur --cat objet --href objet-excalibur.html --menu-title "Excalibur" --epigraph "Bretagne · XIIe s." --hook "L'épée la plus célèbre du monde n'a jamais existé." --status-name "Excalibur"
+   ```
+
+   Pré-requis : le pin doit déjà exister dans `PLACES_FUTURE` (placé à la main avec
+   `tools/edit_map_pins.py`), sinon le script s'arrête.
+
+   **Lire les lignes `SKIP` affichées.** Le script ne coche un statut que sur une
+   correspondance unique et sans ambiguïté ; 4 pages publiées sont restées non cochées
+   pendant des semaines faute d'avoir relu ces lignes (voir `docs/audit-existant.md` § B).
+
+6. À la main (volontairement non automatisé, texte libre) : ajuster la liste `A_VENIR` de
+   `src/pages/index.astro` si le sujet y était annoncé, et corriger les `SKIP`.
+7. Mettre à jour `docs/plans/plan-effets.md` (ligne « Déjà fait » + retirer la piste de la section
+   « à venir ») si ce n'est pas déjà fait à l'étape 3.
+8. `npm run build`, puis vérifier dans le navigateur : page seule + carte + accueil + menu
+   latéral + easter egg + happening au scroll, sans erreur console. Commit, push, surveiller
+   le déploiement GitHub Actions.
+
+### Ce qui n'a plus besoin d'être fait à la main
+
+- **La carte de la page d'accueil** : `index.astro` génère ses 5 sections par boucle depuis
+  `data/site-pages.json`. Ne plus jamais y ajouter de carte à la main, et ne plus jamais y
+  écrire un nombre en dur (le titre « Onze Mythologies » est calculé).
+- **Le menu latéral des pages Astro** : généré à la compilation depuis le même JSON.
+- **La liste du reveal au scroll** des pages Astro : le layout cible `[data-reveal]`, que
+  les composants portent eux-mêmes. Sur les pages **statiques**, cette liste reste écrite à
+  la main et **24 des 29 pages en ligne l'ont fausse** (voir `docs/audit-existant.md` § A2) : si
+  vous écrivez encore une page statique, vérifier que la liste correspond aux vraies classes
+  de cette page.
+
+**Note sur `tools/sync_sidebar.py`** : lit `data/site-pages.json`, ne code plus aucune liste
+en dur, sait maintenant **insérer** un groupe de menu absent (donc une nouvelle catégorie
+apparaît partout sans retouche manuelle) et **ignore** une catégorie encore vide.
+
+---
+
+## 2. Toucher à la carte interactive (`map.html`)
+
+Lire `docs/plans/carte-monde-interactive.md` (contexte/objectif d'origine), `docs/plans/plan-carte-icones.md`
+(icônes et statut), `docs/listes/positions-carte.md` (référence géographique — les 189 positions
+ont été placées manuellement, ne pas les re-générer par formule sans relire pourquoi une
+approche géographique globale a été testée puis abandonnée). Outil d'édition :
+`tools/edit_map_pins.py`, avec un filtre « à placer » pour les pins pas encore calés.
+
+**Piège de nommage** : le rendu d'un pin fait `var(--' + p.cat + ')`. La variable CSS doit
+donc s'appeler **exactement** `--<cat>`, sinon le pin tombe silencieusement sur le fallback
+`var(--gold)` — doré, sans aucune erreur en console (voir `docs/audit-existant.md` § A1).
+
+**Après toute modification** :
+
+```bash
+node tools/check_map.cjs public/map.html
+```
+
+---
+
+## 3. Toucher aux effets (`effects.js`)
+
+Lire `docs/plans/plan-effets.md` en entier — c'est le seul document qui explique l'architecture
+(couches 0 à 4, `EGGS`/`SCROLL_FX`/`GLYPH_POOLS`, pièges déjà rencontrés listés en tête).
+Un seul fichier à éditer : `public/effects.js` (plus de copie miroir depuis le 26/07/2026).
+
+Portée du déchiffrement d'inscriptions (`fx-decode`) : **mythologies et objets légendaires
+seulement**, c'est un arbitrage assumé et expliqué dans `docs/plans/plan-effets.md`.
+
+---
+
+## 4. Icônes de la carte
+
+`docs/plans/plan-carte-icones.md` (statut par page, couleurs, collisions à trancher) et
+`icon-sources/README.md` (le circuit complet planche → icône).
+
+Les prompts encore à passer : `icon-sources/new/prompts-a-generer.md` — **65 icônes en
+11 planches**. `icon-sources/old/` est une archive de référence de style, à ne pas relancer
+en masse (ça écraserait 124 icônes recadrées à la main).
+
+La découpe est outillée :
+
+```bash
+python tools/make_icons.py icon-sources/new/objet/europe-1.png --cat objet --preview
+```
+
+puis la vraie passe avec `--slugs a,b,c`. Le script produit le master 300 px et les
+variantes 32/64/128 à fond transparent, et refuse d'écrire si le nombre de formes détectées
+ne colle pas au nombre de slugs.
+
+---
+
+## Rappels transverses
+
+- **Une seule copie de chaque fichier.** Jusqu'au 26/07/2026, tout fichier HTML/JS existait
+  en double (racine + `public/`), et éditer un seul côté était l'erreur la plus fréquente du
+  projet. Les 31 doublons de la racine ont été supprimés : ils étaient strictement
+  identiques et le déploiement ne les lisait jamais (il publie `dist/`, généré par
+  `astro build`). **`public/` est la seule source** des pages statiques, de `map.html`, de
+  `effects.js` et de `map.jpg`.
+- **`npm run build` régénère `dist/`** à partir de `public/` et `src/` — `dist/` n'est jamais
+  édité à la main, et un fichier ouvert directement dans le navigateur
+  (`file:///.../dist/...`) ne reflète pas les changements tant qu'on n'a pas rebuild.
+- **Ne jamais committer/pusher** sans que l'utilisateur l'ait explicitement demandé pour ce
+  tour-ci.
