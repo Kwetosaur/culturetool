@@ -29,7 +29,7 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 | Mythologie | Score | Ce qui la rend unique |
 |---|---|---|
-| Chinoise | 10 | Cosmologie yin-yang, Empereur de Jade, Pangu, les huit immortels, Nüwa — un corpus immense mêlant taoïsme, bouddhisme et croyances populaires, fondateur de toute la culture est-asiatique. |
+| Chinoise ✅ | 10 | Cosmologie yin-yang, Empereur de Jade, Pangu, les huit immortels, Nüwa — un corpus immense mêlant taoïsme, bouddhisme et croyances populaires, fondateur de toute la culture est-asiatique. |
 | Coréenne | 7 | Mythe fondateur de Dangun (fils d'un dieu et d'une ourse transformée en femme), chamanisme (mudang) toujours pratiqué aujourd'hui. |
 | Tibétaine / Bön | 7 | Religion chamanique prébouddhiste fusionnée avec le bouddhisme tantrique ; cosmologie de montagnes sacrées et d'esprits protecteurs (dharmapala). |
 | Mongole (tengrisme) | 6 | Culte du Ciel Éternel (Tengri), chamanisme des steppes, mythologie de Gengis Khan comme figure quasi-divine. |
@@ -74,15 +74,15 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 ---
 
-## Déjà couvertes (série initiale, 10/10)
+## Déjà couvertes (11/11)
 
-Nordique · Grecque · Égyptienne · Romaine · Celtique · Mésopotamienne · Hindoue · Japonaise · Aztèque/Maya · Slave
+Nordique · Grecque · Égyptienne · Romaine · Celtique · Mésopotamienne · Hindoue · Japonaise · Aztèque/Maya · Slave · Chinoise
 
 ---
 
 ## Top 5 recommandé pour une prochaine vague
 
-1. **Chinoise** (10) — la plus grande zone d'ombre de la série, culture majeure non couverte.
+1. **Chinoise** ✅ (10) — la plus grande zone d'ombre de la série, culture majeure non couverte.
 2. **Aborigène australienne** (10) — cosmologie la plus ancienne et la plus continue au monde.
 3. **Yoruba** (9) — panthéon d'une richesse comparable aux grandes mythologies antiques, encore très vivant.
 4. **Perse / zoroastrienne** (9) — chaînon manquant entre Mésopotamie, monde biblique et islam.

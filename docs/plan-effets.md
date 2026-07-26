@@ -24,7 +24,7 @@ Tout est encapsulé en `try/catch` — un effet cassé ne doit jamais casser la 
 
 **Règle de priorité** : livrer la page avec le générique d'abord si le temps manque, upgrader vers le sur-mesure ensuite. Ne jamais retarder la mise en ligne d'une page pour finir un easter egg.
 
-## Déjà fait (28 pages)
+## Déjà fait (29 pages)
 
 Les 10 pages mythologie combinent désormais leur pluie de glyphes générique **et** une scène sur-mesure (au clic du titre **et** en happening au scroll sur `#pantheon`) — plus du niveau "minimum" décrit ci-dessus.
 
@@ -58,6 +58,7 @@ Les 10 pages mythologie combinent désormais leur pluie de glyphes générique *
 | Empire du Mali (culture) | `mali` | — | **sur-mesure** : caravane de chameaux qui traverse l'écran dans un nuage de poussière dorée | `#style-de-vie` |
 | Le Mothman | `mothman` | — | **sur-mesure** : grande ombre ailée qui passe devant un halo de lumière | `#portrait` |
 | Mécanisme d'Anticythère | `antikythera` | — | **sur-mesure** : engrenages antiques qui s'assemblent et se mettent à tourner | `#enigme` |
+| Chinoise (mythologie) | `chinoise` | pluie de sinogrammes (福龍鳳春) | **sur-mesure** : dragon qui serpente à travers des nuages stylisés | `#pantheon` |
 | Accueil | `accueil` | mélange de glyphes de toutes les cultures | — | — |
 
 ## Stratégie par famille de page
@@ -82,7 +83,6 @@ Script de référence utilisé pour les 10 pages existantes (à adapter, pas com
 Pour chaque page, 1 à 3 pistes — choisir celle qui se prête le mieux au moment de l'écriture, pas besoin de les implémenter toutes. Toutes se construisent avec les mêmes briques que l'existant (`layer()`, `flyAcross()`, `glyphShower()`, `animate()`).
 
 **Mythologies à venir** (`suite_mythologies.md`, top 5 recommandé en priorité) :
-- **Chinoise** (mythologie, distincte de la page culture) — (1) nuages stylisés + caractère 龍 (dragon) qui serpente à l'écran ; (2) un éventail de jade qui s'ouvre et révèle un caractère ; (3) une pluie de pétales de pêcher (symbole d'immortalité), distincte des sinogrammes déjà utilisés côté culture.
 - **Perse/zoroastrienne** — (1) une flamme sacrée qui vacille au centre, halo doré/sombre en clair-obscur (dualisme Ahura Mazda / Angra Mainyu) ; (2) une balance de lumière et d'ombre qui s'incline doucement d'un côté puis de l'autre ; (3) les ailes du Faravahar qui se déploient en silhouette dorée.
 - **Yoruba** — (1) des perles colorées qui s'assemblent en collier (imagerie des orishas) ; (2) un motif de tissu adire qui se teint progressivement à l'écran ; (3) un éclair d'orage (Shango) qui zèbre brièvement l'écran.
 - **Inca** — (1) une spirale dorée façon disque solaire d'Inti qui tourne lentement ; (2) un fil de quipu dont les nœuds se nouent un à un le long d'un cordon ; (3) un condor qui plane en silhouette, ailes déployées, traversant lentement l'écran.

@@ -10,7 +10,8 @@
     {"href": "mythologie-hindoue.html", "title": "Hindoue"},
     {"href": "mythologie-japonaise.html", "title": "Japonaise"},
     {"href": "mythologie-azteque-maya.html", "title": "Aztèque & Maya"},
-    {"href": "mythologie-slave.html", "title": "Slave"}
+    {"href": "mythologie-slave.html", "title": "Slave"},
+    {"href": "mythologie-chinoise.html", "title": "Chinoise"}
   ],
   "cultures": [
     {"href": "culture-chinoise.html", "title": "Chine"},

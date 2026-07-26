@@ -48,6 +48,7 @@ MAP_FILES = [os.path.join(ROOT, 'map.html'), os.path.join(ROOT, 'public', 'map.h
 INDEX_ASTRO = os.path.join(ROOT, 'src', 'pages', 'index.astro')
 PAGES_JSON = os.path.join(ROOT, 'docs', 'site-pages.json')
 STATUS_DOCS = [
+    os.path.join(ROOT, 'docs', 'suite_mythologies.md'),
     os.path.join(ROOT, 'docs', 'suite_cultures.md'),
     os.path.join(ROOT, 'docs', 'liste-creatures-mysteres-monde.md'),
     os.path.join(ROOT, 'docs', 'plan-carte-icones.md'),
@@ -118,8 +119,28 @@ def activate_pin(map_path, page_id, href, cat):
 
 
 def add_index_card(cat, href, epigraph, card_title, hook):
-    section_id = CAT_META[cat]['astro_section']
     txt = open(INDEX_ASTRO, encoding='utf-8').read()
+
+    if cat == 'mythologie':
+        # Cas particulier : la section #mythologies est generee depuis un
+        # tableau `const mythologies = [...]` en frontmatter (pas des cartes
+        # <a> codees en dur comme les 3 autres categories) - ajouter une
+        # entree au tableau, jamais une carte brute dans le <div class="grid">.
+        pat = re.compile(r"(const mythologies = \[\n(?:.*\n)*?)(\];)")
+        m = pat.search(txt)
+        if not m:
+            print("ERREUR : tableau 'const mythologies' introuvable dans index.astro")
+            return False
+        entry = (
+            f"  {{ slug: '{href}', title: '{card_title}', hook: {json.dumps(hook, ensure_ascii=False)}, "
+            f"epigraph: '{epigraph}' }},\n"
+        )
+        txt = txt[:m.end(1)] + entry + txt[m.end(1):]
+        open(INDEX_ASTRO, 'w', encoding='utf-8').write(txt)
+        print("  Note : pense a mettre a jour le titre 'Dix Mythologies' -> nombre reel dans index.astro.")
+        return True
+
+    section_id = CAT_META[cat]['astro_section']
     pat = re.compile(
         r'(<section id="' + re.escape(section_id) + r'">.*?<div class="grid">\n)(.*?)(\n {4}</div>\n {2}</section>)',
         re.DOTALL

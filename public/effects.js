@@ -867,6 +867,41 @@
     g2.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(-150deg)' }], { duration: 3600, delay: 400, easing: 'linear', fill: 'forwards' });
   }
 
+  // Mythologie chinoise — un dragon serpente à travers des nuages stylisés.
+  function dragonCloudGlide() {
+    var l = layer(4600);
+    for (var c = 0; c < 3; c++) {
+      (function (c) {
+        var cloud = document.createElement('div');
+        cloud.style.cssText = 'position:absolute;top:' + rand(10, 60) + 'vh;left:' + rand(-10, 90) + 'vw;' +
+          'width:' + rand(90, 160) + 'px;height:' + rand(30, 50) + 'px;border-radius:50%;' +
+          'background:radial-gradient(ellipse,rgba(240,240,245,.35),transparent 70%);opacity:0;filter:blur(2px);';
+        l.appendChild(cloud);
+        cloud.animate([{ opacity: 0 }, { opacity: .8, offset: .2 }, { opacity: .8, offset: .75 }, { opacity: 0 }],
+          { duration: rand(4000, 4600), delay: c * 300, easing: 'ease-in-out', fill: 'forwards' });
+      })(c);
+    }
+    var dragon = document.createElement('div');
+    dragon.style.cssText = 'position:absolute;top:' + rand(20, 45) + 'vh;left:-24vw;width:150vw;height:120px;opacity:0;';
+    dragon.innerHTML =
+      '<svg viewBox="0 0 1400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<path d="M40 100 Q160 20 280 100 T520 100 T760 100 T1000 100 T1240 100" ' +
+          'fill="none" stroke="#2f9e4a" stroke-width="20" stroke-linecap="round" opacity=".92" ' +
+          'style="filter:drop-shadow(0 0 12px #4fd06a)"/>' +
+        '<path d="M40 100 Q160 20 280 100 T520 100 T760 100 T1000 100 T1240 100" ' +
+          'fill="none" stroke="#e8b23a" stroke-width="4" stroke-dasharray="3 16" opacity=".85"/>' +
+        '<circle cx="30" cy="100" r="16" fill="#2f9e4a" style="filter:drop-shadow(0 0 10px #4fd06a)"/>' +
+        '<circle cx="24" cy="94" r="3" fill="#fff5c2"/>' +
+      '</svg>';
+    l.appendChild(dragon);
+    dragon.animate([
+      { transform: 'translateX(0)', opacity: 0 },
+      { opacity: 1, offset: .15 },
+      { transform: 'translateX(38vw)', opacity: 1, offset: .82 },
+      { transform: 'translateX(48vw)', opacity: 0 }
+    ], { duration: 4600, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -972,7 +1007,8 @@
     nazcaLines: nazcaLines,
     maliCaravan: maliCaravan,
     mothmanShadow: mothmanShadow,
-    antikytheraGears: antikytheraGears
+    antikytheraGears: antikytheraGears,
+    dragonCloudGlide: dragonCloudGlide
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -1026,6 +1062,7 @@
     mali:          maliCaravan,
     mothman:       mothmanShadow,
     antikythera:   antikytheraGears,
+    chinoise:      function () { glyphShower({ glyphs: '福龍鳳春', mode: 'fall', color: '#d8443a' }); dragonCloudGlide(); },
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }

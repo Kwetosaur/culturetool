@@ -80,7 +80,7 @@ Une page `map` avec un fond de carte du monde stylisé (illustration type carte 
 | Hindoue | ✅ fait | Lotus ouvert |
 | Japonaise | ✅ fait | Torii |
 | Aztèque & Maya | ✅ fait | Serpent à plumes (S ondulant) |
-| Chinoise | icône prête | Dragon serpentin |
+| Chinoise | ✅ fait | Dragon serpentin |
 | Coréenne | icône prête | Ourse (Dangun) |
 | Tibétaine/Bön | icône prête | Montagne sacrée |
 | Mongole | icône prête | Loup gris ou ciel étoilé |
