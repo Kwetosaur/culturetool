@@ -28,3 +28,7 @@ __pycache__/
 
 # editor backups
 *.bak
+
+# sources de carte haute resolution : au-dela de la limite de 100 Mo par fichier
+# de GitHub, un `git add .` distrait rendrait le push impossible.
+map_upscayl*.png
