@@ -20,7 +20,7 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 | Mythologie | Score | Ce qui la rend unique |
 |---|---|---|
-| Perse / zoroastrienne | 9 | Dualisme cosmique fondateur (Ahura Mazda contre Angra Mainyu) qui a influencé judaïsme, christianisme et islam ; l'une des plus anciennes religions monothéistes structurées. |
+| Perse / zoroastrienne ✅ | 9 | Dualisme cosmique fondateur (Ahura Mazda contre Angra Mainyu) qui a influencé judaïsme, christianisme et islam ; l'une des plus anciennes religions monothéistes structurées. |
 | Cananéenne / ougaritique | 7 | Panthéon de Baal, El et Anat redécouvert via les tablettes d'Ougarit (1929) ; éclaire directement les textes bibliques par contraste. |
 | Hittite / anatolienne | 6 | Mythe du combat contre le dragon Illuyanka, influences croisées mésopotamiennes et indo-européennes au cœur de l'Anatolie antique. |
 | Arabe préislamique | 6 | Panthéon des idoles de la Kaaba, djinns, poésie oraculaire — largement effacé par l'avènement de l'islam mais essentiel pour comprendre le contexte pré-coranique. |
@@ -44,7 +44,7 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 | Mythologie | Score | Ce qui la rend unique |
 |---|---|---|
-| Yoruba | 9 | Panthéon des orishas (Shango, Oshun, Ogun) d'une richesse comparable aux grands panthéons antiques, toujours vivant au Nigeria et diffusé mondialement via le candomblé et la santería. |
+| Yoruba ✅ | 9 | Panthéon des orishas (Shango, Oshun, Ogun) d'une richesse comparable aux grands panthéons antiques, toujours vivant au Nigeria et diffusé mondialement via le candomblé et la santería. |
 | Dogon | 8 | Cosmologie astronomique remarquablement précise (système de Sirius), mythe de Nommo, objet de débats archéo-astronomiques célèbres. |
 | Ashanti / Akan | 7 | Cycle d'Anansi l'araignée-conteuse, dieu du ciel Nyame — a directement essaimé dans le folklore caribéen et afro-américain (Br'er Rabbit). |
 | Zoulou | 6 | Mythe créateur d'Unkulunkulu ("le très ancien"), ancêtres et esprits (amadlozi) au cœur d'une spiritualité toujours pratiquée en Afrique australe. |
@@ -55,7 +55,7 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 | Mythologie | Score | Ce qui la rend unique |
 |---|---|---|
-| Inca | 9 | Viracocha créateur, culte solaire d'Inti, Pachamama — cosmologie andine structurée autour de la verticalité des montagnes, toujours vivante dans les rituels andins actuels. |
+| Inca ✅ | 9 | Viracocha créateur, culte solaire d'Inti, Pachamama — cosmologie andine structurée autour de la verticalité des montagnes, toujours vivante dans les rituels andins actuels. |
 | Navajo / Diné | 7 | Mythe des Mondes Émergents (quatre mondes traversés avant celui-ci), cérémonies de guérison (peintures de sable) au cœur d'une culture toujours pratiquée. |
 | Haudenosaunee / Iroquoise | 7 | Mythe de la Femme-Ciel tombant sur le dos d'une tortue géante (origine de "Turtle Island"), fondement spirituel de la Confédération iroquoise. |
 | Lakota / Sioux des Plaines | 7 | Wakan Tanka (Grand Mystère), légende de la Femme Bison Blanc, vision quest — spiritualité toujours centrale dans la résistance culturelle lakota. |
@@ -80,11 +80,11 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 ---
 
-## Déjà couvertes (11)
+## Déjà couvertes (13)
 
-Nordique · Grecque · Égyptienne · Romaine · Celtique · Mésopotamienne · Hindoue · Japonaise · Aztèque/Maya · Slave · Chinoise
+Nordique · Grecque · Égyptienne · Romaine · Celtique · Mésopotamienne · Hindoue · Japonaise · Aztèque/Maya · Slave · Chinoise · **Perse / zoroastrienne** · **Yoruba**
 
-**38 candidates restantes** dans les tableaux ci-dessus, dont **6 ajoutées le 26/07/2026**
+**36 candidates restantes** dans les tableaux ci-dessus, dont **6 ajoutées le 26/07/2026**
 pour combler des trous géographiques réels : Ainu (Japon autochtone), berbère (toute
 l'Afrique du Nord non égyptienne manquait), javanaise et philippine (Asie du Sud-Est
 absente), mapuche et guarani (aucun sujet au sud de l'Amazonie).
@@ -93,10 +93,10 @@ absente), mapuche et guarani (aucun sujet au sud de l'Amazonie).
 
 ## Top 5 recommandé pour une prochaine vague
 
-*(Mis à jour le 26/07/2026 — la Chinoise, qui occupait la première place, est publiée.)*
+*(Mis à jour le 26/07/2026 — Perse et Yoruba, qui occupaient les deux premières places, sont publiées.)*
 
 1. **Aborigène australienne** (10) — cosmologie la plus ancienne et la plus continue au monde ; **à traiter avec un soin particulier** (croyances vivantes, sources issues des communautés concernées).
-2. **Yoruba** (9) — panthéon d'une richesse comparable aux grandes mythologies antiques, encore très vivant et mondialement diffusé.
-3. **Perse / zoroastrienne** (9) — chaînon manquant entre Mésopotamie, monde biblique et islam.
-4. **Inca** (9) — grande civilisation andine, contrepoint naturel au chapitre aztèque/maya déjà écrit.
-5. **Finnoise (Kalevala)** (8) — cosmogonie née d'un œuf, héros-chamanes plutôt que guerriers, et une influence directe sur Tolkien qui parle à tout le monde.
+2. **Inca** (9) — grande civilisation andine, contrepoint naturel au chapitre aztèque/maya déjà écrit. Distinct de `culture-incas.html` (angle civilisationnel, déjà publié) : ici, panthéon et cosmogonie (Viracocha, Inti, Pachamama).
+3. **Finnoise (Kalevala)** (8) — cosmogonie née d'un œuf, héros-chamanes plutôt que guerriers, et une influence directe sur Tolkien qui parle à tout le monde.
+4. **Cananéenne / ougaritique** (7) — panthéon de Baal, El et Anat redécouvert via les tablettes d'Ougarit (1929), éclaire directement les textes bibliques par contraste.
+5. **Dogon** (8) — cosmologie astronomique remarquablement précise (système de Sirius), objet de débats archéo-astronomiques célèbres.

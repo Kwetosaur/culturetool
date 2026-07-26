@@ -1,0 +1,278 @@
+---
+/*
+  Mythologie Yoruba — treizième mythologie de la série. Structure imposée par
+  docs/plans/plan-serie-mythologies.md : 9 sections fixes.
+
+  #royaumes : cosmologie authentiquement yoruba en 3 domaines — Orun (le
+  ciel/monde spirituel), Aye (la terre) et le carrefour (seuil liminal
+  d'Eshu) — plutôt qu'un chiffre emprunté à une autre culture (cf. correctif
+  du 26/07/2026).
+
+  #genealogie : les « 3 maisons » sont ici la lignée royale d'Ile-Ife
+  (Obatala/Oduduwa), la maison de Shango (un roi historique déifié après sa
+  mort — cas rare de généalogie mêlant histoire et mythe) et la lignée de
+  transmission du savoir d'Orunmila (une "maison" de disciples, pas de sang).
+
+  Traitement : religion vivante pratiquée aujourd'hui par des dizaines de
+  millions de personnes (Nigeria, Bénin, Togo, diaspora des Amériques) — donc
+  aucun ton de curiosité folklorique éteinte, conformément aux principes de
+  fond de la série sur les croyances vivantes.
+
+  Effets : data-egg="yoruba" + data-scroll-fx="yorubaBeads" sur #pantheon.
+  Déchiffrement des titres (mécanisme 3, minimum non négociable) :
+  glyphs="yoruba", nouveau pool symbolique (soleil, perles, étoile) — pas une
+  écriture historique yoruba au sens strict (il n'y en avait pas avant
+  l'adaptation de l'alphabet latin), donc un jeu de glyphes décoratif choisi
+  en connaissance de cause, sur le même principe que les pools hindou/aztèque
+  déjà existants.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+
+/* Indigo adire, rouge de Shango, or des perles : les couleurs textiles et
+   rituelles yoruba plutôt qu'une palette « Afrique » générique. */
+const palette = {
+  bg: '#160f1c',
+  'bg-deep': '#0b0710',
+  surface: '#221830',
+  'surface-alt': '#2c2140',
+  border: '#4a3a63',
+  ink: '#f7f0f5',
+  text: '#ded0e6',
+  'text-dim': '#a495b8',
+  accent: '#d8443a',
+  'accent-bright': '#f26a4a',
+  accent2: '#d4a72c',
+  'accent2-bright': '#f0c94e',
+  verdict: '#6b2f8a',
+  'verdict-bright': '#a35fc9',
+  glow: 'rgba(216,68,58,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Domaines' },
+  { id: 'pantheon', nav: 'Orishas' },
+  { id: 'genealogie', nav: 'Généalogie' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const domaines = [
+  { num: 'I', title: 'Orun', sub: 'Le ciel, monde spirituel', body: "Séjour d'Olodumare, des orishas et des ancêtres. Invisible aux vivants sauf lors des rites, des transes et des masques Egungun qui font brièvement le pont." },
+  { num: 'II', title: 'Aye', sub: 'La terre, monde des vivants', body: "Créée par Obatala à partir des eaux primordiales, avec Ile-Ife comme point d'origine où la terre ferme apparaît pour la première fois." },
+  { num: 'III', title: 'Le carrefour', sub: "Le seuil d'Eshu", body: "Ni tout à fait Orun ni tout à fait Aye : le domaine liminal des chemins et des portes, sous la garde d'Eshu, qu'on honore en premier avant tout autre rite pour éviter le désordre." },
+];
+---
+<PageLayout
+  title="Mythologie Yoruba"
+  serie="Mythologies du Monde"
+  description="Le panthéon des orishas — Shango, Oshun, Ogun, Eshu — d'une richesse comparable aux grands panthéons antiques, toujours vivant au Nigeria et diffusé mondialement via le candomblé et la santería."
+  href="mythologie-yoruba.html"
+  egg="yoruba"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ÀṢẸ"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : <strong>la mythologie aborigène australienne</strong>"
+>
+  <p class="subtitle" slot="hero">Olodumare · Orishas · Ifa</p>
+  <p class="tagline" slot="hero">
+    Un panthéon aussi riche que ceux de la Grèce ou de l'Égypte antiques — et une religion
+    toujours pratiquée aujourd'hui par des dizaines de millions de personnes, du Nigeria au
+    Brésil.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="Trois domaines, pas neuf royaumes"
+    intro="La cosmologie yoruba authentique ne s'empile pas en niveaux verticaux : elle distingue le monde spirituel, le monde terrestre, et le seuil qui les relie — une structure dérivée de la tradition elle-même, pas alignée sur un autre chapitre de la série.">
+    <Fragment slot="title"><Decode glyphs="yoruba">Trois domaines, pas neuf royaumes</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="300" cy="60" rx="220" ry="44" fill="none" stroke="#f0c94e" stroke-width="2" opacity="0.7"/>
+        <text x="300" y="45" text-anchor="middle" fill="#f0c94e" font-family="Cinzel, serif" font-size="14">ORUN</text>
+        <line x1="300" y1="104" x2="300" y2="156" stroke="#d8443a" stroke-width="2" stroke-dasharray="4 4"/>
+        <circle cx="300" cy="180" r="20" fill="#d8443a" stroke="#f26a4a" stroke-width="2"/>
+        <text x="300" y="185" text-anchor="middle" fill="#160f1c" font-size="10" font-weight="700">ESHU</text>
+        <ellipse cx="300" cy="230" rx="180" ry="26" fill="none" stroke="#a495b8" stroke-width="2" opacity="0.7"/>
+        <text x="300" y="234" text-anchor="middle" fill="#ded0e6" font-family="Cinzel, serif" font-size="13">AYE</text>
+      </svg>
+    </div>
+    <p class="map-caption">Orun (ciel), le carrefour d'Eshu (seuil), Aye (terre) — reliés à la verticale, jamais confondus.</p>
+    <div class="card-grid compact">
+      {domaines.map((d) => <InfoCard {...d} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~16 orishas majeurs" title="Le panthéon des orishas" scrollFx="yorubaBeads">
+    <Fragment slot="title"><Decode glyphs="yoruba">Le panthéon des orishas</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Olodumare (Olorun)" role="Créateur suprême" tags={['Distant', 'Sans temple direct']} body="Source ultime de toute existence, mais rarement l'objet d'un culte direct : contrairement aux orishas, il n'a ni prêtres dédiés ni temples spécifiques dans la pratique traditionnelle la plus courante." />
+      <FigureCard name="Obatala" role="Créateur de la terre et des corps" tags={['Pureté', 'Blanc']} body="Descend du ciel sur une chaîne pour créer la terre ferme, puis façonne les corps humains dans l'argile — un mythe qui explique aussi, dans la tradition, sa protection particulière des personnes nées avec un handicap." />
+      <FigureCard name="Oduduwa" role="Ancêtre des rois yoruba" tags={['Ile-Ife', 'Lignée royale']} body="Premier roi d'Ile-Ife dans la tradition dominante, ancêtre revendiqué de la plupart des dynasties royales yoruba encore en fonction aujourd'hui." />
+      <FigureCard name="Eshu (Elegua)" role="Messager, gardien des carrefours" tags={['Trickster', 'À honorer en premier']} body="Ni bon ni mauvais : agent du hasard et de la communication entre Orun et Aye, dont il faut s'attirer les faveurs avant tout autre rite sous peine de discorde." />
+      <FigureCard name="Ogun" role="Dieu du fer, de la guerre, des routes" tags={['Forge', 'Technologie']} body="Ouvre le premier chemin entre ciel et terre à la machette. Patron des forgerons et des guerriers historiquement, aujourd'hui aussi des chauffeurs et des ingénieurs." />
+      <FigureCard name="Shango" role="Dieu du tonnerre, ancien roi d'Oyo" tags={['Historique', 'Déifié']} body="Cas rare dans cette série : un roi réel d'Oyo, dont le règne s'achève en catastrophe, devient après sa mort le dieu du tonnerre — la déification d'un souverain historique, pas d'une entité éternelle." />
+      <FigureCard name="Oya" role="Déesse des tempêtes" tags={['Épouse de Shango', 'Niger']} body="Gardienne du fleuve Niger et des portes du cimetière, associée aux bouleversements et aux transformations violentes mais nécessaires." />
+      <FigureCard name="Oshun" role="Déesse des rivières, de l'amour" tags={['Fertilité', 'Diplomatie']} body="Liée à la rivière Osun (aujourd'hui site classé UNESCO), figure de la beauté et de la négociation — sans qui, selon le mythe, aucune entreprise des autres orishas ne peut aboutir." />
+      <FigureCard name="Yemoja" role="Déesse de l'océan, mère universelle" tags={['Maternité', 'Eaux']} body="Mère de nombreux orishas, associée aujourd'hui à l'océan Atlantique — un lien particulièrement chargé de sens dans les traditions afro-diasporiques nées de la traite transatlantique." />
+      <FigureCard name="Orunmila" role="Orisha de la sagesse et de la divination" tags={['Ifa', 'Témoin de la création']} body="Témoin de la destinée de chaque être depuis la création, à l'origine du système divinatoire Ifa que consultent encore aujourd'hui des millions de personnes via les babalawo." />
+      <FigureCard name="Osanyin" role="Orisha des plantes médicinales" tags={['Guérison', 'Un bras, une jambe']} body="Gardien du savoir herboriste, représenté avec un corps asymétrique rappelant que son savoir échappe à toute appropriation complète par un seul individu." />
+      <FigureCard name="Oba" role="Épouse trompée de Shango" tags={['Mythe d\'avertissement']} body="Trompée par une coépouse jalouse, elle se mutile pour plaire à Shango — un récit souvent lu comme une mise en garde contre la manipulation entre coépouses plutôt qu'un jugement sur elle." />
+      <FigureCard name="Aje" role="Orisha de la prospérité" tags={['Richesse', 'Commerce']} body="Associée à l'abondance matérielle et à la réussite du commerce, invoquée distinctement des figures de sagesse ou de guerre." />
+      <FigureCard name="Ibeji" role="Les jumeaux divins" tags={['Vitalité', 'Jumeaux']} body="Vénération directement liée à un fait démographique réel : le peuple yoruba affiche l'un des taux de naissances gémellaires les plus élevés au monde." />
+      <FigureCard name="Orisha Oko" role="Orisha de l'agriculture" tags={['Récoltes', 'Terre cultivée']} body="Garant de la fertilité des champs, invoqué aux semis et aux récoltes dans les communautés rurales." />
+      <FigureCard name="Nana Buluku" role="Mère primordiale ancienne" tags={['Antériorité', 'Boue, marécages']} body="Figure ancestrale associée à la boue et aux origines, considérée dans certaines traditions comme mère d'Obatala et d'Oduduwa — une couche mythologique plus ancienne que le reste du panthéon." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 maisons, pas 3 lignées de sang"
+    title="Trois structures de transmission"
+    intro="Ici encore, la parenté biologique ne raconte pas tout : une maison est royale (Ife), une autre naît de la déification d'un roi historique (Oyo), une troisième transmet un savoir plutôt qu'un sang (Ifa). Trois logiques différentes, assumées comme telles.">
+    <Fragment slot="title"><Decode glyphs="yoruba">Trois structures de transmission</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
+        <text x="110" y="34" text-anchor="middle" fill="#f0c94e" font-family="Cinzel, serif" font-size="13">MAISON D'ILE-IFE</text>
+        <circle cx="110" cy="80" r="20" fill="#f0c94e" stroke="#fff" stroke-width="1.5"/>
+        <text x="110" y="85" text-anchor="middle" font-size="9" fill="#160f1c" font-weight="700">Obatala</text>
+        <line x1="110" y1="100" x2="110" y2="150" stroke="#f0c94e" stroke-width="1.5"/>
+        <circle cx="110" cy="170" r="16" fill="#2c2140" stroke="#f0c94e" stroke-width="1.3"/>
+        <text x="110" y="174" text-anchor="middle" font-size="8" fill="#f0c94e">Oduduwa</text>
+        <text x="110" y="210" text-anchor="middle" fill="#a495b8" font-size="9">rois yoruba actuels</text>
+
+        <text x="320" y="34" text-anchor="middle" fill="#d8443a" font-family="Cinzel, serif" font-size="13">MAISON DE SHANGO</text>
+        <circle cx="320" cy="80" r="20" fill="#d8443a" stroke="#f26a4a" stroke-width="1.5"/>
+        <text x="320" y="85" text-anchor="middle" font-size="9" fill="#160f1c" font-weight="700">Shango</text>
+        <line x1="290" y1="95" x2="260" y2="150" stroke="#d8443a" stroke-width="1" stroke-dasharray="3 4"/>
+        <line x1="320" y1="100" x2="320" y2="150" stroke="#d8443a" stroke-width="1" stroke-dasharray="3 4"/>
+        <line x1="350" y1="95" x2="380" y2="150" stroke="#d8443a" stroke-width="1" stroke-dasharray="3 4"/>
+        <circle cx="260" cy="165" r="13" fill="#2c2140" stroke="#d8443a" stroke-width="1"/>
+        <text x="260" y="185" text-anchor="middle" font-size="8" fill="#e0a0a0">Oya</text>
+        <circle cx="320" cy="165" r="13" fill="#2c2140" stroke="#d8443a" stroke-width="1"/>
+        <text x="320" y="185" text-anchor="middle" font-size="8" fill="#e0a0a0">Oshun</text>
+        <circle cx="380" cy="165" r="13" fill="#2c2140" stroke="#d8443a" stroke-width="1"/>
+        <text x="380" y="185" text-anchor="middle" font-size="8" fill="#e0a0a0">Oba</text>
+        <text x="320" y="215" text-anchor="middle" fill="#a495b8" font-size="9">roi historique d'Oyo déifié</text>
+
+        <text x="530" y="34" text-anchor="middle" fill="#a35fc9" font-family="Cinzel, serif" font-size="13">MAISON D'IFA</text>
+        <circle cx="530" cy="80" r="20" fill="#a35fc9" stroke="#fff" stroke-width="1.5"/>
+        <text x="530" y="85" text-anchor="middle" font-size="9" fill="#160f1c" font-weight="700">Orunmila</text>
+        <line x1="530" y1="100" x2="530" y2="150" stroke="#a35fc9" stroke-width="1" stroke-dasharray="1 3"/>
+        <circle cx="530" cy="168" r="14" fill="#2c2140" stroke="#a35fc9" stroke-width="1"/>
+        <text x="530" y="172" text-anchor="middle" font-size="7" fill="#c9a0e0">babalawo</text>
+        <text x="530" y="210" text-anchor="middle" fill="#a495b8" font-size="9">transmission de savoir, pas de sang</text>
+      </svg>
+    </div>
+    <p class="map-caption">Trait plein = filiation ; pointillé = union ou transmission. La maison de Shango mêle mythe et personnage historiquement attesté — un cas rare dans cette série.</p>
+  </Section>
+
+  <Section id="creatures" label="8 êtres notables" title="Esprits, doubles et gardiens">
+    <Fragment slot="title"><Decode glyphs="yoruba">Esprits, doubles et gardiens</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Ajogun" tag="Les huit ennemis de l'humanité" body="Un collectif de forces malveillantes — mort, maladie, perte, paralysie, grand trouble, malédiction, emprisonnement, affliction — que la pratique Ifa cherche à tenir à distance plutôt qu'à vaincre une fois pour toutes." />
+      <MiniCard title="Egungun" tag="Masques ancestraux" body="Lors de festivals encore célébrés aujourd'hui, des initiés masqués incarnent temporairement les ancêtres revenus honorer et conseiller les vivants." />
+      <MiniCard title="Abiku" tag="Enfants-esprits" body="Croyance selon laquelle certains enfants meurent et renaissent dans la même famille à répétition ; des rites et des noms spécifiques (« ne repars plus ») tentent de convaincre l'esprit de rester — sujet à traiter avec sobriété, pas comme un frisson exotique." />
+      <MiniCard title="Iku" tag="Personnification de la mort" body="Figure inévitable plutôt que malveillante en soi : la mort comme fonction cosmique, pas comme ennemi à combattre par la magie." />
+      <MiniCard title="Iwin" tag="Esprits de la forêt" body="Présences discrètes des bois et des lieux sauvages, ni bienveillantes ni hostiles par défaut." />
+      <MiniCard title="Esprit de l'Iroko" tag="Arbre sacré habité" body="Certains arbres iroko sont considérés comme la demeure d'un esprit puissant, et ne se coupent pas sans rituel préalable." />
+      <MiniCard title="Aja" tag="Esprit enseignant de la forêt" body="Initie les chasseurs et guérisseurs aux vertus des plantes médicinales — une figure de transmission plus que de menace." />
+      <MiniCard title="Àjẹ́ (les Mères puissantes)" tag="Figures de pouvoir spirituel féminin" body="Femmes dotées d'un grand pouvoir spirituel, à traiter avec le respect dû à une notion complexe de la cosmologie yoruba — pas la simple traduction occidentale de « sorcière »." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="10 légendes" title="Les grands récits yoruba">
+    <Fragment slot="title"><Decode glyphs="yoruba">Les grands récits yoruba</Decode></Fragment>
+    <StoryBlock num="Légende I" title="La création d'Ile-Ife" body={["Envoyé par Olodumare pour créer la terre ferme sur les eaux primordiales, Obatala descend du ciel par une chaîne, muni d'une coquille d'escargot remplie de terre, d'une poule à cinq doigts et d'une graine de palmier.", "Il répand la terre sur l'eau ; la poule, en grattant, la disperse jusqu'à former un continent. Le palmier planté par Obatala devient le premier arbre du monde, à Ile-Ife — considérée depuis comme le berceau de l'humanité yoruba."]} />
+    <StoryBlock num="Légende II" title="L'ivresse d'Obatala" body="En chemin pour façonner les corps humains dans l'argile, Obatala s'arrête boire du vin de palme et, ivre, façonne des corps imparfaits — origine mythique du handicap dans certaines lectures traditionnelles. Dégrisé, il jure de ne plus jamais boire d'alcool et devient le protecteur particulier de celles et ceux nés différents." />
+    <StoryBlock num="Légende III" title="« Le roi ne s'est pas pendu »" body={["Shango, historique troisième Alaafin (roi) d'Oyo, voit son règne s'effondrer après une série de catastrophes provoquées par ses propres expérimentations avec la foudre. Selon la tradition, il se retire et disparaît — certaines versions évoquent une pendaison.", "Ses partisans refusent cette fin honteuse et proclament : « Oba ko so », le roi ne s'est pas pendu — il est monté au ciel et règne désormais sur le tonnerre. Une catastrophe politique transformée, par la loyauté de ses fidèles, en apothéose divine."]} quote="Oba ko so — le roi ne s'est pas pendu." cite="Formule rituelle toujours chantée à Oyo" />
+    <StoryBlock num="Légende IV" title="Sans Oshun, rien ne fonctionne" body="Lorsque les orishas masculins excluent Oshun d'une mission cruciale pour organiser le monde, tout ce qu'ils entreprennent échoue. Ils finissent par comprendre qu'aucune œuvre ne peut aboutir sans sa participation et la rappellent — un mythe explicitement construit autour de la nécessité du pouvoir féminin." />
+    <StoryBlock num="Légende V" title="Ogun ouvre le premier chemin" body="Lorsque les orishas doivent descendre du ciel vers la terre nouvellement créée, seul Ogun possède les outils de fer nécessaires pour tailler un passage à travers la végétation primordiale. Après cet exploit fondateur, il se retire dans une solitude relative, laissant aux autres le soin de peupler ce qu'il a ouvert." />
+    <StoryBlock num="Légende VI" title="L'origine de la divination Ifa" body="Présent depuis la création et témoin du destin de chaque être, Orunmila établit, avant de quitter le monde visible, un système de consultation — 16 signes principaux (Odu) — pour que les humains puissent continuer à accéder à sa sagesse après son départ, par l'intermédiaire des prêtres babalawo." />
+    <StoryBlock num="Légende VII" title="Le chapeau à deux couleurs d'Eshu" body="Eshu traverse un chemin entre deux amis inséparables, coiffé d'un chapeau rouge d'un côté, noir de l'autre. Chacun ne voit qu'une face et affirme sa couleur avec certitude ; la dispute manque de tourner à la violence avant qu'Eshu ne révèle son jeu — une leçon sur l'orgueil des certitudes et la nécessité de l'honorer avant tout autre rite." />
+    <StoryBlock num="Légende VIII" title="Le ventre débordant de Yemoja" body="Dans l'une des versions les plus dramatiques du cycle, le corps de Yemoja se rompt à la suite d'un affront de son propre fils, Orungan ; de son ventre jaillissent quatorze orishas et plusieurs fleuves — une origine violente qui explique, dans le récit, la profusion des eaux et des divinités qui en dépendent." />
+    <StoryBlock num="Légende IX" title="Les enfants qui repartent" body="Le mythe des abiku explique pourquoi certains enfants meurent en bas âge à répétition dans une même famille : des esprits-enfants qui font des allers-retours entre Orun et Aye. Les parents donnent parfois des noms comme « Malomo » (ne repars plus plus) dans l'espoir de convaincre l'esprit de rester — un mythe né d'un chagrin réel, à ne jamais traiter comme un simple folklore pittoresque." />
+    <StoryBlock num="Légende X" title="Moremi et les envahisseurs masqués" body="Ile-Ife, ravagée par des raids d'envahisseurs déguisés en esprits de la forêt, est sauvée par Moremi, qui se laisse capturer, découvre que les assaillants sont des hommes costumés et non des esprits, puis révèle leur faiblesse au feu. Pour tenir la promesse faite à la déesse du fleuve qui l'a aidée, elle doit ensuite sacrifier son propre fils — un récit fondateur qui mêle intelligence militaire, dévotion et sacrifice." />
+  </Section>
+
+  <Section id="anecdotes" label="7 curiosités" title="Faits marquants et étymologies">
+    <Fragment slot="title"><Decode glyphs="yoruba">Faits marquants et étymologies</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Le record mondial de naissances gémellaires" tag="Fait démographique" body="Le pays yoruba affiche l'un des taux de jumeaux les plus élevés jamais mesurés au monde — un fait statistique bien réel qui a directement nourri le culte des Ibeji." />
+      <MiniCard title="La bosquet sacré d'Osun-Osogbo" tag="UNESCO, 2005" body="L'un des derniers grands bosquets sacrés yoruba encore en usage rituel actif, classé au patrimoine mondial — un site vivant, pas une ruine." />
+      <MiniCard title="Ifa reconnu par l'UNESCO" tag="Patrimoine immatériel, 2005" body="Le système divinatoire d'Orunmila est officiellement reconnu comme patrimoine culturel immatériel de l'humanité, au même titre que d'autres savoirs vivants du monde entier." />
+      <MiniCard title="Un panthéon qui a traversé l'Atlantique" tag="Diaspora forcée" body="La traite transatlantique a dispersé la religion des orishas dans les Amériques, où elle a survécu masquée sous des noms de saints catholiques — une histoire de résistance culturelle, pas de simple folklore transplanté." />
+      <MiniCard title="Wole Soyinka et Ogun" tag="Littérature, prix Nobel 1986" body="Le dramaturge nigérian, premier lauréat africain du Nobel de littérature, puise abondamment dans la figure d'Ogun pour penser la création et la violence." />
+      <MiniCard title="« Orisha » n'est pas simplement « dieu »" tag="Nuance de traduction" body="Les orishas sont souvent décrits comme des forces ou des ancêtres déifiés plutôt que des divinités autonomes au sens grec du terme — une distinction que les traductions rapides effacent trop souvent." />
+      <MiniCard title="Une image parfois sensationnalisée" tag="Mise en garde" body="Le cinéma nigérian (Nollywood) et certains médias internationaux réduisent parfois la religion des orishas à un folklore de « juju » inquiétant — une caricature que les pratiquants eux-mêmes dénoncent." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="D'Ile-Ife aux Amériques">
+    <Fragment slot="title"><Decode glyphs="yoruba">D'Ile-Ife aux Amériques</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="330" cy="100" r="10" fill="#d8443a"/>
+        <text x="330" y="80" text-anchor="middle" fill="#f0c94e" font-size="12" font-family="Cinzel, serif">ILE-IFE</text>
+        {[[420,55,'Bénin, Togo'],[110,60,'Cuba — Santería'],[80,150,'Brésil — Candomblé'],[480,150,'Haïti / Caraïbes'],[250,175,'États-Unis — Oyotunji']].map(([x,y,label]) => (
+          <g>
+            <line x1="330" y1="100" x2={x} y2={y} stroke="#a495b8" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#2c2140" stroke="#d8443a" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#ded0e6" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">La traite transatlantique a dispersé de force la religion des orishas — sa survie et sa diffusion dans les Amériques sont un fait historique documenté, pas une exportation choisie.</p>
+    <div class="card-grid">
+      <InfoCard title="Nigeria, Bénin, Togo" sub="Foyer d'origine" body="Le pays yoruba reste le centre vivant de la pratique religieuse, avec Ile-Ife et Oyo comme foyers historiques majeurs." />
+      <InfoCard title="Cuba — Santería" sub="Regla de Ocha" body="Les orishas y sont vénérés sous des noms de saints catholiques, une syncrétisation née de la clandestinité imposée aux personnes réduites en esclavage." />
+      <InfoCard title="Brésil — Candomblé" sub="Bahia" body="Une tradition afro-brésilienne majeure, particulièrement vivace dans l'État de Bahia, qui conserve un vocabulaire et des rites directement dérivés du yoruba." />
+      <InfoCard title="Haïti et les Caraïbes" sub="Influences croisées" body="Les traditions afro-caribéennes locales portent elles aussi des traces de la cosmologie yoruba, mêlées à d'autres apports ouest-africains." />
+      <InfoCard title="Oyotunji, États-Unis" sub="Depuis 1970" body="Une communauté fondée en Caroline du Sud pour revivre volontairement une pratique yoruba traditionnelle, dans le cadre plus large des mouvements afro-américains de reconnexion culturelle." />
+      <InfoCard title="Diaspora contemporaine mondiale" sub="Tous continents" body="La religion des orishas continue de se transmettre et de se pratiquer activement à travers un réseau mondial de communautés, loin d'être un vestige figé." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="yoruba">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'Date mythique', title: 'Fondation d\'Ile-Ife', body: "Selon la tradition, Oduduwa y devient le premier roi après la création de la terre par Obatala." },
+      { year: 'v. 1100-1400 apr. J.-C.', title: 'Âge classique d\'Ife', body: "Floraison artistique des célèbres têtes de bronze et de terre cuite d'Ife, d'un naturalisme qui a longtemps surpris les archéologues occidentaux." },
+      { year: 'XIVe-XVIIe siècle', title: 'Essor de l\'empire d\'Oyo', body: "Oyo devient la puissance politique yoruba dominante ; le règne historique de Shango se situe au début de sa dynastie." },
+      { year: 'XVIe-XIXe siècle', title: 'Traite transatlantique', body: "Déportation forcée de populations yoruba vers les Amériques, avec leur religion, dispersée et clandestinement préservée." },
+      { year: 'XIXe siècle', title: 'Effondrement de l\'empire d\'Oyo', body: "Guerres internes et pression du djihad peul fragmentent la puissance politique yoruba en Afrique de l'Ouest." },
+      { year: 'XIXe siècle', title: 'Formalisation de la Santería et du Candomblé', body: "À Cuba et au Brésil, les communautés déportées organisent la survie de la religion des orishas sous couvert de saints catholiques." },
+      { year: '1960', title: 'Indépendance du Nigeria', body: "Nouvelle ère politique pour le plus grand foyer démographique de la culture yoruba." },
+      { year: '1970', title: 'Fondation d\'Oyotunji', body: "Création en Caroline du Sud d'un village américain dédié à la pratique revivaliste de la religion yoruba." },
+      { year: '2005', title: 'Double reconnaissance UNESCO', body: "Le bosquet sacré d'Osun-Osogbo et le système divinatoire Ifa sont inscrits au patrimoine mondial et immatériel la même année." },
+      { year: 'Aujourd\'hui', title: 'Des dizaines de millions de pratiquants', body: "En comptant les pratiques afro-diasporiques apparentées, la religion des orishas reste l'une des traditions religieuses africaines les plus vivantes au monde." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que les orishas font encore">
+    <Fragment slot="title"><Decode glyphs="yoruba">Ce que les orishas font encore</Decode></Fragment>
+    <HeritageBlock title="Une religion mondiale active" body="Entre le Nigeria, le Bénin, le Togo et les pratiques afro-diasporiques des Amériques, la religion des orishas compte aujourd'hui des dizaines de millions de pratiquants — l'une des plus vivantes de cette série entière." />
+    <HeritageBlock title="Une influence culturelle mondiale" body="De la littérature de Wole Soyinka à l'imagerie régulièrement citée dans la musique et le cinéma internationaux, les orishas irriguent une part significative de la culture afro-descendante contemporaine." />
+    <HeritageBlock title="Des sites toujours en usage" body="Le bosquet sacré d'Osun-Osogbo accueille chaque année un festival vivant, pas une reconstitution muséale — la continuité rituelle y est directement observable." />
+    <CautionBox>
+      Cette page décrit une religion pratiquée aujourd'hui par des millions de personnes, trop
+      souvent réduite dans les médias populaires à un folklore exotique ou à une imagerie de
+      « magie noire ». Le respect dû à cette tradition vivante est le même que celui accordé
+      sans discussion aux grandes religions abrahamiques ailleurs sur ce site.
+    </CautionBox>
+  </Section>
+</PageLayout>

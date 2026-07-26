@@ -1,0 +1,211 @@
+---
+/*
+  Polynésie (navigation) — huitième page de la série « Peuples & Cultures du
+  Monde ». Même structure à 10 sections que culture-incas.astro (voir ce
+  fichier pour le détail du choix, faute de plan-serie-cultures.md dédié).
+
+  Angle : la navigation aux étoiles et aux courants, sans instruments,
+  colonisation du plus vaste espace océanique jamais peuplé par l'humanité —
+  distinct d'une éventuelle page mythologie polynésienne (Maui, Pele...).
+
+  Effets : data-egg="polynesie" + data-scroll-fx="pirogueDouble" sur
+  #style-de-vie, piste documentée dans plan-effets.md ("une pirogue double
+  qui glisse, étoiles de navigation s'allumant au-dessus d'elle").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Nuit océanique, bois de pirogue, étoiles : la matière et le ciel de la
+   navigation plutôt qu'une palette "îles tropicales" générique. */
+const palette = {
+  bg: '#0c141c',
+  'bg-deep': '#070d13',
+  surface: '#132030',
+  'surface-alt': '#1a2b40',
+  border: '#2f4a63',
+  ink: '#f2f7fb',
+  text: '#cfe0ee',
+  'text-dim': '#84a0b8',
+  accent: '#e8dcc0',
+  'accent-bright': '#f7ecd0',
+  accent2: '#8a5a2a',
+  'accent2-bright': '#c9982f',
+  verdict: '#2a6a8a',
+  'verdict-bright': '#5aa0c0',
+  glow: 'rgba(232,220,192,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Polynésie (navigation)"
+  serie="Peuples & Cultures du Monde"
+  description="Comment coloniser le plus vaste espace océanique du monde sans boussole ni carte : étoiles, houle, vols d'oiseaux — la navigation polynésienne, du triangle Hawaï-Aotearoa-Rapa Nui jusqu'au tour du monde du Hōkūleʻa."
+  href="culture-polynesie.html"
+  egg="polynesie"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="VAKA · WAKA · WAʻA"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : <strong>la Mésopotamie</strong>"
+>
+  <p class="subtitle" slot="hero">Le triangle polynésien</p>
+  <p class="tagline" slot="hero">
+    Colonisé sans boussole ni carte, à la seule force des étoiles, de la houle et des vols
+    d'oiseaux : le plus vaste territoire jamais peuplé par une seule famille de cultures
+    humaines.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="Le triangle polynésien"
+    intro="Trois sommets — Hawaï au nord, Aotearoa/Nouvelle-Zélande au sud-ouest, Rapa Nui/Île de Pâques au sud-est — délimitent un espace océanique d'environ 10 millions de km², plus vaste que la Russie, pour une poignée d'archipels séparés par des milliers de kilomètres d'eau libre.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
+        <path d="M250 30 L60 380 L440 380 Z" fill="none" stroke="#c9982f" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.7"/>
+        <circle cx="250" cy="30" r="7" fill="#f7ecd0" stroke="#0c141c" stroke-width="2"/>
+        <text x="250" y="18" text-anchor="middle" fill="#f7ecd0" font-family="Cinzel, serif" font-size="12">HAWAÏ</text>
+        <circle cx="60" cy="380" r="7" fill="#f7ecd0" stroke="#0c141c" stroke-width="2"/>
+        <text x="60" y="400" text-anchor="middle" fill="#f7ecd0" font-family="Cinzel, serif" font-size="12">AOTEAROA</text>
+        <circle cx="440" cy="380" r="7" fill="#f7ecd0" stroke="#0c141c" stroke-width="2"/>
+        <text x="440" y="400" text-anchor="middle" fill="#f7ecd0" font-family="Cinzel, serif" font-size="12">RAPA NUI</text>
+        <circle cx="260" cy="230" r="4" fill="#c9982f"/>
+        <text x="260" y="222" text-anchor="middle" fill="#cfe0ee" font-size="9">Tahiti</text>
+        <circle cx="230" cy="190" r="4" fill="#c9982f"/>
+        <text x="200" y="184" text-anchor="middle" fill="#cfe0ee" font-size="9">Samoa · Tonga</text>
+        <circle cx="290" cy="260" r="4" fill="#c9982f"/>
+        <text x="320" y="264" text-anchor="middle" fill="#cfe0ee" font-size="9">Marquises</text>
+        <circle cx="200" cy="290" r="4" fill="#c9982f"/>
+        <text x="170" y="300" text-anchor="middle" fill="#cfe0ee" font-size="9">Cook</text>
+      </svg>
+    </div>
+    <p class="map-caption">Le triangle polynésien : trois sommets, des milliers de kilomètres d'océan, une seule famille de langues et de cultures apparentées.</p>
+    <div class="card-grid">
+      <InfoCard title="Hawaï" sub="Sommet nord" body="L'archipel le plus isolé du triangle, colonisé en dernier parmi les grands foyers, aujourd'hui centre du renouveau de la navigation traditionnelle." />
+      <InfoCard title="Aotearoa" sub="Sommet sud-ouest" body="La plus grande masse terrestre du triangle, et l'une des dernières grandes terres habitables au monde colonisées par l'humanité." />
+      <InfoCard title="Rapa Nui" sub="Sommet sud-est" body="L'île habitée la plus isolée du Pacifique, à plus de 2000 km de toute autre terre peuplée — un test extrême de navigation océanique." />
+      <InfoCard title="Le foyer central" sub="Tonga, Samoa, Société, Marquises" body="C'est dans cette zone centrale, autour de Tonga et Samoa, que se cristallise la culture polynésienne distincte, avant sa dispersion vers les trois sommets." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Cultures apparentées" title="Une famille de cultures, pas un peuple unique" intro="Māori, Hawaïens, Samoans, Tongiens, Tahitiens, Rapa Nui, Cook Islanders : des cultures distinctes, chacune avec sa langue et ses protocoles propres, reliées par une ascendance et une langue-mère communes.">
+    <div class="card-grid wide">
+      <FigureCard name="Māori (Aotearoa)" role="Nouvelle-Zélande" tags={['Waka', 'Whakapapa']} body="Installés dans un climat tempéré radicalement différent des îles tropicales d'origine, ils développent une architecture, une agriculture et une organisation sociale adaptées, tout en conservant la mémoire généalogique (whakapapa) des grandes pirogues de migration." />
+      <FigureCard name="Kānaka Maoli (Hawaï)" role="Hawaïens autochtones" tags={['Isolement', 'Renouveau']} body="Habitants du foyer le plus isolé du triangle, aujourd'hui à l'avant-garde du renouveau mondial de la navigation traditionnelle et de la langue hawaïenne." />
+      <FigureCard name="Samoans et Tongiens" role="Le foyer central" tags={['Berceau culturel']} body="Issus de la zone où la culture polynésienne distincte prend forme après la vague de migration Lapita, avant la grande pause puis la dispersion vers l'est." />
+      <FigureCard name="Rapa Nui" role="Île de Pâques" tags={['Isolement extrême', 'Moai']} body="Une culture insulaire développée en isolement quasi total pendant des siècles, avec ses statues monumentales (moai) devenues l'une des images les plus reconnaissables du Pacifique." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes figures" title="Navigateurs, d'hier et d'aujourd'hui">
+    <div class="card-grid wide">
+      <FigureCard name="Kupe" role="Découvreur légendaire d'Aotearoa" tags={['Tradition māorie']} body="Navigateur dont la tradition orale māorie attribue la découverte de la Nouvelle-Zélande, poursuivant une pieuvre géante à travers l'océan selon le récit." />
+      <FigureCard name="Tupaia" role="Navigateur-prêtre tahitien" tags={['1769', 'James Cook']} body="Embarqué à bord de l'Endeavour du capitaine Cook, il fournit une connaissance géographique cruciale du Pacifique et dessine une carte réputée listant des dizaines d'îles de mémoire — mort de maladie en route, à Batavia." />
+      <FigureCard name="Mau Piailug" role="Maître-navigateur micronésien" tags={['Satawal', 'Transmission']} body="L'un des derniers dépositaires vivants du savoir de navigation traditionnelle au XXe siècle, il accepte d'enseigner sa méthode à des Hawaïens pour éviter que ce savoir ne disparaisse complètement." />
+      <FigureCard name="Nainoa Thompson" role="Premier navigateur hawaïen moderne" tags={['1980', 'Hōkūleʻa']} body="Premier Hawaïen natif en plusieurs générations à naviguer sur de longues distances par la seule orientation traditionnelle, symbole central de la renaissance culturelle hawaïenne." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="Une colonisation en vagues, puis un pari scientifique">
+    <StoryBlock num="Épisode I" title="La longue pause" body="Après avoir atteint la zone Tonga-Samoa vers 900 av. J.-C., les navigateurs polynésiens marquent une pause d'environ mille ans avant de reprendre leur expansion vers l'est. Les raisons de cette pause — technique, démographique, climatique — restent débattues, mais elle est aujourd'hui bien établie par l'archéologie et rappelle qu'une expansion humaine n'est jamais un mouvement continu et mécanique." />
+    <StoryBlock num="Épisode II" title="Le débat Heyerdahl" body={["En 1947, l'aventurier norvégien Thor Heyerdahl traverse le Pacifique sur le radeau Kon-Tiki pour démontrer qu'une colonisation depuis l'Amérique du Sud était possible, soutenant une thèse d'origine sud-américaine de la Polynésie.", "L'expédition, spectaculaire, prouve seulement qu'un tel voyage était physiquement réalisable — pas qu'il a eu lieu. Les données génétiques et linguistiques accumulées depuis confirment sans ambiguïté une origine austronésienne, via Taïwan et l'Asie du Sud-Est, pas américaine."]} />
+    <StoryBlock num="Épisode III" title="Dérive accidentelle ou navigation délibérée ?" body="Pendant des décennies, certains chercheurs occidentaux ont soutenu que la colonisation polynésienne devait l'essentiel au hasard de dérives accidentelles, plutôt qu'à une navigation intentionnelle maîtrisée — une thèse aujourd'hui largement abandonnée après la démonstration pratique du Hōkūleʻa en 1976." />
+    <StoryBlock num="Épisode IV" title="Le voyage qui a tout changé" body="En 1976, la pirogue double expérimentale Hōkūleʻa relie Hawaï à Tahiti guidée uniquement par la navigation traditionnelle, sans aucun instrument moderne. Le succès du voyage renverse durablement le débat scientifique et déclenche un mouvement de renaissance culturelle qui dépasse largement la seule question de la navigation." quote="Naviguer sans instruments, ce n'est pas l'absence de technique — c'en est une autre." cite="Principe défendu par les fondateurs de la Polynesian Voyaging Society" />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Naviguer un continent d'eau sans instrument">
+    <div class="card-grid compact">
+      <MiniCard title="La pirogue double" tag="Vaka, waka, waʻa" body="Deux coques reliées par une plateforme, stables en haute mer, capables de transporter des familles entières, des plantes et des animaux sur des milliers de kilomètres." />
+      <MiniCard title="La voile en pince de crabe" tag="Technologie vélique" body="Une voile triangulaire performante au près, permettant de remonter efficacement contre le vent dominant — une contrainte technique majeure pour coloniser l'est du Pacifique." />
+      <MiniCard title="La boussole d'étoiles" tag="Mémoire du ciel" body="Un système mémorisé de points de lever et de coucher d'étoiles servant de repères de cap, transmis oralement de génération en génération de navigateurs." />
+      <MiniCard title="La lecture de la houle" tag="Océanographie sensorielle" body="Les navigateurs distinguent, au ressenti de la coque, plusieurs trains de houle simultanés réfléchis par des terres encore invisibles à l'horizon." />
+      <MiniCard title="Les plantes de pirogue" tag="Taro, arbre à pain, coco" body="Les voyages d'installation embarquent systématiquement les espèces végétales et animales nécessaires à fonder une nouvelle communauté autosuffisante sur une île vierge." />
+      <MiniCard title="L'observation aviaire" tag="Signes de terre" body="Certaines espèces d'oiseaux terrestres ne s'éloignant jamais beaucoup des côtes, leur observation en mer indique la proximité d'une île avant qu'elle ne soit visible." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="Plus grand que la Russie" tag="Superficie du triangle" body="Le triangle polynésien couvre environ 10 millions de km² d'océan — davantage que la superficie terrestre de la Russie — pour une poignée d'archipels au total." />
+      <MiniCard title="L'origine du mot « tatouage »" tag="Étymologie" body="Le mot anglais et français vient du terme polynésien <em>tatau</em>, rapporté en Europe après les premiers contacts avec Tahiti au XVIIIe siècle." />
+      <MiniCard title="Les moai « marchaient »" tag="Archéologie expérimentale" body="Des expériences récentes suggèrent que les statues de Rapa Nui pouvaient être déplacées debout, par un balancement rythmé actionné à la corde, plutôt que traînées à plat comme longtemps supposé." />
+      <MiniCard title="Un savoir presque perdu" tag="XXe siècle" body="À la mort programmée de la génération de Mau Piailug, la navigation traditionnelle a frôlé la disparition complète avant d'être délibérément documentée et enseignée à nouveau à partir des années 1970." />
+      <MiniCard title="La mort de Cook à Hawaï" tag="1779, événement documenté" body="Après un accueil d'abord cérémoniel, la relation entre l'équipage de Cook et les habitants de la baie de Kealakekua se détériore jusqu'à un affrontement où le capitaine trouve la mort — un épisode souvent raconté de façon déséquilibrée dans les récits occidentaux." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="Vivre avec l'océan et le ciel"
+    intro="Une culture où la connaissance de la navigation n'est pas un métier séparé : elle imprègne les chants, les généalogies et l'éducation quotidienne des communautés côtières."
+    scrollFx="pirogueDouble">
+    <div class="card-grid compact">
+      <MiniCard title="Les chants de navigation" tag="Mémoire orale" body="Des séquences chantées encodent des instructions de cap et des descriptions d'îles, transmises comme un répertoire musical autant que technique." />
+      <MiniCard title="Le taro et le poi" tag="Alimentation de base" body="Le taro, cultivé en bassins irrigués, transformé en poi (pâte fermentée) reste un aliment central de l'identité culinaire polynésienne." />
+      <MiniCard title="La construction collective de pirogue" tag="Effort communautaire" body="Bâtir une grande pirogue de voyage mobilise traditionnellement un village entier, de l'abattage rituel de l'arbre à la cérémonie de mise à l'eau." />
+      <MiniCard title="La généalogie récitée" tag="Whakapapa" body="La récitation généalogique, notamment māorie, préserve autant l'histoire des ancêtres que celle des grandes traversées fondatrices." />
+      <MiniCard title="La pêche lagunaire" tag="Gestion des ressources" body="Des systèmes traditionnels de gestion des zones de pêche (comme le rāhui māori) limitent la surexploitation bien avant l'existence d'une réglementation environnementale moderne." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="Du triangle polynésien au tour du monde">
+    <div class="card-grid">
+      <InfoCard title="Hōkūleʻa" sub="Depuis 1976" body="La pirogue double expérimentale continue de naviguer aujourd'hui, formant de nouvelles générations de navigateurs traditionnels dans tout le Pacifique." />
+      <InfoCard title="Le voyage Mālama Honua" sub="2014-2017" body="Un tour du monde complet à la navigation traditionnelle, mené comme un geste de sensibilisation environnementale autant que culturelle." />
+      <InfoCard title="La renaissance linguistique" sub="Māori et hawaïen" body="Des programmes d'immersion linguistique ont permis de faire reculer, sans l'effacer complètement, le déclin de ces langues menacées au XXe siècle." />
+      <InfoCard title="La diaspora pacifique" sub="Nouvelle-Zélande, États-Unis, Australie" body="D'importantes communautés polynésiennes vivent aujourd'hui hors de leurs archipels d'origine, tout en maintenant des liens culturels actifs." />
+      <InfoCard title="Un vocabulaire mondial" sub="Tatouage, tabou, mana" body="Plusieurs mots polynésiens sont entrés durablement dans les langues européennes via les premiers contacts du XVIIIe siècle." />
+      <InfoCard title="Une science redécouverte" sub="Ethnonavigation" body="L'étude académique de la navigation traditionnelle polynésienne a renouvelé la compréhension scientifique des capacités d'orientation humaine sans instrument." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. 1500 av. J.-C.', title: 'Expansion Lapita', body: "Les ancêtres directs des Polynésiens atteignent l'archipel Bismarck, point de départ de la grande expansion océanique." },
+      { year: 'v. 900 av. J.-C.', title: 'Installation à Tonga et Samoa', body: "La culture polynésienne distincte se cristallise dans cette zone centrale." },
+      { year: 'v. 900 av. J.-C. — 700 apr. J.-C.', title: 'La longue pause', body: "Environ mille ans sans expansion nouvelle vers l'est, pour des raisons encore débattues." },
+      { year: 'v. 700-1000 apr. J.-C.', title: 'Société et Marquises', body: "Reprise de l'expansion vers l'est du Pacifique." },
+      { year: 'v. 1000-1200 apr. J.-C.', title: 'Installation à Hawaï', body: "Colonisation de l'archipel le plus isolé du triangle nord." },
+      { year: 'v. 1200 apr. J.-C.', title: 'Installation à Rapa Nui', body: "L'île habitée la plus isolée du Pacifique est atteinte et colonisée." },
+      { year: 'v. 1200-1300 apr. J.-C.', title: 'Installation en Aotearoa', body: "L'une des dernières grandes masses continentales habitables colonisées par l'humanité." },
+      { year: '1769', title: 'Tupaia rejoint Cook', body: "Le navigateur tahitien embarque sur l'Endeavour et dresse une carte réputée du Pacifique." },
+      { year: '1779', title: 'Mort de James Cook à Hawaï', body: "Un affrontement met fin à la troisième expédition du capitaine britannique." },
+      { year: '1947', title: 'Le Kon-Tiki de Heyerdahl', body: "Expédition spectaculaire, mais dont l'hypothèse d'origine sud-américaine sera invalidée par la génétique." },
+      { year: '1976', title: 'Premier voyage du Hōkūleʻa', body: "Hawaï-Tahiti à la seule navigation traditionnelle : la preuve pratique d'une colonisation délibérée." },
+      { year: '1980', title: 'Nainoa Thompson navigue seul', body: "Premier Hawaïen natif moderne à mener une longue traversée par la seule orientation traditionnelle." },
+      { year: '2014-2017', title: 'Voyage mondial Mālama Honua', body: "Le Hōkūleʻa boucle un tour du monde complet à la navigation traditionnelle." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que la navigation polynésienne fait encore">
+    <HeritageBlock title="Un savoir vivant, pas restauré en musée" body="La navigation traditionnelle continue d'être pratiquée et enseignée activement à travers le Pacifique, portée par des organisations comme la Polynesian Voyaging Society." />
+    <HeritageBlock title="Une voix dans le débat climatique" body="Les grandes traversées contemporaines du Hōkūleʻa sont explicitement conçues comme des gestes de sensibilisation environnementale, les îles du Pacifique étant en première ligne de la montée des eaux." />
+    <HeritageBlock title="Des langues en reconquête" body="Le māori et l'hawaïen, longtemps en déclin sous la pression coloniale, connaissent aujourd'hui un mouvement de revitalisation porté par des écoles d'immersion et une reconnaissance institutionnelle croissante." />
+    <CautionBox>
+      Cette page adopte volontairement l'angle de la navigation pour relier des cultures
+      polynésiennes distinctes — māorie, hawaïenne, tahitienne, samoane, tongienne, rapa nui —
+      qui ne se réduisent pas les unes aux autres et possèdent chacune leurs propres
+      protocoles et leur propre histoire. Le fil commun de la navigation ne doit jamais
+      devenir un prétexte pour les traiter comme une seule et même culture interchangeable.
+    </CautionBox>
+  </Section>
+</PageLayout>

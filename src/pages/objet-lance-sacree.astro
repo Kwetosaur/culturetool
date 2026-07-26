@@ -1,0 +1,284 @@
+---
+/*
+  La Lance Sacrée (de Longin) — onzième page de la série « Objets Légendaires
+  du Monde ». Structure imposée par docs/plans/plan-serie-objets.md : 8
+  sections, badge de nature dans le hero. Cas net de la règle n°1 : l'Évangile
+  de Jean mentionne le coup de lance sans nommer ni le soldat ni conserver
+  l'arme ; le nom « Longin » et le culte de la relique viennent de traditions
+  bien postérieures. Pas de Timeline dans #traces : quatre reliques
+  indépendantes, pas une chaîne de possession unique (même logique que le
+  Graal).
+
+  Effets : data-egg="lance" + data-scroll-fx="lanceQuadruple" sur
+  #description, tous deux vers lanceQuadruple() dans public/effects.js — un
+  fer de lance qui se dédouble en quatre silhouettes superposées puis se
+  recompose, les quatre reliques concurrentes en une image.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Fer romain et pourpre impériale : la matière de l'arme et l'usage
+   politique qu'on en a fait, plutôt que la géographie du sujet. */
+const palette = {
+  bg: '#14121a',
+  'bg-deep': '#0a0910',
+  surface: '#201c29',
+  'surface-alt': '#282233',
+  border: '#4a3f5c',
+  ink: '#f5f0f7',
+  text: '#ddd4e6',
+  'text-dim': '#9d90b0',
+  accent: '#8a2030',
+  'accent-bright': '#c0384a',
+  accent2: '#6b6a72',
+  'accent2-bright': '#9a98a5',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(138,32,48,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Un coup de lance, sans nom', sub: 'Évangile de Jean, fin du Ier siècle',
+    body: "Le texte biblique rapporte qu'un soldat perce le flanc du Christ sur la croix — sans jamais nommer ce soldat ni conserver l'arme comme relique.",
+  },
+  {
+    num: 'II', title: 'Longin apparaît', sub: 'Évangile de Nicodème, IVe-Ve siècle',
+    body: "C'est un texte apocryphe bien postérieur qui donne un nom au soldat — « Longin », probablement dérivé du grec <em>longchē</em>, « lance » : le nom naît peut-être d'un jeu de mots sur l'objet lui-même.",
+  },
+  {
+    num: 'III', title: 'Quatre reliques, quatre traditions', sub: 'Moyen Âge',
+    body: "Vienne, Rome, Etchmiadzin et Antioche développent chacune, séparément et à des siècles d'écart, leur propre tradition de possession de « la » lance — sans qu'aucune ne descende documentairement d'une autre.",
+  },
+];
+---
+<PageLayout
+  title="La Lance Sacrée"
+  serie="Objets Légendaires du Monde"
+  description="L'Évangile de Jean mentionne un coup de lance sans nommer le soldat ni garder l'arme. Le nom « Longin » vient d'un texte apocryphe des siècles plus tard. Aujourd'hui, au moins quatre lances concurrentes revendiquent le titre — celle de Vienne, datée du VIIIe siècle, a aussi obsédé la propagande nazie."
+  href="objet-lance-sacree.html"
+  egg="lance"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="VIENNE · ROME · ETCHMIADZIN"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>l'épée de Goujian</strong>"
+>
+  <p class="subtitle" slot="hero">Lance de Longin · Spear of Destiny</p>
+  <p class="tagline" slot="hero">
+    Un coup de lance sans nom dans l'Évangile, un soldat baptisé des siècles plus tard, et
+    aujourd'hui quatre reliques rivales — dont une datée avec certitude du haut Moyen Âge,
+    pas de la Rome antique.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Relique contestée"
+    note="Le geste biblique est rapporté sans arme conservée ni soldat nommé. Les quatre lances vénérées aujourd'hui appartiennent à des traditions indépendantes, et celle de Vienne est datée matériellement du haut Moyen Âge."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Un geste avant un objet"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet. Ici, même le nom du soldat est un ajout tardif — l'écart se creuse en cascade.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Entre le geste rapporté par Jean et la première relique documentée conservée comme «
+      lance de la Passion », il s'écoule plusieurs siècles — et la datation matérielle de la
+      pièce la plus célèbre, celle de Vienne, ajoute encore des siècles à l'écart.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et pouvoirs"
+    title="Ce que la tradition prête à la lance"
+    intro="Rédigé en discours rapporté : ce que le culte de la relique et la légende moderne lui attribuent, à distinguer du texte biblique d'origine, beaucoup plus sobre."
+    scrollFx="lanceQuadruple">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Le fer de Vienne"
+        role="La pièce la plus vénérée"
+        tags={['Regalia impériale', 'VIIIe siècle']}
+        body="Une lame de fer romaine tardive ou médiévale, enserrée d'un manchon d'argent portant l'inscription « Clou de Notre Seigneur », ajouté au XIVe siècle pour y intégrer un fragment supposé de la Vraie Croix."
+      />
+      <FigureCard
+        name="Un insigne de pouvoir"
+        role="Otton Ier et le Saint Empire"
+        tags={['Couronnement', 'Légitimité']}
+        body="La lance de Vienne devient un insigne impérial du Saint Empire romain germanique, censée garantir la victoire à qui la porte au combat — Otton Ier l'aurait tenue à la bataille du Lechfeld en 955."
+      />
+      <FigureCard
+        name="Le « Spear of Destiny »"
+        role="Un pouvoir surnaturel, ajout du XXe siècle"
+        tags={['Occultisme moderne', 'Légende récente']}
+        body="L'idée que la lance confère la maîtrise du destin du monde à son possesseur est une invention largement moderne, popularisée par un ouvrage de 1972 mêlant faits réels et occultisme inventé — pas une croyance médiévale attestée sous cette forme."
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où la lance agit">
+    <StoryBlock
+      num="Récit I"
+      title="Le coup qui confirme la mort"
+      body="Dans l'Évangile de Jean, un soldat perce le flanc du Christ déjà mort sur la croix ; il en sort du sang et de l'eau. Le geste confirme la mort pour les besoins du récit — rien n'indique alors qu'il deviendra un jour un objet de culte."
+      quote="Aussitôt il sortit du sang et de l'eau."
+      cite="Évangile de Jean 19:34"
+    />
+    <StoryBlock
+      num="Récit II"
+      title="La conversion de Longin"
+      body="La tradition apocryphe prête au soldat une cécité partielle, guérie au contact du sang jailli de la blessure — un miracle qui le convertit sur-le-champ. Il finit vénéré comme saint et martyr, sans qu'aucune source ancienne ne s'accorde totalement sur les détails de sa vie."
+    />
+    <StoryBlock
+      num="Récit III"
+      title="La découverte d'Antioche"
+      body={[
+        "Pendant le siège d'Antioche par les croisés en 1098, un pèlerin nommé Pierre Barthélemy affirme avoir reçu une vision lui indiquant l'emplacement d'une lance sainte enterrée sous une église. Exhumée devant l'armée assiégée et démoralisée, elle relance le moral des troupes juste avant une bataille décisive contre les forces de Kerbogha.",
+        "La victoire qui suit est spectaculaire — mais la crédibilité de Pierre Barthélemy est vite contestée par plusieurs chefs croisés. Sommé de prouver sa vision par une ordalie du feu, il en meurt des suites de ses brûlures peu après.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit IV"
+      title="Un cadeau diplomatique à Rome"
+      body="En 1492, le sultan ottoman Bayezid II offre au pape Innocent VIII un fragment présenté comme la pointe de la lance sainte — moins un geste de piété qu'une monnaie d'échange politique, en remerciement du maintien en captivité de son frère rival Cem Sultan."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Ce que la métallurgie a tranché"
+    intro="La section propre à cette série. Ici, l'examen matériel d'une relique réelle a directement permis de trancher une partie du dossier — un cas rare où la facture répond presque à elle seule à la question de datation.">
+    <div class="card-grid compact">
+      <MiniCard title="L'analyse de 2003" tag="Datation métallurgique" body="Un examen radiographique et métallographique de la lance de Vienne date le corps de la lame du VIIe-VIIIe siècle apr. J.-C. — plusieurs siècles après la crucifixion, à l'époque carolingienne plutôt que romaine." />
+      <MiniCard title="Le manchon d'argent" tag="Ajout du XIVe siècle" body="L'empereur Charles IV fait ajouter un manchon d'argent doré et un fil d'or supposé provenir d'un clou de la croix — un remaniement documenté, pas une fabrication d'origine." />
+      <MiniCard title="La pilum romaine, pour comparaison" tag="Ier siècle" body="Les fers de lance et de javelot romains attestés archéologiquement pour le Ier siècle ont une forme et une métallurgie bien différentes de celles de la lance de Vienne — un écart matériel qui appuie la datation tardive." />
+      <MiniCard title="Une politique de la relique" tag="Pratique médiévale" body="Enchâsser un fragment d'une relique plus ancienne (ici, un « clou » de la croix) dans un objet plus récent est une pratique médiévale bien documentée : l'objet n'a pas besoin d'être authentique pour remplir sa fonction politique et dévotionnelle." />
+    </div>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Candidats matériels"
+    title="Quatre lances, quatre traditions indépendantes"
+    intro="Comme pour le Graal, il n'existe pas une chaîne de possession unique à suivre : plusieurs objets distincts, conservés par des institutions différentes, revendiquent chacun le titre sans lien documenté entre eux.">
+    <div class="card-grid">
+      <InfoCard
+        title="La Lance de Vienne"
+        sub="Trésor impérial, Hofburg"
+        body="La plus célèbre, insigne du Saint Empire romain germanique, datée matériellement du haut Moyen Âge — et objet de l'obsession, largement romancée, de la propagande nazie au XXe siècle."
+      />
+      <InfoCard
+        title="La Lance de Rome"
+        sub="Basilique Saint-Pierre"
+        body="Un fragment offert en 1492 par le sultan ottoman Bayezid II au pape Innocent VIII, dans un contexte de tractation diplomatique plutôt que de transmission dévotionnelle continue."
+      />
+      <InfoCard
+        title="La Lance d'Etchmiadzin"
+        sub="Église apostolique arménienne"
+        body="Conservée au trésor de la cathédrale d'Etchmiadzin, rattachée par la tradition arménienne à l'apôtre Thaddée plutôt qu'à la lignée européenne des trois autres."
+      />
+      <InfoCard
+        title="La Lance d'Antioche"
+        sub="Découverte de 1098, statut incertain"
+        body="Trouvée dans des circonstances rapidement contestées par les contemporains eux-mêmes, sa trace se perd ensuite dans l'histoire — le seul des quatre candidats sans lieu de conservation actuel bien établi."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la relique au thriller occulte"
+    title="Du trésor impérial au « Spear of Destiny »">
+    <div class="card-grid compact">
+      <MiniCard title="The Spear of Destiny" tag="Trevor Ravenscroft, 1972" body="L'ouvrage qui fixe l'image contemporaine d'une lance aux pouvoirs occultes convoitée par Hitler — un mélange de faits documentés (le transfert réel de la lance à Nuremberg en 1938) et d'éléments largement fabriqués." />
+      <MiniCard title="Hellboy" tag="Comics puis cinéma" body="La franchise reprend directement l'image d'une lance sacrée convoitée par des forces nazies occultes, popularisant le motif pour un public bien plus large que celui du livre d'origine." />
+      <MiniCard title="Wolfenstein" tag="Jeu vidéo" body="La série de jeux vidéo intègre la lance sacrée comme artefact central de la mythologie occulte nazie qu'elle met en scène, dans la continuité directe de l'imaginaire lancé par Ravenscroft." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Sans détour sur la datation matérielle, sans reprendre à notre compte la légende occulte du XXe siècle.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Une pièce maîtresse datée avec précision"
+      body={[
+        "L'analyse métallurgique de 2003 sur la lance de Vienne, la plus étudiée des quatre, établit une datation du VIIe-VIIIe siècle apr. J.-C. — un résultat solide qui exclut une origine romaine du Ier siècle pour cette pièce précise.",
+        "Les trois autres lances n'ont pas fait l'objet d'un examen matériel aussi poussé et rendu public ; leur statut reste affaire de tradition institutionnelle plutôt que de datation scientifique publiée.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Un mythe de pouvoir largement moderne"
+      body="L'idée d'un pouvoir surnaturel de domination mondiale attaché à la lance n'est documentée dans aucune source médiévale sérieuse : elle apparaît sous cette forme précise dans la littérature ésotérique du XXe siècle, notamment via l'ouvrage de Trevor Ravenscroft, dont les historiens jugent la méthode et une bonne part du contenu peu fiables."
+    />
+    <TheoryCard
+      title="La lance de Vienne est un objet du haut Moyen Âge, pas de l'Antiquité romaine"
+      level="consensus"
+      status="Consensus"
+      body="Position appuyée directement par l'analyse métallurgique de 2003, non contestée depuis par des travaux publiés concurrents."
+      attrib="Analyse métallurgique de 2003, Kunsthistorisches Museum de Vienne"
+    />
+    <TheoryCard
+      title="Le manchon et l'inscription ont été ajoutés pour intégrer une relique de la Vraie Croix"
+      level="plausible"
+      status="Hypothèse bien documentée"
+      body="Cohérente avec les pratiques médiévales connues d'enchâssement de reliques dans des objets de pouvoir, et avec la date attribuée à l'intervention de Charles IV."
+      attrib="Position courante en histoire de l'art médiéval"
+    />
+    <TheoryCard
+      title="La lance confère à son possesseur la maîtrise du destin du monde"
+      level="folklore"
+      status="Invention littéraire du XXe siècle"
+      body="Cette idée, aujourd'hui la plus connue du grand public, n'a aucune attestation médiévale sérieuse : elle est une construction de la littérature ésotérique moderne, largement rejetée par les historiens comme fiction plutôt que tradition ancienne."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que la lance fait encore">
+    <HeritageBlock
+      title="Une pièce de musée toujours exposée"
+      body="La lance de Vienne fait partie du trésor impérial exposé au Kunsthistorisches Museum, aux côtés des autres regalia du Saint Empire — un objet historique documenté, pas seulement une légende."
+    />
+    <HeritageBlock
+      title="Une dévotion vivante à Rome et à Etchmiadzin"
+      body="Les fragments conservés à Saint-Pierre de Rome et à la cathédrale d'Etchmiadzin restent des objets de vénération dans leurs traditions respectives, catholique et arménienne apostolique."
+    />
+    <HeritageBlock
+      title="Un imaginaire occulte toujours actif"
+      body="La version « Spear of Destiny » continue d'alimenter romans, comics, films et jeux vidéo, largement indépendante de l'histoire documentée des quatre reliques réelles."
+    />
+    <CautionBox>
+      Cette page distingue volontairement l'histoire matérielle documentée — une lame
+      médiévale, des ajouts datés, un usage politique réel — de la légende occulte du XXe
+      siècle qui l'a rendue célèbre dans la culture populaire. La confondre reviendrait à
+      prêter à un objet de musée des pouvoirs qu'aucune source sérieuse ne lui attribue avant
+      les années 1970.
+    </CautionBox>
+  </Section>
+</PageLayout>

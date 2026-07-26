@@ -1,0 +1,150 @@
+---
+/*
+  Göbekli Tepe — septième mystère de la série, première écrite avec le socle
+  Astro. Structure imposée par docs/plans/plan-serie-mysteres.md : 7 sections,
+  badge de verdict. « L'absence la plus criante » signalée dans
+  docs/listes/liste-creatures-mysteres-monde.md : un site qui a inversé la
+  séquence admise « d'abord les champs, ensuite les temples ».
+
+  Effets : data-egg="gobeklitepe" + data-scroll-fx="gobekliPiliers" sur
+  #enigme, piste documentée dans plan-effets.md ("deux piliers en T qui se
+  dressent, puis la terre qui remonte les ensevelir — le site a été enterré
+  volontairement").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Calcaire cuit de soleil et terre d'enfouissement : la matière du site
+   plutôt qu'une palette "Moyen-Orient" générique. */
+const palette = {
+  bg: '#171208',
+  'bg-deep': '#0c0905',
+  surface: '#241d12',
+  'surface-alt': '#2e2618',
+  border: '#5a4a2c',
+  ink: '#f7ecd4',
+  text: '#e0cfa8',
+  'text-dim': '#a8926a',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#8a5a2a',
+  'accent2-bright': '#c07a3a',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(201,152,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Göbekli Tepe"
+  serie="Grands Mystères du Monde"
+  description="Des piliers de pierre en T, sculptés d'animaux, dressés 6000 ans avant Stonehenge par des chasseurs-cueilleurs sans agriculture ni écriture — puis délibérément enterrés. Le site qui a inversé la séquence admise « d'abord les champs, ensuite les temples »."
+  href="mystere-gobekli-tepe.html"
+  egg="gobeklitepe"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ŞANLIURFA · v. 9600 AV. J.-C."
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : <strong>la disparition d'Amelia Earhart</strong>"
+>
+  <p class="subtitle" slot="hero">Le sanctuaire qui précède l'agriculture</p>
+  <p class="tagline" slot="hero">
+    Des piliers de dix tonnes dressés par des chasseurs-cueilleurs, six mille ans avant
+    Stonehenge — puis enterrés volontairement, pour des raisons toujours débattues.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Partiellement expliqué"
+    note="La datation, les bâtisseurs et l'enfouissement volontaire sont établis avec certitude. La fonction exacte du site et la raison de son ensevelissement restent, elles, activement débattues."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Un site plus vieux que l'agriculture elle-même" intro="Avant d'aborder ce qui reste mystérieux, ce qui ne l'est plus : la datation et l'identité des bâtisseurs sont aujourd'hui solidement établies.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une datation vérifiée" sub="v. 9600-8000 av. J.-C." body="Les phases les plus anciennes du site précèdent Stonehenge d'environ six mille ans, et l'apparition de l'écriture d'environ six mille ans également." />
+      <InfoCard num="II" title="Des bâtisseurs chasseurs-cueilleurs" sub="Preuves archéozoologiques" body="Les restes fauniques retrouvés sur le site montrent une alimentation dominée par le gibier sauvage — les constructeurs n'étaient pas encore des agriculteurs sédentaires, selon l'interprétation dominante." />
+      <InfoCard num="III" title="Des piliers monumentaux" sub="Jusqu'à 10 tonnes" body="Des piliers en forme de T, atteignant 5,5 mètres de haut, sculptés de renards, serpents, sangliers, oiseaux et scorpions, organisés en enceintes circulaires ou ovales." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Comment, pourquoi — et pourquoi l'avoir enterré ?" scrollFx="gobekliPiliers" intro="Le mystère se résume à trois questions précises, pas à un vague sentiment d'ancienneté impressionnante.">
+    <div class="card-grid wide">
+      <FigureCard name="Comment ?" role="Une logistique sans agriculture ni métal" tags={['Organisation du travail']} body="Extraire, sculpter et dresser des piliers de plusieurs tonnes suppose une coordination collective importante — comment une société de chasseurs-cueilleurs, sans stocks agricoles pour nourrir une main-d'œuvre nombreuse et durable, a-t-elle pu l'organiser ?" />
+      <FigureCard name="Pourquoi ?" role="Une fonction toujours débattue" tags={['Sanctuaire ?', 'Lieu de rassemblement ?']} body="Temple, lieu de rassemblement saisonnier, centre de culte des ancêtres, marqueur astronomique : plusieurs hypothèses sérieuses coexistent, sans qu'aucune ne fasse l'unanimité complète." />
+      <FigureCard name="Pourquoi l'enterrer ?" role="Un geste délibéré, pas un abandon" tags={['Enfouissement volontaire']} body="La stratigraphie montre que le site a été intentionnellement recouvert de débris vers 8000 av. J.-C. — un choix humain, pas un effondrement naturel, dont la logique exacte échappe encore aux archéologues." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment on l'a trouvé" title="D'un cimetière médiéval présumé à la une mondiale">
+    <div class="card-grid">
+      <InfoCard title="1963" sub="Première mention, mal interprétée" body="Une équipe américano-turque repère déjà des pierres travaillées sur le site, mais les identifie à tort comme les vestiges d'un cimetière médiéval — l'ancienneté réelle du lieu passe totalement inaperçue." />
+      <InfoCard title="1994" sub="Klaus Schmidt reconnaît le potentiel du site" body="L'archéologue allemand, en repérage régional, identifie l'importance exceptionnelle du site et lance des fouilles systématiques l'année suivante." />
+      <InfoCard title="Depuis 1995" sub="Des fouilles toujours en cours" body="Les relevés géophysiques suggèrent que la majeure partie du site reste encore enfouie et inexplorée — la recherche est loin d'être achevée." />
+    </div>
+  </Section>
+
+  <Section id="culture-populaire" label="Du site au phénomène médiatique" title="Entre vulgarisation sérieuse et théories spectaculaires">
+    <div class="card-grid compact">
+      <MiniCard title="« Le premier temple du monde »" tag="Presse internationale, dès 2008" body="Une formule séduisante et largement reprise, qui simplifie un débat archéologique encore ouvert sur la fonction exacte du site." />
+      <MiniCard title="Documentaires grand public" tag="Chaînes spécialisées" body="Le site est devenu un sujet récurrent des documentaires sur les origines de la civilisation, avec des degrés de rigueur très variables." />
+      <MiniCard title="Une théorie de civilisation perdue contestée" tag="Série Netflix, 2022" body="La série <em>Ancient Apocalypse</em> utilise Göbekli Tepe pour suggérer l'existence d'une civilisation avancée disparue — une lecture que la communauté archéologique professionnelle a très largement et publiquement récusée." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que l'archéologie peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Une datation et une identité des bâtisseurs solides" body="La datation au radiocarbone des phases principales du site ne fait plus débat. L'identification des bâtisseurs comme des communautés encore majoritairement chasseuses-cueilleuses repose sur des données archéozoologiques convergentes, pas sur une hypothèse isolée." />
+    <ScienceBlock num="Enquête 2" title="Un lien régional avec l'origine du blé domestiqué" body="Le mont Karacadağ, tout proche du site, est identifié par la génétique végétale comme le foyer probable de la domestication du blé engrain — une coïncidence géographique frappante avec Göbekli Tepe, que certains chercheurs lisent comme un indice que les grands rassemblements rituels ont pu stimuler les premières expérimentations agricoles locales, sans que le lien de cause à effet soit formellement démontré." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Un site de rassemblement rituel construit par des chasseurs-cueilleurs"
+      level="consensus"
+      status="Consensus"
+      body="La nature cérémonielle du site et le statut pré-agricole ou proto-agricole de ses bâtisseurs sont largement acceptés dans la littérature archéologique spécialisée."
+      attrib="Position dominante de l'archéologie du Proche-Orient néolithique"
+    />
+    <TheoryCard
+      title="Le rassemblement rituel aurait favorisé l'apparition de l'agriculture"
+      level="plausible"
+      status="Hypothèse influente, débattue"
+      body="Proposée notamment par Klaus Schmidt lui-même, cette hypothèse inverse l'ordre classique « agriculture puis religion » — séduisante, mais encore discutée quant à son caractère strictement causal plutôt que simplement corrélé."
+      attrib="Hypothèse associée à Klaus Schmidt et discutée depuis"
+    />
+    <TheoryCard
+      title="Les gravures encoderaient la date d'un impact cométaire"
+      level="folklore"
+      status="Hypothèse minoritaire, largement contestée"
+      body="Une lecture publiée proposant que certains piliers enregistrent astronomiquement la date d'un cataclysme cosmique (l'épisode du Dryas récent) a reçu une large couverture médiatique, mais reste très minoritaire et largement critiquée par les spécialistes du site pour sa surinterprétation des symboles."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le site fait encore">
+    <HeritageBlock title="Un site classé au patrimoine mondial" body="Göbekli Tepe est inscrit par l'UNESCO en 2018, consacrant son importance pour l'histoire de l'humanité entière, pas seulement pour la région." />
+    <HeritageBlock title="Un manuel scolaire réécrit" body="La séquence « d'abord l'agriculture, ensuite les grands monuments religieux » a dû être révisée dans une partie de l'enseignement archéologique à la lumière de ce site." />
+    <HeritageBlock title="Un moteur touristique régional" body="La province de Şanlıurfa a développé une infrastructure touristique importante autour du site, aujourd'hui l'une des principales attractions archéologiques de Turquie." />
+    <HeritageBlock title="Une fouille loin d'être achevée" body="Les estimations avancent qu'une large part du site reste encore enfouie et non fouillée — les découvertes majeures ne sont peut-être pas encore derrière nous." />
+    <CautionBox>
+      Cette page distingue volontairement ce que l'archéologie professionnelle établit — une
+      datation, une identité des bâtisseurs, un enfouissement délibéré — de ce que des
+      documentaires grand public en tirent parfois pour suggérer une civilisation perdue
+      avancée. La deuxième lecture fait un bon récit ; elle ne fait pas une preuve.
+    </CautionBox>
+  </Section>
+</PageLayout>

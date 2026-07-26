@@ -1,0 +1,222 @@
+---
+/*
+  Incas (culture) — septième page de la série « Peuples & Cultures du
+  Monde », et première page culture écrite avec le socle Astro (les 6
+  précédentes sont statiques). Structure calquée sur celle observée dans
+  public/culture-mali.html (pas de plan-serie-cultures.md dédié — le
+  "gabarit" de la série est docs/gabarits/gabarit-culture.html) : 10 sections
+  — carte, peuples, figures, recits, inventions, anecdotes, style-de-vie
+  (scrollFx), monde, frise, heritage.
+
+  Angle civilisationnel distinct d'une éventuelle page mythologie inca :
+  administration, ingénierie, société — pas de panthéon ici.
+
+  Effets : data-egg="incas" + data-scroll-fx="incaQuipu" sur #style-de-vie,
+  piste documentée dans plan-effets.md ("un cordon de quipu dont les nœuds se
+  nouent un à un").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Or andin, pierre grise, turquoise : la matière de la civilisation plutôt
+   qu'une palette "Amérique du Sud" générique. */
+const palette = {
+  bg: '#171310',
+  'bg-deep': '#0c0a08',
+  surface: '#241f1a',
+  'surface-alt': '#2e2721',
+  border: '#5a4a35',
+  ink: '#f7ecd8',
+  text: '#e0d0b8',
+  'text-dim': '#a89478',
+  accent: '#c9982f',
+  'accent-bright': '#f0c94e',
+  accent2: '#2e8a7a',
+  'accent2-bright': '#5ad0b8',
+  verdict: '#7a3a1f',
+  'verdict-bright': '#c06030',
+  glow: 'rgba(201,152,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const regions = [
+  { title: 'Chinchaysuyu', sub: 'Quart nord-ouest', body: "Le plus peuplé des quatre quarts, englobant la côte et les hauteurs vers l'Équateur actuel." },
+  { title: 'Antisuyu', sub: 'Quart nord-est', body: "Le plus petit, tourné vers les contreforts amazoniens — frontière poreuse plutôt que ligne fermée." },
+  { title: 'Qullasuyu', sub: 'Quart sud-est', body: "Le plus vaste, autour du lac Titicaca, s'étendant jusqu'à l'actuel nord du Chili et de l'Argentine." },
+  { title: 'Kuntisuyu', sub: 'Quart sud-ouest', body: "La côte pacifique méridionale, région désertique reliée par un réseau dense de routes transversales." },
+];
+---
+<PageLayout
+  title="Incas"
+  serie="Peuples & Cultures du Monde"
+  description="Machu Picchu, 40 000 km de routes andines, le quipu comme comptabilité à nœuds : comment un empire a administré des millions de sujets sans écriture ni roue, jusqu'à s'effondrer en cinq ans face à 168 conquistadors et une épidémie."
+  href="culture-incas.html"
+  egg="incas"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="TAWANTINSUYU"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : <strong>la Polynésie (navigation)</strong>"
+>
+  <p class="subtitle" slot="hero">Tawantinsuyu — « les Quatre Régions »</p>
+  <p class="tagline" slot="hero">
+    Le plus grand empire jamais bâti en Amérique précolombienne, administré sans écriture,
+    sans roue et sans monnaie — et effondré en moins de cinq ans.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="La carte-récit du Tawantinsuyu"
+    intro="À son apogée sous Huayna Capac (v. 1493-1527), l'empire s'étend sur près de 4 000 km le long de la cordillère des Andes, de l'actuelle frontière colombo-équatorienne au centre du Chili — l'un des plus grands empires préindustriels du monde par la superficie.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 320 460" xmlns="http://www.w3.org/2000/svg">
+        <path d="M160 20 C 140 120 150 220 130 320 C 120 380 140 420 160 440 C 180 420 200 380 190 320 C 170 220 180 120 160 20 Z" fill="#2e2721" stroke="#5a4a35" stroke-width="1.5" opacity="0.7"/>
+        <line x1="160" y1="20" x2="160" y2="440" stroke="#c9982f" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+        <circle cx="160" cy="150" r="8" fill="#f0c94e" stroke="#171310" stroke-width="2"/>
+        <text x="178" y="153" fill="#f0c94e" font-size="13" font-family="Cinzel, serif">Cusco</text>
+        <circle cx="150" cy="118" r="5" fill="#5ad0b8"/>
+        <text x="118" y="112" fill="#e0d0b8" font-size="10">Machu Picchu</text>
+        <circle cx="165" cy="90" r="5" fill="#5ad0b8"/>
+        <text x="182" y="93" fill="#e0d0b8" font-size="10">Lac Titicaca</text>
+        <circle cx="160" cy="30" r="5" fill="#c06030"/>
+        <text x="130" y="24" fill="#e0d0b8" font-size="10">Quito</text>
+        <text x="230" y="150" fill="#a89478" font-size="10" font-style="italic">Antisuyu →</text>
+        <text x="90" y="150" fill="#a89478" font-size="10" font-style="italic">← Kuntisuyu</text>
+      </svg>
+    </div>
+    <p class="map-caption">Cusco, au centre des quatre quarts (suyu), point d'où rayonne le réseau routier du Qhapaq Ñan.</p>
+    <div class="card-grid">
+      {regions.map((r) => <InfoCard {...r} />)}
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Les peuples du Tawantinsuyu" intro="L'empire inca n'est pas un peuple unique : c'est une mosaïque de dizaines de peuples conquis, administrés en quechua comme langue commune, et parfois déplacés de force pour mieux être intégrés.">
+    <div class="card-grid wide">
+      <FigureCard name="Les Quechua (Inca)" role="Peuple fondateur, élite dirigeante" tags={['Cusco', 'Langue impériale']} body="Locuteurs du quechua (Runa Simi), noyau politique de l'empire — le terme « Inca » désignait à l'origine le souverain et son cercle, pas l'ensemble de la population impériale." />
+      <FigureCard name="Les Aymara" role="Peuple du haut plateau" tags={['Titicaca', 'Rivaux puis sujets']} body="Installés autour du lac Titicaca depuis avant l'expansion inca, intégrés à l'empire tout en conservant leur langue, toujours parlée aujourd'hui." />
+      <FigureCard name="Les Chimú" role="Héritiers du royaume de Chimor" tags={['Côte nord', 'Orfèvrerie']} body="Conquis vers 1470 seulement, quelques décennies avant l'arrivée espagnole : orfèvres et urbanistes de premier plan, dont le savoir-faire métallurgique est absorbé par l'administration inca." />
+      <FigureCard name="Les Chachapoya" role="« Peuple des nuages »" tags={['Forêt de nuages', 'Résistance']} body="Peuple des contreforts amazoniens connu pour une résistance farouche à la conquête inca et une architecture funéraire distinctive à flanc de falaise." />
+      <FigureCard name="Les mitmaqkuna" role="Un système, pas une ethnie" tags={['Politique impériale', 'Déplacement forcé']} body="Des populations entières étaient déplacées d'une région à l'autre de l'empire pour casser les foyers de rébellion et diffuser des savoir-faire — une politique d'État délibérée, pas un peuple au sens ethnique." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Ceux qui ont fait et défait l'empire">
+    <div class="card-grid wide">
+      <FigureCard name="Manco Cápac" role="Fondateur légendaire" tags={['Mythe', 'Lac Titicaca']} body="Premier souverain selon la tradition, émergé du lac Titicaca ou envoyé par le dieu-Soleil Inti — une figure fondatrice au statut mi-historique mi-mythique." />
+      <FigureCard name="Pachacuti" role="Le véritable bâtisseur de l'empire" tags={['v. 1438-1471', 'Réformateur']} body="Neuvième souverain, il transforme un royaume régional en empire après avoir vaincu les Chanka aux portes de Cusco, lance le réseau routier et fait bâtir Machu Picchu." />
+      <FigureCard name="Huayna Capac" role="Dernier souverain d'un empire uni" tags={['Apogée', 'Épidémie']} body="Sous son règne, l'empire atteint son extension maximale — avant qu'une épidémie de variole, arrivée avant même les premiers conquistadors, ne l'emporte et ne déclenche une guerre de succession." />
+      <FigureCard name="Atahualpa" role="Dernier empereur inca" tags={['1532', 'Cajamarca']} body="Vainqueur de la guerre civile contre son demi-frère Huáscar, il est capturé par Pizarro à Cajamarca, paie une rançon en or et en argent sans précédent, et est exécuté malgré tout en 1533." />
+      <FigureCard name="Túpac Amaru" role="Dernier résistant de Vilcabamba" tags={['1572', 'État néo-inca']} body="Depuis le refuge montagneux de Vilcabamba, la résistance inca tient près de 35 ans après la chute de Cusco, jusqu'à sa capture et son exécution publique par les Espagnols." />
+      <FigureCard name="Túpac Amaru II" role="Chef de la grande révolte de 1780" tags={['XVIIIe siècle', 'Résistance coloniale']} body="Reprenant le nom du dernier Inca, José Gabriel Condorcanqui mène l'une des plus grandes révoltes indigènes contre la couronne espagnole en Amérique du Sud, écrasée mais durablement marquante." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="Une expansion foudroyante, un effondrement plus rapide encore">
+    <StoryBlock num="Épisode I" title="La guerre contre les Chanka" body="Vers 1438, alors que Cusco semble sur le point de tomber face aux Chanka, le prince Cusi Yupanqui organise la défense, renverse le rapport de force et prend le nom de Pachacuti (« celui qui transforme la terre »). En quelques décennies, un royaume régional devient l'empire le plus vaste jamais bâti en Amérique précolombienne." />
+    <StoryBlock num="Épisode II" title="Une épidémie qui précède les conquérants" body={["Vers 1524-1527, une épidémie de variole — introduite en Amérique par les premiers contacts espagnols en Amérique centrale, bien avant l'arrivée de Pizarro sur le sol inca — se propage le long des routes impériales et tue l'empereur Huayna Capac ainsi qu'une part considérable de la population.", "La succession n'étant pas clairement réglée, une guerre civile éclate entre ses fils Huáscar et Atahualpa — un empire déjà affaibli et divisé au moment même où les Espagnols débarquent."]} />
+    <StoryBlock num="Épisode III" title="Cajamarca, 1532" body="Atahualpa, venant de remporter la guerre civile, rencontre Francisco Pizarro et ses 168 hommes à Cajamarca, convaincu de sa supériorité numérique écrasante. L'embuscade espagnole, appuyée par la cavalerie et les armes à feu, fait des milliers de morts en quelques heures et capture l'empereur." quote="Une pièce remplie d'or une fois, deux fois d'argent — et l'exécution malgré la rançon payée." cite="Résumé de l'issue de la captivité d'Atahualpa" />
+    <StoryBlock num="Épisode IV" title="Vilcabamba, l'empire qui ne meurt pas tout de suite" body="Après la chute de Cusco, des membres de la famille impériale se replient dans la région reculée de Vilcabamba et y maintiennent un État inca de résistance pendant près de trente-cinq ans, jusqu'à la capture et l'exécution de Túpac Amaru en 1572 — un empire officiellement « conquis » qui a continué d'exister en résistance pendant une génération entière." />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Administrer sans écriture, sans roue et sans monnaie">
+    <div class="card-grid compact">
+      <MiniCard title="Le Qhapaq Ñan" tag="~40 000 km de routes" body="Un réseau routier reliant l'ensemble de l'empire à travers les Andes, avec relais (tambos) tous les vingt kilomètres environ et ponts suspendus en fibres végétales, régulièrement renouvelés." />
+      <MiniCard title="Le quipu" tag="Comptabilité à nœuds" body="Des cordelettes nouées codant des données numériques — et peut-être narratives, un débat toujours ouvert — capables de gérer la logistique d'un empire de plusieurs millions de sujets sans écriture au sens classique." />
+      <MiniCard title="Les chasquis" tag="Relais de coureurs" body="Un système de messagers relayés capable de transmettre une information sur des centaines de kilomètres de montagne en quelques jours seulement." />
+      <MiniCard title="Les andenes" tag="Agriculture en terrasses" body="Des terrasses qui transforment des pentes abruptes en terres cultivables à différentes altitudes, chacune adaptée à des cultures spécifiques — un système d'archipel vertical de microclimats." />
+      <MiniCard title="Le chuño" tag="Lyophilisation précolombienne" body="Une technique de conservation de la pomme de terre par gel et déshydratation alternés en haute altitude, l'une des plus anciennes méthodes de lyophilisation alimentaire connues au monde." />
+      <MiniCard title="La maçonnerie polygonale" tag="Sacsayhuamán" body="Des blocs de pierre taillés et assemblés sans mortier, avec une précision telle qu'une lame n'y trouve pas d'interstice — une technique qui absorbe encore aujourd'hui les secousses sismiques mieux que bien des constructions modernes." />
+      <MiniCard title="Le mit'a" tag="Impôt en travail" body="Plutôt qu'une taxe monétaire — l'empire ne connaît pas la monnaie — chaque sujet doit un temps de travail à l'État, qui finance ainsi routes, temples et greniers publics." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="« Inca » ne désignait pas tout le peuple" tag="Distinction utile" body="Le mot ne s'appliquait à l'origine qu'au souverain et à la caste dirigeante de Cusco — le nom que l'empire se donnait à lui-même était Tawantinsuyu." />
+      <MiniCard title="Sans roue ni bête de trait" tag="Idée reçue à corriger" body="Malgré 40 000 km de routes, l'empire ne connaît ni la roue à usage pratique ni la traction animale lourde : le lama sert de bête de somme, pas de trait." />
+      <MiniCard title="Cinq ans pour un empire millénaire" tag="Vitesse de l'effondrement" body="De la première rencontre avec Pizarro (1532) à la chute complète du pouvoir central (1537), il s'écoule moins de cinq ans — une chute accélérée par une guerre civile et une épidémie antérieures à la conquête elle-même." />
+      <MiniCard title="Le tissu, plus précieux que l'or" tag="Économie du prestige" body="Dans la société inca, le tissu fin (cumbi), tissé en laine d'alpaga ou de vigogne, constituait souvent un bien plus prestigieux que l'or ou l'argent, réservé à l'élite et aux offrandes rituelles." />
+      <MiniCard title="Machu Picchu n'a jamais été « perdu »" tag="Nuance historique" body="Ignoré des conquistadors espagnols, le site restait connu des paysans locaux lorsque l'universitaire américain Hiram Bingham en fait la publicité internationale en 1911 — « redécouverte scientifique », pas découverte au sens strict." />
+      <MiniCard title="Le quipu garde une part de mystère" tag="Recherche active" body="Si le codage numérique des quipus est largement déchiffré, l'hypothèse d'un contenu narratif encodé dans certains d'entre eux reste débattue par les spécialistes aujourd'hui." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="L'ayllu, le tissu et la feuille de coca"
+    intro="Une vie organisée autour de la communauté, de la réciprocité et d'un calendrier agricole rythmé par le culte du Soleil et de la Terre-Mère."
+    scrollFx="incaQuipu">
+    <div class="card-grid compact">
+      <MiniCard title="L'ayllu" tag="Unité de base" body="Une communauté fondée sur la parenté et la terre partagée, cellule de base de toute l'organisation sociale et agricole de l'empire." />
+      <MiniCard title="Ayni et minka" tag="Réciprocité organisée" body="L'entraide entre foyers (ayni) et le travail collectif pour l'intérêt commun (minka) structurent l'essentiel de la vie économique, en dehors de toute logique marchande." />
+      <MiniCard title="La feuille de coca" tag="Usage rituel et pratique" body="Mâchée pour endurer l'altitude et le travail physique, et offerte lors des rituels — un usage ancien, très différent de la plante transformée bien plus tard en stupéfiant industriel." />
+      <MiniCard title="Inti et Pachamama" tag="Culte du quotidien" body="Le Soleil et la Terre-Mère ne sont pas de simples figures de panthéon lointain : leur culte rythme directement les semis, les récoltes et les grandes fêtes agricoles." />
+      <MiniCard title="La pomme de terre andine" tag="Des milliers de variétés" body="Les paysans andins domestiquent plusieurs milliers de variétés de pommes de terre adaptées à des micro-altitudes précises — une diversité génétique aujourd'hui précieuse pour l'agriculture mondiale." />
+      <MiniCard title="La chicha de maïs" tag="Boisson rituelle et sociale" body="Bière de maïs fermentée, consommée lors des fêtes et des cérémonies d'État, souvent distribuée par l'administration impériale elle-même comme geste de redistribution." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="De la pomme de terre andine à la carte UNESCO">
+    <div class="card-grid">
+      <InfoCard title="La pomme de terre, don au monde" sub="Après 1492" body="Domestiquée dans les Andes des millénaires plus tôt, elle devient après l'échange colombien l'un des aliments de base les plus cultivés de la planète." />
+      <InfoCard title="Le quechua, langue vivante" sub="8 à 10 millions de locuteurs" body="Toujours parlé au Pérou, en Bolivie, en Équateur, au Chili et en Argentine, avec un statut officiel dans plusieurs pays andins." />
+      <InfoCard title="Machu Picchu, patrimoine mondial" sub="UNESCO, 1983" body="L'un des sites archéologiques les plus visités au monde, aujourd'hui confronté à une pression touristique que les autorités péruviennes peinent à réguler." />
+      <InfoCard title="Le Qhapaq Ñan, patrimoine partagé" sub="UNESCO, 2014" body="Le réseau routier inca est inscrit conjointement par six pays andins — une reconnaissance transnationale rare pour un même site historique." />
+      <InfoCard title="L'agriculture en terrasses, toujours utilisée" sub="Communautés andines actuelles" body="De nombreuses communautés paysannes andines cultivent encore aujourd'hui les mêmes terrasses, avec des techniques directement héritées de la période inca." />
+      <InfoCard title="Túpac Amaru II, une mémoire politique" sub="XVIIIe siècle à aujourd'hui" body="Son nom continue d'être invoqué, bien au-delà du Pérou, comme symbole de résistance à la domination coloniale en Amérique latine." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'Date légendaire', title: 'Fondation de Cusco', body: "Manco Cápac fonde, selon la tradition, la lignée royale inca." },
+      { year: 'v. 1438', title: 'Pachacuti et la guerre des Chanka', body: "Le tournant qui transforme un royaume régional en empire en expansion rapide." },
+      { year: 'v. 1450', title: 'Construction de Machu Picchu', body: "Domaine royal bâti sous Pachacuti, jamais mentionné dans les sources espagnoles de la conquête." },
+      { year: 'v. 1493-1527', title: 'Règne de Huayna Capac', body: "L'empire atteint son extension territoriale maximale." },
+      { year: 'v. 1524-1527', title: 'Épidémie de variole', body: "Propagée en avance sur les conquistadors eux-mêmes, elle tue l'empereur et déclenche une crise de succession." },
+      { year: '1529-1532', title: 'Guerre civile', body: "Huáscar et Atahualpa se disputent le trône, affaiblissant l'empire à la veille de la conquête." },
+      { year: '1532', title: 'Cajamarca', body: "Pizarro capture Atahualpa lors d'une rencontre qui tourne à l'embuscade." },
+      { year: '1533', title: 'Exécution d\'Atahualpa', body: "L'empereur est mis à mort malgré le paiement d'une rançon considérable en or et en argent." },
+      { year: '1533-1537', title: 'Chute de Cusco', body: "Les Espagnols consolident leur contrôle sur la capitale impériale." },
+      { year: '1537-1572', title: 'L\'État néo-inca de Vilcabamba', body: "La résistance inca se maintient depuis un refuge montagneux pendant près de trente-cinq ans." },
+      { year: '1572', title: 'Exécution de Túpac Amaru', body: "Fin officielle de la résistance inca organisée." },
+      { year: '1780-1781', title: 'Révolte de Túpac Amaru II', body: "L'une des plus grandes insurrections indigènes contre la couronne espagnole en Amérique du Sud." },
+      { year: '1911', title: 'Hiram Bingham à Machu Picchu', body: "Le site, connu localement, est porté à l'attention scientifique internationale." },
+      { year: '1983 puis 2014', title: 'Inscriptions UNESCO', body: "Machu Picchu, puis le réseau du Qhapaq Ñan, rejoignent le patrimoine mondial de l'humanité." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que l'empire laisse encore">
+    <HeritageBlock title="Une langue toujours parlée" body="Le quechua reste une langue vivante, officielle dans plusieurs pays andins, parlée par des millions de personnes bien au-delà des seuls descendants directs de l'aristocratie inca." />
+    <HeritageBlock title="Un legs agricole mondial" body="La pomme de terre andine, domestiquée des millénaires avant l'empire, est devenue l'un des aliments les plus cultivés de la planète — l'héritage le plus discrètement universel de cette civilisation." />
+    <HeritageBlock title="Une économie touristique sous tension" body="Machu Picchu attire chaque année plus d'un million de visiteurs, posant des questions concrètes de préservation face à l'afflux, dans un dialogue permanent entre autorités péruviennes, chercheurs et communautés locales." />
+    <HeritageBlock title="Une mémoire de résistance" body="Le nom de Túpac Amaru, repris deux siècles après le dernier souverain inca par un chef de révolte anticoloniale, continue d'être invoqué comme symbole de résistance à travers l'Amérique latine." />
+    <CautionBox>
+      Cette page décrit une civilisation impressionnante par son ingénierie et son
+      administration — ce qui ne doit pas effacer qu'elle fut aussi un empire de conquête,
+      bâti en partie sur le déplacement forcé de populations entières (les mitmaqkuna). Admirer
+      le génie logistique du Tawantinsuyu n'oblige pas à en gommer les rapports de domination
+      internes, pas plus qu'on ne le ferait pour n'importe quel autre grand empire de l'histoire.
+    </CautionBox>
+  </Section>
+</PageLayout>

@@ -13,7 +13,7 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Le Yeti (Abominable Snowman) ✅ | 9 | Himalaya | Non prouvé, plusieurs traces attribuées depuis à des ours |
 | La Bête du Gévaudan ✅ | 9 | France, XVIIIe siècle | Événement réel documenté, explication la plus probable : loups (éventuellement hybrides ou dressés) |
 | Le Chupacabra ✅ | 8 | Porto Rico / Amérique latine | Phénomène récent (1990s), cas attribués à des canidés galeux |
-| Le Kraken | 8 | Scandinavie | Légende ancienne, probablement inspirée du calmar géant, réellement découvert bien plus tard |
+| Le Kraken ✅ | 8 | Scandinavie | Légende ancienne, probablement inspirée du calmar géant, réellement découvert bien plus tard |
 | Les Sirènes / Femmes-poissons | 7 | Mondiale | Croyance ancienne largement attribuée à des méprises sur des mammifères marins (lamantins, dugongs) |
 | Le Mothman ✅ | 7 | Point Pleasant, États-Unis | Panique collective documentée, explication sceptique dominante (hibou mal identifié) |
 | Le Wendigo | 7 | Peuples algonquins | Figure spirituelle vivante — à traiter avec respect culturel, pas comme simple "monstre" |
@@ -26,7 +26,7 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Le Popobawa | 5 | Zanzibar | Panique collective documentée dans les années 1990-2000 |
 | Le Yowie | 5 | Australie | Équivalent local du Bigfoot, très peu de dossier scientifique |
 | La Créature de Loveland | 4 | Ohio, États-Unis | Anecdote locale isolée, aucune corroboration sérieuse |
-| Le Kappa | 7 | Japon | Croyance folklorique très vivante (mascotte, culture pop), esprit aquatique espiègle et dangereux, non un cryptide "chassé" comme les autres |
+| Le Kappa ✅ | 7 | Japon | Croyance folklorique très vivante (mascotte, culture pop), esprit aquatique espiègle et dangereux, non un cryptide "chassé" comme les autres |
 | L'Orang Pendek | 6 | Sumatra, Indonésie | Non prouvé, expéditions régulières, moulages de traces jamais concluants |
 | Champ | 6 | Lac Champlain, États-Unis/Canada | Folklore du XIXe s. + photo "Mansi" (1977) jamais authentifiée formellement, parallèle direct de Nessie |
 | Nahuelito | 6 | Lac Nahuel Huapi, Argentine | "Nessie sud-américaine", témoignages depuis les années 1920, aucune preuve scientifique |
@@ -57,7 +57,7 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Le Mécanisme d'Anticythère ✅ | 8 | Grèce antique | Largement résolu : calculateur astronomique antique d'une sophistication redécouverte par la science moderne |
 | Les Lignes de Nazca ✅ | 8 | Pérou | Fonction rituelle/astronomique largement documentée par l'archéologie, malgré la persistance de théories marginales |
 | Le Manuscrit de Voynich ✅ | 8 | Europe, XVe siècle | Non déchiffré à ce jour malgré des décennies d'efforts, dossier scientifique sérieux et actif |
-| La Disparition d'Amelia Earhart | 8 | Pacifique, 1937 | Non résolu officiellement, plusieurs hypothèses sérieuses en concurrence |
+| La Disparition d'Amelia Earhart ✅ | 8 | Pacifique, 1937 | Non résolu officiellement, plusieurs hypothèses sérieuses en concurrence |
 | Le Mary Celeste | 8 | Atlantique, 1872 | Événement réel, explication la plus probable aujourd'hui : évacuation précipitée par erreur d'appréciation, pas de mystère surnaturel |
 | L'Île de Pâques et l'Effondrement Rapa Nui | 8 | Polynésie | Hypothèses scientifiques concurrentes sérieuses (déforestation, maladies, esclavage colonial) |
 | Le Suaire de Turin | 7 | Italie | Datation au carbone 14 (1988) pointant vers le Moyen Âge, toujours contestée par certains |
@@ -77,7 +77,7 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Les Pierres de Dropa | 5 | Chine (légende moderne) | Canular/légende du XXe siècle sans fondement archéologique sérieux, bon contre-exemple de pseudo-mystère viral |
 | La Cité Perdue de Paititi / El Dorado | 6 | Amazonie, Pérou/Bolivie | Légende de cité d'or jamais localisée malgré des siècles d'expéditions, toujours non résolue |
 | Dwarka, la Cité Engloutie | 5 | Golfe de Cambay, Inde | Ruines sous-marines liées à la légende de Krishna, datation et interprétation encore débattues par les archéologues |
-| Göbekli Tepe | 9 | Turquie, ~9500 av. J.-C. | **L'absence la plus criante de cette liste.** Des enclos monumentaux à piliers en T bâtis par des chasseurs-cueilleurs, avant l'agriculture et la poterie : le site a inversé la séquence admise « d'abord les champs, ensuite les temples ». Fouillé depuis 1995, encore très largement enfoui |
+| Göbekli Tepe ✅ | 9 | Turquie, ~9500 av. J.-C. | **L'absence la plus criante de cette liste.** Des enclos monumentaux à piliers en T bâtis par des chasseurs-cueilleurs, avant l'agriculture et la poterie : le site a inversé la séquence admise « d'abord les champs, ensuite les temples ». Fouillé depuis 1995, encore très largement enfoui |
 | Le Disque de Phaistos | 7 | Crète, ~1700 av. J.-C. | 241 signes imprimés au poinçon en spirale, 45 caractères distincts, **jamais déchiffrés** — et un corpus trop court pour espérer y arriver. Complément direct de la page Voynich, et lien avec la culture minoenne |
 | Le Rongorongo | 7 | Île de Pâques | Une vingtaine d'objets gravés subsistants, non déchiffrés, et un débat de fond : est-ce même une écriture, ou une proto-écriture ? La seule écriture indéchiffrée d'Océanie — *voir la note de recoupement ci-dessous* |
 | L'Explosion de la Toungouska | 7 | Sibérie, 1908 | Événement réel et colossal (2 000 km² de forêt couchée), consensus scientifique solide (explosion aérienne d'un corps céleste) mais **aucun cratère**, ce qui alimente toujours les théories exotiques |
@@ -89,16 +89,17 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 
 ## État de la série (26/07/2026)
 
-**Créatures : 6 publiées** — Bête du Gévaudan, Monstre du Loch Ness, Bigfoot, Yeti,
-Chupacabra, Mothman. **30 à venir**, dont 9 ajoutées le 26/07/2026 (Mokèlé-mbembé,
-Thunderbird, Golem de Prague, Tarasque, Basilic, Mapinguari, Tatzelwurm, puis La Llorona et
-l'Hombre Caimán) — l'Afrique n'avait que 3 entrées, l'Amazonie aucune, et l'Amérique latine
-hispanique seulement le Chupacabra.
+**Créatures : 8 publiées** — Bête du Gévaudan, Monstre du Loch Ness, Bigfoot, Yeti,
+Chupacabra, Mothman, **le Kraken**, **le Kappa**. **28 à venir**, dont 9 ajoutées le
+26/07/2026 (Mokèlé-mbembé, Thunderbird, Golem de Prague, Tarasque, Basilic, Mapinguari,
+Tatzelwurm, puis La Llorona et l'Hombre Caimán) — l'Afrique n'avait que 3 entrées, l'Amazonie
+aucune, et l'Amérique latine hispanique seulement le Chupacabra.
 
-**Mystères : 6 publiés** — Triangle des Bermudes, Stonehenge, Col Dyatlov, Manuscrit de
-Voynich, Lignes de Nazca, Mécanisme d'Anticythère. **27 à venir**, dont 7 ajoutées le
-26/07/2026 (Göbekli Tepe, disque de Phaistos, rongorongo, Toungouska, Somerton Man, Oak
-Island, sphères du Costa Rica).
+**Mystères : 8 publiés** — Triangle des Bermudes, Stonehenge, Col Dyatlov, Manuscrit de
+Voynich, Lignes de Nazca, Mécanisme d'Anticythère, Göbekli Tepe, **la disparition d'Amelia
+Earhart**. **25 à venir**, dont 7 ajoutées le 26/07/2026 (disque de Phaistos, rongorongo,
+Toungouska, Somerton Man, Oak Island, sphères du Costa Rica — Göbekli Tepe, alors « l'absence
+la plus criante », est désormais publié).
 
 **Note de recoupement — rongorongo et île de Pâques.** Les deux sont dans la liste, au même
 endroit sur la carte. Ce n'est pas la redondance volontaire du type Grand Zimbabwe : l'île de

@@ -1,0 +1,151 @@
+---
+/*
+  Le Kappa — huitième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict. Pas de
+  frise (pas d'histoire de témoignages datés sur plusieurs décennies).
+
+  Ton : léger et joueur, conformément à la liste ("croyance folklorique très
+  vivante, esprit aquatique espiègle et dangereux, non un cryptide « chassé »
+  comme les autres") — le kappa est aujourd'hui une mascotte autant qu'une
+  figure d'avertissement, et le Japon lui-même le traite avec humour.
+
+  Effets : data-egg="kappa" + data-scroll-fx="kappaDish" sur #portrait, piste
+  documentée dans plan-effets.md ("l'écuelle d'eau posée sur une tête qui se
+  renverse — ton léger, c'est un folklore vivant et joueur").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Vert de rivière, concombre, carapace : la matière du folklore plutôt
+   qu'une palette "Japon" générique déjà utilisée par les pages mythologie et
+   culture japonaises. */
+const palette = {
+  bg: '#0f1a12',
+  'bg-deep': '#08100b',
+  surface: '#17281c',
+  'surface-alt': '#1f3325',
+  border: '#3a5a3f',
+  ink: '#eef7ea',
+  text: '#cfe3c8',
+  'text-dim': '#8fac85',
+  accent: '#4a9e4a',
+  'accent-bright': '#7ecb6a',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#2f7a3a',
+  'verdict-bright': '#5ab060',
+  glow: 'rgba(74,158,74,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Témoins' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Kappa"
+  serie="Créatures Légendaires du Monde"
+  description="Un esprit aquatique japonais qui tire les imprudents sous l'eau — et qu'un simple salut poli suffit à neutraliser. Du folklore d'avertissement contre la noyade à la mascotte adorée des sushis au concombre."
+  href="creature-kappa.html"
+  egg="kappa"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="河童 · RIVIÈRES DU JAPON"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>La Llorona</strong>"
+>
+  <p class="subtitle" slot="hero">L'enfant de rivière</p>
+  <p class="tagline" slot="hero">
+    Une créature qu'on neutralise en la saluant poliment — le folklore japonais le plus
+    espiègle de toute cette série.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Folklore vivant, fonction d'avertissement"
+    note="Aucune preuve d'un animal réel correspondant au kappa — mais une fonction sociale bien documentée : dissuader les enfants de nager sans surveillance, doublée aujourd'hui d'un usage ludique assumé par la culture japonaise elle-même."
+  />
+
+  <Section id="origine" label="Première mention" title="Un esprit des rivières, avant d'être un personnage" intro="Le kappa n'a pas un texte fondateur unique : c'est une croyance diffuse, attestée sous des noms régionaux variés bien avant d'être fixée par les bestiaires illustrés de l'époque d'Edo.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une croyance diffuse et régionale" sub="Avant l'époque d'Edo" body="Le kappa porte des noms différents selon les régions du Japon (kawatarō, enko...), signe d'une croyance populaire locale plutôt que d'un mythe unique diffusé depuis un centre religieux." />
+      <InfoCard num="II" title="Toriyama Sekien" sub="Bestiaires illustrés, XVIIIe siècle" body="Les grands recueils illustrés de yōkai de l'époque d'Edo fixent pour la première fois une iconographie standardisée de la créature, aujourd'hui encore largement reprise." />
+      <InfoCard num="III" title="Une fonction avant une forme" sub="Anthropologie du folklore" body="Comme de nombreuses créatures aquatiques ailleurs dans le monde, le kappa semble d'abord avoir servi à tenir les enfants éloignés des rivières dangereuses — la forme précise s'est fixée après la fonction." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapporte la tradition" title="Un enfant de rivière avec une écuelle sur la tête" scrollFx="kappaDish" intro="Rédigé au conditionnel : la description varie selon les régions, mais quelques traits reviennent presque partout.">
+    <div class="card-grid wide">
+      <FigureCard name="Une taille d'enfant" role="Silhouette amphibie" tags={['Peau verdâtre', 'Membres palmés']} body="De la taille d'un enfant, la peau écailleuse ou verdâtre, des mains et des pieds palmés, une carapace de tortue sur le dos et un bec à la place de la bouche." />
+      <FigureCard name="L'écuelle d'eau" role="La source de son pouvoir" tags={['Sara', 'Vulnérabilité']} body="Une cavité remplie d'eau au sommet du crâne : tant qu'elle reste pleine, le kappa conserve sa force ; vidée ou asséchée, il s'affaiblit brutalement, parfois jusqu'à en mourir." />
+      <FigureCard name="Le salut qui désarme" role="Une politesse fatale... pour lui" tags={['Étiquette', 'Ruse']} body="Extrêmement attaché aux bonnes manières, le kappa est contraint de rendre tout salut qu'on lui adresse — un geste qui renverse l'eau de son écuelle et le neutralise aussitôt." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Qui en a parlé" title="Des pactes de village aux bestiaires">
+    <StoryBlock num="Récit I" title="Le kappa capturé qui négocie" body="Un motif récurrent d'un village à l'autre : un kappa, surpris en train de tirer un cheval ou un enfant vers l'eau, se fait attraper puis promet, en échange de sa libération, un savoir utile — souvent une recette médicinale de rebouteux, que certaines familles ou temples affirment encore détenir aujourd'hui." />
+    <StoryBlock num="Récit II" title="Les « momies » de kappa" body="Plusieurs sanctuaires et temples japonais exposent depuis des générations des reliques présentées comme des restes momifiés de kappa — des assemblages composites fabriqués à partir de restes animaux divers, dans la même tradition artisanale que les fausses « sirènes de Fidji » occidentales." />
+    <StoryBlock num="Récit III" title="Kappabashi, la rue qui porte son nom" body="À Tokyo, le quartier de Kappabashi, aujourd'hui célèbre pour ses commerces d'ustensiles de cuisine, tirerait son nom d'une légende locale où un kappa aurait aidé à des travaux de drainage — un exemple de la façon dont la créature s'est inscrite jusque dans la toponymie urbaine." />
+  </Section>
+
+  <Section id="culture-populaire" label="De la légende au phénomène" title="D'avertissement dangereux à mascotte adorée">
+    <div class="card-grid compact">
+      <MiniCard title="Le kappa maki" tag="Cuisine japonaise" body="Le rouleau de sushi au concombre porte le nom de la créature, réputée en raison légendaire pour son amour du concombre — l'un des liens les plus concrets entre folklore et vie quotidienne de toute cette série." />
+      <MiniCard title="Une créature adoucie" tag="Manga, anime, jeux vidéo" body="D'esprit dangereux capable de noyer un enfant, le kappa est devenu au fil du XXe siècle un personnage récurrent et attachant de la culture populaire japonaise, jusque dans des designs ouvertement mignons." />
+      <MiniCard title="Une figure encore locale" tag="Festivals régionaux" body="De nombreuses villes japonaises situées sur des rivières entretiennent des statues, mascottes et festivals dédiés à « leur » kappa local, avec fierté plutôt qu'inquiétude." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que l'anthropologie peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucune créature, une fonction sociale bien documentée" body="Il n'existe aucune preuve zoologique d'un animal correspondant au kappa. En revanche, la fonction du récit — dissuader les enfants de s'aventurer seuls dans une eau dangereuse — est un schéma bien documenté par l'anthropologie du folklore, comparable à d'autres figures aquatiques d'avertissement ailleurs dans le monde." />
+    <ScienceBlock num="Enquête 2" title="Des candidats animaux plausibles" body="La salamandre géante du Japon (Andrias japonicus), qui peut dépasser 1,5 mètre, et la tortue à carapace molle (suppon), connue pour ses morsures vives, offrent des candidats plausibles à l'origine de rencontres réelles mal interprétées dans l'obscurité d'une rivière." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Le kappa est une figure d'avertissement contre la noyade"
+      level="consensus"
+      status="Consensus"
+      body="Lecture largement partagée par les folkloristes japonais : une fonction éducative et préventive, comme on en trouve pour des créatures aquatiques comparables dans d'autres traditions à travers le monde."
+      attrib="Position dominante en anthropologie du folklore japonais"
+    />
+    <TheoryCard
+      title="Des rencontres avec la salamandre géante ou la tortue à carapace molle"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Des animaux réels, impressionnants et parfois agressifs, présents dans les mêmes cours d'eau, pourraient avoir nourri des témoignages ensuite amplifiés en récit de créature intelligente."
+      attrib="Hypothèse discutée en zoologie folklorique"
+    />
+    <TheoryCard
+      title="Les « momies » de kappa sont des restes authentiques"
+      level="folklore"
+      status="Écarté"
+      body="Les rares spécimens examinés se révèlent être des assemblages composites fabriqués, dans la même tradition artisanale que d'autres canulars naturalistes bien connus ailleurs dans le monde."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le kappa fait encore">
+    <HeritageBlock title="Une mascotte régionale assumée" body="De nombreuses municipalités japonaises situées en bord de rivière ont adopté le kappa comme symbole touristique officiel, statue à l'appui — un folklore vivant, pas relégué au musée." />
+    <HeritageBlock title="Un mot entré dans la cuisine mondiale" body="Le kappa maki a exporté, sans que la plupart des convives le sachent, le nom de la créature jusque dans les restaurants de sushi du monde entier." />
+    <HeritageBlock title="Une figure toujours reconvoquée" body="Manga, anime et jeux vidéo continuent de réinventer le kappa, preuve d'un folklore qui reste activement créatif plutôt que figé dans sa version du XVIIIe siècle." />
+    <CautionBox>
+      Le ton de cette page reste volontairement léger : le kappa est aujourd'hui traité avec
+      humour par la culture japonaise elle-même, mascotte de ville autant que figure
+      d'avertissement — une créature qu'on célèbre plus qu'on ne la craint, à la différence de
+      plusieurs autres pages de cette série.
+    </CautionBox>
+  </Section>
+</PageLayout>

@@ -1,0 +1,301 @@
+---
+/*
+  Mythologie Perse / zoroastrienne — douzième mythologie de la série, et
+  première mythologie écrite avec le socle Astro (les 11 précédentes sont des
+  pages statiques, voir docs/plans/plan-industrialisation.md). Structure
+  imposée par docs/plans/plan-serie-mythologies.md : 9 sections fixes.
+
+  #royaumes : le correctif du 26/07/2026 interdit de forcer un chiffre choisi
+  pour une autre culture. Ici, la cosmologie zoroastrienne authentique retient
+  les « sept créations » (haft āfrīngān), chacune protégée par un Amesha
+  Spenta — un chiffre dérivé du Bundahishn, pas aligné sur les Neuf Mondes
+  nordiques.
+
+  #genealogie : le dualisme cosmique zoroastrien ne fonctionne pas comme un
+  arbre généalogique de dieux qui se marient et ont des enfants (cf. Grèce,
+  Egypte) — les « 3 maisons » sont donc redéfinies comme 3 camps/emanations
+  plutôt que 3 lignées de sang, ce qui est expliqué explicitement dans le
+  texte plutôt que forcé silencieusement dans un gabarit généalogique.
+
+  Effets : data-egg="perse" + data-scroll-fx="perseFlame" sur #pantheon
+  (convention de la famille mythologies). Déchiffrement des titres de section
+  (mécanisme 3, minimum non négociable) : glyphs="cunei", le pool cunéiforme
+  existant, réutilisé légitimement car le cunéiforme vieux-perse appartient à
+  la même famille d'écriture que le cunéiforme mésopotamien déjà encodé —
+  plutôt que d'inventer des glyphes non vérifiés pour un vrai système d'écriture.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+
+/* Braise et nuit : le feu sacré (Ahura Mazda) contre l'obscurité (Angra
+   Mainyu) — le dualisme fondateur de la religion, en couleurs. */
+const palette = {
+  bg: '#171009',
+  'bg-deep': '#0c0805',
+  surface: '#241a10',
+  'surface-alt': '#2e2214',
+  border: '#5a4020',
+  ink: '#fbead0',
+  text: '#e8d2b0',
+  'text-dim': '#b09570',
+  accent: '#e8a23c',
+  'accent-bright': '#f7c667',
+  accent2: '#3a3d5c',
+  'accent2-bright': '#6a6f9c',
+  verdict: '#8a1f1f',
+  'verdict-bright': '#c9384a',
+  glow: 'rgba(232,162,60,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Créations' },
+  { id: 'pantheon', nav: 'Panthéon' },
+  { id: 'genealogie', nav: 'Généalogie' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const creations = [
+  { num: 'I', title: 'Le Ciel', sub: 'Métal — Xshathra Vairya', body: "Voûte de cristal et de métal, première des créations, garde-frontière contre l'assaut du chaos." },
+  { num: 'II', title: "L'Eau", sub: 'Haurvatat', body: "Un seul océan primordial, Vourukasha, source de toutes les eaux qui suivront." },
+  { num: 'III', title: 'La Terre', sub: 'Spenta Armaiti', body: "Plate et ronde à l'origine, disque unique avant d'être façonnée en sept climats (keshvar)." },
+  { num: 'IV', title: 'Les Plantes', sub: 'Ameretat', body: "Une plante unique et immortelle, dont toutes les espèces végétales dérivent après l'assaut du Mal." },
+  { num: 'V', title: 'Le Bétail primordial', sub: 'Vohu Manah', body: "Le Bœuf unique, Gavaevodata, dont la mort par l'assaut d'Angra Mainyu donnera naissance à tous les animaux." },
+  { num: 'VI', title: "L'Humanité", sub: 'Spenta Mainyu', body: "Gayomard, l'humain primordial, dont la semence donnera naissance au premier couple humain après sa mort." },
+  { num: 'VII', title: 'Le Feu', sub: 'Asha Vahishta', body: "Dernière création, présente dans toutes les autres comme une étincelle de vie — jamais un objet de culte séparé, contrairement à une idée reçue tenace." },
+];
+---
+<PageLayout
+  title="Mythologie Perse"
+  serie="Mythologies du Monde"
+  description="Le dualisme cosmique fondateur d'Ahura Mazda contre Angra Mainyu, les sept créations protégées par les Amesha Spenta, et une religion toujours vivante de l'Iran à Mumbai — pas une mythologie éteinte."
+  href="mythologie-perse.html"
+  egg="perse"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="AHURA MAZDĀ"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : <strong>la mythologie Yoruba</strong>"
+>
+  <p class="subtitle" slot="hero">Ahura Mazda · Angra Mainyu · Zoroastre</p>
+  <p class="tagline" slot="hero">
+    Un dualisme cosmique si influent qu'il a laissé sa trace dans le judaïsme, le
+    christianisme et l'islam — et une religion toujours pratiquée aujourd'hui, de l'Iran à
+    Mumbai.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="Les sept créations"
+    intro="Pas de royaumes empilés comme chez les Vikings : la cosmologie zoroastrienne authentique (Bundahishn) décrit sept étapes de création successives, chacune confiée à un Amesha Spenta, un « Immortel Bienfaisant » gardien.">
+    <Fragment slot="title"><Decode glyphs="cunei">Les sept créations</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="perseSun" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#f7c667" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#f7c667" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="320" cy="130" r="80" fill="url(#perseSun)"/>
+        <circle cx="320" cy="130" r="26" fill="#e8a23c" stroke="#fbead0" stroke-width="2"/>
+        <text x="320" y="136" text-anchor="middle" fill="#171009" font-family="Cinzel, serif" font-size="11" font-weight="700">ATAR</text>
+        {creations.map((c, i) => {
+          const angle = (i / creations.length) * Math.PI * 2 - Math.PI / 2;
+          const cx = 320 + Math.cos(angle) * 190;
+          const cy = 130 + Math.sin(angle) * 95;
+          return (
+            <g>
+              <line x1="320" y1="130" x2={cx} y2={cy} stroke="#6a6f9c" stroke-width="1" stroke-dasharray="3 5" opacity="0.6" />
+              <circle cx={cx} cy={cy} r="16" fill="#2e2214" stroke="#e8a23c" stroke-width="1.5" />
+              <text x={cx} y={cy + 4} text-anchor="middle" fill="#f7c667" font-family="Cinzel, serif" font-size="10">{c.num}</text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+    <p class="map-caption">Les sept créations rayonnant autour du feu, dernière étape et principe de vie présent dans les six autres.</p>
+    <div class="card-grid compact">
+      {creations.map((c) => <InfoCard {...c} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~16 figures majeures" title="Le panthéon zoroastrien" scrollFx="perseFlame">
+    <Fragment slot="title"><Decode glyphs="cunei">Le panthéon zoroastrien</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Ahura Mazda" role="Le Seigneur Sage, créateur" tags={['Suprême', 'Lumière']} body="Dieu unique de la sagesse, source de toute création bonne. Contrairement aux panthéons polythéistes voisins, il n'a ni parents ni rivaux de son rang — seulement un antagoniste, Angra Mainyu, qu'il n'a pas créé mais dont il n'a pas empêché l'existence." />
+      <FigureCard name="Angra Mainyu (Ahriman)" role="L'Esprit Destructeur" tags={['Chaos', 'Antagoniste']} body="Principe du mensonge et de la destruction, à l'origine de tout mal, souffrance et mort. Il n'est l'égal d'Ahura Mazda en pouvoir : sa défaite finale est annoncée comme certaine, pas seulement espérée." />
+      <FigureCard name="Vohu Manah" role="Bonne Pensée" tags={['Amesha Spenta', 'Bétail']} body="Premier des Immortels Bienfaisants à accueillir Zoroastre lors de sa révélation, protecteur du bétail et de l'esprit de discernement." />
+      <FigureCard name="Asha Vahishta" role="Meilleure Vérité" tags={['Amesha Spenta', 'Feu']} body="Incarnation de l'ordre cosmique et de la vérité, gardien du feu — le principe le plus proche d'une divinité du feu, sans jamais en être un objet de culte matériel séparé." />
+      <FigureCard name="Khshathra Vairya" role="Royauté Désirable" tags={['Amesha Spenta', 'Métal/Ciel']} body="Protecteur du ciel et des métaux, associé à la royauté juste — un pouvoir légitime seulement quand il sert le bien commun." />
+      <FigureCard name="Spenta Armaiti" role="Sainte Dévotion" tags={['Amesha Spenta', 'Terre']} body="Protectrice de la terre et de la piété silencieuse, l'une des rares figures féminines du groupe des Amesha Spenta." />
+      <FigureCard name="Haurvatat" role="Intégrité, Plénitude" tags={['Amesha Spenta', 'Eau']} body="Protectrice des eaux, associée à la santé et à la perfection — souvent invoquée aux côtés d'Ameretat, l'immortalité." />
+      <FigureCard name="Ameretat" role="Immortalité" tags={['Amesha Spenta', 'Plantes']} body="Protectrice des plantes, garante que la vie végétale se renouvelle indéfiniment malgré l'assaut du Mal." />
+      <FigureCard name="Mithra" role="Gardien du Contrat" tags={['Yazata', 'Soleil']} body="Dieu de l'alliance jurée et du serment, « aux mille oreilles », témoin de toute promesse. Son culte voyagera jusqu'à Rome sous le nom de Mithra, popularisé dans les armées impériales." />
+      <FigureCard name="Anahita" role="Les Eaux Puissantes et Immaculées" tags={['Yazata', 'Fertilité']} body="Déesse des eaux et de la fertilité, l'une des divinités les plus vénérées de l'Iran antique, avec des temples dédiés sous les Achéménides." />
+      <FigureCard name="Sraosha" role="Obéissance, Conscience" tags={['Yazata', 'Psychopompe']} body="Gardien de l'âme après la mort, il accompagne le défunt vers le pont Chinvat et le protège des démons durant les trois nuits suivant le trépas." />
+      <FigureCard name="Rashnu" role="Juste Juge" tags={['Yazata', 'Jugement']} body="Aux côtés de Mithra et Sraosha, il pèse les actes du défunt au pont Chinvat avec une balance d'une exactitude parfaite." />
+      <FigureCard name="Vayu" role="Le Vent" tags={['Yazata', 'Double nature']} body="Divinité ambivalente : un aspect bienfaisant qui porte les âmes justes, un aspect dangereux qui rôde entre les mondes — une rare figure à cheval sur les deux camps." />
+      <FigureCard name="Tishtrya" role="L'Étoile de la pluie" tags={['Yazata', 'Combat cosmique']} body="Sous forme de cheval blanc, il affronte le démon de la sécheresse Apaosha pour libérer les pluies — il échoue deux fois avant qu'Ahura Mazda ne lui donne la force de vaincre au troisième assaut." />
+      <FigureCard name="Aeshma" role="La Furie, démon de la colère" tags={['Daeva', 'Antagoniste mineur']} body="Général des forces d'Angra Mainyu, personnification de la rage aveugle — son nom a traversé les langues jusqu'à « Asmodée » dans les traditions juive et chrétienne tardives." />
+      <FigureCard name="Zoroastre (Zarathoustra)" role="Le prophète" tags={['Humain', 'Révélation']} body="Pas un dieu mais la figure centrale humaine : c'est à lui que Vohu Manah révèle le message d'Ahura Mazda, sur la rive d'un fleuve, un matin de printemps selon la tradition." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 camps, pas 3 lignées"
+    title="Une structure sans arbre de parenté"
+    intro="Ici, la généalogie classique (parents, mariages, enfants) ne convient pas : le zoroastrisme est fondé sur un dualisme de camps, pas une famille divine. Les « 3 maisons » sont donc redéfinies en conséquence — un choix explicite, pas un gabarit forcé.">
+    <Fragment slot="title"><Decode glyphs="cunei">Une structure sans arbre de parenté</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
+        <text x="150" y="40" text-anchor="middle" fill="#f7c667" font-family="Cinzel, serif" font-size="14">MAISON D'AHURA MAZDA</text>
+        <circle cx="150" cy="90" r="22" fill="#e8a23c" stroke="#fbead0" stroke-width="2"/>
+        <text x="150" y="95" text-anchor="middle" font-size="10" fill="#171009" font-weight="700">Mazda</text>
+        {['Vohu Manah','Asha','Khshathra','Armaiti','Haurvatat','Ameretat'].map((n,i) => {
+          const cx = 60 + i * 36;
+          return (
+            <g>
+              <line x1="150" y1="112" x2={cx} y2="190" stroke="#e8a23c" stroke-width="1" stroke-dasharray="2 4" opacity="0.7"/>
+              <circle cx={cx} cy="200" r="13" fill="#2e2214" stroke="#e8a23c" stroke-width="1.3"/>
+            </g>
+          );
+        })}
+        <text x="150" y="240" text-anchor="middle" fill="#b09570" font-size="10">émanations, pas naissances</text>
+
+        <text x="470" y="40" text-anchor="middle" fill="#6a6f9c" font-family="Cinzel, serif" font-size="14">MAISON D'ANGRA MAINYU</text>
+        <circle cx="470" cy="90" r="22" fill="#3a3d5c" stroke="#6a6f9c" stroke-width="2"/>
+        <text x="470" y="95" text-anchor="middle" font-size="9" fill="#fbead0" font-weight="700">Ahriman</text>
+        <line x1="470" y1="112" x2="470" y2="190" stroke="#6a6f9c" stroke-width="1" stroke-dasharray="2 4" opacity="0.7"/>
+        <circle cx="470" cy="200" r="13" fill="#171009" stroke="#6a6f9c" stroke-width="1.3"/>
+        <text x="470" y="240" text-anchor="middle" fill="#8a94b8" font-size="10">Aeshma et les daeva</text>
+
+        <text x="310" y="270" text-anchor="middle" fill="#c9384a" font-family="Cinzel, serif" font-size="13">YAZATA PLUS ANCIENS</text>
+        <line x1="150" y1="112" x2="310" y2="245" stroke="#c9384a" stroke-width="1" stroke-dasharray="1 3" opacity="0.5"/>
+        <text x="310" y="250" text-anchor="middle" fill="#e0a0a8" font-size="9">Mithra, Anahita — vénérés avant Zoroastre, intégrés après</text>
+      </svg>
+    </div>
+    <p class="map-caption">Trait pointillé = émanation (pas une naissance) ; les Yazata comme Mithra et Anahita appartiennent à un culte antérieur à la réforme de Zoroastre, absorbé plutôt qu'engendré.</p>
+    <p class="source-note" style="text-align:center;">
+      Les sources elles-mêmes hésitent sur le statut exact de Spenta Mainyu — parfois distinct
+      d'Ahura Mazda, parfois son simple aspect actif. Ce flou n'est pas lissé ici : il appartient
+      au dossier.
+    </p>
+  </Section>
+
+  <Section id="creatures" label="9 êtres notables" title="Le bestiaire du bien et du mal">
+    <Fragment slot="title"><Decode glyphs="cunei">Le bestiaire du bien et du mal</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Simurgh" tag="Oiseau bienfaisant" body="Immense oiseau ailé et sage, niché sur l'Arbre de Tous les Remèdes — plus présent dans l'épopée du Shahnameh que dans les textes liturgiques stricts." />
+      <MiniCard title="Azhi Dahaka" tag="Dragon-tyran à trois têtes" body="Serpent tyrannique enchaîné (et non tué) sous le mont Damavand par le héros Fereydun, destiné à se libérer aux derniers jours du monde." />
+      <MiniCard title="Gopatshah" tag="Homme-taureau gardien" body="Créature hybride protectrice, mi-homme mi-taureau, associée à la garde des frontières entre les mondes." />
+      <MiniCard title="Kamak" tag="Oiseau-démon gigantesque" body="Créature monstrueuse dont l'ombre suffit à assombrir sept climats, combattue par les héros du cycle épique." />
+      <MiniCard title="Az" tag="Démon de l'avidité" body="Personnification de la faim insatiable et de la cupidité, l'un des vices que le zoroastrisme éthique combat en priorité." />
+      <MiniCard title="Jeh" tag="La Démone primordiale" body="Figure qui réveille Angra Mainyu de sa torpeur au début du monde — un rôle structurant dans le récit de l'assaut du Mal." />
+      <MiniCard title="Karshipta" tag="Oiseau messager" body="Aurait apporté aux humains réfugiés dans le Vara de Yima la connaissance de la langue de l'Avesta." />
+      <MiniCard title="Gavaevodata" tag="Le Bœuf unique" body="Animal primordial dont le corps, après sa mort, engendre toutes les espèces animales et végétales de la terre." />
+      <MiniCard title="Chamrosh" tag="Oiseau allié du Simurgh" body="Chargé de disperser les graines de l'Arbre de Tous les Remèdes portées par les eaux jusqu'aux quatre coins du monde." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="10 légendes" title="Les grands récits zoroastriens">
+    <Fragment slot="title"><Decode glyphs="cunei">Les grands récits zoroastriens</Decode></Fragment>
+    <StoryBlock num="Légende I" title="Les deux esprits jumeaux" body={["Dans les Gathas, les plus anciens hymnes attribués à Zoroastre lui-même, deux esprits primordiaux — Spenta Mainyu et Angra Mainyu — se manifestent à l'aube du temps et choisissent, chacun librement, la vie ou le non-être, la vérité ou le mensonge.", "Ce choix n'est pas un simple mythe fondateur : il est présenté comme un modèle que chaque être humain répète à son tour, chaque jour, dans ses propres décisions. C'est le socle éthique de toute la religion."]} quote="Les deux esprits, jumeaux, se sont manifestés d'eux-mêmes au commencement." cite="Gathas, Yasna 30" />
+    <StoryBlock num="Légende II" title="L'assaut d'Angra Mainyu" body={["Après la création achevée et parfaite d'Ahura Mazda, Angra Mainyu perce le ciel et se rue sur le monde : il empoisonne les eaux, flétrit les plantes, tue le Bœuf primordial et l'Homme primordial Gayomard.", "Ce n'est pas une défaite définitive : la mort de Gavaevodata et de Gayomard devient, à l'inverse, la source de toute vie animale et humaine à venir — le mal introduit la mort, mais la création répond en multipliant la vie."]} />
+    <StoryBlock num="Légende III" title="La révélation de Zoroastre" body="À trente ans, au bord d'un fleuve lors d'une cérémonie rituelle, Zoroastre voit apparaître Vohu Manah, qui le conduit devant Ahura Mazda. Il reçoit la révélation du culte véritable, mais met une décennie à convertir un premier disciple — son propre cousin — avant que le roi Vishtaspa n'adopte enfin la nouvelle foi." />
+    <StoryBlock num="Légende IV" title="Yima et le Vara" body={["Avertit par Ahura Mazda qu'un hiver dévastateur va anéantir la vie sur terre, le roi Yima construit un abri souterrain, le Vara, où il rassemble un couple de chaque espèce animale et végétale.", "Le récit rappelle irrésistiblement les mythes du déluge d'autres traditions — sauf qu'ici, la catastrophe est un hiver cosmique, pas une inondation, un détail qui trahit l'origine d'un peuple des steppes froides plutôt que d'une plaine fluviale."]} />
+    <StoryBlock num="Légende V" title="Fereydun enchaîne Azhi Dahaka" body="Le héros Fereydun capture le dragon-tyran à trois têtes Azhi Dahaka, qui a usurpé le trône du monde. Plutôt que de le tuer, il l'enchaîne au fond du mont Damavand — un emprisonnement, pas une mort, car la tradition prévoit que le monstre se libérera aux derniers jours et devra être affronté une seconde fois." />
+    <StoryBlock num="Légende VI" title="Le combat de Tishtrya" body="Sous la forme d'un cheval blanc, l'astre Tishtrya affronte le démon de la sécheresse Apaosha, lui aussi transformé en cheval, pour décider si l'année sera fertile ou aride. Deux fois, Tishtrya faiblit et recule ; à la troisième tentative, fortifié par les prières des hommes et l'appui d'Ahura Mazda, il triomphe et libère les pluies." quote="Trois fois, l'étoile de pluie affronta la sécheresse ; la troisième fois, elle l'emporta." cite="Résumé du Tishtar Yasht" />
+    <StoryBlock num="Légende VII" title="Le pont Chinvat" body={["À la mort de chacun, l'âme se présente au pont Chinvat, jugée par Mithra, Sraosha et Rashnu selon la balance exacte de ses pensées, paroles et actes. Le pont s'élargit comme une route pour les justes, se rétrécit jusqu'au tranchant d'une lame pour les injustes, qui basculent dans l'abîme.", "L'âme y rencontre aussi sa propre conscience, Daena, personnifiée en jeune femme radieuse ou en vieille femme hideuse selon la vie menée — une image saisissante de jugement qui se regarde soi-même."]} />
+    <StoryBlock num="Légende VIII" title="Frashokereti, la Rénovation finale" body="À la fin des temps, un sauveur (Saoshyant), conçu miraculeusement de la semence préservée de Zoroastre, ressuscite les morts. Un fleuve de métal fondu purifie l'humanité entière — un supplice indolore pour les justes, une épreuve pour les autres — avant qu'Angra Mainyu ne soit définitivement anéanti et que le monde retrouve sa perfection originelle." />
+    <StoryBlock num="Légende IX" title="Pourquoi le feu, jamais un objet de culte" body="Contrairement à une idée reçue tenace, les zoroastriens ne « vénèrent » pas le feu comme une idole : Asha Vahishta, principe de vérité et d'ordre cosmique, s'y manifeste comme un symbole visible de la lumière divine, un point de concentration pour la prière — la distinction, insiste la tradition, est fondamentale, pas cosmétique." />
+    <StoryBlock num="Légende X" title="Le mensonge d'Angra Mainyu et la fin du mélange" body="Toute l'histoire cosmique, dans le Bundahishn, se résume à trois âges : la création pure, le mélange du bien et du mal (l'âge où nous vivons), puis la séparation définitive. Chaque prière, chaque bonne action humaine hâte, selon la doctrine, la fin de cet âge intermédiaire — une théologie qui fait de la vie quotidienne un acte cosmique, pas un simple intermède moral." />
+  </Section>
+
+  <Section id="anecdotes" label="8 curiosités" title="Étymologies et faits marquants">
+    <Fragment slot="title"><Decode glyphs="cunei">Étymologies et faits marquants</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Une datation qui varie de 1000 ans" tag="Chronologie disputée" body="Selon la méthode (linguistique des Gathas contre tradition postérieure), les spécialistes situent Zoroastre entre 1500 et 600 av. J.-C. — l'un des plus grands écarts de datation de toute cette série." />
+      <MiniCard title="« Magi », l'origine du mot magie" tag="Étymologie" body="Les <em>magi</em>, prêtres zoroastriens mèdes, ont donné en grec puis en latin le mot qui deviendra « magie » — un glissement de sens que la religion elle-même aurait jugé étranger à ses pratiques." />
+      <MiniCard title="Le swastika, symbole solaire indo-iranien" tag="Avant sa récupération du XXe siècle" body="Motif solaire attesté dans l'aire indo-iranienne bien avant l'ère commune — sa signification originelle n'a strictement rien à voir avec l'usage qu'en a fait le nazisme des millénaires plus tard." />
+      <MiniCard title="Une influence débattue sur les religions abrahamiques" tag="Hypothèse académique" body="Plusieurs chercheurs relient l'apparition tardive, dans le judaïsme post-exilique, des concepts de résurrection, de jugement individuel et de sauveur messianique à un contact avec le zoroastrisme perse — une hypothèse sérieuse, pas un fait déjà tranché." />
+      <MiniCard title="Les tours du silence" tag="Rite funéraire, en net recul" body="L'exposition des corps aux vautours (dakhma) reste prescrite par la tradition pour ne pas polluer la terre, l'eau ou le feu — une pratique aujourd'hui menacée par l'effondrement des populations de vautours en Asie du Sud." />
+      <MiniCard title="Cyrus le Grand, souvent sur-lié au zoroastrisme" tag="Prudence historique" body="Le cylindre de Cyrus, célébré pour sa tolérance religieuse, est parfois présenté comme un « premier texte des droits de l'homme » d'inspiration zoroastrienne — une lecture largement anachronique et débattue par les historiens." />
+      <MiniCard title="La communauté parsie de l'Inde" tag="Diaspora historique" body="Après la conquête arabo-musulmane de la Perse, des zoroastriens émigrent vers le Gujarat (Inde), où leurs descendants, les Parsis, forment aujourd'hui une communauté restreinte mais influente." />
+      <MiniCard title="Le Nowruz, calendrier hérité" tag="Nouvel an persan" body="La fête du Nouvel An persan, aujourd'hui célébrée par des centaines de millions de personnes bien au-delà du zoroastrisme, dérive directement du calendrier rituel zoroastrien." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="De l'Iran antique à Mumbai">
+    <Fragment slot="title"><Decode glyphs="cunei">De l'Iran antique à Mumbai</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="300" cy="100" r="10" fill="#e8a23c"/>
+        <text x="300" y="80" text-anchor="middle" fill="#f7c667" font-size="12" font-family="Cinzel, serif">IRAN</text>
+        {[[120,60,'Yazd/Kerman'],[460,60,'Achéménides → Sassanides'],[80,150,'Gujarat (Inde)'],[500,150,'Diaspora mondiale'],[300,170,'Asie centrale']].map(([x,y,label]) => (
+          <g>
+            <line x1="300" y1="100" x2={x} y2={y} stroke="#6a6f9c" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#2e2214" stroke="#e8a23c" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#e8d2b0" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">De l'Iran antique jusqu'à la diaspora parsie contemporaine — une religion qui a suivi les routes de l'exil plus que celles de la conquête.</p>
+    <div class="card-grid">
+      <InfoCard title="Empire achéménide" sub="v. 550-330 av. J.-C." body="Ahura Mazda est explicitement invoqué dans les inscriptions royales de Darius et Xerxès — la première trace politique du culte." />
+      <InfoCard title="Empire sassanide" sub="224-651 apr. J.-C." body="Le zoroastrisme devient religion d'État rigoureusement organisée, avec compilation active de l'Avesta." />
+      <InfoCard title="Conquête arabo-musulmane" sub="651 apr. J.-C." body="La chute des Sassanides entraîne un déclin progressif du zoroastrisme en Iran même, sur plusieurs siècles." />
+      <InfoCard title="Migration vers le Gujarat" sub="VIIIe-Xe siècle" body="Des communautés zoroastriennes s'installent en Inde et deviennent les Parsis, préservant la tradition hors de sa terre d'origine." />
+      <InfoCard title="L'essor parsi à Mumbai" sub="XIXe-XXe siècle" body="La communauté parsie devient disproportionnellement influente dans le commerce et l'industrie indienne, dont la dynastie Tata." />
+      <InfoCard title="Communautés iraniennes actuelles" sub="Yazd, Kerman" body="De petites communautés zoroastriennes subsistent en Iran même, centrées sur des feux sacrés entretenus sans interruption depuis des siècles." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="cunei">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'v. 1500-1000 av. J.-C.', title: 'Zoroastre (datation basse contestée)', body: "Fourchette large retenue par la linguistique des Gathas, bien plus haute que la tradition tardive (600 av. J.-C.)." },
+      { year: 'v. 550 av. J.-C.', title: 'Cyrus le Grand', body: "Fondation de l'Empire achéménide ; sympathies religieuses du souverain toujours débattues." },
+      { year: '539 av. J.-C.', title: 'Prise de Babylone', body: "Le cylindre de Cyrus, souvent sur-interprété comme un texte zoroastrien de tolérance." },
+      { year: 'Ve siècle av. J.-C.', title: 'Inscriptions royales', body: "Darius et Xerxès invoquent nommément Ahura Mazda dans leurs inscriptions monumentales." },
+      { year: '330 av. J.-C.', title: 'Alexandre et la chute de Persépolis', body: "Destruction du centre cérémoniel achéménide, rupture pour les institutions religieuses." },
+      { year: '224 apr. J.-C.', title: 'Fondation de l\'empire sassanide', body: "Le zoroastrisme devient religion d'État strictement organisée." },
+      { year: 'IIIe siècle apr. J.-C.', title: 'Compilation de l\'Avesta', body: "Effort sassanide de fixation écrite des textes liturgiques jusque-là transmis oralement." },
+      { year: '651 apr. J.-C.', title: 'Conquête arabo-musulmane', body: "Chute des Sassanides ; début du déclin progressif du zoroastrisme en Iran." },
+      { year: 'VIIIe-Xe siècle', title: 'Migration vers le Gujarat', body: "Naissance de la communauté parsie en Inde, selon la tradition du Qissa-i Sanjan." },
+      { year: 'XIXe siècle', title: 'Essor économique parsi', body: "La communauté de Mumbai devient un acteur majeur du commerce et de l'industrie indienne." },
+      { year: '1905-1911', title: 'Révolution constitutionnelle iranienne', body: "Reconnaissance progressive de droits pour les minorités religieuses, dont les zoroastriens d'Iran." },
+      { year: '2009', title: 'Le Nowruz reconnu par l\'UNESCO', body: "Le Nouvel An persan, hérité du calendrier rituel zoroastrien, est inscrit au patrimoine immatériel de l'humanité." },
+      { year: 'Aujourd\'hui', title: 'Une communauté mondiale réduite', body: "Entre 100 000 et 200 000 zoroastriens pratiquants estimés dans le monde, en déclin démographique préoccupant, notamment chez les Parsis de Mumbai." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le zoroastrisme fait encore">
+    <Fragment slot="title"><Decode glyphs="cunei">Ce que le zoroastrisme fait encore</Decode></Fragment>
+    <HeritageBlock title="Une religion vivante, pas une mythologie éteinte" body="Contrairement à la plupart des panthéons de cette série, le zoroastrisme compte encore des pratiquants organisés aujourd'hui, en Iran comme dans la diaspora parsie — une différence de statut qu'il faut garder à l'esprit tout au long de cette page." />
+    <HeritageBlock title="Une empreinte sur les grandes religions abrahamiques" body="L'hypothèse d'une influence zoroastrienne sur les conceptions juive, chrétienne et islamique du jugement, du paradis et de l'enfer reste débattue dans le détail, mais largement reconnue dans son principe par les spécialistes de l'histoire des religions." />
+    <HeritageBlock title="La communauté parsie, une influence disproportionnée" body="Malgré son faible nombre, la communauté parsie de l'Inde a marqué durablement l'industrie, la philanthropie et la culture indiennes, de la dynastie Tata à de nombreuses figures publiques." />
+    <HeritageBlock title="Le Nowruz, une fête devenue mondiale" body="Célébré aujourd'hui par des centaines de millions de personnes d'Asie centrale au Moyen-Orient, bien au-delà des seuls zoroastriens, le Nouvel An persan reste la trace la plus vivante et la plus largement partagée de ce calendrier religieux." />
+    <CautionBox>
+      Un symbole solaire indo-iranien porté par cette religion pendant des millénaires — le
+      swastika — a été violemment détourné par le nazisme au XXe siècle. Le rappeler ici n'est
+      pas un détail : c'est refuser de laisser un usage criminel récent effacer plusieurs
+      millénaires de sens religieux antérieur, pour une communauté aujourd'hui minoritaire et
+      fragile démographiquement.
+    </CautionBox>
+  </Section>
+</PageLayout>

@@ -5,6 +5,11 @@
 
   `scrollFx` pose data-scroll-fx : la clef doit exister dans SCROLL_FX de
   effects.js (voir docs/plans/plan-effets.md). Une seule section par page en porte un.
+
+  Slot nomme "title" : optionnel, remplace le texte brut de `title` par du
+  contenu (typiquement <Decode>) pour le dechiffrement au scroll des titres de
+  section — mecanisme obligatoire sur la famille mythologies (voir
+  docs/plans/plan-effets.md). Sans ce slot, `title` s'affiche tel quel comme avant.
 */
 export interface Props {
   id: string;
@@ -19,7 +24,7 @@ const { id, label, title, intro, scrollFx } = Astro.props;
 ---
 <section id={id} data-scroll-fx={scrollFx}>
   {label && <div class="section-label">{label}</div>}
-  <h2 class="section-title">{title}</h2>
+  <h2 class="section-title"><slot name="title">{title}</slot></h2>
   {intro && <p class="section-intro">{intro}</p>}
   <slot />
 </section>

@@ -1,0 +1,295 @@
+---
+/*
+  Le Saint Graal — dixième page de la série « Objets Légendaires du Monde ».
+
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections, badge de
+  nature dans le hero. Cas d'école de la règle n°1 de la série : Chrétien de
+  Troyes ne décrit qu'un simple plat, sans lien biblique — c'est un second
+  auteur, Robert de Boron, qui christianise l'objet une génération plus tard.
+  Pas de Timeline dans #traces : contrairement au Koh-i-Noor, il n'existe pas
+  UNE chaîne de possession mais plusieurs reliques concurrentes indépendantes,
+  mieux rendues par une grille que par une frise.
+
+  Effets : data-egg="graal" + data-scroll-fx="graalLumiere" sur #description,
+  tous deux vers graalLumiere() dans public/effects.js — un calice qui se
+  remplit de lumière plutôt que de liquide, halo qui s'éteint doucement. Pas
+  de fx-decode : aucune inscription réelle portée par l'objet lui-même.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Émeraude et or liturgique, lumière plutôt que liquide : la matière de
+   l'objet plutôt que la géographie du sujet, principe visuel de la série. */
+const palette = {
+  bg: '#0f1811',
+  'bg-deep': '#080f0a',
+  surface: '#182619',
+  'surface-alt': '#203222',
+  border: '#3d5a3f',
+  ink: '#f5f7ea',
+  text: '#d8e4c8',
+  'text-dim': '#93a884',
+  accent: '#c9982f',
+  'accent-bright': '#f0d27a',
+  accent2: '#2e7a5a',
+  'accent2-bright': '#4aa87e',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(240,210,122,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  {
+    num: 'I', title: 'Un simple plat', sub: 'Chrétien de Troyes, v. 1180',
+    body: "Dans <em>Perceval ou le Conte du Graal</em>, resté inachevé, l'objet n'est qu'« un graal » — un plat d'orfèvrerie porté en procession. Aucun lien avec la Cène, aucune origine biblique.",
+  },
+  {
+    num: 'II', title: 'La coupe de la Cène', sub: 'Robert de Boron, v. 1200',
+    body: "C'est un second auteur, une génération plus tard, qui christianise l'objet : Joseph d'Arimathie y aurait recueilli le sang du Christ. Cette version, la plus connue aujourd'hui, n'est donc pas la plus ancienne.",
+  },
+  {
+    num: 'III', title: 'Une pierre tombée du ciel', sub: 'Wolfram von Eschenbach, v. 1200-1210',
+    body: "La tradition allemande du <em>Parzival</em> décrit un objet totalement différent : ni plat ni coupe, mais une pierre miraculeuse, <em>lapsit exillis</em>, gardée par un ordre de chevaliers.",
+  },
+];
+---
+<PageLayout
+  title="Le Saint Graal"
+  serie="Objets Légendaires du Monde"
+  description="Inventé par Chrétien de Troyes dans un roman inachevé de 1180 comme un simple plat, christianisé une génération plus tard par Robert de Boron, absent des Évangiles : le Graal change de forme selon les auteurs — plat, coupe, pierre — et compte aujourd'hui une dizaine de reliques concurrentes."
+  href="objet-graal.html"
+  egg="graal"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="CHRÉTIEN DE TROYES · v. 1180"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>la Lance Sacrée</strong>"
+>
+  <p class="subtitle" slot="hero">Graal · Saint Calice · Sangreal</p>
+  <p class="tagline" slot="hero">
+    Un roman inachevé de 1180 décrit un simple plat. Absent des Évangiles, christianisé une
+    génération plus tard, l'objet a depuis pris la forme d'un plat, d'une coupe, d'une pierre
+    — et d'une dizaine de reliques qui se disputent son nom.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Relique contestée"
+    note="Né dans un roman du XIIe siècle sans aucune origine biblique, christianisé après coup, décrit sous des formes incompatibles selon les auteurs, et revendiqué aujourd'hui par plusieurs reliques indépendantes."
+  />
+
+  <Section
+    id="origine"
+    label="Première attestation"
+    title="Un plat avant d'être une coupe"
+    intro="La règle de cette série : distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet. Ici, l'écart le plus intéressant n'est pas entre l'objet et le texte, mais entre deux textes eux-mêmes, à quelques années d'intervalle.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+    <p class="source-note" style="margin-top:28px; text-align:center;">
+      Chrétien de Troyes meurt avant d'achever son roman, sans jamais expliquer ce qu'est
+      vraiment le graal ni à quoi il sert. Tout ce que la postérité en retient — la Cène, le
+      sang du Christ, la quête sacrée — est un ajout ultérieur d'autres auteurs.
+    </p>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et pouvoirs"
+    title="Un objet qui change de forme selon qui le décrit"
+    intro="Rédigé en discours rapporté : les sources se contredisent sur la forme même de l'objet, une situation plus radicale que pour n'importe quel autre objet de cette série."
+    scrollFx="graalLumiere">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Le plat de Chrétien"
+        role="La version la plus ancienne"
+        tags={['Orfèvrerie', 'Procession']}
+        body="Un plat d'or serti de pierreries, porté en procession devant le Roi Pêcheur blessé — sans qu'aucune fonction précise ne soit expliquée dans le texte inachevé."
+      />
+      <FigureCard
+        name="La coupe de Robert de Boron"
+        role="La version devenue canonique"
+        tags={['Cène', 'Sang du Christ']}
+        body="Le vase utilisé par le Christ lors de la Cène, dans lequel Joseph d'Arimathie recueille ensuite son sang à la croix — c'est cette version, et elle seule, qui deviendra l'image dominante du Graal."
+      />
+      <FigureCard
+        name="La pierre de Wolfram"
+        role="Une tradition allemande distincte"
+        tags={['Lapsit exillis', 'Chevaliers gardiens']}
+        body="Ni plat ni coupe : une pierre aux pouvoirs miraculeux — nourrir sans fin, préserver la jeunesse — gardée par un ordre de chevaliers dans un château reclus."
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Là où le Graal agit">
+    <StoryBlock
+      num="Récit I"
+      title="La question que Perceval ne pose pas"
+      body={[
+        "Reçu au château du Roi Pêcheur, gravement blessé, le jeune Perceval assiste à une étrange procession : une lance qui saigne, puis le graal. Par discrétion — on lui a appris à ne pas poser trop de questions — il se tait.",
+        "Son silence a un coût : le roi reste blessé, la terre reste stérile. Le lendemain, château et cortège ont disparu. Toute la suite du récit, resté inachevé, aurait dû être la quête d'une seconde chance de poser la bonne question.",
+      ]}
+      quote="Il se tut, de peur de commettre une faute en parlant trop."
+      cite="Résumé du Conte du Graal, Chrétien de Troyes"
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Joseph d'Arimathie et l'exil du vase"
+      body="Robert de Boron raconte comment Joseph d'Arimathie, emprisonné après avoir réclamé le corps du Christ, survit des années grâce au pouvoir nourricier du vase de la Cène, avant que lui ou ses descendants ne l'emportent jusqu'en Bretagne — c'est ce récit qui ancre pour la première fois le Graal dans la géographie arthurienne."
+    />
+    <StoryBlock
+      num="Récit III"
+      title="Seuls trois chevaliers y parviennent"
+      body={[
+        "Dans le cycle en prose du XIIIe siècle, la quête du Graal devient l'épreuve suprême des chevaliers de la Table Ronde. Sur des dizaines de partants, seuls trois l'atteignent : Galaad, d'une pureté absolue, Perceval et Bohort.",
+        "Lancelot, le meilleur chevalier du monde selon toutes les autres mesures, échoue à cause de son amour adultère pour Guenièvre — la quête devient un jugement moral déguisé en aventure, et sa fin marque le début du déclin de la Table Ronde.",
+      ]}
+    />
+    <StoryBlock
+      num="Récit IV"
+      title="Le château du Graal, version allemande"
+      body="Chez Wolfram von Eschenbach, Parzival doit lui aussi apprendre à poser la question qui guérit le roi blessé — mais le lieu, Munsalvaesche, et l'objet, une pierre et non une coupe, appartiennent à une tradition suffisamment différente pour qu'on ne puisse pas simplement la fondre avec la version française."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Ce que l'orfèvrerie liturgique sait vraiment"
+    intro="La section propre à cette série. Le Graal n'a pas existé, mais les calices et plats liturgiques de l'époque où le récit se répand, eux, ont bel et bien été fabriqués — et parfois soumis à l'examen scientifique.">
+    <div class="card-grid compact">
+      <MiniCard title="L'orfèvrerie de repoussé" tag="Technique médiévale" body="Les grands vases liturgiques médiévaux sont façonnés par martelage d'une feuille de métal depuis l'envers, puis sertis de pierres — la même famille de savoir-faire que les couronnes et reliquaires de la même époque." />
+      <MiniCard title="Le Sacro Catino de Gênes" tag="Analyse de 1806" body="Longtemps cru taillé dans une émeraude unique, ce plat hexagonal rapporté de croisade se révèle être du verre coloré lorsque des soldats napoléoniens le brisent en le transportant — une désillusion matérielle bien documentée." />
+      <MiniCard title="Le Calice de Valence" tag="Coupe d'agate" body="La vasque supérieure, en agate, est datée par certains travaux archéologiques d'une période et d'une région compatibles avec le Proche-Orient antique — sans que cela prouve un usage lors de la Cène elle-même." />
+      <MiniCard title="Le calice d'Antioche" tag="Attribution corrigée" body="Un vase d'argenterie du VIe siècle un temps proposé comme candidat au Graal s'avère, après étude, être le pied ajouré d'une lampe liturgique byzantine — pas une coupe à boire." />
+    </div>
+    <p class="source-note" style="margin-top:30px;">
+      Une remarque de méthode : dans cette série, la section facture explique d'ordinaire
+      comment on <em>aurait pu</em> fabriquer un objet disparu. Ici, elle fait l'inverse : elle
+      montre comment l'examen matériel a, à plusieurs reprises, corrigé ou infirmé
+      l'attribution de reliques bien réelles.
+    </p>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Candidats matériels"
+    title="Une dizaine de reliques, aucune chaîne unique"
+    intro="À la différence du Koh-i-Noor ou de l'Arche d'Alliance, il n'existe pas une seule histoire de possession à suivre : plusieurs objets indépendants revendiquent le titre, sans lien documenté entre eux.">
+    <div class="card-grid">
+      <InfoCard
+        title="Le Calice de Valence"
+        sub="Cathédrale de Valence, Espagne"
+        body="Le candidat le plus régulièrement cité par la tradition catholique : sa vasque d'agate a servi lors de messes célébrées par plusieurs papes, sans que l'Église n'en ait jamais proclamé l'authenticité de façon dogmatique."
+      />
+      <InfoCard
+        title="Le Sacro Catino"
+        sub="Gênes, Italie"
+        body="Rapporté de la première croisade en 1101, cru taillé dans une émeraude pendant sept siècles avant que son verre ne soit révélé accidentellement en 1806."
+      />
+      <InfoCard
+        title="La Coupe de Nanteos"
+        sub="Pays de Galles"
+        body="Un bol de bois associé à des moines ayant fui la dissolution des monastères anglais, plus tard utilisé dans des pratiques populaires de guérison."
+      />
+      <InfoCard
+        title="Le puits de Chalice Well"
+        sub="Glastonbury, Angleterre"
+        body="Une source associée par la légende à Joseph d'Arimathie, sur le même site que la tombe supposée d'Arthur déjà évoquée dans la page consacrée à Excalibur."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="De la légende au phénomène"
+    title="De la quête chevaleresque au best-seller">
+    <div class="card-grid compact">
+      <MiniCard title="Monty Python, Sacré Graal" tag="Cinéma · 1975" body="La parodie britannique détourne la quête arthurienne en absurde méthodique — et reste aujourd'hui la référence culturelle la plus citée du mot « Graal » lui-même." />
+      <MiniCard title="Indiana Jones et la Dernière Croisade" tag="Cinéma · 1989" body="Le film met en scène l'idée, d'inspiration authentiquement médiévale, que le vrai Graal serait le plus humble des objets présentés — « choisir sagement » plutôt que choisir le plus doré." />
+      <MiniCard title="Da Vinci Code" tag="Roman puis film · 2003-2006" body="Dan Brown réinterprète le Graal comme un « Sang Real » — une lignée royale du Christ plutôt qu'un objet — une thèse qui s'appuie sur un canular du XXe siècle aujourd'hui bien documenté, pas sur une source médiévale." />
+      <MiniCard title="Le jeu vidéo et l'expression courante" tag="Usage généralisé" body="« Le Graal de… » est devenu une expression courante pour désigner tout objectif ultime et difficilement atteignable, bien au-delà de tout contexte arthurien." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Sans détour sur l'origine littéraire, sans trancher à la place des institutions religieuses sur la valeur de dévotion des reliques encore vénérées aujourd'hui.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Un objet absent de toute source biblique"
+      body={[
+        "Aucun évangile, aucune tradition chrétienne antérieure au XIIe siècle ne mentionne un objet correspondant au Graal. Le récit apparaît d'abord sans dimension religieuse chez Chrétien de Troyes, avant d'être christianisé par un second auteur une génération plus tard.",
+        "C'est un cas rare dans cette série où l'on peut identifier avec precision le moment exact — et l'auteur — du basculement d'un objet de fiction vers une relique à connotation sacrée.",
+      ]}
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Des reliques réelles, des attributions parfois corrigées"
+      body="Plusieurs objets réels ont porté, à un moment de leur histoire, le nom de Graal — certains ont vu cette attribution démentie par l'examen matériel (le Sacro Catino, l'calice d'Antioche), d'autres restent une possibilité chronologiquement compatible sans preuve de provenance continue (le calice de Valence)."
+    />
+    <TheoryCard
+      title="Le Graal est une invention littéraire du XIIe siècle"
+      level="consensus"
+      status="Consensus"
+      body="Position dominante des médiévistes : le motif apparaît sans antécédent religieux identifiable, dans une œuvre de fiction datée avec précision."
+      attrib="Position dominante des études médiévales"
+    />
+    <TheoryCard
+      title="Le motif s'inspire de chaudrons magiques celtiques antérieurs"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Plusieurs celtisants rapprochent le Graal de récipients magiques de la mythologie celtique insulaire (comme le chaudron de Dagda ou celui du Mabinogion), source d'inspiration plausible pour Chrétien de Troyes sans preuve directe de filiation."
+      attrib="Hypothèse discutée en études celtiques"
+    />
+    <TheoryCard
+      title="Le Graal serait le symbole d'une lignée de sang du Christ"
+      level="folklore"
+      status="Rejeté par les historiens"
+      body="Cette lecture, popularisée par le Da Vinci Code, repose sur des documents aujourd'hui reconnus comme un canular du XXe siècle (le dossier du Prieuré de Sion, fabriqué par Pierre Plantard) — sans le moindre fondement dans les sources médiévales elles-mêmes."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le Graal fait encore">
+    <HeritageBlock
+      title="Un objet de dévotion vivante"
+      body="Le calice de Valence continue d'être utilisé lors de célébrations liturgiques par l'Église catholique, y compris par plusieurs papes, sans que cet usage vaille reconnaissance dogmatique d'authenticité."
+    />
+    <HeritageBlock
+      title="Une industrie éditoriale entière"
+      body="Depuis les années 1980, la littérature pseudo-historique sur le Graal, les Templiers et les lignées secrètes constitue un genre éditorial à part entière, largement indépendant de la recherche universitaire sur le sujet."
+    />
+    <HeritageBlock
+      title="Une expression entrée dans la langue courante"
+      body="« Le Graal » désigne aujourd'hui, en français comme en anglais, n'importe quel objectif suprême et rarement atteint, du sport à la recherche scientifique."
+    />
+    <CautionBox>
+      Cette page rapporte l'état des sources et des analyses matérielles sans se substituer à
+      l'Église catholique sur la valeur dévotionnelle des reliques encore vénérées aujourd'hui
+      — le calice de Valence n'a jamais été proclamé authentique par Rome, mais il reste un
+      objet de foi vivante pour des croyants réels, à distinguer nettement des théories
+      éditoriales qui l'ont entouré ces dernières décennies.
+    </CautionBox>
+  </Section>
+</PageLayout>

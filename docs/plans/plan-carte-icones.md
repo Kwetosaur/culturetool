@@ -87,7 +87,7 @@ fait croire le travail terminé.
 |---|---|---|
 | Égyptienne | ✅ fait | Œil d'Horus |
 | Mésopotamienne | ✅ fait | Ziggourat |
-| Perse/zoroastrienne | icône prête | Flamme sacrée |
+| Perse/zoroastrienne | ✅ fait | Flamme sacrée |
 | Cananéenne/ougaritique | icône prête | Taureau stylisé |
 | Hittite | icône prête | Dragon enroulé (Illuyanka) |
 | Arabe préislamique | icône prête | Croissant + étoile |
@@ -112,7 +112,7 @@ fait croire le travail terminé.
 ### Afrique
 | Page | Statut | Icône |
 |---|---|---|
-| Yoruba | icône prête | Hache double (Shango) |
+| Yoruba | ✅ fait | Hache double (Shango) |
 | Dogon | icône prête | Étoile Sirius |
 | Ashanti/Akan | icône prête | Araignée (Anansi) |
 | Zoulou | icône prête | Bouclier + lance |
@@ -200,7 +200,7 @@ fait croire le travail terminé.
 ### Océanie
 | Page | Statut | Icône |
 |---|---|---|
-| Polynésie (navigation) | icône prête | Pirogue double |
+| Polynésie (navigation) | ✅ fait | Pirogue double |
 | Aborigènes d'Australie (culture) | icône prête | Boomerang |
 
 **Note redondance volontaire** : Grand Zimbabwe apparaît à la fois en Culture (le peuple qui l'a bâti) et en Mystère (la controverse coloniale sur qui l'a bâti) — c'est intentionnel, sur le même modèle que l'Égypte (mythologie + culture) : deux pages, deux angles, pas un doublon à corriger.
@@ -214,7 +214,7 @@ fait croire le travail terminé.
 |---|---|---|
 | Bête du Gévaudan | ✅ fait | Yeux ambrés dans le noir |
 | Monstre du Loch Ness | ✅ fait | Silhouette émergeant de l'eau |
-| Le Kraken | icône prête | Tentacule enroulé |
+| Le Kraken | ✅ fait | Tentacule enroulé |
 | Les Sirènes | icône prête | Silhouette mi-femme mi-poisson |
 | Le Loup-Garou | icône prête | Silhouette de loup debout |
 | Black Shuck | icône prête | Chien noir, yeux rouges |
@@ -251,7 +251,7 @@ fait croire le travail terminé.
 | Page | Statut | Icône |
 |---|---|---|
 | Le Yeti | ✅ fait | Empreinte dans la neige |
-| Le Kappa | icône prête | Carapace + bec stylisés |
+| Le Kappa | ✅ fait | Carapace + bec stylisés |
 | L'Orang Pendek | icône prête | Silhouette de primate accroupi |
 | Le Yeren | icône prête | Silhouette de primate poilu debout |
 
@@ -277,7 +277,7 @@ fait croire le travail terminé.
 | Page | Statut | Icône |
 |---|---|---|
 | Triangle des Bermudes | ✅ fait | Boussole/triangle |
-| Amelia Earhart | icône prête | Avion stylisé qui s'efface |
+| Amelia Earhart | ✅ fait | Avion stylisé qui s'efface |
 | Le Mary Celeste | icône prête | Voilier fantôme |
 | Colonie de Roanoke | icône prête | Inscription stylisée |
 | Cité de Paititi / El Dorado | icône prête | Masque/pièce d'or stylisé |
@@ -303,7 +303,7 @@ fait croire le travail terminé.
 | Batterie de Bagdad | icône prête | Jarre stylisée |
 | Malédiction de Toutânkhamon | icône prête | Masque funéraire stylisé |
 | Grand Zimbabwe (mystère) | icône prête | Mur de pierre courbe |
-| Göbekli Tepe | icône prête | Deux piliers en T dressés côte à côte |
+| Göbekli Tepe | ✅ fait | Deux piliers en T dressés côte à côte |
 | Disque de Phaistos | icône prête | Disque couvert de petits signes disposés en spirale — la spirale est ce qui le distingue du disque de Dropa et de la Pierre du Soleil |
 
 ### Asie
@@ -349,8 +349,8 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 |---|---|---|
 | Excalibur | ✅ fait | Épée plantée verticalement dans une pierre |
 | Mjöllnir | ✅ fait | Marteau à manche court, tête massive, de profil |
-| Le Saint Graal | icône prête | Calice à pied, simple |
-| La Lance Sacrée | icône prête | Fer de lance long et fin, hampe coupée |
+| Le Saint Graal | ✅ fait | Calice à pied, simple |
+| La Lance Sacrée | ✅ fait | Fer de lance long et fin, hampe coupée |
 | La Chambre d'Ambre | icône prête | Fragment de panneau mural orné, angle brisé |
 | Les épées Ulfberht | icône prête | Lame à plat portant une inscription stylisée (traits, pas de lettres lisibles) |
 | La Pierre de Scone | icône prête | Bloc de pierre rectangulaire avec ses deux anneaux de transport |

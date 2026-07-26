@@ -199,4 +199,6 @@ liste complète et les scores.)*
 | 7 | La Pierre du Soleil aztèque | publiée (26/07/2026) |
 | 8 | L'hameçon de Maui | publiée (26/07/2026) |
 | 9 | Le Koh-i-Noor | publiée (26/07/2026) |
-| — | 28 autres sujets | à démarrer |
+| 10 | Le Saint Graal | publiée (26/07/2026) |
+| 11 | La Lance Sacrée | publiée (26/07/2026) |
+| — | 26 autres sujets | à démarrer |

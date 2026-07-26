@@ -6,12 +6,12 @@ Même principe de score /10 que les autres listes, basé sur la richesse du doss
 
 ---
 
-## Déjà couvertes (6)
+## Déjà couvertes (8)
 
 Chine · Égypte Antique · Rome antique · Grèce antique · Vikings / Scandinavie médiévale ·
-Empire du Mali
+Empire du Mali · **Incas** · **Polynésie (navigation)**
 
-**28 candidates restantes** dans les tableaux ci-dessous, dont **6 ajoutées le 26/07/2026**
+**26 candidates restantes** dans les tableaux ci-dessous, dont **6 ajoutées le 26/07/2026**
 pour combler des trous réels : Al-Andalus (huit siècles d'Europe absents), Minoens (première
 civilisation européenne), Carthage (angle historiographique), côte swahilie (tout l'océan
 Indien), Empire songhaï (suite du Mali), Empire timouride (Asie centrale savante).
@@ -68,7 +68,7 @@ Indien), Empire songhaï (suite du Mali), Empire timouride (Asie centrale savant
 
 | Culture | Score | Ce qui la rend unique |
 |---|---|---|
-| Incas (culture) | 9 | Machu Picchu, réseau routier andin, quipu (comptabilité à nœuds), administration sans écriture ni roue — angle civilisationnel distinct d'une éventuelle page mythologie inca |
+| Incas (culture) ✅ | 9 | Machu Picchu, réseau routier andin, quipu (comptabilité à nœuds), administration sans écriture ni roue — angle civilisationnel distinct d'une éventuelle page mythologie inca |
 | Maya (culture) | 9 | Astronomie et calendrier d'une précision remarquable, seule écriture pleinement développée des Amériques précolombiennes, effondrement classique toujours débattu — distinct de `mythologie-azteque-maya.html` |
 | Aztèques (culture) | 8 | Tenochtitlan et son urbanisme lacustre (chinampas), société guerrière hiérarchisée, tribut et alliance de la Triple Alliance — distinct de `mythologie-azteque-maya.html` |
 | Peuples des Plaines (Amérique du Nord) | 7 | Économie du bison, nomadisme équestre après l'introduction du cheval, résistance culturelle face à la colonisation |
@@ -77,25 +77,21 @@ Indien), Empire songhaï (suite du Mali), Empire timouride (Asie centrale savant
 
 | Culture | Score | Ce qui la rend unique |
 |---|---|---|
-| Polynésie (navigation) | 9 | Navigation aux étoiles et aux courants sans instruments, colonisation du plus vaste espace océanique au monde, pirogues doubles |
+| Polynésie (navigation) ✅ | 9 | Navigation aux étoiles et aux courants sans instruments, colonisation du plus vaste espace océanique au monde, pirogues doubles |
 | Aborigènes d'Australie (culture) | 8 | Culture continue la plus ancienne du monde (60 000+ ans), gestion du feu et de l'environnement, art rupestre — angle civilisationnel distinct d'une éventuelle page mythologie aborigène |
 
 ---
 
 ## Top 5 recommandé pour la prochaine vague
 
-*(Mis à jour le 26/07/2026 — l'ancien top 5 recommandait encore Rome antique et Grèce
-antique, publiées depuis, ainsi que l'Empire du Mali, publié également.)*
+*(Mis à jour le 26/07/2026 — Incas et Polynésie (navigation), qui occupaient les deux
+premières places, sont publiées.)*
 
-1. **Incas** (9) — grande civilisation andine, contrepoint direct à la page Aztèque/Maya déjà en ligne côté mythologie, et l'Amérique du Sud n'a aucune page culture.
-2. **Polynésie (navigation)** (9) — Océanie totalement absente de la série à ce jour, angle unique (navigation aux étoiles) très visuel pour la carte.
-3. **Mésopotamie (culture)** (9) — premières villes, premier code de lois : l'angle civilisationnel manque alors que la page mythologie existe depuis longtemps.
-4. **Empire perse achéménide** (9) — chaînon administratif entre Mésopotamie et monde hellénistique, aucune page sur l'Iran.
-5. **Empire mongol** (9) — plus grand empire terrestre continu, et l'Asie centrale est un vide complet sur la carte.
-
-Deux entrées à surveiller en priorité *ensuite* pour l'équilibre continental : **Nubie /
-Koush** (8, deuxième page africaine) et **Inde (culture)** (9, pendant civilisationnel de
-`mythologie-hindoue.html`).
+1. **Mésopotamie (culture)** (9) — premières villes, premier code de lois : l'angle civilisationnel manque alors que la page mythologie existe depuis longtemps.
+2. **Empire perse achéménide** (9) — chaînon administratif entre Mésopotamie et monde hellénistique ; distinct de `mythologie-perse.html` (angle religieux, déjà publié) : ici, administration, routes royales, satrapies.
+3. **Empire mongol** (9) — plus grand empire terrestre continu, et l'Asie centrale est un vide complet sur la carte.
+4. **Nubie / Koush** (8) — deuxième page africaine, rivale puis conquérante de l'Égypte.
+5. **Inde (culture)** (9) — pendant civilisationnel de `mythologie-hindoue.html`, encore absent de la série.
 
 ---
 

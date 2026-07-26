@@ -1,0 +1,148 @@
+---
+/*
+  Le Kraken — septième créature de la série, première écrite avec le socle
+  Astro. Structure imposée par docs/plans/plan-serie-creatures.md : 7 sections,
+  badge de verdict obligatoire justifié dans #science. Pas de frise (la
+  légende n'a pas de chronologie de témoignages datés assez riche pour
+  l'imposer, conformément à la règle "pas de frise par défaut").
+
+  Effets : data-egg="kraken" + data-scroll-fx="krakenTentacle" sur #portrait
+  (convention créatures), piste documentée dans plan-effets.md ("un tentacule
+  qui s'enroule depuis le bord de l'écran puis se retire dans l'eau").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Noir océanique et lueur bioluminescente : la matière de la légende plutôt
+   que la géographie générique du Nord. */
+const palette = {
+  bg: '#0a1214',
+  'bg-deep': '#050a0b',
+  surface: '#101c1f',
+  'surface-alt': '#152528',
+  border: '#2a4448',
+  ink: '#eaf5f2',
+  text: '#c8ddd8',
+  'text-dim': '#7a9994',
+  accent: '#2ea69a',
+  'accent-bright': '#5ad0c0',
+  accent2: '#6b4a2a',
+  'accent2-bright': '#a67c42',
+  verdict: '#1f6b5a',
+  'verdict-bright': '#3aa08a',
+  glow: 'rgba(46,166,154,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Témoins' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Kraken"
+  serie="Créatures Légendaires du Monde"
+  description="Une île qui n'en est pas une, capable d'aspirer un navire entier dans un tourbillon : la légende scandinave du Kraken, née des récits de marins, probablement inspirée d'un animal bien réel mais longtemps invisible — le calmar géant."
+  href="creature-kraken.html"
+  egg="kraken"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="SCANDINAVIE · MER DE NORVÈGE"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>le Kappa</strong>"
+>
+  <p class="subtitle" slot="hero">Le monstre qu'on prenait pour une île</p>
+  <p class="tagline" slot="hero">
+    Un animal réel a probablement existé derrière la légende — mais il a fallu attendre 2012
+    pour en filmer un premier spécimen vivant.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Légende ancienne, animal réel probable"
+    note="Aucune créature de la taille rapportée par Pontoppidan n'a jamais existé — mais le calmar géant, resté scientifiquement mystérieux jusqu'au XXIe siècle, offre une explication naturelle crédible à l'origine de la légende."
+  />
+
+  <Section id="origine" label="Première mention" title="Des sagas norroises à la zoologie fantaisiste" intro="Le nom « Kraken » et sa description la plus influente sont plus récents que la légende elle-même : il faut distinguer les monstres marins des sagas médiévales de la créature précisément décrite au XVIIIe siècle.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Hafgufa et Lyngbakr" sub="Sagas norroises, XIIIe siècle" body="Les textes islandais médiévaux décrivent déjà des monstres marins capables d'être confondus avec des îles — un motif ancien, mais encore sans le nom « Kraken »." />
+      <InfoCard num="II" title="Erik Pontoppidan" sub="Histoire naturelle de la Norvège, 1752-53" body="C'est cet évêque et naturaliste danois qui fixe la description la plus détaillée et la plus citée : une créature large de plusieurs kilomètres, confondue avec un banc ou une île par les marins." />
+      <InfoCard num="III" title="Même Linné s'y est laissé prendre" sub="Systema Naturae, 1735" body="Carl Linné inclut brièvement le Kraken, sous le nom scientifique <em>Microcosmus marinus</em>, dans les premières éditions de sa classification — avant de le retirer des éditions suivantes." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapportent les récits" title="Une île qui respire" scrollFx="krakenTentacle" intro="Rédigé au conditionnel : ce que la tradition et les témoignages anciens prêtent à la créature, pas un fait établi.">
+    <div class="card-grid wide">
+      <FigureCard name="Une taille d'île" role="Selon Pontoppidan" tags={['Kilométrique', 'Confusion']} body="Les récits insistent moins sur une silhouette précise que sur l'erreur qu'elle provoque : des marins auraient jeté l'ancre sur son dos, la prenant pour un haut-fond ou une île basse." />
+      <FigureCard name="Des bras qui saisissent" role="L'image la plus tardive" tags={['Tentacules', 'XIXe siècle']} body="L'image d'une pieuvre géante aux bras happant les navires se fixe surtout au XIXe siècle, avec Victor Hugo puis Jules Verne — les récits norrois d'origine évoquent une forme plus proche d'un crabe ou d'une étoile de mer démesurés." />
+      <FigureCard name="Le tourbillon final" role="La disparition" tags={['Maelström', 'Immersion']} body="En plongeant, la créature créerait un tourbillon capable d'engloutir un navire entier — un motif qui rejoint la réalité bien attestée des puissants courants tidaux norvégiens comme le Moskstraumen." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Qui en a parlé" title="Des marins aux naturalistes">
+    <StoryBlock num="Récit I" title="Les récits de pêcheurs norvégiens" body="Pendant des siècles, des pêcheurs des côtes norvégiennes rapportent des zones de pêche exceptionnellement riches, réputées se former au-dessus du dos immergé du Kraken — une explication mythologique à un phénomène bien réel d'upwelling, la remontée d'eaux profondes riches en nutriments." />
+    <StoryBlock num="Récit II" title="Pontoppidan, entre récit et méthode" body="En compilant les témoignages de marins pour son Histoire naturelle de la Norvège, l'évêque Pontoppidan cherche à documenter sérieusement la faune de son pays — et retranscrit la légende du Kraken avec le même sérieux méthodique que ses observations de baleines, brouillant la frontière entre zoologie et folklore." />
+    <StoryBlock num="Récit III" title="Le calmar géant, longtemps invisible" body="Des spécimens de calmar géant (Architeuthis dux) s'échouent sporadiquement sur les côtes depuis des siècles, offrant des cadavres gigantesques et déconcertants sans qu'aucun scientifique n'observe l'animal vivant — la première photographie d'un spécimen vivant en mer ne date que de 2004, la première vidéo que de 2012." />
+  </Section>
+
+  <Section id="culture-populaire" label="De la légende au phénomène" title="Du folklore norvégien au vestiaire de hockey">
+    <div class="card-grid compact">
+      <MiniCard title="« Release the Kraken »" tag="Clash of the Titans, 1981 et 2010" body="Réplique devenue culte — alors même que le Kraken, créature scandinave, n'appartient à aucune mythologie grecque : un mélange culturel assumé par Hollywood, pas une erreur savante." />
+      <MiniCard title="Pirates des Caraïbes" tag="Le Secret du coffre maudit, 2006" body="Le film installe durablement l'image d'un monstre tentaculaire au service d'un capitaine maudit dans l'imaginaire populaire contemporain." />
+      <MiniCard title="Le Kraken de Seattle" tag="LNH, depuis 2021" body="La franchise de hockey sur glace de Seattle choisit ce nom en clin d'œil à la légende maritime plutôt qu'à un animal réel." />
+      <MiniCard title="Le calmar géant, star scientifique" tag="Documentaires, depuis 2012" body="La première vidéo d'un calmar géant vivant, tournée par une équipe japonaise et Discovery Channel, a suscité une couverture médiatique mondiale — la créature réelle rattrapant enfin sa légende." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que la science peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucune créature de la taille de Pontoppidan" body="Aucune donnée biologique ne permet l'existence d'un animal marin large de plusieurs kilomètres : les contraintes physiques et métaboliques d'un tel organisme le rendraient tout simplement impossible à nourrir et à faire fonctionner." />
+    <ScienceBlock num="Enquête 2" title="Le calmar géant, un candidat crédible mais modeste" body="Architeuthis dux peut atteindre une douzaine de mètres de long tentacules comprises — spectaculaire, mais très loin de la taille d'une île. Sa vie en eaux profondes, sa rareté d'observation directe et ses affrontements documentés avec les cachalots (cicatrices retrouvées sur des baleines) en font une source plausible de récits amplifiés par des marins n'ayant vu que des cadavres échoués ou des combats en surface." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Le Kraken dérive d'observations réelles de calmars géants et de cachalots"
+      level="consensus"
+      status="Consensus"
+      body="La position la plus largement partagée par les zoologistes et les folkloristes : un noyau d'observation réelle, considérablement amplifié par la transmission orale et l'absence de moyens de vérification."
+      attrib="Position dominante en cryptozoologie critique"
+    />
+    <TheoryCard
+      title="Un récit composite mêlant plusieurs phénomènes marins réels"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Courants tidaux violents (Moskstraumen), zones de pêche riches liées à l'upwelling, et échouages occasionnels de grands céphalopodes pourraient s'être combinés en un seul récit au fil des générations de marins."
+      attrib="Hypothèse discutée en folkloristique maritime"
+    />
+    <TheoryCard
+      title="Une créature unique de taille insulaire a réellement existé"
+      level="folklore"
+      status="Écarté"
+      body="Aucune trace fossile, aucune observation moderne, aucune contrainte biologique connue ne soutient l'existence littérale d'un animal de cette échelle — la description de Pontoppidan relève de la légende amplifiée, pas d'un fait zoologique."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le Kraken fait encore">
+    <HeritageBlock title="Une icône commerciale" body="Du rhum aux équipes sportives, le nom Kraken reste l'un des noms de créature légendaire les plus exploités commercialement dans le monde anglophone." />
+    <HeritageBlock title="Une recherche scientifique toujours active" body="L'étude du calmar géant et du calmar colossal (Mesonychoteuthis hamiltoni), plus lourd encore, continue de progresser — la créature réelle derrière la légende reste elle-même largement mystérieuse." />
+    <HeritageBlock title="Un folklore maritime norvégien vivant" body="Sur les côtes norvégiennes, la légende continue d'irriguer le tourisme local et l'identité maritime régionale, sans plus prétendre au statut de fait zoologique." />
+    <CautionBox>
+      Le Kraken illustre bien le principe de cette série : une légende n'a pas besoin d'être
+      vraie au pied de la lettre pour désigner quelque chose de réel — ici, un animal
+      authentiquement spectaculaire que la science elle-même a mis des siècles à observer
+      vivant.
+    </CautionBox>
+  </Section>
+</PageLayout>

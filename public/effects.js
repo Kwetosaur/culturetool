@@ -1321,6 +1321,330 @@
     });
   }
 
+  // Mythologie perse — une flamme vacille au centre, un voile de clair-obscur
+  // balaie l'écran en écho au dualisme Ahura Mazda / Angra Mainyu.
+  function perseFlame() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:14vh;transform:translateX(-50%);width:min(18vh,130px);opacity:0;';
+    wrap.innerHTML =
+      '<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<ellipse cx="50" cy="130" rx="30" ry="8" fill="#2e2214"/>' +
+        '<path d="M50 30 C 30 60 30 90 50 120 C 70 90 70 60 50 30 Z" fill="#e8a23c" style="filter:drop-shadow(0 0 14px #f7c667)"/>' +
+        '<path d="M50 55 C 40 75 40 95 50 115 C 60 95 60 75 50 55 Z" fill="#fbead0" opacity="0.85"/>' +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .86 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var tip = wrap.querySelector('svg');
+    tip.animate([
+      { transform: 'scaleY(1) scaleX(1)' },
+      { transform: 'scaleY(1.08) scaleX(.94)', offset: .2 },
+      { transform: 'scaleY(.92) scaleX(1.05)', offset: .4 },
+      { transform: 'scaleY(1.1) scaleX(.96)', offset: .6 },
+      { transform: 'scaleY(.95) scaleX(1.03)', offset: .8 },
+      { transform: 'scaleY(1) scaleX(1)' }
+    ], { duration: 1800, iterations: 2.3, easing: 'ease-in-out' });
+    var shade = document.createElement('div');
+    shade.style.cssText = 'position:absolute;inset:0;background:linear-gradient(90deg, rgba(58,61,92,.35), transparent 55%);opacity:0;';
+    l.appendChild(shade);
+    shade.animate([{ opacity: 0 }, { opacity: 1, offset: .3 }, { opacity: .2, offset: .6 }, { opacity: 1, offset: .8 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Mythologie yoruba — un collier de perles colorées s'assemble perle par
+  // perle en travers de l'écran.
+  function yorubaBeads() {
+    var l = layer(4200);
+    var colors = ['#d8443a', '#f0c94e', '#2e9e8a', '#a35fc9'];
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:40%;transform:translateX(-50%);width:min(50vh,360px);opacity:0;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .06 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var count = 14;
+    for (var i = 0; i < count; i++) {
+      (function (i) {
+        var t = i / (count - 1);
+        var x = t * 100;
+        var y = Math.sin(t * Math.PI) * 36;
+        var bead = document.createElement('div');
+        var size = rand(14, 22);
+        bead.style.cssText = 'position:absolute;left:' + x + '%;top:' + (50 - y) + 'px;width:' + size + 'px;height:' + size + 'px;' +
+          'border-radius:50%;background:' + pick(colors) + ';opacity:0;box-shadow:0 0 8px rgba(0,0,0,.4);transform:scale(.3);';
+        wrap.appendChild(bead);
+        bead.animate([
+          { opacity: 0, transform: 'scale(.3)' },
+          { opacity: 1, transform: 'scale(1)' },
+          { opacity: 1 }
+        ], { duration: 500, delay: 150 + i * 180, easing: 'cubic-bezier(.2,1.4,.4,1)', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Incas — un cordon de quipu dont les nœuds se nouent un à un.
+  function incaQuipu() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:20%;transform:translateX(-50%);width:min(10vh,70px);height:min(60vh,420px);opacity:0;';
+    wrap.innerHTML =
+      '<svg viewBox="0 0 60 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<line x1="30" y1="0" x2="30" y2="400" stroke="#c9982f" stroke-width="3"/>' +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .06 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var strandColors = ['#c9982f', '#2e8a7a', '#a6293a', '#5ad0b8'];
+    for (var i = 0; i < 7; i++) {
+      (function (i) {
+        var y = 40 + i * 46;
+        var side = i % 2 === 0 ? -1 : 1;
+        var strand = document.createElement('div');
+        strand.style.cssText = 'position:absolute;left:50%;top:' + y + 'px;width:2px;height:34px;background:' + pick(strandColors) + ';' +
+          'transform-origin:top center;transform:translateX(' + (side * 20) + 'px) rotate(' + (side * 18) + 'deg) scaleY(0);opacity:0;';
+        wrap.appendChild(strand);
+        var knot = document.createElement('div');
+        knot.style.cssText = 'position:absolute;left:50%;top:' + (y + 30) + 'px;width:8px;height:8px;border-radius:50%;background:#f0c94e;' +
+          'transform:translate(' + (side * 20 - 3) + 'px,0) scale(0);opacity:0;box-shadow:0 0 6px #f0c94e;';
+        wrap.appendChild(knot);
+        var delay = 250 + i * 420;
+        strand.animate([
+          { opacity: 0, transform: 'translateX(' + (side * 20) + 'px) rotate(' + (side * 18) + 'deg) scaleY(0)' },
+          { opacity: 1, transform: 'translateX(' + (side * 20) + 'px) rotate(' + (side * 18) + 'deg) scaleY(1)' }
+        ], { duration: 300, delay: delay, easing: 'ease-out', fill: 'forwards' });
+        knot.animate([
+          { opacity: 0, transform: 'translate(' + (side * 20 - 3) + 'px,0) scale(0)' },
+          { opacity: 1, transform: 'translate(' + (side * 20 - 3) + 'px,0) scale(1.3)', offset: .7 },
+          { opacity: 1, transform: 'translate(' + (side * 20 - 3) + 'px,0) scale(1)' }
+        ], { duration: 400, delay: delay + 280, easing: 'ease-out', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Polynésie — une pirogue double glisse sur l'écran, des étoiles de
+  // navigation s'allumant au-dessus d'elle.
+  function pirogueDouble() {
+    var l = layer(4600);
+    var canoe = document.createElement('div');
+    canoe.style.cssText = 'position:absolute;top:58vh;left:-24vw;width:150vw;height:60px;opacity:0;';
+    canoe.innerHTML =
+      '<svg viewBox="0 0 1400 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<path d="M40 90 Q120 60 240 90 L 230 100 Q120 76 50 100 Z" fill="#8a5a2a"/>' +
+        '<path d="M160 90 Q240 60 360 90 L 350 100 Q240 76 170 100 Z" fill="#8a5a2a"/>' +
+        '<rect x="90" y="55" width="220" height="10" fill="#c9982f"/>' +
+        '<path d="M170 20 L 210 55 L 130 55 Z" fill="#e8dcc0" opacity="0.9"/>' +
+      '</svg>';
+    l.appendChild(canoe);
+    canoe.animate([
+      { transform: 'translateX(0)', opacity: 0 },
+      { opacity: 1, offset: .12 },
+      { transform: 'translateX(36vw)', opacity: 1, offset: .82 },
+      { transform: 'translateX(46vw)', opacity: 0 }
+    ], { duration: 4600, easing: 'ease-in-out', fill: 'forwards' });
+
+    [[20, 20], [35, 12], [50, 22], [65, 10], [80, 18]].forEach(function (p, i) {
+      var star = document.createElement('div');
+      star.style.cssText = 'position:absolute;left:' + p[0] + 'vw;top:' + p[1] + 'vh;width:4px;height:4px;border-radius:50%;' +
+        'background:#f7ecd0;box-shadow:0 0 8px #f7ecd0;opacity:0;';
+      l.appendChild(star);
+      star.animate([{ opacity: 0 }, { opacity: 1 }, { opacity: .4 }, { opacity: 1 }, { opacity: 0 }],
+        { duration: 2400, delay: 400 + i * 300, easing: 'ease-in-out', fill: 'forwards' });
+    });
+  }
+
+  // Le Kraken — un tentacule s'enroule depuis le bord de l'écran puis se
+  // retire dans l'eau, un remous s'élargissant derrière lui.
+  function krakenTentacle() {
+    var l = layer(4200);
+    var t = document.createElement('div');
+    t.style.cssText = 'position:absolute;bottom:-6vh;left:' + rand(10, 70) + 'vw;width:min(22vh,160px);opacity:0;';
+    t.innerHTML =
+      '<svg viewBox="0 0 100 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<path d="M50 240 C 20 200 70 160 40 120 C 15 90 60 60 45 20" fill="none" stroke="#2ea69a" stroke-width="22" ' +
+          'stroke-linecap="round" style="filter:drop-shadow(0 0 10px #2ea69a)"/>' +
+        '<circle cx="45" cy="20" r="7" fill="#5ad0c0"/>' +
+        '<circle cx="52" cy="55" r="6" fill="#5ad0c0"/>' +
+        '<circle cx="42" cy="95" r="6" fill="#5ad0c0"/>' +
+      '</svg>';
+    l.appendChild(t);
+    t.animate([
+      { opacity: 0, transform: 'translateY(40px) scale(.85)' },
+      { opacity: 1, offset: .22, transform: 'translateY(0) scale(1)' },
+      { opacity: 1, offset: .66 },
+      { opacity: 0, transform: 'translateY(60px) scale(.8)' }
+    ], { duration: 4200, easing: 'cubic-bezier(.3,.9,.3,1)', fill: 'forwards' });
+
+    var ripple = document.createElement('div');
+    ripple.style.cssText = 'position:absolute;bottom:2vh;left:' + rand(10, 70) + 'vw;width:120px;height:30px;border-radius:50%;' +
+      'border:2px solid rgba(90,208,192,.5);opacity:0;';
+    l.appendChild(ripple);
+    ripple.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: .8, offset: .15 }, { opacity: 0, transform: 'scale(2.2)' }],
+      { duration: 2000, delay: 2600, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Le Kappa — l'écuelle d'eau posée sur sa tête se renverse, quelques
+  // gouttes s'échappent — ton léger, folklore vivant et joueur.
+  function kappaDish() {
+    var l = layer(3600);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:38%;transform:translateX(-50%);width:min(16vh,120px);opacity:0;';
+    wrap.innerHTML =
+      '<svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<ellipse cx="50" cy="60" rx="34" ry="26" fill="#4a9e4a"/>' +
+        '<circle cx="38" cy="48" r="4" fill="#0f1a12"/>' +
+        '<circle cx="62" cy="48" r="4" fill="#0f1a12"/>' +
+        '<ellipse id="fx-kappa-dish" cx="50" cy="26" rx="20" ry="9" fill="#7ecb6a" stroke="#2f7a3a" stroke-width="2" ' +
+          'style="transform-origin:50px 60px"/>' +
+      '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .8 }, { opacity: 0 }],
+      { duration: 3600, easing: 'ease-out', fill: 'forwards' });
+    var dish = wrap.querySelector('#fx-kappa-dish');
+    dish.animate([
+      { transform: 'rotate(0deg)' },
+      { transform: 'rotate(0deg)', offset: .5 },
+      { transform: 'rotate(35deg)', offset: .62 },
+      { transform: 'rotate(0deg)', offset: .78 },
+      { transform: 'rotate(0deg)' }
+    ], { duration: 3600, easing: 'ease-in-out', fill: 'forwards' });
+    for (var i = 0; i < 4; i++) {
+      (function (i) {
+        var drop = document.createElement('div');
+        drop.style.cssText = 'position:absolute;left:' + (46 + i * 4) + '%;top:24%;width:4px;height:6px;border-radius:50% 50% 50% 0;' +
+          'background:#7ecb6a;opacity:0;';
+        wrap.appendChild(drop);
+        drop.animate([{ opacity: 0, transform: 'translateY(0)' }, { opacity: 1, offset: .2 }, { opacity: 0, transform: 'translateY(30px)' }],
+          { duration: 700, delay: 2230 + i * 60, easing: 'ease-in', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Göbekli Tepe — deux piliers en T se dressent, puis la terre remonte les
+  // ensevelir (le site a été enterré volontairement).
+  function gobekliPiliers() {
+    var l = layer(4400);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);width:min(40vh,300px);height:min(24vh,180px);overflow:hidden;';
+    function pillarEl(x, delay) {
+      var p = document.createElement('div');
+      p.style.cssText = 'position:absolute;left:' + x + '%;bottom:0;width:16%;height:100%;transform:translateY(60px);opacity:0;';
+      p.innerHTML = '<svg viewBox="0 0 40 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<rect x="14" y="0" width="12" height="130" fill="#c9982f"/>' +
+        '<rect x="0" y="0" width="40" height="16" rx="3" fill="#e8c164"/>' +
+        '<circle cx="20" cy="70" r="5" fill="#8a5a2a"/>' +
+      '</svg>';
+      p.animate([
+        { opacity: 0, transform: 'translateY(60px)' },
+        { opacity: 1, offset: .28, transform: 'translateY(0)' },
+        { opacity: 1, offset: .62 },
+        { opacity: 0, transform: 'translateY(64px)' }
+      ], { duration: 4400, delay: delay, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+      return p;
+    }
+    wrap.appendChild(pillarEl(28, 0));
+    wrap.appendChild(pillarEl(56, 200));
+    var earth = document.createElement('div');
+    earth.style.cssText = 'position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(180deg,#2e2618,#171208);opacity:0;';
+    wrap.appendChild(earth);
+    l.appendChild(wrap);
+    earth.animate([
+      { height: '0%', opacity: 0 },
+      { height: '0%', opacity: 0, offset: .6 },
+      { height: '100%', opacity: 1, offset: .9 },
+      { height: '100%', opacity: 1 }
+    ], { duration: 4400, easing: 'ease-in', fill: 'forwards' });
+  }
+
+  // Le Saint Graal — un calice se remplit de lumière plutôt que de liquide,
+  // halo qui s'éteint doucement.
+  function graalLumiere() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:10vh;transform:translateX(-50%);width:min(20vh,150px);';
+    wrap.innerHTML =
+      '<svg viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<path d="M30 20 L70 20 L62 70 Q50 84 38 70 Z" fill="none" stroke="#c9982f" stroke-width="4"/>' +
+        '<rect x="46" y="84" width="8" height="46" fill="#c9982f"/>' +
+        '<ellipse cx="50" cy="134" rx="26" ry="7" fill="#c9982f"/>' +
+        '<defs><clipPath id="fx-graal-clip"><path d="M32 24 L68 24 L61 68 Q50 80 39 68 Z"/></clipPath></defs>' +
+        '<rect id="fx-graal-fill" x="30" y="24" width="40" height="56" fill="#f0d27a" clip-path="url(#fx-graal-clip)" ' +
+          'style="transform-origin:50px 80px;transform:scaleY(0)"/>' +
+      '</svg>';
+    var glow = document.createElement('div');
+    glow.style.cssText = 'position:absolute;left:50%;top:10%;transform:translate(-50%,-50%);width:70%;aspect-ratio:1;' +
+      'border-radius:50%;opacity:0;pointer-events:none;' +
+      'background:radial-gradient(circle,rgba(240,210,122,.9),rgba(240,210,122,0) 70%);';
+    wrap.appendChild(glow);
+    l.appendChild(wrap);
+
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var fillRect = wrap.querySelector('#fx-graal-fill');
+    fillRect.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)', offset: .55 }, { transform: 'scaleY(1)' }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    glow.animate([{ opacity: 0 }, { opacity: 0, offset: .5 }, { opacity: 1, offset: .68 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // La disparition d'Amelia Earhart — un avion s'estompe dans un brouillard
+  // du Pacifique, sobre, aucune mise en scène de catastrophe.
+  function earhartFade() {
+    var l = layer(4600);
+    var fog = document.createElement('div');
+    fog.style.cssText = 'position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(207,218,229,.25),transparent 65%);opacity:0;';
+    l.appendChild(fog);
+    fog.animate([{ opacity: 0 }, { opacity: 1, offset: .25 }, { opacity: 1, offset: .75 }, { opacity: 0 }],
+      { duration: 4600, easing: 'ease-in-out', fill: 'forwards' });
+
+    var plane = document.createElement('div');
+    plane.style.cssText = 'position:absolute;top:42vh;left:-14vw;width:120px;opacity:0;';
+    plane.innerHTML =
+      '<svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+        '<path d="M0 20 L60 16 L120 20 L60 24 Z" fill="#c9d4de"/>' +
+        '<path d="M50 20 L70 4 L76 6 L64 20 Z" fill="#c9d4de"/>' +
+        '<path d="M50 20 L70 36 L76 34 L64 20 Z" fill="#c9d4de"/>' +
+      '</svg>';
+    l.appendChild(plane);
+    plane.animate([
+      { transform: 'translateX(0)', opacity: 0 },
+      { opacity: .9, offset: .14 },
+      { transform: 'translateX(46vw)', opacity: .9, offset: .55 },
+      { transform: 'translateX(60vw)', opacity: 0 }
+    ], { duration: 4600, easing: 'ease-in', fill: 'forwards' });
+  }
+
+  // La Lance Sacrée — un fer de lance se dédouble en quatre silhouettes
+  // superposées puis se recompose : les quatre reliques concurrentes en une image.
+  function lanceQuadruple() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(10vh,70px);height:min(34vh,240px);';
+    function head(dx, dy, rot, delay) {
+      var h = document.createElement('div');
+      h.style.cssText = 'position:absolute;left:50%;top:50%;width:100%;height:100%;' +
+        'transform:translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg);opacity:0;';
+      h.innerHTML = '<svg viewBox="0 0 40 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+        '<path d="M20 0 L34 60 L26 60 L26 150 L14 150 L14 60 L6 60 Z" fill="#9a98a5" stroke="#c0384a" stroke-width="1.5"/>' +
+      '</svg>';
+      wrap.appendChild(h);
+      h.animate([
+        { opacity: 0, transform: 'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg) scale(.8)' },
+        { opacity: .85, offset: .4, transform: 'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg) scale(1)' },
+        { opacity: .85, offset: .62 },
+        { opacity: 1, transform: 'translate(-50%,-50%) translate(0,0) rotate(0deg) scale(1)', offset: .85 },
+        { opacity: 0 }
+      ], { duration: 4200, delay: delay, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+      return h;
+    }
+    head(-14, -10, -8, 0);
+    head(14, -6, 6, 120);
+    head(-8, 12, 4, 240);
+    head(10, 10, -5, 360);
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -1343,7 +1667,7 @@
   var GLYPH_POOLS = {
     rune: RUNES, greek: GREEK, hiero: HIERO, cunei: CUNEI, ogham: OGHAM, roman: ROMAN,
     hindu: 'ॐ☸✴◈', japan: '❀✿花結', azteque: '☀✴◈❂', slave: '☀✺❉✵', chine: '福龍鳳春',
-    lapidaire: LAPID
+    lapidaire: LAPID, yoruba: '☀◈✦❖'
   };
 
   function glyphify(el, pool) {
@@ -1442,7 +1766,17 @@
     chevalTroieAssemble: chevalTroieAssemble,
     pierreSoleilTourne: pierreSoleilTourne,
     hameconMaui: hameconMaui,
-    kohINoorFacettes: kohINoorFacettes
+    kohINoorFacettes: kohINoorFacettes,
+    perseFlame: perseFlame,
+    yorubaBeads: yorubaBeads,
+    incaQuipu: incaQuipu,
+    pirogueDouble: pirogueDouble,
+    krakenTentacle: krakenTentacle,
+    kappaDish: kappaDish,
+    gobekliPiliers: gobekliPiliers,
+    graalLumiere: graalLumiere,
+    earhartFade: earhartFade,
+    lanceQuadruple: lanceQuadruple
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -1506,6 +1840,16 @@
     pierresoleil:  pierreSoleilTourne,
     hamecon:       hameconMaui,
     kohinoor:      kohINoorFacettes,
+    perse:         perseFlame,
+    yoruba:        yorubaBeads,
+    incas:         incaQuipu,
+    polynesie:     pirogueDouble,
+    kraken:        krakenTentacle,
+    kappa:         kappaDish,
+    gobeklitepe:   gobekliPiliers,
+    graal:         graalLumiere,
+    earhart:       earhartFade,
+    lance:         lanceQuadruple,
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }

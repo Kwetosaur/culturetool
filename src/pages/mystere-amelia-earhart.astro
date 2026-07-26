@@ -1,0 +1,154 @@
+---
+/*
+  La disparition d'Amelia Earhart — huitième mystère de la série. Structure
+  imposée par docs/plans/plan-serie-mysteres.md : 7 sections, badge de
+  verdict. Sujet impliquant une disparition réelle et des vies humaines
+  perdues (Earhart et son navigateur Fred Noonan) : traité factuellement et
+  sobrement, sans mise en scène de catastrophe, conformément aux principes de
+  fond de la série sur le respect des victimes.
+
+  Effets : data-egg="earhart" + data-scroll-fx="earhartFade" sur #enigme,
+  piste documentée dans plan-effets.md ("un avion qui s'estompe dans un
+  brouillard du Pacifique — sobre, aucune mise en scène de catastrophe").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* Aluminium d'avion, bleu Pacifique profond, ambre de coucher de soleil :
+   la matière de l'appareil et de l'océan plutôt qu'un décor générique. */
+const palette = {
+  bg: '#0d1620',
+  'bg-deep': '#070d15',
+  surface: '#16222f',
+  'surface-alt': '#1d2c3d',
+  border: '#33495f',
+  ink: '#f0f4f7',
+  text: '#cfdae5',
+  'text-dim': '#83a0b5',
+  accent: '#c9d4de',
+  'accent-bright': '#eef3f7',
+  accent2: '#c9782f',
+  'accent2-bright': '#e8a25a',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(201,212,222,0.18)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Recherches' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="La disparition d'Amelia Earhart"
+  serie="Grands Mystères du Monde"
+  description="Le 2 juillet 1937, Amelia Earhart et son navigateur Fred Noonan disparaissent au-dessus du Pacifique en cherchant la minuscule île de Howland. La plus grande recherche aérienne et maritime de l'histoire jusque-là n'a rien trouvé — et le mystère reste officiellement non résolu."
+  href="mystere-amelia-earhart.html"
+  egg="earhart"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="PACIFIQUE · 2 JUILLET 1937"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : <strong>le Mary Celeste</strong>"
+>
+  <p class="subtitle" slot="hero">Lae, Nouvelle-Guinée → Howland Island</p>
+  <p class="tagline" slot="hero">
+    La plus grande recherche aérienne et maritime jamais menée jusqu'alors — 250 000 km²
+    ratissés, quatre millions de dollars dépensés — n'a rien trouvé.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Non résolu à ce jour"
+    note="Aucune épave confirmée de l'avion d'Earhart n'a jamais été retrouvée, ni près de Howland ni sur l'atoll de Nikumaroro. Plusieurs hypothèses sérieuses restent en concurrence, aucune n'est démontrée."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Une aviatrice, un dernier vol" intro="Avant d'aborder ce qui reste mystérieux, ce qui ne l'est pas : le déroulement du vol et sa disparition sont bien documentés jusqu'aux derniers messages radio.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une pionnière confirmée" sub="1932" body="Amelia Earhart est déjà la première femme à traverser l'Atlantique en solo avant de tenter, en 1937, le tour du monde par l'équateur avec son navigateur Fred Noonan à bord d'un Lockheed Electra 10E." />
+      <InfoCard num="II" title="Le dernier tronçon" sub="2 juillet 1937" body="Décollés de Lae, en Nouvelle-Guinée, ils visent Howland, un îlot minuscule du Pacifique central, étape de ravitaillement indispensable avant la suite du tour du monde." />
+      <InfoCard num="III" title="Les derniers messages" sub="Garde-côtes Itasca" body="Le navire garde-côte Itasca, posté près de Howland pour les guider, reçoit des messages radio indiquant un carburant bas et une impossibilité de repérer l'île — puis plus rien." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Où l'avion s'est-il posé — ou abîmé ?" scrollFx="earhartFade" intro="Le mystère se résume à une question précise : l'avion s'est-il abîmé en mer près de Howland, comme le suggère la lecture la plus simple des faits, ou a-t-il atteint un autre point de chute ?">
+    <div class="card-grid wide">
+      <FigureCard name="Abîmé près de Howland" role="L'hypothèse la plus simple" tags={['Carburant bas', 'Océan profond']} body="Les derniers messages radio indiquent un avion cherchant activement l'île sans la trouver, à court de carburant — un amerrissage forcé dans une zone d'océan profond expliquerait l'absence totale d'épave retrouvée." />
+      <FigureCard name="Posé sur Nikumaroro" role="L'hypothèse du naufrage" tags={['Gardner Island', 'TIGHAR']} body="Un atoll inhabité à environ 560 km au sud-est de Howland, où des artefacts (chaussure, flacon, panneau d'aluminium) et des restes osseux disparus depuis ont alimenté l'hypothèse d'un atterrissage suivi d'une survie temporaire en naufragés." />
+      <FigureCard name="Capturée par le Japon" role="La théorie sans preuve crédible" tags={['Rejetée', 'Débunkée']} body="Une théorie d'espionnage et de capture japonaise, popularisée par un documentaire de 2017 autour d'une photographie — retirée de la circulation dès qu'un blogueur a retrouvé la même image publiée en 1935, soit deux ans avant la disparition." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment on a cherché" title="De la plus grande recherche de l'histoire aux expéditions actuelles">
+    <Timeline items={[
+      { year: '2-18 juillet 1937', title: 'La recherche officielle', body: "La marine et les garde-côtes américains ratissent environ 250 000 km² d'océan, la plus vaste opération de recherche aérienne et maritime menée jusqu'alors — sans résultat." },
+      { year: '1939', title: 'Déclaration de décès', body: "Amelia Earhart est légalement déclarée morte par contumace, deux ans après sa disparition." },
+      { year: 'Depuis 1989', title: 'Les expéditions TIGHAR', body: "Le groupe de recherche TIGHAR mène de nombreuses expéditions sur l'atoll de Nikumaroro, mettant au jour des artefacts d'origine américaine des années 1930 sans preuve définitive qu'ils appartiennent à Earhart." },
+      { year: '2018', title: 'Ré-analyse des ossements de 1940', body: "Des mesures osseuses effectuées en 1940 sur Nikumaroro, puis perdues, sont ré-analysées à partir des données d'époque : l'anthropologue Richard Jantz conclut qu'elles sont statistiquement plus compatibles avec la morphologie d'Earhart qu'avec celle de la plupart des individus d'un large échantillon de référence — un résultat suggestif, pas une identification formelle." },
+      { year: '2002, 2006, 2019', title: 'Recherches sous-marines', body: "Plusieurs expéditions, dont une menée par Robert Ballard (découvreur du Titanic) en 2019, sondent les fonds marins près de Howland et de Nikumaroro sans localiser d'épave confirmée." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="Du fait divers au mythe médiatique" title="Une icône, une théorie virale et son démenti">
+    <div class="card-grid compact">
+      <MiniCard title="Amelia (2009)" tag="Biopic" body="Le film consacré à sa vie contribue à entretenir l'intérêt du grand public pour sa disparition autant que pour sa carrière de pionnière de l'aviation." />
+      <MiniCard title="La photo de 2017" tag="Documentaire History Channel" body="Présentée comme preuve qu'Earhart aurait survécu en captivité japonaise, la photographie s'est révélée provenir d'un ouvrage publié en 1935 — un exemple net et daté de démontage de théorie virale." />
+      <MiniCard title="Une icône féministe" tag="Culture populaire durable" body="Au-delà du mystère, Earhart reste une référence constante de l'histoire de l'aviation et des parcours de femmes pionnières, indépendamment de la façon dont son vol s'est terminé." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucune épave confirmée, malgré des décennies de recherche" body="Ni les recherches officielles de 1937, ni les expéditions sous-marines modernes près de Howland, ni les multiples campagnes sur Nikumaroro n'ont permis de localiser et d'identifier formellement l'épave du Lockheed Electra d'Earhart." />
+    <ScienceBlock num="Enquête 2" title="Des indices suggestifs, jamais définitifs" body="Les artefacts et les mesures osseuses de Nikumaroro restent statistiquement compatibles avec la présence d'Earhart sur l'atoll, sans qu'aucun ne constitue une preuve formelle au sens où l'exigerait une identification médico-légale standard." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="L'avion s'est abîmé en mer près de Howland"
+      level="consensus"
+      status="Explication la plus largement acceptée"
+      body="La lecture la plus directe des derniers échanges radio et du niveau de carburant : un amerrissage forcé en zone océanique profonde, où une épave serait extrêmement difficile à localiser."
+      attrib="Position dominante chez les historiens de l'aviation"
+    />
+    <TheoryCard
+      title="L'avion s'est posé sur Nikumaroro, où les naufragés ont survécu un temps"
+      level="plausible"
+      status="Hypothèse sérieuse, non prouvée"
+      body="Défendue notamment par TIGHAR à partir d'artefacts et de signaux radio post-disparition rapportés par des opérateurs de l'époque, cohérents avec un avion posé et alimenté en batterie pendant plusieurs jours — mais aucune épave n'a été formellement identifiée sur place."
+      attrib="Hypothèse discutée, TIGHAR et chercheurs associés"
+    />
+    <TheoryCard
+      title="Earhart menait une mission d'espionnage et fut capturée par le Japon"
+      level="folklore"
+      status="Rejeté par les historiens"
+      body="Sans document d'archive crédible à l'appui, et directement invalidé dans sa version la plus médiatisée par la datation de la photographie de 1935 présentée à tort comme preuve en 2017."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette disparition fait encore">
+    <HeritageBlock title="Des recherches toujours actives" body="TIGHAR et d'autres organisations continuent d'organiser des expéditions et des analyses, avec l'espoir déclaré de clore un jour le dossier de façon définitive." />
+    <HeritageBlock title="Un symbole de l'aviation pionnière" body="Amelia Earhart reste célébrée pour ses records réels bien avant sa disparition — une reconnaissance qui ne dépend pas de la résolution du mystère." />
+    <HeritageBlock title="Un cas d'école de démontage de désinformation" body="L'épisode de la photographie de 2017 est aujourd'hui cité comme exemple pédagogique de vérification des sources face à une théorie médiatique virale." />
+    <CautionBox>
+      Cette disparition a coûté la vie à deux personnes réelles, Amelia Earhart et Fred
+      Noonan, dont les proches ont vécu l'incertitude pendant des décennies. Les hypothèses
+      les plus spectaculaires méritent le même examen critique que n'importe quelle autre
+      affaire non résolue de cette série — ni sensationnalisme, ni certitude affichée là où il
+      n'y en a pas.
+    </CautionBox>
+  </Section>
+</PageLayout>

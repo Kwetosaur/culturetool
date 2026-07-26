@@ -38,11 +38,11 @@ Tout est encapsulé en `try/catch` — un effet cassé ne doit jamais casser la 
 
 **Règle de priorité** : livrer la page avec le générique d'abord si le temps manque, upgrader vers le sur-mesure ensuite. Ne jamais retarder la mise en ligne d'une page pour finir un easter egg.
 
-## Déjà fait (38 pages de contenu + l'accueil)
+## Déjà fait (48 pages de contenu + l'accueil)
 
-Les 11 pages mythologie combinent désormais leur pluie de glyphes générique **et** une scène sur-mesure (au clic du titre **et** en happening au scroll sur `#pantheon`) — plus du niveau "minimum" décrit ci-dessus.
+Les 11 premières pages mythologie combinent leur pluie de glyphes générique **et** une scène sur-mesure (au clic du titre **et** en happening au scroll sur `#pantheon`) — plus du niveau "minimum" décrit ci-dessus. Perse et Yoruba, les deux pages suivantes, n'ont que le déchiffrement des titres (minimum non négociable) et une scène sur-mesure, sans pluie de glyphes générique — un niveau tout aussi conforme, cf. règle de priorité plus bas.
 
-Câblage vérifié le 26/07/2026 (voir `docs/audit-existant.md` § E) : les 30 clefs `data-egg` utilisées dans les pages existent toutes dans `EGGS`, les 29 `data-scroll-fx` dans `SCROLL_FX`, les 11 `data-glyphs` dans `GLYPH_POOLS`. Aucune clef morte, aucune clef manquante.
+Câblage vérifié le 26/07/2026 (voir `docs/audit-existant.md` § E) pour les 30 pages d'alors : les clefs `data-egg`, `data-scroll-fx` et `data-glyphs` correspondaient toutes à une entrée dans `EGGS`/`SCROLL_FX`/`GLYPH_POOLS`. Les pages ajoutées depuis suivent la même discipline, vérifiée à chaque intégration.
 
 | Page | Clef `data-egg` | Effet générique | Effet sur-mesure | Déclenché aussi au scroll sur |
 |---|---|---|---|---|
@@ -84,17 +84,27 @@ Câblage vérifié le 26/07/2026 (voir `docs/audit-existant.md` § E) : les 30 c
 | La Pierre du Soleil aztèque (objet) | `pierresoleil` | — | **sur-mesure** : un disque tourne d'un cran puis s'arrête net — jamais un défilement continu | `#description` |
 | L'hameçon de Maui (objet) | `hamecon` | — | **sur-mesure** : un hameçon tire une île hors de l'eau, puis sa courbe se prolonge en constellation | `#description` |
 | Le Koh-i-Noor (objet) | `kohinoor` | — | **sur-mesure** : un diamant dont les facettes s'allument une à une, chacune projetant un éclat bref | `#description` |
+| Perse / zoroastrienne | `perse` | — | **sur-mesure** : une flamme vacille en clair-obscur, dualisme Ahura Mazda / Angra Mainyu | `#pantheon` |
+| Yoruba | `yoruba` | — | **sur-mesure** : un collier de perles colorées s'assemble perle par perle | `#pantheon` |
+| Incas (culture) | `incas` | — | **sur-mesure** : un cordon de quipu dont les nœuds se nouent un à un | `#style-de-vie` |
+| Polynésie (navigation, culture) | `polynesie` | — | **sur-mesure** : une pirogue double glisse, des étoiles de navigation s'allument au-dessus | `#style-de-vie` |
+| Le Kraken | `kraken` | — | **sur-mesure** : un tentacule s'enroule depuis le bord de l'écran puis se retire dans l'eau | `#portrait` |
+| Le Kappa | `kappa` | — | **sur-mesure** : l'écuelle d'eau sur sa tête se renverse, ton léger | `#portrait` |
+| Göbekli Tepe | `gobeklitepe` | — | **sur-mesure** : deux piliers en T se dressent, puis la terre remonte les ensevelir | `#enigme` |
+| Le Saint Graal (objet) | `graal` | — | **sur-mesure** : un calice se remplit de lumière plutôt que de liquide, halo qui s'éteint doucement | `#description` |
+| La disparition d'Amelia Earhart | `earhart` | — | **sur-mesure sobre** : un avion s'estompe dans un brouillard du Pacifique, aucune mise en scène de catastrophe | `#enigme` |
+| La Lance Sacrée (objet) | `lance` | — | **sur-mesure** : un fer de lance se dédouble en quatre silhouettes superposées puis se recompose | `#description` |
 | Accueil | `accueil` | mélange de glyphes de toutes les cultures | — | — |
 
 ## Stratégie par famille de page
 
 Chaque série a sa propre logique d'effet dominant (en plus du décor commun ci-dessus) — c'est le principe à suivre pour toute nouvelle page :
 
-- **Mythologies** → déchiffrement des titres de section (mécanisme 3, obligatoire et "simple" — voir plus bas) **+**, quand le temps le permet, une scène sur-mesure rejouée au clic du titre et en happening sur `#pantheon` (mécanisme 4). Les 11 pages existantes ont les deux niveaux. Pour une nouvelle mythologie : le déchiffrement des titres reste le minimum non négociable ; la scène sur-mesure est un bonus, jamais un blocage pour livrer.
-- **Créatures** → "happenings" au scroll (mécanisme 4) qui rejouent l'effet sur-mesure de la créature (pas seulement au clic du titre) sur une section clé — typiquement `#portrait` ou `#temoins-recits`. Déjà fait : Gévaudan (`eyes`, sur `#portrait`), Loch Ness (`nessie`, sur `#portrait`), Bigfoot (`bigfootTracks`, empreintes en diagonale, sur `#portrait`), Yeti (`yetiBlizzard`, blizzard + silhouette floue, sur `#portrait`), Chupacabra (`chupacabraEyes`, yeux rouges désertiques + ombre bondissante, sur `#portrait`), Mothman (`mothmanShadow`, ombre ailée + halo, sur `#portrait`).
-- **Mystères** → décors ou effets simples au scroll, même mécanisme 4, sur une section clé — typiquement `#enigme` ou `#decouverte`. Déjà fait : Triangle des Bermudes (`bermudes`, sur `#enigme`), Stonehenge (`solstice`, sur `#enigme`), Col Dyatlov (`dyatlov`, flocons sobres, sur `#enigme`), Manuscrit de Voynich (`voynichScript`, glyphes inventés, sur `#enigme`), Lignes de Nazca (`nazcaLines`, géoglyphe qui se dessine, sur `#enigme`), Mécanisme d'Anticythère (`antikytheraGears`, engrenages qui s'assemblent, sur `#enigme`).
-- **Cultures** → effets qui jouent sur un élément matériel/iconique de la culture (danse, soie, poterie...) plutôt que sur des glyphes abstraits. Déjà fait : Chine (`silk`, ruban de soie qui ondule, sur `#style-de-vie`), Égypte Antique (réutilise `sunrise`, sur `#style-de-vie`), Rome antique (`romanColumns`, colonnes qui se révèlent, sur `#style-de-vie`), Grèce antique (`greekMaskFlip`, masque comédie/tragédie, sur `#style-de-vie`), Vikings (`vikingLonghship`, drakkar qui traverse l'écran, sur `#style-de-vie`).
-- **Objets légendaires** (5e famille, créée le 26/07/2026, aucune page écrite) → **l'objet lui-même s'assemble, se forge ou s'illumine**. Ni glyphes abstraits, ni créature qui traverse, ni décor d'ambiance : une chose fabriquée qui se construit sous les yeux du lecteur. Le précédent existe et fonctionne : `antikytheraGears` (engrenages qui s'assemblent puis tournent) est exactement le patron à suivre. Section porteuse du `data-scroll-fx` : **`#description`** (là où l'objet est décrit) ou **`#facture`** (la section forge/matière). Le déchiffrement d'inscription (mécanisme 3) est autorisé sur cette famille, voir l'arbitrage plus haut.
+- **Mythologies** → déchiffrement des titres de section (mécanisme 3, obligatoire et "simple" — voir plus bas) **+**, quand le temps le permet, une scène sur-mesure rejouée au clic du titre et en happening sur `#pantheon` (mécanisme 4). Les 13 pages existantes ont les deux niveaux. Pour une nouvelle mythologie : le déchiffrement des titres reste le minimum non négociable ; la scène sur-mesure est un bonus, jamais un blocage pour livrer. Perse et Yoruba (`perse`/`cunei`, `yoruba`/`yoruba`) sont les deux premières mythologies écrites avec le socle Astro — voir `docs/plans/plan-industrialisation.md`.
+- **Créatures** → "happenings" au scroll (mécanisme 4) qui rejouent l'effet sur-mesure de la créature (pas seulement au clic du titre) sur une section clé — typiquement `#portrait` ou `#temoins-recits`. Déjà fait : Gévaudan (`eyes`, sur `#portrait`), Loch Ness (`nessie`, sur `#portrait`), Bigfoot (`bigfootTracks`, empreintes en diagonale, sur `#portrait`), Yeti (`yetiBlizzard`, blizzard + silhouette floue, sur `#portrait`), Chupacabra (`chupacabraEyes`, yeux rouges désertiques + ombre bondissante, sur `#portrait`), Mothman (`mothmanShadow`, ombre ailée + halo, sur `#portrait`), Kraken (`krakenTentacle`, tentacule qui se retire dans l'eau, sur `#portrait`), Kappa (`kappaDish`, écuelle qui se renverse, ton léger, sur `#portrait`).
+- **Mystères** → décors ou effets simples au scroll, même mécanisme 4, sur une section clé — typiquement `#enigme` ou `#decouverte`. Déjà fait : Triangle des Bermudes (`bermudes`, sur `#enigme`), Stonehenge (`solstice`, sur `#enigme`), Col Dyatlov (`dyatlov`, flocons sobres, sur `#enigme`), Manuscrit de Voynich (`voynichScript`, glyphes inventés, sur `#enigme`), Lignes de Nazca (`nazcaLines`, géoglyphe qui se dessine, sur `#enigme`), Mécanisme d'Anticythère (`antikytheraGears`, engrenages qui s'assemblent, sur `#enigme`), Göbekli Tepe (`gobekliPiliers`, piliers ensevelis, sur `#enigme`), Amelia Earhart (`earhartFade`, avion qui s'estompe dans le brouillard, sur `#enigme`).
+- **Cultures** → effets qui jouent sur un élément matériel/iconique de la culture (danse, soie, poterie...) plutôt que sur des glyphes abstraits. Déjà fait : Chine (`silk`, ruban de soie qui ondule, sur `#style-de-vie`), Égypte Antique (réutilise `sunrise`, sur `#style-de-vie`), Rome antique (`romanColumns`, colonnes qui se révèlent, sur `#style-de-vie`), Grèce antique (`greekMaskFlip`, masque comédie/tragédie, sur `#style-de-vie`), Vikings (`vikingLonghship`, drakkar qui traverse l'écran, sur `#style-de-vie`), Incas (`incaQuipu`, nœuds de quipu, sur `#style-de-vie`), Polynésie (`pirogueDouble`, pirogue et étoiles, sur `#style-de-vie`).
+- **Objets légendaires** (5e famille, créée le 26/07/2026) → **l'objet lui-même s'assemble, se forge ou s'illumine**. Ni glyphes abstraits, ni créature qui traverse, ni décor d'ambiance : une chose fabriquée qui se construit sous les yeux du lecteur. Le précédent existe et fonctionne : `antikytheraGears` (engrenages qui s'assemblent puis tournent) est exactement le patron à suivre. Section porteuse du `data-scroll-fx` : **`#description`** (là où l'objet est décrit) ou **`#facture`** (la section forge/matière). Le déchiffrement d'inscription (mécanisme 3) est autorisé sur cette famille, voir l'arbitrage plus haut.
 
 ## Comment ajouter le déchiffrement de titres à une nouvelle page mythologie
 
@@ -118,11 +128,9 @@ familles (voir `docs/audit-existant.md` § C2). Une piste n'est **jamais** un en
 un point de départ pour ne pas repartir de zéro au moment de l'écriture, et elle peut être
 remplacée par mieux.
 
-**Les 4 mythologies les plus attendues** (`docs/listes/suite_mythologies.md`, top 5 recommandé), avec
-plusieurs pistes chacune :
-- **Perse/zoroastrienne** — (1) une flamme sacrée qui vacille au centre, halo doré/sombre en clair-obscur (dualisme Ahura Mazda / Angra Mainyu) ; (2) une balance de lumière et d'ombre qui s'incline doucement d'un côté puis de l'autre ; (3) les ailes du Faravahar qui se déploient en silhouette dorée.
-- **Yoruba** — (1) des perles colorées qui s'assemblent en collier (imagerie des orishas) ; (2) un motif de tissu adire qui se teint progressivement à l'écran ; (3) un éclair d'orage (Shango) qui zèbre brièvement l'écran.
-- **Inca** — (1) une spirale dorée façon disque solaire d'Inti qui tourne lentement ; (2) un fil de quipu dont les nœuds se nouent un à un le long d'un cordon ; (3) un condor qui plane en silhouette, ailes déployées, traversant lentement l'écran.
+**Les 2 mythologies les plus attendues restantes** (`docs/listes/suite_mythologies.md`, top 5
+recommandé — Perse et Yoruba, qui occupaient les deux premières places, sont publiées) :
+- **Inca (mythologie)** — (1) une spirale dorée façon disque solaire d'Inti qui tourne lentement ; (2) un fil de quipu dont les nœuds se nouent un à un le long d'un cordon ; (3) un condor qui plane en silhouette, ailes déployées, traversant lentement l'écran. Distincte de `culture-incas.html` (angle civilisationnel, déjà publié, qui a déjà pris la piste du quipu — choisir plutôt (1) ou (3) ici pour ne pas répéter le même geste).
 - **Aborigène australienne** — (1) un motif de points façon peinture aborigène qui se dessine progressivement ; (2) une ligne de chant (songline) tracée en pointillé lumineux à travers un paysage stylisé. **Traiter avec un soin particulier** (consulter des sources issues des communautés concernées avant de choisir le motif définitif) — cf. principes de fond de la série mythologies sur le respect des croyances vivantes.
 
 **Les 34 autres mythologies à venir** — une piste par page. Le déchiffrement des titres
@@ -166,8 +174,8 @@ bonus.
 | Mapuche | Deux serpents qui montent l'un contre l'autre, l'eau montant avec eux, puis se retirent (Ten Ten et Kai Kai) |
 | Guarani / tupi | Un chemin de lumière qui s'ouvre à travers la forêt et se referme (la quête de la Terre sans Mal) |
 
-**Les 28 cultures à venir** — jouer sur un objet ou un geste matériel reconnaissable de la
-culture, jamais sur des glyphes abstraits.
+**Les 26 cultures à venir** (Incas et Polynésie sont publiées) — jouer sur un objet ou un
+geste matériel reconnaissable de la culture, jamais sur des glyphes abstraits.
 
 | Page | Piste d'effet |
 |---|---|
@@ -187,11 +195,9 @@ culture, jamais sur des glyphes abstraits.
 | Nubie / Koush | Une pyramide méroïtique qui se dessine, visiblement plus effilée qu'une égyptienne |
 | Grand Zimbabwe (culture) | Un mur de pierres sèches qui s'assemble bloc par bloc, sans mortier |
 | Éthiopie / Aksoum | Une stèle monolithique qui se redresse lentement |
-| Incas (culture) | Un cordon de quipu dont les nœuds se nouent un à un |
 | Maya (culture) | Un glyphe qui se sculpte trait par trait ; variante : un nombre qui se compose en points et barres |
 | Aztèques (culture) | Un motif de tissage ou de céramique qui se complète progressivement ; variantes : une pyramide à degrés qui se dessine, un éclat de jade qui scintille — distinct de la page mythologie aztèque |
 | Peuples des Plaines | Un tipi qui se dresse, silhouettes de bisons passant au lointain |
-| Polynésie (navigation) | Une pirogue double qui glisse, étoiles de navigation s'allumant au-dessus d'elle |
 | Aborigènes d'Australie (culture) | Un motif de points qui se dessine progressivement ; variante : une songline tracée en pointillé lumineux — **traiter avec un soin particulier**, consulter des sources issues des communautés concernées avant de figer le motif |
 | Al-Andalus | Une arcade d'arcs outrepassés qui se répète en profondeur, chaque arc s'allumant après le précédent (la forêt de colonnes de Cordoue) |
 | Minoens (Crète) | Un taureau qui bondit et un acrobate qui le franchit, en frise continue |
@@ -200,15 +206,14 @@ culture, jamais sur des glyphes abstraits.
 | Empire songhaï | Un manuscrit qui se referme et qu'une main emporte (l'exil des bibliothèques de Tombouctou) |
 | Empire timouride | Une carte du ciel qui se constelle point par point (les tables d'Ulugh Beg) |
 
-**Les 30 créatures à venir** — cette famille n'a pas de niveau générique utilisable (le
-`glyphShower` repose sur des écritures culturelles, aucune des 6 pages créature existantes ne
-l'emploie) : c'est sur-mesure, mais la plupart des pistes ci-dessous sont des **variantes
-d'un effet déjà écrit**, donc peu coûteuses. La fonction réutilisable est indiquée entre
-parenthèses.
+**Les 28 créatures à venir** (Le Kraken et Le Kappa sont publiés) — cette famille n'a pas de
+niveau générique utilisable (le `glyphShower` repose sur des écritures culturelles, aucune
+page créature ne l'emploie) : c'est sur-mesure, mais la plupart des pistes ci-dessous sont
+des **variantes d'un effet déjà écrit**, donc peu coûteuses. La fonction réutilisable est
+indiquée entre parenthèses.
 
 | Page | Piste d'effet |
 |---|---|
-| Le Kraken | Un tentacule qui s'enroule depuis le bord de l'écran puis se retire dans l'eau |
 | Les Sirènes | Une silhouette assise sur un rocher qui plonge, ne laissant que des ondes concentriques (variante `nessie`) |
 | Le Loup-Garou | Une ombre humaine portée au sol qui s'allonge en silhouette de loup — la transformation par l'ombre seule, aucune violence |
 | Black Shuck | Deux yeux rouges au ras du sol qui s'allument puis s'éloignent en tremblant (variante `eyes`) |
@@ -221,7 +226,6 @@ parenthèses.
 | Champ | Une vague en V qui traverse un lac calme, **sans créature visible** — l'ambiguïté de la photo Mansi comme effet |
 | Bête de Bray Road | Deux phares de voiture qui éclairent une silhouette pendant une fraction de seconde |
 | Nahuelito | Une silhouette sous la surface d'un lac andin, jamais nette (variante `nessie`, palette froide) |
-| Le Kappa | L'écuelle d'eau posée sur une tête qui se renverse — ton léger, c'est un folklore vivant et joueur |
 | L'Orang Pendek | La végétation qui s'écarte sur un passage, sans jamais montrer l'animal |
 | Le Yeren | Des empreintes qui remontent un versant boisé (variante `bigfootTracks`, autre angle) |
 | Le Popobawa | Une grande ombre ailée qui passe devant la lune (variante `mothmanShadow`) |
@@ -239,12 +243,11 @@ parenthèses.
 | La Llorona | Une silhouette blanche au bord de l'eau qui s'efface, et des ondes concentriques qui s'élargissent — **jamais de visage, jamais de cri**, la retenue est le sujet |
 | L'Hombre Caimán | Un sillage qui descend un fleuve et se perd dans la mer (sa descente du Magdalena jusqu'à Bocas de Ceniza) |
 
-**Les 27 mystères à venir** — même logique : décor ou geste simple sur `#enigme` ou
-`#decouverte`.
+**Les 25 mystères à venir** (Göbekli Tepe et la disparition d'Amelia Earhart sont publiés) —
+même logique : décor ou geste simple sur `#enigme` ou `#decouverte`.
 
 | Page | Piste d'effet |
 |---|---|
-| La disparition d'Amelia Earhart | Un avion qui s'estompe dans un brouillard du Pacifique — sobre, aucune mise en scène de catastrophe |
 | L'île de Pâques | Un moai qui se dresse en silhouette, très sobre |
 | Le Mary Celeste | Un voilier immobile, voiles molles, aucune silhouette à bord |
 | La Colonie de Roanoke | Le mot CROATOAN qui se grave lettre par lettre dans le bois (bon candidat `fx-decode`, avec un pool de lettres latines gravées) |
@@ -264,7 +267,6 @@ parenthèses.
 | Dwarka engloutie | Un toit de temple qui apparaît sous le passage des vagues |
 | Le Zodiac Killer | Une grille de cryptogramme dont quelques cases se remplissent puis s'arrêtent — strictement abstrait, aucune allusion aux victimes ni à l'auteur |
 | Le Vol MH370 | Un point radar qui clignote, puis disparaît, puis rien — sobriété maximale, aucune reconstitution |
-| Göbekli Tepe | Deux piliers en T qui se dressent, puis la terre qui remonte les ensevelir (le site a été enterré volontairement) |
 | Le Disque de Phaistos | Des signes qui s'impriment en spirale du bord vers le centre, puis s'arrêtent sans rien livrer |
 | Le Rongorongo | Des lignes de glyphes qui se gravent alternativement dans un sens puis dans l'autre (l'écriture en boustrophédon inversé, qui est un fait du corpus) |
 | L'Explosion de la Toungouska | Une onde qui traverse l'écran et couche des troncs en éventail, sans flash ni explosion spectaculaire |
@@ -272,16 +274,15 @@ parenthèses.
 | Le Somerton Man | Un bout de papier déchiré qui se pose, et rien d'autre — sobriété absolue, une mort réelle |
 | Les Sphères du Costa Rica | Trois sphères qui roulent se ranger en ligne, puis une flèche qui les déplace hors du cadre (la perte du contexte archéologique) |
 
-**Les 28 objets légendaires restants** (Excalibur, l'Arche d'Alliance, les Trois Trésors du
+**Les 26 objets légendaires restants** (Excalibur, l'Arche d'Alliance, les Trois Trésors du
 Japon, le Tabouret d'or des Ashanti, Mjöllnir, le Cheval de Troie, la Pierre du Soleil
-aztèque, l'hameçon de Maui et le Koh-i-Noor sont publiés) — l'objet s'assemble, se forge ou
-s'illumine. Section porteuse du `data-scroll-fx` : `#description` ou `#facture`.
+aztèque, l'hameçon de Maui, le Koh-i-Noor, le Saint Graal et la Lance Sacrée sont publiés) —
+l'objet s'assemble, se forge ou s'illumine. Section porteuse du `data-scroll-fx` :
+`#description` ou `#facture`.
 
 | Page | Piste d'effet |
 |---|---|
-| Le Saint Graal | Un calice qui se remplit de lumière plutôt que de liquide, halo qui s'éteint doucement |
 | L'Épée de Goujian | Une lame de bronze qui se dépatine, la corrosion reculant pour révéler l'inscription (bon candidat `fx-decode` en écriture-oiseau) |
-| La Lance Sacrée | Un fer de lance qui se dédouble en quatre silhouettes superposées puis se recompose — les quatre reliques concurrentes en une image |
 | La Chambre d'Ambre | Un panneau d'ambre qui se remplit tesson par tesson, puis dont les pièces s'éteignent une à une |
 | Les épées Ulfberht | Une signature `+VLFBERH+T` qui s'inscrit dans la lame, la croix se déplaçant pour révéler une contrefaçon (`fx-decode` + décalage final) |
 | La Toison d'Or | Une peau de mouton plongée dans un courant, dont les paillettes d'or s'accrochent une à une |
