@@ -1,0 +1,35 @@
+---
+/*
+  Une hypothese, avec son niveau de fiabilite et son attribution.
+
+  Regle de fond des series d'enquete : chaque theorie est attribuee a qui la
+  defend, et aucune n'est presentee comme acquise sans preuve. Les 3 niveaux
+  ci-dessous sont volontairement limitatifs — ne jamais en inventer un 4e, c'est
+  ce qui garantit qu'une hypothese marginale ne peut pas etre presentee avec la
+  meme couleur qu'un consensus.
+
+    consensus  = position dominante de la recherche
+    plausible  = hypothese serieuse mais non tranchee
+    folklore   = croyance, theorie marginale ou rejetee (mentionnee, pas validee)
+*/
+export interface Props {
+  title: string;
+  level: 'consensus' | 'plausible' | 'folklore';
+  /** Libelle affiche du niveau. Ex. "Consensus scientifique" */
+  status: string;
+  body?: string | string[];
+  /** Qui defend cette theorie. Ex. "Hypothèse de Luigi Garlaschelli, 2001" */
+  attrib?: string;
+}
+const { title, level, status, body, attrib } = Astro.props;
+const paras = Array.isArray(body) ? body : body ? [body] : [];
+---
+<div class="theory-card" data-reveal>
+  <div class="theory-header">
+    <h3>{title}</h3>
+    <span class={`theory-status ${level}`}>{status}</span>
+  </div>
+  {paras.map((p) => <p set:html={p}></p>)}
+  <slot />
+  {attrib && <p class="theory-attrib">{attrib}</p>}
+</div>

@@ -1,19 +1,72 @@
 ---
+/*
+  Les 5 sections de séries sont générées par boucle depuis data/site-pages.json —
+  la même source de vérité que tools/sync_sidebar.py (menu latéral des pages
+  statiques) et tools/add_page.py. Publier une page = ajouter une entrée dans ce
+  JSON ; ni cette page ni le menu ne se patchent plus à la main, et le nombre
+  écrit dans le titre d'une section ne peut plus être périmé.
+
+  Une série dont le tableau est vide (ex. "objets" avant sa première page) est
+  simplement ignorée ici.
+*/
+import pages from '../../data/site-pages.json';
+
 const base = import.meta.env.BASE_URL;
 
-const mythologies = [
-  { slug: 'mythologie-nordique.html', title: 'Nordique', hook: 'Neuf mondes suspendus à un frêne cosmique.', epigraph: 'ᚱᚢᚾᛖᛊ' },
-  { slug: 'mythologie-grecque.html', title: 'Grecque', hook: "Sept royaumes primordiaux, l'Olympe et les Enfers.", epigraph: 'ΘΕΟΙ' },
-  { slug: 'mythologie-egyptienne.html', title: 'Égyptienne', hook: 'Le Nil, le Douat et la pesée du cœur.', epigraph: '𓁢𓂀𓆣' },
-  { slug: 'mythologie-romaine.html', title: 'Romaine', hook: 'Un panthéon hérité, une religion d’État.', epigraph: 'S P Q R' },
-  { slug: 'mythologie-celtique.html', title: 'Celtique', hook: "Six vagues d'invasions, un Autre Monde.", epigraph: 'ᚑᚌᚐᚋ' },
-  { slug: 'mythologie-mesopotamienne.html', title: 'Mésopotamienne', hook: 'Les premières villes, les premiers mythes écrits.', epigraph: '𒀭𒈗𒆠' },
-  { slug: 'mythologie-hindoue.html', title: 'Hindoue', hook: 'Quatorze mondes, un cycle cosmique sans fin.', epigraph: 'ॐ' },
-  { slug: 'mythologie-japonaise.html', title: 'Japonaise', hook: 'Huit millions de kami, du ciel aux sanctuaires.', epigraph: '八百万の神' },
-  { slug: 'mythologie-azteque-maya.html', title: 'Aztèque & Maya', hook: 'Deux cosmologies voisines, un même continent.', epigraph: 'ⓖ ⓔ' },
-  { slug: 'mythologie-slave.html', title: 'Slave', hook: "Le monde visible et l'invisible, Yav et Nav.", epigraph: 'БОГИ' },
-  { slug: 'mythologie-chinoise.html', title: 'Chinoise', hook: "Pangu, l'Empereur de Jade et les huit immortels : la plus grande zone d'ombre de la série enfin comblée.", epigraph: '龍' },
+const NOMBRES = ['Zéro', 'Une', 'Deux', 'Trois', 'Quatre', 'Cinq', 'Six', 'Sept', 'Huit',
+  'Neuf', 'Dix', 'Onze', 'Douze', 'Treize', 'Quatorze', 'Quinze', 'Seize', 'Dix-sept',
+  'Dix-huit', 'Dix-neuf', 'Vingt'];
+const compte = (n) => NOMBRES[n] || String(n);
+
+const SERIES = [
+  {
+    key: 'mythologies',
+    label: 'Série en cours',
+    titre: (n) => `${compte(n)} Mythologies`,
+    intro: "Chaque chapitre a sa propre cosmologie, son propre panthéon, son propre décor — le nombre de royaumes ou l'ampleur de la frise varient selon ce que chaque culture porte vraiment, sans moule imposé.",
+  },
+  {
+    key: 'cultures',
+    label: 'Série en cours',
+    titre: () => 'Cultures du Monde',
+    intro: "Des peuples, continents et pays entiers racontés au-delà de leur mythologie : histoire, figures, inventions, style de vie.",
+  },
+  {
+    key: 'creatures',
+    label: 'Série en cours',
+    titre: () => 'Créatures Légendaires',
+    intro: "Entre folklore, fait divers historique et zoologie mystérieuse — ce qu'on sait vraiment, et ce qu'on raconte.",
+  },
+  {
+    key: 'mysteres',
+    label: 'Série en cours',
+    titre: () => 'Grands Mystères',
+    intro: "Lieux, objets et événements non résolus — ou résolus, mais jamais rattrapés par leur légende.",
+  },
+  {
+    key: 'objets',
+    label: 'Nouvelle série',
+    titre: () => 'Objets Légendaires',
+    intro: "Excalibur, le Graal, l'Arche d'Alliance — où s'arrête le récit, et où commence la matière ?",
+  },
 ];
+
+const series = SERIES
+  .map((s) => ({ ...s, items: pages[s.key] || [] }))
+  .filter((s) => s.items.length > 0);
+
+const total = series.reduce((n, s) => n + s.items.length, 0);
+
+const A_VENIR = [
+  { titre: 'Prochaines mythologies', texte: 'Aborigène australienne, yoruba, perse, inca, finnoise...', tag: 'Mythologies' },
+  { titre: 'Prochaines cultures', texte: 'Incas, Polynésie, Mésopotamie, Perse achéménide...', tag: 'Cultures' },
+  { titre: 'Prochaines créatures', texte: 'Le Kraken, les Sirènes, le Loup-Garou...', tag: 'Créatures' },
+  { titre: 'Prochains mystères', texte: "L'Atlantide, la disparition d'Amelia Earhart, le Mary Celeste...", tag: 'Mystères' },
+  { titre: 'Premiers objets légendaires', texte: "Excalibur, l'Arche d'Alliance, les Trois Trésors du Japon, Mjöllnir...", tag: 'Objets' },
+];
+
+const description = "Une encyclopédie illustrée des mythologies, cultures, créatures, mystères et objets légendaires du monde — cosmogonies, panthéons, enquêtes et héritages, culture par culture.";
+const pageUrl = new URL(base, Astro.site).href;
 ---
 
 <!doctype html>
@@ -22,7 +75,13 @@ const mythologies = [
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mythologies & Cultures du Monde</title>
-  <meta name="description" content="Une encyclopédie illustrée des grandes mythologies du monde — cosmogonies, panthéons, légendes et héritages, culture par culture." />
+  <meta name="description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mythologies & Cultures du Monde" />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={pageUrl} />
+  <meta property="og:image" content={new URL(`${base}map.jpg`, Astro.site).href} />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
@@ -188,160 +247,35 @@ const mythologies = [
     <a href={`${base}map.html`} class="map-link">🗺️ Voir la carte du monde</a>
   </header>
 
-  <section id="mythologies">
-    <div class="section-label">Série en cours</div>
-    <h2 class="section-title">Onze Mythologies</h2>
-    <p class="section-intro">Chaque chapitre a sa propre cosmologie, son propre panthéon, son propre décor — le nombre de royaumes ou l'ampleur de la frise varient selon ce que chaque culture porte vraiment, sans moule imposé.</p>
-    <div class="grid">
-      {mythologies.map((m) => (
-        <a class="card" href={`${base}${m.slug}`}>
-          <div class="epigraph">{m.epigraph}</div>
-          <h3>{m.title}</h3>
-          <p>{m.hook}</p>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <section id="cultures">
-    <div class="section-label">Nouvelle série</div>
-    <h2 class="section-title">Cultures du Monde</h2>
-    <p class="section-intro">Des peuples, continents et pays entiers racontés au-delà de leur mythologie : histoire, figures, inventions, style de vie.</p>
-    <div class="grid">
-      <a class="card" href={`${base}culture-chinoise.html`}>
-        <div class="epigraph">中國</div>
-        <h3>Chine</h3>
-        <p>Peuples, grandes figures, inventions et carte-récit d'une civilisation continue.</p>
-      </a>
-      <a class="card" href={`${base}culture-egypte-antique.html`}>
-        <div class="epigraph">𓁢𓂀𓆣</div>
-        <h3>Égypte Antique</h3>
-        <p>Pharaons, société, inventions et vie quotidienne le long du Nil.</p>
-      </a>
-      <a class="card" href={`${base}culture-rome-antique.html`}>
-        <div class="epigraph">AB VRBE CONDITA</div>
-        <h3>Rome Antique</h3>
-        <p>Du village du Latium à l'empire méditerranéen : droit, ingénierie et légende fondatrice.</p>
-      </a>
-      <a class="card" href={`${base}culture-grece-antique.html`}>
-        <div class="epigraph">ΕΛΛΑΣ</div>
-        <h3>Grèce Antique</h3>
-        <p>Cité-États, démocratie naissante et philosophie : le socle civilisationnel de l'Occident.</p>
-      </a>
-      <a class="card" href={`${base}culture-vikings.html`}>
-        <div class="epigraph">793 — 1066</div>
-        <h3>Vikings</h3>
-        <p>Navigateurs, marchands et colons : la Scandinavie médiévale au-delà du cliché du pillard.</p>
-      </a>
-      <a class="card" href={`${base}culture-mali.html`}>
-        <div class="epigraph">Tombouctou</div>
-        <h3>Empire du Mali</h3>
-        <p>Mansa Moussa, l'or du Sahel et la ville la plus riche du XIVe siècle.</p>
-      </a>
-    </div>
-  </section>
-
-  <section id="creatures">
-    <div class="section-label">Nouvelle série</div>
-    <h2 class="section-title">Créatures Légendaires</h2>
-    <p class="section-intro">Entre folklore, fait divers historique et zoologie mystérieuse — ce qu'on sait vraiment, et ce qu'on raconte.</p>
-    <div class="grid">
-      <a class="card" href={`${base}creature-gevaudan.html`}>
-        <div class="epigraph">1764 — 1767</div>
-        <h3>La Bête du Gévaudan</h3>
-        <p>Un carnage bien réel dans la France de Louis XV, entre loups, dressage et légende.</p>
-      </a>
-      <a class="card" href={`${base}creature-loch-ness.html`}>
-        <div class="epigraph">Écosse</div>
-        <h3>Le Monstre du Loch Ness</h3>
-        <p>Photos truquées, sonars et ADN environnemental : l'enquête la plus célèbre du genre.</p>
-      </a>
-      <a class="card" href={`${base}creature-bigfoot.html`}>
-        <div class="epigraph">Pacifique Nord-Ouest</div>
-        <h3>Bigfoot</h3>
-        <p>Du folklore autochtone au film Patterson-Gimlin de 1967 : la traque du plus célèbre cryptide d'Amérique.</p>
-      </a>
-      <a class="card" href={`${base}creature-yeti.html`}>
-        <div class="epigraph">Himalaya</div>
-        <h3>Le Yeti</h3>
-        <p>Croyance sherpa vivante et légende d'alpinistes : ce que l'ADN a vraiment trouvé dans la neige.</p>
-      </a>
-      <a class="card" href={`${base}creature-chupacabra.html`}>
-        <div class="epigraph">Porto Rico · 1995</div>
-        <h3>Le Chupacabra</h3>
-        <p>Un film de science-fiction, une panique régionale et des carcasses attribuées à la gale.</p>
-      </a>
-      <a class="card" href={`${base}creature-mothman.html`}>
-        <div class="epigraph">Point Pleasant · 1966</div>
-        <h3>Le Mothman</h3>
-        <p>Une ombre ailée, un pont effondré, et une panique collective devenue légende.</p>
-      </a>
-    </div>
-  </section>
-
-  <section id="mysteres">
-    <div class="section-label">Nouvelle série</div>
-    <h2 class="section-title">Grands Mystères</h2>
-    <p class="section-intro">Lieux, objets et événements non résolus — ou résolus, mais jamais rattrapés par leur légende.</p>
-    <div class="grid">
-      <a class="card" href={`${base}mystere-triangle-bermudes.html`}>
-        <div class="epigraph">Atlantique Nord</div>
-        <h3>Le Triangle des Bermudes</h3>
-        <p>Comment la statistique a dégonflé l'un des plus grands mythes médiatiques du XXe siècle.</p>
-      </a>
-      <a class="card" href={`${base}mystere-stonehenge.html`}>
-        <div class="epigraph">Plaine de Salisbury</div>
-        <h3>Stonehenge</h3>
-        <p>Comment des pierres de plusieurs tonnes ont voyagé 225 km sans roue ni métal.</p>
-      </a>
-      <a class="card" href={`${base}mystere-dyatlov.html`}>
-        <div class="epigraph">Oural · 1959</div>
-        <h3>Le Col Dyatlov</h3>
-        <p>Neuf randonneurs, une tente lacérée de l'intérieur — et une explication scientifique récente enfin crédible.</p>
-      </a>
-      <a class="card" href={`${base}mystere-voynich.html`}>
-        <div class="epigraph">Europe · XVe s.</div>
-        <h3>Le Manuscrit de Voynich</h3>
-        <p>Une écriture jamais déchiffrée, authentifiée par le carbone 14 — l'énigme la plus tenace de la cryptologie.</p>
-      </a>
-      <a class="card" href={`${base}mystere-nazca.html`}>
-        <div class="epigraph">Pérou</div>
-        <h3>Les Lignes de Nazca</h3>
-        <p>Un mystère largement résolu par l'archéologie, mais jamais rattrapé par la légende extraterrestre.</p>
-      </a>
-      <a class="card" href={`${base}mystere-anticythere.html`}>
-        <div class="epigraph">Grèce antique</div>
-        <h3>Mécanisme d'Anticythère</h3>
-        <p>Un calculateur astronomique antique d'une sophistication redécouverte par la science moderne.</p>
-      </a>
-    </div>
-  </section>
+  {series.map((s) => (
+    <section id={s.key}>
+      <div class="section-label">{s.label}</div>
+      <h2 class="section-title">{s.titre(s.items.length)}</h2>
+      <p class="section-intro">{s.intro}</p>
+      <div class="grid">
+        {s.items.map((p) => (
+          <a class="card" href={`${base}${p.href}`}>
+            <div class="epigraph">{p.epigraph}</div>
+            <h3>{p.cardTitle || p.title}</h3>
+            <p>{p.hook}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
 
   <section id="a-venir">
     <div class="section-label">Bientôt</div>
     <h2 class="section-title">La Suite</h2>
-    <p class="section-intro">Toutes les séries s'étoffent une entrée à la fois, au rythme des crédits du jour.</p>
+    <p class="section-intro">{total} pages en ligne, et toutes les séries s'étoffent une entrée à la fois, au rythme des crédits du jour.</p>
     <div class="placeholder-grid">
-      <div class="placeholder-card">
-        <h4>Prochaines mythologies</h4>
-        <p>Chinoise, perse, yoruba, inca, aborigène australienne...</p>
-        <span class="tag">Mythologies</span>
-      </div>
-      <div class="placeholder-card">
-        <h4>Prochaines cultures</h4>
-        <p>Civilisation inca, Mésopotamie, Japon...</p>
-        <span class="tag">Cultures</span>
-      </div>
-      <div class="placeholder-card">
-        <h4>Prochaines créatures</h4>
-        <p>Le Kraken, le Loup-Garou...</p>
-        <span class="tag">Créatures</span>
-      </div>
-      <div class="placeholder-card">
-        <h4>Prochains mystères</h4>
-        <p>L'Atlantide, la disparition d'Amelia Earhart...</p>
-        <span class="tag">Mystères</span>
-      </div>
+      {A_VENIR.map((a) => (
+        <div class="placeholder-card">
+          <h4>{a.titre}</h4>
+          <p>{a.texte}</p>
+          <span class="tag">{a.tag}</span>
+        </div>
+      ))}
     </div>
   </section>
 

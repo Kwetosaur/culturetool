@@ -1,0 +1,34 @@
+---
+/*
+  Bloc narratif long : une legende, un recit, un episode. 2 a 4 paragraphes,
+  avec une citation en exergue optionnelle.
+
+  C'est le composant qui doit rester le plus permissif du socle : le contenu
+  narratif ne se met pas en donnees. `body` accepte du HTML (<em>, <strong>), et
+  tout ce qui ne rentre pas passe par le slot.
+*/
+export interface Props {
+  title: string;
+  /** Numero de chapitre ou etiquette. Ex. "Récit III" */
+  num?: string;
+  body?: string | string[];
+  /** Citation mise en exergue apres les paragraphes. */
+  quote?: string;
+  /** Source de la citation. */
+  cite?: string;
+}
+const { title, num, body, quote, cite } = Astro.props;
+const paras = Array.isArray(body) ? body : body ? [body] : [];
+---
+<div class="story-block" data-reveal>
+  {num && <div class="story-num">{num}</div>}
+  <h3>{title}</h3>
+  {paras.map((p) => <p set:html={p}></p>)}
+  {quote && (
+    <blockquote class="pull-quote">
+      <span set:html={quote}></span>
+      {cite && <cite>{cite}</cite>}
+    </blockquote>
+  )}
+  <slot />
+</div>

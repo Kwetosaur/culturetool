@@ -1,0 +1,25 @@
+---
+/*
+  Une section de page : ancre, sur-titre, titre, chapeau, contenu.
+  Remplace ~8 lignes de balises repetees 8 fois par page.
+
+  `scrollFx` pose data-scroll-fx : la clef doit exister dans SCROLL_FX de
+  effects.js (voir docs/plans/plan-effets.md). Une seule section par page en porte un.
+*/
+export interface Props {
+  id: string;
+  /** Libelle court pour la nav — non affiche ici, lu par PageLayout. */
+  nav?: string;
+  label?: string;
+  title: string;
+  intro?: string;
+  scrollFx?: string;
+}
+const { id, label, title, intro, scrollFx } = Astro.props;
+---
+<section id={id} data-scroll-fx={scrollFx}>
+  {label && <div class="section-label">{label}</div>}
+  <h2 class="section-title">{title}</h2>
+  {intro && <p class="section-intro">{intro}</p>}
+  <slot />
+</section>

@@ -1,0 +1,233 @@
+---
+/*
+  PageLayout.astro — ossature commune de toute page de contenu.
+
+  Remplace les ~20 ko de <head> + menu + scripts que chaque page statique
+  reproduit a l'identique (voir docs/plans/plan-industrialisation.md § 1).
+
+  Ce que ce layout apporte et que les pages statiques n'ont pas :
+   - le menu lateral est GENERE depuis data/site-pages.json a la compilation,
+     donc jamais a resynchroniser avec tools/sync_sidebar.py ;
+   - les balises og:/twitter: sont posees une fois pour toutes (aucune page
+     statique n'en a — voir docs/audit-existant.md § C4) ;
+   - la liste du reveal au scroll cible [data-reveal], que les composants
+     portent eux-memes : il n'y a plus de liste de classes a maintenir page par
+     page, donc le bug A2 de l'audit (24 pages sur 29 avec une liste recopiee
+     d'une autre famille) ne peut plus se reproduire.
+
+  Conventions preservees : la page compile vers un fichier .html a la racine
+  (build.format = 'file' dans astro.config.mjs), donc les liens relatifs entre
+  pages, les href de map.html et les motifs de sync_sidebar.py continuent de
+  fonctionner sans changement.
+*/
+import pages from '../../data/site-pages.json';
+import '../styles/tokens.css';
+
+const SIDE_GROUPS = [
+  ['Mythologies', 'mythologies'],
+  ['Cultures', 'cultures'],
+  ['Créatures', 'creatures'],
+  ['Mystères', 'mysteres'],
+  ['Objets légendaires', 'objets'],
+];
+
+export interface Props {
+  /** Titre de la page, sans le suffixe de serie. Ex. "Excalibur" */
+  title: string;
+  /** Suffixe de serie affiche dans <title>. Ex. "Objets Légendaires du Monde" */
+  serie: string;
+  /** Resume factuel en une phrase (meta description + og:description). */
+  description: string;
+  /** Nom du fichier .html de cette page, pour marquer le lien actif du menu. */
+  href: string;
+  /** Clef de l'easter egg (doit exister dans EGGS de effects.js). */
+  egg: string;
+  /** Les ~14 variables du vocabulaire normalise — voir tokens.css. */
+  palette: Record<string, string>;
+  /** Sections de la page : alimente la nav du hero ET la nav collante. */
+  sections: { id: string; nav: string }[];
+  /** Rangee decorative du hero et du footer (runes, hieroglyphes, dates...). */
+  epigraph?: string;
+  /** Teaser de fin de page. */
+  nextUp?: string;
+  /** Image de partage (chemin relatif dans public/). */
+  ogImage?: string;
+}
+
+const {
+  title, serie, description, href, egg, palette, sections,
+  epigraph = '', nextUp = '', ogImage = 'map.jpg',
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const styleVars = Object.entries(palette).map(([k, v]) => `--${k}:${v}`).join(';');
+const groups = SIDE_GROUPS
+  .map(([label, key]) => [label, pages[key] || []])
+  .filter(([, items]) => items.length > 0);
+const shareUrl = Astro.site ? new URL(`${base}${href}`, Astro.site).href : '';
+const shareImg = Astro.site ? new URL(`${base}${ogImage}`, Astro.site).href : '';
+---
+<!DOCTYPE html>
+<html lang="fr" style={styleVars}>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title} — {serie}</title>
+<meta name="description" content={description} />
+<meta property="og:type" content="article" />
+<meta property="og:title" content={`${title} — ${serie}`} />
+<meta property="og:description" content={description} />
+{shareUrl && <meta property="og:url" content={shareUrl} />}
+{shareImg && <meta property="og:image" content={shareImg} />}
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+</head>
+<body data-egg={egg}>
+
+<button id="side-menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
+<div id="side-menu-overlay"></div>
+<nav id="side-menu">
+  <a href="./" class="side-home">&larr; Accueil</a>
+  <a href="map.html" class="side-home">&#128506; Carte du Monde</a>
+  <div class="side-divider"></div>
+  <div class="side-search"><input type="text" id="side-search-input" placeholder="Rechercher une page..." autocomplete="off" /></div>
+  {groups.map(([label, items]) => (
+    <Fragment>
+      <div class="side-label">{label}</div>
+      <div class="side-group">
+        {items.map((p) => (
+          <a href={p.href} class={p.href === href ? 'active' : undefined}>{p.title}</a>
+        ))}
+      </div>
+    </Fragment>
+  ))}
+</nav>
+
+<header class="hero">
+  {epigraph && <div class="epigraph-row">{epigraph}</div>}
+  <h1>{title}</h1>
+  <slot name="hero" />
+  <div class="divider"></div>
+  <nav class="nav-pills">
+    {sections.map((s) => <a href={`#${s.id}`}>{s.nav}</a>)}
+  </nav>
+</header>
+
+<nav class="sticky-nav">
+  {sections.map((s) => <a href={`#${s.id}`}>{s.nav}</a>)}
+</nav>
+
+<slot />
+
+<footer>
+  {epigraph && <div class="epigraph-row">{epigraph}</div>}
+  <div class="divider"></div>
+  {nextUp && <p class="next-up" set:html={nextUp}></p>}
+</footer>
+
+<script is:inline>
+/* Menu lateral : ouverture, replis par groupe, recherche.
+   Copie fonctionnelle du script des pages statiques — a garder aligne si l'un
+   des deux evolue (jusqu'a la fin de la migration, cf. plan-industrialisation). */
+(function () {
+  var menu = document.getElementById('side-menu');
+  var overlay = document.getElementById('side-menu-overlay');
+  var toggle = document.getElementById('side-menu-toggle');
+  if (!menu || !overlay || !toggle) return;
+  toggle.addEventListener('click', function () {
+    menu.classList.toggle('open');
+    overlay.classList.toggle('open');
+  });
+  overlay.addEventListener('click', function () {
+    menu.classList.remove('open');
+    overlay.classList.remove('open');
+  });
+
+  var labels = Array.prototype.slice.call(menu.querySelectorAll('.side-label'));
+  labels.forEach(function (label) {
+    var group = label.nextElementSibling;
+    if (!group) return;
+    if (!group.querySelector('a.active')) {
+      label.classList.add('collapsed');
+      group.classList.add('collapsed');
+    }
+    label.addEventListener('click', function () {
+      label.classList.toggle('collapsed');
+      group.classList.toggle('collapsed');
+    });
+  });
+
+  var input = document.getElementById('side-search-input');
+  if (!input) return;
+  var links = Array.prototype.slice.call(menu.querySelectorAll('.side-group a'));
+  function restoreCollapse() {
+    labels.forEach(function (label) {
+      var group = label.nextElementSibling;
+      if (!group) return;
+      var hasActive = !!group.querySelector('a.active');
+      label.classList.toggle('collapsed', !hasActive);
+      group.classList.toggle('collapsed', !hasActive);
+    });
+  }
+  input.addEventListener('input', function () {
+    var q = input.value.trim().toLowerCase();
+    if (!q) {
+      links.forEach(function (a) { a.classList.remove('search-hide'); });
+      restoreCollapse();
+      return;
+    }
+    links.forEach(function (a) {
+      a.classList.toggle('search-hide', a.textContent.toLowerCase().indexOf(q) === -1);
+    });
+    labels.forEach(function (label) {
+      label.classList.remove('collapsed');
+      if (label.nextElementSibling) label.nextElementSibling.classList.remove('collapsed');
+    });
+  });
+  input.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter') return;
+    var first = links.filter(function (a) { return !a.classList.contains('search-hide'); })[0];
+    if (first) window.location.href = first.getAttribute('href');
+  });
+})();
+</script>
+
+<script is:inline>
+/* Scroll-spy de la nav collante + apparition au scroll.
+   La liste du reveal cible [data-reveal] (pose par les composants) plutot
+   qu'une enumeration de classes recopiee page par page. */
+(function () {
+  var navLinks = document.querySelectorAll('.sticky-nav a[href^="#"]');
+  var sections = [];
+  navLinks.forEach(function (a) {
+    var el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el) sections.push({ link: a, el: el });
+  });
+  function onScroll() {
+    var pos = window.scrollY + window.innerHeight * 0.3;
+    var current = null;
+    sections.forEach(function (s) { if (s.el.offsetTop <= pos) current = s; });
+    navLinks.forEach(function (a) { a.classList.remove('nav-active'); });
+    if (current) current.link.classList.add('nav-active');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var targets = document.querySelectorAll('[data-reveal], section > h2');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  targets.forEach(function (el) { el.classList.add('reveal-init'); io.observe(el); });
+})();
+</script>
+<script src={`${base}effects.js`} is:inline defer></script>
+</body>
+</html>

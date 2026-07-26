@@ -1,0 +1,25 @@
+---
+/*
+  Frise chronologique verticale.
+
+  ATTENTION, regle editoriale : la frise n'est PAS systematique. Sur les series
+  creatures, mysteres et objets, elle n'apparait que si le sujet a une vraie
+  histoire datee (temoignages sur plusieurs decennies, chaine de possession
+  documentee). Ne jamais la remplir artificiellement pour "faire comme les
+  autres pages" — voir les plans de serie.
+*/
+export interface Props {
+  items: { year: string; title: string; body?: string }[];
+}
+const { items } = Astro.props;
+---
+<div class="timeline">
+  {items.map((it) => (
+    <div class="timeline-item" data-reveal>
+      <span class="timeline-dot"></span>
+      <span class="timeline-year">{it.year}</span>
+      <h4>{it.title}</h4>
+      {it.body && <p set:html={it.body}></p>}
+    </div>
+  ))}
+</div>

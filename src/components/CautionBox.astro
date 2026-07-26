@@ -1,0 +1,12 @@
+---
+/*
+  Note de vigilance de fin de section #heritage, ou avertissement de fond au
+  milieu d'une section sensible (croyance vivante, victimes reelles, source
+  tardive contestee).
+
+  Doit etre differente sur chaque page : c'est le seul endroit du site ou l'on
+  s'adresse au lecteur sur la maniere de lire le reste.
+*/
+const { html } = Astro.props;
+---
+<p class="caution-box" data-reveal>{html ? <Fragment set:html={html} /> : <slot />}</p>

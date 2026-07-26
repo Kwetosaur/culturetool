@@ -1,0 +1,23 @@
+---
+/*
+  Bloc de la section pivot (#science pour creatures/mysteres, #verite pour les
+  objets legendaires) : etat reel des connaissances sur un aspect precis.
+
+  C'est la section la plus importante des series d'enquete. Si aucune preuve
+  n'existe, le bloc doit le dire explicitement plutot que de rester dans le flou.
+*/
+export interface Props {
+  title: string;
+  /** Etiquette de numerotation. Ex. "Enquête 2" */
+  num?: string;
+  body?: string | string[];
+}
+const { title, num, body } = Astro.props;
+const paras = Array.isArray(body) ? body : body ? [body] : [];
+---
+<div class="science-block" data-reveal>
+  {num && <div class="science-num">{num}</div>}
+  <h3>{title}</h3>
+  {paras.map((p) => <p set:html={p}></p>)}
+  <slot />
+</div>

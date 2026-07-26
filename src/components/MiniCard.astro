@@ -1,0 +1,20 @@
+---
+/*
+  Petite carte de liste : une creature du bestiaire, une zone de diffusion, une
+  curiosite, une apparition en culture populaire. Format le plus compact du
+  socle — a utiliser dans une .card-grid.compact.
+*/
+export interface Props {
+  title: string;
+  /** Etiquette courte au-dessus du texte (periode, media, region). */
+  tag?: string;
+  body?: string;
+}
+const { title, tag, body } = Astro.props;
+---
+<div class="mini-card" data-reveal>
+  <h4>{title}</h4>
+  {tag && <span class="mini-tag">{tag}</span>}
+  {body && <p set:html={body}></p>}
+  <slot />
+</div>

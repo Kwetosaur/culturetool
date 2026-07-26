@@ -1,0 +1,204 @@
+---
+/*
+  ============================================================================
+  PAGE DE REFERENCE DU SOCLE — a lire AVANT d'ecrire une page avec les composants
+  ============================================================================
+
+  Double role :
+
+  1. VERIFICATION VISUELLE — instancie tous les composants avec des donnees
+     d'exemple, pour voir le rendu du socle sans avoir a ecrire une vraie page.
+     URL : /culturetool/socle-demo.html
+
+  2. DOCUMENT DE LECTURE POUR UN AGENT DE REDACTION — c'est ce fichier (~200
+     lignes) qu'il faut lire pour savoir quoi ecrire, a la place d'un gabarit
+     HTML de 580 lignes. Chaque composant y apparait une fois, avec ses props
+     reelles. Voir docs/plans/plan-industrialisation.md pour la mesure du gain.
+
+  Cette page n'est liee depuis nulle part (ni menu, ni accueil, ni carte) : elle
+  est publiee mais invisible. Elle peut etre supprimee sans rien casser.
+
+  Le contenu ci-dessous est un exemple de travail, pas une page a publier — les
+  faits sur Excalibur y sont reels, mais la page reelle devra suivre la structure
+  complete de docs/plans/plan-serie-objets.md (8 sections).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+
+/* --- Les ~14 variables du vocabulaire normalise (voir src/styles/tokens.css).
+       Ici : acier poli et violet améthyste, la couleur de la categorie objets. --- */
+const palette = {
+  bg: '#1a1726',
+  'bg-deep': '#100e18',
+  surface: '#252036',
+  'surface-alt': '#2e2842',
+  border: '#4a3f6b',
+  ink: '#efe9ff',
+  text: '#ddd6ee',
+  'text-dim': '#a49bc0',
+  accent: '#9a72d4',
+  'accent-bright': '#c3a6f0',
+  accent2: '#8a6a2f',
+  'accent2-bright': '#d8b45a',
+  verdict: '#6b4a9c',
+  'verdict-bright': '#9a72d4',
+  glow: 'rgba(154,114,212,0.28)',
+};
+
+/* --- Les sections alimentent A LA FOIS la nav du hero et la nav collante :
+       une seule liste a maintenir, jamais deux listes a garder synchrones. --- */
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+/* --- Contenu tabulaire = tableaux de donnees. C'est le second gisement de
+       jetons apres l'ossature : ~10 lignes de balises deviennent 1 ligne. --- */
+const faits = [
+  { num: 'I', title: 'Un nom latin', sub: 'v. 1136', body: "Geoffroy de Monmouth l'appelle <strong>Caliburnus</strong> dans son <em>Historia Regum Britanniae</em>." },
+  { num: 'II', title: 'Deux épées, pas une', sub: 'Motifs distincts', body: "L'épée du rocher et l'épée du lac sont deux motifs séparés, fusionnés bien plus tard." },
+  { num: 'III', title: 'Une relique offerte', sub: '1191', body: "Richard Cœur de Lion offre une « Excalibur » à Tancrède de Sicile." },
+];
+
+const temoins = [
+  {
+    name: 'Geoffroy de Monmouth',
+    role: 'Clerc, v. 1095-1155',
+    tags: ['Source première', 'Latin'],
+    body: ["Sa chronique, présentée comme une traduction d'un « livre très ancien » jamais retrouvé, fixe l'essentiel de la matière arthurienne.",
+           "C'est là qu'apparaît le nom de l'épée — <strong>sans</strong> le rocher, et <strong>sans</strong> la Dame du Lac."],
+  },
+  {
+    name: 'Robert de Boron',
+    role: 'Poète, fin du XIIe siècle',
+    tags: ['Christianisation'],
+    body: "Il introduit l'épreuve de l'épée fichée dans la pierre comme signe d'élection divine.",
+  },
+];
+
+const jalons = [
+  { year: 'v. 1136', title: 'Caliburnus', body: "Première mention connue, chez Geoffroy de Monmouth." },
+  { year: '1191', title: 'Un cadeau diplomatique', body: "Richard Ier offre une épée présentée comme Excalibur au roi de Sicile." },
+  { year: 'v. 1470', title: 'Le Morte d\'Arthur', body: "Malory fixe la version qui deviendra canonique en anglais." },
+];
+---
+<PageLayout
+  title="Excalibur"
+  serie="Objets Légendaires du Monde"
+  description="Exemple de page construite avec le socle Astro : structure, composants et effets d'une page « objet légendaire »."
+  href="socle-demo.html"
+  egg="accueil"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="BRETAGNE — XIIe SIÈCLE"
+  nextUp="Page de démonstration du socle — voir <strong>docs/plans/plan-industrialisation.md</strong>"
+>
+  <!-- slot "hero" : tout ce qui s'insère entre le titre et la nav du hero -->
+  <p class="subtitle" slot="hero">Caliburnus · Caledfwlch · Excalibur</p>
+  <p class="tagline" slot="hero">L'épée la plus célèbre du monde n'a jamais existé — et des dizaines d'épées réelles ont été présentées comme elle.</p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet de fiction"
+    note="Aucun original n'a jamais existé : l'épée naît dans un texte du XIIe siècle. Les reliques, elles, sont bien réelles."
+  />
+
+  <Section id="origine" nav="Origine" label="Première attestation" title="L'origine du nom"
+           intro="Distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet : ici, les deux sont séparés par des siècles."
+           scrollFx="antikytheraGears">
+    <div class="card-grid">
+      {faits.map((f) => <InfoCard {...f} />)}
+    </div>
+  </Section>
+
+  <Section id="description" nav="Description" label="Forme et pouvoirs" title="Ce que les textes décrivent">
+    <div class="card-grid wide">
+      {temoins.map((t) => <FigureCard {...t} />)}
+    </div>
+  </Section>
+
+  <Section id="recits" nav="Récits" label="Les grands récits" title="Là où l'épée agit">
+    <StoryBlock
+      num="Récit I"
+      title="L'épée et la pierre"
+      body={["L'épreuve n'appartient pas à la couche la plus ancienne du corpus : elle apparaît chez Robert de Boron, qui en fait un signe d'élection divine plutôt qu'une prouesse physique.",
+             "Le déplacement est intéressant : ce n'est pas la force qui retire l'épée, c'est la légitimité."]}
+      quote="Qui retirera cette épée de cette pierre est le roi né de droit de toute l'Angleterre."
+      cite="Formule de l'inscription, tradition tardive"
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Le retour au lac"
+      body="À la fin du cycle, l'épée est rendue à l'eau — une clôture qui refuse au lecteur la relique qu'il espérait."
+    />
+  </Section>
+
+  <Section id="facture" nav="Facture" label="Matière et fabrication" title="Comment on forgeait une telle épée"
+           intro="La section propre à cette série : même quand l'objet est imaginaire, la technique, elle, s'explique.">
+    <div class="card-grid compact">
+      <MiniCard title="Fer et acier" tag="Ve-XIIe siècle" body="Corroyage de barres de duretés différentes, tranchant rapporté." />
+      <MiniCard title="Damas soudé" tag="Décor" body="Motifs obtenus par torsion de faisceaux, longtemps pris pour de la magie." />
+      <MiniCard title="Trempe" tag="Métallurgie" body="Refroidissement brutal : la dureté au prix de la fragilité." />
+      <MiniCard title="Le poids réel" tag="Idée reçue" body="Une épée longue médiévale pèse 1,1 à 1,5 kg, pas 5." />
+    </div>
+  </Section>
+
+  <Section id="traces" nav="Traces" label="Candidats matériels" title="Les épées qu'on a montrées">
+    <Timeline items={jalons} />
+  </Section>
+
+  <Section id="verite" nav="Vérité" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Aucune épée, un texte"
+      body={["Il n'existe aucune trace matérielle, archéologique ou documentaire d'une épée historique correspondant à Excalibur.",
+             "Ce n'est pas un manque de preuve : c'est un objet littéraire, et le dire n'enlève rien au récit."]}
+    />
+    <TheoryCard
+      title="Une origine galloise du nom"
+      level="consensus"
+      status="Consensus"
+      body="Caliburnus dérive vraisemblablement du gallois <em>Caledfwlch</em>, lui-même apparenté à un nom d'épée irlandais."
+      attrib="Position dominante en philologie celtique"
+    />
+    <TheoryCard
+      title="Un souvenir de forge romaine"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Le rapprochement avec le latin <em>chalybs</em> (l'acier) est ancien et défendable, sans être établi."
+      attrib="Discutée, non tranchée"
+    />
+    <TheoryCard
+      title="Une arme réellement extraite d'un rocher"
+      level="folklore"
+      status="Écarté"
+      body="Mentionné ici parce que la légende s'y accroche, pas parce que c'est soutenable."
+    />
+  </Section>
+
+  <Section id="heritage" nav="Héritage" label="Aujourd'hui" title="Ce que l'épée fait encore">
+    <HeritageBlock title="Tourisme" body="Tintagel, Glastonbury et le lac de Dozmary vivent en partie de l'épée." />
+    <HeritageBlock title="Politique" body="Le roi qui reviendra a servi d'argument identitaire à des causes très diverses." />
+    <HeritageBlock title="Culture populaire" body="Du cinéma au jeu vidéo, l'épée nommée est devenue un archétype de game design." />
+    <CautionBox>
+      Une légende n'a pas besoin d'être vraie pour être importante. Le seul travers à éviter
+      ici est l'inverse du scepticisme : présenter une relique du XIIe siècle comme la preuve
+      d'un roi du VIe.
+    </CautionBox>
+  </Section>
+</PageLayout>

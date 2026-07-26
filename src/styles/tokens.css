@@ -1,0 +1,272 @@
+/* =============================================================================
+   tokens.css — structure partagee de toutes les pages de contenu
+   =============================================================================
+
+   Ecrit une fois, importe par src/layouts/PageLayout.astro. Contient TOUT ce qui
+   ne change pas d'une page a l'autre : grilles, cartes, frise, nav collante,
+   menu lateral, footer, responsive. Environ 20 ko de <head> par page en moins
+   (voir docs/plan-industrialisation.md § 1 pour la mesure).
+
+   VOCABULAIRE NORMALISE — une page ne fournit que ces variables, via la prop
+   `palette` de PageLayout. Les pages statiques existantes utilisent des noms
+   divergents d'une famille a l'autre (--gold / --brass, --ink / --parchment,
+   .fact-card / .info-card...) : c'est precisement cette divergence qui rendait
+   impossible d'extraire un composant partage. Ne pas la reintroduire ici.
+
+     --bg, --bg-deep        fond de page, fond profond
+     --surface,             fond de carte, et sa variante pour les degrades
+     --surface-alt
+     --border               bordure de carte / separateur
+     --ink                  texte a fort contraste (titres, mots-cles)
+     --text, --text-dim     texte courant, texte atténue
+     --accent,              accent principal (l'or du site par defaut)
+     --accent-bright
+     --accent2,             accent secondaire (rouge sang, vert mousse, indigo...)
+     --accent2-bright
+     --verdict,             couleur du badge de verdict / de nature
+     --verdict-bright
+     --glow                 halo colore (rgba)
+
+   Le CSS reellement propre a une page (SVG decoratif, motif de bordure) reste
+   dans un <style> local a cette page, jamais ici.
+   ========================================================================== */
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  background: radial-gradient(ellipse at top, var(--surface) 0%, var(--bg) 55%), var(--bg-deep);
+  color:var(--text);
+  font-family:'EB Garamond', Georgia, serif;
+  font-size:18px;
+  line-height:1.75;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{ font-family:'Cinzel', serif; color:var(--ink); letter-spacing:0.03em; font-weight:700; }
+a{color:var(--accent-bright);}
+
+/* grain discret sur toute la page */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none;
+  background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.05) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.05) 3px);
+  z-index:1; opacity:0.5;
+}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative; min-height:78vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:60px 20px; overflow:hidden;
+  background: radial-gradient(circle at 50% 12%, var(--glow), transparent 55%),
+    linear-gradient(180deg, var(--surface) 0%, var(--bg) 55%, var(--bg-deep) 100%);
+  border-bottom:1px solid var(--border);
+}
+.hero::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background: radial-gradient(ellipse at 20% 90%, var(--bg-deep), transparent 60%),
+    radial-gradient(ellipse at 85% 85%, var(--bg-deep), transparent 55%);
+}
+.hero > *{position:relative; z-index:2;}
+.epigraph-row{ font-family:'Cinzel', serif; font-size:16px; letter-spacing:6px; color:var(--accent); opacity:0.85; margin-bottom:26px; }
+.hero h1{
+  font-family:'Cinzel Decorative', serif; font-size:clamp(2.4rem, 6.6vw, 4.9rem); margin:0;
+  background:linear-gradient(180deg, var(--ink), var(--accent-bright) 65%, var(--accent));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  text-shadow:0 0 50px rgba(0,0,0,0.4);
+  cursor:pointer; /* l'easter egg se declenche au clic du titre (effects.js) */
+}
+.hero .subtitle{ font-family:'Cinzel', serif; font-size:1.02rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent2-bright); margin-top:16px; }
+.hero .tagline{ max-width:640px; margin:30px auto 0; font-style:italic; color:var(--text-dim); font-size:1.1rem; }
+
+/* ===== BADGE DE VERDICT / DE NATURE ===== */
+.verdict-badge{
+  display:inline-flex; flex-direction:column; align-items:center; gap:4px;
+  margin:34px auto 0; padding:14px 28px; border:1px solid var(--verdict-bright); border-radius:3px;
+  background:linear-gradient(160deg, var(--glow), rgba(0,0,0,0.35)); box-shadow:0 0 24px var(--glow); max-width:620px;
+}
+.verdict-badge .verdict-label{ font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--verdict-bright); }
+.verdict-badge .verdict-text{ font-family:'Cinzel', serif; font-size:1.05rem; color:var(--ink); line-height:1.5; }
+.verdict-badge .verdict-note{ font-size:0.86rem; font-style:italic; color:var(--text-dim); margin-top:6px; }
+
+.divider{ width:120px; height:2px; margin:34px auto; background:linear-gradient(90deg, transparent, var(--accent), transparent); }
+
+/* ===== NAV DU HERO ===== */
+.nav-pills{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:860px; }
+.nav-pills a{
+  font-family:'Cinzel', serif; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase;
+  text-decoration:none; border:1px solid var(--border); padding:9px 20px; border-radius:2px;
+  color:var(--text-dim); background:rgba(0,0,0,0.25); transition:all .25s ease;
+}
+.nav-pills a:hover{ color:var(--ink); border-color:var(--accent); box-shadow:0 0 14px var(--glow); }
+
+/* ===== NAV COLLANTE ===== */
+.sticky-nav{
+  position:sticky; top:0; z-index:50; display:flex; gap:6px; flex-wrap:wrap; justify-content:center;
+  padding:14px 20px; background:rgba(0,0,0,0.82); backdrop-filter:blur(6px); border-bottom:1px solid var(--border);
+}
+.sticky-nav a{
+  color:var(--text-dim); text-decoration:none; font-family:'Cinzel', serif; font-size:0.68rem;
+  letter-spacing:0.08em; text-transform:uppercase; padding:5px 12px; border:1px solid transparent;
+  border-radius:2px; transition:all .2s ease;
+}
+.sticky-nav a:hover{color:var(--accent2-bright); border-color:var(--accent2-bright);}
+.sticky-nav a.nav-active{color:var(--accent-bright); border-color:var(--accent);}
+
+/* ===== SECTIONS ===== */
+section{ position:relative; z-index:2; max-width:1180px; margin:0 auto; padding:80px 24px; }
+.section-label{ text-align:center; font-family:'Cinzel', serif; letter-spacing:0.35em; text-transform:uppercase; color:var(--accent2-bright); font-size:0.78rem; margin-bottom:12px; }
+.section-title{ text-align:center; font-size:clamp(1.9rem,4.2vw,2.9rem); margin:0 0 16px; }
+.section-intro{ text-align:center; max-width:700px; margin:0 auto 60px; color:var(--text-dim); font-style:italic; }
+
+/* ===== GRILLE DE CARTES ===== */
+.card-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:22px; }
+.card-grid.wide{ grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:26px; }
+.card-grid.compact{ grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:18px; }
+
+/* carte courte generique */
+.info-card{
+  background:linear-gradient(160deg, var(--surface), var(--surface-alt)); border:1px solid var(--border);
+  border-radius:3px; padding:26px 24px; position:relative; overflow:hidden;
+}
+.info-card::before{ content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--accent2-bright), var(--accent)); }
+.info-card h3{ margin:0 0 4px; font-size:1.2rem; display:flex; align-items:center; gap:10px; }
+.info-card .info-num{ color:var(--accent); font-size:1rem; opacity:0.9; font-family:'Cinzel', serif; }
+.info-card .info-sub{ font-size:0.82rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px; }
+.info-card p{margin:0; font-size:0.97rem;}
+.info-card p + p{margin-top:10px;}
+
+/* fiche nommee (divinite, figure, temoin, relique concurrente...) */
+.figure-card{
+  background:var(--surface); border:1px solid var(--border); padding:0; border-radius:4px; overflow:hidden;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.figure-card:hover{ transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--accent); }
+.figure-card .figure-header{ padding:22px 24px 16px; border-bottom:1px solid var(--border); background:linear-gradient(160deg, var(--glow), transparent); }
+.figure-card .figure-name{font-size:1.35rem; margin:0;}
+.figure-card .figure-role{ font-size:0.82rem; color:var(--accent2-bright); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px; }
+.figure-card .figure-body{padding:18px 24px 24px;}
+.figure-card .figure-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+.figure-card p{margin:0 0 10px; font-size:0.96rem;}
+.figure-card p:last-child{margin-bottom:0;}
+.figure-card strong{color:var(--ink); font-weight:600;}
+
+.tag{ font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; border:1px solid var(--border); color:var(--text-dim); padding:3px 10px; border-radius:20px; }
+
+/* petite carte de liste (creatures, regions, curiosites...) */
+.mini-card{ border:1px solid var(--border); border-top:2px solid var(--accent2-bright); padding:18px 20px; background:var(--surface); border-radius:3px; }
+.mini-card h4{margin:0 0 6px; font-size:0.98rem; color:var(--ink);}
+.mini-card .mini-tag{ display:block; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:8px; }
+.mini-card p{margin:0; font-size:0.9rem;}
+
+/* ===== BLOC NARRATIF LONG ===== */
+.story-block{ margin-bottom:52px; padding-bottom:44px; border-bottom:1px solid var(--border); }
+.story-block:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+.story-block .story-num{ font-family:'Cinzel Decorative', serif; font-size:0.9rem; color:var(--accent); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px; }
+.story-block h3{font-size:1.55rem; margin:0 0 18px;}
+.story-block p{margin:0 0 15px; font-size:1rem;}
+.story-block p:last-child{margin-bottom:0;}
+.story-block strong{color:var(--ink); font-weight:600;}
+
+.pull-quote{ border-left:3px solid var(--accent); padding:6px 24px; margin:24px 0; font-style:italic; color:var(--ink); font-size:1.08rem; }
+.pull-quote cite{ display:block; margin-top:8px; font-style:normal; font-size:0.8rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; }
+.source-note{ font-size:0.85rem; color:var(--text-dim); font-style:italic; }
+
+/* ===== FRISE (optionnelle : seulement si le sujet a une vraie chronologie) ===== */
+.timeline{ position:relative; max-width:860px; margin:0 auto; padding-left:34px; }
+.timeline::before{
+  content:""; position:absolute; left:9px; top:0; bottom:0; width:2px;
+  background:linear-gradient(180deg, transparent, var(--accent) 6%, var(--accent2-bright) 50%, var(--accent) 94%, transparent);
+}
+.timeline-item{ position:relative; padding-bottom:34px; }
+.timeline-item:last-child{padding-bottom:0;}
+.timeline-dot{ position:absolute; top:3px; left:-34px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:3px solid var(--accent-bright); box-shadow:0 0 10px var(--glow); }
+.timeline-year{ font-family:'Cinzel', serif; color:var(--accent2-bright); font-size:0.98rem; letter-spacing:0.05em; display:block; margin-bottom:6px; }
+.timeline-item h4{margin:0 0 6px; font-size:1.02rem; color:var(--ink);}
+.timeline-item p{margin:0; font-size:0.92rem; color:var(--text-dim);}
+
+/* ===== SECTION PIVOT (#science / #verite) ===== */
+.science-block{ margin-bottom:48px; padding-bottom:42px; border-bottom:1px solid var(--border); }
+.science-block:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+.science-block .science-num{ font-family:'Cinzel Decorative', serif; font-size:0.9rem; color:var(--accent); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px; }
+.science-block h3{font-size:1.45rem; margin:0 0 14px;}
+.science-block p{margin:0 0 14px; font-size:1rem;}
+.science-block p:last-child{margin-bottom:0;}
+
+/* ===== THEORIES / HYPOTHESES ===== */
+.theory-card{
+  margin-bottom:24px; padding:24px 26px; background:var(--surface); border:1px solid var(--border);
+  border-radius:3px; position:relative; overflow:hidden;
+}
+.theory-card::before{ content:""; position:absolute; top:0; left:0; bottom:0; width:3px; background:linear-gradient(180deg, var(--accent), var(--accent2-bright)); }
+.theory-card .theory-header{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.theory-card h3{margin:0; font-size:1.25rem;}
+.theory-card p{margin:0 0 10px; font-size:0.97rem;}
+.theory-card p:last-child{margin-bottom:0;}
+.theory-card .theory-attrib{ font-size:0.85rem; color:var(--text-dim); font-style:italic; margin-top:10px; }
+/* 3 niveaux de fiabilite — toujours l'un des 3, jamais une 4e couleur inventee */
+.theory-status{ font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; padding:4px 12px; border-radius:20px; }
+.theory-status.consensus{ background:var(--glow); color:var(--verdict-bright); border:1px solid var(--verdict-bright); }
+.theory-status.plausible{ background:transparent; color:var(--accent-bright); border:1px solid var(--accent); }
+.theory-status.folklore{ background:transparent; color:var(--text-dim); border:1px dashed var(--text-dim); }
+
+/* ===== HERITAGE ===== */
+.heritage-block{margin-bottom:32px;}
+.heritage-block h4{ font-size:0.92rem; color:var(--ink); margin:0 0 10px; text-transform:uppercase; letter-spacing:0.05em; }
+.heritage-block p{margin:0; font-size:0.98rem;}
+.caution-box{ border-left:3px solid var(--accent2-bright); padding:10px 22px; margin-top:24px; font-size:0.92rem; color:var(--text-dim); font-style:italic; background:var(--glow); }
+
+/* ===== DIAGRAMMES SVG FAITS MAIN ===== */
+.map-diagram{text-align:center; margin:10px 0 56px;}
+.map-diagram svg{max-width:100%; height:auto;}
+.map-caption{text-align:center; font-size:0.82rem; color:var(--text-dim); font-style:italic; margin:-34px 0 50px;}
+
+/* ===== FOOTER ===== */
+footer{ position:relative; z-index:2; text-align:center; padding:60px 20px 80px; border-top:1px solid var(--border); color:var(--text-dim); }
+footer .epigraph-row{margin-bottom:20px; font-size:15px;}
+footer .next-up{font-size:0.95rem;}
+footer .next-up strong{color:var(--ink);}
+
+::selection{background:var(--accent2-bright); color:var(--bg-deep);}
+
+/* ===== APPARITION AU SCROLL =====
+   .reveal-init est pose par le script du layout sur tout element portant
+   data-reveal. Les composants le portent eux-memes : il n'y a donc plus de
+   liste de classes a maintenir par page (c'etait le bug A2 de l'audit,
+   present sur 24 des 29 pages statiques). */
+.reveal-init{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+.reveal-in{opacity:1; transform:translateY(0);}
+
+/* ===== MENU LATERAL (identique aux pages statiques) ===== */
+#side-menu-toggle{position:fixed; top:18px; left:18px; z-index:9999; width:44px; height:44px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(10,10,15,0.72); backdrop-filter:blur(6px); color:#e9e6db; font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;}
+#side-menu-toggle:hover{background:rgba(10,10,15,0.9); border-color:#c9982f;}
+#side-menu-overlay{position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9997; opacity:0; pointer-events:none; transition:opacity 0.2s ease;}
+#side-menu-overlay.open{opacity:1; pointer-events:auto;}
+#side-menu{position:fixed; top:0; left:0; height:100vh; width:270px; max-width:82vw; background:rgba(12,12,18,0.97); backdrop-filter:blur(8px); z-index:9998; transform:translateX(-100%); transition:transform 0.25s ease; box-shadow:2px 0 24px rgba(0,0,0,0.4); overflow-y:auto; padding:70px 0 30px; font-family:'EB Garamond', Georgia, serif;}
+#side-menu.open{transform:translateX(0);}
+#side-menu a{display:block; padding:9px 22px; color:#cfd0dd; text-decoration:none; font-size:0.98rem; border-left:3px solid transparent;}
+#side-menu a:hover{background:rgba(255,255,255,0.06); color:#f2e9d0;}
+#side-menu a.active{color:#e8c164; border-left-color:#c9982f; font-weight:600;}
+#side-menu a.search-hide{display:none;}
+#side-menu .side-home{margin:0 14px 14px; padding:12px 16px !important; border:1px solid rgba(255,255,255,0.18); border-radius:6px; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.05em; font-size:0.85rem; text-transform:uppercase;}
+#side-menu .side-divider{margin:6px 22px 10px; height:1px; background:rgba(255,255,255,0.12);}
+#side-menu .side-search{padding:0 22px 14px;}
+#side-menu .side-search input{width:100%; box-sizing:border-box; padding:8px 10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:5px; color:#e9e6db; font-family:'EB Garamond', Georgia, serif; font-size:0.9rem;}
+#side-menu .side-search input::placeholder{color:#7a7b8c;}
+#side-menu .side-search input:focus{outline:none; border-color:#c9982f;}
+#side-menu .side-label{padding:12px 22px 6px; margin-top:2px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:space-between;}
+#side-menu .side-label::after{content:'\25BE'; font-size:0.65rem; transition:transform 0.2s ease; color:#6d6e7e;}
+#side-menu .side-label.collapsed::after{transform:rotate(-90deg);}
+#side-menu .side-group{overflow:hidden; max-height:600px; transition:max-height 0.25s ease;}
+#side-menu .side-group.collapsed{max-height:0;}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:860px){
+  body{font-size:17px;}
+  section{padding:60px 18px;}
+  .sticky-nav a{font-size:0.6rem; padding:4px 9px;}
+  .timeline{padding-left:28px;}
+  .timeline-dot{left:-28px;}
+  .theory-card .theory-header{flex-direction:column; align-items:flex-start;}
+  .diagram-scroll{overflow-x:auto;}
+  .diagram-scroll svg{min-width:700px; max-width:none;}
+}

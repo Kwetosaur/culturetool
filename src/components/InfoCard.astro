@@ -1,0 +1,26 @@
+---
+/*
+  Carte courte generique : un fait etabli, un royaume, une invention, un element
+  de contexte. Remplace .fact-card / .info-card / .life-card / .realm-card des
+  pages statiques, qui etaient structurellement identiques sous 4 noms.
+
+  Deux usages : passer `body` (chaine ou tableau de paragraphes), ou glisser du
+  contenu libre dans le slot quand la carte contient autre chose que du texte.
+*/
+export interface Props {
+  title: string;
+  /** Numero ou pictogramme affiche avant le titre. */
+  num?: string;
+  /** Sous-titre en petites capitales (dates, region, categorie). */
+  sub?: string;
+  body?: string | string[];
+}
+const { title, num, sub, body } = Astro.props;
+const paras = Array.isArray(body) ? body : body ? [body] : [];
+---
+<div class="info-card" data-reveal>
+  <h3>{num && <span class="info-num">{num}</span>}{title}</h3>
+  {sub && <div class="info-sub">{sub}</div>}
+  {paras.map((p) => <p set:html={p}></p>)}
+  <slot />
+</div>

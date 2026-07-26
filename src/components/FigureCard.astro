@@ -1,0 +1,32 @@
+---
+/*
+  Fiche nommee : une divinite, une figure historique, un temoin, une relique
+  concurrente. Un seul composant pour ce que les pages statiques appelaient
+  .god-card ET .figure-card — decision tranchee dans
+  docs/plans/plan-industrialisation.md § 8 : deux noms pour la meme structure, c'est
+  la divergence qui rendait la migration couteuse.
+*/
+export interface Props {
+  /** Nom principal. */
+  name: string;
+  /** Epithete, role, fonction, date. Ex. "Dieu du Tonnerre" */
+  role?: string;
+  tags?: string[];
+  body?: string | string[];
+}
+const { name, role, tags = [], body } = Astro.props;
+const paras = Array.isArray(body) ? body : body ? [body] : [];
+---
+<article class="figure-card" data-reveal>
+  <div class="figure-header">
+    <h3 class="figure-name">{name}</h3>
+    {role && <div class="figure-role">{role}</div>}
+  </div>
+  <div class="figure-body">
+    {tags.length > 0 && (
+      <div class="figure-tags">{tags.map((t) => <span class="tag">{t}</span>)}</div>
+    )}
+    {paras.map((p) => <p set:html={p}></p>)}
+    <slot />
+  </div>
+</article>

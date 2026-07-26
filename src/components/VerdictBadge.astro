@@ -1,0 +1,25 @@
+---
+/*
+  Badge de verdict (creatures, mysteres) ou de nature (objets legendaires),
+  affiche dans le hero. Se place dans <slot name="hero"> de PageLayout.
+
+  Regle editoriale : le badge doit toujours pouvoir se justifier dans la section
+  pivot (#science ou #verite) de la page. En cas de doute reel, choisir la valeur
+  honnete ("mystère non résolu", "relique contestée") plutot que de trancher.
+  Valeurs autorisees : voir le plan de la serie concernee.
+*/
+export interface Props {
+  /** Sur-titre du badge. Ex. "Verdict", "Nature de l'objet" */
+  label: string;
+  /** La valeur elle-meme. Ex. "Objet de fiction" */
+  text: string;
+  /** Nuance en une phrase, optionnelle mais recommandee. */
+  note?: string;
+}
+const { label, text, note } = Astro.props;
+---
+<div class="verdict-badge" data-reveal>
+  <div class="verdict-label">{label}</div>
+  <div class="verdict-text">{text}</div>
+  {note && <div class="verdict-note">{note}</div>}
+</div>

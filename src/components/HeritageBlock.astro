@@ -1,0 +1,21 @@
+---
+/*
+  Bloc thematique de la section #heritage (langue, symboles, tourisme,
+  revendications, culture pop...).
+
+  Rappel : la section #heritage se termine toujours par une note de vigilance
+  (composant CautionBox), differente a chaque page et honnete — recuperation
+  ideologique, pillage colonial, reinvention romantique, respect des croyances
+  vivantes. C'est une regle de la famille, pas une option.
+*/
+export interface Props {
+  title: string;
+  body?: string;
+}
+const { title, body } = Astro.props;
+---
+<div class="heritage-block" data-reveal>
+  <h4>{title}</h4>
+  {body && <p set:html={body}></p>}
+  <slot />
+</div>

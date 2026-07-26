@@ -1,0 +1,25 @@
+---
+/*
+  Inscription qui se dechiffre au scroll (mecanisme 3 de effects.js).
+
+  PORTEE LIMITEE — reserve aux pages mythologie (titres de section) et aux pages
+  objets legendaires (inscription reellement portee par l'objet). Voir
+  l'arbitrage dans docs/plans/plan-effets.md : les pools de GLYPH_POOLS sont des
+  ecritures culturelles, elles n'ont aucun sens sur une page "Triangle des
+  Bermudes".
+
+  PIEGE A NE PAS REPRODUIRE : le vrai texte doit rester le contenu VISIBLE de
+  l'element (c'est ce que fait ce composant). Un .fx-decode vide dont le texte
+  serait planque dans data-text n'afficherait rien du tout sans JS ou effets
+  desactives — et un element de 0px de hauteur n'est jamais vu par
+  l'IntersectionObserver, donc ne se declencherait meme pas.
+
+  `glyphs` doit exister dans GLYPH_POOLS de effects.js, sinon le pool des runes
+  est utilise par defaut (degradation silencieuse : verifier).
+*/
+export interface Props {
+  glyphs: string;
+}
+const { glyphs } = Astro.props;
+---
+<span class="fx-decode" data-glyphs={glyphs}><slot /></span>
