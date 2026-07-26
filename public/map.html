@@ -884,7 +884,7 @@ function positionPins(){
   }
 }
 
-var CAT_LABELS = { mythologie:'Mythologie', culture:'Culture', creature:'Créature', mystere:'Mystère' };
+var CAT_LABELS = { mythologie:'Mythologie', culture:'Culture', creature:'Créature', mystere:'Mystère', objet:'Objet légendaire' };
 var tooltip = document.getElementById('tooltip');
 function showTooltip(e, p){
   var tag = p.status === 'future' ? '<span class="cat">' + CAT_LABELS[p.cat] + ' · à venir</span>' : '<span class="cat">' + CAT_LABELS[p.cat] + '</span>';
