@@ -24,6 +24,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Basalte volcanique et turquoise du Pacifique : la matière des statues et
    de l'océan plutôt qu'une palette "île tropicale" générique. */
@@ -64,7 +65,7 @@ const SECTIONS = [
   palette={palette}
   sections={SECTIONS}
   epigraph="RAPA NUI · PACIFIQUE SUD"
-  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : <strong>le Suaire de Turin</strong>"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : <strong>la Colonie perdue de Roanoke</strong>"
 >
   <p class="subtitle" slot="hero">Rapa Nui</p>
   <p class="tagline" slot="hero">
@@ -154,4 +155,12 @@ const SECTIONS = [
       spéculative, n'efface la seconde, documentée sans ambiguïté.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Jared Diamond, Collapse: How Societies Choose to Fail or Succeed, Viking, 2005", note: "Ouvrage qui a popularisé la thèse d'un effondrement rapa nui auto-infligé par surexploitation des ressources." },
+    { label: "Terry Hunt et Carl Lipo, The Statues That Walked: Unraveling the Mystery of Easter Island, Free Press, 2011", note: "Présente la contre-thèse d'un déclin plus tardif, lié en partie au rat polynésien introduit, avec une population restée relativement stable jusqu'au contact européen." },
+    { label: "C. Lipo, T. Hunt et S. Haoa, « The 'walking' megalithic statues (moai) of Easter Island », Journal of Archaeological Science, vol. 40, 2013, p. 2859-2866", note: "Étude expérimentale démontrant qu'un moai correctement équilibré peut être déplacé debout par balancement, sans traîneau ni rondins." },
+    { label: "UNESCO, « Rapa Nui National Park », Centre du patrimoine mondial", url: "https://whc.unesco.org/en/list/715/", note: "Confirme l'inscription du parc au patrimoine mondial depuis 1995." },
+    { label: "Smithsonian Magazine, « Rapa Nui Representatives Visit British Museum to Discuss Repatriation of Easter Island Statue »", url: "https://www.smithsonianmag.com/smart-news/british-museum-hosts-rapa-nui-representatives-discuss-repatriation-easter-island-statue-180970878/", note: "Rend compte de la démarche de restitution engagée en 2018 autour de la tête moai Hoa Hakananai'a." },
+  ]} />
 </PageLayout>

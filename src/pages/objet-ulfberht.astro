@@ -1,0 +1,259 @@
+---
+/*
+  Les épées Ulfberht — quatorzième page de la série « Objets Légendaires du
+  Monde ». Structure imposée par docs/plans/plan-serie-objets.md : 8
+  sections, badge de nature dans le hero.
+
+  Effets : data-egg="ulfberht" + data-scroll-fx="ulfberhtSignature" sur
+  #description, piste documentée dans plan-effets.md ("une signature
+  +VLFBERH+T qui s'inscrit dans la lame, la croix se déplaçant pour
+  révéler une contrefaçon"). fx-decode utilisé avec le pool "lapidaire"
+  (capitales latines gravées) : l'inscription est une vraie transcription
+  latine réellement portée par les lames retrouvées, pas un ornement
+  inventé.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
+
+/* Acier bruni, givre nordique, éclat froid de la lame : la matière de
+   l'objet plutôt qu'une géographie générique. */
+const palette = {
+  bg: '#12161c',
+  'bg-deep': '#080a0e',
+  surface: '#1c222a',
+  'surface-alt': '#242c36',
+  border: '#3a4656',
+  ink: '#eef2f5',
+  text: '#c8d4dc',
+  'text-dim': '#8496a4',
+  accent: '#8a98a8',
+  'accent-bright': '#b8c4cc',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(138,152,168,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  { num: 'I', title: 'Un nom, pas un homme', sub: 'Vraisemblablement une marque transmise', body: "« Ulfberht » est probablement un nom de fondateur d'atelier franc, reproduit sur des générations de lames plutôt que le nom d'un forgeron unique — une marque plus qu'une signature individuelle." },
+  { num: 'II', title: 'Environ 170 lames retrouvées', sub: 'Scandinavie et Rhénanie, IXe-XIe s.', body: "Réparties sur toute l'Europe du Nord et centrale, ces épées portent toutes une variante de l'inscription +VLFBERH+T incrustée dans le fer de la lame." },
+  { num: 'III', title: 'Une qualité d\'acier hors norme', sub: 'Faible teneur en scories', body: "Un acier d'une pureté que la métallurgie européenne ne retrouvera pas avant plusieurs siècles — l'un des rares objets de cette série où l'énigme porte sur la matière elle-même, pas sur un récit." },
+];
+---
+<PageLayout
+  title="Les épées Ulfberht"
+  serie="Objets Légendaires du Monde"
+  description="Environ 170 lames retrouvées à travers l'Europe du Nord, toutes signées +VLFBERH+T, dans un acier d'une pureté inattendue pour l'époque viking — et la première affaire connue de contrefaçon de marque déposée, à mille ans de distance des logos contemporains."
+  href="objet-ulfberht.html"
+  egg="ulfberht"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="SCANDINAVIE · RHÉNANIE, IXe-XIe SIÈCLE"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>le Vajra</strong>"
+>
+  <p class="subtitle" slot="hero">+VLFBERH+T — une marque, pas un nom propre</p>
+  <p class="tagline" slot="hero">
+    Une signature reproduite sur près de deux siècles et 170 lames connues — et, parmi elles,
+    de vraies contrefaçons d'époque, trahies par un acier bien plus pauvre que l'original.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet réel, pouvoirs légendaires"
+    note="Les lames existent bel et bien, dispersées dans des musées européens. Ce qui relève de la légende, c'est la réputation de qualité quasi surnaturelle qu'on leur prêtait à l'époque — une réputation que l'archéométrie confirme en grande partie, fait rare dans cette série."
+  />
+
+  <Section
+    id="origine"
+    label="Une marque, pas un homme"
+    title="Le mystère commence par le nom lui-même"
+    intro="La règle de cette série : séparer l'ancienneté de l'objet de l'ancienneté du récit. Ici, la question porte d'abord sur l'identité même du nom inscrit, avant même de parler de légende.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et inscription"
+    title="Une lame double tranchant, une signature incrustée"
+    intro="Une épée d'apparence classique pour l'époque viking — c'est l'inscription incrustée dans le métal, et la matière de la lame elle-même, qui la distinguent."
+    scrollFx="ulfberhtSignature">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Une lame à double tranchant"
+        role="Type d'épée viking classique"
+        tags={['~90 cm', 'Rainure centrale']}
+        body="De forme globalement semblable aux autres épées de l'âge viking, avec une rainure centrale (fuller) allégeant la lame sans la fragiliser."
+      />
+      <FigureCard
+        name="L'inscription incrustée"
+        role="+VLFBERH+T, en fils de fer"
+        tags={['Damasquinure', 'Croix encadrantes']}
+        body="Le nom est incrusté par des fils de métal plus doux martelés dans des rainures pratiquées sur la lame — une technique de damasquinure distincte de la simple gravure de surface."
+      />
+      <FigureCard
+        name="Une croix qui trahit le faux"
+        role="Position de la croix dans la signature"
+        tags={['Détail décisif']}
+        body="Sur les exemplaires authentiques, la croix qui suit le H se place à un endroit précis de l'inscription ; sur plusieurs contrefaçons d'époque, ce détail typographique diffère légèrement — une signature de marque avant l'heure."
+      />
+    </div>
+    <blockquote class="pull-quote" style="margin-top:34px;">
+      <Decode glyphs="lapidaire">+VLFBERHT+</Decode>
+      <cite>Variante de l'inscription relevée sur plusieurs lames retrouvées en Scandinavie et en Rhénanie</cite>
+    </blockquote>
+  </Section>
+
+  <Section id="recits" label="Une réputation, pas une saga" title="Ce que les sources disent — et ne disent pas">
+    <StoryBlock
+      num="Récit I"
+      title="Aucune saga ne nomme cette épée précisément"
+      body="Contrairement à Excalibur ou à Durandal, aucun grand récit littéraire nordique ne consacre explicitement une épée Ulfberht par son nom — la réputation de la marque semble avoir été avant tout matérielle et commerciale, pas légendaire au sens narratif."
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Une réputation de qualité transmise oralement"
+      body="Plusieurs spécialistes estiment que la renommée de ces lames, connue des guerriers de l'époque, explique la persistance de la marque sur près de deux siècles — un cas rare où la légende est avant tout une réputation de fiabilité plutôt qu'un récit d'exploit."
+    />
+    <StoryBlock
+      num="Récit III"
+      title="Des lames retrouvées jusqu'en Russie"
+      body="Certaines épées Ulfberht ont été retrouvées le long des routes commerciales fluviales reliant la Scandinavie à la Russie actuelle et à la mer Caspienne — un indice de la portée commerciale considérable de cette production, bien au-delà de son origine franque supposée."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Un acier plus pur que la technologie locale ne le permettait"
+    intro="La section propre à cette série : ici, la question porte moins sur la fabrication de l'objet que sur l'origine de sa matière première, restée en partie mystérieuse.">
+    <div class="card-grid compact">
+      <MiniCard title="Un acier au carbone remarquablement pur" tag="Faible teneur en scories" body="Les analyses métallurgiques montrent un acier bien plus homogène et moins riche en impuretés que celui produit par les techniques de bas fourneau européennes courantes à cette époque." />
+      <MiniCard title="Une origine importée plausible" tag="Acier au creuset" body="Plusieurs chercheurs avancent que le métal brut proviendrait d'ateliers d'Asie centrale ou du monde islamique, où des techniques d'acier au creuset (proches du wootz) produisaient déjà ce niveau de pureté, importé via les routes commerciales fluviales russes." />
+      <MiniCard title="Un savoir-faire redécouvert avec difficulté" tag="Expérience de forge moderne" body="Un documentaire consacré au sujet a fait reproduire la lame par un forgeron contemporain expérimenté, qui n'est parvenu à approcher la qualité de l'original qu'au prix de plusieurs tentatives infructueuses." />
+      <MiniCard title="Des contrefaçons d'un acier bien plus pauvre" tag="Fer plié, faible qualité" body="Plusieurs lames portant une inscription similaire, mais légèrement différente, sont faites d'un métal nettement inférieur — des imitations d'époque cherchant à profiter de la réputation de la marque authentique." />
+    </div>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Environ 170 exemplaires"
+    title="Une dispersion à travers toute l'Europe du Nord"
+    intro="Contrairement à la plupart des objets de cette série, il n'existe pas ici une seule pièce disputée mais une série entière de lames comparables, retrouvées sur une aire géographique étendue.">
+    <div class="card-grid">
+      <InfoCard
+        title="Découvertes scandinaves"
+        sub="Norvège, Suède, Danemark"
+        body="La majorité des exemplaires connus proviennent de tombes et de sites vikings d'Europe du Nord."
+      />
+      <InfoCard
+        title="Découvertes rhénanes"
+        sub="Origine franque supposée"
+        body="Le nom lui-même suggère une origine d'atelier dans la région rhénane, alors sous contrôle franc, avant exportation vers le monde scandinave."
+      />
+      <InfoCard
+        title="Des musées à travers l'Europe"
+        sub="Collections dispersées"
+        body="Les exemplaires connus sont aujourd'hui répartis dans plusieurs musées nationaux et régionaux européens, sans qu'aucune pièce unique ne domine la série comme objet vedette."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="D'un secret d'atelier à un documentaire scientifique"
+    title="Une énigme métallurgique devenue vedette de vulgarisation">
+    <div class="card-grid compact">
+      <MiniCard title="« Secrets of the Viking Sword », 2012" tag="Documentaire NOVA/PBS" body="Cette production suit la tentative d'un forgeron contemporain de reproduire une lame Ulfberht, popularisant largement le dossier auprès du grand public." />
+      <MiniCard title="Une référence en histoire des marques" tag="Cas d'école commercial" body="Le dossier Ulfberht est souvent cité comme l'un des tout premiers exemples documentés de contrefaçon de marque commerciale dans l'histoire occidentale." />
+      <MiniCard title="Une popularité dans les jeux et la culture vidéoludique" tag="Références modernes" body="Le nom Ulfberht apparaît régulièrement comme objet ou référence dans des jeux vidéo et séries à thématique viking, généralement sans grand souci d'exactitude historique." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Un cas assez rare dans cette série : la réputation légendaire de qualité de ces lames est largement confirmée par l'archéométrie, plutôt que démentie ou simplement enjolivée par le récit.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Une supériorité métallurgique confirmée"
+      body="Les analyses de composition et de structure du métal confirment que les lames authentiques présentent un acier significativement plus pur et plus homogène que la production locale courante de l'époque."
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Une origine de la matière première toujours débattue"
+      body="Si la supériorité du métal est établie, la provenance exacte du minerai ou du lingot d'acier au carbone reste discutée, faute de méthode d'analyse capable de tracer son origine géographique avec certitude absolue."
+    />
+    <TheoryCard
+      title="Le nom Ulfberht désigne une marque d'atelier transmise sur plusieurs générations"
+      level="consensus"
+      status="Consensus"
+      body="La variation du style d'inscription et l'étalement chronologique sur environ deux siècles rendent peu plausible l'hypothèse d'un seul artisan, au profit d'une marque ou d'une lignée d'ateliers."
+      attrib="Position dominante en archéométrie médiévale"
+    />
+    <TheoryCard
+      title="L'acier brut provient d'un commerce à longue distance avec l'Asie centrale ou le monde islamique"
+      level="plausible"
+      status="Hypothèse la plus discutée"
+      body="Compatible avec la route commerciale fluviale bien documentée entre la Scandinavie et la mer Caspienne, sans qu'aucune analyse isotopique n'ait encore permis de le démontrer avec une certitude définitive."
+      attrib="Hypothèse discutée en histoire des techniques"
+    />
+    <TheoryCard
+      title="Les épées Ulfberht possédaient un pouvoir surnaturel de protection au combat"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune source ne prête explicitement de pouvoir magique à ces lames : leur réputation, aussi méritée soit-elle sur le plan métallurgique, reste d'ordre pratique plutôt que surnaturel."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que les épées Ulfberht font encore">
+    <HeritageBlock
+      title="Une référence en histoire des techniques"
+      body="Le dossier Ulfberht reste un cas d'étude classique pour comprendre les réseaux commerciaux et la circulation des matières premières à l'époque viking."
+    />
+    <HeritageBlock
+      title="Un cas d'école en histoire des marques"
+      body="Souvent cité comme l'un des tout premiers exemples de contrefaçon de marque commerciale, le dossier continue d'intéresser bien au-delà du seul cercle des historiens de l'armement."
+    />
+    <HeritageBlock
+      title="Une énigme métallurgique toujours ouverte"
+      body="L'origine exacte de la matière première reste un sujet de recherche actif, à la croisée de l'archéologie, de la métallurgie et de l'histoire du commerce médiéval."
+    />
+    <CautionBox>
+      Cette page traite un objet dont la réputation ancienne se trouve, fait rare, largement
+      confirmée par la science moderne : la prudence porte ici moins sur un excès
+      d'émerveillement que sur la tentation inverse, qui consisterait à réduire un vrai
+      mystère technique non résolu à une simple curiosité anecdotique.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Alan Williams, « A metallurgical study of some Viking swords », Gladius, vol. 29, 2009, p. 121-184", url: "https://www.researchgate.net/publication/250312307_A_metallurgical_study_of_some_Viking_swords", note: "Étude de référence sur la composition de 44 lames Ulfberht et la variation de qualité entre exemplaires authentiques et contrefaçons" },
+    { label: "« Secrets of the Viking Sword », NOVA, PBS, 2012", url: "https://www.pbs.org/wgbh/nova/vikingsword/", note: "Documentaire suivant la tentative de reproduction moderne de la lame par un forgeron contemporain" },
+  ]} />
+</PageLayout>

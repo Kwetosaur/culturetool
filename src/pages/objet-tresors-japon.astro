@@ -27,6 +27,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Laque noire, vermillon impérial et or terni : la matière de coffres qui ne
    s'ouvrent jamais, plutôt que la géographie du sujet. */
@@ -308,4 +309,10 @@ const noms = [
       contaminer la lecture de la tradition qui l'a précédé de plus d'un millénaire.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Kojiki, trad. Basil Hall Chamberlain, 1919", url: "https://sacred-texts.com/shi/kj/index.htm", note: "Texte source du mythe d'Amaterasu et de l'origine des trois trésors" },
+    { label: "« The Imperial Regalia: Japan's Three Sacred Treasures », Nippon.com", url: "https://www.nippon.com/en/guide-to-japan/cs00073/", note: "Présentation des trois pièces, de leur localisation actuelle et du secret qui les entoure" },
+    { label: "« Lost Art: the mysterious allure of Japan's Three Sacred Treasures », The Art Newspaper, 2019", url: "https://www.theartnewspaper.com/2019/07/15/lost-art-the-mysterious-allure-of-japans-three-sacred-treasures", note: "Contexte de l'intronisation de 2019 et de la question de l'authenticité jamais vérifiable" },
+  ]} />
 </PageLayout>

@@ -21,6 +21,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Calcaire cuit de soleil et terre d'enfouissement : la matière du site
    plutôt qu'une palette "Moyen-Orient" générique. */
@@ -147,4 +148,11 @@ const SECTIONS = [
       avancée. La deuxième lecture fait un bon récit ; elle ne fait pas une preuve.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Klaus Schmidt, Göbekli Tepe: A Stone Age Sanctuary in South-Eastern Anatolia, ex oriente, 2012", note: "Ouvrage de référence de l'archéologue qui a dirigé les fouilles systématiques du site de 1995 à sa mort en 2014." },
+    { label: "UNESCO, « Göbekli Tepe », Centre du patrimoine mondial", url: "https://whc.unesco.org/en/list/1572/", note: "Confirme l'inscription du site au patrimoine mondial en 2018 et la datation 9600-8200 av. J.-C." },
+    { label: "M. Heun et al., « Site of Einkorn Wheat Domestication Identified by DNA Fingerprinting », Science, vol. 278, 1997, p. 1312-1314", url: "https://www.science.org/doi/10.1126/science.278.5341.1312", note: "Étude génétique situant l'origine du blé engrain domestiqué près du mont Karacadağ, à proximité immédiate de Göbekli Tepe." },
+    { label: "SAPIENS, « The Dangers of Ancient Apocalypse's Pseudoscience »", url: "https://www.sapiens.org/archaeology/ancient-apocalypse-pseudoscience/", note: "Illustre la réaction critique de la communauté archéologique professionnelle face à la lecture « civilisation perdue » de la série Netflix." },
+  ]} />
 </PageLayout>

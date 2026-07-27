@@ -1,0 +1,273 @@
+---
+/*
+  Mythologie Dogon — seizième mythologie de la série. Structure imposée par
+  docs/plans/plan-serie-mythologies.md : 9 sections fixes.
+
+  #royaumes : pas d'empilement calqué sur un autre chapitre (correctif du
+  26/07/2026) — la cosmogonie dogon authentique part de l'œuf d'Amma et se
+  prolonge dans l'architecture même du grenier, qui reproduit le monde en
+  trois niveaux (grain/ciel, vivants, ancêtres dans la falaise).
+
+  Point sensible : la « connaissance de Sirius B » popularisée par Griaule
+  et Dieterlen (1950) est présentée avec la controverse académique réelle
+  (le travail de terrain ultérieur de Walter van Beek, 1991, n'a pas
+  retrouvé cette connaissance chez la majorité des Dogon et soupçonne une
+  contamination par des informateurs déjà en contact avec des missionnaires
+  ou des astronomes de passage) — traité en #anecdotes et en #heritage,
+  jamais présenté comme un fait établi ni comme une preuve extraterrestre.
+
+  Effets : data-egg="nommo" + data-scroll-fx="siriusOrbit" sur #pantheon,
+  piste documentée dans plan-effets.md ("deux étoiles qui tournent l'une
+  autour de l'autre, l'une minuscule — Sirius A et B"). Déchiffrement des
+  titres : glyphs="dogon", nouveau pool symbolique abstrait (triangle,
+  losange, éclat) inspiré des motifs géométriques gravés sur les portes de
+  grenier — décoratif assumé, pas une écriture réelle.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
+
+/* Terre cuite de la falaise de Bandiagara, indigo des tissus rituels, éclat
+   d'étoile blanche : la matière du pays dogon plutôt qu'une palette
+   "Afrique" générique. */
+const palette = {
+  bg: '#1a1408',
+  'bg-deep': '#0d0a04',
+  surface: '#291f10',
+  'surface-alt': '#342815',
+  border: '#5c4a28',
+  ink: '#f5ecd8',
+  text: '#e0d0a8',
+  'text-dim': '#a89468',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#3a5a7a',
+  'accent2-bright': '#6a8aa8',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(201,152,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Cosmogonie' },
+  { id: 'pantheon', nav: 'Panthéon' },
+  { id: 'genealogie', nav: 'Généalogie' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const niveaux = [
+  { num: 'I', title: 'Le toit — le grain', sub: 'Domaine céleste', body: "Les greniers dogon stockent le grain au sommet, sous un toit conique de chaume — le niveau que la cosmogonie associe au ciel et à Amma, source de toute nourriture." },
+  { num: 'II', title: "L'étage habité — les vivants", sub: 'Le monde des hommes', body: "Le niveau où l'on vit et travaille, construit à flanc de falaise — le seul des trois où l'on marche, exactement comme le Kay Pacha andin ou le Ashihara no Nakatsukuni japonais organisent ailleurs le monde des vivants." },
+  { num: 'III', title: 'La falaise — les ancêtres', sub: 'Domaine des morts', body: "Les anciens Dogon inhumaient leurs morts dans des cavités creusées à même la paroi de la falaise de Bandiagara, au-dessus des villages — les ancêtres restent littéralement au-dessus des vivants, jamais un simple enfer souterrain." },
+];
+---
+<PageLayout
+  title="Mythologie Dogon"
+  serie="Mythologies du Monde"
+  description="Amma et l'œuf du monde, les Nommo amphibies, le grenier comme modèle réduit de l'univers : une cosmologie ouest-africaine d'une précision remarquable, devenue mondialement célèbre — et mondialement débattue — pour sa prétendue connaissance de l'étoile compagne de Sirius."
+  href="mythologie-dogon.html"
+  egg="nommo"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="FALAISE DE BANDIAGARA · MALI"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : <strong>la mythologie vietnamienne</strong>"
+>
+  <p class="subtitle" slot="hero">Amma · Nommo · l'œuf du monde</p>
+  <p class="tagline" slot="hero">
+    Une cosmogonie où l'architecture même du grenier reproduit la structure du monde — et un
+    dossier d'astronomie rituelle resté l'un des plus débattus de toute l'ethnographie africaine.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="L'œuf d'Amma et les trois niveaux du grenier"
+    intro="Pas un empilement de royaumes façon Yggdrasil : la cosmologie dogon se lit directement dans l'architecture du grenier familial, qui reproduit à petite échelle la structure du monde né de l'œuf primordial d'Amma.">
+    <Fragment slot="title"><Decode glyphs="dogon">L'œuf d'Amma et les trois niveaux du grenier</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 20 L320 90 L320 110 L80 110 L80 90 Z" fill="#c9982f" opacity="0.85"/>
+        <text x="200" y="55" text-anchor="middle" fill="#1a1408" font-family="Cinzel, serif" font-size="12" font-weight="700">GRAIN · CIEL</text>
+        <rect x="90" y="110" width="220" height="110" fill="#8a6a35" opacity="0.7"/>
+        <text x="200" y="170" text-anchor="middle" fill="#f5ecd8" font-family="Cinzel, serif" font-size="13">VIVANTS</text>
+        <path d="M60 220 L340 220 L300 300 L100 300 Z" fill="#5c4a28" opacity="0.9"/>
+        <text x="200" y="265" text-anchor="middle" fill="#e8c164" font-family="Cinzel, serif" font-size="13">FALAISE · ANCÊTRES</text>
+      </svg>
+    </div>
+    <p class="map-caption">Le grenier comme monde réduit — trois niveaux réellement bâtis, pas une métaphore décorative.</p>
+    <div class="card-grid compact">
+      {niveaux.map((n) => <InfoCard {...n} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~13 figures majeures" title="Le panthéon dogon" scrollFx="siriusOrbit">
+    <Fragment slot="title"><Decode glyphs="dogon">Le panthéon dogon</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Amma" role="Créateur suprême" tags={['Œuf primordial', 'Distant']} body="Façonne l'univers à partir d'un œuf cosmique (Aduno tal) contenant les germes de toute chose — une divinité créatrice qui se retire ensuite, laissant le monde aux Nommo et aux hommes." />
+      <FigureCard name="Les Nommo" role="Ancêtres amphibies civilisateurs" tags={['Eau', 'Civilisation']} body="Êtres mi-humains mi-poissons envoyés par Amma pour apporter aux hommes la parole, le tissage et l'agriculture — une civilisation transmise par l'eau plutôt que conquise par la force." />
+      <FigureCard name="Ogo (Yurugu)" role="Le fils rebelle, renard pâle" tags={['Désordre', 'Divination']} body="Sort prématurément de l'œuf d'Amma avant l'heure, emportant un fragment du placenta primordial — son geste introduit le désordre dans le monde, mais fonde aussi la divination par les traces de renard, toujours pratiquée aujourd'hui." />
+      <FigureCard name="Lébé" role="Premier ancêtre ressuscité" tags={['Serpent', 'Agriculture']} body="Mort le premier, il revient sous forme de serpent pour lécher la terre et la purifier — geste fondateur associé à l'agriculture et à l'institution du Hogon." />
+      <FigureCard name="Le Hogon" role="Plus haute autorité religieuse vivante" tags={['Charge, pas divinité']} body="N'est pas un dieu mais l'autorité spirituelle suprême d'une région dogon, censé recevoir la visite nocturne du serpent de Lébé qui purifie son corps — une charge religieuse et politique bien réelle, toujours en fonction aujourd'hui." />
+      <FigureCard name="Les Binu" role="Esprits ancestraux tutélaires" tags={['Autels', 'Masques']} body="Esprits de lignage vénérés par des autels et des masques spécifiques à chaque clan, intermédiaires entre les vivants et les forces créatrices plus lointaines." />
+      <FigureCard name="Dyongu Sérou" role="Figure fondatrice des masques" tags={['Sigui', 'Mort inaugurale']} body="Selon la tradition, sa mort accidentelle est à l'origine du premier masque et de la cérémonie du Sigui, qui rejoue depuis ce deuil originel tous les soixante ans." />
+      <FigureCard name="Yasigi" role="Maîtresse des masques" tags={['Sœur des masques', 'Rituel']} body="Seule femme autorisée à un rôle rituel dans la société des masques, elle danse lors des grandes cérémonies funéraires (dama) sous une forme spécifique qui porte son nom." />
+      <FigureCard name="Les Andoumboulou" role="Première humanité manquée" tags={['Petits êtres', 'Échec']} body="Créatures de petite taille façonnées avant les humains actuels, jugées imparfaites par la tradition — une étape écartée plutôt qu'un ancêtre direct, comparable à d'autres humanités « ratées » ailleurs dans le monde." />
+      <FigureCard name="Ogotemmêli" role="Sage aveugle, informateur historique" tags={['1931', 'Transmission']} body="Chasseur aveugle de Sanga qui expose sur plusieurs semaines la cosmogonie dogon à l'ethnologue Marcel Griaule en 1931 — sans lui, l'essentiel de ce corpus n'aurait probablement jamais été mis par écrit dans ce détail." />
+      <FigureCard name="Nommo Titiyayne" role="Figure du Nommo sacrifié" tags={['Purification']} body="Version du Nommo dont le sacrifice et le démembrement rituels purifient le monde souillé par le geste d'Ogo — un motif de mort réparatrice repris dans plusieurs récits dogon." />
+      <FigureCard name="La Terre" role="Épouse primordiale d'Amma" tags={['Union fondatrice']} body="Amma s'unit à la Terre pour engendrer les premiers êtres — un mythe d'union fondatrice, dont certaines versions évoquent une première union imparfaite corrigée ensuite par un second geste créateur." />
+      <FigureCard name="Le Renard pâle" role="Support de divination" tags={['Oracle vivant']} body="Chaque nuit, des devins dogon tracent des grilles de sable que le renard pâle vient parcourir — ses traces sont lues au matin comme des réponses oraculaires, une pratique divinatoire toujours vivante dans certains villages." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 maisons, pas un arbre de sang"
+    title="Ordre, rébellion et ancêtres"
+    intro="Pas de généalogie divine au sens grec : la tradition dogon organise plutôt une tension entre trois lignées de sens — l'ordre voulu par Amma, le désordre introduit par son fils rebelle, et la lignée ancestrale des hommes.">
+    <Fragment slot="title"><Decode glyphs="dogon">Ordre, rébellion et ancêtres</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+        <text x="100" y="30" text-anchor="middle" fill="#e8c164" font-family="Cinzel, serif" font-size="12">MAISON D'AMMA</text>
+        <circle cx="100" cy="70" r="18" fill="#c9982f"/>
+        <text x="100" y="75" text-anchor="middle" font-size="8" fill="#1a1408" font-weight="700">Amma</text>
+        <line x1="100" y1="88" x2="100" y2="130" stroke="#c9982f" stroke-width="1" stroke-dasharray="3 4"/>
+        <circle cx="100" cy="145" r="13" fill="#342815" stroke="#c9982f" stroke-width="1.3"/>
+        <text x="100" y="165" text-anchor="middle" font-size="8" fill="#e0d0a8">les Nommo</text>
+
+        <text x="300" y="30" text-anchor="middle" fill="#a83a4a" font-family="Cinzel, serif" font-size="12">MAISON DU DÉSORDRE</text>
+        <circle cx="300" cy="70" r="18" fill="#7a2030"/>
+        <text x="300" y="75" text-anchor="middle" font-size="8" fill="#f5ecd8" font-weight="700">Ogo</text>
+        <line x1="300" y1="88" x2="300" y2="130" stroke="#a83a4a" stroke-width="1" stroke-dasharray="2 4"/>
+        <circle cx="300" cy="145" r="13" fill="#342815" stroke="#a83a4a" stroke-width="1.3"/>
+        <text x="300" y="165" text-anchor="middle" font-size="8" fill="#e0d0a8">renard pâle</text>
+
+        <text x="500" y="30" text-anchor="middle" fill="#6a8aa8" font-family="Cinzel, serif" font-size="12">MAISON DES ANCÊTRES</text>
+        <circle cx="500" cy="70" r="18" fill="#3a5a7a"/>
+        <text x="500" y="75" text-anchor="middle" font-size="8" fill="#f5ecd8" font-weight="700">Lébé</text>
+        <line x1="500" y1="88" x2="500" y2="130" stroke="#6a8aa8" stroke-width="1" stroke-dasharray="2 4"/>
+        <circle cx="500" cy="145" r="13" fill="#342815" stroke="#6a8aa8" stroke-width="1.3"/>
+        <text x="500" y="165" text-anchor="middle" font-size="8" fill="#e0d0a8">le Hogon</text>
+      </svg>
+    </div>
+    <p class="map-caption">Trait plein = filiation directe ; pointillé = héritage rituel. Les sources dogon elles-mêmes varient selon les villages et les informateurs — Griaule et Dieterlen ont recueilli plusieurs versions parfois divergentes.</p>
+  </Section>
+
+  <Section id="creatures" label="8 êtres notables" title="Le bestiaire dogon">
+    <Fragment slot="title"><Decode glyphs="dogon">Le bestiaire dogon</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Les Nommo" tag="Amphibies civilisateurs" body="Mi-humains mi-poissons, ils apportent la parole et l'agriculture — un motif de sagesse venue de l'eau qu'on retrouve, sous d'autres traits, dans plusieurs traditions ouest-africaines et mésopotamiennes." />
+      <MiniCard title="Le renard pâle (Yurugu)" tag="Oracle vivant" body="Animal réel dont le comportement nocturne est lu chaque matin sur des grilles de sable tracées par les devins — la divination continue d'être pratiquée dans certains villages." />
+      <MiniCard title="Le serpent de Lébé" tag="Purification" body="Vient rituellement lécher le corps du Hogon pour le purifier — un serpent ancestral, jamais une menace, plutôt un soin." />
+      <MiniCard title="Les Andoumboulou" tag="Première humanité écartée" body="Petits êtres imparfaits produits avant l'humanité actuelle, souvent associés dans le folklore à des esprits de brousse invisibles." />
+      <MiniCard title="Le caméléon" tag="Messager de la mort" body="Dans plusieurs versions du mythe de l'origine de la mort, un messager trop lent — souvent le caméléon — laisse le malheur devancer la bonne nouvelle d'immortalité." />
+      <MiniCard title="Le corbeau" tag="Présage" body="Son vol et son cri sont traditionnellement observés comme des signes avant certaines décisions rituelles ou agricoles." />
+      <MiniCard title="Le crocodile sacré de Sanga" tag="Bassin rituel" body="Des bassins à crocodiles tenus pour sacrés existent près de plusieurs villages dogon, avec des interdits de chasse spécifiques." />
+      <MiniCard title="Le grand serpent du Sigui" tag="Masque cérémoniel" body="Un immense masque-serpent articulé, parfois long de plusieurs mètres, porté collectivement lors de la cérémonie du Sigui tous les soixante ans." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="10 légendes" title="Les grands récits dogon">
+    <Fragment slot="title"><Decode glyphs="dogon">Les grands récits dogon</Decode></Fragment>
+    <StoryBlock num="Légende I" title="L'œuf d'Amma" body="Amma façonne l'univers à partir d'un œuf cosmique en deux jumeaux placentaires porteurs des germes de toute chose. L'un des jumeaux, Ogo, impatient, déchire son enveloppe et se précipite hors de l'œuf avant l'heure prévue, emportant avec lui un fragment de placenta — ce geste introduit le désordre et l'imperfection dans un monde qu'Amma avait voulu achevé." />
+    <StoryBlock num="Légende II" title="La souillure d'Ogo et la terre incestueuse" body="Le fragment de placenta emporté par Ogo devient la terre telle que nous la connaissons — une terre souillée dès l'origine par ce vol, que les Nommo devront ensuite purifier. Ogo, transformé en renard pâle, erre depuis dans le désert à la recherche de sa jumelle perdue." />
+    <StoryBlock num="Légende III" title="Le sacrifice purificateur du Nommo" body="Pour réparer la faute d'Ogo, un Nommo est sacrifié et démembré ; ses restes, dispersés aux quatre points cardinaux, purifient la terre et fondent l'ordre du monde habité — un motif de mort réparatrice qui structure une bonne part du rituel funéraire dogon ultérieur." />
+    <StoryBlock num="Légende IV" title="La descente de l'arche" body="Amma fait descendre du ciel une arche céleste contenant les huit ancêtres fondateurs de l'humanité, accompagnés d'animaux, de graines et des outils de la civilisation — un mythe de descente organisée plutôt que d'apparition spontanée." />
+    <StoryBlock num="Légende V" title="La mort et la résurrection de Lébé" body="Premier des huit ancêtres à mourir, Lébé revient sous forme de serpent pour lécher la terre du village fondateur et la rendre à nouveau fertile — son culte fonde directement l'institution du Hogon, censé recevoir sa visite nocturne purificatrice." />
+    <StoryBlock num="Légende VI" title="La mort de Dyongu Sérou et l'origine des masques" body="Selon la tradition, un ancêtre nommé Dyongu Sérou meurt accidentellement en découvrant un secret réservé aux femmes ; son deuil impossible à célébrer normalement donne naissance au premier masque et à la cérémonie funéraire dama, rejouée depuis à chaque génération." />
+    <StoryBlock num="Légende VII" title="L'origine de la parole tissée" body="Les Nommo enseignent aux hommes le tissage en même temps que la parole — le mouvement de la navette sur le métier à tisser est traditionnellement comparé au mouvement même de la parole humaine, un mythe qui relie littéralement le geste artisanal au langage." />
+    <StoryBlock num="Légende VIII" title="Pourquoi les hommes meurent" body="Dans plusieurs versions recueillies, un messager chargé d'annoncer aux hommes l'immortalité arrive trop tard, devancé par un messager plus rapide porteur de la nouvelle inverse — un motif de messager manqué qui explique, sans jamais la justifier moralement, l'origine de la mort humaine." quote="Le message de vie est arrivé après celui de la mort." cite="Résumé d'une version orale recueillie à Sanga" />
+    <StoryBlock num="Légende IX" title="Les conversations d'Ogotemmêli" body={["En 1931, le chasseur aveugle Ogotemmêli accepte de recevoir l'ethnologue français Marcel Griaule sur trente-trois jours consécutifs pour lui exposer, couche par couche, l'ensemble de la cosmogonie dogon.", "Le livre qui en résulte, <em>Dieu d'eau</em> (1948), reste la source principale — et la plus discutée — de ce que le monde extérieur connaît de cette tradition, avec toutes les questions de méthode que pose une cosmologie entière recueillie par un seul informateur en un mois."]} />
+    <StoryBlock num="Légende X" title="Le premier Sigui" body="La tradition situe l'origine de la grande cérémonie du Sigui dans la mort du premier ancêtre à avoir découvert la parole — depuis, le rituel se rejoue tous les soixante ans dans un cycle qui suit le renouvellement symbolique de la langue elle-même, pas seulement la mémoire d'un deuil." />
+  </Section>
+
+  <Section id="anecdotes" label="8 curiosités" title="Étymologies, débats et faits marquants">
+    <Fragment slot="title"><Decode glyphs="dogon">Étymologies, débats et faits marquants</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="La controverse de Sirius B" tag="À traiter avec prudence" body="Griaule et Dieterlen rapportent en 1950 que les Dogon connaîtraient l'existence d'une étoile compagne invisible de Sirius, confirmée par l'astronomie occidentale seulement en 1970. L'anthropologue Walter van Beek, retournant sur le terrain en 1991, ne retrouve pas ce savoir chez la majorité des Dogon interrogés et suggère une possible contamination par des visiteurs occidentaux déjà informés avant l'enquête de Griaule — le débat reste ouvert, sans consensus définitif." />
+      <MiniCard title="Le grenier comme modèle du monde" tag="Architecture rituelle" body="La disposition en trois niveaux du grenier vernaculaire dogon n'est pas une simple commodité de stockage : elle reproduit délibérément, dans l'architecture quotidienne, la structure cosmologique du monde." />
+      <MiniCard title="Le Sigui, un calendrier de 60 ans" tag="Dernière édition : 1967" body="Cette cérémonie majeure, qui dure plusieurs années de préparation et de célébration à travers les villages, ne se produit qu'une fois par génération humaine environ — la prochaine édition complète est attendue au XXIe siècle." />
+      <MiniCard title="Ogotemmêli, un informateur, pas un prêtre" tag="Nuance méthodologique" body="Chasseur aveugle respecté mais pas figure religieuse officielle, son récit reflète une synthèse personnelle érudite — d'autres Dogon interrogés par la suite ont proposé des versions parfois sensiblement différentes." />
+      <MiniCard title="Les masques Kanaga" tag="Objet emblématique" body="Le masque à double croix du Kanaga, l'un des plus reproduits au monde dans les musées d'art africain, représenterait selon une lecture le geste créateur reliant le ciel et la terre." />
+      <MiniCard title="Un peuple, plusieurs traditions locales" tag="Diversité interne" body="La cosmogonie exposée ici est une synthèse : les villages dogon de la falaise de Bandiagara ne partagent pas tous exactement le même corpus mythologique dans le détail." />
+      <MiniCard title="La divination au renard, encore pratiquée" tag="Tradition vivante" body="Certains devins dogon continuent aujourd'hui de tracer des grilles de sable la nuit pour lire au matin les traces laissées par le renard pâle." />
+      <MiniCard title="Von Däniken s'en est emparé" tag="Récupération pseudo-scientifique" body="Le dossier Sirius a été largement récupéré par la littérature des « anciens astronautes », qui y voit la preuve d'un contact extraterrestre — une lecture qu'aucun spécialiste sérieux de la région ne soutient." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="De la falaise de Bandiagara aux musées du monde">
+    <Fragment slot="title"><Decode glyphs="dogon">De la falaise de Bandiagara aux musées du monde</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="110" r="10" fill="#c9982f"/>
+        <text x="250" y="90" text-anchor="middle" fill="#e8c164" font-size="12" font-family="Cinzel, serif">SANGA</text>
+        {[[120,60,'Falaise de Bandiagara'],[380,60,'Musée du quai Branly, Paris'],[100,170,'Tombouctou'],[400,170,'Musées d\'ethnographie, monde entier']].map(([x,y,label]) => (
+          <g>
+            <line x1="250" y1="110" x2={x} y2={y} stroke="#6a8aa8" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#342815" stroke="#c9982f" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#e0d0a8" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">De la falaise malienne aux collections d'art africain occidentales — un patrimoine matériel largement dispersé bien avant que le débat sur Sirius n'éclate.</p>
+    <div class="card-grid">
+      <InfoCard title="La falaise de Bandiagara" sub="Patrimoine UNESCO depuis 1989" body="Classée pour son ensemble exceptionnel de villages, de greniers et de sites funéraires — le décor concret de toute cette cosmologie, pas une abstraction." />
+      <InfoCard title="Le Sigui itinérant" sub="Tous les 60 ans" body="La cérémonie parcourt successivement les villages de la falaise sur plusieurs années consécutives, selon un ordre traditionnel précis." />
+      <InfoCard title="Les masques dans les collections occidentales" sub="Musée du quai Branly, entre autres" body="Une grande partie des masques dogon collectés au XXe siècle circule aujourd'hui dans des musées européens — un patrimoine rituel devenu objet d'exposition, question encore débattue par les communautés d'origine." />
+      <InfoCard title="Marcel Griaule et Germaine Dieterlen" sub="Ethnographie française, XXe siècle" body="Leurs travaux ont rendu cette cosmologie mondialement célèbre, tout en faisant l'objet de critiques méthodologiques sur la représentativité d'un savoir recueilli auprès de quelques informateurs." />
+      <InfoCard title="Walter van Beek" sub="Contre-enquête, 1991" body="Son retour sur le terrain relance tout le débat scientifique sur la fiabilité du corpus Griaule-Dieterlen, en particulier sur le dossier Sirius." />
+      <InfoCard title="Le tourisme culturel au Mali" sub="Contexte fragile" body="L'instabilité sécuritaire régionale a fortement réduit, depuis les années 2010, l'accès touristique à la région — un patrimoine vivant aujourd'hui difficile d'accès." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="dogon">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'XIVe-XVIe siècle', title: 'Installation dogon sur la falaise', body: "Les Dogon s'établissent le long de l'escarpement de Bandiagara, en partie pour se protéger d'incursions extérieures." },
+      { year: '1931', title: 'Les conversations avec Ogotemmêli', body: "Marcel Griaule recueille sur trente-trois jours l'exposé cosmologique qui deviendra la base de la connaissance occidentale de cette tradition." },
+      { year: '1948', title: 'Publication de « Dieu d\'eau »', body: "Le livre de Griaule diffuse largement la cosmogonie dogon hors du cercle académique spécialisé." },
+      { year: '1950', title: 'L\'article sur le « système soudanais »', body: "Griaule et Dieterlen publient les éléments qui alimenteront la controverse sur la connaissance dogon de Sirius B." },
+      { year: '1967', title: 'Dernière édition complète du Sigui', body: "La cérémonie parcourt l'ensemble des villages traditionnels de la falaise sur plusieurs années." },
+      { year: '1970', title: 'Confirmation astronomique de Sirius B', body: "L'astronomie occidentale obtient la première image directe de l'étoile compagne, relançant l'intérêt public pour le dossier dogon." },
+      { year: '1976', title: 'Publication de « Le Mystère de Sirius »', body: "Robert Temple popularise une lecture extraterrestre du dossier, largement rejetée par les spécialistes de la région." },
+      { year: '1989', title: 'Classement UNESCO de la falaise de Bandiagara', body: "Reconnaissance du patrimoine architectural, culturel et naturel de la région." },
+      { year: '1991', title: 'La contre-enquête de Walter van Beek', body: "Un retour de terrain qui questionne sérieusement la représentativité du savoir cosmologique rapporté par Griaule." },
+      { year: 'Années 2010', title: 'Crise sécuritaire au Mali', body: "L'instabilité régionale restreint fortement l'accès à la falaise, fragilisant la transmission touristique et culturelle du patrimoine dogon." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que la cosmologie dogon fait encore">
+    <Fragment slot="title"><Decode glyphs="dogon">Ce que la cosmologie dogon fait encore</Decode></Fragment>
+    <HeritageBlock title="Une religion et une architecture toujours pratiquées" body="Le Hogon, les autels Binu et les greniers à trois niveaux restent des réalités vivantes dans de nombreux villages de la falaise, pas de simples reconstitutions muséales." />
+    <HeritageBlock title="Un cas d'école en anthropologie" body="Le débat Griaule/van Beek sur la connaissance de Sirius reste discuté dans les cursus d'anthropologie comme un cas exemplaire des limites méthodologiques du travail de terrain reposant sur peu d'informateurs." />
+    <HeritageBlock title="Une esthétique mondialement diffusée" body="Masques Kanaga et Sigui figurent parmi les pièces les plus exposées de l'art africain dans les musées occidentaux, souvent séparées de leur contexte rituel d'origine." />
+    <CautionBox>
+      Le dossier Sirius a été massivement récupéré par une littérature pseudo-scientifique
+      d'« anciens astronautes » qui prête aux Dogon un contact extraterrestre — une lecture que
+      cette page ne cautionne à aucun moment. Le débat scientifique réel porte sur la fiabilité
+      d'une enquête ethnographique menée par deux chercheurs auprès d'un nombre restreint
+      d'informateurs, pas sur une quelconque preuve de visite venue d'ailleurs.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Marcel Griaule, Dieu d'eau. Entretiens avec Ogotemmêli, Éditions du Chêne, 1948", url: "https://archive.org/details/marcel-griaule-dieu-deau-entretien-avec-ogotemmeli", note: "Source principale des trente-trois jours d'entretiens avec Ogotemmêli, citée en #legendes." },
+    { label: "Marcel Griaule et Germaine Dieterlen, \"Un système soudanais de Sirius\", Journal de la Société des Africanistes, 20(2), 1950", url: "https://www.persee.fr/doc/jafr_0037-9166_1950_num_20_2_2611", note: "Article à l'origine de la controverse sur la connaissance dogon de Sirius B, traitée en #anecdotes." },
+    { label: "Walter E. A. van Beek, \"Dogon Restudied: A Field Evaluation of the Work of Marcel Griaule\", Current Anthropology, 32(2), 1991", url: "https://home.iscte-iul.pt/~fgvs/VanBeek,Dogon.pdf", note: "Contre-enquête de terrain qui relance le débat sur le dossier Sirius, citée en #anecdotes et #heritage." },
+    { label: "UNESCO, \"Cliff of Bandiagara (Land of the Dogons)\", World Heritage List, 1989", url: "https://whc.unesco.org/en/list/516", note: "Confirme le classement de la falaise mentionné en #monde et #frise." },
+    { label: "Robert K. G. Temple, The Sirius Mystery, St. Martin's Press, 1976", note: "Ouvrage à l'origine de la récupération pseudo-scientifique du dossier Sirius, mise en garde en #anecdotes et #heritage." },
+  ]} />
+</PageLayout>

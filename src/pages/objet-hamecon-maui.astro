@@ -28,6 +28,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Nuit océanique, nacre et étoiles : la matière et le ciel de l'objet plutôt
    que la géographie générique du Pacifique. */
@@ -280,4 +281,9 @@ const noms = [
       leurs différences réelles.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Martha Warren Beckwith, Hawaiian Mythology, Yale University Press, 1940", url: "https://archive.org/details/hawaiianmytholog00beck", note: "Étude de référence sur les récits hawaïens de Maui et de son hameçon" },
+    { label: "« Hawaiian Star Lines and Names for Stars », Polynesian Voyaging Society", url: "https://archive.hokulea.com/ike/hookele/hawaiian_star_lines.html", note: "Identification de Manaiakalani, l'hameçon de Maui, à la constellation du Scorpion" },
+  ]} />
 </PageLayout>

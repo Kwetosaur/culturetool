@@ -25,6 +25,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Ambre et résine chaude, ombre de bunker : la matière de l'objet et le
    contexte de sa disparition plutôt qu'une géographie générique. */
@@ -282,4 +283,9 @@ const noms = [
       aussi exceptionnelle soit-elle.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "« The History and Reconstruction of the Amber Room », Gems & Gemology, Gemological Institute of America, hiver 2018", url: "https://www.gia.edu/gems-gemology/winter-2018-history-and-reconstruction-of-amber-room", note: "Étude de référence sur la fabrication d'origine, le pillage de 1941 et la reconstruction achevée en 2003" },
+    { label: "« A Brief History of the Amber Room », Smithsonian Magazine", url: "https://www.smithsonianmag.com/history/a-brief-history-of-the-amber-room-160940121/", note: "Synthèse du don de 1716 et de la disparition en 1945" },
+  ]} />
 </PageLayout>

@@ -1,0 +1,213 @@
+---
+/*
+  Khmers (Empire d'Angkor) — onzième page de la série « Peuples & Cultures
+  du Monde ». Même structure à 10 sections que culture-byzance.astro.
+
+  Point de vigilance : corriger le récit occidental d'une « découverte »
+  d'Angkor par Henri Mouhot en 1860 — le site n'a jamais été perdu pour les
+  Khmers eux-mêmes, qui y maintenaient une présence monastique bouddhiste
+  continue ; traité explicitement en #anecdotes et en #frise.
+
+  Effets : data-egg="khmers" + data-scroll-fx="canalAngkor" sur
+  #style-de-vie, piste documentée dans plan-effets.md ("un canal
+  d'irrigation qui se remplit et encercle une tour").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Grès gris-vert des temples, or des bas-reliefs, vert profond de la
+   jungle qui les entoure : la matière d'Angkor plutôt qu'une palette
+   "Asie du Sud-Est" générique. */
+const palette = {
+  bg: '#101c14',
+  'bg-deep': '#08110b',
+  surface: '#182a1e',
+  'surface-alt': '#203528',
+  border: '#3a5c44',
+  ink: '#eef5ec',
+  text: '#c8d8c8',
+  'text-dim': '#84a084',
+  accent: '#8a9e6a',
+  'accent-bright': '#b0c488',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(138,158,106,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Khmers (Empire d'Angkor)"
+  serie="Peuples & Cultures du Monde"
+  description="Un réseau hydraulique sophistiqué qui a permis à Angkor de devenir la plus vaste agglomération préindustrielle jamais bâtie — un site que l'Occident a cru « redécouvrir » en 1860, alors que des moines khmers n'avaient jamais cessé d'y vivre."
+  href="culture-khmers.html"
+  egg="khmers"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ANGKOR · IXe-XVe SIÈCLE"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : <strong>l'Empire mongol</strong>"
+>
+  <p class="subtitle" slot="hero">La cité que l'eau a bâtie</p>
+  <p class="tagline" slot="hero">
+    Un empire dont la survie et l'effondrement se lisent d'abord dans son ingénierie de l'eau —
+    et un site que l'Occident a cru redécouvrir, alors que des moines y vivaient sans interruption.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="Autour du grand lac Tonlé Sap"
+    intro="L'empire khmer s'étend depuis la région d'Angkor, au nord du lac Tonlé Sap, jusqu'à couvrir à son apogée une bonne partie de l'actuelle Asie du Sud-Est continentale.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="260" cy="230" rx="90" ry="40" fill="#3a5c7a" opacity="0.6"/>
+        <text x="260" y="235" text-anchor="middle" fill="#c8d8e8" font-size="11" font-style="italic">Tonlé Sap</text>
+        <rect x="220" y="100" width="80" height="18" fill="#8a9e6a" opacity="0.85"/>
+        <text x="260" y="90" text-anchor="middle" fill="#b0c488" font-size="12" font-family="Cinzel, serif" font-weight="bold">ANGKOR</text>
+        <circle cx="260" cy="140" r="7" fill="#e8c164"/>
+        <text x="260" y="160" text-anchor="middle" fill="#eef5ec" font-size="10">Angkor Wat</text>
+        <circle cx="290" cy="120" r="6" fill="#c9982f"/>
+        <text x="330" y="115" text-anchor="middle" fill="#c8d8c8" font-size="10">Angkor Thom / Bayon</text>
+        <circle cx="120" cy="90" r="5" fill="#8a6a35"/>
+        <text x="120" y="75" text-anchor="middle" fill="#a0b8a0" font-size="10" font-style="italic">Ayutthaya (rival siamois)</text>
+      </svg>
+    </div>
+    <p class="map-caption">Le lac Tonlé Sap, ressource halieutique majeure, et Angkor juste au nord — au cœur d'un vaste réseau de bassins-réservoirs (barays) et de canaux.</p>
+    <div class="card-grid">
+      <InfoCard title="Angkor Wat" sub="v. 1113-1150" body="Le plus grand monument religieux du monde jamais bâti d'un seul tenant, orienté vers l'ouest — une orientation inhabituelle pour un temple khmer, toujours débattue par les spécialistes." />
+      <InfoCard title="Angkor Thom et le Bayon" sub="Fin du XIIe siècle" body="Cité fortifiée bâtie par Jayavarman VII, dont le temple central porte plus de deux cents visages de pierre géants au sourire énigmatique." />
+      <InfoCard title="Les grands barays" sub="Réservoirs hydrauliques" body="Immenses bassins artificiels destinés à stocker l'eau de la mousson pour l'irrigation et, selon certaines lectures, à un usage rituel autant que pratique." />
+      <InfoCard title="Le lac Tonlé Sap" sub="Ressource vitale" body="Lac dont le niveau et la superficie varient radicalement selon les saisons, fournissant une part essentielle des ressources en poisson de la région depuis l'époque angkorienne jusqu'à aujourd'hui." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Rois-dieux, moines et rivaux chams" intro="Une société organisée autour de la figure du roi-dieu (devaraja), appuyée sur une main-d'œuvre de corvée considérable, et régulièrement en tension avec le royaume voisin du Champa.">
+    <div class="card-grid wide">
+      <FigureCard name="Le roi-dieu (devaraja)" role="Fondement du pouvoir royal" tags={['Culte dynastique', 'Légitimité religieuse']} body="Institué selon la tradition par Jayavarman II vers 802, le culte du roi identifié à une divinité protectrice justifie et sacralise l'autorité royale sur l'ensemble de l'empire." />
+      <FigureCard name="Les Chams" role="Rivaux et parfois conquérants" tags={['Royaume du Champa', 'Sac d\'Angkor, 1177']} body="Peuple voisin du littoral actuel du Vietnam, dont la flotte parvient à mettre à sac Angkor en 1177 — un désastre que Jayavarman VII transformera en repartant à la reconquête et en reconstruisant la capitale à plus grande échelle encore." />
+      <FigureCard name="La main-d'œuvre de corvée" role="Bâtisseurs anonymes" tags={['Travail obligatoire', 'Chantiers monumentaux']} body="Des dizaines de milliers de travailleurs, mobilisés par un système de corvée organisé, ont rendu possible la construction et l'entretien des temples et du réseau hydraulique — l'immense majorité d'entre eux restent anonymes dans les sources." />
+      <FigureCard name="Les moines bouddhistes" role="Continuité religieuse" tags={['Présence ininterrompue']} body="Une communauté monastique bouddhiste a continué d'occuper Angkor Wat sans interruption bien après le déclin politique de l'empire — la présence khmère sur le site n'a en réalité jamais cessé." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Ceux qui ont bâti l'empire">
+    <div class="card-grid wide">
+      <FigureCard name="Jayavarman II" role="Fondateur traditionnel de l'empire" tags={['v. 802']} body="Se proclame selon la tradition « roi universel » et instaure le culte du roi-dieu — un moment fondateur transmis surtout par des inscriptions bien postérieures aux faits eux-mêmes." />
+      <FigureCard name="Yasovarman Ier" role="Fondateur d'Angkor" tags={['889-910']} body="Établit la première capitale sur le site d'Angkor lui-même, Yasodharapura, et fait construire l'un des tout premiers grands barays de la région." />
+      <FigureCard name="Suryavarman II" role="Bâtisseur d'Angkor Wat" tags={['v. 1113-1150']} body="Fait édifier le plus grand temple de tout l'empire, dédié à Vishnu — son orientation vers l'ouest continue d'alimenter un débat entre fonction funéraire et symbolique solaire." />
+      <FigureCard name="Jayavarman VII" role="Le « roi bâtisseur d'hôpitaux »" tags={['1181-v. 1218']} body="Reconstruit la capitale à l'échelle d'Angkor Thom après le sac cham de 1177, convertit la religion d'État au bouddhisme mahāyāna, et fait bâtir plus d'une centaine d'hôpitaux et de maisons de repos le long des routes de son empire." />
+      <FigureCard name="Zhou Daguan" role="Diplomate et chroniqueur chinois" tags={['Mission de 1296-1297']} body="Membre d'une mission diplomatique chinoise, il rédige un compte-rendu détaillé de la vie quotidienne à Angkor — la seule description directe et systématique de la ville à son apogée qui nous soit parvenue." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="Du sac cham à l'ambassade chinoise">
+    <StoryBlock num="Épisode I" title="Le sac cham de 1177" body="Une flotte chame remonte le Mékong et le Tonlé Sap jusqu'à Angkor, prenant la ville par surprise et la mettant à sac — l'un des rares épisodes où la capitale de l'empire khmer subit une défaite militaire directe sur son propre sol." />
+    <StoryBlock num="Épisode II" title="La revanche et la reconstruction de Jayavarman VII" body="Loin de se contenter de repousser l'envahisseur, Jayavarman VII fait ensuite bâtir une capitale fortifiée à une échelle inédite, Angkor Thom, et convertit la religion d'État — une reconstruction si ambitieuse qu'elle façonne l'image la plus connue d'Angkor aujourd'hui, le Bayon et ses visages de pierre." />
+    <StoryBlock num="Épisode III" title="L'ambassade de Zhou Daguan" body="Envoyé en mission diplomatique par la cour mongole de Chine, Zhou Daguan séjourne environ un an à Angkor et rédige à son retour un compte-rendu minutieux de l'organisation sociale, du commerce, des mœurs et des cérémonies royales — un document sans équivalent dans les sources khmères elles-mêmes, restées bien plus rares sur la vie quotidienne." />
+    <StoryBlock num="Épisode IV" title="Le lent déclin, pas un effondrement soudain" body="Contrairement à une image populaire d'abandon brutal, le déclin d'Angkor s'étale sur plusieurs générations : pressions militaires siamoises croissantes, variations climatiques sévères révélées par l'étude des cernes d'arbres, et probable saturation du système hydraulique se combinent, sans qu'aucune cause unique ne fasse consensus parmi les chercheurs." />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="L'eau, la pierre et le temple-montagne">
+    <div class="card-grid compact">
+      <MiniCard title="Le réseau de barays" tag="Ingénierie hydraulique" body="Un système de bassins-réservoirs et de canaux d'une ampleur exceptionnelle, destiné à stocker l'eau de mousson et à irriguer les rizières environnantes tout au long de l'année." />
+      <MiniCard title="Le temple-montagne" tag="Architecture cosmologique" body="Chaque grand temple reproduit en pierre la forme du mont Meru, montagne cosmique centrale de la cosmologie hindo-bouddhiste, entourée de douves représentant l'océan primordial." />
+      <MiniCard title="Les bas-reliefs narratifs" tag="Art monumental" body="Des kilomètres de bas-reliefs sculptés racontent batailles historiques, scènes de vie quotidienne et épisodes mythologiques comme le Barattage de la Mer de lait, sur les galeries d'Angkor Wat." />
+      <MiniCard title="Le réseau routier royal" tag="Infrastructure impériale" body="Des chaussées reliant les principales villes de l'empire, ponctuées de relais et, sous Jayavarman VII, d'hôpitaux publics — une infrastructure d'État à visée à la fois militaire et sociale." />
+      <MiniCard title="La construction en grès et en latérite" tag="Technique de taille" body="Le grès, transporté parfois sur des dizaines de kilomètres depuis les carrières des monts Kulen, permet une sculpture fine ; la latérite, plus poreuse, sert de structure porteuse dissimulée sous le décor." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="Angkor n'a jamais été « perdu »" tag="Correction utile" body="Des moines bouddhistes khmers vivaient à Angkor Wat sans discontinuer bien avant que des visiteurs européens n'en parlent — le récit d'une cité engloutie par la jungle et « redécouverte » simplifie fortement une réalité de continuité locale ininterrompue." />
+      <MiniCard title="Un moine portugais l'avait déjà décrite en 1586" tag="Antériorité européenne" body="Le frère Antonio da Madalena visite et décrit Angkor Wat près de trois siècles avant que le naturaliste français Henri Mouhot ne popularise le site en Europe en 1860." />
+      <MiniCard title="La plus vaste agglomération préindustrielle connue" tag="Découvertes LIDAR (2012-2016)" body="Des relevés laser aéroportés récents ont révélé une urbanisation à faible densité s'étendant bien au-delà des seuls grands temples visibles — une métropole beaucoup plus vaste que ce que l'archéologie de terrain avait pu cartographier auparavant." />
+      <MiniCard title="Les visages du Bayon, une identité débattue" tag="Énigme iconographique" body="Les spécialistes discutent toujours si les grands visages de pierre du Bayon représentent Jayavarman VII lui-même, le bodhisattva Avalokiteshvara, ou une fusion délibérée des deux figures." />
+      <MiniCard title="Une orientation qui intrigue" tag="Angkor Wat vers l'ouest" body="Contrairement à la plupart des temples khmers tournés vers l'est, Angkor Wat fait face à l'ouest — une anomalie que certains chercheurs relient à une possible fonction funéraire du monument." />
+      <MiniCard title="Le seul drapeau national à représenter un monument précis" tag="Symbole d'État" body="Le drapeau du Cambodge est l'un des très rares au monde à représenter un bâtiment réel et identifiable, Angkor Wat, plutôt qu'un symbole abstrait." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="Ce que Zhou Daguan a vu"
+    intro="La description la plus précise de la vie quotidienne angkorienne provient d'un observateur extérieur, l'émissaire chinois Zhou Daguan, dont le témoignage de 1296-1297 reste sans équivalent dans les sources khmères elles-mêmes."
+    scrollFx="canalAngkor">
+    <div class="card-grid compact">
+      <MiniCard title="Les sorties royales" tag="Cérémonial fastueux" body="Zhou Daguan décrit des processions royales somptueuses, éléphants et parasols dorés à l'appui, destinées à manifester publiquement la puissance du souverain." />
+      <MiniCard title="Le marché quotidien" tag="Vie économique" body="Un marché se tenait chaque matin, tenu en grande partie par des femmes, avec un système d'échange où le riz et le tissu servaient souvent de monnaie d'usage courant." />
+      <MiniCard title="Les maisons sur pilotis" tag="Habitat adapté" body="La plupart des habitations, à l'exception des palais et des temples en pierre, étaient bâties en matériaux périssables sur pilotis — ce qui explique qu'il n'en reste aujourd'hui presque aucune trace archéologique." />
+      <MiniCard title="La pêche sur le Tonlé Sap" tag="Ressource alimentaire" body="Le lac fournissait une part considérable des besoins alimentaires de la région, une pratique de pêche saisonnière qui se poursuit essentiellement à l'identique aujourd'hui." />
+      <MiniCard title="Les bains rituels" tag="Pratique quotidienne" body="Zhou Daguan rapporte des bains collectifs fréquents dans les bassins et canaux de la ville, une pratique d'hygiène et de sociabilité qu'il juge digne d'être notée dans son compte-rendu." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="D'Angkor au drapeau cambodgien">
+    <div class="card-grid">
+      <InfoCard title="Angkor Wat sur le drapeau national" sub="Symbole d'État" body="Le monument figure sur le drapeau cambodgien depuis le XIXe siècle sous une forme ou une autre, fait rarissime pour un édifice architectural précis." />
+      <InfoCard title="Classement UNESCO, 1992" sub="Patrimoine mondial" body="Le site d'Angkor rejoint la liste du patrimoine mondial de l'UNESCO, accompagné d'un vaste programme international de conservation encore actif aujourd'hui." />
+      <InfoCard title="L'archéologie par laser" sub="Programme LIDAR, 2012-2016" body="Des campagnes de relevé aérien ont révélé une extension urbaine bien plus vaste que ce qui était visible au sol, renouvelant la compréhension de la taille réelle de la cité." />
+      <InfoCard title="Influence architecturale régionale" sub="Thaïlande, Laos" body="Le style architectural khmer influence durablement les temples bouddhistes de toute l'Asie du Sud-Est continentale, y compris chez d'anciens rivaux politiques de l'empire." />
+      <InfoCard title="Le tourisme, pilier économique" sub="Cambodge contemporain" body="Angkor reste aujourd'hui l'une des principales destinations touristiques d'Asie du Sud-Est et une source de revenus majeure pour l'économie cambodgienne." />
+      <InfoCard title="Les communautés du Tonlé Sap" sub="Continuité vivante" body="Des villages flottants installés sur le lac perpétuent aujourd'hui encore un mode de vie directement lié aux mêmes ressources qu'à l'époque angkorienne." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. 802', title: 'Jayavarman II proclame le culte du roi-dieu', body: "Moment fondateur traditionnel de l'empire khmer, connu surtout par des inscriptions bien postérieures." },
+      { year: '889-910', title: 'Yasovarman Ier fonde Angkor', body: "Première capitale établie sur le site d'Angkor lui-même, avec son premier grand baray." },
+      { year: 'v. 1113-1150', title: 'Construction d\'Angkor Wat', body: "Sous Suryavarman II, le plus grand temple religieux du monde jamais bâti d'un seul tenant." },
+      { year: '1177', title: 'Sac cham d\'Angkor', body: "La capitale est prise par surprise par une flotte venue du royaume voisin du Champa." },
+      { year: '1181-v. 1218', title: 'Règne de Jayavarman VII', body: "Reconstruction d'Angkor Thom et du Bayon, conversion au bouddhisme d'État, construction d'hôpitaux publics." },
+      { year: '1296-1297', title: 'Mission de Zhou Daguan', body: "L'émissaire chinois séjourne à Angkor et rédige le témoignage le plus détaillé qui nous soit parvenu sur la vie quotidienne de la ville." },
+      { year: '1431', title: 'Prise d\'Angkor par le royaume d\'Ayutthaya', body: "Les pressions militaires siamoises croissantes contribuent au déplacement progressif du centre politique khmer vers la région de Phnom Penh." },
+      { year: '1586', title: 'Premier témoignage écrit européen connu', body: "Le moine portugais Antonio da Madalena décrit Angkor Wat, longtemps avant sa prétendue « découverte » occidentale." },
+      { year: '1860', title: 'Publication du récit de Henri Mouhot', body: "Le naturaliste français popularise le site en Europe — un moment de diffusion médiatique occidentale, pas une découverte au sens strict." },
+      { year: '1992', title: 'Classement UNESCO', body: "Angkor rejoint la liste du patrimoine mondial, avec un programme international de conservation." },
+      { year: '2012-2016', title: 'Relevés LIDAR', body: "Des campagnes de télédétection aérienne révèlent une extension urbaine bien plus vaste que ce que l'on croyait connaître." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce qu'Angkor laisse encore">
+    <HeritageBlock title="Un symbole national inscrit dans le drapeau" body="Angkor Wat continue de représenter l'identité cambodgienne à l'échelle internationale, jusque sur le drapeau national lui-même." />
+    <HeritageBlock title="Une leçon d'ingénierie hydraulique toujours étudiée" body="Le réseau de barays et de canaux angkorien reste un objet d'étude pour les chercheurs en gestion de l'eau, y compris pour penser la résilience de systèmes hydrauliques modernes." />
+    <HeritageBlock title="Un pilier économique contemporain" body="Le tourisme culturel autour d'Angkor demeure aujourd'hui l'une des principales sources de revenus du Cambodge." />
+    <CautionBox>
+      Le patrimoine d'Angkor a aussi subi des pertes bien réelles au XXe siècle : pillages
+      d'antiquités pendant les décennies de guerre civile et de régime des Khmers rouges,
+      dispersion d'œuvres sur le marché de l'art international. S'émerveiller de la
+      prouesse hydraulique et architecturale de cet empire n'a de sens qu'en reconnaissant
+      aussi ce que ce même patrimoine a perdu de notre vivant.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Michael D. Coe, Angkor and the Khmer Civilization, Thames & Hudson, 2003", url: "https://archive.org/details/angkorkhmercivil0000coem", note: "Synthèse de référence sur l'histoire politique et sociale de l'empire khmer" },
+    { label: "Zhou Daguan, A Record of Cambodia: The Land and Its People, trad. Peter Harris, Silkworm Books, 2007", url: "https://angkordatabase.asia/books/zhou-daguans-customs-of-cambodia-new-translation", note: "Traduction directe du chinois classique du témoignage de 1296-1297" },
+    { label: "Damian H. Evans et al., « Uncovering archaeological landscapes at Angkor using lidar », PNAS 110(31), 2013", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3732978/", note: "Étude à l'origine de la révision de l'étendue urbaine réelle d'Angkor" },
+    { label: "UNESCO, Centre du patrimoine mondial, « Angkor » (n° 668), inscrit en 1992", url: "https://whc.unesco.org/en/list/668/", note: "Statut patrimonial du site" },
+  ]} />
+</PageLayout>

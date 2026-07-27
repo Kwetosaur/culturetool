@@ -33,7 +33,7 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 | Coréenne | 7 | Mythe fondateur de Dangun (fils d'un dieu et d'une ourse transformée en femme), chamanisme (mudang) toujours pratiqué aujourd'hui. |
 | Tibétaine / Bön | 7 | Religion chamanique prébouddhiste fusionnée avec le bouddhisme tantrique ; cosmologie de montagnes sacrées et d'esprits protecteurs (dharmapala). |
 | Mongole (tengrisme) | 6 | Culte du Ciel Éternel (Tengri), chamanisme des steppes, mythologie de Gengis Khan comme figure quasi-divine. |
-| Vietnamienne | 6 | Mythe fondateur Lạc Long Quân et Âu Cơ (l'œuf aux cent enfants), fusion de croyances chinoises, indiennes et locales. |
+| Vietnamienne ✅ | 6 | Mythe fondateur Lạc Long Quân et Âu Cơ (l'œuf aux cent enfants), fusion de croyances chinoises, indiennes et locales. |
 | Turque / Asie centrale | 6 | Loup gris ancestral (Asena), mythologie de Dede Korkut, racines communes avec le tengrisme mongol. |
 | Cosmologie bouddhiste (transversale) | 7 | Système cosmique commun à toute l'Asie (Mont Meru, cycles de renaissance, royaumes multiples) qui se superpose aux mythologies locales sans les remplacer. |
 | Ainu | 7 | Cosmologie des kamuy où l'ours est un dieu qui visite le monde des hommes ; peuple autochtone du Japon dont la langue et les rites ont failli disparaître, reconnu officiellement autochtone en 2019 — **à traiter avec le soin dû à une culture vivante en cours de réappropriation**. |
@@ -45,7 +45,7 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 | Mythologie | Score | Ce qui la rend unique |
 |---|---|---|
 | Yoruba ✅ | 9 | Panthéon des orishas (Shango, Oshun, Ogun) d'une richesse comparable aux grands panthéons antiques, toujours vivant au Nigeria et diffusé mondialement via le candomblé et la santería. |
-| Dogon | 8 | Cosmologie astronomique remarquablement précise (système de Sirius), mythe de Nommo, objet de débats archéo-astronomiques célèbres. |
+| Dogon ✅ | 8 | Cosmologie astronomique remarquablement précise (système de Sirius), mythe de Nommo, objet de débats archéo-astronomiques célèbres. |
 | Ashanti / Akan | 7 | Cycle d'Anansi l'araignée-conteuse, dieu du ciel Nyame — a directement essaimé dans le folklore caribéen et afro-américain (Br'er Rabbit). |
 | Zoulou | 6 | Mythe créateur d'Unkulunkulu ("le très ancien"), ancêtres et esprits (amadlozi) au cœur d'une spiritualité toujours pratiquée en Afrique australe. |
 | Éthiopienne (Kebra Nagast) | 6 | Généalogie mythique reliant Salomon, la reine de Saba et l'Arche d'alliance à la dynastie éthiopienne — fondement religieux du rastafarisme. |
@@ -80,11 +80,11 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 ---
 
-## Déjà couvertes (15)
+## Déjà couvertes (17)
 
-Nordique · Grecque · Égyptienne · Romaine · Celtique · Mésopotamienne · Hindoue · Japonaise · Aztèque/Maya · Slave · Chinoise · Perse / zoroastrienne · Yoruba · **Inca** · **Aborigène australienne**
+Nordique · Grecque · Égyptienne · Romaine · Celtique · Mésopotamienne · Hindoue · Japonaise · Aztèque/Maya · Slave · Chinoise · Perse / zoroastrienne · Yoruba · Inca · Aborigène australienne · **Dogon** · **Vietnamienne**
 
-**34 candidates restantes** dans les tableaux ci-dessus. 6 avaient été ajoutées le 26/07/2026
+**32 candidates restantes** dans les tableaux ci-dessus. 6 avaient été ajoutées le 26/07/2026
 pour combler des trous géographiques réels : Ainu (Japon autochtone), berbère (toute
 l'Afrique du Nord non égyptienne manquait), javanaise et philippine (Asie du Sud-Est
 absente), mapuche et guarani (aucun sujet au sud de l'Amazonie).
@@ -93,10 +93,11 @@ absente), mapuche et guarani (aucun sujet au sud de l'Amazonie).
 
 ## Top 5 recommandé pour une prochaine vague
 
-*(Mis à jour le 27/07/2026 — Inca et Aborigène australienne, qui occupaient les deux premières places, sont publiées.)*
+*(Mis à jour le 27/07/2026 — Dogon, qui occupait la troisième place, est publiée ; la
+Vietnamienne, hors top 5, a aussi été publiée dans la même vague.)*
 
 1. **Polynésienne** (9) — Maui pêchant les îles, Pele déesse des volcans, panthéon partagé sur un triangle océanique immense. Distincte de `culture-polynesie.html` (angle navigation/civilisationnel, déjà publié) : ici, panthéon et cosmogonie.
 2. **Finnoise (Kalevala)** (8) — cosmogonie née d'un œuf, héros-chamanes plutôt que guerriers, et une influence directe sur Tolkien qui parle à tout le monde.
-3. **Dogon** (8) — cosmologie astronomique remarquablement précise (système de Sirius), objet de débats archéo-astronomiques célèbres.
-4. **Cananéenne / ougaritique** (7) — panthéon de Baal, El et Anat redécouvert via les tablettes d'Ougarit (1929), éclaire directement les textes bibliques par contraste.
-5. **Ashanti / Akan** (7) — cycle d'Anansi l'araignée-conteuse, dieu du ciel Nyame — a directement essaimé dans le folklore caribéen et afro-américain.
+3. **Cananéenne / ougaritique** (7) — panthéon de Baal, El et Anat redécouvert via les tablettes d'Ougarit (1929), éclaire directement les textes bibliques par contraste.
+4. **Ashanti / Akan** (7) — cycle d'Anansi l'araignée-conteuse, dieu du ciel Nyame — a directement essaimé dans le folklore caribéen et afro-américain.
+5. **Coréenne** (7) — mythe fondateur de Dangun (fils d'un dieu et d'une ourse transformée en femme), chamanisme (mudang) toujours pratiqué aujourd'hui.

@@ -1,0 +1,158 @@
+---
+/*
+  Sanxingdui — douzième mystère de la série. Structure imposée par
+  docs/plans/plan-serie-mysteres.md : 7 sections, badge de verdict.
+  #science et #theories restent deux <Section> distinctes.
+
+  Effets : data-egg="sanxingdui" + data-scroll-fx="masqueBronzeLeve" sur
+  #enigme, piste documentée dans plan-effets.md ("un masque de bronze aux
+  yeux globuleux qui se lève lentement de sa fosse").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Bronze vert-de-gris, or des masques, terre du Sichuan : la matière des
+   fosses sacrificielles plutôt qu'une palette "Chine" générique — distincte
+   des rouges déjà pris par les pages chinoises existantes. */
+const palette = {
+  bg: '#141810',
+  'bg-deep': '#0a0c08',
+  surface: '#202418',
+  'surface-alt': '#2a3020',
+  border: '#4a5c34',
+  ink: '#f0f5e8',
+  text: '#d0dcc0',
+  'text-dim': '#94a880',
+  accent: '#8a9e4a',
+  'accent-bright': '#b8d068',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(138,158,74,0.18)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Sanxingdui"
+  serie="Grands Mystères du Monde"
+  description="Des masques de bronze aux yeux globuleux saillants, une statue géante sans équivalent connu, et une civilisation entière absente des textes historiques chinois traditionnels — l'une des découvertes archéologiques les plus déstabilisantes pour le récit habituel des origines de la Chine."
+  href="mystere-sanxingdui.html"
+  egg="sanxingdui"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="SICHUAN, CHINE · ÂGE DU BRONZE"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : <strong>le Suaire de Turin</strong>"
+>
+  <p class="subtitle" slot="hero">Des visages de bronze qu'aucun texte n'annonçait</p>
+  <p class="tagline" slot="hero">
+    Des masques aux yeux exorbités, une statue de bronze géante, une écriture qui semble ne
+    jamais avoir existé — et un royaume entier que l'histoire officielle chinoise avait oublié.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Civilisation authentique, largement absente des textes historiques chinois classiques"
+    note="Les fouilles ont mis au jour une civilisation du bronze bien réelle et sophistiquée, contemporaine des Shang, mais quasiment absente des grandes chroniques historiques chinoises traditionnelles — les fouilles et recherches restent activement en cours aujourd'hui."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Un royaume du bronze oublié des chroniques" intro="Avant d'aborder ce qui reste énigmatique, ce qui ne l'est pas : l'ampleur et la sophistication technique du site sont aujourd'hui bien documentées par l'archéologie.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Le royaume de Shu" sub="Sichuan, IIe millénaire av. J.-C." body="Le site correspond à une civilisation avancée du bassin du Sichuan, contemporaine de la dynastie Shang du bassin du fleuve Jaune, mais quasiment absente des chroniques historiques chinoises classiques centrées sur cette dernière région." />
+      <InfoCard num="II" title="Une découverte accidentelle" sub="1929" body="Un paysan local met au jour les premiers objets en creusant un fossé d'irrigation, bien avant que des fouilles archéologiques systématiques ne débutent des décennies plus tard." />
+      <InfoCard num="III" title="Deux grandes fosses sacrificielles" sub="Fouilles de 1986" body="La découverte de deux fosses contenant des centaines d'objets de bronze, de jade, d'or et d'ivoire, volontairement brisés puis brûlés avant d'être enterrés, relance radicalement l'intérêt scientifique pour le site." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Des yeux sur tige, une écriture absente" scrollFx="masqueBronzeLeve" intro="Le mystère se concentre sur deux points précis : le sens de l'iconographie très particulière des masques, et l'absence surprenante de toute trace d'écriture sur un matériel technique aussi avancé.">
+    <div class="card-grid wide">
+      <FigureCard name="Des masques aux yeux exorbités" role="Iconographie unique en son genre" tags={['Yeux sur tige', 'Symbolisme débattu']} body="Plusieurs masques de bronze présentent des yeux saillants montés sur de longues tiges cylindriques — un trait qui rappelle, selon certains chercheurs, la description d'un roi légendaire de Shu aux « yeux verticaux » mentionnée dans des textes chinois bien plus tardifs." />
+      <FigureCard name="Une statue de bronze géante" role="2,6 mètres, socle compris" tags={['Sans équivalent connu']} body="La plus grande figure humaine en bronze coulé connue du monde antique à l'époque de sa découverte, dont la fonction précise — souverain, prêtre, divinité — reste débattue faute de tout texte d'accompagnement." />
+      <FigureCard name="Aucune trace d'écriture" role="Une énigme technique à part entière" tags={['Sophistication sans texte']} body="Contrairement à la civilisation Shang contemporaine, qui grave des inscriptions divinatoires sur os et carapaces, aucun système d'écriture n'a pour l'instant été identifié à Sanxingdui, malgré un niveau de maîtrise métallurgique comparable ou supérieur." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="D'un fossé d'irrigation aux fouilles de 2019-2022" title="Une histoire de fouilles toujours en cours">
+    <Timeline items={[
+      { year: '1929', title: 'Découverte accidentelle', body: "Un paysan met au jour les premiers objets de jade en creusant un fossé d'irrigation près du village." },
+      { year: '1934', title: 'Premières fouilles archéologiques', body: "Des recherches limitées confirment l'existence d'un site ancien important, sans en mesurer encore l'ampleur." },
+      { year: '1986', title: 'Découverte des deux grandes fosses sacrificielles', body: "Des centaines d'objets de bronze, d'or, de jade et d'ivoire, volontairement brisés et brûlés, sont mis au jour dans un état de conservation remarquable." },
+      { year: '1997', title: 'Ouverture du musée de Sanxingdui', body: "Un musée dédié permet une première présentation publique large des découvertes." },
+      { year: '2019-2022', title: 'Découverte de six nouvelles fosses', body: "De nouvelles fouilles mettent au jour des centaines d'objets supplémentaires, dont un coffret de bronze conservant des résidus de soie et un nombre inédit de défenses d'ivoire entières." },
+      { year: 'Aujourd\'hui', title: 'Recherches toujours actives', body: "Le site reste un chantier archéologique en cours, sans qu'un consensus définitif n'ait été atteint sur l'identité précise de la civilisation qui l'a produit." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un chantier archéologique à l'icône nationale" title="Sanxingdui, fierté patrimoniale chinoise">
+    <div class="card-grid compact">
+      <MiniCard title="Une icône archéologique nationale" tag="Fierté patrimoniale" body="Les masques de Sanxingdui figurent aujourd'hui parmi les objets archéologiques chinois les plus reproduits, sur des emballages touristiques jusqu'aux émojis officiels de certaines applications chinoises." />
+      <MiniCard title="Diffusion internationale récente" tag="Expositions itinérantes" body="Les fouilles de 2019-2022, largement retransmises en direct par les médias chinois, ont considérablement relancé l'intérêt international pour le site." />
+      <MiniCard title="Récupération pseudo-scientifique" tag="Théories extraterrestres" body="L'apparence inhabituelle des masques a, comme pour d'autres sites archéologiques spectaculaires, nourri des théories d'intervention extraterrestre qu'aucun spécialiste sérieux du site ne retient." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Une civilisation du bronze indépendante et sophistiquée" body="Les analyses métallurgiques confirment une maîtrise technique du bronze comparable, voire par certains aspects supérieure, à celle des ateliers Shang contemporains — sans que les deux traditions artisanales ne semblent directement dérivées l'une de l'autre." />
+    <ScienceBlock num="Enquête 2" title="Une destruction rituelle délibérée, pas un accident" body="L'analyse des objets retrouvés dans les fosses montre des traces cohérentes de bris et de combustion volontaires avant l'enfouissement — un geste rituel organisé, dont la cause précise (changement religieux, chute dynastique, offrande funéraire) reste débattue." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Sanxingdui est le vestige du royaume de Shu, civilisation parallèle aux Shang"
+      level="consensus"
+      status="Consensus archéologique"
+      body="L'existence d'une civilisation avancée et largement indépendante dans le Sichuan ancien, contemporaine mais distincte de la civilisation du fleuve Jaune, fait aujourd'hui consensus parmi les archéologues chinois et internationaux."
+      attrib="Position dominante en archéologie chinoise contemporaine"
+    />
+    <TheoryCard
+      title="Les fosses correspondent à un changement dynastique ou religieux brutal"
+      level="plausible"
+      status="Hypothèse la plus discutée"
+      body="La destruction rituelle et l'enfouissement simultané d'objets religieux majeurs évoquent, pour plusieurs chercheurs, un basculement politique ou cultuel important plutôt qu'une simple pratique funéraire récurrente."
+      attrib="Hypothèse discutée en archéologie du bronze chinois"
+    />
+    <TheoryCard
+      title="Les objets témoignent d'un contact extraterrestre ou d'une technologie perdue"
+      level="folklore"
+      status="Rejeté par l'archéologie"
+      body="Aucun élément matériel ne soutient cette lecture : la sophistication des objets s'explique entièrement par des techniques de fonderie et de forge documentées, sans qu'il soit nécessaire d'invoquer une origine extraordinaire."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que Sanxingdui fait encore">
+    <HeritageBlock title="Un chantier archéologique toujours vivant" body="Les fouilles se poursuivent activement, avec des découvertes régulières qui continuent de renouveler la compréhension du site." />
+    <HeritageBlock title="Une révision du récit national des origines" body="Sanxingdui a contribué à nuancer une vision de l'histoire chinoise ancienne longtemps centrée presque exclusivement sur le bassin du fleuve Jaune, en révélant l'existence de civilisations parallèles tout aussi sophistiquées." />
+    <HeritageBlock title="Un pôle touristique et muséal majeur" body="Le musée de Sanxingdui attire aujourd'hui un public large, chinois et international, et continue de s'agrandir à mesure que de nouvelles pièces sont mises au jour." />
+    <CautionBox>
+      L'apparence spectaculaire des masques aux yeux exorbités a nourri, comme pour d'autres
+      sites archéologiques marquants, des théories d'origine extraterrestre relayées en ligne.
+      Cette page s'en tient aux explications archéologiques documentées : une civilisation
+      humaine sophistiquée, pas une preuve de contact extérieur à notre monde.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Cambridge University Press, « New discoveries at the Sanxingdui Bronze Age site in south-west China », Antiquity, 2022", url: "https://www.cambridge.org/core/journals/antiquity/article/new-discoveries-at-the-sanxingdui-bronze-age-site-in-southwest-china/D96494368471CF7CBA817690CDCA5A75", note: "Présente les résultats des fouilles de 2019-2022 et les six fosses supplémentaires mises au jour." },
+    { label: "Smithsonian Magazine, « Trove of 13,000 Artifacts Sheds Light on Enigmatic Chinese Civilization »", url: "https://www.smithsonianmag.com/smart-news/trove-of-13000-artifacts-sheds-light-on-enigmatic-chinese-civilization-180980254/", note: "Détaille les objets mis au jour lors des fouilles récentes, dont les résidus de soie et le coffret de bronze." },
+    { label: "The Past, « The lost world of Sanxingdui: Fabulous finds from a forgotten civilisation »", url: "https://the-past.com/feature/the-lost-world-of-sanxingdui-fabulous-finds-from-a-forgotten-civilisation/", note: "Contextualise la découverte de 1986 et la place du site face à la civilisation Shang contemporaine." },
+  ]} />
+</PageLayout>

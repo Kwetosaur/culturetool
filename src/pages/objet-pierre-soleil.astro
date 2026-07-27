@@ -28,6 +28,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Basalte sombre, turquoise et or : la matière et la palette rituelle
    mexica, plutôt que la géographie générique du Mexique. */
@@ -273,4 +274,9 @@ const noms = [
       aussi réducteur.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Instituto Nacional de Antropología e Historia (INAH), « Piedra del Sol »", url: "https://www.inah.gob.mx/foto-del-dia/piedra-del-sol", note: "Présentation officielle de la pièce, de sa découverte en 1790 et de sa fonction de cuauhxicalli" },
+    { label: "« Aztec Calendar Stone », Getty Research Institute, exposition Obsidian Mirror-Travels", url: "https://www.getty.edu/research/exhibitions_events/exhibitions/obsidian_mirror/aztec_calendar_stone.html", note: "Analyse académique du malentendu autour du nom « calendrier aztèque »" },
+  ]} />
 </PageLayout>

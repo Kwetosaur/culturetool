@@ -1,0 +1,213 @@
+---
+/*
+  Empire byzantin — dixième page de la série « Peuples & Cultures du
+  Monde ». Même structure à 10 sections que culture-mesopotamie.astro.
+
+  Angle civilisationnel : administration, droit, art impérial et
+  continuité romaine — pas une page de théologie orthodoxe.
+
+  Effets : data-egg="byzance" + data-scroll-fx="mosaiqueOr" sur
+  #style-de-vie, piste documentée dans plan-effets.md ("une mosaïque à la
+  feuille d'or qui se pose tessère par tessère").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Pourpre impérial, or des mosaïques, bleu profond des icônes : la
+   matière de la cour de Constantinople plutôt qu'une palette "Antiquité"
+   générique — distincte du pourpre déjà pris par culture-rome.astro. */
+const palette = {
+  bg: '#1a0e1a',
+  'bg-deep': '#0d070d',
+  surface: '#2a1826',
+  'surface-alt': '#362030',
+  border: '#5c3a54',
+  ink: '#f5ecec',
+  text: '#e0c8d0',
+  'text-dim': '#a884a0',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#7a2050',
+  'accent2-bright': '#a83a78',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(201,152,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Empire byzantin"
+  serie="Peuples & Cultures du Monde"
+  description="Onze siècles de continuité romaine en Orient, un code de lois qui structure encore le droit civil moderne, et des habitants qui ne se sont jamais appelés « byzantins » — un mot inventé bien après leur chute pour désigner un empire qui se disait simplement romain."
+  href="culture-byzance.html"
+  egg="byzance"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="CONSTANTINOPLE · 330-1453"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : <strong>les Khmers d'Angkor</strong>"
+>
+  <p class="subtitle" slot="hero">Rome continuée en Orient</p>
+  <p class="tagline" slot="hero">
+    Onze siècles de continuité impériale romaine après la chute de Rome elle-même — et un
+    empire dont les habitants ne se sont jamais appelés « byzantins ».
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="De Rome nouvelle à la dernière citadelle"
+    intro="Fondée par Constantin sur le site de l'ancienne Byzance, Constantinople reste la capitale d'un empire dont le territoire n'a cessé de se contracter pendant onze siècles, jusqu'à ne plus être, à la fin, que la ville elle-même.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="280" cy="150" r="9" fill="#e8c164"/>
+        <text x="280" y="130" text-anchor="middle" fill="#e8c164" font-size="13" font-family="Cinzel, serif" font-weight="bold">CONSTANTINOPLE</text>
+        <circle cx="180" cy="90" r="6" fill="#a83a78"/>
+        <text x="180" y="80" text-anchor="middle" fill="#f5ecec" font-size="11">Nicée</text>
+        <circle cx="140" cy="200" r="6" fill="#a83a78"/>
+        <text x="110" y="215" text-anchor="middle" fill="#f5ecec" font-size="11">Thessalonique</text>
+        <circle cx="400" cy="230" r="6" fill="#8a6a35"/>
+        <text x="400" y="250" text-anchor="middle" fill="#c9b0a8" font-size="10" font-style="italic">Trébizonde</text>
+        <circle cx="90" cy="270" r="5" fill="#5c3a54"/>
+        <text x="90" y="290" text-anchor="middle" fill="#a884a0" font-size="10" font-style="italic">Ravenne (exarchat)</text>
+      </svg>
+    </div>
+    <p class="map-caption">Constantinople, cœur inchangé de l'empire pendant onze siècles — les territoires environnants, eux, se sont contractés presque sans discontinuer après le VIIe siècle.</p>
+    <div class="card-grid">
+      <InfoCard title="Constantinople" sub="Capitale, 330-1453" body="Bâtie sur le site de l'antique Byzance par Constantin, protégée par un triple rempart resté infranchissable pendant près de neuf siècles avant 1204." />
+      <InfoCard title="Nicée" sub="Capitale en exil, 1204-1261" body="Après le sac de la capitale par la quatrième croisade, un empire byzantin réduit continue d'exister ici jusqu'à la reconquête de Constantinople." />
+      <InfoCard title="Ravenne" sub="Exarchat d'Occident" body="Avant-poste byzantin en Italie, dont les mosaïques de l'époque de Justinien comptent parmi les mieux conservées de tout l'art impérial byzantin." />
+      <InfoCard title="Trébizonde" sub="Dernier fragment, jusqu'en 1461" body="Petit empire byzantin périphérique qui survit huit ans de plus que Constantinople elle-même après sa chute face aux Ottomans." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Des Romains qui parlaient grec" intro="L'empire ne se pensait jamais comme une nouveauté : ses habitants se désignaient eux-mêmes comme « Romaioi », Romains, en grec — le mot « byzantin » est une invention d'historiens occidentaux du XVIe siècle, jamais employée par les intéressés eux-mêmes.">
+    <div class="card-grid wide">
+      <FigureCard name="Les Romaioi" role="Le nom que l'empire se donnait" tags={['Continuité romaine', 'Langue grecque']} body="Citoyens d'un empire qui se percevait comme la continuation directe de Rome, tout en parlant et en administrant en grec depuis longtemps déjà — une identité double que le mot « byzantin » occulte." />
+      <FigureCard name="Les Arméniens" role="Élite militaire et impériale" tags={['Origine de plusieurs dynasties']} body="Plusieurs empereurs, dont le fondateur de la dynastie macédonienne Basile Ier, sont d'origine arménienne — une composante essentielle de l'élite militaire et administrative de l'empire." />
+      <FigureCard name="La Garde varègue" role="Mercenaires nordiques puis anglo-saxons" tags={['Élite militaire étrangère']} body="Corps d'élite recruté d'abord parmi les guerriers scandinaves et russes (Varègues), puis, après 1066, parmi des exilés anglo-saxons fuyant la conquête normande de l'Angleterre." />
+      <FigureCard name="Les marchands vénitiens et génois" role="Puissances commerciales rivales" tags={['Privilèges commerciaux', 'Tensions']} body="Communautés marchandes italiennes bénéficiant de privilèges fiscaux considérables à Constantinople, dont la rivalité et le ressentiment local contribuent aux tensions qui mèneront au sac de 1204." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Ceux qui ont gouverné et transformé l'empire">
+    <div class="card-grid wide">
+      <FigureCard name="Constantin Ier" role="Fondateur de la capitale" tags={['306-337']} body="Déplace la capitale impériale romaine à Byzance, rebaptisée en son honneur, et favorise le christianisme — deux décisions qui redessinent durablement l'histoire européenne et proche-orientale." />
+      <FigureCard name="Justinien Ier" role="Codificateur et bâtisseur" tags={['527-565']} body="Fait compiler le droit romain dans le Corpus Juris Civilis, base directe de nombreux systèmes juridiques modernes, et fait reconstruire la basilique Sainte-Sophie en moins de six ans après sa destruction pendant les émeutes Nika." />
+      <FigureCard name="Théodora" role="Impératrice, ancienne actrice" tags={['Influence politique réelle']} body="D'origine modeste, mariée à Justinien malgré les lois interdisant l'union avec une actrice, elle exerce une influence politique directe et refuse la fuite lors des émeutes de 532, un épisode que les chroniques lui attribuent explicitement." />
+      <FigureCard name="Bélisaire" role="Général des reconquêtes" tags={['Campagnes d\'Afrique et d\'Italie']} body="Reconquiert temporairement l'Afrique du Nord vandale et une partie de l'Italie ostrogothique pour le compte de Justinien, avant de tomber en disgrâce à la fin de sa carrière." />
+      <FigureCard name="Basile II" role="Le Bulgaroctone" tags={['976-1025']} body="Mène l'empire à son apogée territoriale médiévale après avoir vaincu le tsar bulgare — un surnom postérieur (« tueur de Bulgares ») qui résume, de façon crue, la dureté de ses campagnes militaires." />
+      <FigureCard name="Anne Comnène" role="Première historienne connue" tags={['Autrice de l\'Alexiade']} body="Princesse byzantine du XIIe siècle, elle rédige une histoire du règne de son père Alexis Ier d'une ampleur et d'une rigueur remarquables — considérée comme l'une des toutes premières femmes historiennes de l'histoire occidentale." />
+      <FigureCard name="Constantin XI Paléologue" role="Dernier empereur" tags={['Mort au combat, 1453']} body="Meurt les armes à la main lors de la prise finale de Constantinople par les Ottomans, refusant de fuir — sa mort exacte reste incertaine, alimentant depuis des légendes populaires sur un empereur endormi qui attendrait son réveil." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="Des émeutes du cirque à la dernière nuit de la ville">
+    <StoryBlock num="Épisode I" title="Les émeutes Nika" body="En 532, une rivalité entre factions de l'Hippodrome (les Bleus et les Verts) dégénère en insurrection quasi générale contre Justinien. L'empereur, prêt à fuir, est retenu par Théodora ; la répression fait des dizaines de milliers de morts dans l'Hippodrome même, mais permet à Justinien de reconstruire une capitale — et Sainte-Sophie — à sa mesure." />
+    <StoryBlock num="Épisode II" title="Le secret du feu grégeois" body="Une arme incendiaire capable de brûler même au contact de l'eau permet à l'empire de repousser à plusieurs reprises des sièges navals décisifs, notamment contre les flottes arabes du VIIe siècle. La composition exacte du feu grégeois, jalousement gardée secrète par l'État byzantin, ne nous est jamais parvenue — un des rares secrets militaires anciens jamais réellement percés." />
+    <StoryBlock num="Épisode III" title="Le sac de 1204" body="Détournée de son objectif initial faute de financement, la quatrième croisade met le siège devant Constantinople et pille la ville pendant trois jours — des chrétiens latins saccageant la plus grande capitale chrétienne d'Orient, un épisode que l'empire ne s'est jamais totalement remis d'avoir subi, même après la reconquête de 1261." />
+    <StoryBlock num="Épisode IV" title="La dernière nuit, 1453" body={["Après un siège de près de deux mois et l'usage de canons d'un calibre inédit, les troupes ottomanes de Mehmed II percent enfin les murailles théodosiennes, restées infranchissables pendant plus de mille ans.", "Constantin XI meurt au combat dans la confusion des derniers assauts, son corps n'étant jamais identifié avec certitude — un vide qui nourrira longtemps, dans le folklore grec, la légende d'un « empereur de marbre » simplement endormi, prêt à revenir un jour libérer la ville."]} quote="La Ville est tombée, mais l'esprit n'en est pas mort." cite="Formule attribuée a posteriori à la tradition populaire grecque" />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Droit, architecture et diplomatie d'État">
+    <div class="card-grid compact">
+      <MiniCard title="Le Corpus Juris Civilis" tag="527-534" body="Compilation méthodique du droit romain classique sous Justinien, qui redevient la base directe de nombreux systèmes de droit civil européens à partir de sa redécouverte médiévale." />
+      <MiniCard title="Le dôme de Sainte-Sophie" tag="Prouesse d'ingénierie, 537" body="Un dôme immense reposant sur des pendentifs plutôt que sur des colonnes continues, une solution architecturale qui semble, selon la légende contemporaine, « suspendue depuis le ciel par une chaîne d'or »." />
+      <MiniCard title="Le feu grégeois" tag="Arme secrète d'État" body="Une arme incendiaire décisive dont la composition exacte reste, aujourd'hui encore, un mystère technique non résolu." />
+      <MiniCard title="La sériciculture volée" tag="Contrebande impériale" body="Selon la tradition rapportée par Procope, des moines rapportent en Occident des œufs de vers à soie dissimulés dans des cannes de bambou, brisant le monopole chinois sur la production de soie." />
+      <MiniCard title="Le cérémonial diplomatique" tag="Instrument de pouvoir" body="Un protocole de cour d'une sophistication délibérée, conçu pour impressionner les ambassadeurs étrangers et projeter une puissance parfois supérieure à la réalité militaire du moment." />
+      <MiniCard title="La mosaïque murale à fond d'or" tag="Art impérial" body="Une technique portée à un raffinement inégalé, où des tesselles de verre doré composent des scènes religieuses et impériales visibles à grande distance dans la pénombre des églises." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="« Byzantin » n'a jamais été leur mot" tag="Invention historiographique" body="Le terme apparaît seulement au XVIe siècle, chez l'historien allemand Hieronymus Wolf — les intéressés se disaient Romains (Romaioi), jusqu'à la toute fin de l'empire." />
+      <MiniCard title="Né dans la Pourpre" tag="Légitimité dynastique" body="Les enfants impériaux nés dans une salle du palais tapissée de porphyre étaient dits « nés dans la pourpre » (porphyrogénète), un statut de légitimité supérieure recherché par les prétendants au trône." />
+      <MiniCard title="Les factions de l'Hippodrome, de vrais partis" tag="Politique par le sport" body="Bleus et Verts n'étaient pas seulement des équipes de course de chars : leurs rivalités structuraient une bonne part de la vie politique urbaine de la capitale, jusqu'à déclencher une insurrection en 532." />
+      <MiniCard title="Le Grand Schisme de 1054" tag="Rupture religieuse" body="L'excommunication mutuelle du pape de Rome et du patriarche de Constantinople scelle une rupture entre christianismes d'Orient et d'Occident dont les effets se prolongent bien au-delà du seul domaine religieux." />
+      <MiniCard title="L'adjectif « byzantin » comme insulte" tag="Postérité déformée" body="Utilisé aujourd'hui pour désigner une complexité administrative excessive, l'adjectif reflète surtout des siècles de dénigrement historiographique occidental plutôt qu'une réalité bureaucratique unique en son genre." />
+      <MiniCard title="Un empire qui a duré onze siècles" tag="Longévité rare" body="De 330 à 1453, soit plus longtemps que la République et l'Empire romain d'Occident réunis — une longévité institutionnelle exceptionnelle, trop souvent éclipsée par le récit centré sur la seule Rome antique." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="La soie, l'icône et le cérémonial"
+    intro="Une vie de cour rythmée par un protocole extrêmement codifié, une piété orthodoxe omniprésente et des divertissements populaires bien vivants à l'Hippodrome."
+    scrollFx="mosaiqueOr">
+    <div class="card-grid compact">
+      <MiniCard title="Le cérémonial de cour" tag="Codification extrême" body="Chaque geste, chaque vêtement et chaque position dans la salle du trône obéissait à un protocole écrit, destiné à démontrer un ordre cosmique reflété sur terre par l'empereur." />
+      <MiniCard title="L'icône, fenêtre sur le sacré" tag="Piété quotidienne" body="Vénérées dans les foyers comme dans les églises, les icônes ont traversé une grave crise iconoclaste (VIIIe-IXe siècle) avant de retrouver leur place centrale dans la piété orthodoxe." />
+      <MiniCard title="L'Hippodrome" tag="Divertissement populaire" body="Course de chars, mais aussi lieu d'acclamation ou de contestation publique de l'empereur — un espace politique autant que sportif." />
+      <MiniCard title="La soie byzantine" tag="Industrie de luxe" body="Réservée en partie à la cour et à l'exportation diplomatique, la soie produite localement après le vol du secret chinois devient un symbole de statut social autant qu'un produit commercial." />
+      <MiniCard title="Le grec comme langue de gouvernement" tag="Depuis le VIIe siècle" body="Le latin administratif cède progressivement la place au grec, langue déjà dominante dans la vie quotidienne de la majorité des sujets de l'empire." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="De Constantinople à l'alphabet cyrillique">
+    <div class="card-grid">
+      <InfoCard title="Sainte-Sophie" sub="Basilique, mosquée, musée, mosquée" body="Convertie en mosquée après 1453, puis en musée en 1935, puis reconvertie en mosquée en 2020 — un bâtiment dont les usages successifs racontent, à eux seuls, l'histoire de la ville." />
+      <InfoCard title="Les mosaïques de Ravenne" sub="Italie" body="Comptent parmi les meilleurs témoignages conservés de l'art impérial de l'époque de Justinien, en dehors même du territoire actuel de la Turquie." />
+      <InfoCard title="L'alphabet cyrillique" sub="Mission de Cyrille et Méthode" body="La mission d'évangélisation slave du IXe siècle, envoyée depuis Constantinople, aboutit à la création d'un alphabet toujours utilisé aujourd'hui par plusieurs centaines de millions de locuteurs." />
+      <InfoCard title="Moscou, « Troisième Rome »" sub="Héritage revendiqué" body="Après la chute de Constantinople, certains cercles russes revendiquent la continuité de l'héritage impérial et religieux byzantin pour Moscou — une revendication idéologique, pas une continuité institutionnelle directe." />
+      <InfoCard title="Les chevaux de Saint-Marc, Venise" sub="Butin de 1204" body="Quatre chevaux de bronze antiques, emportés de l'Hippodrome de Constantinople lors du sac de 1204, ornent aujourd'hui encore la basilique Saint-Marc de Venise." />
+      <InfoCard title="Le droit civil moderne" sub="Héritage juridique mondial" body="De nombreux systèmes juridiques contemporains, notamment en Europe continentale, restent structurés par des principes directement hérités du Corpus Juris Civilis de Justinien." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: '330', title: 'Fondation de Constantinople', body: "Constantin déplace la capitale impériale romaine sur le site de l'antique Byzance." },
+      { year: '527-565', title: 'Règne de Justinien', body: "Codification du droit romain, reconstruction de Sainte-Sophie, tentatives de reconquête de l'Occident." },
+      { year: '532', title: 'Émeutes Nika', body: "Insurrection urbaine réprimée dans le sang, suivie d'une reconstruction monumentale de la capitale." },
+      { year: '626-717', title: 'Sièges arabes repoussés', body: "Le feu grégeois joue un rôle décisif dans la survie de l'empire face à l'expansion arabo-musulmane." },
+      { year: '726-843', title: 'Crise iconoclaste', body: "Deux vagues de destruction puis de restauration du culte des images religieuses, avec de profondes conséquences politiques et théologiques." },
+      { year: '863', title: 'Mission de Cyrille et Méthode', body: "Évangélisation des Slaves et création de l'ancêtre de l'alphabet cyrillique." },
+      { year: '976-1025', title: 'Règne de Basile II', body: "Apogée territoriale médiévale de l'empire après la défaite du tsar bulgare." },
+      { year: '1054', title: 'Grand Schisme', body: "Rupture officielle entre christianismes d'Orient et d'Occident." },
+      { year: '1204', title: 'Sac de Constantinople', body: "La quatrième croisade pille la capitale, fragmentant temporairement l'empire." },
+      { year: '1261', title: 'Reconquête de Constantinople', body: "La dynastie des Paléologues restaure un empire byzantin affaibli, jamais totalement rétabli." },
+      { year: '1453', title: 'Chute de Constantinople', body: "Les troupes ottomanes de Mehmed II prennent la ville, mettant fin à onze siècles de continuité impériale romaine en Orient." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que Byzance laisse encore">
+    <HeritageBlock title="Un socle du droit civil moderne" body="Le Corpus Juris Civilis continue d'irriguer, souvent sans que ses utilisateurs le sachent, la structure de nombreux systèmes juridiques contemporains." />
+    <HeritageBlock title="Un alphabet toujours en usage" body="L'alphabet cyrillique, issu directement d'une mission byzantine, reste employé aujourd'hui par plusieurs centaines de millions de personnes." />
+    <HeritageBlock title="Une esthétique religieuse toujours vivante" body="La tradition iconographique orthodoxe byzantine continue d'être pratiquée et enseignée dans les monastères, notamment au Mont Athos." />
+    <CautionBox>
+      Le sac de Constantinople en 1204 par des croisés chrétiens latins reste un rappel utile
+      que les grandes ruptures de cette histoire n'opposent pas toujours deux civilisations
+      étrangères l'une à l'autre : l'un des coups les plus durs subis par l'empire byzantin est
+      venu de coreligionnaires occidentaux, pas d'une puissance extérieure à la chrétienté.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Procope de Césarée, Histoire secrète, trad. et commenté par Pierre Maraval, Les Belles Lettres, 1990", url: "https://www.lesbelleslettres.com/contributeur/procope", note: "Source antique des émeutes Nika, du rôle de Théodora et du vol de la sériciculture" },
+    { label: "Judith Herrin, Byzantium: The Surprising Life of a Medieval Empire, Princeton University Press, 2007", url: "https://press.princeton.edu/books/paperback/9780691143699/byzantium", note: "Synthèse académique de référence sur l'ensemble de la période byzantine" },
+    { label: "Warren Treadgold, A History of the Byzantine State and Society, Stanford University Press, 1997", url: "https://www.sup.org/books/history/history-byzantine-state-and-society", note: "Appuie la trame politique et institutionnelle de l'empire sur onze siècles" },
+    { label: "UNESCO, Centre du patrimoine mondial, « Historic Areas of Istanbul » (n° 356), inscrit en 1985", url: "https://whc.unesco.org/en/list/356/", note: "Appuie le statut patrimonial de Sainte-Sophie et du site de Constantinople" },
+  ]} />
+</PageLayout>

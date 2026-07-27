@@ -22,6 +22,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Vert de marais dense, brun de rivière trouble : la matière du bassin du
    Congo plutôt qu'une palette "Afrique" générique. */
@@ -146,4 +147,10 @@ const SECTIONS = [
       première dans les récits médiatiques occidentaux.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Roy P. Mackal, A Living Dinosaur? In Search of Mokele-Mbembe, E.J. Brill, 1987", note: "Relate l'expédition Powell-Mackal de 1980." },
+    { label: "« Fringe Zoology: The (In)Convenience of Disappearing Evidence », Skeptical Inquirer, 2024", url: "https://skepticalinquirer.org/2024/12/fringe-zoology-the-inconvenience-of-disappearing-evidence/", note: "Analyse critique de la disparition récurrente de preuves matérielles dans ce type d'expédition, dont celle d'Agnagna en 1983." },
+    { label: "Creation.com, « Mokele-mbembe: a living dinosaur? »", url: "https://creation.com/en/articles/mokele-mbembe-a-living-dinosaur", note: "Exemple direct du cadrage créationniste explicite mentionné en Témoins." },
+  ]} />
 </PageLayout>

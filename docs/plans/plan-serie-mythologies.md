@@ -19,6 +19,8 @@
 | 13 | Yoruba | ✅ Fait |
 | 14 | Inca | ✅ Fait |
 | 15 | Aborigène australienne | ✅ Fait |
+| 16 | Dogon | ✅ Fait |
+| 17 | Vietnamienne | ✅ Fait |
 
 Chaque page est un fichier HTML autonome (`mythologie-XXX.html`), sans dépendance externe hors polices Google Fonts.
 
@@ -47,6 +49,7 @@ Toutes les pages suivent le même squelette de 9 sections, dans le même ordre, 
 - **Pas de bataille sur les sources exactes** dans le corps mythologique (quelle Edda, quel manuscrit) — sauf quand la contradiction elle-même est intéressante (ex. deux origines d'Aphrodite, plusieurs pères possibles pour Tyr).
 - **Dates réelles seulement dans la frise et le monde géographique** — c'est là que la précision compte, pas dans le récit mythologique lui-même.
 - **Design entièrement réadapté à chaque culture** : palette, décor, motif de bordure et symbole d'épigraphe changent à chaque fois (voir tableau ci-dessous). Seule l'architecture CSS (noms de classes, grille, timeline) reste commune.
+- **Bibliographie obligatoire** (depuis le 27/07/2026) : chaque page se termine par un bloc `Sources` réel — voir `docs/plan_page.md` § Sources et `src/components/Sources.astro`.
 
 ## Correctif — le chiffre "9 royaumes" avait été forcé
 
@@ -90,13 +93,14 @@ Le détail des sources et du raisonnement par culture est conservé dans l'histo
 
 ---
 
-**15 mythologies rédigées.** La série initiale des 10 chapitres est terminée ; la Chinoise,
-puis la Perse, la Yoruba, l'Inca et l'Aborigène australienne l'ont prolongée les 26 et
-27/07/2026, et **34 candidates restent listées** dans `docs/listes/suite_mythologies.md`. La
-série n'est donc plus « close » : chaque nouvelle mythologie applique le correctif ci-dessus
-(nombre de royaumes dérivé des sources propres à la culture, jamais aligné sur un autre
-chapitre), ainsi que le principe du socle Astro (toutes écrites avec les composants partagés
-plutôt qu'en HTML statique — voir `docs/plans/plan-industrialisation.md`). La page aborigène
-adapte plus radicalement encore la structure (pas de royaumes empilés, pas d'arbre
-généalogique, panthéon volontairement court) — voir le commentaire d'en-tête de
-`mythologie-aborigene.astro` pour le détail de ces choix et leur justification.
+**17 mythologies rédigées.** La série initiale des 10 chapitres est terminée ; la Chinoise,
+puis la Perse, la Yoruba, l'Inca, l'Aborigène australienne, la Dogon et la Vietnamienne l'ont
+prolongée les 26 et 27/07/2026, et **32 candidates restent listées** dans
+`docs/listes/suite_mythologies.md`. La série n'est donc plus « close » : chaque nouvelle
+mythologie applique le correctif ci-dessus (nombre de royaumes dérivé des sources propres à
+la culture, jamais aligné sur un autre chapitre), ainsi que le principe du socle Astro
+(toutes écrites avec les composants partagés plutôt qu'en HTML statique — voir
+`docs/plans/plan-industrialisation.md`). La page aborigène adapte plus radicalement encore la
+structure (pas de royaumes empilés, pas d'arbre généalogique, panthéon volontairement court)
+— voir le commentaire d'en-tête de `mythologie-aborigene.astro` pour le détail de ces choix
+et leur justification.

@@ -28,6 +28,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 import Decode from '../components/Decode.astro';
 
 /* Fer battu et étincelles bleu-blanc de forge : la matière de l'objet plutôt
@@ -297,4 +298,10 @@ const noms = [
       silence.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Snorri Sturluson, Edda (Snorra Edda), trad. Arthur Gilchrist Brodeur, The American-Scandinavian Foundation, 1916", url: "https://en.wikisource.org/wiki/The_Prose_Edda_(1916)", note: "Source du récit du sabotage de Loki et du manche trop court de Mjöllnir" },
+    { label: "Lisbeth Imer et al., « The Lolland Runic Thor's Hammer », Danish Journal of Archaeology / ResearchGate", url: "https://www.researchgate.net/publication/339941075_The_Lolland_Runic_Thors_Hammer", note: "Étude runologique de l'amulette de Købelev (2014) et de son inscription « Hmar is x »" },
+    { label: "« Runes confirm Thor's hammer amulet is a hammer », The History Blog, 2014", url: "https://www.thehistoryblog.com/archives/31199", note: "Compte-rendu de la découverte et du déchiffrement de l'amulette par le Musée national du Danemark" },
+  ]} />
 </PageLayout>

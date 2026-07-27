@@ -36,6 +36,7 @@ Chaque page reste un fichier HTML autonome (`creature-XXX.html`), même famille 
 - **Respect des cultures d'origine** : certaines créatures (Wendigo, Skinwalker et autres figures issues de traditions amérindiennes) sont liées à des croyances spirituelles encore vivantes et parfois considérées comme sensibles ou sacrées par les communautés concernées. Ces pages doivent être traitées avec un surcroît de prudence, de contextualisation culturelle, et éviter le ton "attraction spectaculaire" appliqué sans discernement à toutes les entrées de la liste.
 - **Distinction claire mythe / réalité / canular** : le badge de verdict en hero doit toujours pouvoir se justifier dans la section `#science`. Si le statut est disputé, le badge le dit ("mystère non résolu") plutôt que de trancher artificiellement.
 - **Design adapté à chaque créature** : palette et ambiance visuelle suivent la géographie et le folklore d'origine (eaux sombres écossaises pour Nessie, forêts du Gévaudan, désert mexicain pour le Chupacabra...).
+- **Bibliographie obligatoire** (depuis le 27/07/2026) : chaque page se termine par un bloc `Sources` réel — voir `docs/plan_page.md` § Sources et `src/components/Sources.astro`.
 
 ---
 

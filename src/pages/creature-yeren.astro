@@ -1,0 +1,157 @@
+---
+/*
+  Le Yeren — douzième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict.
+  #science et #theories restent deux <Section> distinctes.
+
+  Effets : data-egg="yeren" + data-scroll-fx="bigfootTracks" sur
+  #portrait — réutilisation directe de la fonction déjà écrite pour
+  Bigfoot (piste documentée dans plan-effets.md : "des empreintes qui
+  remontent un versant boisé, variante bigfootTracks"), sans palette
+  distincte requise puisque le happening reste identique, seule la clef
+  data-egg change.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Vert profond de la forêt du Shennongjia, brun-roux du pelage rapporté,
+   brume de montagne : la matière du site plutôt qu'une palette "Chine"
+   générique — distincte du rouge cinabre déjà pris par les pages chinoises
+   existantes. */
+const palette = {
+  bg: '#121a12',
+  'bg-deep': '#080c08',
+  surface: '#1c281c',
+  'surface-alt': '#243424',
+  border: '#3a5c3a',
+  ink: '#eef5ea',
+  text: '#c8d8c0',
+  'text-dim': '#84a078',
+  accent: '#7a5a3a',
+  'accent-bright': '#a8825a',
+  accent2: '#3a6a4a',
+  'accent2-bright': '#5a9a6a',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(122,90,58,0.18)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Témoignages' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Yeren"
+  serie="Créatures Légendaires du Monde"
+  description="Le « Bigfoot chinois » des forêts du Shennongjia, dans la province du Hubei — la seule grande enquête cryptozoologique de l'histoire à avoir mobilisé, en 1977, une expédition scientifique directement organisée par l'État."
+  href="creature-yeren.html"
+  egg="yeren"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="SHENNONGJIA · HUBEI, CHINE"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>la Tarasque</strong>"
+>
+  <p class="subtitle" slot="hero">野人 · L'Homme sauvage des forêts du Hubei</p>
+  <p class="tagline" slot="hero">
+    Un cryptide dont la traque a bénéficié d'un privilège rare : une expédition scientifique
+    d'État, financée officiellement par la Chine des années 1970.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Non prouvé, dossier riche en expéditions officielles"
+    note="Aucune preuve matérielle concluante n'a jamais été produite malgré plusieurs expéditions scientifiques d'ampleur, dont une directement organisée par l'État chinois en 1977 — un niveau d'attention institutionnelle rare pour ce type de dossier."
+  />
+
+  <Section id="origine" label="Première mention" title="Une tradition locale bien antérieure aux expéditions modernes" intro="Les récits d'hommes sauvages velus dans les montagnes reculées du Hubei circulent dans les chroniques et le folklore locaux bien avant que la science d'État ne s'y intéresse.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Un nom qui dit tout" sub="野人, littéralement « homme sauvage »" body="Le terme désigne depuis longtemps, dans le folklore local, une figure humanoïde velue vivant dans les zones forestières les plus reculées et les moins accessibles du centre de la Chine." />
+      <InfoCard num="II" title="Des mentions anciennes discutées" sub="Chroniques et bestiaires classiques" body="Certains textes anciens chinois, dont le célèbre « Classique des monts et des mers », sont parfois cités comme de possibles références à des figures similaires — un rapprochement que les spécialistes jugent en réalité incertain, ces textes mêlant librement observation et bestiaire fantastique." />
+      <InfoCard num="III" title="Le Shennongjia, terrain d'observation" sub="Hubei, Chine centrale" body="La région doit son nom à Shennong, laboureur-empereur légendaire réputé avoir goûté des centaines de plantes pour en tester les vertus — un massif forestier accidenté et peu peuplé, idéal terrain à légendes." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapportent les témoins" title="Une silhouette humanoïde couverte de poils roux" scrollFx="bigfootTracks" intro="Une description remarquablement cohérente d'un témoignage à l'autre, sur plusieurs décennies.">
+    <div class="card-grid wide">
+      <FigureCard name="Une haute stature bipède" role="Souvent supérieure à deux mètres" tags={['Posture redressée', 'Démarche humaine']} body="Les témoins décrivent une silhouette marchant debout, à l'allure globalement humaine mais à la carrure nettement plus massive que celle d'un homme adulte." />
+      <FigureCard name="Un pelage roux ou brun-noir" role="Corps entièrement couvert" tags={['Poils longs', 'Visage plus nu']} body="Le corps serait couvert de poils longs, roux ou brun sombre selon les récits, à l'exception d'un visage relativement dégagé rappelant des traits humains." />
+      <FigureCard name="Un comportement fuyant" role="Jamais agressif dans les récits" tags={['Discrétion', 'Zones reculées']} body="Contrairement à certains cryptides occidentaux parfois décrits comme menaçants, le Yeren est presque toujours rapporté en train de fuir ou d'observer à distance, jamais en train d'attaquer." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Des chroniques locales à l'expédition d'État" title="Un dossier de témoignages qui a fini par mobiliser Pékin">
+    <StoryBlock num="Témoignage I" title="Des récits locaux dispersés sur des décennies" body="Des habitants du Hubei rapportent, depuis le début du XXe siècle au moins, des rencontres ponctuelles avec une créature humanoïde velue dans les zones forestières les plus reculées du massif du Shennongjia." />
+    <StoryBlock num="Témoignage II" title="Le signalement de 1976" body="Un groupe de cadres du Parti communiste chinois en déplacement officiel rapporte avoir vu une créature traverser la route devant leur véhicule — un témoignage qui, venant de responsables du Parti plutôt que de villageois isolés, contribue directement à convaincre les autorités scientifiques de s'y intéresser officiellement." />
+    <StoryBlock num="Témoignage III" title="L'expédition scientifique de 1977" body="L'Académie des sciences de Chine organise une expédition de grande ampleur, mobilisant plusieurs centaines de participants sur plusieurs mois — une mobilisation institutionnelle directement financée par l'État, sans équivalent connu dans l'histoire mondiale de la cryptozoologie." />
+  </Section>
+
+  <Section id="culture-populaire" label="Du dossier scientifique au tourisme régional" title="Le Yeren, moteur touristique du Hubei">
+    <div class="card-grid compact">
+      <MiniCard title="Le musée du Yeren" tag="Shennongjia" body="Un musée consacré à la créature, présentant moulages de traces, témoignages et reconstitutions, attire aujourd'hui une partie non négligeable du tourisme régional." />
+      <MiniCard title="Documentaires et reportages officiels" tag="Médias chinois" body="Plusieurs chaînes de télévision chinoises ont consacré des reportages au dossier, souvent présentés avec un ton plus sérieux et institutionnel que l'équivalent occidental sur Bigfoot." />
+      <MiniCard title="« Le Bigfoot chinois »" tag="Presse internationale" body="Les médias occidentaux reprennent volontiers ce raccourci, qui simplifie un peu vite un dossier au contexte scientifique et politique assez différent de celui du cryptide nord-américain." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que la science peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucune preuve matérielle concluante après un siècle" body="Ni ossements, ni corps, ni photographie ou vidéo nette n'ont jamais été produits malgré l'ampleur de l'expédition de 1977 et de recherches ponctuelles ultérieures." />
+    <ScienceBlock num="Enquête 2" title="Des échantillons de poils analysés, jamais concluants" body="Plusieurs échantillons de poils attribués au Yeren, analysés en laboratoire au fil des décennies, se sont révélés appartenir à des animaux connus — notamment des ours ou des primates locaux — sans qu'aucun n'ait jamais révélé de matériel génétique inconnu de la science." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Le récit décrit des animaux connus mal identifiés"
+      level="consensus"
+      status="Explication la plus économe"
+      body="Le rhinopithèque doré (singe à nez retroussé endémique de la région), aperçu debout dans la végétation dense, ou l'ours noir d'Asie dressé sur ses pattes arrière, offrent des candidats plausibles et bien documentés pour une partie substantielle des témoignages."
+      attrib="Position dominante chez les zoologistes sceptiques"
+    />
+    <TheoryCard
+      title="Une part du dossier renvoie à des marginaux humains isolés"
+      level="plausible"
+      status="Hypothèse discutée"
+      body="Certains chercheurs relèvent qu'une partie des récits historiques les plus anciens pourrait décrire des ermites ou des exilés vivant volontairement en marge de la société dans ces montagnes difficiles d'accès, plutôt qu'une créature non humaine."
+      attrib="Hypothèse discutée en ethnographie régionale"
+    />
+    <TheoryCard
+      title="Un grand primate ou hominidé inconnu de la science survit dans le Shennongjia"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune donnée génétique, fossile ou photographique ne vient à ce jour soutenir la survie d'une espèce de grand primate inconnue dans cette région, malgré l'ampleur inhabituelle des moyens déployés pour la chercher."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que la quête du Yeren fait encore">
+    <HeritageBlock title="Une réserve naturelle protégée, effet collatéral heureux" body="L'intérêt porté au Yeren a contribué à faire classer le Shennongjia comme réserve naturelle nationale dès 1990, puis comme réserve de biosphère reconnue par l'UNESCO — une protection environnementale bénéficiant à des espèces bien réelles et menacées, indépendamment du sort du cryptide lui-même." />
+    <HeritageBlock title="Un cas d'étude en histoire des sciences" body="La mobilisation officielle de 1977 reste un exemple souvent cité pour illustrer comment une curiosité populaire peut, dans certains contextes politiques, obtenir un soutien institutionnel rarement accordé à ce type de recherche ailleurs dans le monde." />
+    <HeritageBlock title="Un moteur économique local toujours actif" body="Le tourisme lié au Yeren continue de représenter une part identifiable de l'économie touristique de la région du Shennongjia." />
+    <CautionBox>
+      Le parallèle constant avec Bigfoot ou le Yéti ne doit pas effacer le contexte propre à ce
+      dossier : une mobilisation scientifique d'État unique en son genre, et une région dont la
+      protection environnementale réelle a fini par profiter davantage à des espèces menacées
+      bien réelles qu'à la créature qui a motivé les premières expéditions.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Oliver D. Smith, « The Wildman of China: The Search for the Yeren », Sino-Platonic Papers n° 309, 2021", url: "https://sino-platonic.org/complete/spp309_chinese_wildman.pdf", note: "Synthèse académique des témoignages et de l'hypothèse d'une origine liée à des rencontres anciennes avec des Occidentaux" },
+    { label: "Zhou Guoxing, « Fifty Years of Tracking the Chinese Wildman », Relict Hominoid Inquiry, vol. 1, 2012, p. 118-141", url: "https://www.isu.edu/media/libraries/rhi/research-papers/Zhou__Tracking-the-Chinese-Wildman.pdf", note: "Récit de première main de l'expédition de 1977 par l'un de ses responsables scientifiques" },
+    { label: "UNESCO, Centre du patrimoine mondial, « Hubei Shennongjia » (n° 1509), inscrit en 2016", url: "https://whc.unesco.org/en/list/1509", note: "Statut de protection de la réserve et présence du rhinopithèque doré" },
+  ]} />
+</PageLayout>

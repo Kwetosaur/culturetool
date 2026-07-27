@@ -49,6 +49,7 @@ import Timeline from '../components/Timeline.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
 import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
 
 /* Ocre, terre rouge, nuit étoilée : la matière du désert et du ciel plutôt
    qu'une reprise des couleurs du drapeau aborigène, qui reste un symbole
@@ -98,7 +99,7 @@ const dimensions = [
   palette={palette}
   sections={SECTIONS}
   epigraph="PLUS DE 250 NATIONS · AU MOINS 65 000 ANS"
-  nextUp="Prochain chapitre de la série « Mythologies du Monde » : <strong>la mythologie finnoise</strong>"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : <strong>la mythologie dogon</strong>"
 >
   <p class="subtitle" slot="hero">Le Temps du Rêve</p>
   <p class="tagline" slot="hero">
@@ -231,4 +232,12 @@ const dimensions = [
       elles-mêmes et les auteurs aborigènes publiés.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "W. E. H. Stanner, The Dreaming & Other Essays, essai « The Dreaming » (1953), réédité Black Inc., 2009", url: "https://books.google.com/books/about/The_Dreaming_Other_Essays.html?id=qsWEsEs3LusC", note: "Source de la mise en garde citée en #royaumes sur les limites de la traduction anglaise « Dreaming »." },
+    { label: "National Museum of Australia, \"Songlines: Tracking the Seven Sisters\", exposition 2017", url: "https://www.nma.gov.au/exhibitions/songlines", note: "Exposition menée en consultation directe avec les communautés gardiennes, citée en #pantheon, #legendes et #monde." },
+    { label: "AIATSIS, \"The Mabo Case\"", url: "https://aiatsis.gov.au/explore/mabo-case", note: "Documente l'arrêt Mabo de 1992 et le rejet de la doctrine de terra nullius, cité en #frise et #heritage." },
+    { label: "C. Clarkson et al., \"Human occupation of northern Australia by 65,000 years ago\", Nature 547, 2017", url: "https://www.nature.com/articles/nature22968", note: "Étude source de la datation de Madjedbebe citée en #anecdotes et #frise." },
+    { label: "National Museum of Australia, \"Handback of Uluru to the Anangu\"", url: "https://www.nma.gov.au/defining-moments/resources/uluru-handback-anangu", note: "Confirme la rétrocession d'Uluru en 1985 mentionnée en #monde et #frise." },
+  ]} />
 </PageLayout>

@@ -23,6 +23,7 @@ import StoryBlock from '../components/StoryBlock.astro';
 import Timeline from '../components/Timeline.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Pourpre impériale et or : la matière du pouvoir de cour plutôt qu'une
    palette régionale générique — distincte de la palette flamme/nuit déjà
@@ -67,7 +68,7 @@ const SECTIONS = [
   palette={palette}
   sections={SECTIONS}
   epigraph="PERSÉPOLIS · SUSE · PASARGADES"
-  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : <strong>l'Empire mongol</strong>"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : <strong>l'Empire byzantin</strong>"
 >
   <p class="subtitle" slot="hero">Le chaînon administratif</p>
   <p class="tagline" slot="hero">
@@ -209,4 +210,11 @@ const SECTIONS = [
       dépasse.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Pierre Briant, From Cyrus to Alexander: A History of the Persian Empire, trad. Peter T. Daniels, Eisenbrauns, 2002", url: "https://www.eisenbrauns.org/books/titles/978-1-57506-031-6.html", note: "Référence académique de synthèse sur l'administration et la politique de l'empire achéménide" },
+    { label: "Hérodote, L'Enquête, texte présenté, traduit et annoté par Andrée Barguet, Gallimard, coll. Folio classique", url: "https://www.gallimard.fr/catalogue/l-enquete-livres-i-a-iv/9782070376513", note: "Source antique de la route royale, des guerres médiques et du récit de Marathon" },
+    { label: "British Museum, « The Cyrus Cylinder » (objet 1880,0617.1941)", url: "https://www.britishmuseum.org/collection/object/W_1880-0617-1941", note: "Appuie la description du cylindre de Cyrus et sa découverte par Hormuzd Rassam en 1879" },
+    { label: "UNESCO, Centre du patrimoine mondial, « Persepolis » (n° 114), inscrit en 1979", url: "https://whc.unesco.org/en/list/114/", note: "Appuie la date et le statut d'inscription UNESCO de Persépolis" },
+  ]} />
 </PageLayout>

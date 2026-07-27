@@ -25,6 +25,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Fer romain et pourpre impériale : la matière de l'arme et l'usage
    politique qu'on en a fait, plutôt que la géographie du sujet. */
@@ -281,4 +282,9 @@ const noms = [
       les années 1970.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "« Archaeometallurgical analysis of the Holy Lance in the Treasury of the Kunsthistorisches Museum Wien », VIAS, Université de Vienne", url: "https://vias.univie.ac.at/en/research/httpsmaterialsscienceunivieacat/projects/archaeometallurgical-analysis-of-the-holy-lance-in-the-treasury-of-the-kunsthistorisches-museum-wien/", note: "Étude archéométallurgique à l'origine de la datation carolingienne de la lance de Vienne" },
+    { label: "« Holy Lance (relic) », EBSCO Research Starters", url: "https://www.ebsco.com/research-starters/history/holy-lance-relic", note: "Synthèse académique des quatre reliques concurrentes et de leurs traditions respectives" },
+  ]} />
 </PageLayout>

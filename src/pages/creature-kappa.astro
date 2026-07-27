@@ -24,6 +24,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Vert de rivière, concombre, carapace : la matière du folklore plutôt
    qu'une palette "Japon" générique déjà utilisée par les pages mythologie et
@@ -148,4 +149,10 @@ const SECTIONS = [
       plusieurs autres pages de cette série.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Michael Dylan Foster, Pandemonium and Parade: Japanese Monsters and the Culture of Yokai, University of California Press, 2009", url: "https://archive.org/details/pandemoniumparad0000fost", note: "Étude de référence sur l'évolution du kappa, de figure dangereuse à mascotte." },
+    { label: "Toriyama Sekien (trad. Matt Alt et Hiroko Yoda), Japandemonium Illustrated: The Yokai Encyclopedias of Toriyama Sekien, Dover, 2017", note: "Traduction annotée des bestiaires d'Edo qui fixent l'iconographie standard du kappa." },
+    { label: "Encyclopaedia Britannica, « Japanese giant salamander »", url: "https://www.britannica.com/animal/Japanese-giant-salamander", note: "Appuie le candidat animal réel évoqué en Science." },
+  ]} />
 </PageLayout>

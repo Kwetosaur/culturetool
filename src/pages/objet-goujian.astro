@@ -29,6 +29,7 @@ import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
 import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
 
 /* Bronze patiné vert-de-gris et or de l'inscription : la matière réelle de
    l'objet plutôt qu'une géographie générique. */
@@ -281,4 +282,10 @@ const noms = [
       qu'elle n'a jamais eus.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "« Sword of ancient king hailed as world's top », China Daily, 2025", url: "https://govt.chinadaily.com.cn/s/202501/26/WS6795f9db498eec7e1f72e504/sword-of-ancient-king-hailed-as-worlds-top.html", note: "Présente la découverte de 1965, l'inscription et le statut de trésor national conservé au musée du Hubei" },
+    { label: "« Sword of Goujian Still Looks and Cuts Like New After 2,500 Years », My Modern Met", url: "https://mymodernmet.com/sword-of-goujian/", note: "Synthèse de l'état de préservation exceptionnel de la lame" },
+    { label: "« How Was the Sword of Goujian Made to Last 2,500 Years? », ScienceInsights", url: "https://scienceinsights.org/how-was-the-sword-of-goujian-made-to-last-2500-years/", note: "Détaille les analyses métallurgiques qui écartent l'hypothèse d'un placage au chrome délibéré" },
+  ]} />
 </PageLayout>

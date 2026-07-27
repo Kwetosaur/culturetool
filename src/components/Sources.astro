@@ -1,0 +1,41 @@
+---
+/*
+  Bibliographie de fin de page — bloc sobre place juste avant le pied de
+  page (epigraphe + nextUp dans PageLayout), apres la derniere <Section>.
+
+  Volontairement PAS une <Section> a part entiere : pas de pilule de nav,
+  pas d'entree dans le compte "N sections" de chaque plan de serie. Ajouter
+  cette bibliographie a une page existante ne touche donc jamais a sa
+  structure de navigation ni aux plans qui comptent des sections.
+
+  Chaque entree doit correspondre a une source reelle et verifiable
+  (ouvrage, article academique, site institutionnel/musee/encyclopedie de
+  reference) en lien direct avec une affirmation precise de la page — pas
+  une bibliographie generique de remplissage. Ne jamais inventer d'URL.
+*/
+export interface SourceItem {
+  /** Citation complete : auteur, titre, editeur/revue, annee. */
+  label: string;
+  /** Lien direct si la source est consultable en ligne. */
+  url?: string;
+  /** Precision courte sur ce que cette source appuie precisement sur la page. */
+  note?: string;
+}
+export interface Props {
+  items: SourceItem[];
+}
+const { items } = Astro.props;
+---
+<section class="sources-block" aria-label="Sources" data-reveal>
+  <h3 class="sources-title">Sources</h3>
+  <ol class="sources-list">
+    {items.map((s) => (
+      <li>
+        {s.url
+          ? <a href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
+          : <span>{s.label}</span>}
+        {s.note && <span class="sources-note"> — {s.note}</span>}
+      </li>
+    ))}
+  </ol>
+</section>

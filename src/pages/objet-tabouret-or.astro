@@ -28,6 +28,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Or battu et kente noir et rouge : la matière et les couleurs de l'objet,
    pas la géographie générique de l'Afrique de l'Ouest. */
@@ -288,4 +289,10 @@ const noms = [
       même façon ici.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Ivor Wilks, Asante in the Nineteenth Century: The Structure and Evolution of a Political Order, Cambridge University Press, 1975", url: "https://archive.org/details/asanteinnineteen0000wilk", note: "Référence académique standard sur l'histoire politique asante et le rôle du Tabouret d'or" },
+    { label: "« The Golden Stool (17th c.- ) », BlackPast.org", url: "https://blackpast.org/global-african-history/golden-stool-17th-c/", note: "Présentation du statut sacré du tabouret et de son rôle comme siège de l'âme de la nation ashanti" },
+    { label: "« Yaa Asantewaa (mid-1800s-1921) », BlackPast.org", url: "https://blackpast.org/global-african-history/yaa-asantewaa-mid-1800s-1921/", note: "Récit de la guerre de 1900 déclenchée par la demande du gouverneur Hodgson" },
+  ]} />
 </PageLayout>

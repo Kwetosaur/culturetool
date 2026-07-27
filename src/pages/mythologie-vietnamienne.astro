@@ -1,0 +1,268 @@
+---
+/*
+  Mythologie Vietnamienne — dix-septième mythologie de la série. Structure
+  imposée par docs/plans/plan-serie-mythologies.md : 9 sections fixes.
+
+  #royaumes : pas d'emprunt à un autre chapitre (correctif du 26/07/2026) —
+  la tripartition retenue (Montagnes / Eaux / Monde des hommes) est dérivée
+  directement de la dualité fondatrice du mythe lui-même (Âu Cơ la fée des
+  montagnes, Lạc Long Quân le dragon des eaux), pas plaquée de l'extérieur.
+
+  Point de vigilance : la chronologie légendaire de la dynastie Hồng Bàng
+  (2879 av. J.-C.) est un ajout tardif des chroniqueurs du XVe siècle
+  (Ngô Sĩ Liên), pas une date historique — traité explicitement en
+  #anecdotes et en #heritage plutôt que présenté comme un fait établi.
+
+  Effets : data-egg="laclongquan" + data-scroll-fx="eggHatch" sur
+  #pantheon, piste documentée dans plan-effets.md ("un œuf qui se fend en
+  cent points lumineux qui se dispersent"). Déchiffrement des titres :
+  glyphs="chine", réutilisation assumée du pool sinogrammes déjà encodé —
+  le chữ Hán puis le chữ Nôm (caractères chinois adaptés) ont servi
+  d'écriture lettrée au Vietnam pendant près de deux millénaires avant
+  l'adoption de l'alphabet latin (chữ Quốc ngữ) au XXe siècle : une
+  parenté réelle, pas un emprunt décoratif arbitraire.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
+
+/* Laque rouge et or des temples, jade des rizières, bleu-vert des eaux du
+   dragon : la matière du Vietnam plutôt qu'une palette "Asie" générique —
+   et distincte du rouge cinabre déjà pris par mythologie-chinoise.astro. */
+const palette = {
+  bg: '#0e1a14',
+  'bg-deep': '#08110c',
+  surface: '#152920',
+  'surface-alt': '#1c3428',
+  border: '#2e5c44',
+  ink: '#f0f5ea',
+  text: '#c8e0cc',
+  'text-dim': '#7ea888',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#3a7a5a',
+  'accent2-bright': '#5ac084',
+  verdict: '#7a2030',
+  'verdict-bright': '#a83a4a',
+  glow: 'rgba(201,152,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Royaumes' },
+  { id: 'pantheon', nav: 'Panthéon' },
+  { id: 'genealogie', nav: 'Généalogie' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const royaumes = [
+  { num: 'I', title: 'Núi — les Montagnes', sub: 'Royaume d\'Âu Cơ', body: "Domaine des fées et des immortels, d'où descend Âu Cơ elle-même — les cinquante fils qui la suivent y deviennent les ancêtres des peuples des hauts plateaux." },
+  { num: 'II', title: 'Nước — les Eaux', sub: 'Royaume de Lạc Long Quân', body: "Royaume englouti du Dragon, le Thủy Phủ, d'où Lạc Long Quân gouverne les eaux — les cinquante fils qui l'accompagnent peuplent les rivages et les deltas." },
+  { num: 'III', title: 'Đất — le Monde des hommes', sub: 'Văn Lang', body: "Le royaume médian où s'installe l'aîné des cent fils, devenu le premier roi Hùng — le seul des trois royaumes où l'on cultive le riz et où l'on vit au quotidien." },
+];
+---
+<PageLayout
+  title="Mythologie Vietnamienne"
+  serie="Mythologies du Monde"
+  description="Cent fils nés d'un même sac d'œufs, partagés entre les montagnes et la mer : le mythe fondateur qui donne encore aujourd'hui aux Vietnamiens leur nom collectif, « enfants du Dragon et de la Fée »."
+  href="mythologie-vietnamienne.html"
+  egg="laclongquan"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="CON RỒNG CHÁU TIÊN"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : <strong>la mythologie finnoise</strong>"
+>
+  <p class="subtitle" slot="hero">Lạc Long Quân · Âu Cơ · le sac de cent œufs</p>
+  <p class="tagline" slot="hero">
+    Une union entre un dragon des eaux et une fée des montagnes, un sac de cent œufs, et une
+    scission fondatrice qui structure encore la façon dont le Vietnam se raconte lui-même.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="Montagnes, Eaux et Monde des hommes"
+    intro="Pas un empilement calqué sur un autre chapitre : la tripartition retenue ici vient directement de la dualité fondatrice du mythe — un père des eaux, une mère des montagnes, et le royaume médian où s'installent leurs descendants humains.">
+    <Fragment slot="title"><Decode glyphs="chine">Montagnes, Eaux et Monde des hommes</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 120 L150 30 L240 120 Z" fill="#5ac084" opacity="0.85"/>
+        <text x="150" y="100" text-anchor="middle" fill="#08110c" font-family="Cinzel, serif" font-size="12" font-weight="700">NÚI</text>
+        <ellipse cx="150" cy="230" rx="140" ry="40" fill="#8a6a2f" opacity="0.85"/>
+        <text x="150" y="235" text-anchor="middle" fill="#f0f5ea" font-family="Cinzel, serif" font-size="13">ĐẤT</text>
+        <path d="M340 260 Q 400 200 460 260 Q 400 300 340 260 Z" fill="#3a7a5a" opacity="0.9"/>
+        <text x="400" y="255" text-anchor="middle" fill="#c8e0cc" font-family="Cinzel, serif" font-size="12">NƯỚC</text>
+      </svg>
+    </div>
+    <p class="map-caption">Trois royaumes issus d'un seul mythe fondateur — pas trois cosmologies séparées, mais une seule scission de départ.</p>
+    <div class="card-grid compact">
+      {royaumes.map((r) => <InfoCard {...r} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~13 figures majeures" title="Le panthéon vietnamien" scrollFx="eggHatch">
+    <Fragment slot="title"><Decode glyphs="chine">Le panthéon vietnamien</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Lạc Long Quân" role="Seigneur-Dragon des eaux" tags={['Thủy Phủ', 'Père fondateur']} body="Descendant divin qui gouverne le royaume englouti des eaux, il s'unit à Âu Cơ pour engendrer les cent ancêtres du peuple viet — l'un des rares mythes fondateurs au monde où le père règne littéralement sous la mer." />
+      <FigureCard name="Âu Cơ" role="Fée immortelle des montagnes" tags={['Núi', 'Mère fondatrice']} body="Descendante des immortels des hautes terres, elle porte un sac de cent œufs dont éclosent les cent fils fondateurs — figure toujours invoquée aujourd'hui dans l'expression « enfants de la Fée »." />
+      <FigureCard name="Hùng Vương (premier roi)" role="Aîné des cent fils" tags={['Văn Lang', 'Dynastie Hồng Bàng']} body="Choisi pour régner sur le royaume médian de Văn Lang, il fonde une lignée de dix-huit rois Hùng dont la chronologie légendaire couvre, selon les chroniques tardives, près de deux mille ans." />
+      <FigureCard name="Thánh Gióng" role="Enfant-guerrier, l'un des Quatre Immortels" tags={['Cheval de fer', 'Ascension']} body="Muet jusqu'à trois ans, il grandit en un instant à l'annonce d'une invasion, repousse l'ennemi sur un cheval de fer crachant le feu, puis s'élève au ciel depuis le mont Sóc sans jamais redescendre parmi les hommes." />
+      <FigureCard name="Sơn Tinh (Tản Viên Sơn Thánh)" role="Génie de la Montagne" tags={['Quatre Immortels', 'Anti-crue']} body="Vainqueur du génie des Eaux pour la main de la princesse Mỵ Nương, il est aujourd'hui encore invoqué comme protecteur contre les inondations annuelles du delta." />
+      <FigureCard name="Thủy Tinh" role="Génie des Eaux" tags={['Rival', 'Crues annuelles']} body="Perdant du concours de dot face à Sơn Tinh, il déchaîne chaque année ses eaux en signe de rancune — un mythe qui explique directement le cycle des inondations saisonnières du fleuve Rouge." />
+      <FigureCard name="Chử Đồng Tử" role="Pêcheur devenu immortel" tags={['Quatre Immortels', 'Ascension conjugale']} body="Trop pauvre pour posséder un pagne, il épouse en secret une princesse fugueuse, Tiên Dung ; leur couple finit par s'élever au ciel avec toute leur cité, laissant derrière eux un simple marécage." />
+      <FigureCard name="Liễu Hạnh" role="Déesse-Mère, la seule des Quatre Immortels née femme mortelle" tags={['Đạo Mẫu', 'Culte vivant']} body="Princesse céleste redescendue trois fois sur terre, elle devient la figure centrale du culte des Déesses-Mères (Đạo Mẫu), reconnu par l'UNESCO en 2016 comme patrimoine culturel immatériel vivant." />
+      <FigureCard name="An Dương Vương" role="Roi de Âu Lạc, successeur des rois Hùng" tags={['Arbalète magique', 'Trahison']} body="Reçoit du Dieu Tortue d'Or une arbalète capable de tuer mille ennemis d'un seul trait — un don que sa propre fille, par amour, finira par trahir." />
+      <FigureCard name="Mỵ Châu" role="Princesse tragique" tags={['Amour', 'Trahison involontaire']} body="Éprise du prince ennemi Trọng Thủy, elle révèle sans le vouloir le secret de l'arbalète magique — un des grands récits tragiques vietnamiens sur la tension entre amour filial et amour conjugal." />
+      <FigureCard name="Rùa Vàng (le Dieu Tortue d'Or)" role="Messager divin des eaux" tags={['Arbalète', 'Épée du lac']} body="Offre l'arbalète magique à An Dương Vương, puis, des siècles plus tard selon un autre récit, réclame la restitution d'une épée magique au roi Lê Lợi sur le lac Hoàn Kiếm." />
+      <FigureCard name="Lang Liêu" role="Prince inventeur des gâteaux de riz" tags={['Bánh chưng', 'Bánh dày']} body="Le plus modeste des fils du roi Hùng, il invente un gâteau carré de riz gluant représentant la Terre et un gâteau rond représentant le Ciel — offrande devenue le centre rituel du Nouvel An lunaire." />
+      <FigureCard name="Táo Quân" role="Trio des Génies du Foyer" tags={['Nouvel An', 'Rapport céleste']} body="Deux époux et une épouse réunis par le destin en gardiens du foyer, censés chevaucher chacun une carpe pour rapporter au Ciel, chaque fin d'année, le bilan de la conduite de chaque famille." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 maisons, pas un arbre unique"
+    title="La scission des cent fils"
+    intro="Pas un arbre de dieux à l'européenne : le mythe vietnamien organise une seule scission fondatrice entre trois lignées, toutes issues du même sac d'œufs.">
+    <Fragment slot="title"><Decode glyphs="chine">La scission des cent fils</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="50" r="20" fill="#e8c164"/>
+        <text x="250" y="55" text-anchor="middle" font-size="8" fill="#0e1a14" font-weight="700">100 œufs</text>
+        <line x1="230" y1="65" x2="120" y2="130" stroke="#5ac084" stroke-width="1.5" stroke-dasharray="3 4"/>
+        <line x1="270" y1="65" x2="380" y2="130" stroke="#3a7a5a" stroke-width="1.5" stroke-dasharray="3 4"/>
+        <line x1="250" y1="70" x2="250" y2="150" stroke="#c9982f" stroke-width="1.5"/>
+
+        <circle cx="120" cy="150" r="16" fill="#5ac084"/>
+        <text x="120" y="155" text-anchor="middle" font-size="8" fill="#08110c" font-weight="700">Âu Cơ</text>
+        <text x="120" y="185" text-anchor="middle" fill="#c8e0cc" font-size="9">50 fils · Montagnes</text>
+
+        <circle cx="380" cy="150" r="16" fill="#3a7a5a"/>
+        <text x="380" y="155" text-anchor="middle" font-size="8" fill="#f0f5ea" font-weight="700">Long Quân</text>
+        <text x="380" y="185" text-anchor="middle" fill="#c8e0cc" font-size="9">50 fils · Eaux</text>
+
+        <circle cx="250" cy="165" r="16" fill="#c9982f"/>
+        <text x="250" y="170" text-anchor="middle" font-size="8" fill="#0e1a14" font-weight="700">Aîné</text>
+        <text x="250" y="200" text-anchor="middle" fill="#e8c164" font-size="10">Premier roi Hùng · Văn Lang</text>
+      </svg>
+    </div>
+    <p class="map-caption">Trait plein = filiation directe ; pointillé = répartition rituelle des cent fils entre les deux royaumes parentaux.</p>
+  </Section>
+
+  <Section id="creatures" label="7 êtres notables" title="Le bestiaire vietnamien">
+    <Fragment slot="title"><Decode glyphs="chine">Le bestiaire vietnamien</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Rồng, le dragon des eaux" tag="Ancêtre lui-même" body="Contrairement au dragon occidental, il n'est jamais un ennemi à vaincre : c'est un ancêtre direct, symbole de pluie bienfaisante et de royauté." />
+      <MiniCard title="Rùa Vàng, la Tortue d'Or" tag="Messager divin" body="Intervient à deux reprises dans l'histoire légendaire, à des siècles d'écart, toujours pour offrir ou reprendre un objet d'arme magique." />
+      <MiniCard title="Le cheval de fer de Thánh Gióng" tag="Monture crachant le feu" body="Forgé sur commande du jeune héros pour repousser l'envahisseur, il s'élève avec lui au ciel à la fin du récit." />
+      <MiniCard title="La carpe du Nouvel An" tag="Monture des Táo Quân" body="Chaque foyer relâche traditionnellement des carpes vivantes la veille du Nouvel An lunaire, censées transporter les Génies du Foyer jusqu'au Ciel." />
+      <MiniCard title="Le tigre des contes populaires" tag="Figure ambivalente" body="Tantôt dupe naïve, tantôt puissance redoutée selon les contes, le tigre occupe dans le folklore vietnamien un rôle aussi central que le renard en Europe." />
+      <MiniCard title="La grue et la tortue du temple" tag="Symbole de longévité" body="Statue rituelle fréquente dans les pagodes vietnamiennes, associant les deux animaux comme emblèmes conjoints de longévité et de sagesse." />
+      <MiniCard title="Cụ Rùa, la grande tortue du lac Hoàn Kiếm" tag="Créature réelle devenue légende vivante" body="Individu géant d'une espèce aujourd'hui quasi éteinte (Rafetus swinhoei), longtemps considéré par la population de Hanoï comme une incarnation du Dieu Tortue lui-même." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="10 légendes" title="Les grands récits vietnamiens">
+    <Fragment slot="title"><Decode glyphs="chine">Les grands récits vietnamiens</Decode></Fragment>
+    <StoryBlock num="Légende I" title="Le sac de cent œufs" body="Lạc Long Quân, seigneur-dragon des eaux, s'unit à Âu Cơ, fée immortelle des montagnes. De leur union naît un unique sac contenant cent œufs, dont éclosent cent fils en parfaite santé, sans qu'aucun ne meure — un mythe fondateur qui donne encore aujourd'hui aux Vietnamiens leur nom collectif de « enfants du Dragon et de la Fée »." />
+    <StoryBlock num="Légende II" title="La scission des cinquante et cinquante" body="Estimant ne pouvoir vivre indéfiniment ensemble, l'un habitué à la mer, l'autre aux montagnes, le couple se sépare à l'amiable : cinquante fils suivent leur mère vers les hauts plateaux, cinquante autres suivent leur père vers les rivages. L'aîné, resté au centre, devient le premier roi du royaume de Văn Lang." />
+    <StoryBlock num="Légende III" title="Thánh Gióng, l'enfant qui grandit en un jour" body="Muet et immobile jusqu'à l'âge de trois ans, un enfant se dresse soudain à l'annonce d'une invasion et réclame une armure de fer, un cheval de fer et une lance de fer. Il grandit alors si vite qu'il faut nourrir tout un village pour le rassasier, avant de partir seul repousser l'ennemi, puis de s'élever au ciel depuis le mont Sóc sans jamais redescendre." />
+    <StoryBlock num="Légende IV" title="Sơn Tinh contre Thủy Tinh" body="Deux prétendants à la main de la princesse Mỵ Nương s'affrontent en dot : le Génie de la Montagne l'emporte de justesse. Furieux, le Génie des Eaux déchaîne chaque année ses flots contre les montagnes de son rival — un mythe qui continue d'expliquer, dans l'imaginaire populaire, le cycle annuel des inondations du delta du fleuve Rouge." />
+    <StoryBlock num="Légende V" title="Chử Đồng Tử et Tiên Dung" body="Trop pauvre pour posséder même un pagne, un jeune pêcheur se dissimule dans le sable à l'arrivée inopinée d'une princesse en fuite, Tiên Dung, qui l'y découvre en se baignant. Elle décide de l'épouser envers et contre l'avis de son père le roi ; leur cité prospère finit par s'élever tout entière au ciel une nuit, ne laissant derrière elle qu'un simple marécage." />
+    <StoryBlock num="Légende VI" title="Bánh chưng, bánh dày" body="Pour désigner son successeur, un roi Hùng demande à ses fils de lui rapporter l'offrande la plus digne des ancêtres. Le plus modeste d'entre eux, Lang Liêu, invente un gâteau carré de riz gluant représentant la Terre et un gâteau rond représentant le Ciel — une offrande si juste qu'elle lui vaut le trône, et qui reste, aujourd'hui encore, au centre de chaque Nouvel An lunaire vietnamien." />
+    <StoryBlock num="Légende VII" title="L'arbalète magique et la trahison de Mỵ Châu" body="Le Dieu Tortue d'Or offre au roi An Dương Vương une arbalète capable d'abattre mille ennemis d'un seul trait. Sa fille Mỵ Châu, éprise du prince ennemi Trọng Thủy, lui révèle sans malice le secret de l'arme — un des grands récits tragiques vietnamiens sur le conflit entre amour et loyauté au royaume." quote="Elle aima sans savoir qu'elle trahissait." cite="Résumé d'une version populaire du récit" />
+    <StoryBlock num="Légende VIII" title="L'épée restituée du lac Hoàn Kiếm" body="Des siècles plus tard, le futur roi Lê Lợi reçoit une épée magique qui l'aide à chasser un envahisseur étranger. Une fois la paix rétablie, une grande tortue dorée émerge du lac de Hanoï pour réclamer la restitution de l'épée au nom du royaume des Eaux — épisode qui donne au lac son nom actuel, « lac de l'Épée restituée »." />
+    <StoryBlock num="Légende IX" title="Les Sœurs Trưng" body="Deux sœurs nobles lèvent une armée pour chasser l'occupant Han et règnent brièvement sur un royaume indépendant en 40 apr. J.-C. — figures historiquement attestées plutôt que purement mythologiques, mais élevées depuis au rang de légende nationale et vénérées dans de nombreux temples." />
+    <StoryBlock num="Légende X" title="Trầu Cau, la légende du bétel et de l'arec" body="Deux frères jumeaux si semblables qu'on les confond épousent, l'un une femme qui ne distingue plus lequel est son mari ; le malentendu conduit à une série de morts par chagrin, transformant les trois protagonistes en pierre à chaux, en arbre d'arec et en liane de bétel — les trois ingrédients que l'on continue de mâcher ensemble en signe d'hospitalité et de mariage." />
+  </Section>
+
+  <Section id="anecdotes" label="8 curiosités" title="Étymologies et distinctions utiles">
+    <Fragment slot="title"><Decode glyphs="chine">Étymologies et distinctions utiles</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="« Con Rồng Cháu Tiên »" tag="Identité toujours en usage" body="Littéralement « enfants du Dragon, petits-enfants de la Fée » — une expression que les Vietnamiens emploient encore aujourd'hui, y compris dans la diaspora, pour désigner leur origine commune." />
+      <MiniCard title="Une chronologie fixée bien après les faits" tag="À nuancer" body="La date légendaire de fondation de la dynastie Hồng Bàng (2879 av. J.-C.) provient d'une chronique du XVe siècle, celle de Ngô Sĩ Liên — un ajout tardif de lettré, pas une donnée archéologique directe." />
+      <MiniCard title="La culture de Đông Sơn, un socle réel" tag="Archéologie" body="Les tambours de bronze de la culture Đông Sơn (env. 1000-1 av. J.-C.) offrent le meilleur ancrage archéologique disponible derrière la légende des rois Hùng, sans coïncider exactement avec la chronologie littéraire tardive." />
+      <MiniCard title="Les Sœurs Trưng, un cas à part" tag="Histoire, pas seulement mythe" body="Contrairement à la plupart des figures de cette page, leur existence et leur révolte sont attestées par des sources historiques chinoises contemporaines — la légende s'est construite autour d'un fait, pas l'inverse." />
+      <MiniCard title="Le Đạo Mẫu reconnu par l'UNESCO" tag="2016" body="Le culte des Déesses-Mères centré sur Liễu Hạnh est inscrit au patrimoine culturel immatériel de l'humanité — une pratique religieuse vivante, pas un folklore éteint." />
+      <MiniCard title="Cụ Rùa, une espèce presque éteinte" tag="Mythe et zoologie" body="La grande tortue molle géante du lac Hoàn Kiếm appartient à une espèce comptant seulement quelques individus connus au monde ; son dernier spécimen dans le lac est mort en 2016, événement suivi avec une émotion nationale réelle." />
+      <MiniCard title="Le Festival de Thánh Gióng" tag="UNESCO, 2010" body="Célébré chaque année près de Hanoï, il reconstitue le récit du jeune héros repoussant l'envahisseur — une fête reconnue internationalement, pas seulement une commémoration locale." />
+      <MiniCard title="La fête du Đền Hùng" tag="Jour férié national" body="Le dixième jour du troisième mois lunaire, jour de commémoration des rois Hùng, est un jour férié officiel au Vietnam — un mythe fondateur transformé en calendrier civil contemporain." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="Des temples de Phú Thọ à la diaspora mondiale">
+    <Fragment slot="title"><Decode glyphs="chine">Des temples de Phú Thọ à la diaspora mondiale</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="110" r="10" fill="#c9982f"/>
+        <text x="250" y="90" text-anchor="middle" fill="#e8c164" font-size="12" font-family="Cinzel, serif">ĐỀN HÙNG</text>
+        {[[120,60,'Mont Sóc — ascension de Thánh Gióng'],[380,60,'Lac Hoàn Kiếm, Hanoï'],[100,170,'Phủ Dầy — culte de Liễu Hạnh'],[400,170,'Diaspora vietnamienne mondiale']].map(([x,y,label]) => (
+          <g>
+            <line x1="250" y1="110" x2={x} y2={y} stroke="#5ac084" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#1c3428" stroke="#c9982f" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#c8e0cc" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">Du site fondateur de Phú Thọ aux temples de tout le pays, jusqu'à l'identité revendiquée par la diaspora à l'étranger.</p>
+    <div class="card-grid">
+      <InfoCard title="Đền Hùng, Phú Thọ" sub="Site fondateur" body="Complexe de temples dédié aux dix-huit rois Hùng, but du grand pèlerinage national annuel et site classé au patrimoine culturel." />
+      <InfoCard title="Mont Sóc" sub="Ascension de Thánh Gióng" body="Lieu traditionnel où le jeune héros se serait élevé au ciel, aujourd'hui doté d'un grand temple et d'une statue monumentale." />
+      <InfoCard title="Lac Hoàn Kiếm, Hanoï" sub="Cœur symbolique de la capitale" body="Site de la légende de l'épée restituée, aujourd'hui l'un des lieux les plus visités du pays, en plein centre-ville." />
+      <InfoCard title="Phủ Dầy, Nam Định" sub="Culte de Liễu Hạnh" body="Grand centre du culte des Déesses-Mères, où se pratiquent encore aujourd'hui les rituels de possession (lên đồng) du Đạo Mẫu." />
+      <InfoCard title="La diaspora vietnamienne" sub="Identité transmise" body="L'expression « con Rồng cháu Tiên » continue d'être utilisée par les communautés vietnamiennes à l'étranger comme marqueur d'identité culturelle commune." />
+      <InfoCard title="Le folklore régional" sub="Diversité locale" body="De nombreuses variantes locales de ces récits existent selon les régions du Vietnam, sans qu'aucune version unique ne fasse autorité absolue." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="chine">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'v. 1000-1 av. J.-C.', title: 'Culture de Đông Sơn', body: "Civilisation du bronze qui offre le meilleur ancrage archéologique connu derrière la légende des rois Hùng." },
+      { year: '257 av. J.-C. (traditionnel)', title: 'Fondation légendaire de Âu Lạc', body: "An Dương Vương succède aux rois Hùng et reçoit l'arbalète magique du Dieu Tortue d'Or, selon la chronologie traditionnelle." },
+      { year: '40 apr. J.-C.', title: 'Révolte des Sœurs Trưng', body: "Soulèvement historiquement attesté contre l'occupation Han, devenu l'un des grands récits de résistance nationale." },
+      { year: '1428', title: 'Lê Lợi et l\'épée restituée', body: "Selon la légende, la grande tortue du lac Hoàn Kiếm reprend l'épée magique une fois l'indépendance recouvrée." },
+      { year: '1479', title: 'Chronique de Ngô Sĩ Liên', body: "Première grande compilation écrite qui fixe par écrit, et date rétrospectivement, la légende des rois Hùng dans l'histoire officielle du royaume." },
+      { year: '2010', title: 'Festival de Thánh Gióng reconnu par l\'UNESCO', body: "Inscription au patrimoine culturel immatériel de l'humanité." },
+      { year: '2012', title: 'Culte des rois Hùng reconnu par l\'UNESCO', body: "Le pèlerinage annuel de Đền Hùng rejoint à son tour le patrimoine immatériel mondial." },
+      { year: '2016', title: 'Đạo Mẫu reconnu par l\'UNESCO', body: "Le culte des Déesses-Mères centré sur Liễu Hạnh obtient à son tour cette reconnaissance internationale." },
+      { year: '2016', title: 'Mort de Cụ Rùa', body: "La grande tortue du lac Hoàn Kiếm, longtemps identifiée à la figure légendaire du Dieu Tortue, meurt dans le lac lui-même — un événement suivi avec une émotion nationale sincère." },
+      { year: 'Aujourd\'hui', title: 'Un jour férié national', body: "Le jour de commémoration des rois Hùng reste un jour chômé officiel au Vietnam, mythe fondateur transformé en calendrier civil." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ce mythe fondateur fait encore">
+    <Fragment slot="title"><Decode glyphs="chine">Ce que ce mythe fondateur fait encore</Decode></Fragment>
+    <HeritageBlock title="Une identité nationale toujours revendiquée" body="L'expression « con Rồng cháu Tiên » continue de circuler dans le discours public vietnamien, y compris dans la diaspora, comme un marqueur d'origine commune." />
+    <HeritageBlock title="Un jour férié qui rejoue le mythe" body="La fête des rois Hùng transforme chaque année un récit fondateur en pèlerinage national concret vers un site précis." />
+    <HeritageBlock title="Une religion vivante, pas un vestige" body="Le culte des Déesses-Mères (Đạo Mẫu), avec ses rituels de possession, reste activement pratiqué et reconnu internationalement comme patrimoine vivant." />
+    <CautionBox>
+      La date légendaire de 2879 av. J.-C. pour la fondation du royaume, fixée bien plus tard
+      par un chroniqueur du XVe siècle, a parfois été présentée comme un fait historique établi
+      dans certains récits nationalistes du XXe siècle. Cette page distingue explicitement la
+      profondeur symbolique du mythe fondateur de sa datation littérale, qu'aucune source
+      archéologique ne permet de confirmer telle quelle.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Ngô Sĩ Liên, Đại Việt sử ký toàn thư (Mémoires historiques complètes du Đại Việt), compilé en 1479", note: "Chronique du XVe siècle qui fixe par écrit la légende des rois Hùng et la date de 2879 av. J.-C., discutée en #anecdotes et #heritage." },
+    { label: "UNESCO, \"Worship of Hùng kings in Phú Thọ\", Representative List of the Intangible Cultural Heritage of Humanity, 2012", url: "https://ich.unesco.org/en/RL/worship-of-hung-kings-in-phu-th-00735", note: "Confirme la reconnaissance du culte des rois Hùng citée en #anecdotes et #frise." },
+    { label: "UNESCO, \"Practices related to the Việt beliefs in the Mother Goddesses of Three Realms\", Representative List of the Intangible Cultural Heritage of Humanity, 2016", url: "https://ich.unesco.org/en/RL/practices-related-to-the-viet-beliefs-in-the-mother-goddesses-of-three-realms-01064", note: "Source de la reconnaissance du Đạo Mẫu évoquée en #pantheon et #heritage." },
+    { label: "UNESCO, \"Gióng festival of Phù Đổng and Sóc temples\", Representative List of the Intangible Cultural Heritage of Humanity, 2010", url: "https://ich.unesco.org/en/6-representative-list-00335?id=00443&include=slideshow_inc.php", note: "Confirme la reconnaissance du festival de Thánh Gióng citée en #anecdotes et #frise." },
+    { label: "Keith W. Taylor, The Birth of Vietnam, University of California Press, 1983", note: "Analyse historienne de la légende des rois Hùng et de la culture de Đông Sơn, utilisée pour nuancer la chronologie en #anecdotes." },
+  ]} />
+</PageLayout>

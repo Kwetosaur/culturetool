@@ -26,6 +26,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Émeraude et or liturgique, lumière plutôt que liquide : la matière de
    l'objet plutôt que la géographie du sujet, principe visuel de la série. */
@@ -292,4 +293,10 @@ const noms = [
       éditoriales qui l'ont entouré ces dernières décennies.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "« Perceval; ou, le conte du Graal », Encyclopaedia Britannica", url: "https://www.britannica.com/topic/Perceval-ou-le-conte-du-Graal", note: "Présente le roman inachevé de Chrétien de Troyes et son objet non explicitement sacré" },
+    { label: "Étude sur la christianisation du récit par Robert de Boron, eScholarship, University of California", url: "https://escholarship.org/content/qt5sm6v0cm/qt5sm6v0cm.pdf", note: "Analyse académique de la façon dont Robert de Boron ajoute la dimension christique absente de Chrétien de Troyes" },
+    { label: "« The Sacro Catino: Did Napoleon break the Holy Grail? », Historic Mysteries", url: "https://www.historicmysteries.com/history/sacro-catino/23437/", note: "Retrace l'analyse menée sous Napoléon qui identifie le calice de Gênes comme du verre, pas de l'émeraude" },
+  ]} />
 </PageLayout>

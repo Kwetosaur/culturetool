@@ -102,7 +102,7 @@ fait croire le travail terminé.
 | Coréenne | icône prête | Ourse (Dangun) |
 | Tibétaine/Bön | icône prête | Montagne sacrée |
 | Mongole | icône prête | Loup gris ou ciel étoilé |
-| Vietnamienne | icône prête | Œuf fendu |
+| Vietnamienne | ✅ fait | Œuf fendu |
 | Turque/Asie centrale | icône prête | Loup gris (Asena) |
 | Cosmologie bouddhiste | icône prête | Mont Meru (montagne à degrés) |
 | Ainu | icône prête | Ours de face, silhouette sobre (kamuy) |
@@ -113,7 +113,7 @@ fait croire le travail terminé.
 | Page | Statut | Icône |
 |---|---|---|
 | Yoruba | ✅ fait | Hache double (Shango) |
-| Dogon | icône prête | Étoile Sirius |
+| Dogon | ✅ fait | Étoile Sirius |
 | Ashanti/Akan | icône prête | Araignée (Anansi) |
 | Zoulou | icône prête | Bouclier + lance |
 | Éthiopienne | icône prête | Arche/couronne |
@@ -152,7 +152,7 @@ fait croire le travail terminé.
 | Grèce antique | ✅ fait | Amphore |
 | Vikings/Scandinavie médiévale | ✅ fait | Drakkar (bateau viking) |
 | Celtes (Gaule/Îles britanniques) | icône prête | Bouclier celtique/torque |
-| Empire byzantin | icône prête | Aigle bicéphale |
+| Empire byzantin | ✅ fait | Aigle bicéphale |
 | Cités-États italiennes | icône prête | Lion ailé (Venise) |
 | Al-Andalus | icône prête | Arc outrepassé (fer à cheval) de Cordoue |
 | Minoens (Crète) | icône prête | Taureau bondissant de profil |
@@ -175,7 +175,7 @@ fait croire le travail terminé.
 | Civilisation de l'Indus | icône prête | Sceau à motif de taureau |
 | Japon (culture) | icône prête | Éventail plié |
 | Corée | icône prête | Toit de palais coréen |
-| Khmers (Angkor) | icône prête | Tour d'Angkor Vat |
+| Khmers (Angkor) | ✅ fait | Tour d'Angkor Vat |
 | Empire timouride | icône prête | Coupole nervurée à côté d'un sextant astronomique (Ulugh Beg) |
 
 ### Afrique
@@ -218,7 +218,7 @@ fait croire le travail terminé.
 | Les Sirènes | icône prête | Silhouette mi-femme mi-poisson |
 | Le Loup-Garou | icône prête | Silhouette de loup debout |
 | Black Shuck | icône prête | Chien noir, yeux rouges |
-| Le Golem de Prague | icône prête | Silhouette d'argile massive et sans visage, petit parchemin à la bouche |
+| Le Golem de Prague | ✅ fait | Silhouette d'argile massive et sans visage, petit parchemin à la bouche |
 | La Tarasque | icône prête | Dragon trapu à carapace, monté sur roues de procession |
 | Le Basilic | icône prête | Coq à queue de serpent |
 | Le Tatzelwurm | icône prête | Ver à tête de chat, deux pattes avant seulement |
@@ -253,7 +253,7 @@ fait croire le travail terminé.
 | Le Yeti | ✅ fait | Empreinte dans la neige |
 | Le Kappa | ✅ fait | Carapace + bec stylisés |
 | L'Orang Pendek | icône prête | Silhouette de primate accroupi |
-| Le Yeren | icône prête | Silhouette de primate poilu debout |
+| Le Yeren | ✅ fait | Silhouette de primate poilu debout |
 
 ### Afrique
 | Page | Statut | Icône |
@@ -279,7 +279,7 @@ fait croire le travail terminé.
 | Triangle des Bermudes | ✅ fait | Boussole/triangle |
 | Amelia Earhart | ✅ fait | Avion stylisé qui s'efface |
 | Le Mary Celeste | ✅ fait | Voilier fantôme |
-| Colonie de Roanoke | icône prête | Inscription stylisée |
+| Colonie de Roanoke | ✅ fait | Inscription stylisée |
 | Cité de Paititi / El Dorado | icône prête | Masque/pièce d'or stylisé |
 | Oak Island | icône prête | Puits circulaire vu en coupe, couches successives |
 | Sphères de pierre du Costa Rica | icône prête | Trois sphères de tailles différentes alignées |
@@ -309,7 +309,7 @@ fait croire le travail terminé.
 ### Asie
 | Page | Statut | Icône |
 |---|---|---|
-| Sanxingdui | icône prête | Masque de bronze aux yeux globuleux |
+| Sanxingdui | ✅ fait | Masque de bronze aux yeux globuleux |
 | Triangle du Dragon (Devil's Sea) | icône prête | Tourbillon/vague stylisée |
 | Pierres de Dropa | icône prête | Disque gravé stylisé |
 | Dwarka engloutie | icône prête | Temple englouti (vagues sur toit) |
@@ -352,7 +352,7 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 | Le Saint Graal | ✅ fait | Calice à pied, simple |
 | La Lance Sacrée | ✅ fait | Fer de lance long et fin, hampe coupée |
 | La Chambre d'Ambre | ✅ fait | Fragment de panneau mural orné, angle brisé |
-| Les épées Ulfberht | icône prête | Lame à plat portant une inscription stylisée (traits, pas de lettres lisibles) |
+| Les épées Ulfberht | ✅ fait | Lame à plat portant une inscription stylisée (traits, pas de lettres lisibles) |
 | La Pierre de Scone | icône prête | Bloc de pierre rectangulaire avec ses deux anneaux de transport |
 | Durandal | icône prête | Épée fichée **horizontalement** dans une paroi rocheuse (angle volontairement différent d'Excalibur) |
 | Le Trésor des Templiers | icône prête | Coffre fermé portant une croix pattée |
@@ -386,7 +386,7 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 | Le Koh-i-Noor | ✅ fait | Diamant taillé, facettes géométriques |
 | Le Sceau de jade impérial | icône prête | Sceau carré à poignée sculptée |
 | Le Honjo Masamune | icône prête | Katana dans son fourreau, courbe marquée |
-| Le Vajra | icône prête | Vajra à branches symétriques |
+| Le Vajra | ✅ fait | Vajra à branches symétriques |
 | Le Ruyi Jingu Bang | icône prête | Bâton long à extrémités cerclées |
 
 ### Afrique (3)

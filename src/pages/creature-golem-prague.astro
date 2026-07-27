@@ -1,0 +1,165 @@
+---
+/*
+  Le Golem de Prague — onzième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict.
+  #science et #theories restent deux <Section> distinctes (piège déjà
+  rencontré trois fois cette session sur d'autres pages — voir
+  docs/audit-existant.md).
+
+  Cas structurellement proche d'Excalibur, déjà signalé dans
+  docs/listes/liste-creatures-mysteres-monde.md : un personnage historique
+  réel (le rabbin Loew, XVIe siècle) et un récit de golem qui ne cristallise
+  par écrit, sous la forme qu'on lui connaît aujourd'hui, qu'au XIXe puis au
+  début du XXe siècle — traité explicitement en #origine et en #theories,
+  pas présenté comme une légende continue depuis le XVIe siècle.
+
+  Contexte sensible : la légende répond à une menace bien réelle
+  (accusations de meurtre rituel et pogroms visant la communauté juive de
+  Prague) — traité avec sobriété en #origine et en #heritage, sans mise en
+  scène de la violence elle-même.
+
+  Effets : data-egg="golem" + data-scroll-fx="golemEmetMet" sur #portrait,
+  piste documentée dans plan-effets.md ("un mot hébreu qui s'inscrit puis
+  dont une lettre s'effrite — emet -> met, vérité -> mort").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Argile brune, or hébraïque, bleu nuit du ghetto de Prague : la matière du
+   récit plutôt qu'une palette "Europe centrale" générique. */
+const palette = {
+  bg: '#181410',
+  'bg-deep': '#0c0a08',
+  surface: '#241e16',
+  'surface-alt': '#2e2618',
+  border: '#5c4a30',
+  ink: '#f5ecd8',
+  text: '#dcc8a0',
+  'text-dim': '#a08860',
+  accent: '#8a6a35',
+  'accent-bright': '#c9982f',
+  accent2: '#3a4a6a',
+  'accent2-bright': '#5a7aa8',
+  verdict: '#5a2020',
+  'verdict-bright': '#8a3a35',
+  glow: 'rgba(201,152,47,0.18)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Variantes' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Golem de Prague"
+  serie="Créatures Légendaires du Monde"
+  description="Un géant d'argile animé par un mot hébreu, façonné par un rabbin réellement historique pour protéger le ghetto juif de Prague — mais dont le récit précis que nous connaissons aujourd'hui n'a été mis par écrit que trois siècles après sa mort."
+  href="creature-golem-prague.html"
+  egg="golem"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="PRAGUE · XVIe SIÈCLE (RÉCIT : XIXe-XXe)"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>le Yeren</strong>"
+>
+  <p class="subtitle" slot="hero">אמת · Emet — la vérité qui anime, la mort qui arrête</p>
+  <p class="tagline" slot="hero">
+    Le même écart que pour Excalibur, mais côté golem : un rabbin bien réel, et un récit de
+    créature d'argile mis par écrit des siècles après sa mort plutôt que transmis sans rupture.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Légende hébraïque tardive, adossée à une figure historique réelle"
+    note="Le rabbin Judah Loew ben Bezalel (le Maharal de Prague) a bien existé et fut un érudit reconnu. Aucune source de son vivant ne lui attribue la fabrication d'un golem : ce récit précis apparaît par écrit près de trois siècles plus tard."
+  />
+
+  <Section id="origine" label="Un rabbin réel, un récit tardif" title="Le Maharal de Prague et la menace du blood libel" intro="La figure centrale de ce récit est historiquement attestée ; l'histoire du golem qu'on lui attribue, elle, ne l'est pas au même degré.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Un érudit réellement historique" sub="Judah Loew ben Bezalel, v. 1520-1609" body="Grand rabbin de Prague, philosophe et enseignant respecté, dont l'œuvre théologique et talmudique bien réelle est indépendante de toute légende de golem." />
+      <InfoCard num="II" title="Une menace bien réelle pour justifier le récit" sub="Accusations de meurtre rituel" body="Le contexte que le récit invoque — des accusations de crime rituel (blood libel) visant régulièrement les communautés juives d'Europe centrale et débouchant sur des violences — est, lui, parfaitement documenté historiquement." />
+      <InfoCard num="III" title="Un récit mis par écrit trois siècles plus tard" sub="Cristallisation au XIXe-XXe siècle" body="Aucune source contemporaine du vivant du Maharal ne mentionne un golem à son sujet ; la version que l'on connaît aujourd'hui se fixe véritablement dans des textes publiés à partir du XIXe siècle." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapporte la tradition" title="Un géant d'argile muet, animé par un mot" scrollFx="golemEmetMet" intro="Une figure façonnée à partir de la terre du fleuve Vltava, dépourvue de parole, dont l'existence entière tient à une inscription.">
+    <div class="card-grid wide">
+      <FigureCard name="Une stature d'argile" role="Créature façonnée, pas née" tags={['Vltava', 'Silence']} body="Modelé à partir de la glaise des berges du fleuve qui traverse Prague, le Golem ne parle jamais et n'a, selon la tradition, aucune volonté propre en dehors des ordres qu'on lui donne." />
+      <FigureCard name="Le mot qui anime" role="אמת — « vérité »" tags={['Front ou bouche', 'Shem']} body="Selon les versions, l'inscription du mot hébreu emet sur son front, ou l'insertion d'un parchemin portant un nom divin (shem) dans sa bouche, lui donne vie." />
+      <FigureCard name="Le geste qui arrête" role="Effacer une lettre" tags={['Emet → Met']} body="Retirer la première lettre du mot emet (« vérité ») laisse met (« mort ») — un seul geste d'écriture suffit, dans la tradition, à ramener le géant à l'inertie." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Variantes recueillies" title="Protection, rébellion et grenier scellé">
+    <StoryBlock num="Variante I" title="Le protecteur du ghetto" body="Face à la menace d'un pogrom motivé par une fausse accusation de crime rituel, le Maharal façonne le Golem pour surveiller les rues du quartier juif la nuit et déjouer les complots visant sa communauté." />
+    <StoryBlock num="Variante II" title="Le géant qui échappe au contrôle" body="Dans plusieurs versions, le Golem, livré à lui-même un jour de sabbat où son créateur a oublié de le désactiver, devient incontrôlable et sème la destruction — motif récurrent d'une créature protectrice qui se retourne contre l'ordre qu'elle devait servir." />
+    <StoryBlock num="Variante III" title="Le grenier de la synagogue Vieille-Nouvelle" body="Une fois la menace écartée, le Maharal désactive définitivement le Golem et fait entreposer ses restes dans le grenier (guenizah) de la synagogue Vieille-Nouvelle de Prague — un lieu que la tradition interdit depuis d'ouvrir ou même de visiter." />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un manuscrit apocryphe au cinéma expressionniste" title="Comment le Golem est devenu mondial">
+    <div class="card-grid compact">
+      <MiniCard title="Yudl Rosenberg, 1909" tag="« Nifla'ot Maharal »" body="Un rabbin polonais publie ce récit en le présentant comme un manuscrit ancien retrouvé — une présentation aujourd'hui considérée par les chercheurs comme une invention littéraire plutôt qu'une découverte authentique." />
+      <MiniCard title="Gustav Meyrink, 1915" tag="Roman « Le Golem »" body="Best-seller autrichien qui installe durablement la figure dans l'imaginaire littéraire européen, en l'éloignant sensiblement du récit religieux d'origine." />
+      <MiniCard title="Paul Wegener, 1920" tag="Cinéma expressionniste allemand" body="Le film « Der Golem, wie er in die Welt kam » fixe l'image visuelle la plus durable de la créature — silhouette massive et rigide, souvent citée comme influence directe sur le Frankenstein cinématographique de 1931." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucune trace matérielle attendue" body="Une figure d'argile non cuite exposée aux intempéries pendant des siècles ne laisserait de toute façon aucun vestige archéologique identifiable — l'absence de preuve matérielle n'est ici ni surprenante ni probante dans un sens ou dans l'autre." />
+    <ScienceBlock num="Enquête 2" title="Le grenier existe, la légende de son inviolabilité aussi" body="Le grenier de la synagogue Vieille-Nouvelle de Prague est un lieu réel, dont l'accès reste par tradition fortement restreint — des travaux de restauration menés au XIXe siècle n'ont, selon les rapports disponibles, rapporté aucune découverte notable." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Un récit protecteur, né en réponse à une menace réelle"
+      level="consensus"
+      status="Consensus"
+      body="Que le récit précis soit tardif ou non, sa fonction sociale — rassurer une communauté régulièrement exposée à des accusations mensongères et à des violences bien réelles — fait consensus chez les folkloristes."
+      attrib="Position dominante en études juives et folkloriques"
+    />
+    <TheoryCard
+      title="Une invention largement littéraire du XIXe-XXe siècle greffée sur un rabbin réel"
+      level="plausible"
+      status="Hypothèse la plus documentée"
+      body="Aucune source contemporaine du Maharal ne mentionne de golem ; l'attribution se construit surtout à travers des textes allemands et yiddish du XIXe siècle, puis se fixe définitivement avec le texte de Rosenberg en 1909, présenté à tort comme un document ancien."
+      attrib="Position dominante chez les historiens du folklore juif"
+    />
+    <TheoryCard
+      title="Un golem d'argile a réellement existé et reste caché dans le grenier de la synagogue"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune preuve matérielle ne vient étayer cette lecture littérale, qui reste une croyance populaire et un puissant argument touristique plutôt qu'une hypothèse retenue par les chercheurs."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le Golem fait encore">
+    <HeritageBlock title="Un ancêtre littéraire de la créature artificielle" body="Le Golem est très souvent cité comme un jalon important dans la généalogie des récits d'êtres artificiels, aux côtés de Frankenstein puis des robots et intelligences artificielles de la culture populaire contemporaine." />
+    <HeritageBlock title="Un mot devenu courant en hébreu" body="Le terme « golem » désigne aujourd'hui, dans l'usage courant, aussi bien une figure artificielle au sens large qu'une personne maladroite ou peu dégourdie." />
+    <HeritageBlock title="Une attraction touristique et un symbole identitaire" body="Statues, boutiques et visites guidées consacrées au Golem structurent une partie du tourisme du quartier juif de Prague, tout en restant, pour certains, un symbole sérieux de protection communautaire." />
+    <CautionBox>
+      Cette page évoque des accusations de meurtre rituel et des pogroms réels sans en détailler
+      la violence : le contexte historique justifie la fonction protectrice du récit, mais n'a
+      pas besoin d'être mis en scène pour être pris au sérieux.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Moshe Idel, Golem: Jewish Magical and Mystical Traditions on the Artificial Anthropoid, SUNY Press, 1990", url: "https://muse.jhu.edu/book/13178", note: "Étude académique de référence sur l'ensemble des traditions du golem" },
+    { label: "« Golem Legend », YIVO Encyclopedia of Jews in Eastern Europe", url: "https://encyclopedia.yivo.org/article.aspx/Golem_Legend", note: "Retrace la formation tardive du récit précis attaché au Maharal de Prague" },
+    { label: "Shnayer Leiman, cité dans « The Golem of Prague in Recent Rabbinic Literature », The Seforim Blog, 2010", url: "https://seforimblog.com/2010/05/golem-of-prague-in-recent-rabbinic/", note: "Analyse le texte de 1909 de Yudl Rosenberg comme une fabrication littéraire présentée à tort comme un manuscrit ancien" },
+  ]} />
+</PageLayout>

@@ -34,6 +34,7 @@ import Timeline from '../components/Timeline.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
 import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
 
 /* Braise et nuit : le feu sacré (Ahura Mazda) contre l'obscurité (Angra
    Mainyu) — le dualisme fondateur de la religion, en couleurs. */
@@ -298,4 +299,12 @@ const creations = [
       fragile démographiquement.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Mary Boyce, Zoroastrians: Their Religious Beliefs and Practices, Routledge, 1979 (2e éd. 2001)", url: "https://www.routledge.com/Zoroastrians-Their-Religious-Beliefs-and-Practices/Boyce/p/book/9780415239035", note: "Référence académique de fond pour la cosmogonie, le panthéon et l'histoire du zoroastrisme présentés sur la page." },
+    { label: "\"AMƎŠA SPƎNTA\", Encyclopaedia Iranica", url: "https://www.iranicaonline.org/articles/amesa-spenta-beneficent-divinity/", note: "Appuie la section sur les sept Amesha Spenta et leur origine dans le Bundahishn." },
+    { label: "UNESCO, \"Nowruz\", Représentative List of the Intangible Cultural Heritage of Humanity, 2009 (étendu 2016)", url: "https://ich.unesco.org/en/RL/nawrouz-novruz-nowrouz-nowrouz-nawrouz-nauryz-nooruz-nowruz-navruz-nevruz-nowruz-navruz-02097", note: "Confirme la reconnaissance internationale du Nowruz évoquée en #heritage." },
+    { label: "Encyclopaedia Britannica, \"Zoroastrianism\"", url: "https://www.britannica.com/topic/Zoroastrianism", note: "Vue d'ensemble utilisée pour la frise historique et l'expansion de la religion de l'Iran achéménide à la diaspora parsie." },
+    { label: "Gathas, Yasna 30 (hymnes attribués à Zoroastre)", note: "Source du récit des « deux esprits jumeaux » cité en #legendes." },
+  ]} />
 </PageLayout>

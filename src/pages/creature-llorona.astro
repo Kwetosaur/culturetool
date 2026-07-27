@@ -25,6 +25,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Nuit au bord de l'eau, robe pâle, lune froide : la matière du récit
    plutôt qu'une palette "Mexique" générique. */
@@ -149,4 +150,10 @@ const SECTIONS = [
       page.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Domino Renee Perez, There Was a Woman: La Llorona from Folklore to Popular Culture, University of Texas Press, 2008", note: "Étude de référence recensant les variantes régionales et la fonction culturelle du récit." },
+    { label: "Bacil F. Kirtley, « La Llorona and Related Themes », Western Folklore, vol. 19, n° 3, 1960, p. 155-168", note: "Première étude folkloristique systématique des variantes régionales du récit." },
+    { label: "Mexicolore, « La Llorona and the Days of the Dead in Mexico »", url: "https://www.mexicolore.co.uk/aztecs/home/la-llorona-and-the-days-of-the-dead-in-mexico-1", note: "Détaille le rapprochement avec la déesse Cihuacóatl évoqué en Origine." },
+  ]} />
 </PageLayout>

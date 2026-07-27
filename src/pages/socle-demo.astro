@@ -34,6 +34,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* --- Les ~14 variables du vocabulaire normalise (voir src/styles/tokens.css).
        Ici : acier poli et violet améthyste, la couleur de la categorie objets. --- */
@@ -201,4 +202,9 @@ const jalons = [
       d'un roi du VIe.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Geoffroy de Monmouth, Historia Regum Britanniae, v. 1136", note: "Première apparition de « Caliburnus », le nom qui deviendra Excalibur." },
+    { label: "Thomas Malory, Le Morte d'Arthur, 1485", url: "https://www.gutenberg.org/ebooks/1251", note: "Fusionne l'épée du rocher et l'épée du lac en un seul objet." },
+  ]} />
 </PageLayout>

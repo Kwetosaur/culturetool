@@ -36,6 +36,7 @@ import Timeline from '../components/Timeline.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
 import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
 
 /* Indigo adire, rouge de Shango, or des perles : les couleurs textiles et
    rituelles yoruba plutôt qu'une palette « Afrique » générique. */
@@ -275,4 +276,11 @@ const domaines = [
       sans discussion aux grandes religions abrahamiques ailleurs sur ce site.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "William Bascom, Ifa Divination: Communication Between Gods and Men in West Africa, Indiana University Press, 1969", url: "https://archive.org/details/ifadivinationcom0000basc", note: "Étude de référence sur le système divinatoire Ifa et le rôle des babalawo décrits en #pantheon." },
+    { label: "UNESCO, \"Ifa divination system\", Masterpieces of the Oral and Intangible Heritage of Humanity, 2005", url: "https://ich.unesco.org/en/RL/ifa-divination-system-00146", note: "Confirme la reconnaissance internationale d'Ifa citée en #anecdotes." },
+    { label: "UNESCO, \"Osun-Osogbo Sacred Grove\", World Heritage List, 2005", url: "https://whc.unesco.org/en/list/1118/", note: "Source du classement du bosquet sacré mentionné en #monde et #anecdotes." },
+    { label: "The Nobel Prize, \"Wole Soyinka – Facts\", Nobel Prize in Literature 1986", url: "https://www.nobelprize.org/prizes/literature/1986/soyinka/biographical/", note: "Confirme le prix Nobel et l'usage de la figure d'Ogun dans l'œuvre de Soyinka, cité en #anecdotes." },
+  ]} />
 </PageLayout>

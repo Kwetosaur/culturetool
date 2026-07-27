@@ -18,6 +18,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Brume grise-verte de l'Atlantique, laiton des instruments de bord : la
    matière du navire plutôt qu'un décor générique de mer. */
@@ -144,4 +145,10 @@ const SECTIONS = [
       explicitement plutôt que de la laisser de côté.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Smithsonian Magazine, « An Abandoned Merchant Ship Was Discovered Floating in the Atlantic in 1872. The Mystery of Its Missing Crew Was Never Solved »", url: "https://www.smithsonianmag.com/smart-news/an-abandoned-merchant-ship-was-discovered-floating-in-the-atlantic-1872-the-mystery-its-missing-crew-never-solved-180985547/", note: "Synthèse des faits établis et des principales hypothèses sur la disparition de l'équipage." },
+    { label: "UCL News, « Solved: Mystery of the Mary Celeste », mai 2006", url: "https://www.ucl.ac.uk/news/2006/may/solved-mystery-mary-celeste", note: "Rend compte de la démonstration expérimentale du chimiste Andrea Sella sur l'hypothèse des vapeurs d'alcool issues des barils en chêne rouge." },
+    { label: "Arthur Conan Doyle, « J. Habakuk Jephson's Statement », The Cornhill Magazine, janvier 1884", note: "Nouvelle qui a fixé durablement l'orthographe erronée « Marie Celeste » dans la mémoire populaire." },
+  ]} />
 </PageLayout>

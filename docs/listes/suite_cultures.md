@@ -6,13 +6,13 @@ Même principe de score /10 que les autres listes, basé sur la richesse du doss
 
 ---
 
-## Déjà couvertes (10)
+## Déjà couvertes (12)
 
 Chine · Égypte Antique · Rome antique · Grèce antique · Vikings / Scandinavie médiévale ·
-Empire du Mali · Incas · Polynésie (navigation) · **Mésopotamie (culture)** ·
-**Empire perse achéménide**
+Empire du Mali · Incas · Polynésie (navigation) · Mésopotamie (culture) ·
+Empire perse achéménide · **Empire byzantin** · **Khmers (Angkor)**
 
-**24 candidates restantes** dans les tableaux ci-dessous. 6 avaient été ajoutées le
+**22 candidates restantes** dans les tableaux ci-dessous. 6 avaient été ajoutées le
 26/07/2026 pour combler des trous réels : Al-Andalus (huit siècles d'Europe absents),
 Minoens (première civilisation européenne), Carthage (angle historiographique), côte
 swahilie (tout l'océan Indien), Empire songhaï (suite du Mali), Empire timouride (Asie
@@ -28,7 +28,7 @@ centrale savante).
 | Grèce antique ✅ | 10 | Cité-État, naissance de la démocratie et de la philosophie occidentale, jeux panhelléniques |
 | Vikings / Scandinavie médiévale ✅ | 9 | Navigation océanique précoce, sociétés complexes (Thing, lois orales), expansion de l'Islande à Terre-Neuve — angle civilisationnel distinct de `mythologie-nordique.html` |
 | Celtes (Gaule &amp; Îles britanniques) | 7 | Société tribale/druidique, artisanat métallurgique (art de La Tène), résistance à la romanisation — angle civilisationnel distinct de `mythologie-celtique.html` |
-| Empire byzantin | 7 | Continuité romaine jusqu'en 1453, droit justinien, pont culturel entre Antiquité et Moyen Âge |
+| Empire byzantin ✅ | 7 | Continuité romaine jusqu'en 1453, droit justinien, pont culturel entre Antiquité et Moyen Âge |
 | Cités-États italiennes (Venise, Florence...) | 6 | République maritime marchande, mécénat des arts, banque moderne naissante |
 | Al-Andalus | 9 | Cordoue comme plus grande ville d'Europe au Xe siècle, transmission des savoirs grecs vers l'Occident latin, et une *convivencia* dont l'ampleur réelle est aujourd'hui débattue — l'Espagne musulmane, huit siècles d'histoire européenne, était totalement absente de la liste |
 | Minoens (Crète) | 8 | Première civilisation d'Europe, palais **sans fortifications**, fresques d'une modernité déconcertante, écriture linéaire A toujours non déchiffrée — bon pont avec `docs/listes/liste-creatures-mysteres-monde.md` (disque de Phaistos) |
@@ -52,7 +52,7 @@ centrale savante).
 | Civilisation de l'Indus (Mohenjo-Daro/Harappa) | 8 | Urbanisme précoce très abouti (égouts, plan en grille), écriture toujours non déchiffrée, absence apparente de hiérarchie royale marquée |
 | Japon (culture) | 7 | Société féodale (samouraïs, shogunat), esthétique du raffinement (thé, jardins), isolement volontaire (sakoku) puis modernisation éclair — angle civilisationnel distinct de `mythologie-japonaise.html` |
 | Corée | 7 | Dynasties de longue durée, inventions (première imprimerie à caractères métalliques mobiles), résilience culturelle face aux puissances voisines |
-| Khmers (Empire d'Angkor) | 7 | Réseau hydraulique sophistiqué, Angkor Vat, apogée puis effondrement encore débattu |
+| Khmers (Empire d'Angkor) ✅ | 7 | Réseau hydraulique sophistiqué, Angkor Vat, apogée puis effondrement encore débattu |
 | Empire timouride | 7 | Samarcande comme capitale savante, l'observatoire d'Ulugh Beg dont les tables astronomiques restèrent une référence pendant deux siècles — l'Asie centrale n'avait que l'Empire mongol |
 
 ## Afrique

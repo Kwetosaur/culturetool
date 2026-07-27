@@ -23,6 +23,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Aluminium d'avion, bleu Pacifique profond, ambre de coucher de soleil :
    la matière de l'appareil et de l'océan plutôt qu'un décor générique. */
@@ -151,4 +152,11 @@ const SECTIONS = [
       n'y en a pas.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Richard L. Jantz, « Amelia Earhart and the Nikumaroro Bones: A 1941 Analysis versus Modern Quantitative Techniques », Forensic Anthropology, vol. 1, n°2, 2018", url: "https://journals.upress.ufl.edu/fa/article/view/525", note: "Ré-analyse statistique des mesures osseuses de 1940, à l'origine de l'hypothèse d'une compatibilité avec la morphologie d'Earhart." },
+    { label: "TIGHAR (The International Group for Historic Aircraft Recovery), site officiel", url: "https://tighar.org/", note: "Organisation à l'origine des expéditions menées sur l'atoll de Nikumaroro depuis 1989." },
+    { label: "CNN, « Amelia Earhart mystery: Photo appears taken 2 years before pilot vanished », 12 juillet 2017", url: "https://www.cnn.com/2017/07/12/asia/amelia-earhart-photo-japan", note: "Rend compte de la découverte, par le blogueur Kota Yamano, que la photographie présentée comme preuve datait en réalité de 1935." },
+    { label: "National Geographic, « 'Tantalizing clue' marks end of Amelia Earhart expedition »", url: "https://www.nationalgeographic.com/culture/article/tantalizing-clue-marks-end-amelia-earhart-expedition", note: "Bilan de l'expédition sous-marine de Robert Ballard en 2019 près de Nikumaroro, sans épave localisée." },
+  ]} />
 </PageLayout>

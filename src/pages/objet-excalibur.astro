@@ -26,6 +26,7 @@ import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
 import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
 
 /* Acier poli et eau de lac : la matière de l'objet, pas la géographie du sujet —
    c'est le principe visuel propre à la série objets. */
@@ -354,4 +355,10 @@ const popculture = [
       méfiance une affirmation assurée sur « le véritable Arthur ».
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Geoffroy de Monmouth, Historia Regum Britanniae, v. 1136", url: "https://d.lib.rochester.edu/crusades/text/historia-regum-britanniae.html", note: "Première attestation datable de l'épée, sous le nom latin Caliburnus" },
+    { label: "Thomas Malory, Le Morte d'Arthur, imprimé par Caxton, 1485", url: "https://www.gutenberg.org/ebooks/1251", note: "Version qui fixe la forme canonique du récit et l'inscription de la pierre" },
+    { label: "Roger de Hoveden, Chronica, trad. Henry T. Riley, The Annals of Roger de Hoveden, H. G. Bohn, 1853", url: "https://archive.org/details/annalsofrogerdeh02hoveuoft", note: "Source primaire du don d'une épée présentée comme celle d'Arthur à Tancrède de Sicile en 1191" },
+  ]} />
 </PageLayout>

@@ -35,6 +35,7 @@ Chaque page reste un fichier HTML autonome (`mystere-XXX.html`), même famille v
 - **Aucun chiffre imposé d'une page à l'autre** : le nombre de théories, de témoignages ou d'éléments culturels dépend uniquement de la richesse réelle du dossier.
 - **Mettre en valeur quand la science a résolu le mystère** : plusieurs cas de cette série ont en réalité une explication solide aujourd'hui (mécanisme d'Anticythère, canular de l'homme de Piltdown) — ce sont d'excellents contrepoints aux mystères réellement non résolus, et la série doit inclure les deux types plutôt que de céder à la tentation du mystère pour le mystère.
 - **Design adapté à chaque mystère** : palette et ambiance suivent le lieu et l'époque (bleu océan et rouille pour le Triangle des Bermudes, pierre et brume pour Stonehenge...).
+- **Bibliographie obligatoire** (depuis le 27/07/2026) : chaque page se termine par un bloc `Sources` réel — voir `docs/plan_page.md` § Sources et `src/components/Sources.astro`.
 
 ---
 

@@ -1,0 +1,161 @@
+---
+/*
+  La Colonie perdue de Roanoke — onzième mystère de la série. Structure
+  imposée par docs/plans/plan-serie-mysteres.md : 7 sections, badge de
+  verdict. #science et #theories restent deux <Section> distinctes.
+
+  Portée du déchiffrement (fx-decode) : réservée aux mythologies et objets
+  légendaires (arbitrage du 26/07/2026, docs/plans/plan-effets.md) — la
+  gravure du mot CROATOAN est donc rendue en scène animée simple
+  (croatoanCarve), pas via le mécanisme fx-decode.
+
+  Effets : data-egg="roanoke" + data-scroll-fx="croatoanCarve" sur
+  #enigme, piste documentée dans plan-effets.md ("le mot CROATOAN qui se
+  grave lettre par lettre dans le bois").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Bois brut gravé, brume côtière grise-verte, lueur de bougie : la matière
+   d'un fort de bois abandonné plutôt qu'un décor colonial générique. */
+const palette = {
+  bg: '#141a16',
+  'bg-deep': '#0a0e0c',
+  surface: '#202822',
+  'surface-alt': '#28322a',
+  border: '#4a5c4a',
+  ink: '#eef2ea',
+  text: '#cdd8c8',
+  'text-dim': '#8aa084',
+  accent: '#a8926a',
+  'accent-bright': '#c9b090',
+  accent2: '#3a5a5a',
+  'accent2-bright': '#5a8a8a',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(168,146,106,0.18)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="La Colonie perdue de Roanoke"
+  serie="Grands Mystères du Monde"
+  description="Cent quinze colons anglais disparus sans trace en 1587, un seul mot gravé sur un poteau — CROATOAN — et aucune croix de détresse, le signal convenu qui aurait signifié un départ forcé. L'archéologie récente penche pour une dispersion pacifique plutôt qu'un massacre."
+  href="mystere-roanoke.html"
+  egg="roanoke"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="CAROLINE DU NORD · 1587-1590"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : <strong>Sanxingdui</strong>"
+>
+  <p class="subtitle" slot="hero">Un seul mot gravé, aucune croix de détresse</p>
+  <p class="tagline" slot="hero">
+    Cent quinze colons disparus sans un seul signe de violence — et un mot gravé qui, depuis
+    plus de quatre siècles, désigne peut-être moins une énigme qu'un déménagement pacifique.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Non résolu officiellement, plusieurs hypothèses archéologiques récentes convergentes"
+    note="Aucune preuve définitive n'a jamais tranché le sort exact des colons, mais l'archéologie des dernières décennies converge plutôt vers une dispersion pacifique parmi des populations amérindiennes alliées que vers un massacre ou une catastrophe soudaine."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Une colonie anglaise isolée trop longtemps" intro="Avant d'aborder ce qui reste mystérieux, ce qui ne l'est pas : les circonstances du départ du gouverneur et le délai de son retour sont bien documentés par ses propres écrits.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une colonie fondée en 1587" sub="Île de Roanoke, Caroline du Nord actuelle" body="Environ cent quinze colons anglais, hommes, femmes et enfants, s'installent sous la direction du gouverneur John White, dans une tentative de colonisation permanente du Nouveau Monde." />
+      <InfoCard num="II" title="Le retour du gouverneur pour des vivres" sub="Été 1587" body="John White repart en Angleterre chercher des ravitaillements, laissant la colonie sur l'île, avec l'intention affichée de revenir rapidement." />
+      <InfoCard num="III" title="Un retard de trois ans" sub="Guerre anglo-espagnole" body="La mobilisation de tous les navires anglais disponibles contre l'Invincible Armada espagnole retarde son retour de près de trois ans, bien au-delà du délai initialement prévu." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Un mot gravé, aucun signe de détresse" scrollFx="croatoanCarve" intro="Le mystère tient à un contraste précis : la disparition totale des colons, mais l'absence du signal convenu qui aurait dû indiquer un départ sous la contrainte.">
+    <div class="card-grid wide">
+      <FigureCard name="Un seul mot gravé" role="CROATOAN, sur un poteau de la palissade" tags={['Aucune ponctuation de détresse']} body="À son retour en 1590, John White ne trouve la colonie ni détruite ni habitée, mais un seul mot gravé sur un poteau du fort abandonné — le nom d'une île voisine et d'un peuple allié." />
+      <FigureCard name="Un signal convenu absent" role="La croix de Malte manquante" tags={['Accord préalable']} body="Avant son départ, White avait convenu avec les colons que toute évacuation forcée serait signalée par une croix gravée à côté du message — aucune croix de ce type n'est retrouvée, suggérant un départ non contraint." />
+      <FigureCard name="Aucun signe de violence" role="Ni combat ni pillage visible" tags={['Objets abandonnés intacts']} body="Le site ne présente aucune trace de bataille, d'incendie ou de pillage soudain — un indice qui oriente davantage vers un départ organisé que vers une attaque surprise." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Du retour de White à l'archéologie moderne" title="Trois siècles de recherches, avant la relance récente">
+    <Timeline items={[
+      { year: 'Août 1587', title: 'Départ de John White', body: "Le gouverneur repart chercher des vivres en Angleterre, laissant la colonie sur l'île de Roanoke." },
+      { year: '1588', title: 'L\'Invincible Armada mobilise tous les navires', body: "La guerre contre l'Espagne immobilise les navires anglais disponibles, retardant tout retour vers la colonie." },
+      { year: '1590', title: 'Le retour de White', body: "Il découvre la colonie abandonnée et le mot CROATOAN gravé sur un poteau, sans pouvoir organiser de recherche approfondie faute de temps et de conditions favorables." },
+      { year: '1937', title: 'Les « pierres de Dare »', body: "Des pierres gravées prétendant relater le sort des colons apparaissent ; la plupart sont aujourd'hui considérées comme des canulars, à l'exception éventuelle de la toute première." },
+      { year: '1998-2010s', title: 'Fouilles sur l\'île de Hatteras (site de Croatoan)', body: "Des archéologues mettent au jour des objets européens du XVIe siècle mêlés à des vestiges amérindiens, compatibles avec une installation durable de colons parmi la population locale." },
+      { year: '2015-2016', title: 'Le « Site X »', body: "Des fouilles à l'intérieur des terres révèlent des fragments de poterie européenne datables de la période, suggérant qu'une partie des colons aurait pu se disperser vers plusieurs destinations distinctes plutôt qu'une seule." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'une pièce de théâtre à la fiction télévisée" title="Un mystère devenu emblème national américain">
+    <div class="card-grid compact">
+      <MiniCard title="« The Lost Colony », depuis 1937" tag="Théâtre de plein air" body="Cette pièce symphonique, jouée chaque été sur le site même de Fort Raleigh, est l'une des plus anciennes productions de théâtre en plein air toujours en activité aux États-Unis." />
+      <MiniCard title="Une expression passée dans la langue" tag="« The Lost Colony »" body="L'expression est devenue une référence culturelle américaine généraliste, bien au-delà du cercle des passionnés d'histoire coloniale." />
+      <MiniCard title="Reprises fictionnelles multiples" tag="Séries et romans" body="Le mystère a inspiré de nombreuses œuvres de fiction américaines, souvent avec une tonalité surnaturelle très éloignée des hypothèses archéologiques sérieuses." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Des objets européens retrouvés parmi des sites amérindiens" body="Des fouilles menées sur l'île de Hatteras (l'ancienne Croatoan) ont mis au jour des objets d'origine européenne datables du XVIe siècle mêlés à des vestiges d'occupation amérindienne — une cohabitation matérielle compatible avec une installation durable plutôt qu'un simple passage." />
+    <ScienceBlock num="Enquête 2" title="Une dispersion plausible en plusieurs groupes" body="Les découvertes plus récentes à l'intérieur des terres suggèrent qu'une partie au moins des colons aurait pu se répartir entre plusieurs communautés amérindiennes alliées plutôt que rester groupée en un seul lieu — ce qui expliquerait la difficulté à localiser un site unique et définitif." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Les colons se sont installés pacifiquement parmi les Croatans et d'autres peuples alliés"
+      level="plausible"
+      status="Hypothèse la plus soutenue par l'archéologie récente"
+      body="Cohérente avec le mot gravé, l'absence de signal de détresse, l'absence de trace de violence, et les découvertes archéologiques récentes de matériel européen sur des sites amérindiens de la région."
+      attrib="Hypothèse dominante chez les archéologues du Roanoke Colony Research"
+    />
+    <TheoryCard
+      title="Les colons ont péri de faim, de maladie ou lors d'une tempête en tentant de rentrer par eux-mêmes"
+      level="plausible"
+      status="Hypothèse concurrente sérieuse"
+      body="Une sécheresse sévère documentée par l'étude des cernes d'arbres touche justement la région à cette période, ce qui aurait pu pousser les colons à un départ précipité et risqué, sans qu'on sache avec certitude vers où ni avec quel résultat."
+      attrib="Hypothèse discutée en histoire coloniale nord-américaine"
+    />
+    <TheoryCard
+      title="Les colons ont été massacrés par des tribus hostiles ou par des rivaux espagnols"
+      level="folklore"
+      status="Peu soutenu"
+      body="Aucune trace archéologique de violence n'a jamais été retrouvée sur le site d'origine, ce qui rend cette hypothèse nettement moins compatible avec les indices matériels disponibles que les scénarios de dispersion pacifique." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ce mystère fait encore">
+    <HeritageBlock title="Un site historique national actif" body="Fort Raleigh, sur l'île de Roanoke, est aujourd'hui un site historique national américain, régulièrement fouillé et ouvert au public." />
+    <HeritageBlock title="Un cas d'école archéologique en cours" body="Les recherches du Roanoke Colony Research Office et de la First Colony Foundation continuent activement d'explorer de nouveaux sites, avec des méthodes d'imagerie et d'analyse de plus en plus précises." />
+    <HeritageBlock title="Une expression toujours vivante" body="« The Lost Colony » reste une référence culturelle largement partagée aux États-Unis, entretenue chaque été par la représentation théâtrale donnée sur les lieux mêmes." />
+    <CautionBox>
+      Les théories les plus sensationnalistes autour de ce mystère (créature surnaturelle,
+      portail vers un autre monde) n'ont aucun fondement archéologique : les indices matériels
+      disponibles orientent vers une explication humaine et pacifique, celle d'une communauté
+      qui s'est probablement dispersée parmi des alliés plutôt que d'avoir disparu sans raison.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "David W. Stahle et al., « The Lost Colony and Jamestown Droughts », Science, vol. 280, 1998, p. 564-567", url: "https://www.science.org/doi/abs/10.1126/science.280.5363.564", note: "Étude dendrochronologique établissant que la disparition de la colonie coïncide avec la sécheresse la plus sévère en 800 ans." },
+    { label: "National Park Service, « 1587: The Lost Colony », Fort Raleigh National Historic Site", url: "https://www.nps.gov/fora/learn/historyculture/1587-the-lost-colony.htm", note: "Présente le déroulement documenté des faits, du départ de John White à son retour en 1590." },
+    { label: "Smithsonian Magazine, « Pottery Fragments May Hold Clues to Roanoke Colonists' Fate »", url: "https://www.smithsonianmag.com/smart-news/new-evidence-roanoke-colonys-disappearance-180976248/", note: "Rend compte des fouilles du First Colony Foundation au Site X et de l'hypothèse d'une dispersion des colons en plusieurs groupes." },
+  ]} />
+</PageLayout>

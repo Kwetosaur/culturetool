@@ -26,6 +26,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Or et acacia sur fond de tente nocturne : la matière de l'objet plutôt que
    la géographie du sujet, principe visuel propre à la série objets. */
@@ -321,4 +322,10 @@ const noms = [
       contemporaine comme une simple curiosité folklorique.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Bible hébraïque, Exode 25:10-22", url: "https://www.biblegateway.com/passage/?search=Exodus%2025&version=LSG", note: "Texte fondateur donnant dimensions et procédé de fabrication" },
+    { label: "Kebra Nagast: The Queen of Sheba and Her Only Son Menyelek, trad. E. A. Wallis Budge, Medici Society, 1922", url: "https://archive.org/details/kebranagast", note: "Texte source de la tradition éthiopienne du transfert de l'Arche par Ménélik Ier" },
+    { label: "« Church of St. Mary of Zion », Encyclopaedia Britannica", url: "https://www.britannica.com/place/Church-of-St-Mary-of-Zion", note: "Présentation neutre du sanctuaire d'Aksoum et de sa revendication" },
+  ]} />
 </PageLayout>

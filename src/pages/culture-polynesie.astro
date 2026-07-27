@@ -21,6 +21,7 @@ import StoryBlock from '../components/StoryBlock.astro';
 import Timeline from '../components/Timeline.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Nuit océanique, bois de pirogue, étoiles : la matière et le ciel de la
    navigation plutôt qu'une palette "îles tropicales" générique. */
@@ -208,4 +209,12 @@ const SECTIONS = [
       devenir un prétexte pour les traiter comme une seule et même culture interchangeable.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Patrick Vinton Kirch, On the Road of the Winds: An Archaeological History of the Pacific Islands before European Contact, éd. révisée, University of California Press, 2017", url: "https://www.ucpress.edu/books/on-the-road-of-the-winds/paper", note: "Appuie l'expansion Lapita et la chronologie de peuplement, dont la « longue pause »" },
+    { label: "Ben Finney, Voyage of Rediscovery: A Cultural Odyssey through Polynesia, University of California Press, 1994", note: "Appuie le récit du Hōkūleʻa, de Mau Piailug et de Nainoa Thompson" },
+    { label: "David Lewis, We, the Navigators: The Ancient Art of Landfinding in the Pacific, 2e éd., University of Hawaii Press, 1994", note: "Appuie la description des techniques de navigation traditionnelle (étoiles, houle, oiseaux)" },
+    { label: "Terry Hunt et Carl Lipo, The Statues that Walked: Unraveling the Mystery of Easter Island, Free Press, 2011", url: "https://www.simonandschuster.com/books/The-Statues-that-Walked/Terry-Hunt/9781439154342", note: "Appuie l'hypothèse expérimentale des moai déplacés debout par balancement" },
+    { label: "Polynesian Voyaging Society, « History »", url: "https://hokulea.com/history/", note: "Appuie les dates des voyages du Hōkūleʻa (1976, 1980, Mālama Honua 2014-2017)" },
+  ]} />
 </PageLayout>

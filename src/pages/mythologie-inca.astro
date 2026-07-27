@@ -31,6 +31,7 @@ import Timeline from '../components/Timeline.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
 import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
 
 /* Or d'Inti, indigo du ciel nocturne, terre volcanique : les trois Pacha en
    couleurs plutôt qu'une palette "Amérique du Sud" générique — et distincte
@@ -267,4 +268,12 @@ const pachas = [
       pas un symbole décoratif disponible pour n'importe quel usage.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Encyclopaedia Britannica, \"Viracocha\"", url: "https://www.britannica.com/topic/Viracocha", note: "Appuie le récit du créateur qui s'efface, présenté en #pantheon et #legendes." },
+    { label: "Encyclopaedia Britannica, \"Inca religion\"", url: "https://www.britannica.com/topic/Inca-religion", note: "Vue d'ensemble du panthéon andin (Inti, Viracocha, Illapa) utilisée pour la section #pantheon." },
+    { label: "UNESCO, \"Pilgrimage to the sanctuary of the Lord of Qoyllurit'i\", Representative List of the Intangible Cultural Heritage of Humanity, 2011", url: "https://ich.unesco.org/en/RL/pilgrimage-to-the-sanctuary-of-the-lord-of-qoyllurit-i-00567", note: "Confirme la reconnaissance UNESCO du pèlerinage cité en #monde et #frise." },
+    { label: "Ryan Hewlett, \"Bolivia's Mother Earth Laws: Is the Ecocentric Legislation Misleading?\", ReVista, Harvard DRCLAS", url: "https://revista.drclas.harvard.edu/bolivias-mother-earth-laws-is-the-ecocentric-legislation-misleading/", note: "Analyse la loi bolivienne de 2010 sur les droits de la Terre-Mère, citée en #heritage et #frise." },
+    { label: "Garcilaso de la Vega, Comentarios Reales de los Incas, 1609", note: "Chronique de référence pour la description du jardin d'or de Coricancha citée en #legendes." },
+  ]} />
 </PageLayout>

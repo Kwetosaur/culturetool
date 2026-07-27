@@ -1,0 +1,256 @@
+---
+/*
+  Le Vajra — quinzième page de la série « Objets Légendaires du Monde ».
+  Structure imposée par docs/plans/plan-serie-objets.md : 8 sections,
+  badge de nature dans le hero. Cas inverse signalé dans
+  docs/listes/suite_objets.md : la seule trajectoire mythe -> matière de
+  toute la série — la foudre d'Indra devenue objet rituel réellement
+  forgé et manipulé aujourd'hui, plutôt qu'un artefact ancien dont on
+  chercherait la trace perdue. #traces adapte donc son propos : pas de
+  pièce unique disputée, mais une production rituelle continue.
+
+  Effets : data-egg="vajra" + data-scroll-fx="vajraSolidify" sur
+  #description, piste documentée dans plan-effets.md ("un éclair qui se
+  solidifie en sceptre à branches symétriques").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Bronze doré, éclat d'éclair blanc-bleu, pourpre tantrique : la matière
+   du sceptre rituel plutôt qu'une géographie générique. */
+const palette = {
+  bg: '#160e1c',
+  'bg-deep': '#0b0710',
+  surface: '#22182c',
+  'surface-alt': '#2c2036',
+  border: '#4a3a5c',
+  ink: '#f2ecf5',
+  text: '#dccce0',
+  'text-dim': '#a088a8',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#6a4a9e',
+  'accent2-bright': '#9a78c8',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(201,152,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  { num: 'I', title: "L'arme d'Indra", sub: 'Mythologie védique', body: "À l'origine, la foudre du roi des dieux, forgée à partir des ossements offerts par le sage Dadhichi pour vaincre le démon Vritra." },
+  { num: 'II', title: 'Le sceptre tantrique', sub: 'Bouddhisme vajrayāna', body: "Devenu l'instrument rituel central d'une tradition bouddhiste entière, qui tire précisément son nom de cet objet — le « Véhicule du Diamant-Foudre »." },
+  { num: 'III', title: 'Un objet fabriqué, pas retrouvé', sub: 'Trajectoire inverse de la série', body: "Contrairement à la plupart des objets de cette série, il n'existe aucune quête d'un exemplaire perdu : le vajra continue d'être fondu et manipulé aujourd'hui, exactement comme il y a des siècles." },
+];
+---
+<PageLayout
+  title="Le Vajra"
+  serie="Objets Légendaires du Monde"
+  description="La foudre du dieu védique Indra, devenue le sceptre rituel central du bouddhisme tantrique — le seul objet de cette série dont la trajectoire va du mythe vers la matière, et non l'inverse."
+  href="objet-vajra.html"
+  egg="vajra"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="INDE · TIBET · HIMALAYA"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>la Toison d'Or</strong>"
+>
+  <p class="subtitle" slot="hero">वज्र · La foudre devenue sceptre</p>
+  <p class="tagline" slot="hero">
+    Une trajectoire inverse de tous les autres objets de cette série : le vajra ne part pas
+    d'un artefact réel entouré de légende, mais d'une arme mythique devenue objet rituel bien réel.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet mythologique"
+    note="Le vajra reste d'abord un symbole religieux — la foudre d'un dieu védique. Ce qui est réel, en revanche, c'est sa fabrication et son usage rituel actuels : des milliers d'exemplaires sont aujourd'hui forgés et manipulés chaque jour dans les monastères tantriques."
+  />
+
+  <Section
+    id="origine"
+    label="Du mythe à l'objet"
+    title="Une trajectoire inversée par rapport au reste de la série"
+    intro="La règle habituelle de cette série est de séparer l'ancienneté de l'objet de l'ancienneté du récit. Ici, exceptionnellement, il n'y a pas d'objet ancien à chercher : le récit précède la matière, qui continue d'être produite aujourd'hui.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et symbolisme"
+    title="Un sceptre à double extrémité symétrique"
+    intro="Un objet reconnaissable entre tous par sa forme géométrique précise, chaque élément portant un sens rituel codifié."
+    scrollFx="vajraSolidify">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Une sphère centrale"
+        role="Le point d'équilibre"
+        tags={['Vide central', 'Śūnyatā']}
+        body="Le centre du sceptre, souvent orné d'un motif de lotus, représente selon certaines lectures tantriques la vacuité (śūnyatā), notion centrale de la philosophie bouddhiste."
+      />
+      <FigureCard
+        name="Cinq branches symétriques"
+        role="De chaque côté du centre"
+        tags={['Cinq sagesses', 'Cinq familles de Bouddhas']}
+        body="La forme la plus courante déploie cinq griffes recourbées de chaque côté, associées dans la tradition vajrayāna aux cinq sagesses et aux cinq familles de Bouddhas."
+      />
+      <FigureCard
+        name="Un compagnon rituel, la cloche"
+        role="Ghanta, tenue dans l'autre main"
+        tags={['Complémentarité']}
+        body="Dans la pratique tantrique, le vajra tenu dans la main droite (méthode, compassion) se combine systématiquement à une cloche tenue dans la main gauche (sagesse) — les deux ne s'emploient jamais seuls l'un sans l'autre."
+      />
+    </div>
+  </Section>
+
+  <Section id="recits" label="De la foudre védique au protecteur tantrique" title="Un objet qui traverse plusieurs traditions religieuses">
+    <StoryBlock
+      num="Récit I"
+      title="Le sacrifice du sage Dadhichi"
+      body="Selon la tradition védique, les dieux, incapables de vaincre le démon Vritra qui retient toutes les eaux du monde, obtiennent du sage Dadhichi le don de ses propres ossements. Le dieu-artisan Tvashtar en façonne une arme, le vajra, qu'Indra utilise pour libérer les eaux et vaincre le démon."
+      quote="Un sacrifice consenti pour forger l'arme qui sauve le monde."
+      cite="Résumé d'un motif récurrent des textes védiques"
+    />
+    <StoryBlock
+      num="Récit II"
+      title="Vajrapani, le protecteur au sceptre"
+      body="Dans le bouddhisme, une divinité protectrice nommée Vajrapani (« celui qui tient le vajra à la main ») veille sur le Bouddha et incarne la puissance spirituelle indestructible — une adaptation directe de l'arme védique à un rôle de gardien plutôt que de conquérant."
+    />
+    <StoryBlock
+      num="Récit III"
+      title="Le Trône de Diamant à Bodh Gaya"
+      body="Le lieu traditionnel de l'éveil du Bouddha, sous l'arbre de la Bodhi, est appelé Vajrasana, le « siège de diamant » — le même mot que celui de l'objet rituel, reliant directement l'idée d'indestructibilité spirituelle au lieu fondateur du bouddhisme."
+    />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Un objet toujours activement fabriqué aujourd'hui"
+    intro="Contrairement à la plupart des objets de cette série, il n'y a ici aucune reconstitution hypothétique à proposer : la fabrication du vajra est un artisanat rituel documenté et pratiqué sans interruption.">
+    <div class="card-grid compact">
+      <MiniCard title="Le bronze, matériau le plus courant" tag="Fonte rituelle" body="La majorité des vajras rituels contemporains sont coulés en bronze, parfois dorés, selon des proportions et des motifs qui suivent des canons iconographiques précis transmis par les ateliers monastiques." />
+      <MiniCard title="Des tailles très variables" tag="De quelques centimètres à l'objet monumental" body="Le vajra existe aussi bien comme petit objet de poche tenu en main que sous forme de sculptures monumentales ornant l'entrée de monastères himalayens." />
+      <MiniCard title="Une transmission artisanale continue" tag="Népal, Tibet, Bhoutan" body="Des centres artisanaux spécialisés, notamment dans la vallée de Katmandou, continuent de fabriquer des vajras rituels selon des techniques transmises de génération en génération d'artisans newars." />
+    </div>
+  </Section>
+
+  <Section
+    id="traces"
+    label="Pas une pièce unique, une production continue"
+    title="Aucune quête d'un exemplaire perdu"
+    intro="À la différence de la plupart des objets de cette série, il n'existe aucun vajra « original » recherché : l'objet se définit par sa forme et sa fonction rituelle, reproductible à l'identique depuis des siècles.">
+    <div class="card-grid">
+      <InfoCard
+        title="Des milliers d'exemplaires en usage"
+        sub="Aucune rareté recherchée"
+        body="Le vajra rituel n'est jamais traité comme une relique unique : sa valeur tient à sa conformité aux canons traditionnels, pas à son ancienneté individuelle."
+      />
+      <InfoCard
+        title="Des pièces anciennes conservées en musée"
+        sub="Valeur historique, pas magique"
+        body="Certains exemplaires anciens et particulièrement travaillés sont conservés dans des collections muséales pour leur valeur artistique et historique, sans qu'aucun ne soit désigné comme « le » vajra originel."
+      />
+      <InfoCard
+        title="Une production toujours vivante"
+        sub="Ateliers contemporains actifs"
+        body="Des ateliers spécialisés continuent aujourd'hui de produire des vajras destinés à la pratique religieuse, exactement comme il y a plusieurs siècles."
+      />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="D'un objet rituel à un motif culturel"
+    title="Une forme reconnaissable bien au-delà du monastère">
+    <div class="card-grid compact">
+      <MiniCard title="Un motif architectural et décoratif" tag="Toits, portes, bijoux" body="La forme du vajra orne fréquemment les toits de monastères, des bijoux et des objets décoratifs, bien au-delà de son usage strictement rituel." />
+      <MiniCard title="Une racine linguistique fréquente" tag="Dorje, en tibétain" body="Le mot tibétain pour vajra, dorje, est aussi l'un des prénoms masculins les plus courants au Tibet, porté sans connotation religieuse particulière dans la vie quotidienne." />
+      <MiniCard title="Une popularité récente en Occident" tag="Bijouterie et bien-être" body="La forme du vajra est de plus en plus reprise dans la bijouterie et les objets de décoration liés au bien-être en Occident, souvent détachée de son sens religieux d'origine." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Un cas particulier pour cette série : il n'y a pas d'écart à mesurer entre un objet réel et son récit, mais une trajectoire à décrire, du symbole védique à l'outil rituel quotidien.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Une continuité religieuse bien documentée"
+      body="Le passage du vajra védique, arme d'un dieu du ciel, à son rôle d'instrument rituel bouddhiste tantrique est documenté par une chaîne de textes religieux et de représentations artistiques continues, sans rupture majeure identifiée."
+    />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Une fabrication rituelle activement étudiée"
+      body="Les techniques de fonte et les canons de proportion utilisés par les artisans contemporains, notamment dans la vallée de Katmandou, sont documentés par les historiens de l'art bouddhiste comme une tradition artisanale ininterrompue."
+    />
+    <TheoryCard
+      title="Le vajra bouddhiste dérive directement de l'arme védique d'Indra"
+      level="consensus"
+      status="Consensus"
+      body="La continuité du nom, de la forme symbolique et de la fonction de puissance indestructible entre les deux traditions religieuses est largement documentée par l'histoire des religions indiennes."
+      attrib="Position dominante en histoire des religions sud-asiatiques"
+    />
+    <TheoryCard
+      title="Le nombre de branches encode un système symbolique tantrique cohérent"
+      level="plausible"
+      status="Interprétation largement partagée"
+      body="L'association des cinq branches aux cinq sagesses et cinq familles de Bouddhas est une lecture bien attestée dans les textes tantriques, sans que toutes les écoles bouddhistes n'en proposent une interprétation strictement identique."
+      attrib="Interprétation courante en bouddhologie tantrique"
+    />
+    <TheoryCard
+      title="Le vajra confère un pouvoir surnaturel réel à celui qui le manipule"
+      level="folklore"
+      status="Relève de la croyance religieuse"
+      body="Cette affirmation relève d'une croyance religieuse pratiquée par des millions de fidèles, que cette page ne peut ni confirmer ni infirmer scientifiquement — une question de foi, pas de preuve matérielle."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le vajra fait encore">
+    <HeritageBlock
+      title="Un instrument rituel toujours en usage quotidien"
+      body="Des millions de pratiquants du bouddhisme tantrique continuent d'utiliser le vajra dans leurs cérémonies religieuses, sans aucune rupture avec la pratique historique."
+    />
+    <HeritageBlock
+      title="Un motif artisanal transmis de génération en génération"
+      body="Les ateliers de fonte spécialisés, notamment au Népal, perpétuent un savoir-faire artisanal directement hérité des canons religieux anciens."
+    />
+    <HeritageBlock
+      title="Un symbole culturel diffusé bien au-delà du bouddhisme"
+      body="La forme du vajra continue d'inspirer bijoux, décorations et objets contemporains, souvent au-delà de son cercle religieux d'origine."
+    />
+    <CautionBox>
+      Contrairement à la plupart des pages de cette série, il ne s'agit pas ici de mesurer un
+      écart entre un objet perdu et sa légende : le vajra est un objet religieux vivant, produit
+      et utilisé aujourd'hui par des communautés bouddhistes réelles — cette page en décrit la
+      forme et l'histoire sans se prononcer sur la vérité de la croyance qu'il porte.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "« Vajra: Ritual Symbol, Thunderbolt, Weapon », Encyclopaedia Britannica", url: "https://www.britannica.com/topic/vajra", note: "Présente la trajectoire du vajra védique à l'objet rituel bouddhiste tantrique et son usage conjoint avec la cloche" },
+    { label: "« Ritual Implements in Tibetan Buddhism: A Symbolic Appraisal », Stanford University", url: "https://web.stanford.edu/class/history11sc/pdfs/ritual", note: "Analyse du symbolisme des branches et de la fonction rituelle du vajra dans la pratique tantrique" },
+  ]} />
+</PageLayout>

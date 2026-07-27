@@ -27,6 +27,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Éclat de diamant et velours royal : la matière de la pierre plutôt que la
    géographie du sujet, principe visuel propre à la série objets. */
@@ -269,4 +270,10 @@ const noms = [
       droit international, seulement de rapporter fidèlement les positions en présence.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "William Dalrymple et Anita Anand, Kohinoor: The Story of the World's Most Infamous Diamond, Bloomsbury, 2016", note: "Étude de référence sur l'histoire complète de la pierre, de son origine à la controverse actuelle" },
+    { label: "« The True Story of the Koh-i-Noor Diamond—and Why the British Won't Give It Back », Smithsonian Magazine, 2017", url: "https://www.smithsonianmag.com/history/true-story-koh-i-noor-diamondand-why-british-wont-give-it-back-180964660/", note: "Synthèse de la cession de 1849 et des positions britanniques actuelles" },
+    { label: "« No ordinary diamond: how the Koh-i-Noor became an imperial possession », The Conversation, 2023", url: "https://theconversation.com/no-ordinary-diamond-how-the-koh-i-noor-became-an-imperial-possession-200473", note: "Analyse académique du Traité de Lahore de 1849 et des revendications indiennes, pakistanaises, iraniennes et afghanes" },
+  ]} />
 </PageLayout>

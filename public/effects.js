@@ -1955,6 +1955,191 @@
       { duration: 1400, delay: 2600, easing: 'ease-in-out', fill: 'forwards' });
   }
 
+  // Dogon — deux étoiles qui tournent l'une autour de l'autre, l'une
+  // minuscule (Sirius A et B).
+  function siriusOrbit() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:44%;width:min(20vh,140px);height:min(20vh,140px);opacity:0;';
+    l.appendChild(wrap);
+    var a = document.createElement('div');
+    a.style.cssText = 'position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px;border-radius:50%;background:radial-gradient(circle,#fff,#e8d8a0);box-shadow:0 0 18px #e8d8a0;';
+    wrap.appendChild(a);
+    var orbit = document.createElement('div');
+    orbit.style.cssText = 'position:absolute;inset:0;transform-origin:50% 50%;';
+    wrap.appendChild(orbit);
+    var b = document.createElement('div');
+    b.style.cssText = 'position:absolute;left:50%;top:4%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff;';
+    orbit.appendChild(b);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    orbit.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }],
+      { duration: 3600, easing: 'linear', fill: 'forwards' });
+  }
+
+  // Mythologie vietnamienne — un œuf qui se fend en une centaine de points
+  // lumineux qui se dispersent (Lạc Long Quân et Âu Cơ).
+  function eggHatch() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(12vh,90px);height:min(16vh,120px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<ellipse cx="50" cy="70" rx="42" ry="60" fill="#f2e6c8" stroke="#c9982f" stroke-width="2"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .12 }, { opacity: 1, offset: .5 }, { opacity: 0, offset: .55 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    for (var i = 0; i < 36; i++) {
+      (function () {
+        var angle = rand(0, 360), dist = rand(40, 140);
+        var dot = document.createElement('div');
+        dot.style.cssText = 'position:absolute;left:50%;top:46%;width:4px;height:4px;border-radius:50%;background:#f7dc8a;box-shadow:0 0 6px #f7dc8a;opacity:0;';
+        l.appendChild(dot);
+        dot.animate([
+          { opacity: 0, transform: 'translate(-50%,-50%)' },
+          { opacity: 1, offset: .1, transform: 'translate(-50%,-50%)' },
+          { opacity: .9, transform: 'translate(calc(-50% + ' + (Math.cos(angle * Math.PI / 180) * dist) + 'px), calc(-50% + ' + (Math.sin(angle * Math.PI / 180) * dist) + 'px))' },
+          { opacity: 0 }
+        ], { duration: 2600, delay: 1900 + rand(0, 300), easing: 'ease-out', fill: 'forwards' });
+      })();
+    }
+  }
+
+  // Empire byzantin — une mosaïque à la feuille d'or qui se pose tessère
+  // par tessère.
+  function mosaiqueOr() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(26vh,190px);height:min(20vh,150px);opacity:0;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .06 }, { opacity: 1, offset: .92 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var cols = 6, rows = 4, i = 0;
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        (function (r, c, idx) {
+          var t = document.createElement('div');
+          t.style.cssText = 'position:absolute;left:' + (c * (100 / cols)) + '%;top:' + (r * (100 / rows)) + '%;width:' + (100 / cols - 1.5) + '%;height:' + (100 / rows - 1.5) + '%;background:linear-gradient(135deg,#e8c164,#c9982f);opacity:0;transform:scale(.4) rotate(' + rand(-8, 8) + 'deg);';
+          wrap.appendChild(t);
+          t.animate([{ opacity: 0, transform: 'scale(.4)' }, { opacity: 1, transform: 'scale(1)' }],
+            { duration: 220, delay: 120 + idx * 55, easing: 'ease-out', fill: 'forwards' });
+        })(r, c, i);
+        i++;
+      }
+    }
+  }
+
+  // Khmers (Angkor) — un canal d'irrigation qui se remplit et encercle une
+  // tour.
+  function canalAngkor() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:min(28vh,200px);height:min(20vh,150px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path d="M110 20 L130 60 L120 130 L100 130 L90 60 Z" fill="#8a6a2f"/>' +
+      '<rect x="95" y="10" width="30" height="14" fill="#c9982f"/>' +
+      '<circle id="fx-canal-ring" cx="110" cy="95" r="70" fill="none" stroke="#3a6a8a" stroke-width="6" stroke-dasharray="440" stroke-dashoffset="440"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var ring = wrap.querySelector('#fx-canal-ring');
+    ring.animate([{ strokeDashoffset: 440 }, { strokeDashoffset: 0 }],
+      { duration: 2600, delay: 300, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Le Golem de Prague — un mot hébreu s'inscrit puis une lettre s'effrite
+  // (emet -> met, « vérité » -> « mort »).
+  function golemEmetMet() {
+    var l = layer(3800);
+    var word = document.createElement('div');
+    word.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);font-family:serif;font-size:min(9vh,64px);letter-spacing:4px;color:#c9982f;text-shadow:0 0 16px rgba(201,152,47,.6);opacity:0;direction:rtl;';
+    word.textContent = 'אמת';
+    l.appendChild(word);
+    word.animate([{ opacity: 0 }, { opacity: 1, offset: .15 }, { opacity: 1, offset: .6 }, { opacity: 1 }],
+      { duration: 3800, easing: 'ease-out', fill: 'forwards' });
+    setTimeout(function () {
+      word.textContent = 'מת';
+      word.animate([{ filter: 'brightness(1.8)' }, { filter: 'brightness(1)' }],
+        { duration: 500, easing: 'ease-out', fill: 'forwards' });
+    }, 2300);
+  }
+
+  // La Colonie perdue de Roanoke — le mot CROATOAN se grave lettre par
+  // lettre dans le bois.
+  function croatoanCarve() {
+    var l = layer(4000);
+    var word = document.createElement('div');
+    word.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);font-family:Cinzel, serif;font-size:min(5.5vh,38px);letter-spacing:6px;color:#a8926a;opacity:0;';
+    l.appendChild(word);
+    word.animate([{ opacity: 0 }, { opacity: 1, offset: .06 }, { opacity: 1, offset: .94 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    'CROATOAN'.split('').forEach(function (ch, i) {
+      var span = document.createElement('span');
+      span.textContent = ch;
+      span.style.cssText = 'opacity:0;';
+      word.appendChild(span);
+      span.animate([{ opacity: 0, textShadow: '0 0 0 transparent' }, { opacity: 1, textShadow: '0 0 10px #e8c164' }, { textShadow: 'none' }],
+        { duration: 260, delay: 300 + i * 220, easing: 'ease-out', fill: 'forwards' });
+    });
+  }
+
+  // Sanxingdui — un masque de bronze aux yeux globuleux qui se lève
+  // lentement de sa fosse.
+  function masqueBronzeLeve() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:-2vh;transform:translateX(-50%);width:min(18vh,130px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path d="M60 6 C 20 6 10 50 14 90 L106 90 C 110 50 100 6 60 6 Z" fill="#5a6a3a"/>' +
+      '<circle cx="38" cy="55" r="14" fill="#3a4a24"/>' +
+      '<circle cx="82" cy="55" r="14" fill="#3a4a24"/>' +
+      '<rect x="46" y="82" width="28" height="8" fill="#2a3418"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([
+      { opacity: 0, transform: 'translateX(-50%) translateY(60px)' },
+      { opacity: 1, offset: .25, transform: 'translateX(-50%) translateY(0)' },
+      { opacity: 1, offset: .85 },
+      { opacity: 0 }
+    ], { duration: 4200, easing: 'cubic-bezier(.2,.9,.2,1)', fill: 'forwards' });
+  }
+
+  // Les épées Ulfberht — une signature +VLFBERH+T s'inscrit dans la lame,
+  // puis se révèle contrefaçon.
+  function ulfberhtSignature() {
+    var l = layer(4000);
+    var word = document.createElement('div');
+    word.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);font-family:Cinzel, serif;font-size:min(5vh,34px);letter-spacing:3px;color:#c9c9c9;opacity:0;white-space:nowrap;';
+    word.textContent = '+VLFBERH+T';
+    l.appendChild(word);
+    word.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .7 }, { opacity: 1 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    setTimeout(function () {
+      word.style.color = '#e86a4a';
+      word.textContent = '+VLFBERHT+ (contrefaçon)';
+    }, 2600);
+  }
+
+  // Le Vajra — un éclair qui se solidifie en sceptre à branches symétriques.
+  function vajraSolidify() {
+    var l = layer(3800);
+    var bolt = document.createElement('div');
+    bolt.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(6vh,40px);height:min(30vh,200px);opacity:0;';
+    bolt.innerHTML = '<svg id="fx-vajra-bolt" viewBox="0 0 40 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path d="M20 0 L30 70 L14 80 L26 200 L4 100 L20 90 Z" fill="#e8d8a0"/>' +
+    '</svg>';
+    l.appendChild(bolt);
+    bolt.animate([{ opacity: 0 }, { opacity: 1, offset: .15 }, { opacity: 1, offset: .85 }, { opacity: 0 }],
+      { duration: 3800, easing: 'ease-out', fill: 'forwards' });
+    setTimeout(function () {
+      var svg = bolt.querySelector('#fx-vajra-bolt');
+      svg.innerHTML = '<rect x="16" y="0" width="8" height="200" fill="#c9982f"/>' +
+        '<path d="M4 20 Q20 0 36 20 Q20 36 4 20 Z" fill="#e8d8a0"/>' +
+        '<path d="M4 180 Q20 200 36 180 Q20 164 4 180 Z" fill="#e8d8a0"/>';
+    }, 2200);
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -1977,7 +2162,8 @@
   var GLYPH_POOLS = {
     rune: RUNES, greek: GREEK, hiero: HIERO, cunei: CUNEI, ogham: OGHAM, roman: ROMAN,
     hindu: 'ॐ☸✴◈', japan: '❀✿花結', azteque: '☀✴◈❂', slave: '☀✺❉✵', chine: '福龍鳳春',
-    lapidaire: LAPID, yoruba: '☀◈✦❖', inca: '☀◈▲✦', dreaming: '●○◐◑✦'
+    lapidaire: LAPID, yoruba: '☀◈✦❖', inca: '☀◈▲✦', dreaming: '●○◐◑✦',
+    dogon: '▲▽◇✦'
   };
 
   function glyphify(el, pool) {
@@ -2096,7 +2282,16 @@
     maryCelesteDrift: maryCelesteDrift,
     moaiSilhouette: moaiSilhouette,
     ambreMosaique: ambreMosaique,
-    goujianDepatine: goujianDepatine
+    goujianDepatine: goujianDepatine,
+    siriusOrbit: siriusOrbit,
+    eggHatch: eggHatch,
+    mosaiqueOr: mosaiqueOr,
+    canalAngkor: canalAngkor,
+    golemEmetMet: golemEmetMet,
+    croatoanCarve: croatoanCarve,
+    masqueBronzeLeve: masqueBronzeLeve,
+    ulfberhtSignature: ulfberhtSignature,
+    vajraSolidify: vajraSolidify
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -2180,6 +2375,16 @@
     rapanui:       moaiSilhouette,
     ambre:         ambreMosaique,
     goujian:       goujianDepatine,
+    nommo:         siriusOrbit,
+    laclongquan:   eggHatch,
+    byzance:       mosaiqueOr,
+    khmers:        canalAngkor,
+    golem:         golemEmetMet,
+    yeren:         bigfootTracks,
+    roanoke:       croatoanCarve,
+    sanxingdui:    masqueBronzeLeve,
+    ulfberht:      ulfberhtSignature,
+    vajra:         vajraSolidify,
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }

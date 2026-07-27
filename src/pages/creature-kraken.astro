@@ -21,6 +21,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Noir océanique et lueur bioluminescente : la matière de la légende plutôt
    que la géographie générique du Nord. */
@@ -145,4 +146,11 @@ const SECTIONS = [
       vivant.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Erik Pontoppidan, The Natural History of Norway (trad. anglaise), A. Linde, 1755", url: "https://archive.org/details/naturalhistoryNc2Pont", note: "Texte source de la description détaillée du Kraken reprise en Origine." },
+    { label: "Carl von Linné, Systema Naturae, 1re éd., 1735 (inclusion puis retrait du « Microcosmus marinus »)" },
+    { label: "CBS News, « Giant squid filmed alive in deep sea for first time », 2013", url: "https://www.cbsnews.com/news/giant-squid-filmed-alive-in-deep-sea-for-first-time/", note: "Rend compte de la première vidéo d'un calmar géant vivant, tournée en 2012." },
+    { label: "Encyclopaedia Britannica, « Architeuthis dux »", url: "https://www.britannica.com/animal/Architeuthis-dux", note: "Appuie les données de taille du calmar géant citées en Science." },
+  ]} />
 </PageLayout>

@@ -161,6 +161,8 @@ Interdit : un badge qui tranche ce que les sources ne tranchent pas. En cas de d
   de forge pour une épée, or et vitrail pour un calice, ambre et bois pour la Chambre
   d'Ambre, jade et laque pour les trésors chinois. C'est le principe visuel qui distingue la
   série des quatre autres (dont les palettes suivent la région).
+- **Bibliographie obligatoire** (depuis le 27/07/2026) : chaque page se termine par un bloc
+  `Sources` réel — voir `docs/plan_page.md` § Sources et `src/components/Sources.astro`.
 
 ---
 
@@ -203,4 +205,6 @@ liste complète et les scores.)*
 | 11 | La Lance Sacrée | publiée (26/07/2026) |
 | 12 | La Chambre d'Ambre | publiée (27/07/2026) |
 | 13 | L'Épée de Goujian | publiée (27/07/2026) |
-| — | 24 autres sujets | à démarrer |
+| 14 | Les épées Ulfberht | publiée (27/07/2026) |
+| 15 | Le Vajra | publiée (27/07/2026) |
+| — | 22 autres sujets | à démarrer |

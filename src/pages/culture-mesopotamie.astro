@@ -22,6 +22,7 @@ import StoryBlock from '../components/StoryBlock.astro';
 import Timeline from '../components/Timeline.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Argile cuite, bleu lapis-lazuli, bitume noir : la matière de la ville et
    de l'administration plutôt qu'une palette "Moyen-Orient" générique — et
@@ -214,4 +215,12 @@ const SECTIONS = [
       patrimoine, a été perdu de notre vivant.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Marc Van De Mieroop, A History of the Ancient Near East ca. 3000-323 BC, 3e éd., Wiley-Blackwell, 2016", note: "Appuie la trame politique générale : cités sumériennes, empire akkadien, Babylone, Assyrie" },
+    { label: "Jean Bottéro, Mesopotamia: Writing, Reasoning, and the Gods, University of Chicago Press, 1992", note: "Appuie l'analyse de l'écriture cunéiforme et de son origine comptable" },
+    { label: "Andrew George (trad.), The Epic of Gilgamesh, Penguin Classics, 2003", url: "https://www.penguinrandomhouse.com/books/670028/the-epic-of-gilgamesh-by-translated-with-an-introduction-by-andrew-george/", note: "Appuie la mention de l'Épopée de Gilgamesh conservée dans la bibliothèque d'Assurbanipal" },
+    { label: "Musée du Louvre, Collections, « Code de Hammurabi »", url: "https://collections.louvre.fr/en/ark:/53355/cl010174436", note: "Appuie la description de la stèle et sa découverte à Suse en 1901-1902" },
+    { label: "Georges Roux, Ancient Iraq, 3e éd., Penguin, 1992", note: "Appuie la chronologie générale : Sargon, Ur-Nammu, Assurbanipal, chute de Ninive" },
+  ]} />
 </PageLayout>

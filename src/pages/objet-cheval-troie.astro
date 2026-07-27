@@ -28,6 +28,7 @@ import TheoryCard from '../components/TheoryCard.astro';
 import ScienceBlock from '../components/ScienceBlock.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Bois vieilli, bronze et nuit de siège : la matière de l'objet plutôt que la
    géographie du sujet, principe visuel propre à la série objets. */
@@ -277,4 +278,10 @@ const noms = [
       les fouilles hâtives du XIXe siècle ont illustrée en grand.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "Homère, Odyssée, chants IV et VIII, trad. Samuel Butler, 1900", url: "https://www.gutenberg.org/ebooks/1727", note: "Plus anciennes mentions connues du cheval, absent de l'Iliade" },
+    { label: "Virgile, Énéide, livre II, trad. John Dryden, 1697", url: "https://www.gutenberg.org/ebooks/228", note: "Récit le plus détaillé de la ruse et de la prise de Troie" },
+    { label: "« Trojan horse », Encyclopaedia Britannica", url: "https://www.britannica.com/topic/Trojan-horse", note: "Synthèse de la tradition littéraire et de l'hypothèse d'une machine de siège mal transmise" },
+  ]} />
 </PageLayout>

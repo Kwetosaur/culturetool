@@ -70,6 +70,39 @@ liens relatifs, mêmes `href` dans `map.html`.
    `python tools/make_icons.py <planche.png> --cat <catégorie> --slugs a,b,c` (découpe, fond
    transparent, 4 tailles, nommage), et enfin placer le pin.
 
+### Sources — obligatoire depuis le 27/07/2026 (pages Astro)
+
+Chaque page Astro doit se terminer par une bibliographie réelle, ajoutée via
+`src/components/Sources.astro` :
+
+```astro
+import Sources from '../components/Sources.astro';
+...
+  <Section id="heritage" ...>...</Section>
+
+  <Sources items={[
+    { label: "Auteur, Titre, Éditeur/Revue, Année", url: "https://...", note: "Ce que cette source appuie précisément sur la page" },
+    { label: "Autre référence sans lien disponible" },
+  ]} />
+</PageLayout>
+```
+
+Règles :
+- **3 à 6 sources réelles et vérifiables** par page — ouvrages, articles
+  académiques, sites institutionnels/muséaux/encyclopédiques de référence.
+  Jamais une bibliographie générique de remplissage : chaque entrée doit
+  appuyer une affirmation précise déjà présente sur la page.
+- **Ne jamais inventer une URL.** Si aucun lien fiable n'est trouvé pour un
+  ouvrage, laisser `url` absent — la citation textuelle suffit.
+- Placé **après la dernière `<Section>`, avant `</PageLayout>`** — ce n'est
+  volontairement **pas** une `<Section>` : pas de pilule de nav, pas
+  d'entrée dans le compte "N sections" de chaque plan de série (voir
+  `src/components/Sources.astro` pour le détail de ce choix).
+- Portée actuelle : les pages **Astro** (`src/pages/*.astro`) uniquement.
+  Les pages statiques historiques (`public/*.html`) n'ont pas encore été
+  converties — à traiter dans un tour séparé, probablement lors d'une
+  migration vers le socle Astro.
+
 ### Puis, une fois la page écrite
 
 Un seul fichier dans les deux cas : `public/<nom>.html` ou `src/pages/<nom>.astro`.

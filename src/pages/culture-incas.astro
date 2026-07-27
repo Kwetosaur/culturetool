@@ -24,6 +24,7 @@ import StoryBlock from '../components/StoryBlock.astro';
 import Timeline from '../components/Timeline.astro';
 import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
 
 /* Or andin, pierre grise, turquoise : la matière de la civilisation plutôt
    qu'une palette "Amérique du Sud" générique. */
@@ -219,4 +220,12 @@ const regions = [
       internes, pas plus qu'on ne le ferait pour n'importe quel autre grand empire de l'histoire.
     </CautionBox>
   </Section>
+
+  <Sources items={[
+    { label: "John Hemming, The Conquest of the Incas, Macmillan/Harcourt Brace Jovanovich, 1970", url: "https://archive.org/details/conquestofincas0000hemm", note: "Référence classique sur Cajamarca, l'exécution d'Atahualpa et la résistance de Vilcabamba" },
+    { label: "Terence N. D'Altroy, The Incas, 2e éd., Wiley-Blackwell, 2015", url: "https://www.wiley.com/en-be/The+Incas,+2nd+Edition-p-9781118610596", note: "Appuie l'administration impériale : mit'a, mitmaqkuna, organisation des quatre suyu" },
+    { label: "Gary Urton, Signs of the Inka Khipu: Binary Coding in the Andean Knotted-String Records, University of Texas Press, 2003", note: "Appuie la description du quipu comme système de comptabilité à nœuds" },
+    { label: "UNESCO, Centre du patrimoine mondial, « Historic Sanctuary of Machu Picchu » (n° 274), inscrit en 1983", url: "https://whc.unesco.org/en/list/274/", note: "Appuie la date et le statut d'inscription UNESCO de Machu Picchu" },
+    { label: "UNESCO, Centre du patrimoine mondial, « Qhapaq Ñan, Andean Road System » (n° 1459), inscrit en 2014", url: "https://whc.unesco.org/en/list/1459/", note: "Appuie la date et le statut d'inscription UNESCO du réseau routier inca" },
+  ]} />
 </PageLayout>
