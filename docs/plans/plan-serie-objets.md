@@ -207,4 +207,6 @@ liste complète et les scores.)*
 | 13 | L'Épée de Goujian | publiée (27/07/2026) |
 | 14 | Les épées Ulfberht | publiée (27/07/2026) |
 | 15 | Le Vajra | publiée (27/07/2026) |
-| — | 22 autres sujets | à démarrer |
+| 16 | La Toison d'Or | publiée (29/07/2026) |
+| 17 | La Boîte de Pandore | publiée (29/07/2026) |
+| — | 20 autres sujets | à démarrer |

@@ -1,0 +1,169 @@
+---
+/*
+  Le Suaire de Turin — onzième mystère de la série. Structure imposée par
+  docs/plans/plan-serie-mysteres.md : 7 sections, badge de verdict.
+
+  Sujet sensible à double titre : objet de foi pour des millions de
+  croyants catholiques (l'Église elle-même reste prudente et ne se
+  prononce jamais officiellement sur l'authenticité), et objet d'étude
+  scientifique rigoureuse (datation au carbone 14, étude STURP). Cette
+  page sépare explicitement les deux plans — jamais de ton moqueur
+  envers la dévotion, jamais de complaisance envers les théories de
+  fraude non étayées non plus. Le tissu n'est photographié/reproduit
+  nulle part ici : uniquement décrit et sourcé.
+
+  Effets : data-egg="suaire" + data-scroll-fx="suaireDeplie" sur
+  #enigme (déjà enregistrés dans effects.js) — un tissu qui se déplie et
+  une empreinte en négatif suggérée, jamais un visage net.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Lin ivoire, ombre sépia, or discret de la relique : sobriété
+   délibérée, aucun rouge ni éclat dramatique qui théâtraliserait le
+   sujet. */
+const palette = {
+  bg: '#181510',
+  'bg-deep': '#0e0c09',
+  surface: '#221e17',
+  'surface-alt': '#2c261c',
+  border: '#4f4630',
+  ink: '#f2ece0',
+  text: '#d4c8ac',
+  'text-dim': '#948868',
+  accent: '#a8946a',
+  'accent-bright': '#d0ba8a',
+  accent2: '#5a4a30',
+  'accent2-bright': '#8a7248',
+  verdict: '#4a2818',
+  'verdict-bright': '#7a4a2a',
+  glow: 'rgba(168,148,106,0.16)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Suaire de Turin"
+  serie="Grands Mystères du Monde"
+  description="Un linceul de lin marqué de l'empreinte en négatif d'un corps supplicié, conservé à Turin depuis 1578 — objet de vénération pour des millions de croyants, et sujet de l'une des enquêtes scientifiques les plus rigoureuses jamais menées sur une relique, dont la datation au carbone 14 continue pourtant d'être contestée par certains chercheurs."
+  href="mystere-suaire-turin.html"
+  egg="suaire"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="TORINO · LINCEUL · 1354"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : <strong>le Paititi</strong>"
+>
+  <p class="subtitle" slot="hero">Un négatif photographique avant la photographie</p>
+  <p class="tagline" slot="hero">
+    Une pièce de lin de 4,4 mètres, marquée d'une empreinte corporelle qui ne révèle sa
+    logique de négatif photographique qu'en 1898 — près de cinq siècles avant l'invention de
+    la photographie elle-même. Cette page distingue soigneusement la question de foi de la
+    question scientifique, sans jamais réduire l'une à l'autre.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Origine médiévale la plus soutenue scientifiquement ; mécanisme de l'image non expliqué"
+    note="La datation au carbone 14 de 1988 situe le tissu entre 1260 et 1390. Le débat scientifique porte aujourd'hui moins sur cette fourchette elle-même que sur une possible contamination de l'échantillon testé — et surtout sur la question, restée ouverte, du procédé exact ayant produit l'image."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Un tissu réel, une histoire documentée depuis 1354" intro="Avant d'aborder ce qui divise les chercheurs, ce qui ne fait pas débat : l'existence matérielle du tissu, sa conservation continue depuis le XIVe siècle, et la nature de l'image qu'il porte.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une pièce de lin de 4,4 x 1,1 mètre" sub="Tissage en chevrons" body="Le tissu porte l'empreinte frontale et dorsale, tête-bêche, d'un corps d'homme adulte marqué de blessures compatibles avec une crucifixion romaine — description matérielle qui ne fait l'objet d'aucun débat sérieux." />
+      <InfoCard num="II" title="Première mention historique sûre, 1354" sub="Lirey, France" body="Le chevalier Geoffroi de Charny expose le linceul dans une collégiale de Lirey — la plus ancienne mention documentée avec certitude, près de 1300 ans après la mort du Christ si son authenticité était retenue." />
+      <InfoCard num="III" title="Conservation à Turin depuis 1578" sub="Cathédrale Saint-Jean-Baptiste" body="La maison de Savoie transfère le linceul à Turin, où il reste conservé jusqu'à aujourd'hui, survivant notamment à un incendie majeur en 1532 dont les traces de brûlure et de réparation sont toujours visibles sur le tissu." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Négatif photographique et fibres non identifiées" scrollFx="suaireDeplie" intro="Deux questions distinctes, souvent confondues dans le débat public : la datation du tissu, et le mécanisme exact ayant produit l'image qu'il porte.">
+    <div class="card-grid wide">
+      <FigureCard name="Une image en négatif photographique" role="Découverte de 1898" tags={['Secondo Pia', 'Photographie']} body="Le photographe italien Secondo Pia découvre, en développant sa plaque photographique du linceul, que l'image devient un positif net une fois inversée — un effet que l'iconographie médiévale connue ne permet pas d'expliquer facilement si le tissu est une œuvre peinte volontaire." />
+      <FigureCard name="Un mécanisme de formation d'image non reproduit à l'identique" role="Question ouverte" tags={['STURP, 1978']} body="Malgré de nombreuses tentatives scientifiques, aucune reproduction en laboratoire n'a permis, à ce jour, de recréer un résultat en tout point identique à l'image du linceul par un procédé médiéval plausible et unique." />
+      <FigureCard name="La controverse sur l'échantillon de 1988" role="Débat méthodologique" tags={['Contamination possible', 'Zone de réparation']} body="Certains chercheurs soutiennent que l'échantillon prélevé pour la datation au carbone 14 provenait d'une zone reprisée au Moyen Âge après l'incendie de 1532, ce qui aurait faussé le résultat — une hypothèse contestée par d'autres spécialistes qui défendent la fiabilité du prélèvement d'origine." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment on l'a étudié" title="De Lirey à l'analyse scientifique moderne">
+    <Timeline items={[
+      { year: '1354', title: 'Première exposition documentée', body: "Geoffroi de Charny expose le linceul à Lirey, en Champagne — la mention historique la plus ancienne dont l'existence soit sûre." },
+      { year: '1389', title: 'Lettre critique de l\'évêque Pierre d\'Arcis', body: "L'évêque de Troyes écrit au pape qu'un artiste aurait selon lui confessé avoir peint l'image — un document précoce et rarement mis en avant par les défenseurs de l'authenticité." },
+      { year: '1532', title: 'Incendie de Chambéry', body: "Le linceul, alors conservé en Savoie, est endommagé par un incendie qui laisse des marques de brûlure et de goutte de métal fondu toujours visibles, réparées par des religieuses clarisses la même année." },
+      { year: '1578', title: 'Transfert à Turin', body: "La maison de Savoie installe définitivement le linceul dans la cathédrale Saint-Jean-Baptiste de Turin." },
+      { year: '1898', title: 'Photographie de Secondo Pia', body: "La première photographie du linceul révèle l'effet de négatif qui relance considérablement l'intérêt scientifique pour l'objet." },
+      { year: '1978', title: 'Étude STURP', body: "Une équipe internationale de scientifiques américains examine le linceul pendant cinq jours avec un accès direct exceptionnel, sans parvenir à identifier de pigment ou de procédé de peinture connu." },
+      { year: '1988', title: 'Datation au carbone 14', body: "Trois laboratoires indépendants datent l'échantillon testé entre 1260 et 1390 apr. J.-C., une fourchette médiévale qui reste contestée par certains chercheurs pour des raisons méthodologiques." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'une relique à un objet d'étude mondial" title="Entre dévotion catholique et documentaires scientifiques">
+    <div class="card-grid compact">
+      <MiniCard title="Une posture prudente de l'Église elle-même" tag="Position institutionnelle" body="L'Église catholique n'a jamais formellement statué sur l'authenticité du linceul ; plusieurs papes, dont Jean-Paul II, l'ont qualifié d'« icône » ou objet de vénération sans jamais l'ériger en dogme de foi obligatoire." />
+      <MiniCard title="Des ostensions publiques rares" tag="Événement religieux majeur" body="Le linceul n'est exposé publiquement que lors d'ostensions exceptionnelles, décidées au cas par cas par les autorités religieuses turinoises, chacune attirant des millions de pèlerins et de visiteurs." />
+      <MiniCard title="Un sujet récurrent de documentaires scientifiques" tag="Production médiatique continue" body="Le linceul reste l'un des objets religieux les plus étudiés et documentés au monde par des équipes scientifiques indépendantes, générant une production continue de documentaires et d'articles depuis les années 1970." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="La datation de 1988 reste la donnée la plus solide disponible" body="Trois laboratoires indépendants (Oxford, Zurich, Tucson) ont convergé sur une fourchette de 1260-1390 apr. J.-C. — un résultat obtenu par une méthode scientifique standard et répétée, même si certains chercheurs continuent de discuter la représentativité de l'échantillon testé." />
+    <ScienceBlock num="Enquête 2" title="Le mécanisme de formation de l'image demeure, lui, non résolu" body="Ni pigment, ni trace de pinceau identifiable n'a été détecté par l'étude STURP de 1978 ; à l'inverse, aucun procédé de reproduction en laboratoire n'a permis de recréer un résultat strictement identique par une méthode médiévale plausible — cette question technique précise reste distincte de celle de la datation et demeure ouverte." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Un tissu d'origine médiévale, probablement une œuvre d'art ou de dévotion"
+      level="consensus"
+      status="Position majoritaire académique"
+      body="La convergence de la datation au carbone 14 et de la première mention historique sûre au XIVe siècle constitue, pour la majorité des chercheurs, un faisceau d'indices cohérent en faveur d'une origine médiévale plutôt qu'antique."
+      attrib="Position dominante en histoire de l'art et en physico-chimie des matériaux"
+    />
+    <TheoryCard
+      title="Un échantillon de datation non représentatif du tissu d'origine"
+      level="plausible"
+      status="Hypothèse minoritaire mais défendue par des chercheurs qualifiés"
+      body="Certains chimistes et statisticiens soutiennent que l'échantillon de 1988 provenait d'une zone de réparation médiévale tissée différemment du reste du linceul, ce qui aurait pu fausser le résultat — une critique méthodologique prise au sérieux mais qui n'a pas convaincu la majorité de la communauté scientifique à ce jour."
+      attrib="Débat technique toujours actif en science des matériaux"
+    />
+    <TheoryCard
+      title="Une relique authentique du Ier siècle produite par un phénomène surnaturel"
+      level="folklore"
+      status="Article de foi, non une hypothèse scientifique"
+      body="Cette position relève de la croyance religieuse personnelle plutôt que d'une hypothèse vérifiable par la méthode scientifique — l'Église catholique elle-même se garde de la formuler comme un fait établi." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le linceul fait encore">
+    <HeritageBlock title="Un lieu de pèlerinage toujours actif" body="La chapelle du Saint-Suaire à Turin continue d'attirer chaque année des pèlerins, même en dehors des rares périodes d'ostension publique du tissu lui-même." />
+    <HeritageBlock title="Un cas d'école en méthodologie scientifique" body="Le linceul reste régulièrement cité dans l'enseignement des sciences comme exemple de la difficulté à trancher définitivement une question empirique quand plusieurs méthodes rigoureuses produisent des résultats en tension." />
+    <HeritageBlock title="Une conservation scientifique continue" body="Le tissu fait l'objet d'un programme de conservation permanent, incluant un stockage climatiquement contrôlé destiné à préserver l'état actuel de la relique pour d'éventuelles études futures." />
+    <CautionBox>
+      Cette page ne prend pas position sur une question de foi religieuse, qui n'appartient
+      pas au registre de la preuve scientifique. Elle rapporte fidèlement l'état du débat
+      scientifique documenté — datation contestée d'un côté, mécanisme d'image non expliqué de
+      l'autre — sans présenter l'un des deux plans comme réfutant l'autre.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "P. E. Damon et al., « Radiocarbon dating of the Shroud of Turin », Nature, vol. 337, 1989, p. 611-615", url: "https://www.nature.com/articles/337611a0", note: "Publication scientifique originale de la datation au carbone 14 de 1988" },
+    { label: "John P. Jackson, Eric J. Jumper et William R. Ercoline, « Correlation of image intensity on the Turin Shroud with the 3-D structure of a human body shape », Applied Optics, vol. 23, 1984", note: "Étude issue du programme STURP sur les propriétés de l'image" },
+    { label: "Diocèse de Turin, Site officiel du Saint-Suaire", url: "https://www.sindone.org/en/", note: "Source institutionnelle sur l'histoire de la conservation et les ostensions" },
+    { label: "Andrea Nicolotti, The Shroud of Turin: The History and Legends of the World's Most Famous Relic, Baylor University Press, 2019", url: "https://www.baylorpress.com/9781481308580/the-shroud-of-turin/", note: "Étude historique critique de référence sur l'origine médiévale documentée du linceul" },
+  ]} />
+</PageLayout>

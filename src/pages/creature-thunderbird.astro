@@ -1,0 +1,166 @@
+---
+/*
+  Le Thunderbird — douzième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict.
+
+  Point de vigilance central : le Thunderbird n'est pas UNE légende
+  unique mais un ensemble de figures distinctes, propres à des nations
+  autochtones nord-américaines différentes (Ojibwé/Anishinaabe, Lakota,
+  peuples côtiers du Pacifique Nord-Ouest, Ho-Chunk, Menominee...),
+  chacune avec son propre nom, son propre rôle cosmologique et son
+  propre art visuel — jamais fondues ici en un seul folklore générique
+  « amérindien ». #origine et #portrait le disent explicitement.
+  L'angle cryptide (observations du XXe siècle, hypothèse tératorne)
+  est traité séparément en #science/#theories, sans le confondre avec
+  les traditions spirituelles vivantes.
+
+  Effets : data-egg="thunderbird" + data-scroll-fx="thunderbirdEclair"
+  sur #portrait (déjà enregistrés dans effects.js) — un éclair suivi
+  d'une silhouette d'ailes déployées, sans représentation figurative
+  appropriant un style visuel autochtone précis.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Ciel d'orage, éclair blanc-bleu, bois totémique sombre : la matière
+   du sujet plutôt qu'une palette "Amérindien" générique qui gommerait
+   les distinctions régionales. */
+const palette = {
+  bg: '#12151c',
+  'bg-deep': '#0a0c11',
+  surface: '#1a1e28',
+  'surface-alt': '#232836',
+  border: '#3f4658',
+  ink: '#eef1f7',
+  text: '#c6ccdb',
+  'text-dim': '#7d84a0',
+  accent: '#5878b0',
+  'accent-bright': '#84a0d8',
+  accent2: '#c9a24a',
+  'accent2-bright': '#e8c470',
+  verdict: '#4a2818',
+  'verdict-bright': '#7a4a2a',
+  glow: 'rgba(88,120,176,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Témoignages' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Thunderbird"
+  serie="Créatures Légendaires du Monde"
+  description="Pas une seule légende mais tout un ensemble de figures distinctes, propres à des nations autochtones d'Amérique du Nord différentes — un oiseau si vaste que le battement de ses ailes produirait le tonnerre, entre puissance spirituelle majeure et, plus récemment, sujet de témoignages d'observations modernes toujours débattus."
+  href="creature-thunderbird.html"
+  egg="thunderbird"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="TONNERRE · ÉCLAIR · AILES"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>le Suaire de Turin</strong>"
+>
+  <p class="subtitle" slot="hero">L'oiseau dont les ailes font gronder le ciel</p>
+  <p class="tagline" slot="hero">
+    Une figure spirituelle majeure et distincte selon les nations qui la vénèrent, devenue
+    aussi, depuis le XXe siècle, le sujet de témoignages d'observations d'un immense oiseau
+    non identifié — deux histoires liées par un nom, mais qu'il serait malhonnête de confondre.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Figure spirituelle vivante et multiple ; volet cryptide non confirmé"
+    note="Le respect dû aux traditions spirituelles autochtones vivantes et l'examen critique des témoignages modernes d'observation sont deux démarches distinctes, traitées séparément sur cette page."
+  />
+
+  <Section id="origine" label="Une figure, pas une légende unique" title="Des traditions distinctes, pas un folklore générique" intro="Le nom « Thunderbird » en anglais recouvre des figures spirituelles bien distinctes selon les nations autochtones qui les vénèrent — cette page ne prétend pas les fondre en une seule tradition unifiée.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Animikii, chez les Ojibwés/Anishinaabeg" sub="Grands Lacs" body="Esprit du tonnerre associé au bien et à la protection contre les esprits malveillants des profondeurs aquatiques (Mishibizhiw) — une figure cosmologique centrale dans l'équilibre spirituel de la tradition anishinaabe." />
+      <InfoCard num="II" title="Wakinyan, chez les Lakotas" sub="Grandes Plaines" body="Être associé à l'ouest et au tonnerre, à l'aspect parfois redouté, dont le rôle s'inscrit dans un système cosmologique plus large propre à la spiritualité lakota des Grandes Plaines." />
+      <InfoCard num="III" title="Le Thunderbird des peuples côtiers" sub="Pacifique Nord-Ouest" body="Chez plusieurs nations comme les Kwakwaka'wakw ou les Haïdas, le Thunderbird occupe une place centrale dans l'art monumental (mâts totémiques, masques) et dans des récits associés à l'orque, souvent présentée comme sa proie ou son rival." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapportent les traditions" title="Une envergure à l'échelle du ciel lui-même" scrollFx="thunderbirdEclair">
+    <div class="card-grid wide">
+      <FigureCard name="Une envergure démesurée" role="Trait commun aux versions" tags={['Tonnerre', 'Éclairs']} body="Selon de nombreuses traditions, l'envergure de ses ailes serait telle que leur seul battement produirait le tonnerre, et l'éclat de ses yeux ou de la foudre qu'il projette serait à l'origine de l'éclair." />
+      <FigureCard name="Un rôle protecteur ou justicier" role="Fonction cosmologique" tags={['Équilibre', 'Force bienveillante ou redoutée']} body="Dans plusieurs traditions, le Thunderbird agit comme une force de protection ou de rétablissement de l'équilibre, notamment face à des esprits aquatiques malveillants — son rôle exact et sa tonalité (bienveillante, redoutée, ambivalente) varient nettement d'une nation à l'autre." />
+      <FigureCard name="Une présence artistique monumentale" role="Art du Pacifique Nord-Ouest" tags={['Mâts totémiques', 'Masques cérémoniels']} body="Chez les nations côtières du Pacifique Nord-Ouest, le Thunderbird figure parmi les motifs les plus reconnaissables de l'art monumental, sculpté au sommet de nombreux mâts totémiques avec un bec crochu caractéristique." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Des récits sacrés aux témoignages modernes" title="Deux corpus à ne pas confondre">
+    <StoryBlock num="Corpus I" title="Les récits traditionnels" body="Transmis oralement au sein de chaque nation concernée, ces récits s'inscrivent dans des systèmes cosmologiques complets et continuent d'être racontés et enseignés au sein des communautés concernées aujourd'hui — ils ne relèvent pas d'un folklore éteint mais d'une transmission spirituelle vivante." />
+    <StoryBlock num="Corpus II" title="La vague de témoignages de l'Illinois, 1977" body="En juillet 1977, un jeune garçon de dix ans, Marlon Lowe, affirme avoir été brièvement soulevé du sol par un immense oiseau non identifié près de Lawndale, dans l'Illinois — un incident largement médiatisé qui relance, dans la presse et la culture populaire américaines, l'intérêt pour d'éventuelles observations modernes de très grands oiseaux non identifiés." />
+    <StoryBlock num="Corpus III" title="Une accumulation de témoignages isolés, jamais un dossier unifié" body="Depuis cet épisode, plusieurs autres témoignages d'observation de très grands oiseaux ont été rapportés ponctuellement à travers les États-Unis, sans qu'aucun ne soit accompagné d'une preuve matérielle probante — un dossier resté fragmentaire, jamais consolidé en une enquête scientifique systématique." />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un totem à un sujet de fiction" title="Entre respect patrimonial et récupération commerciale">
+    <div class="card-grid compact">
+      <MiniCard title="Une appropriation commerciale fréquente" tag="Point de vigilance" body="Le nom et l'image du Thunderbird ont été largement repris à des fins commerciales (automobiles, marques diverses) sans lien avec les traditions spirituelles d'origine — un usage que plusieurs voix autochtones critiquent comme une forme de récupération culturelle." />
+      <MiniCard title="Un motif central de l'art monumental du Pacifique Nord-Ouest" tag="Patrimoine artistique reconnu" body="Loin d'être un simple folklore, le Thunderbird reste un motif activement pratiqué par des artistes autochtones contemporains de la côte Pacifique, dans une continuité assumée plutôt que comme un vestige figé." />
+      <MiniCard title="Une présence récurrente dans la culture cryptide américaine" tag="Depuis les années 1970" body="L'épisode de Lawndale de 1977 reste la référence la plus citée dans les médias et documentaires consacrés aux cryptides nord-américains contemporains, souvent au détriment d'une présentation adéquate des traditions spirituelles d'origine." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que la recherche peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucun grand oiseau vivant de cette envergure connu en Amérique du Nord" body="Le plus grand oiseau volant actuellement recensé en Amérique du Nord, le condor de Californie, atteint une envergure d'environ trois mètres — bien en deçà des envergures rapportées dans les témoignages les plus spectaculaires, sans qu'aucun spécimen n'ait jamais été capturé ou photographié de façon concluante." />
+    <ScienceBlock num="Enquête 2" title="L'hypothèse tératorne, une piste paléontologique sans lien démontré" body="Certains proposent un rapprochement avec les tératornithidés, famille d'oiseaux géants aujourd'hui éteints (dont Argentavis magnificens, l'un des plus grands oiseaux volants jamais identifiés) — un parallèle paléontologique suggestif, mais qu'aucune preuve fossile récente ne permet de relier à une population survivante jusqu'au XXe siècle." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Une figure spirituelle multiple, à comprendre nation par nation"
+      level="consensus"
+      status="Reconnu par les spécialistes"
+      body="Les ethnologues et les nations concernées s'accordent sur le fait qu'il n'existe pas une seule tradition du Thunderbird mais plusieurs figures distinctes, chacune ancrée dans son propre système cosmologique — traiter le sujet comme un folklore unique et générique est reconnu comme une simplification erronée."
+      attrib="Position partagée par l'ethnologie nord-américaine contemporaine"
+    />
+    <TheoryCard
+      title="Les témoignages modernes décrivent probablement des rapaces mal identifiés"
+      level="plausible"
+      status="Hypothèse la plus économe"
+      body="Des aigles royaux ou des condors, aperçus dans des conditions de mauvaise visibilité ou de mauvaise estimation de la distance, pourraient expliquer une partie significative des témoignages d'observation les plus récents, sans recourir à une espèce inconnue."
+      attrib="Explication couramment avancée en zoologie critique des cryptides"
+    />
+    <TheoryCard
+      title="Une population résiduelle de grand oiseau inconnu de la science"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune preuve matérielle — carcasse, plume identifiable, image nette — n'est venue à ce jour appuyer l'existence d'une espèce d'oiseau géant inconnue survivant en Amérique du Nord contemporaine."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette figure fait encore">
+    <HeritageBlock title="Une spiritualité toujours pratiquée" body="Le Thunderbird, sous ses différentes formes propres à chaque nation, continue d'occuper une place vivante dans les pratiques spirituelles et artistiques de plusieurs peuples autochtones d'Amérique du Nord aujourd'hui." />
+    <HeritageBlock title="Un motif artistique en dialogue avec le présent" body="Des artistes autochtones contemporains, notamment sur la côte Pacifique Nord-Ouest, continuent de faire évoluer la représentation du Thunderbird dans des œuvres actuelles, loin d'un simple héritage figé du passé." />
+    <HeritageBlock title="Un cas d'école sur la frontière entre folklore et cryptozoologie" body="Le Thunderbird illustre particulièrement bien la différence entre une tradition spirituelle vivante et respectée, et un usage cryptozoologique populaire qui en détourne le nom sans toujours en respecter le sens d'origine." />
+    <CautionBox>
+      Les traditions spirituelles évoquées ici appartiennent à des nations autochtones
+      distinctes et vivantes, pas à un folklore générique disponible pour la fiction ou le
+      commerce. Cette page distingue volontairement le respect dû à ces traditions du volet
+      cryptide, plus récent et bien plus incertain, pour éviter de les réduire l'une à l'autre.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Basil Johnston, Ojibway Heritage, University of Nebraska Press, 1976", url: "https://www.nebraskapress.unl.edu/nebraska/9780803275117/", note: "Référence sur la place d'Animikii dans la cosmologie anishinaabe" },
+    { label: "Aldona Jonaitis, Art of the Northwest Coast, University of Washington Press, 2006", url: "https://uwapress.uw.edu/book/9780774812559/art-of-the-northwest-coast/", note: "Référence sur le motif du Thunderbird dans l'art monumental du Pacifique Nord-Ouest" },
+    { label: "Chicago Tribune, archives, « Lawndale boy tells of giant bird attack », juillet 1977", url: "https://www.chicagotribune.com/", note: "Couverture de presse contemporaine de l'incident de Marlon Lowe à Lawndale" },
+    { label: "Kenneth E. Campbell Jr. et al., « A Reappraisal of the Osteology of Argentavis magnificens », American Museum Novitates, 2019", url: "https://digitallibrary.amnh.org/handle/2246/6968", note: "Étude paléontologique de référence sur les tératornithidés géants évoqués en #science" },
+  ]} />
+</PageLayout>

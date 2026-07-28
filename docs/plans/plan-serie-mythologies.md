@@ -21,6 +21,8 @@
 | 15 | Aborigène australienne | ✅ Fait |
 | 16 | Dogon | ✅ Fait |
 | 17 | Vietnamienne | ✅ Fait |
+| 18 | Finnoise (Kalevala) | ✅ Fait |
+| 19 | Polynésienne | ✅ Fait |
 
 Chaque page est un fichier HTML autonome (`mythologie-XXX.html`), sans dépendance externe hors polices Google Fonts.
 
@@ -93,14 +95,16 @@ Le détail des sources et du raisonnement par culture est conservé dans l'histo
 
 ---
 
-**17 mythologies rédigées.** La série initiale des 10 chapitres est terminée ; la Chinoise,
-puis la Perse, la Yoruba, l'Inca, l'Aborigène australienne, la Dogon et la Vietnamienne l'ont
-prolongée les 26 et 27/07/2026, et **32 candidates restent listées** dans
-`docs/listes/suite_mythologies.md`. La série n'est donc plus « close » : chaque nouvelle
-mythologie applique le correctif ci-dessus (nombre de royaumes dérivé des sources propres à
-la culture, jamais aligné sur un autre chapitre), ainsi que le principe du socle Astro
-(toutes écrites avec les composants partagés plutôt qu'en HTML statique — voir
+**19 mythologies rédigées.** La série initiale des 10 chapitres est terminée ; la Chinoise,
+puis la Perse, la Yoruba, l'Inca, l'Aborigène australienne, la Dogon, la Vietnamienne, la
+Finnoise et la Polynésienne l'ont prolongée entre le 26 et le 29/07/2026, et **30 candidates
+restent listées** dans `docs/listes/suite_mythologies.md`. La série n'est donc plus « close » :
+chaque nouvelle mythologie applique le correctif ci-dessus (nombre de royaumes dérivé des
+sources propres à la culture, jamais aligné sur un autre chapitre), ainsi que le principe du
+socle Astro (toutes écrites avec les composants partagés plutôt qu'en HTML statique — voir
 `docs/plans/plan-industrialisation.md`). La page aborigène adapte plus radicalement encore la
 structure (pas de royaumes empilés, pas d'arbre généalogique, panthéon volontairement court)
 — voir le commentaire d'en-tête de `mythologie-aborigene.astro` pour le détail de ces choix
-et leur justification.
+et leur justification. La page polynésienne applique le même principe : sa cosmogonie en
+trois états successifs (Te Kore / Te Pō / Te Ao Mārama) est dérivée de la tradition māorie
+elle-même, pas d'un empilement calqué sur un autre chapitre.

@@ -1,0 +1,221 @@
+---
+/*
+  Inde (civilisation) — treizième page de la série « Peuples & Cultures
+  du Monde ». Même structure à 10 sections que culture-khmers.astro et
+  culture-empire-mongol.astro.
+
+  Angle délibérément civilisationnel plutôt que religieux : pas de
+  panthéon ni de cosmogonie ici (voir mythologie-hindoue.astro pour cet
+  angle) — cette page couvre la civilisation de l'Indus, les grands
+  empires (Maurya, Gupta), les mathématiques et le commerce. Le système
+  des castes (varna/jāti) est traité avec la prudence requise : présenté
+  comme une institution historique aux origines et à l'évolution
+  débattues par les chercheurs, jamais comme une essence intemporelle de
+  « la culture indienne » — voir #peuples et #anecdotes.
+
+  Effets : data-egg="inde" + data-scroll-fx="mudraGeste" sur
+  #style-de-vie (déjà enregistrés dans effects.js).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Grès rouge des forts moghols, indigo du commerce textile, safran et
+   or : une palette civilisationnelle et marchande, distincte du
+   safran-vermillon-paon déjà réservé à mythologie-hindoue.astro. */
+const palette = {
+  bg: '#1c1410',
+  'bg-deep': '#100b08',
+  surface: '#281d16',
+  'surface-alt': '#34261a',
+  border: '#5c4530',
+  ink: '#f5ece0',
+  text: '#d8c4ac',
+  'text-dim': '#a08468',
+  accent: '#b4472c',
+  'accent-bright': '#d86a44',
+  accent2: '#2e5c78',
+  'accent2-bright': '#4f8ab0',
+  verdict: '#4a3a18',
+  'verdict-bright': '#7a5e2a',
+  glow: 'rgba(180,71,44,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Inde (civilisation)"
+  serie="Peuples & Cultures du Monde"
+  description="Une urbanisation précoce dotée d'égouts avant Rome, l'invention du zéro comme chiffre à part entière, et des routes commerciales qui ont fait de l'Inde le centre de gravité économique du monde ancien pendant des siècles — le versant civilisationnel d'une histoire que mythologie-hindoue.html raconte sous l'angle des dieux."
+  href="culture-inde.html"
+  egg="inde"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="SINDHU · MAURYA · GUPTA"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : <strong>la Nubie / Koush</strong>"
+>
+  <p class="subtitle" slot="hero">Le zéro, l'Indus et la route des épices</p>
+  <p class="tagline" slot="hero">
+    Des cités planifiées de la civilisation de l'Indus, dont l'écriture reste toujours
+    indéchiffrée, jusqu'à l'âge d'or scientifique des Gupta et aux routes commerciales qui
+    ont fait affluer l'or romain vers le sous-continent : l'histoire civilisationnelle
+    derrière le panthéon.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="Du bassin de l'Indus au Deccan"
+    intro="Un sous-continent aux climats et aux langues d'une diversité considérable, dont les grands empires successifs n'ont presque jamais réussi à unifier durablement l'ensemble du territoire jusqu'à l'extrême sud.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 200 20 L 280 100 L 260 220 L 200 320 L 140 220 L 120 100 Z" fill="#b4472c" opacity="0.15" stroke="#5c4530" stroke-width="1"/>
+        <circle cx="150" cy="80" r="6" fill="#4f8ab0"/>
+        <text x="150" y="65" text-anchor="middle" fill="#d8c4ac" font-size="10">Harappa</text>
+        <circle cx="170" cy="130" r="6" fill="#4f8ab0"/>
+        <text x="170" y="150" text-anchor="middle" fill="#d8c4ac" font-size="10">Mohenjo-Daro</text>
+        <circle cx="230" cy="150" r="6" fill="#d86a44"/>
+        <text x="255" y="150" text-anchor="middle" fill="#d8c4ac" font-size="10">Pataliputra</text>
+        <circle cx="220" cy="200" r="6" fill="#d86a44"/>
+        <text x="245" y="200" text-anchor="middle" fill="#d8c4ac" font-size="10">Ujjain</text>
+        <circle cx="195" cy="280" r="5" fill="#a08468"/>
+        <text x="195" y="298" text-anchor="middle" fill="#a08468" font-size="10" font-style="italic">Deccan</text>
+      </svg>
+    </div>
+    <p class="map-caption">Le bassin de l'Indus au nord-ouest, berceau de la première urbanisation ; Pataliputra, capitale des grands empires ; le plateau du Deccan, jamais pleinement absorbé par le pouvoir du nord.</p>
+    <div class="card-grid">
+      <InfoCard title="Mohenjo-Daro et Harappa" sub="v. 2600-1900 av. J.-C." body="Deux des plus grandes cités de la civilisation de l'Indus, dotées d'un urbanisme en grille remarquablement régulier et d'un système d'évacuation des eaux usées en avance de plus de mille ans sur Rome." />
+      <InfoCard title="Pataliputra" sub="Capitale maurya puis gupta" body="Cité située au confluent du Gange et de la Son, décrite par l'ambassadeur grec Mégasthène comme l'une des plus grandes villes du monde antique de son temps." />
+      <InfoCard title="Le plateau du Deccan" sub="Sud du sous-continent" body="Région dont le relief et les royaumes locaux puissants ont limité, à toutes les époques, l'emprise durable des grands empires du nord — l'Inde antique n'a presque jamais connu d'unification politique totale." />
+      <InfoCard title="La mousson" sub="Rythme agricole et commercial" body="Le régime des vents de mousson structure non seulement l'agriculture indienne mais aussi, dès l'Antiquité, les routes maritimes commerciales directes vers l'Égypte romaine et l'Asie du Sud-Est." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Cités planifiées, castes et royaumes rivaux" intro="Une organisation sociale ancienne, le système varna/jāti, dont l'origine précise et l'application réelle à travers les siècles restent activement débattues par les historiens — bien loin d'un système figé et intemporel comme on le présente parfois de l'extérieur.">
+    <div class="card-grid wide">
+      <FigureCard name="La civilisation de l'Indus" role="Urbanisme sans monument royal visible" tags={['v. 2600-1900 av. J.-C.', 'Écriture non déchiffrée']} body="Contrairement à l'Égypte ou la Mésopotamie contemporaines, aucun palais royal monumental ni inscription dynastique n'a été identifié avec certitude — l'organisation politique réelle de cette civilisation urbaine reste largement hypothétique." />
+      <FigureCard name="Le système varna/jāti" role="Institution sociale débattue" tags={['Origine ancienne', 'Évolution historique']} body="Système de catégories sociales dont la forme rigide souvent décrite aujourd'hui doit beaucoup à des codifications et des politiques ultérieures, notamment coloniales britanniques — les historiens s'accordent sur une réalité historique plus fluide et régionalement variable que l'image figée qui en circule." />
+      <FigureCard name="Les marchands de la route des épices" role="Intermédiaires économiques" tags={['Commerce indo-romain']} body="Réseaux marchands qui font transiter poivre, textiles fins et pierres précieuses vers l'Empire romain, en échange d'un afflux d'or et d'argent romain suffisamment massif pour inquiéter certains auteurs latins contemporains." />
+      <FigureCard name="Les lettrés bouddhistes et jaïns" role="Traditions dissidentes influentes" tags={['Nalanda', 'Diffusion en Asie']} body="Traditions religieuses et philosophiques nées en réaction à l'orthodoxie védique dominante, dont l'influence intellectuelle et monastique dépasse largement les frontières du sous-continent, notamment via la route de la soie." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="D'Ashoka à Aryabhata">
+    <div class="card-grid wide">
+      <FigureCard name="Chandragupta Maurya" role="Fondateur de l'empire Maurya" tags={['v. 321-297 av. J.-C.']} body="Unifie l'essentiel du nord du sous-continent en un empire centralisé, avec l'aide, selon la tradition, du stratège et théoricien politique Chanakya (Kautilya), auteur présumé de l'Arthashastra." />
+      <FigureCard name="Ashoka" role="Empereur converti à la non-violence" tags={['v. 268-232 av. J.-C.']} body="Après la conquête sanglante du Kalinga, il se convertit au bouddhisme et fait graver sur des édits de pierre et des colonnes, dans tout l'empire, des messages de tolérance et de non-violence — un cas rare de souverain antique documenté renonçant publiquement à la guerre de conquête." />
+      <FigureCard name="Chandragupta II" role="Souverain de l'âge d'or gupta" tags={['v. 380-415 apr. J.-C.']} body="Règne sur l'apogée culturelle et scientifique de la dynastie Gupta, période à laquelle le voyageur chinois bouddhiste Faxian rend un témoignage direct particulièrement flatteur sur la prospérité et la justice du royaume." />
+      <FigureCard name="Aryabhata" role="Astronome et mathématicien" tags={['476-550 apr. J.-C.']} body="Formule une valeur de pi remarquablement précise, avance l'hypothèse d'une Terre en rotation sur elle-même, et contribue au système décimal positionnel qui rendra possible, plus tard, l'usage généralisé du zéro." />
+      <FigureCard name="Brahmagupta" role="Mathématicien du zéro" tags={['598-668 apr. J.-C.']} body="Premier auteur connu à formuler des règles arithmétiques explicites pour le zéro comme nombre à part entière, et non simple symbole de position — une contribution qui transformera, via le monde arabe, les mathématiques mondiales." />
+      <FigureCard name="Mégasthène" role="Ambassadeur grec témoin" tags={['v. 300 av. J.-C.']} body="Envoyé à la cour de Chandragupta Maurya, il rédige les Indica, l'une des premières descriptions détaillées de l'Inde par un observateur extérieur — texte original perdu, connu surtout par des citations chez des auteurs postérieurs." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="De Kalinga au sac de Nalanda">
+    <StoryBlock num="Épisode I" title="La bataille de Kalinga et la conversion d'Ashoka" body="Vers 261 avant notre ère, la conquête du royaume de Kalinga fait, selon les propres édits gravés par Ashoka, des centaines de milliers de morts et de déportés. Bouleversé, l'empereur renonce publiquement à la guerre de conquête et adopte le dharma bouddhiste comme principe de gouvernement — un des rares exemples antiques documentés de remords impérial affiché." quote="Le Bien-Aimé des dieux considère la victoire par le dharma comme la plus haute des victoires." cite="Paraphrase de l'édit sur roche n° XIII d'Ashoka" />
+    <StoryBlock num="Épisode II" title="Le témoignage de Faxian sous les Gupta" body="Le moine pèlerin chinois Faxian traverse l'Inde gupta au tout début du Ve siècle à la recherche de textes bouddhistes originaux ; son journal de voyage décrit un royaume qu'il juge prospère, où les châtiments corporels sont rares et l'aumône publique organisée — un témoignage extérieur précieux sur l'âge d'or gupta." />
+    <StoryBlock num="Épisode III" title="Le rayonnement puis le sac de Nalanda" body="Le grand monastère-université de Nalanda attire pendant des siècles des étudiants venus de toute l'Asie, avant d'être détruit au tournant du XIIe-XIIIe siècle lors d'une campagne militaire — un épisode dont l'ampleur exacte et la part d'incendie volontaire des manuscrits restent débattues entre les sources disponibles." />
+    <StoryBlock num="Épisode IV" title="L'or romain vers l'Inde" body="L'auteur latin Pline l'Ancien s'inquiète explicitement, au Ier siècle de notre ère, de la quantité d'or et d'argent romains qui reflue chaque année vers l'Inde en paiement d'épices, de textiles fins et de pierres précieuses — une preuve directe, par la plainte elle-même, de l'ampleur réelle du commerce indo-romain de l'époque." />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Le zéro, l'urbanisme et l'acier de Damas">
+    <div class="card-grid compact">
+      <MiniCard title="Le zéro comme nombre" tag="Mathématiques" body="Formalisé par Brahmagupta au VIIe siècle comme un nombre à part entière soumis à ses propres règles de calcul, plutôt que simple marqueur de position — une avancée qui, transmise via le monde arabe, transformera les mathématiques mondiales." />
+      <MiniCard title="Le système décimal positionnel" tag="Notation numérique" body="Le système de numération à dix chiffres et notation positionnelle, aujourd'hui universel, trouve ses racines documentées dans les mathématiques indiennes anciennes avant d'être transmis à l'Europe via le monde arabo-musulman." />
+      <MiniCard title="L'urbanisme planifié de l'Indus" tag="Ingénierie civile" body="Rues en damier, systèmes d'évacuation des eaux usées couverts et bains publics standardisés attestent d'une planification urbaine centralisée remarquablement précoce, sans équivalent connu à la même époque." />
+      <MiniCard title="L'acier au creuset (wootz)" tag="Métallurgie" body="Procédé de fabrication d'un acier de très haute qualité, exporté dès l'Antiquité vers le Moyen-Orient où il servira de matière première à ce que l'on appellera plus tard l'acier de Damas." />
+      <MiniCard title="La chirurgie de Sushruta" tag="Médecine ancienne" body="Le traité médical Sushruta Samhita décrit des techniques chirurgicales détaillées, dont une méthode de reconstruction du nez encore citée comme précurseur de la chirurgie plastique moderne." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="« Chiffres arabes », un nom trompeur" tag="Correction utile" body="Les chiffres dits « arabes » utilisés aujourd'hui dans le monde entier ont été inventés en Inde puis transmis et diffusés par les mathématiciens du monde arabo-musulman — l'appellation usuelle efface une étape entière de cette histoire." />
+      <MiniCard title="Une écriture toujours non déchiffrée" tag="Civilisation de l'Indus" body="Les inscriptions courtes de la civilisation de l'Indus n'ont, à ce jour, jamais été déchiffrées avec certitude, malgré de nombreuses tentatives — on ignore même s'il s'agit d'une écriture au sens plein du terme." />
+      <MiniCard title="Le zéro voyage vers l'Europe" tag="Transmission via al-Khwarizmi" body="Le concept indien du zéro et de la numération positionnelle atteint l'Europe médiévale via les traductions latines des travaux du mathématicien perse al-Khwarizmi, dont le nom donnera plus tard le mot « algorithme »." />
+      <MiniCard title="Le système des castes n'est pas figé dans le temps" tag="Nuance historique" body="De nombreux historiens soulignent que la rigidité perçue du système des castes doit beaucoup à des politiques de codification britanniques du XIXe siècle via les recensements coloniaux, plutôt qu'à une organisation figée depuis l'Antiquité." />
+      <MiniCard title="Nalanda, une université avant l'heure" tag="Ve-XIIe siècle" body="Ce monastère-université aurait accueilli, selon les témoignages de voyageurs chinois, plusieurs milliers d'étudiants venus de toute l'Asie — un précurseur de l'université au sens moderne, des siècles avant Bologne ou Paris." />
+      <MiniCard title="Le jeu d'échecs, une origine indienne probable" tag="Diffusion culturelle" body="Le chaturanga, ancêtre probable des échecs modernes, se diffuse depuis l'Inde vers la Perse puis le monde arabo-musulman et l'Europe médiévale, changeant de règles à chaque étape de son voyage." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="Épices, textiles et gestes rituels"
+    intro="Une vie quotidienne façonnée par le commerce des épices et des textiles fins, et par des gestes codifiés — dont le mudrā, position symbolique de la main — qui traversent aussi bien la danse classique que la pratique religieuse."
+    scrollFx="mudraGeste">
+    <div class="card-grid compact">
+      <MiniCard title="Les épices, moteur commercial" tag="Poivre, cannelle, cardamome" body="Le sous-continent indien fournit, dès l'Antiquité, une part majeure des épices qui circulent vers le Moyen-Orient, l'Afrique de l'Est et l'Empire romain, moteur économique de premier plan du commerce ancien." />
+      <MiniCard title="Le coton et les textiles fins" tag="Production artisanale renommée" body="Les mousselines et cotons indiens, réputés pour leur finesse jusqu'en Méditerranée, comptent parmi les produits manufacturés les plus recherchés du commerce ancien et médiéval." />
+      <MiniCard title="Les mudrās, gestes codifiés" tag="Danse et pratique religieuse" body="Positions symboliques précises de la main, employées aussi bien dans la danse classique indienne que dans certaines pratiques méditatives et religieuses, chacune porteuse d'un sens conventionnel transmis de génération en génération." />
+      <MiniCard title="L'Ayurveda, système médical ancien" tag="Tradition thérapeutique" body="Système de médecine traditionnelle fondé sur l'équilibre de principes corporels (doshas), documenté dans des traités anciens et toujours pratiqué aujourd'hui aux côtés de la médecine conventionnelle." />
+      <MiniCard title="Les bains publics urbains" tag="Civilisation de l'Indus" body="Le grand bassin de Mohenjo-Daro, soigneusement étanchéifié au bitume, suggère un usage rituel et communautaire de l'eau dont on retrouve l'écho dans des pratiques indiennes attestées bien plus tard." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="Du zéro à Nalanda">
+    <div class="card-grid">
+      <InfoCard title="Le zéro et le système décimal, héritage mondial" sub="Via le monde arabo-musulman" body="Le système de numération et le concept de zéro développés en Inde ancienne deviennent, via leur transmission arabe puis latine, le fondement des mathématiques utilisées aujourd'hui dans le monde entier." />
+      <InfoCard title="Le commerce indo-romain" sub="Ier-IIIe siècle apr. J.-C." body="Des ports comme Muziris, sur la côte malabare, accueillent un trafic maritime direct et régulier avec l'Égypte romaine, documenté notamment par le manuel de navigation grec Périple de la mer Érythrée." />
+      <InfoCard title="La diffusion du bouddhisme en Asie" sub="Depuis l'époque d'Ashoka" body="Missions et pèlerins font voyager les textes et les pratiques bouddhistes indiennes vers le Sri Lanka, l'Asie du Sud-Est, la Chine, la Corée et le Japon, façonnant durablement les traditions religieuses de tout le continent." />
+      <InfoCard title="Nalanda, pôle intellectuel international" sub="Ve-XIIe siècle" body="Ce monastère-université attire des étudiants venus de Chine, d'Asie centrale et d'Asie du Sud-Est, faisant de l'Inde gupta puis post-gupta un pôle intellectuel de rayonnement véritablement international." />
+      <InfoCard title="L'influence sur les échecs et les jeux" sub="Diffusion via la Perse" body="Le chaturanga indien, ancêtre probable des échecs, atteint l'Europe médiévale après plusieurs étapes de transformation à travers le monde perse et arabo-musulman." />
+      <InfoCard title="Une diaspora scientifique et commerciale ancienne" sub="Longue durée" body="Marchands, mathématiciens et pèlerins religieux indiens circulent, dès l'Antiquité, sur un espace allant de la Méditerranée romaine à l'Asie du Sud-Est, contribuant à une circulation des savoirs largement antérieure à la mondialisation moderne." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. 2600-1900 av. J.-C.', title: 'Apogée de la civilisation de l\'Indus', body: "Cités planifiées de Mohenjo-Daro et Harappa, urbanisme en grille et système d'évacuation des eaux usées avancé." },
+      { year: 'v. 1500-500 av. J.-C.', title: 'Période védique', body: "Composition progressive des hymnes védiques et formation des structures sociales et religieuses anciennes du sous-continent." },
+      { year: '321 av. J.-C.', title: 'Fondation de l\'empire Maurya', body: "Chandragupta Maurya unifie l'essentiel du nord du sous-continent sous une administration centralisée." },
+      { year: 'v. 261 av. J.-C.', title: 'Bataille de Kalinga', body: "Ashoka, bouleversé par le bilan humain de sa propre conquête, se convertit au dharma bouddhiste." },
+      { year: 'v. 300 av. J.-C.', title: 'Ambassade de Mégasthène', body: "L'envoyé grec rédige l'une des premières descriptions détaillées de l'Inde par un observateur extérieur." },
+      { year: 'v. 320-550 apr. J.-C.', title: 'Âge d\'or gupta', body: "Apogée scientifique, mathématique et artistique sous les empereurs Gupta, décrite favorablement par le pèlerin chinois Faxian." },
+      { year: '476-550 apr. J.-C.', title: 'Aryabhata', body: "Formule une valeur précise de pi et pose les bases du système décimal positionnel." },
+      { year: '628 apr. J.-C.', title: 'Règles de Brahmagupta sur le zéro', body: "Premières règles arithmétiques explicites connues traitant le zéro comme un nombre à part entière." },
+      { year: 'IXe siècle', title: 'Transmission via al-Khwarizmi', body: "Le système décimal indien atteint le monde arabo-musulman, puis, plus tard, l'Europe latine." },
+      { year: 'XIIe-XIIIe siècle', title: 'Déclin puis destruction de Nalanda', body: "Le grand monastère-université décline puis est détruit lors d'une campagne militaire, marquant la fin de son rôle de pôle intellectuel international." },
+      { year: '1498', title: 'Arrivée de Vasco de Gama à Calicut', body: "Première liaison maritime directe entre l'Europe et l'Inde par le cap de Bonne-Espérance, prélude à l'ère coloniale européenne dans la région." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette civilisation laisse encore">
+    <HeritageBlock title="Un système numérique devenu universel" body="Le zéro et le système décimal positionnel indiens restent, aujourd'hui encore, le fondement de toute notation mathématique utilisée dans le monde entier." />
+    <HeritageBlock title="Une tradition médicale toujours pratiquée" body="L'Ayurveda continue d'être pratiqué en Inde contemporaine aux côtés de la médecine conventionnelle, et connaît une diffusion internationale croissante." />
+    <HeritageBlock title="Un pôle démographique et économique mondial" body="L'Inde contemporaine, héritière directe de cette longue histoire civilisationnelle, compte aujourd'hui parmi les toutes premières puissances démographiques et économiques mondiales." />
+    <CautionBox>
+      Le système des castes continue d'avoir des conséquences sociales bien réelles et
+      documentées dans l'Inde contemporaine, malgré son interdiction constitutionnelle
+      officielle depuis 1950. Présenter la richesse civilisationnelle ancienne du
+      sous-continent n'a de sens qu'en reconnaissant aussi cette persistance, sans la réduire
+      à un folklore du passé.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Romila Thapar, A History of India, Volume 1, Penguin Books, 1990", url: "https://archive.org/details/historyofindia0000thap", note: "Synthèse académique de référence sur l'Inde ancienne, de l'Indus aux Gupta" },
+    { label: "Jonathan Mark Kenoyer, Ancient Cities of the Indus Valley Civilization, Oxford University Press, 1998", url: "https://archive.org/details/ancientcitiesofi0000keno", note: "Étude de référence sur l'urbanisme et l'archéologie de la civilisation de l'Indus" },
+    { label: "Kim Plofker, Mathematics in India, Princeton University Press, 2009", url: "https://press.princeton.edu/books/hardcover/9780691120067/mathematics-in-india", note: "Étude de référence sur les mathématiques indiennes anciennes, dont le zéro et le système décimal" },
+    { label: "« The Edicts of King Ashoka », trad. Ven. S. Dhammika, Access to Insight", url: "https://www.accesstoinsight.org/lib/authors/dhammika/wheel386.html", note: "Traduction anglaise des édits d'Ashoka, dont l'édit sur roche n° XIII cité en #recits" },
+  ]} />
+</PageLayout>

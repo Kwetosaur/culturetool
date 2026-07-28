@@ -1,0 +1,266 @@
+---
+/*
+  Mythologie Finnoise — dix-huitième mythologie de la série. Structure
+  imposée par docs/plans/plan-serie-mythologies.md : 9 sections fixes.
+
+  Point de vigilance central : le Kalevala n'est pas un texte ancien
+  continu, mais une compilation du XIXe siècle (Elias Lönnrot, 1835 puis
+  1849) assemblée à partir de chants oraux (runot) collectés en Carélie —
+  traité explicitement en #origine, #anecdotes et #heritage, jamais
+  présenté comme une épopée unifiée transmise telle quelle depuis
+  l'Antiquité.
+
+  Piège de vocabulaire évité : les chants du Kalevala sont appelés "runot"
+  (chants) en finnois, sans aucun rapport avec l'alphabet runique
+  germanique — le pool de déchiffrement "kalevala" est donc volontairement
+  abstrait (étoiles, glace), jamais présenté comme une vraie écriture
+  runique, pour ne pas entretenir la confusion.
+
+  Effets : data-egg="vainamoinen" + data-scroll-fx="cosmicEggSplit" sur
+  #pantheon, piste documentée dans plan-effets.md ("un œuf cosmique qui se
+  fend, ses fragments montant former le ciel et descendant former la
+  terre").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
+
+/* Glace bleu-nuit, bronze du kantele, aurore verte : la matière du Nord
+   plutôt qu'une palette "Scandinavie" déjà prise par mythologie-nordique. */
+const palette = {
+  bg: '#0c1420',
+  'bg-deep': '#070c14',
+  surface: '#161f2e',
+  'surface-alt': '#1e2a3c',
+  border: '#3a4e64',
+  ink: '#eef4f7',
+  text: '#cddce5',
+  'text-dim': '#7f97a8',
+  accent: '#e8c164',
+  'accent-bright': '#f7dc8a',
+  accent2: '#3a8a6a',
+  'accent2-bright': '#5ac094',
+  verdict: '#5a4020',
+  'verdict-bright': '#8a6a35',
+  glow: 'rgba(232,193,100,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Cosmogonie' },
+  { id: 'pantheon', nav: 'Panthéon' },
+  { id: 'genealogie', nav: 'Maisons' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const royaumes = [
+  { num: 'I', title: 'Yläilma', sub: "L'air d'en haut", body: "Domaine d'Ilmatar, fille de l'air, avant même la création du monde — un vide primordial flottant, pas encore un ciel." },
+  { num: 'II', title: 'Maailma', sub: 'Le monde créé, en deux camps', body: "La terre née de l'œuf brisé, partagée entre Kalevala (le pays des héros) et Pohjola (le royaume rival du Nord, gouverné par Louhi) — une rivalité, pas une simple géographie." },
+  { num: 'III', title: 'Tuonela', sub: 'Le royaume des morts', body: "Terre insulaire cernée par la rivière noire de Tuoni, où même les héros les plus puissants risquent de rester pris au piège s'ils s'y aventurent sans précaution." },
+];
+---
+<PageLayout
+  title="Mythologie Finnoise"
+  serie="Mythologies du Monde"
+  description="Un monde né d'un œuf brisé, un chanteur-chaman pour seul héros et pas un guerrier, et un moulin magique, le Sampo, dont personne ne sait vraiment ce qu'il fabrique — la cosmologie du Kalevala, compilée au XIXe siècle à partir de chants oraux de Carélie."
+  href="mythologie-finnoise.html"
+  egg="vainamoinen"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="KALEVALA · POHJOLA · TUONELA"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : <strong>la mythologie polynésienne</strong>"
+>
+  <p class="subtitle" slot="hero">Väinämöinen · Ilmarinen · le Sampo</p>
+  <p class="tagline" slot="hero">
+    Un monde né d'un œuf, un héros qui gagne par le chant plutôt que par l'épée, et un objet
+    magique dont la nature exacte reste, dans le texte lui-même, délibérément indéterminée.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="L'œuf, Kalevala et Tuonela"
+    intro="Pas un empilement de royaumes façon Yggdrasil : la cosmologie finnoise naît d'un œuf unique qui se fend, dont les moitiés forment le ciel et la terre — et se prolonge dans la rivalité entre deux pays bien réels du récit.">
+    <Fragment slot="title"><Decode glyphs="kalevala">L'œuf, Kalevala et Tuonela</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="200" cy="70" rx="150" ry="40" fill="none" stroke="#f7dc8a" stroke-width="2"/>
+        <text x="200" y="55" text-anchor="middle" fill="#f7dc8a" font-family="Cinzel, serif" font-size="12">YLÄILMA</text>
+        <line x1="200" y1="112" x2="200" y2="150" stroke="#e8c164" stroke-width="2" stroke-dasharray="4 4"/>
+        <ellipse cx="200" cy="175" rx="170" ry="42" fill="none" stroke="#cddce5" stroke-width="2"/>
+        <text x="200" y="180" text-anchor="middle" fill="#cddce5" font-family="Cinzel, serif" font-size="13">MAAILMA</text>
+        <line x1="200" y1="219" x2="200" y2="255" stroke="#5ac094" stroke-width="2" stroke-dasharray="4 4"/>
+        <ellipse cx="200" cy="275" rx="120" ry="20" fill="none" stroke="#5ac094" stroke-width="2"/>
+        <text x="200" y="280" text-anchor="middle" fill="#5ac094" font-family="Cinzel, serif" font-size="12">TUONELA</text>
+      </svg>
+    </div>
+    <p class="map-caption">Un œuf fendu, pas des mondes empilés — la cosmologie tire sa structure du récit de création lui-même.</p>
+    <div class="card-grid compact">
+      {royaumes.map((r) => <InfoCard {...r} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~13 figures majeures" title="Le panthéon du Kalevala" scrollFx="cosmicEggSplit">
+    <Fragment slot="title"><Decode glyphs="kalevala">Le panthéon du Kalevala</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Väinämöinen" role="Chanteur-chaman éternel" tags={['Héros principal', 'Kantele']} body="Le héros central du Kalevala n'est pas un guerrier : il l'emporte par le chant et la parole, capable de façonner le monde ou de vaincre un rival par la seule puissance de ses vers chantés." />
+      <FigureCard name="Ilmarinen" role="Forgeron éternel" tags={['Sampo', 'Voûte céleste']} body="Forge la voûte du ciel lui-même puis, à la demande de Louhi, le Sampo — un objet dont ni le texte ni les personnages n'expliquent jamais précisément la fonction." />
+      <FigureCard name="Lemminkäinen" role="Aventurier téméraire" tags={['Séducteur', 'Résurrection']} body="Héros impulsif et charmeur, tué et découpé lors d'une quête impossible en Pohjola, puis rassemblé et ramené à la vie par sa mère à force de patience et de savoir rituel." />
+      <FigureCard name="Louhi" role="Maîtresse de Pohjola" tags={['Antagoniste', 'Puissante sorcière']} body="Souveraine redoutable du royaume rival du Nord, capable de dérober le soleil et la lune eux-mêmes — une figure d'autorité et de pouvoir, jamais réduite à une simple méchante de conte." />
+      <FigureCard name="Ilmatar" role="Fille de l'air" tags={['Avant la création']} body="Flotte seule sur les eaux primordiales avant que l'œuf pondu sur son genou par un oiseau plongeur ne se brise et ne forme le monde." />
+      <FigureCard name="Joukahainen" role="Jeune barde rival" tags={['Défi de chant perdu']} body="Défie Väinämöinen en duel de chant, le perd, et doit offrir sa sœur Aino en mariage pour sauver sa vie — point de départ d'une des tragédies du cycle." />
+      <FigureCard name="Aino" role="Sœur de Joukahainen" tags={['Refus', 'Noyade']} body="Refuse d'épouser le vieux Väinämöinen et se noie plutôt que de se soumettre — un des passages les plus sobres et les plus souvent commentés du texte." />
+      <FigureCard name="Kullervo" role="Héros tragique, esclave" tags={['Vengeance', 'Fin funeste']} body="Élevé dans l'esclavage après le massacre de sa famille, il enchaîne les malheurs jusqu'à une fin tragique — le personnage qui inspirera directement à Tolkien son propre héros maudit, Túrin Turambar." />
+      <FigureCard name="Tuoni" role="Seigneur des morts" tags={['Tuonela']} body="Gouverne avec son épouse Tuonetar le royaume insulaire des morts, cerné par une rivière noire que peu de vivants traversent et reviennent raconter." />
+      <FigureCard name="Ukko" role="Dieu du ciel et du tonnerre" tags={['Autorité suprême']} body="Divinité céleste invoquée en dernier recours dans plusieurs épisodes, notamment pour trancher des conflits que les héros eux-mêmes ne peuvent résoudre." />
+      <FigureCard name="Sampsa Pellervoinen" role="Esprit de la végétation" tags={['Semailles']} body="Chargé de semer les premiers arbres et plantes sur la terre nouvellement formée, une figure agricole discrète mais essentielle du cycle de création." />
+      <FigureCard name="Mielikki" role="Maîtresse de la forêt" tags={['Chasse', 'Faveur des bois']} body="Invoquée par les chasseurs avant de s'enfoncer en forêt, gardienne dont la faveur détermine traditionnellement le succès ou l'échec de la traque." />
+      <FigureCard name="Vellamo" role="Reine des eaux" tags={['Épouse d\'Ahti']} body="Divinité aquatique associée à la pêche et aux richesses immergées, aux côtés de son époux Ahti, dieu des eaux et des poissons." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 maisons, pas un arbre unique"
+    title="Kalevala, Pohjola et Tuonela"
+    intro="Pas de généalogie divine centralisée : le Kalevala organise plutôt une tension entre trois maisons rivales, chacune alignée sur l'un des trois royaumes.">
+    <Fragment slot="title"><Decode glyphs="kalevala">Kalevala, Pohjola et Tuonela</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+        <text x="100" y="30" text-anchor="middle" fill="#f7dc8a" font-family="Cinzel, serif" font-size="12">MAISON DE KALEVALA</text>
+        <circle cx="100" cy="70" r="18" fill="#e8c164"/>
+        <text x="100" y="75" text-anchor="middle" font-size="8" fill="#0c1420" font-weight="700">Väinämöinen</text>
+        <line x1="100" y1="88" x2="100" y2="130" stroke="#e8c164" stroke-width="1" stroke-dasharray="3 4"/>
+        <circle cx="100" cy="145" r="13" fill="#1e2a3c" stroke="#e8c164" stroke-width="1.3"/>
+        <text x="100" y="165" text-anchor="middle" font-size="8" fill="#cddce5">Ilmarinen</text>
+
+        <text x="300" y="30" text-anchor="middle" fill="#a83a4a" font-family="Cinzel, serif" font-size="12">MAISON DE POHJOLA</text>
+        <circle cx="300" cy="70" r="18" fill="#7a2030"/>
+        <text x="300" y="75" text-anchor="middle" font-size="8" fill="#f5ecd8" font-weight="700">Louhi</text>
+        <line x1="300" y1="88" x2="300" y2="130" stroke="#a83a4a" stroke-width="1" stroke-dasharray="2 4"/>
+        <circle cx="300" cy="145" r="13" fill="#1e2a3c" stroke="#a83a4a" stroke-width="1.3"/>
+        <text x="300" y="165" text-anchor="middle" font-size="8" fill="#cddce5">filles de Pohjola</text>
+
+        <text x="500" y="30" text-anchor="middle" fill="#5ac094" font-family="Cinzel, serif" font-size="12">MAISON DE TUONELA</text>
+        <circle cx="500" cy="70" r="18" fill="#3a8a6a"/>
+        <text x="500" y="75" text-anchor="middle" font-size="8" fill="#f5ecd8" font-weight="700">Tuoni</text>
+        <line x1="500" y1="88" x2="500" y2="130" stroke="#5ac094" stroke-width="1" stroke-dasharray="2 4"/>
+        <circle cx="500" cy="145" r="13" fill="#1e2a3c" stroke="#5ac094" stroke-width="1.3"/>
+        <text x="500" y="165" text-anchor="middle" font-size="8" fill="#cddce5">Tuonetar</text>
+      </svg>
+    </div>
+    <p class="map-caption">Trait plein = filiation ou union directe ; pointillé = alliance ou rivalité rituelle entre maisons.</p>
+  </Section>
+
+  <Section id="creatures" label="7 êtres notables" title="Le bestiaire du Kalevala">
+    <Fragment slot="title"><Decode glyphs="kalevala">Le bestiaire du Kalevala</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Le grand brochet" tag="Origine du kantele" body="Sa mâchoire, façonnée par Väinämöinen après sa mort, devient le premier kantele — l'instrument à cordes qui reste aujourd'hui l'emblème musical national finlandais." />
+      <MiniCard title="L'Élan de Hiisi" tag="Chasse impossible" body="Créature enchantée que Lemminkäinen doit capturer lors d'une des épreuves imposées par Louhi pour obtenir la main de sa fille." />
+      <MiniCard title="Le cheval de feu de Hiisi" tag="Deuxième épreuve" body="Monture surnaturelle que Lemminkäinen doit brider, tout aussi périlleuse que l'élan qui la précède dans le cycle des épreuves." />
+      <MiniCard title="L'ours sacré" tag="Chasse rituelle" body="Animal traité avec un respect cérémoniel particulier dans les traditions finno-ougriennes, dont la mise à mort rituelle s'accompagne de chants d'excuse et de célébration." />
+      <MiniCard title="Iku-Turso" tag="Monstre des eaux" body="Créature marine redoutable que Väinämöinen affronte et repousse, associée aux dangers imprévisibles de la mer." />
+      <MiniCard title="Le serpent de Tuonela" tag="Gardien du fleuve des morts" body="Obstacle vivant gardant le passage vers le royaume de Tuoni, que les héros doivent déjouer par la ruse plutôt que par la force." />
+      <MiniCard title="Le grand chêne" tag="Obstacle cosmique" body="Un chêne d'une taille telle qu'il bloque le soleil, abattu par un héros minuscule surgi de la mer — un motif de disproportion qui revient dans plusieurs traditions finno-ougriennes." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="9 légendes" title="Les grands récits du Kalevala">
+    <Fragment slot="title"><Decode glyphs="kalevala">Les grands récits du Kalevala</Decode></Fragment>
+    <StoryBlock num="Légende I" title="L'œuf primordial" body="Ilmatar, fille de l'air, flotte seule sur l'océan originel pendant des siècles. Un oiseau plongeur, cherchant où nicher, pond ses œufs sur son genou dressé hors de l'eau. Quand elle bouge, les œufs tombent et se brisent : les coquilles forment le ciel et la terre, le jaune devient le soleil, le blanc la lune." />
+    <StoryBlock num="Légende II" title="Le duel de chant" body="Le jeune Joukahainen provoque Väinämöinen en duel de connaissance chantée. Battu à plate couture, il promet sa sœur Aino en mariage pour avoir la vie sauve — un marché qu'Aino elle-même n'a jamais accepté." />
+    <StoryBlock num="Légende III" title="Le refus d'Aino" body="Plutôt que d'épouser le vieux Väinämöinen, Aino s'enfonce dans les bois puis dans les eaux et s'y noie — un des passages les plus sobrement tragiques du cycle, rapporté sans effet dramatique excessif dans le texte original." quote="Elle choisit l'eau plutôt qu'un mariage qu'elle n'avait jamais voulu." cite="Résumé d'un passage du chant IV" />
+    <StoryBlock num="Légende IV" title="La forge du Sampo" body="Pour obtenir la main d'une fille de Louhi, Ilmarinen forge le Sampo, un objet dont le texte ne précise jamais clairement la nature — moulin, coffre ou pilier du monde selon les lectures — mais dont la possession garantit prospérité et abondance à Pohjola." />
+    <StoryBlock num="Légende V" title="La mort et le rassemblement de Lemminkäinen" body="Envoyé chasser l'Élan de Hiisi puis affronter d'autres épreuves impossibles, Lemminkäinen finit tué et démembré dans la rivière de Tuonela. Sa mère, refusant le désespoir, rassemble patiemment chaque morceau et le ramène à la vie par le chant et l'onguent rituel." />
+    <StoryBlock num="Légende VI" title="La blessure de Väinämöinen" body="Blessé à la jambe par sa propre hache en fabriquant un bateau, Väinämöinen doit chanter l'origine mythique du fer pour en apaiser le tranchant et se soigner — un épisode qui illustre la logique magique centrale du texte : connaître l'origine d'une chose, c'est pouvoir la maîtriser." />
+    <StoryBlock num="Légende VII" title="La vie tragique de Kullervo" body="Élevé comme esclave après le massacre de sa famille par son oncle, Kullervo enchaîne les catastrophes malgré lui jusqu'à une fin funeste qu'il se donne lui-même — le cycle le plus sombre du Kalevala, et celui qui marquera le plus durablement le jeune Tolkien." />
+    <StoryBlock num="Légende VIII" title="Le vol du Sampo" body="Väinämöinen, Ilmarinen et Lemminkäinen s'unissent pour reprendre le Sampo à Pohjola. Poursuivis par Louhi transformée en aigle géant, l'objet se brise dans la mer durant la lutte — ses fragments dispersés expliqueraient, selon le texte, l'origine de la prospérité inégale du monde." />
+    <StoryBlock num="Légende IX" title="Le vol du soleil et de la lune" body="Furieuse d'avoir perdu le Sampo, Louhi dérobe le soleil et la lune et les enferme dans une montagne, plongeant le monde dans l'obscurité — un désastre que seule l'intervention du forgeron Ilmarinen, contraint de forger de nouveaux astres de remplacement, finit par résoudre." />
+  </Section>
+
+  <Section id="anecdotes" label="7 curiosités" title="Étymologies, débats et faits marquants">
+    <Fragment slot="title"><Decode glyphs="kalevala">Étymologies, débats et faits marquants</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Une compilation, pas un texte ancien continu" tag="À nuancer" body="Le Kalevala tel qu'on le lit aujourd'hui est un assemblage réalisé par le médecin et folkloriste Elias Lönnrot en 1835 puis 1849, à partir de chants oraux collectés surtout en Carélie — pas une épopée transmise telle quelle depuis l'Antiquité." />
+      <MiniCard title="Le mètre du Kalevala" tag="Trochaïque tétramètre" body="Le rythme poétique caractéristique de ces chants a directement inspiré Henry Wadsworth Longfellow pour son poème américain « Le Chant de Hiawatha » en 1855." />
+      <MiniCard title="Le Sampo reste une énigme voulue" tag="Objet non identifié" body="Contrairement à la plupart des objets légendaires, le texte ne tranche jamais sur la nature exacte du Sampo — un flou que les chercheurs considèrent aujourd'hui comme délibéré plutôt que comme un oubli du compilateur." />
+      <MiniCard title="Tolkien et Kullervo" tag="Une inspiration directe" body="Le jeune Tolkien rédige dès 1914-1915 une réécriture en prose du cycle de Kullervo — un texte publié seulement en 2010, qui préfigure directement son propre héros tragique, Túrin Turambar." />
+      <MiniCard title="Le jour du Kalevala" tag="28 février" body="Cette date commémore la signature par Lönnrot de la préface de la première édition en 1835 ; elle est devenue en Finlande le Jour de la culture finnoise, jour férié non chômé mais largement célébré." />
+      <MiniCard title="Le kantele, un instrument bien réel" tag="Continuité vivante" body="L'instrument que Väinämöinen façonne dans le mythe correspond à un instrument à cordes traditionnel toujours joué aujourd'hui, considéré comme un symbole musical national finlandais." />
+      <MiniCard title="L'influence sur Sibelius" tag="Musique classique" body="Le compositeur Jean Sibelius puise directement dans le Kalevala pour plusieurs poèmes symphoniques majeurs, dont la suite « Lemminkäinen »." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="De la Carélie aux poèmes symphoniques">
+    <Fragment slot="title"><Decode glyphs="kalevala">De la Carélie aux poèmes symphoniques</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="110" r="10" fill="#e8c164"/>
+        <text x="250" y="90" text-anchor="middle" fill="#f7dc8a" font-size="12" font-family="Cinzel, serif">CARÉLIE</text>
+        {[[120,60,'Helsinki — Société de littérature finnoise'],[380,60,'Boston — influence sur Longfellow'],[100,170,'Oxford — Tolkien et Kullervo'],[400,170,'Concerts de Sibelius, monde entier']].map(([x,y,label]) => (
+          <g>
+            <line x1="250" y1="110" x2={x} y2={y} stroke="#5ac094" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#1e2a3c" stroke="#e8c164" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#cddce5" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">Des chants oraux de Carélie à une influence mondiale sur la fantasy et la musique classique.</p>
+    <div class="card-grid">
+      <InfoCard title="La Carélie" sub="Terrain de collecte" body="Région où Lönnrot recueille l'essentiel des chants oraux qui composeront le Kalevala, lors de plusieurs expéditions de terrain menées entre 1828 et les années 1840." />
+      <InfoCard title="La Société de littérature finnoise" sub="Helsinki" body="Institution fondée en 1831, encore active aujourd'hui, qui a soutenu la collecte et continue de conserver les archives de chants oraux à l'origine du texte." />
+      <InfoCard title="L'influence sur Longfellow" sub="États-Unis, 1855" body="Le mètre du Kalevala inspire directement la forme poétique du « Chant de Hiawatha », qui popularise ce rythme auprès d'un lectorat anglophone bien avant les traductions complètes du texte finnois." />
+      <InfoCard title="Oxford et Tolkien" sub="1914-1915" body="Le jeune étudiant y découvre le Kalevala et rédige sa première réécriture mythologique personnelle, point de départ reconnu de tout son legendarium ultérieur." />
+      <InfoCard title="Les poèmes symphoniques de Sibelius" sub="Fin du XIXe - début du XXe siècle" body="Plusieurs œuvres majeures du compositeur finlandais s'inspirent directement d'épisodes du cycle, contribuant à sa diffusion internationale par la musique plutôt que par le texte." />
+      <InfoCard title="La reconnaissance UNESCO" sub="Patrimoine documentaire" body="Les manuscrits originaux de collecte de Lönnrot sont aujourd'hui conservés comme un patrimoine documentaire national finlandais de premier plan." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="kalevala">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'Tradition orale, siècles indéterminés', title: 'Les chants runot', body: "Des chants populaires narratifs se transmettent oralement en Carélie et dans d'autres régions finnoises, sans qu'aucune date d'origine précise ne puisse leur être assignée." },
+      { year: '1828-1845', title: 'Les expéditions de collecte de Lönnrot', body: "Le médecin et folkloriste parcourt la Carélie pour recueillir des chants auprès de bardes locaux, dont le célèbre Arhippa Perttunen." },
+      { year: '1835', title: 'Première édition du Kalevala', body: "Lönnrot publie une première version compilée et mise en ordre narratif des chants collectés." },
+      { year: '1849', title: 'Édition définitive, le « Nouveau Kalevala »', body: "Version augmentée et remaniée qui devient la référence standard du texte, presque deux fois plus longue que la première édition." },
+      { year: '1855', title: 'Influence sur « Le Chant de Hiawatha »', body: "Henry Wadsworth Longfellow reprend le mètre du Kalevala pour son poème américain, popularisant le rythme sans le texte lui-même." },
+      { year: '1888 et 1907', title: 'Premières traductions anglaises complètes', body: "John Martin Crawford (1888) puis William Forsell Kirby (1907) traduisent l'ensemble du texte en respectant son mètre d'origine." },
+      { year: '1914-1915', title: 'Le jeune Tolkien découvre le Kalevala', body: "Il rédige une première réécriture en prose du cycle de Kullervo, jamais publiée de son vivant." },
+      { year: '1917', title: "Indépendance de la Finlande", body: "Le Kalevala devient un symbole central de l'identité culturelle finnoise nouvellement indépendante." },
+      { year: '1985', title: '150e anniversaire de la première édition', body: "Célébrations nationales marquant l'importance durable du texte dans l'identité culturelle finlandaise." },
+      { year: '2010', title: 'Publication posthume de « The Story of Kullervo »', body: "L'universitaire Verlyn Flieger édite et publie le texte de jeunesse de Tolkien, révélant l'ampleur de cette influence directe." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le Kalevala fait encore">
+    <Fragment slot="title"><Decode glyphs="kalevala">Ce que le Kalevala fait encore</Decode></Fragment>
+    <HeritageBlock title="Un jour de culture nationale" body="Le 28 février reste célébré en Finlande comme Journée de la culture finnoise, directement lié à la préface de 1835 du Kalevala." />
+    <HeritageBlock title="Une influence directe sur la fantasy moderne" body="Au-delà de Tolkien, le texte continue d'inspirer un nombre considérable d'œuvres de fantasy et de jeux vidéo contemporains, souvent sans que le public en connaisse la source précise." />
+    <HeritageBlock title="Un instrument toujours joué" body="Le kantele reste un instrument traditionnel activement enseigné et joué en Finlande, loin d'être une simple relique muséale." />
+    <CautionBox>
+      Présenter le Kalevala comme une épopée antique ininterrompue plutôt que comme une
+      compilation savante du XIXe siècle a longtemps servi, en Finlande comme ailleurs en
+      Europe romantique, une construction d'identité nationale. Cette page choisit de nommer
+      clairement le rôle de Lönnrot plutôt que d'entretenir le flou.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Kalevala, trad. William Forsell Kirby, 1907", url: "https://www.gutenberg.org/ebooks/7000", note: "Traduction anglaise de référence respectant le mètre d'origine du texte" },
+    { label: "J.R.R. Tolkien, The Story of Kullervo, éd. Verlyn Flieger, HarperCollins, 2015", note: "Texte de jeunesse de Tolkien et commentaires établissant l'influence directe du cycle de Kullervo sur son œuvre" },
+    { label: "« Kalevala », Encyclopaedia Britannica", url: "https://www.britannica.com/topic/Kalevala", note: "Présentation synthétique de la compilation de Lönnrot et de son contexte historique" },
+  ]} />
+</PageLayout>

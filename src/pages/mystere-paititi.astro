@@ -1,0 +1,169 @@
+---
+/*
+  Le Paititi — douzième mystère de la série. Structure imposée par
+  docs/plans/plan-serie-mysteres.md : 7 sections, badge de verdict.
+
+  Point de vigilance : distinguer nettement trois choses souvent
+  confondues dans la presse populaire — (1) Vilcabamba, dernier refuge
+  historique bien réel et bien localisé de la résistance inca, redécouvert
+  en 1964 ; (2) le Paititi, cité légendaire plus lointaine dont
+  l'existence même reste non confirmée ; (3) la « Cité perdue de Z » de
+  Percy Fawcett, une quête distincte au Mato Grosso brésilien, sans
+  rapport géographique direct avec le Paititi péruvien/bolivien. Cette
+  page ne traite que le Paititi — les deux autres sont mentionnés
+  uniquement pour éviter la confusion.
+
+  Effets : data-egg="paititi" + data-scroll-fx="canopeeDoree" sur
+  #enigme (déjà enregistrés dans effects.js) — une canopée qui s'assombrit
+  autour d'un point de lumière dorée, jamais une carte au trésor.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Vert profond de la canopée amazonienne, or inca, ombre humide : la
+   matière de la jungle plutôt qu'une palette "trésor" générique. */
+const palette = {
+  bg: '#0e1a10',
+  'bg-deep': '#080f09',
+  surface: '#162417',
+  'surface-alt': '#1e3020',
+  border: '#3a5438',
+  ink: '#eef5ec',
+  text: '#c4d8c0',
+  'text-dim': '#7ea078',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#3a7a5a',
+  'accent2-bright': '#5aa87e',
+  verdict: '#4a3418',
+  'verdict-bright': '#7a5c2a',
+  glow: 'rgba(201,152,47,0.18)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Paititi"
+  serie="Grands Mystères du Monde"
+  description="Une cité inca légendaire d'or et de refuge, censée se cacher dans la jungle profonde entre le Pérou et la Bolivie — distincte du site bien réel de Vilcabamba, redécouvert en 1964, et jamais localisée malgré plus d'un siècle d'expéditions, de survols et, plus récemment, de recherches par imagerie satellite."
+  href="mystere-paititi.html"
+  egg="paititi"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="AMAZONIE · FRONTIÈRE PÉROU-BOLIVIE"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : <strong>la Toison d'or</strong>"
+>
+  <p class="subtitle" slot="hero">La cité que la jungle n'a jamais rendue</p>
+  <p class="tagline" slot="hero">
+    Ni prouvée ni réfutée : contrairement à Vilcabamba, son cousin historique bien réel, le
+    Paititi reste à ce jour un point d'interrogation sur la carte — cherché sans succès
+    confirmé depuis des décennies, sous une canopée qui a englouti bien plus de sites qu'elle
+    n'en a laissé découvrir.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Existence non confirmée ; à ne pas confondre avec Vilcabamba, site réel et localisé"
+    note="Aucune expédition n'a, à ce jour, produit de preuve archéologique concluante d'une cité correspondant à la description légendaire du Paititi. Le site historique de Vilcabamba, lui, est confirmé et fouillé depuis 1964 — les deux sont trop souvent confondus dans la presse populaire."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Une résistance inca bien réelle, un refuge légendaire distinct" intro="Avant d'aborder ce qui reste incertain, ce qui ne fait pas débat : la résistance inca s'est bien repliée dans la jungle après la chute de Cusco, et au moins un de ses refuges a été retrouvé et fouillé.">
+    <div class="card-grid">
+      <InfoCard num="I" title="La résistance de Vilcabamba" sub="1537-1572" body="Après la prise de Cusco par les conquistadors, un État inca de résistance se maintient pendant plus de trente ans dans la jungle, jusqu'à la capture et l'exécution du dernier souverain, Túpac Amaru, en 1572." />
+      <InfoCard num="II" title="Vilcabamba, site réel redécouvert en 1964" sub="Espíritu Pampa" body="L'explorateur américain Gene Savoy identifie formellement le site d'Espíritu Pampa comme la véritable dernière capitale inca de la résistance — un site aujourd'hui fouillé, documenté et distinct de Machu Picchu, un temps confondu avec lui par Hiram Bingham." />
+      <InfoCard num="III" title="Une mention légendaire distincte dès le XVIe siècle" sub="Chroniques coloniales" body="Des sources espagnoles évoquent, dès le XVIe siècle, une cité nommée « Paytiti » plus lointaine encore dans la jungle, réputée receler l'or que les Incas auraient mis à l'abri des conquistadors — une mention légendaire distincte de la localisation historique de Vilcabamba." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Où, et si elle a jamais existé" scrollFx="canopeeDoree" intro="Deux questions distinctes se superposent dans le débat : le Paititi désigne-t-il un lieu réel encore non localisé, ou une amplification légendaire du souvenir de Vilcabamba ?">
+    <div class="card-grid wide">
+      <FigureCard name="Une zone de recherche immense et hostile" role="Contrainte géographique" tags={['Jungle dense', 'Relief accidenté']} body="La région où la légende situe le Paititi, à cheval sur le Pérou et la Bolivie, combine canopée amazonienne dense, relief andin accidenté et absence quasi totale d'infrastructure — des conditions qui rendent toute prospection archéologique systématique extrêmement coûteuse et lente." />
+      <FigureCard name="Des ruines réelles, mais non identifiées avec certitude" role="Résultats partiels" tags={['Expéditions Jamin', 'Pétroglyphes']} body="Plusieurs expéditions, dont celles menées par l'explorateur français Thierry Jamin dans les années 2000-2010, ont documenté des vestiges et des pétroglyphes dans la région — sans qu'aucune découverte n'ait été reconnue par la communauté archéologique comme correspondant formellement au Paititi légendaire." />
+      <FigureCard name="Le risque de confusion avec d'autres légendes" role="Clarification nécessaire" tags={['El Dorado', 'Cité de Z de Fawcett']} body="Le Paititi est fréquemment confondu dans la presse populaire avec El Dorado (légende distincte originaire de Colombie) ou avec la « Cité perdue de Z » que cherchait l'explorateur britannique Percy Fawcett dans le Mato Grosso brésilien, une tout autre région à des centaines de kilomètres de là." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment on l'a cherché" title="De la chronique coloniale au satellite">
+    <Timeline items={[
+      { year: '1572', title: 'Chute de Vilcabamba', body: "Capture et exécution de Túpac Amaru, dernier souverain de l'État inca de résistance — la fin politique de la résistance organisée, mais pas la fin de la légende d'un refuge plus lointain." },
+      { year: 'Fin du XVIe siècle', title: 'Premières mentions écrites du « Paytiti »', body: "Des documents coloniaux espagnols évoquent une cité ou province lointaine dans la jungle à l'est des Andes, réputée riche en or." },
+      { year: '1911', title: 'Redécouverte de Machu Picchu par Hiram Bingham', body: "Bingham croit un temps avoir trouvé Vilcabamba en découvrant Machu Picchu — une confusion qui ne sera corrigée que des décennies plus tard." },
+      { year: '1964', title: 'Identification d\'Espíritu Pampa comme Vilcabamba', body: "Gene Savoy établit qu'Espíritu Pampa, et non Machu Picchu, correspond à la véritable dernière capitale de la résistance inca — clarifiant définitivement la géographie de ce refuge historique réel." },
+      { year: 'Années 1980-2000', title: 'Multiplication des expéditions vers le Paititi', body: "Plusieurs explorateurs, chercheurs indépendants et équipes universitaires lancent des expéditions vers la frontière Pérou-Bolivie, sans qu'aucune ne produise de preuve archéologique consensuellement reconnue." },
+      { year: 'Années 2010-2020', title: 'Recherches par imagerie satellite et LIDAR', body: "Les mêmes technologies de télédétection qui ont révélé l'ampleur réelle d'Angkor sont mobilisées sur la région, révélant des structures possibles mais aucune confirmation formelle au sol à ce jour." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'une chronique coloniale à un mythe d'aventure" title="Entre roman d'aventure et documentaires d'exploration">
+    <div class="card-grid compact">
+      <MiniCard title="Un moteur de récits d'aventure sud-américains" tag="Littérature et cinéma" body="Le Paititi, aux côtés d'El Dorado, nourrit depuis des décennies un imaginaire de cité d'or perdue en Amérique du Sud, repris dans de nombreux romans et films d'aventure, souvent sans grande fidélité aux sources historiques réelles." />
+      <MiniCard title="Une confusion fréquente entretenue par les médias" tag="Simplification journalistique" body="La presse généraliste confond régulièrement Paititi, Vilcabamba et la cité de Z de Fawcett en un seul récit unique de « cité perdue inca », alors que ces trois pistes renvoient à des lieux, des époques et des niveaux de certitude archéologique très différents." />
+      <MiniCard title="Un sujet actif de documentaires d'exploration" tag="Production continue" body="Plusieurs chaînes documentaires internationales ont consacré des programmes aux expéditions vers le Paititi depuis les années 2000, contribuant à la fois à populariser et à parfois sur-simplifier l'état réel des connaissances archéologiques." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Vilcabamba est un fait établi ; le Paititi ne l'est pas" body="La distinction est cruciale : le refuge historique de la résistance inca est localisé, fouillé et documenté depuis 1964 à Espíritu Pampa. Le Paititi, cité plus lointaine et plus richement dotée que décrit par la légende, n'a en revanche jamais été localisé avec une preuve archéologique reconnue par la communauté scientifique." />
+    <ScienceBlock num="Enquête 2" title="La télédétection ouvre des pistes sans les confirmer" body="Les campagnes de survol et d'imagerie satellite récentes ont bien révélé des structures possiblement anthropiques dans la région, comme cela a été le cas pour d'autres sites amazoniens — mais une anomalie détectée depuis l'espace ne devient une preuve archéologique qu'après vérification physique sur le terrain, une étape qui reste à accomplir pour le Paititi spécifiquement." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Le Paititi est une amplification légendaire du souvenir de Vilcabamba"
+      level="plausible"
+      status="Hypothèse la plus économe"
+      body="Plusieurs chercheurs soutiennent que la légende du Paititi pourrait être née d'une déformation progressive, à travers les récits coloniaux successifs, du souvenir bien réel de la résistance de Vilcabamba, embelli au fil du temps en une cité d'or plus vaste et plus lointaine."
+      attrib="Hypothèse répandue en ethnohistoire andine"
+    />
+    <TheoryCard
+      title="Il existe un ou plusieurs sites archéologiques réels encore non identifiés dans la région"
+      level="plausible"
+      status="Piste sérieuse, non confirmée"
+      body="Étant donné l'ampleur des découvertes archéologiques amazoniennes récentes obtenues par LIDAR ailleurs sur le continent, l'hypothèse de vestiges significatifs encore non documentés dans cette région reculée n'est pas déraisonnable — mais reste, à ce jour, sans confirmation archéologique publiée et vérifiée."
+      attrib="Piste ouverte par les avancées récentes de la télédétection amazonienne"
+    />
+    <TheoryCard
+      title="Le Paititi correspond exactement à la cité décrite par la légende, or et richesses intacts"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune preuve archéologique n'est venue à ce jour appuyer l'existence d'une cité correspondant précisément à la description légendaire la plus spectaculaire, malgré plus d'un siècle de recherches et d'expéditions successives." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette légende fait encore">
+    <HeritageBlock title="Des expéditions toujours en cours" body="Des équipes de chercheurs indépendants et, plus ponctuellement, des missions universitaires continuent d'explorer la région à la recherche d'indices archéologiques supplémentaires." />
+    <HeritageBlock title="Un moteur du tourisme d'aventure régional" body="La légende continue d'alimenter un tourisme d'exploration dans le sud-est du Pérou et le nord de la Bolivie, y compris pour des visiteurs davantage attirés par le mythe que par la certitude d'une découverte." />
+    <HeritageBlock title="Un cas d'école sur la frontière entre histoire et légende" body="Le Paititi illustre bien comment un fait historique documenté (Vilcabamba) peut engendrer, par amplification narrative successive, une légende parallèle bien plus difficile à vérifier ou à réfuter définitivement." />
+    <CautionBox>
+      Les recherches archéologiques dans cette région se déroulent sur des territoires
+      autochtones et des zones parfois protégées ; plusieurs expéditions passées ont fait
+      l'objet de critiques pour un manque de coordination avec les communautés locales et les
+      autorités patrimoniales péruviennes et boliviennes. L'enthousiasme pour une découverte
+      spectaculaire ne dispense pas du respect dû à ces territoires et à leurs habitants.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Gene Savoy, Antisuyo: The Search for the Lost Cities of the Amazon, Simon & Schuster, 1970", note: "Récit de l'identification d'Espíritu Pampa comme site de Vilcabamba, distinct du Paititi légendaire" },
+    { label: "Vincent R. Lee, Forgotten Vilcabamba: Final Stronghold of the Incas, Sixpac Manco Publications, 2000", note: "Étude archéologique de référence sur le site confirmé de Vilcabamba" },
+    { label: "John Hemming, The Conquest of the Incas, Harcourt Brace Jovanovich, 1970", url: "https://archive.org/details/conquestofincas00hemm", note: "Référence historique sur la résistance inca de Vilcabamba et son contexte colonial" },
+    { label: "Jim Dobson, « How The Discovery Of Paititi, The Lost City Of Gold, May Change Peru Forever », Forbes, 11 janvier 2016", url: "https://www.forbes.com/sites/jimdobson/2016/01/11/move-over-machu-picchu-the-discovery-of-paititi-the-secret-city-of-gold-may-change-peru-forever/", note: "Entretien avec l'explorateur Thierry Jamin sur l'état de ses recherches dans la vallée de Lacco" },
+  ]} />
+</PageLayout>

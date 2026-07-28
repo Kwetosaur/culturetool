@@ -1,0 +1,165 @@
+---
+/*
+  La Tarasque — onzième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict.
+
+  Cas particulier : contrairement à la plupart des créatures de la
+  série, la Tarasque n'est ni un cryptide qu'on chercherait sur le
+  terrain, ni un pur revenant folklorique comme la Llorona — c'est une
+  figure hagiographique (légende de sainte Marthe) devenue fête
+  patrimoniale vivante, reconnue par l'UNESCO. #science est donc adaptée
+  à une question d'origine et de datation textuelle, pas de preuve
+  zoologique ; #theories porte sur les hypothèses concurrentes de
+  l'origine du récit (crue du Rhône personnifiée, animal de bestiaire
+  médiéval, écho pré-chrétien) plutôt que sur son existence réelle.
+
+  Effets : data-egg="tarasque" + data-scroll-fx="tarasqueProcession" sur
+  #culture-populaire (déjà enregistrés dans effects.js) — un dragon de
+  procession sur roues qui traverse l'écran, cohérent avec le sujet
+  précis de cette section (la fête de Tarascon).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Ocre du Rhône, vert olive de Provence, écailles vert-de-gris : la
+   matière du sujet plutôt qu'une palette "dragon" générique. */
+const palette = {
+  bg: '#1a1a10',
+  'bg-deep': '#100f0a',
+  surface: '#242216',
+  'surface-alt': '#302c1c',
+  border: '#5c5430',
+  ink: '#f2ecda',
+  text: '#d4cba8',
+  'text-dim': '#948a5e',
+  accent: '#8a9e4a',
+  'accent-bright': '#b0c46e',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#4a2818',
+  'verdict-bright': '#7a4a2a',
+  glow: 'rgba(138,158,74,0.18)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Récits' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="La Tarasque"
+  serie="Créatures Légendaires du Monde"
+  description="Un dragon amphibie qui terrorisait le Rhône près de Tarascon, apaisé non par un chevalier mais par sainte Marthe et un simple signe de croix — une légende devenue fête patrimoniale vivante, reconnue par l'UNESCO, où le monstre défile chaque année dans les rues plutôt que d'être combattu."
+  href="creature-tarasque.html"
+  egg="tarasque"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="TARASCON · PROVENCE"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : <strong>le Thunderbird</strong>"
+>
+  <p class="subtitle" slot="hero">Le dragon que l'on apaise, pas que l'on tue</p>
+  <p class="tagline" slot="hero">
+    Contrairement à la quasi-totalité des dragons légendaires d'Europe, la Tarasque n'est
+    vaincue ni par une épée ni par un chevalier : une sainte la calme d'un geste, et la ville
+    qu'elle terrorisait continue, huit siècles plus tard, à la faire défiler en fête plutôt
+    qu'à célébrer sa mort.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Légende hagiographique devenue patrimoine vivant, pas un cryptide recherché"
+    note="Aucune enquête zoologique n'a de sens ici : la question pertinente porte sur l'origine textuelle du récit et sa transformation en fête, pas sur l'existence d'un animal réel."
+  />
+
+  <Section id="origine" label="Première mention" title="De la Légende dorée au folklore provençal" intro="Le récit tel qu'on le connaît aujourd'hui prend sa forme la plus ancienne dans un texte hagiographique du XIIIe siècle, bien avant de devenir la fête que l'on connaît.">
+    <div class="card-grid">
+      <InfoCard num="I" title="La Légende dorée, v. 1260" sub="Jacques de Voragine" body="Le récit de la Tarasque apparaît dans ce recueil de vies de saints, au sein du chapitre consacré à sainte Marthe — la plus ancienne source écrite connue à mentionner explicitement la créature par ce nom." />
+      <InfoCard num="II" title="Une origine plus ancienne, non écrite" sub="Toponymie et tradition orale" body="Le nom même de Tarascon, attesté bien avant le XIIIe siècle, laisse penser à une tradition locale antérieure à sa mise par écrit hagiographique — mais aucune source pré-médiévale directe ne permet de la documenter avec certitude." />
+      <InfoCard num="III" title="Codification de la fête, 1474" sub="Roi René d'Anjou" body="Le roi René, comte de Provence, formalise et finance la première grande procession attestée de la Tarasque dans les rues de la ville — un moment charnière où le récit religieux devient explicitement fête populaire organisée." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapporte la tradition" title="Un amphibien composite, plus étrange qu'un dragon classique">
+    <div class="card-grid wide">
+      <FigureCard name="Un corps de bête composite" role="Description hagiographique" tags={['Amphibie', 'Composite']} body="La Légende dorée la décrit comme plus grosse qu'un bœuf, plus longue qu'un cheval, dotée de dents tranchantes comme des épées et d'une carapace protectrice — un assemblage délibérément composite plutôt qu'un dragon reptilien classique." />
+      <FigureCard name="Une origine marine et fluviale" role="Généalogie légendaire" tags={['Rhône', 'Bestiaire médiéval']} body="Le texte lui attribue une filiation entre le Léviathan biblique et le Onachus, un animal fabuleux du bestiaire antique, et la situe explicitement entre mer et fleuve, terrorisant qui tente de traverser le Rhône." />
+      <FigureCard name="Le geste de sainte Marthe" role="Résolution du récit" tags={['Apaisement', 'Signe de croix']} body="Plutôt que de la combattre, sainte Marthe l'asperge d'eau bénite et lui présente une croix ; la bête, apaisée, se laisse ensuite conduire dans le village où elle est tuée par la foule — un dénouement que la fête moderne choisit précisément de ne pas rejouer à l'identique." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Le récit et ses reprises" title="De la sainte au canon de la ville">
+    <StoryBlock num="Récit I" title="Le récit hagiographique de base" body="Selon la Légende dorée, la bête ravage la région entre Arles et Avignon, cachée dans le Rhône, coulant les bateaux et dévorant les voyageurs. Sainte Marthe, venue évangéliser la Provence, se rend seule jusqu'à son repaire et l'apaise par la seule force de sa prière et d'un signe de croix, sans arme ni violence." />
+    <StoryBlock num="Récit II" title="L'étymologie légendaire de Tarascon" body="La tradition locale fait dériver le nom même de la ville de celui de la créature soumise — une étymologie légendaire plutôt qu'une filiation linguistique strictement établie, mais solidement ancrée dans l'identité locale depuis des siècles." />
+    <StoryBlock num="Récit III" title="La fête codifiée par le roi René" body="En 1474, le roi René d'Anjou organise et finance une procession où une effigie articulée de la Tarasque, portée ou montée sur roues par des hommes dissimulés, parcourt les rues de la ville en simulant des ruades vers la foule — un spectacle contrôlé qui rejoue le danger sans jamais le rendre menaçant." quote="La ville qui a inventé le monstre a choisi, six siècles durant, de le promener plutôt que de l'oublier." cite="Résumé du consensus historiographique local" />
+  </Section>
+
+  <Section id="culture-populaire" label="De la procession au patrimoine mondial" title="D'une fête locale à l'UNESCO" scrollFx="tarasqueProcession">
+    <div class="card-grid compact">
+      <MiniCard title="Alphonse Daudet et Tartarin de Tarascon, 1872" tag="Littérature" body="L'écrivain popularise le nom de la ville bien au-delà de la Provence à travers son personnage comique, sans traiter directement la légende de la Tarasque elle-même, mais en ancrant Tarascon dans l'imaginaire littéraire français." />
+      <MiniCard title="Inscription UNESCO, 2005" tag="Patrimoine culturel immatériel" body="La Tarasque est inscrite sur la liste représentative du patrimoine culturel immatériel de l'humanité, au sein d'un ensemble plus large de « géants et dragons processionnels » de Belgique et de France." />
+      <MiniCard title="Les fêtes annuelles de la Tarasque" tag="Tradition vivante" body="Chaque année, la ville de Tarascon fait à nouveau défiler l'effigie du monstre dans les rues, perpétuant une tradition dont la forme précise a évolué mais dont la continuité remonte à plusieurs siècles." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que la recherche peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Une datation textuelle solide, une origine orale incertaine" body="La première mention écrite connue est fermement datée du XIIIe siècle grâce à la Légende dorée elle-même ; en revanche, l'existence et la forme exactes d'une tradition orale antérieure ne peuvent être établies avec certitude faute de sources directes plus anciennes." />
+    <ScienceBlock num="Enquête 2" title="Pas de créature à chercher, une fête à documenter" body="Aucune recherche zoologique n'a de sens pour ce sujet : les chercheurs qui s'y intéressent aujourd'hui étudient surtout l'histoire de la fête elle-même, ses transformations successives et sa fonction dans l'identité locale de Tarascon." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Une personnification des crues dangereuses du Rhône"
+      level="plausible"
+      status="Hypothèse répandue"
+      body="Le Rhône, réputé pour ses crues et courants dangereux avant les aménagements modernes, est une explication couramment avancée pour l'origine symbolique du monstre — plausible sans être documentée par une source médiévale l'affirmant explicitement."
+      attrib="Hypothèse courante en folkloristique régionale"
+    />
+    <TheoryCard
+      title="Un emprunt délibéré au bestiaire chrétien antique"
+      level="plausible"
+      status="Bien étayée textuellement"
+      body="La Légende dorée relie elle-même explicitement la créature au Léviathan biblique et au Onachus antique — un ancrage littéraire clair, qui n'exclut pas pour autant un fond local antérieur repris et christianisé par le texte."
+      attrib="Lecture directement appuyée sur le texte de Jacques de Voragine"
+    />
+    <TheoryCard
+      title="Un souvenir déformé d'un culte pré-chrétien local"
+      level="folklore"
+      status="Non démontré"
+      body="L'idée d'un culte celtique ou ligure antérieur à l'évangélisation, dont la Tarasque serait un lointain écho christianisé, reste une spéculation séduisante mais non appuyée par des sources archéologiques ou textuelles directes."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette légende fait encore">
+    <HeritageBlock title="Une fête reconnue mondialement" body="L'inscription UNESCO de 2005 place la Tarasque aux côtés d'autres géants et dragons processionnels d'Europe du Nord, reconnaissant une pratique festive vivante plutôt qu'un simple conte figé dans les livres." />
+    <HeritageBlock title="Une identité municipale assumée" body="Tarascon continue de faire de la Tarasque un symbole central de son identité locale, jusque dans son blason et sa signalétique touristique." />
+    <HeritageBlock title="Une figure toujours réinterprétée" body="Les modalités précises de la procession — taille de l'effigie, comportement simulé, encadrement de la foule — continuent d'évoluer au fil des décennies, signe d'une tradition vivante plutôt que figée." />
+    <CautionBox>
+      Le récit médiéval original se conclut par la mise à mort de la créature apaisée par la
+      foule, un dénouement que les organisateurs contemporains de la fête choisissent
+      aujourd'hui d'atténuer ou d'omettre — un choix éditorial révélateur de la manière dont
+      une tradition ancienne s'adapte sciemment aux sensibilités actuelles plutôt que de rester
+      figée dans sa version la plus ancienne.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Jacques de Voragine, La Légende dorée, trad. Jean-Baptiste M. Roze, chapitre « Sainte Marthe », v. 1260", url: "https://gallica.bnf.fr/ark:/12148/bpt6k5619474j", note: "Source textuelle la plus ancienne connue du récit de la Tarasque" },
+    { label: "UNESCO, Patrimoine culturel immatériel, « Géants et dragons processionnels de Belgique et de France »", url: "https://ich.unesco.org/fr/RL/geants-et-dragons-processionnels-de-belgique-et-de-france-00104", note: "Fiche d'inscription officielle incluant la Tarasque de Tarascon" },
+    { label: "Ville de Tarascon, service culturel et patrimoine, « Histoire de la Tarasque »", url: "https://www.tarascon.fr/culture-patrimoine/la-tarasque/", note: "Synthèse historique locale sur la codification de la fête par le roi René en 1474" },
+  ]} />
+</PageLayout>

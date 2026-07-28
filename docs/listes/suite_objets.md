@@ -43,9 +43,9 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
-| La Toison d'Or | `obj-toison-or` | 7 | Colchide / Grèce | Objet mythologique | Hypothèse solide : l'orpaillage **à la peau de mouton** dans les rivières de Colchide (Géorgie actuelle) est une technique réellement attestée. Prolongement inattendu : l'ordre de la Toison d'or, fondé en 1430, existe toujours. |
+| La Toison d'Or ✅ | `obj-toison-or` | 7 | Colchide / Grèce | Objet mythologique | Hypothèse solide : l'orpaillage **à la peau de mouton** dans les rivières de Colchide (Géorgie actuelle) est une technique réellement attestée. Prolongement inattendu : l'ordre de la Toison d'or, fondé en 1430, existe toujours. |
 | Le Cheval de Troie ✅ | `obj-cheval-troie` | 7 | Anatolie | Objet de fiction | **Absent de l'Iliade** : il apparaît dans l'Odyssée puis chez Virgile. Hypothèse discutée d'une machine de siège assyrienne mal transmise. L'objet-piège archétypal, jusque dans le vocabulaire informatique. |
-| La Boîte de Pandore | `obj-boite-pandore` | 6 | Grèce | Objet de fiction | C'est une **jarre** (*pithos*) chez Hésiode ; « boîte » vient d'une erreur de traduction d'Érasme au XVIe siècle. La démonstration la plus courte et la plus nette de la série : comment un objet légendaire naît d'un contresens. |
+| La Boîte de Pandore ✅ | `obj-boite-pandore` | 6 | Grèce | Objet de fiction | C'est une **jarre** (*pithos*) chez Hésiode ; « boîte » vient d'une erreur de traduction d'Érasme au XVIe siècle. La démonstration la plus courte et la plus nette de la série : comment un objet légendaire naît d'un contresens. |
 
 ## Moyen-Orient
 
@@ -93,7 +93,7 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 
 ---
 
-## Déjà couvertes (15)
+## Déjà couvertes (17)
 
 **Excalibur** (26/07/2026) — première page de la série, et première page du site écrite avec
 le socle Astro (`src/pages/objet-excalibur.astro`).
@@ -120,7 +120,12 @@ que la réalité archéologique.
 réputation légendaire de qualité est confirmée par l'archéométrie, et le seul objet de toute
 la série dont la trajectoire va du mythe vers la matière plutôt que l'inverse.
 
-Les 22 autres ont déjà leur icône dans `public/icons/objet/` (4 tailles chacune) et leur pin
+**La Toison d'Or** et **La Boîte de Pandore** (29/07/2026) — septième vague : deux objets
+méditerranéens antiques rédigés coup sur coup, l'un avec une explication matérielle plausible
+(orpaillage caucasien), l'autre avec la démonstration la plus nette de toute la série d'un
+objet légendaire né d'une simple erreur de traduction (pithos devenu pyxis chez Érasme).
+
+Les 20 autres ont déjà leur icône dans `public/icons/objet/` (4 tailles chacune) et leur pin
 placé dans `PLACES_FUTURE` de `public/map.html` : il ne manque que les pages.
 
 **Objets volontairement écartés** : Suaire de Turin, Mécanisme d'Anticythère (publié) et
@@ -150,6 +155,22 @@ La Pierre Noire de la Kaaba est écartée pour les raisons de respect exposées 
 Troisième vague (hors top 5, choisie pour l'équilibre continental — voir la note ci-dessous) :
 **Le Cheval de Troie** ✅ (7, Méditerranée antique), **La Pierre du Soleil aztèque** ✅
 (6, Amériques), **L'hameçon de Maui** ✅ (6, Océanie), **Le Koh-i-Noor** ✅ (8, Asie).
+
+## Prochaine vague recommandée
+
+*(Mis à jour le 29/07/2026 — La Toison d'Or et La Boîte de Pandore, les deux derniers objets
+de Méditerranée antique de la liste, sont publiées.)*
+
+1. **Durandal** (7, France) — actualité rare pour un objet légendaire : la lame scellée dans
+   la falaise de Rocamadour a été dérobée en 2024.
+2. **Le Sceau de jade impérial** (7, Chine) — objet réel disparu dont l'absence a délégitimé
+   des dynasties entières.
+3. **La Ménorah du Second Temple** (7, Jérusalem/Rome) — sculptée sur l'arc de Titus, jamais
+   retrouvée depuis le Ve siècle.
+4. **Zulfiqar** (7, Arabie/Istanbul) — objet de dévotion vivante et emblème politique
+   contemporain, à traiter avec le même soin que Le Tabouret d'or des Ashanti.
+5. **La Pierre de Scone** (7, Écosse) — un simple bloc de grès dont le seul pouvoir est
+   politique, volé par des étudiants nationalistes en 1950.
 
 ## Note d'équilibre pour la carte
 

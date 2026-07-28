@@ -1,0 +1,219 @@
+---
+/*
+  Empire mongol — douzième page de la série « Peuples & Cultures du
+  Monde ». Même structure à 10 sections que culture-khmers.astro.
+
+  Point de vigilance : dépasser l'image occidentale réductrice du
+  « barbare destructeur » — la Pax Mongolica a aussi produit une
+  circulation de personnes, de biens et d'idées sur toute l'Eurasie sans
+  précédent avant l'ère moderne, et Gengis Khan a imposé une tolérance
+  religieuse et un code de lois (Yassa) inhabituels pour son époque.
+  Traité explicitement en #anecdotes et en #heritage.
+
+  Effets : data-egg="mongol" + data-scroll-fx="yourteMontage" sur
+  #style-de-vie (déjà enregistrés dans effects.js).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Steppe sous ciel bas, feutre des yourtes, éclat de l'or nomade :
+   palette froide et minérale, distincte du vert-jungle d'Angkor ou du
+   pourpre byzantin déjà utilisés. */
+const palette = {
+  bg: '#151a20',
+  'bg-deep': '#0b0e12',
+  surface: '#1e252c',
+  'surface-alt': '#283038',
+  border: '#454e58',
+  ink: '#f0ede4',
+  text: '#c8c4b8',
+  'text-dim': '#8a8478',
+  accent: '#4a90a4',
+  'accent-bright': '#6ab4c8',
+  accent2: '#c9a24a',
+  'accent2-bright': '#e8c470',
+  verdict: '#5a2a20',
+  'verdict-bright': '#8a4a35',
+  glow: 'rgba(74,144,164,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Empire mongol"
+  serie="Peuples & Cultures du Monde"
+  description="Le plus vaste empire contigu jamais constitué dans l'histoire humaine, bâti en une seule génération par des cavaliers de la steppe — et une Pax Mongolica qui a fait circuler sur la route de la soie des idées, des techniques et des maladies à une échelle inédite avant l'ère moderne."
+  href="culture-empire-mongol.html"
+  egg="mongol"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="YEKE MONGGHOL ULUS · XIIIe SIÈCLE"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : <strong>l'Inde classique</strong>"
+>
+  <p class="subtitle" slot="hero">L'empire que la steppe a bâti</p>
+  <p class="tagline" slot="hero">
+    En une seule génération, des clans nomades rivaux deviennent le plus vaste empire terrestre
+    contigu de l'histoire — porté par un système militaire redoutable et, moins connu, par une
+    tolérance religieuse et une circulation des idées sans précédent sur toute l'Eurasie.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="De la mer Jaune à la mer Noire"
+    intro="À son apogée, l'empire mongol s'étend sur environ 24 millions de kilomètres carrés, de la Corée jusqu'aux portes de l'Europe centrale — un territoire contigu qu'aucun empire n'a égalé depuis.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="250" cy="150" rx="220" ry="90" fill="#4a90a4" opacity="0.18"/>
+        <circle cx="250" cy="150" r="8" fill="#e8c470"/>
+        <text x="250" y="135" text-anchor="middle" fill="#e8c470" font-size="12" font-family="Cinzel, serif" font-weight="bold">KARAKORUM</text>
+        <circle cx="410" cy="120" r="5" fill="#6ab4c8"/>
+        <text x="410" y="105" text-anchor="middle" fill="#c8c4b8" font-size="10">Pékin (Khanbalik)</text>
+        <circle cx="90" cy="170" r="5" fill="#6ab4c8"/>
+        <text x="90" y="188" text-anchor="middle" fill="#c8c4b8" font-size="10">Kiev</text>
+        <circle cx="180" cy="220" r="5" fill="#6ab4c8"/>
+        <text x="180" y="238" text-anchor="middle" fill="#c8c4b8" font-size="10">Bagdad</text>
+        <circle cx="330" cy="205" r="5" fill="#6ab4c8"/>
+        <text x="330" y="223" text-anchor="middle" fill="#c8c4b8" font-size="10">Samarcande</text>
+      </svg>
+    </div>
+    <p class="map-caption">Karakorum, capitale steppique choisie loin de toute grande ville préexistante — un empire administré depuis son propre centre de gravité, pas depuis une capitale conquise.</p>
+    <div class="card-grid">
+      <InfoCard title="Karakorum" sub="Capitale impériale, fondée 1220" body="Établie par Gengis Khan en plein cœur de la steppe mongole, loin de toute cité conquise — un choix délibéré qui ancre le pouvoir dans le monde nomade plutôt que dans une capitale sédentaire héritée." />
+      <InfoCard title="La route de la soie unifiée" sub="Sous contrôle mongol unique" body="Pour la première fois, l'essentiel de la route terrestre entre la Chine et l'Europe passe sous une autorité politique unique, facilitant la circulation des marchands, diplomates et missionnaires." />
+      <InfoCard title="Les quatre khanats" sub="Après 1260" body="À la mort de Möngke Khan, l'empire se scinde en quatre khanats autonomes (Yuan en Chine, Ilkhanat en Perse, Horde d'or en Russie, khanat de Djaghataï en Asie centrale) qui restent liés par une même origine dynastique." />
+      <InfoCard title="24 millions de km²" sub="Apogée territorial" body="Le plus vaste empire contigu jamais constitué dans l'histoire, plus étendu que l'Empire romain et l'Empire britannique pris chacun séparément à leur propre apogée." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Clans de la steppe et sujets conquis" intro="Une société d'origine nomade organisée en clans et en unités militaires décimales, devenue en une génération l'administratrice d'immenses populations sédentaires aux cultures très diverses.">
+    <div class="card-grid wide">
+      <FigureCard name="Les clans nomades unifiés" role="Base du pouvoir de Gengis Khan" tags={['Steppe mongole', 'Unification 1206']} body="Avant Gengis Khan, la steppe mongole est fragmentée en clans rivaux (Merkites, Naïmans, Tatars, Mongols proprement dits) que des décennies de guerres internes opposent — leur unification forcée en 1206 est la condition préalable à toute expansion ultérieure." />
+      <FigureCard name="Les keshig" role="Garde impériale d'élite" tags={['Loyauté personnelle']} body="Corps de garde du souverain recruté en partie parmi les fils de chefs de clans, gardés en otages autant qu'en apprentis — un mécanisme qui consolide la loyauté personnelle envers le khan plutôt qu'envers le clan d'origine." />
+      <FigureCard name="Les artisans et savants déportés" role="Ressource impériale mobile" tags={['Transferts de population']} body="Ingénieurs chinois, astronomes perses, médecins et artisans de toutes origines sont systématiquement épargnés lors des conquêtes puis déplacés d'un bout à l'autre de l'empire pour y mettre leur savoir au service de l'administration mongole." />
+      <FigureCard name="Les marchands protégés" role="Bénéficiaires de la Pax Mongolica" tags={['Sécurité des routes']} body="La sécurisation des routes commerciales sous une autorité unique permet à des marchands de toutes origines, dont le vénitien Marco Polo, de traverser l'Eurasie avec une sécurité inédite pour l'époque." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="De Gengis Khan à Kubilaï">
+    <div class="card-grid wide">
+      <FigureCard name="Gengis Khan (Temüjin)" role="Fondateur de l'empire" tags={['v. 1162-1227']} body="Né dans un clan mineur et orphelin de père jeune, il unifie par la force et l'alliance l'ensemble des tribus de la steppe mongole en 1206, avant de lancer les campagnes qui posent les fondations de l'empire." />
+      <FigureCard name="Ögedeï Khan" role="Second grand khan" tags={['1229-1241']} body="Fils et successeur désigné de Gengis Khan, il poursuit l'expansion vers la Chine des Song et l'Europe de l'Est, et fait construire la capitale de Karakorum." />
+      <FigureCard name="Möngke Khan" role="Quatrième grand khan" tags={['1251-1259']} body="Relance une expansion militaire de grande ampleur vers le Moyen-Orient et la Chine des Song du Sud ; sa mort en 1259 déclenche la fragmentation de l'empire en khanats rivaux." />
+      <FigureCard name="Kubilaï Khan" role="Fondateur de la dynastie Yuan" tags={['1260-1294']} body="Petit-fils de Gengis Khan, il achève la conquête de la Chine et fonde la dynastie Yuan, adoptant largement l'administration et les usages chinois tout en conservant une identité mongole distincte." />
+      <FigureCard name="Sorkhokhtani Beki" role="Régente et matriarche stratège" tags={['Mère de quatre khans']} body="Veuve d'un fils de Gengis Khan, elle place ses quatre propres fils — dont Möngke et Kubilaï — sur les trônes les plus importants de l'empire par une stratégie politique et matrimoniale que plusieurs historiens jugent décisive pour la suite de la dynastie." />
+      <FigureCard name="Subötaï" role="Général en chef" tags={['Campagnes d\'Europe de l\'Est']} body="Stratège militaire d'origine roturière devenu l'un des plus grands généraux de l'histoire mongole, artisan des victoires éclair contre la Russie kiévienne et la Hongrie dans les années 1230-1240." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="De l'unification de 1206 à l'arrêt de 1242">
+    <StoryBlock num="Épisode I" title="Le kurultaï de 1206" body="Réunion de l'ensemble des chefs de clans mongols au cours de laquelle Temüjin est proclamé Gengis Khan (« souverain universel ») — un moment fondateur qui transforme une confédération instable de tribus rivales en une force politique et militaire unifiée capable de tourner son énergie vers l'extérieur." />
+    <StoryBlock num="Épisode II" title="La destruction du Khwarezm, 1219-1221" body="En représailles au massacre d'une caravane et d'ambassadeurs mongols par le gouverneur d'Otrar, Gengis Khan lance une campagne dévastatrice contre l'empire khwarezmien d'Asie centrale — un épisode d'une brutalité documentée qui façonne durablement l'image occidentale et musulmane des Mongols." />
+    <StoryBlock num="Épisode III" title="La percée européenne de 1241" body="Sous le commandement de Subötaï, les armées mongoles écrasent successivement les forces polonaises à Legnica et hongroises à Mohi — l'Europe centrale semble sans défense face à cette avancée." quote="Aucune armée européenne assemblée n'avait pu tenir face à eux." cite="Résumé du constat historiographique standard sur 1241" />
+    <StoryBlock num="Épisode IV" title="Le retrait de 1242, une énigme toujours débattue" body="Au moment même où l'Europe occidentale semble ouverte à une invasion mongole, les armées se retirent brusquement d'Europe centrale — officiellement à la suite de la mort du grand khan Ögedeï, qui impose le retour des princes pour l'élection du successeur, bien que d'autres facteurs (logistique, conditions climatiques, résistances rencontrées) continuent d'être débattus par les historiens." />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Poste impériale, Yassa et guerre de siège">
+    <div class="card-grid compact">
+      <MiniCard title="Le yam, relais postal impérial" tag="Communication" body="Réseau de stations de relais espacées sur l'ensemble des routes de l'empire, permettant à des messagers montés de parcourir des centaines de kilomètres par jour — une infrastructure de communication d'une rapidité inégalée avant le télégraphe." />
+      <MiniCard title="La Yassa, code de lois de Gengis Khan" tag="Administration" body="Corpus de lois attribué à Gengis Khan, couvrant discipline militaire, organisation sociale et tolérance religieuse — connu surtout par des mentions indirectes dans des sources postérieures, son contenu exact précis reste débattu par les historiens." />
+      <MiniCard title="La cavalerie composite" tag="Système militaire" body="Organisation décimale de l'armée (unités de dix, cent, mille, dix mille) combinée à l'arc composite mongol et à une discipline de manœuvre coordonnée, formant un système militaire redouté sur tous les fronts de l'empire." />
+      <MiniCard title="L'adoption systématique des technologies de siège" tag="Emprunt technique assumé" body="Peuple originellement de cavaliers de steppe sans tradition de siège, les Mongols intègrent rapidement ingénieurs et machines de siège chinois et musulmans capturés, prouvant une capacité d'adaptation technique décisive." />
+      <MiniCard title="La tolérance religieuse d'État" tag="Politique impériale" body="Contrairement à de nombreux empires contemporains, l'administration mongole n'impose pas de religion d'État unique et exempte généralement clercs de toutes confessions de l'impôt et de la conscription." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="Pas seulement des destructeurs" tag="Correction utile" body="L'image occidentale du Mongol comme pur agent de destruction masque une réalité plus complexe : sécurisation des routes commerciales, tolérance religieuse d'État et circulation accélérée de techniques (imprimerie, poudre à canon, cartographie) entre l'Asie et l'Europe." />
+      <MiniCard title="Marco Polo, un voyage rendu possible par la Pax Mongolica" tag="Circulation eurasiatique" body="Le voyage du marchand vénitien jusqu'à la cour de Kubilaï Khan, l'un des récits de voyage les plus célèbres de l'histoire occidentale, n'aurait probablement pas été possible sans la sécurisation des routes terrestres sous administration mongole unique." />
+      <MiniCard title="La peste noire, revers de la même circulation" tag="Conséquence sanitaire" body="La même intégration des routes commerciales eurasiatiques qui favorise le commerce facilite aussi, selon l'hypothèse la plus généralement admise, la propagation rapide de la peste noire vers l'Europe au XIVe siècle." />
+      <MiniCard title="Gengis Khan et la descendance génétique" tag="Étude génétique de 2003" body="Une étude génétique très citée suggère qu'un pourcentage notable d'hommes d'Asie centrale porterait un chromosome Y associé à une lignée unique datée de l'époque de Gengis Khan — un résultat qui reste débattu quant à son attribution précise." />
+      <MiniCard title="Deux tentatives d'invasion du Japon, deux échecs" tag="1274 et 1281" body="Les flottes mongoles envoyées contre le Japon sont chacune dispersées par des tempêtes que les Japonais nommeront plus tard kamikaze, « vent divin » — un terme qui resurgira de façon tragique au XXe siècle dans un tout autre contexte." />
+      <MiniCard title="Karakorum, une capitale cosmopolite" tag="Diversité religieuse observée" body="Le moine franciscain Guillaume de Rubrouck, qui y séjourne vers 1254, y décrit la coexistence de temples bouddhistes, de mosquées et d'une église chrétienne nestorienne dans une même capitale steppique." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="La yourte, le lait fermenté et l'arc à cheval"
+    intro="Une vie quotidienne façonnée par la mobilité permanente du monde nomade, où l'habitat, l'alimentation et le savoir-faire équestre restent indissociables même après la constitution de l'empire."
+    scrollFx="yourteMontage">
+    <div class="card-grid compact">
+      <MiniCard title="La yourte (ger)" tag="Habitat mobile" body="Structure circulaire en treillis de bois recouverte de feutre, démontable et transportable en quelques heures — l'habitat de référence de la vie nomade, encore utilisé aujourd'hui en Mongolie." />
+      <MiniCard title="L'airag, lait de jument fermenté" tag="Boisson traditionnelle" body="Boisson légèrement alcoolisée obtenue par fermentation du lait de jument, consommée quotidiennement et lors des cérémonies — une ressource directement liée à l'élevage équestre au cœur de la vie steppique." />
+      <MiniCard title="L'apprentissage équestre dès l'enfance" tag="Compétence martiale" body="Les enfants mongols apprennent à monter à cheval dès l'âge de trois ans environ selon plusieurs témoignages contemporains, une compétence qui explique en partie la redoutable mobilité des armées mongoles adultes." />
+      <MiniCard title="Le naadam, trois jeux virils" tag="Fête traditionnelle" body="Compétitions de lutte, de course de chevaux et de tir à l'arc, pratiquées depuis l'époque impériale et toujours célébrées chaque été en Mongolie contemporaine." />
+      <MiniCard title="La mobilité saisonnière des campements" tag="Transhumance" body="Les campements se déplacent plusieurs fois par an au rythme des pâturages disponibles pour le bétail — un mode de vie qui structure directement l'organisation militaire et politique mongole, elle-même fondamentalement mobile." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="De la Pax Mongolica à Marco Polo">
+    <div class="card-grid">
+      <InfoCard title="La Pax Mongolica" sub="v. 1250-1350" body="Période de sécurisation relative des routes terrestres eurasiatiques sous administration mongole, qui facilite les échanges commerciaux, diplomatiques et intellectuels entre la Chine, la Perse, la Russie et l'Europe." />
+      <InfoCard title="La diffusion de techniques chinoises vers l'Ouest" sub="Imprimerie, poudre à canon, boussole" body="Plusieurs innovations chinoises se diffusent vers le Moyen-Orient et l'Europe à un rythme accéléré durant la période mongole, avec un impact qui dépasse largement la durée de vie de l'empire lui-même." />
+      <InfoCard title="Les missions diplomatiques et religieuses" sub="Rubrouck, Carpini, Marco Polo" body="Plusieurs voyageurs européens, envoyés par la papauté ou pour le commerce, traversent l'empire et laissent des témoignages qui façonnent durablement la connaissance européenne de l'Asie." />
+      <InfoCard title="L'héritage politique en Asie centrale et en Russie" sub="Longue durée" body="La domination de la Horde d'or sur les principautés russes pendant plus de deux siècles influence durablement la formation politique et administrative ultérieure de l'État russe." />
+      <InfoCard title="La Mongolie contemporaine" sub="Identité nationale" body="Gengis Khan demeure une figure fondatrice centrale de l'identité nationale mongole moderne, célébrée officiellement depuis la fin de la période communiste dans les années 1990." />
+      <InfoCard title="L'historiographie en révision continue" sub="Débats académiques actuels" body="Les historiens contemporains débattent activement de la part de destruction réelle attribuable aux campagnes mongoles face à la part, longtemps sous-estimée, de leur contribution à l'intégration économique et culturelle eurasiatique." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. 1162', title: 'Naissance de Temüjin', body: "Futur Gengis Khan, né dans un clan mineur de la steppe mongole." },
+      { year: '1206', title: 'Kurultaï fondateur', body: "Temüjin est proclamé Gengis Khan, souverain universel des tribus mongoles unifiées." },
+      { year: '1219-1221', title: 'Destruction du Khwarezm', body: "Campagne dévastatrice contre l'empire khwarezmien d'Asie centrale." },
+      { year: '1227', title: 'Mort de Gengis Khan', body: "L'empire, déjà immense, passe à ses successeurs désignés." },
+      { year: '1220', title: 'Fondation de Karakorum', body: "Capitale impériale établie en plein cœur de la steppe mongole." },
+      { year: '1237-1240', title: 'Conquête de la Russie kiévienne', body: "Les principales principautés russes tombent sous domination mongole." },
+      { year: '1241', title: 'Victoires de Legnica et Mohi', body: "Les armées mongoles écrasent les forces polonaises et hongroises en Europe centrale." },
+      { year: '1242', title: 'Retrait d\'Europe centrale', body: "Les armées mongoles se retirent, officiellement à la suite de la mort d'Ögedeï Khan." },
+      { year: '1254', title: 'Mission de Guillaume de Rubrouck', body: "Le moine franciscain séjourne à Karakorum et décrit sa diversité religieuse." },
+      { year: '1260', title: 'Fragmentation en quatre khanats', body: "Après la mort de Möngke Khan, l'empire se scinde en entités autonomes rivales." },
+      { year: '1271-1295', title: 'Voyage de Marco Polo', body: "Le marchand vénitien traverse l'empire jusqu'à la cour de Kubilaï Khan." },
+      { year: '1274 et 1281', title: 'Échec des invasions du Japon', body: "Deux flottes mongoles sont dispersées par des tempêtes majeures." },
+      { year: '1368', title: 'Chute de la dynastie Yuan', body: "La dynastie Ming chasse les Mongols de Chine, marquant la fin de la présence impériale mongole directe sur le sol chinois." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que l'empire laisse encore">
+    <HeritageBlock title="Une identité nationale mongole revendiquée" body="Gengis Khan reste une figure fondatrice célébrée officiellement en Mongolie contemporaine, omniprésente jusque sur la monnaie nationale et l'aéroport international d'Oulan-Bator." />
+    <HeritageBlock title="Une intégration eurasiatique dont les effets perdurent" body="La circulation de techniques, de biens et d'idées facilitée par la Pax Mongolica continue d'être étudiée comme un moment charnière de la mondialisation prémoderne." />
+    <HeritageBlock title="Un mode de vie nomade toujours pratiqué" body="Une part significative de la population mongole contemporaine continue de vivre en yourte et de pratiquer l'élevage transhumant, dans une continuité directe avec les usages de l'époque impériale." />
+    <CautionBox>
+      Les campagnes mongoles ont aussi causé des destructions et des pertes humaines
+      considérables et bien documentées, en particulier lors de la conquête du Khwarezm et de
+      certaines villes chinoises et abbassides. Reconnaître l'apport de la Pax Mongolica à la
+      circulation eurasiatique n'a de sens qu'à condition de ne pas minimiser cette violence
+      réelle, telle qu'elle est rapportée par des sources multiples et indépendantes.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Jack Weatherford, Genghis Khan and the Making of the Modern World, Crown, 2004", url: "https://archive.org/details/genghiskhanmakin0000weat", note: "Synthèse de référence sur l'organisation politique et l'héritage de l'empire mongol" },
+    { label: "David Morgan, The Mongols, 2e éd., Wiley-Blackwell, 2007", url: "https://www.wiley.com/en-us/The+Mongols%2C+2nd+Edition-p-9781405135399", note: "Étude académique de référence sur les structures et les sources de l'empire" },
+    { label: "Timothy May, The Mongol Conquests in World History, Reaktion Books, 2012", url: "https://reaktionbooks.co.uk/work/the-mongol-conquests-in-world-history", note: "Analyse de l'impact des conquêtes mongoles sur les échanges eurasiatiques" },
+    { label: "Guillaume de Rubrouck, The Mission of Friar William of Rubruck, trad. Peter Jackson, Hakluyt Society, 1990", url: "https://archive.org/details/missionoffriarwi0000will", note: "Témoignage direct sur Karakorum vers 1254" },
+  ]} />
+</PageLayout>

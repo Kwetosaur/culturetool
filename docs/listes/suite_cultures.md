@@ -6,13 +6,14 @@ Même principe de score /10 que les autres listes, basé sur la richesse du doss
 
 ---
 
-## Déjà couvertes (12)
+## Déjà couvertes (14)
 
 Chine · Égypte Antique · Rome antique · Grèce antique · Vikings / Scandinavie médiévale ·
 Empire du Mali · Incas · Polynésie (navigation) · Mésopotamie (culture) ·
-Empire perse achéménide · **Empire byzantin** · **Khmers (Angkor)**
+Empire perse achéménide · Empire byzantin · Khmers (Angkor) · **Empire mongol** · **Inde
+(culture)**
 
-**22 candidates restantes** dans les tableaux ci-dessous. 6 avaient été ajoutées le
+**20 candidates restantes** dans les tableaux ci-dessous. 6 avaient été ajoutées le
 26/07/2026 pour combler des trous réels : Al-Andalus (huit siècles d'Europe absents),
 Minoens (première civilisation européenne), Carthage (angle historiographique), côte
 swahilie (tout l'océan Indien), Empire songhaï (suite du Mali), Empire timouride (Asie
@@ -47,8 +48,8 @@ centrale savante).
 
 | Culture | Score | Ce qui la rend unique |
 |---|---|---|
-| Inde (culture) | 9 | Civilisation de l'Indus, système de castes, mathématiques (zéro, décimal), routes des épices — angle civilisationnel distinct de `mythologie-hindoue.html` |
-| Empire mongol | 9 | Plus grand empire terrestre continu de l'histoire, Pax Mongolica et routes commerciales, tolérance religieuse relative |
+| Inde (culture) ✅ | 9 | Civilisation de l'Indus, système de castes, mathématiques (zéro, décimal), routes des épices — angle civilisationnel distinct de `mythologie-hindoue.html` |
+| Empire mongol ✅ | 9 | Plus grand empire terrestre continu de l'histoire, Pax Mongolica et routes commerciales, tolérance religieuse relative |
 | Civilisation de l'Indus (Mohenjo-Daro/Harappa) | 8 | Urbanisme précoce très abouti (égouts, plan en grille), écriture toujours non déchiffrée, absence apparente de hiérarchie royale marquée |
 | Japon (culture) | 7 | Société féodale (samouraïs, shogunat), esthétique du raffinement (thé, jardins), isolement volontaire (sakoku) puis modernisation éclair — angle civilisationnel distinct de `mythologie-japonaise.html` |
 | Corée | 7 | Dynasties de longue durée, inventions (première imprimerie à caractères métalliques mobiles), résilience culturelle face aux puissances voisines |
@@ -86,14 +87,14 @@ centrale savante).
 
 ## Top 5 recommandé pour la prochaine vague
 
-*(Mis à jour le 27/07/2026 — Mésopotamie (culture) et Empire perse achéménide, qui
-occupaient les deux premières places, sont publiées.)*
+*(Mis à jour le 29/07/2026 — Empire mongol et Inde (culture), qui occupaient les deux
+premières places, sont publiées.)*
 
-1. **Empire mongol** (9) — plus grand empire terrestre continu, et l'Asie centrale est un vide complet sur la carte.
-2. **Inde (culture)** (9) — pendant civilisationnel de `mythologie-hindoue.html`, encore absent de la série.
-3. **Nubie / Koush** (8) — deuxième page africaine, rivale puis conquérante de l'Égypte.
-4. **Al-Andalus** (9) — Cordoue comme plus grande ville d'Europe au Xe siècle, huit siècles d'Europe musulmane toujours absents de la série.
-5. **Maya (culture)** (9) — astronomie et calendrier d'une précision remarquable, angle civilisationnel distinct de `mythologie-azteque-maya.html`.
+1. **Nubie / Koush** (8) — deuxième page africaine, rivale puis conquérante de l'Égypte.
+2. **Al-Andalus** (9) — Cordoue comme plus grande ville d'Europe au Xe siècle, huit siècles d'Europe musulmane toujours absents de la série.
+3. **Maya (culture)** (9) — astronomie et calendrier d'une précision remarquable, angle civilisationnel distinct de `mythologie-azteque-maya.html`.
+4. **Phéniciens** (8) — invention de l'alphabet consonantique, thalassocratie commerciale de Carthage à Cadix.
+5. **Empire ottoman** (8) — carrefour Europe/Asie pendant six siècles, administration multiconfessionnelle.
 
 ---
 

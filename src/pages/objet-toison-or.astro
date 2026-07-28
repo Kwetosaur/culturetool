@@ -1,0 +1,243 @@
+---
+/*
+  La Toison d'or — seizième page de la série « Objets Légendaires du
+  Monde ». Structure imposée par docs/plans/plan-serie-objets.md : 8
+  sections, badge de nature dans le hero.
+
+  Cas où #verite a une réponse concrète et bien documentée à proposer :
+  la technique ancienne de récupération de l'or alluvionnaire au moyen
+  de toisons de mouton immergées dans les rivières du Caucase (attestée
+  par Strabon et toujours pratiquée de façon artisanale en Svanétie,
+  Géorgie, jusqu'au XXe siècle) offre une explication matérielle
+  plausible à l'origine du mythe — traitée comme hypothèse sérieuse et
+  non comme certitude absolue.
+
+  Effets : data-egg="toisonor" + data-scroll-fx="toisonOrEclat" sur
+  #description, piste documentée dans plan-effets.md (une toison qui
+  scintille d'un éclat doré).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Toison dorée, bleu profond de la mer Noire, bronze antique : la
+   matière du mythe de Colchide plutôt qu'une palette "Grèce antique"
+   générique déjà prise par mythologie-grecque.html. */
+const palette = {
+  bg: '#181206',
+  'bg-deep': '#0e0a04',
+  surface: '#241c0e',
+  'surface-alt': '#302614',
+  border: '#5c4a24',
+  ink: '#f5eede',
+  text: '#d8c8a0',
+  'text-dim': '#a08e5e',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#2e5a78',
+  'accent2-bright': '#4f8ab0',
+  verdict: '#4a3418',
+  'verdict-bright': '#7a5c2a',
+  glow: 'rgba(201,152,47,0.20)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  { num: 'I', title: 'La toison du bélier Chrysomallos', sub: 'Mythologie grecque', body: "Selon le mythe, la peau d'un bélier ailé envoyé par Zeus pour sauver deux enfants royaux, sacrifié puis suspendu dans un bois sacré de Colchide sous la garde d'un dragon jamais endormi." },
+  { num: 'II', title: 'Le but de la quête de Jason', sub: 'Épopée argonautique' , body: "L'objectif de l'expédition des Argonautes, imposé à Jason comme condition pour récupérer son trône légitime — l'une des plus anciennes quêtes d'objet de toute la littérature occidentale." },
+  { num: 'III', title: 'Une explication matérielle plausible', sub: 'Orpaillage caucasien' , body: "Une technique réelle d'orpaillage utilisant des toisons de mouton immergées dans les rivières aurifères du Caucase, attestée par des sources antiques et pratiquée jusqu'au XXe siècle en Svanétie géorgienne." },
+];
+---
+<PageLayout
+  title="La Toison d'or"
+  serie="Objets Légendaires du Monde"
+  description="La peau d'un bélier magique, gardée par un dragon sans sommeil au bout du monde connu des Grecs — et une explication matérielle plausible, attestée par des sources antiques : l'usage réel de toisons de mouton pour capturer l'or alluvionnaire dans les rivières du Caucase."
+  href="objet-toison-or.html"
+  egg="toisonor"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="COLCHIDE · MER NOIRE"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>la Boîte de Pandore</strong>"
+>
+  <p class="subtitle" slot="hero">Χρυσόμαλλον δέρας · La peau d'or au bout du monde</p>
+  <p class="tagline" slot="hero">
+    Un objet dont le mythe et la réalité se rejoignent peut-être plus directement qu'aucun
+    autre de cette série : une technique d'orpaillage bien réelle, décrite par Strabon,
+    pourrait être à l'origine même du récit plutôt qu'une simple coïncidence a posteriori.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet mythologique, avec explication matérielle plausible"
+    note="Aucune toison magique n'a jamais existé. En revanche, la technique d'orpaillage aux toisons de mouton dans le Caucase est attestée par des sources antiques indépendantes et par une pratique artisanale documentée jusqu'au XXe siècle — un cas rare où le mythe pourrait décrire, de façon transposée, une réalité économique concrète."
+  />
+
+  <Section
+    id="origine"
+    label="D'un sacrifice à une quête"
+    title="De Chrysomallos au bois sacré d'Arès"
+    intro="Le récit se construit en deux temps : l'origine du bélier magique, puis la raison pour laquelle sa toison finit gardée à l'autre bout du monde connu des Grecs anciens.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme et matière"
+    title="Une toison, pas un objet forgé"
+    intro="Contrairement à la plupart des objets légendaires de cette série, il ne s'agit pas d'une arme ou d'un bijou façonné, mais d'une peau animale entière, suspendue et gardée."
+    scrollFx="toisonOrEclat">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Une toison à la laine d'or véritable"
+        role="Description homérique et postérieure"
+        tags={['Bélier ailé', 'Don de Zeus']}
+        body="Les sources grecques décrivent une toison littéralement dorée, provenant d'un bélier volant envoyé pour sauver Phrixos et Hellé, les deux enfants du roi Athamas menacés par leur belle-mère." />
+      <FigureCard
+        name="Suspendue dans un bois sacré"
+        role="Bois consacré à Arès, en Colchide"
+        tags={['Colchide', 'Actuelle Géorgie']}
+        body="Une fois le bélier sacrifié en offrande à Zeus, sa toison est suspendue à un chêne dans un bosquet consacré au dieu de la guerre, sur les rives du fleuve Phase, à l'extrémité orientale du monde connu des Grecs anciens." />
+      <FigureCard
+        name="Gardée par un dragon sans sommeil"
+        role="Obstacle final de la quête"
+        tags={['Serpent-dragon', 'Jamais endormi']}
+        body="Un dragon ou serpent gigantesque, réputé ne jamais dormir, garde la toison en permanence — c'est la magicienne Médée, fille du roi de Colchide, qui permet finalement à Jason de l'endormir par ses charmes." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="De Phrixos à Jason" title="Le grand récit argonautique">
+    <StoryBlock
+      num="Récit I"
+      title="La fuite de Phrixos et Hellé"
+      body="Menacés de sacrifice par leur belle-mère Ino, les jumeaux royaux Phrixos et Hellé s'enfuient sur le dos d'un bélier ailé à la toison d'or, envoyé par Zeus. Hellé tombe et se noie dans le détroit qui portera son nom (l'Hellespont) ; Phrixos atteint seul la Colchide, où il sacrifie l'animal par gratitude." />
+    <StoryBlock
+      num="Récit II"
+      title="La condition posée à Jason"
+      body="Dépossédé de son trône légitime par son oncle Pélias, Jason se voit imposer, comme condition pour le récupérer, de rapporter la Toison d'or depuis la lointaine Colchide — une quête qui rassemble autour de lui les plus grands héros grecs, les Argonautes, à bord du navire Argo." />
+    <StoryBlock
+      num="Récit III"
+      title="L'aide décisive de Médée"
+      body="Éprise de Jason, la magicienne Médée, fille du roi Éétès de Colchide, l'aide à accomplir les épreuves imposées par son père puis à endormir le dragon gardien — un geste qui la conduit à trahir sa propre famille et son propre royaume pour suivre Jason." quote="Sans elle, aucun héros grec n'aurait jamais quitté la Colchide vivant." cite="Résumé du rôle de Médée dans la tradition argonautique" />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et technique"
+    title="L'or alluvionnaire capté par la laine"
+    intro="Il n'existe naturellement aucune toison en or massif à décrire — en revanche, la technique antique documentée qui pourrait avoir inspiré le mythe est, elle, bien réelle et physiquement expliquée.">
+    <div class="card-grid compact">
+      <MiniCard title="L'orpaillage par toison immergée" tag="Technique attestée" body="Une toison de mouton, immergée dans le lit d'une rivière aurifère, retient dans sa laine les particules d'or les plus fines charriées par le courant — un procédé simple ne nécessitant aucun outillage métallurgique sophistiqué." />
+      <MiniCard title="Séchage puis récupération" tag="Étape finale" body="Une fois retirée et séchée, la toison est battue ou secouée pour en détacher les paillettes d'or accumulées, qui peuvent ensuite être rassemblées séparément." />
+      <MiniCard title="Une pratique documentée jusqu'au XXe siècle" tag="Svanétie, Géorgie" body="Des voyageurs et ethnographes ont documenté cette même technique encore en usage en Svanétie, région montagneuse du Caucase géorgien, bien après l'Antiquité." />
+    </div>
+  </Section>
+
+  <Section id="traces" label="Aucune toison, mais une géographie précise" title="La Colchide, un lieu réel derrière le mythe">
+    <div class="card-grid">
+      <InfoCard
+        title="La Colchide, un royaume historique réel"
+        sub="Actuelle Géorgie occidentale"
+        body="Contrairement à de nombreux lieux de la mythologie grecque restés purement légendaires, la Colchide correspond à une région historiquement attestée, avec laquelle les Grecs anciens entretenaient des contacts commerciaux documentés dès l'époque archaïque." />
+      <InfoCard
+        title="Le fleuve Phase, aujourd'hui le Rioni"
+        sub="Identification géographique directe"
+        body="Le fleuve mentionné dans le mythe correspond à un cours d'eau réel de Géorgie occidentale, dont le bassin comprend précisément des zones d'orpaillage alluvionnaire historiquement documentées." />
+      <InfoCard
+        title="Aucun objet physique à rechercher"
+        sub="Différence avec les autres pages de la série"
+        body="Il ne s'agit pas ici d'une relique perdue qu'on pourrait espérer retrouver, mais d'un objet entièrement mythique dont l'intérêt principal réside dans l'explication plausible de son origine narrative." />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="D'un mythe fondateur à un symbole d'excellence"
+    title="Un objet devenu métaphore de la quête ultime">
+    <div class="card-grid compact">
+      <MiniCard title="Jason and the Argonauts, 1963" tag="Cinéma" body="Le film de Don Chaffey, porté par les effets spéciaux en volume de Ray Harryhausen, popularise durablement l'imaginaire visuel de la quête argonautique auprès d'un large public occidental." />
+      <MiniCard title="Un symbole d'excellence et de distinction" tag="Usage figuré" body="L'expression « Toison d'or » est reprise dès le Moyen Âge pour nommer un ordre de chevalerie prestigieux fondé par le duc de Bourgogne Philippe le Bon en 1430, aujourd'hui encore l'une des plus hautes distinctions dynastiques européennes." />
+      <MiniCard title="Une métaphore de l'objectif ultime" tag="Langage courant" body="L'expression continue d'être employée au sens figuré pour désigner un objectif rare et difficile à atteindre, indépendamment de toute référence directe au mythe grec d'origine." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Un des cas les mieux documentés de cette série pour établir un pont plausible entre légende et pratique matérielle réelle.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Une technique d'orpaillage indépendamment attestée"
+      body="Le géographe grec Strabon décrit explicitement, au Ier siècle avant notre ère, l'usage de toisons pour capter l'or des rivières du Caucase — une description indépendante du récit mythologique lui-même, ce qui renforce sa crédibilité comme pratique réelle plutôt que comme simple exégèse a posteriori du mythe." />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Une continuité ethnographique jusqu'au XXe siècle"
+      body="Des voyageurs et chercheurs ont documenté la persistance de cette même technique en Svanétie bien après l'Antiquité, offrant une continuité matérielle rare qui appuie la plausibilité du lien entre pratique réelle et origine du mythe." />
+    <TheoryCard
+      title="Le mythe transpose une pratique réelle d'orpaillage caucasien"
+      level="plausible"
+      status="Hypothèse la mieux étayée"
+      body="La convergence entre la description de Strabon, la géographie précise du mythe et la persistance ethnographique de la technique constitue un faisceau d'indices cohérent, sans pour autant constituer une preuve définitive et unique de l'origine du récit."
+      attrib="Hypothèse largement reprise en histoire ancienne et en archéologie du Caucase"
+    />
+    <TheoryCard
+      title="Le mythe encode aussi une mémoire de contacts commerciaux réels"
+      level="plausible"
+      status="Hypothèse complémentaire"
+      body="Au-delà de la seule technique d'orpaillage, le récit pourrait aussi conserver le souvenir de contacts commerciaux et culturels bien réels entre le monde grec égéen et la Colchide caucasienne dès l'époque archaïque."
+      attrib="Lecture complémentaire en histoire économique antique"
+    />
+    <TheoryCard
+      title="La toison est un pur symbole religieux sans aucun ancrage matériel"
+      level="folklore"
+      status="Minoritaire face au faisceau d'indices"
+      body="Cette lecture, qui traite le récit comme purement religieux et symbolique sans aucun rapport avec une pratique économique réelle, reste défendable mais convainc moins de chercheurs compte tenu de la convergence des sources indépendantes évoquées plus haut."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ce mythe laisse encore">
+    <HeritageBlock
+      title="Un ordre de chevalerie toujours actif"
+      body="L'ordre de la Toison d'or, fondé en 1430, continue d'exister aujourd'hui sous ses deux branches espagnole et autrichienne, comme l'une des plus anciennes distinctions dynastiques européennes encore décernées." />
+    <HeritageBlock
+      title="Une pratique d'orpaillage traditionnelle encore commémorée"
+      body="La technique de la toison immergée reste un symbole culturel fort en Géorgie contemporaine, évoquée dans le tourisme patrimonial et les commémorations locales de Svanétie." />
+    <HeritageBlock
+      title="Un symbole persistant de quête ultime"
+      body="Du cinéma à la publicité en passant par le langage courant, la Toison d'or reste l'un des objets mythologiques les plus immédiatement reconnaissables comme métaphore d'un objectif rare et difficile à atteindre." />
+    <CautionBox>
+      L'hypothèse de l'orpaillage aux toisons, bien qu'étayée par des sources antiques
+      indépendantes et une continuité ethnographique réelle, reste une hypothèse d'origine
+      plausible et non une preuve définitive que le mythe grec ait été directement inspiré par
+      cette pratique précise — la prudence méthodologique s'impose face à toute convergence,
+      aussi séduisante soit-elle.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Strabon, Géographie, Livre XI, chapitre 2 (sur la Colchide et l'orpaillage caucasien)", url: "http://remacle.org/bloodwolf/geographie/strabon/livre11.htm", note: "Source antique indépendante décrivant l'usage de toisons pour capter l'or des rivières du Caucase" },
+    { label: "Apollonios de Rhodes, Argonautiques, IIIe siècle av. J.-C., trad. Émile Delage", url: "https://www.persee.fr/collection/bude", note: "Épopée grecque de référence sur la quête de Jason et des Argonautes" },
+    { label: "David Braund, Georgia in Antiquity: A History of Colchis and Transcaucasian Iberia, 550 BC–AD 562, Oxford University Press, 1994", url: "https://academic.oup.com/book/34791", note: "Étude historique de référence sur la Colchide antique et ses contacts avec le monde grec" },
+  ]} />
+</PageLayout>

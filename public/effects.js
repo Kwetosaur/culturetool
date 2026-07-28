@@ -2140,6 +2140,220 @@
     }, 2200);
   }
 
+  // Mythologie finnoise — un œuf cosmique qui se fend, une moitié montant
+  // former le ciel, l'autre descendant former la terre.
+  function cosmicEggSplit() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(14vh,100px);height:min(18vh,130px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path id="fx-egg-top" d="M50 4 C 22 4 12 46 12 66 L88 66 C 88 46 78 4 50 4 Z" fill="#e8c164"/>' +
+      '<path id="fx-egg-bottom" d="M12 66 C 12 100 28 136 50 136 C 72 136 88 100 88 66 Z" fill="#c9982f"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .55 }, { opacity: 0, offset: .6 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    var top = wrap.querySelector('#fx-egg-top'), bottom = wrap.querySelector('#fx-egg-bottom');
+    setTimeout(function () {
+      top.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-70px)' }],
+        { duration: 1400, easing: 'ease-in', fill: 'forwards' });
+      bottom.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(70px)' }],
+        { duration: 1400, easing: 'ease-in', fill: 'forwards' });
+    }, 1500);
+  }
+
+  // Mythologie polynésienne — Te Kore (le vide) puis Te Pō (la nuit) qui
+  // se déchirent lentement pour révéler Te Ao Mārama (le monde de lumière).
+  function teAoMarama() {
+    var l = layer(4200);
+    var dark = document.createElement('div');
+    dark.style.cssText = 'position:absolute;inset:0;background:#050a08;opacity:0;';
+    l.appendChild(dark);
+    dark.animate([{ opacity: 0 }, { opacity: .88, offset: .18 }, { opacity: .88, offset: .55 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+    var glow = document.createElement('div');
+    glow.style.cssText = 'position:absolute;left:50%;top:50%;width:10px;height:10px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#fff,#e8c164);opacity:0;';
+    l.appendChild(glow);
+    glow.animate([
+      { opacity: 0, width: '10px', height: '10px' },
+      { opacity: 1, offset: .35, width: '10px', height: '10px' },
+      { opacity: 1, width: 'min(50vh,360px)', height: 'min(50vh,360px)', offset: .75 },
+      { opacity: 0 }
+    ], { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Empire mongol — une yourte qui se monte en cercle, treillis puis toit.
+  function yourteMontage() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);width:min(24vh,170px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<ellipse id="fx-yurt-base" cx="100" cy="110" rx="90" ry="14" fill="#8a6a3f" opacity="0"/>' +
+      '<path id="fx-yurt-wall" d="M20 110 L20 70 L180 70 L180 110 Z" fill="#c9b090" opacity="0"/>' +
+      '<path id="fx-yurt-roof" d="M20 70 L100 20 L180 70 Z" fill="#a8825a" opacity="0"/>' +
+      '<circle id="fx-yurt-crown" cx="100" cy="30" r="6" fill="#e8c164" opacity="0"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    var parts = ['fx-yurt-base', 'fx-yurt-wall', 'fx-yurt-roof', 'fx-yurt-crown'];
+    parts.forEach(function (id, i) {
+      var el = wrap.querySelector('#' + id);
+      el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: 300 + i * 350, easing: 'ease-out', fill: 'forwards' });
+    });
+  }
+
+  // Culture indienne — un mudra (geste de danse classique) esquissé en une
+  // ligne continue.
+  function mudraGeste() {
+    var l = layer(3800);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(16vh,110px);height:min(16vh,110px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path id="fx-mudra-path" d="M20 90 C 20 40 40 20 60 20 C 80 20 95 35 95 55 C 95 75 80 85 65 78 C 55 73 58 60 68 60" ' +
+        'fill="none" stroke="#e8925a" stroke-width="4" stroke-linecap="round" stroke-dasharray="260" stroke-dashoffset="260"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .85 }, { opacity: 0 }],
+      { duration: 3800, easing: 'ease-out', fill: 'forwards' });
+    wrap.querySelector('#fx-mudra-path').animate([{ strokeDashoffset: 260 }, { strokeDashoffset: 0 }],
+      { duration: 2200, delay: 300, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // La Tarasque — un dragon de procession qui traverse l'écran en cahotant
+  // sur ses roues, ambiance de fête.
+  function tarasqueProcession() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:-20%;top:48%;transform:translateY(-50%);width:min(20vh,140px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path d="M10 60 Q 40 20 90 40 Q 130 55 180 45 L175 65 Q 120 75 80 62 Q 45 52 15 75 Z" fill="#6a8a3a"/>' +
+      '<circle cx="30" cy="80" r="10" fill="#3a2a18"/><circle cx="150" cy="80" r="10" fill="#3a2a18"/>' +
+      '<circle cx="182" cy="42" r="5" fill="#c9982f"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .85 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    wrap.animate([
+      { left: '-20%', transform: 'translateY(-50%) rotate(0deg)' },
+      { left: '40%', transform: 'translateY(-54%) rotate(-2deg)', offset: .5 },
+      { left: '110%', transform: 'translateY(-50%) rotate(0deg)' }
+    ], { duration: 4000, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Le Thunderbird — un éclair qui, l'espace d'une image, dessine une
+  // envergure d'ailes.
+  function thunderbirdEclair() {
+    var l = layer(2600);
+    var flash = document.createElement('div');
+    flash.style.cssText = 'position:absolute;inset:0;background:rgba(230,240,255,0.9);opacity:0;';
+    l.appendChild(flash);
+    flash.animate([{ opacity: 0 }, { opacity: .8, offset: .06 }, { opacity: 0, offset: .12 }, { opacity: 0 }],
+      { duration: 700, easing: 'ease-out', fill: 'forwards' });
+    var wings = document.createElement('div');
+    wings.style.cssText = 'position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:min(50vh,360px);opacity:0;';
+    wings.innerHTML = '<svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path d="M150 50 L110 20 L70 30 L30 15 L60 45 L20 55 L65 60 L30 85 L80 65 L110 80 L120 55 Z" fill="#12151a"/>' +
+      '<path d="M150 50 L190 20 L230 30 L270 15 L240 45 L280 55 L235 60 L270 85 L220 65 L190 80 L180 55 Z" fill="#12151a"/>' +
+    '</svg>';
+    l.appendChild(wings);
+    wings.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .3 }, { opacity: 0 }],
+      { duration: 2600, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Le Suaire de Turin — un tissu qui se déplie et dont l'empreinte
+  // apparaît en négatif, jamais un visage net.
+  function suaireDeplie() {
+    var l = layer(4200);
+    var cloth = document.createElement('div');
+    cloth.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) scaleY(.08);width:min(16vh,110px);height:min(34vh,240px);background:linear-gradient(180deg,#ece0c4,#d8c8a0);opacity:0;';
+    l.appendChild(cloth);
+    cloth.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    cloth.animate([{ transform: 'translate(-50%,-50%) scaleY(.08)' }, { transform: 'translate(-50%,-50%) scaleY(1)' }],
+      { duration: 1600, delay: 300, easing: 'ease-out', fill: 'forwards' });
+    var imprint = document.createElement('div');
+    imprint.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(8vh,55px);height:min(20vh,140px);opacity:0;background:radial-gradient(ellipse,rgba(122,90,58,.35),transparent 70%);';
+    l.appendChild(imprint);
+    imprint.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1200, delay: 2000, easing: 'ease-in', fill: 'forwards' });
+  }
+
+  // Cité de Paititi / El Dorado — la canopée s'ouvre sur un reflet doré
+  // qui disparaît aussitôt.
+  function canopeeDoree() {
+    var l = layer(3600);
+    var canopy = document.createElement('div');
+    canopy.style.cssText = 'position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 0%,#0e1a10 65%);opacity:0;';
+    l.appendChild(canopy);
+    canopy.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .85 }, { opacity: 0 }],
+      { duration: 3600, easing: 'ease-out', fill: 'forwards' });
+    var glint = document.createElement('div');
+    glint.style.cssText = 'position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#fff,#e8c164);opacity:0;';
+    l.appendChild(glint);
+    glint.animate([
+      { opacity: 0, width: '6px', height: '6px' },
+      { opacity: 1, offset: .45, width: 'min(14vh,100px)', height: 'min(14vh,100px)' },
+      { opacity: 0, offset: .55 },
+      { opacity: 0 }
+    ], { duration: 3600, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // La Toison d'Or — une peau de mouton plongée dans un courant, dont les
+  // paillettes d'or s'accrochent une à une.
+  function toisonOrEclat() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(18vh,130px);height:min(16vh,110px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path d="M20 50 Q 40 20 80 25 Q 120 20 140 50 Q 130 80 80 85 Q 30 80 20 50 Z" fill="#e8d8b0"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    for (var i = 0; i < 14; i++) {
+      (function () {
+        var x = rand(25, 135), y = rand(25, 85);
+        var speck = document.createElement('div');
+        speck.style.cssText = 'position:absolute;left:' + x + 'px;top:' + y + 'px;width:5px;height:5px;border-radius:50%;background:#e8c164;box-shadow:0 0 6px #e8c164;opacity:0;';
+        wrap.appendChild(speck);
+        speck.animate([{ opacity: 0 }, { opacity: 1 }, { opacity: .3 }],
+          { duration: 700, delay: 500 + i * 180, easing: 'ease-out', fill: 'forwards' });
+      })();
+    }
+  }
+
+  // La Boîte de Pandore — une jarre qui s'entrouvre, laisse échapper des
+  // points sombres, et retient le dernier.
+  function jarrePandore() {
+    var l = layer(4200);
+    var jar = document.createElement('div');
+    jar.style.cssText = 'position:absolute;left:50%;bottom:10vh;transform:translateX(-50%);width:min(12vh,85px);opacity:0;';
+    jar.innerHTML = '<svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path d="M20 20 L60 20 L55 30 L66 100 Q 40 115 14 100 L25 30 Z" fill="#8a6a3f"/>' +
+      '<rect id="fx-jar-lid" x="18" y="10" width="44" height="10" fill="#6a4a2a" style="transform-origin:20px 15px"/>' +
+    '</svg>';
+    l.appendChild(jar);
+    jar.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var lid = jar.querySelector('#fx-jar-lid');
+    setTimeout(function () {
+      lid.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(-25deg)' }],
+        { duration: 500, easing: 'ease-out', fill: 'forwards' });
+      for (var i = 0; i < 8; i++) {
+        (function (i) {
+          var dot = document.createElement('div');
+          dot.style.cssText = 'position:absolute;left:22px;top:8px;width:5px;height:5px;border-radius:50%;background:#2a1a10;opacity:0;';
+          jar.appendChild(dot);
+          dot.animate([
+            { opacity: 0, transform: 'translate(0,0)' },
+            { opacity: 1, offset: .15, transform: 'translate(0,-6px)' },
+            { opacity: 0, transform: 'translate(' + rand(-60, 60) + 'px,' + rand(-90, -30) + 'px)' }
+          ], { duration: 1400, delay: 500 + i * 90, easing: 'ease-out', fill: 'forwards' });
+        })(i);
+      }
+    }, 800);
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -2163,7 +2377,7 @@
     rune: RUNES, greek: GREEK, hiero: HIERO, cunei: CUNEI, ogham: OGHAM, roman: ROMAN,
     hindu: 'ॐ☸✴◈', japan: '❀✿花結', azteque: '☀✴◈❂', slave: '☀✺❉✵', chine: '福龍鳳春',
     lapidaire: LAPID, yoruba: '☀◈✦❖', inca: '☀◈▲✦', dreaming: '●○◐◑✦',
-    dogon: '▲▽◇✦'
+    dogon: '▲▽◇✦', kalevala: '✦❆◆✶', polynesienne: '▲◆✦❖'
   };
 
   function glyphify(el, pool) {
@@ -2291,7 +2505,17 @@
     croatoanCarve: croatoanCarve,
     masqueBronzeLeve: masqueBronzeLeve,
     ulfberhtSignature: ulfberhtSignature,
-    vajraSolidify: vajraSolidify
+    vajraSolidify: vajraSolidify,
+    cosmicEggSplit: cosmicEggSplit,
+    teAoMarama: teAoMarama,
+    yourteMontage: yourteMontage,
+    mudraGeste: mudraGeste,
+    tarasqueProcession: tarasqueProcession,
+    thunderbirdEclair: thunderbirdEclair,
+    suaireDeplie: suaireDeplie,
+    canopeeDoree: canopeeDoree,
+    toisonOrEclat: toisonOrEclat,
+    jarrePandore: jarrePandore
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -2385,6 +2609,16 @@
     sanxingdui:    masqueBronzeLeve,
     ulfberht:      ulfberhtSignature,
     vajra:         vajraSolidify,
+    vainamoinen:   cosmicEggSplit,
+    mauihook:      teAoMarama,
+    mongol:        yourteMontage,
+    inde:          mudraGeste,
+    tarasque:      tarasqueProcession,
+    thunderbird:   thunderbirdEclair,
+    suaire:        suaireDeplie,
+    paititi:       canopeeDoree,
+    toisonor:      toisonOrEclat,
+    pandore:       jarrePandore,
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }

@@ -1,0 +1,245 @@
+---
+/*
+  La Boîte de Pandore — dix-septième et dernière page de la vague en
+  cours de la série « Objets Légendaires du Monde ». Structure imposée
+  par docs/plans/plan-serie-objets.md : 8 sections, badge de nature dans
+  le hero.
+
+  Cas le plus net de toute la série pour #verite : l'objet grec original
+  chez Hésiode est un pithos (grande jarre de stockage en terre cuite),
+  pas une boîte — l'erreur remonte à la traduction latine d'Érasme au
+  XVIe siècle, qui rend pithos par le latin pyxis (petite boîte), d'où
+  le mot français actuel. Cette page documente ce contresens comme la
+  démonstration la plus courte et la plus nette de comment un objet
+  légendaire naît d'une erreur de traduction plutôt que d'une tradition
+  continue.
+
+  Effets : data-egg="pandore" + data-scroll-fx="jarrePandore" sur
+  #description (déjà enregistrés dans effects.js) — une jarre dont le
+  couvercle se soulève doucement, jamais un déferlement de maux figuré.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Terre cuite antique, ombre grise des maux libérés, lueur pâle
+   d'Elpis (l'Espoir) qui reste seule au fond : la matière du récit
+   plutôt qu'une palette "boîte à trésor" trompeuse. */
+const palette = {
+  bg: '#141210',
+  'bg-deep': '#0b0a08',
+  surface: '#1e1a16',
+  'surface-alt': '#28221c',
+  border: '#4a4034',
+  ink: '#f2ece2',
+  text: '#d0c4b0',
+  'text-dim': '#948870',
+  accent: '#a8623a',
+  'accent-bright': '#d0885a',
+  accent2: '#5a6a78',
+  'accent2-bright': '#8a9ca8',
+  verdict: '#3a2818',
+  'verdict-bright': '#6a4a2a',
+  glow: 'rgba(168,98,58,0.18)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const noms = [
+  { num: 'I', title: 'Un pithos chez Hésiode', sub: 'Grec ancien, VIIIe-VIIe siècle av. J.-C.', body: "Le texte original emploie le mot pithos, désignant une grande jarre de stockage en terre cuite, souvent semi-enterrée — un contenant domestique commun, pas un coffret précieux." },
+  { num: 'II', title: 'Devenue « pyxis » chez Érasme', sub: 'Traduction latine, 1508' , body: "L'humaniste Érasme de Rotterdam traduit le mot grec par le latin pyxis, désignant une petite boîte — un glissement de sens qui fixe durablement, dans les langues européennes modernes, l'image erronée d'une boîte." },
+  { num: 'III', title: 'Le récipient de tous les maux', sub: 'Fonction narrative' , body: "Quel que soit le contenant réel, sa fonction dans le récit reste constante : y sont enfermés tous les maux destinés à l'humanité, et Elpis (l'Espoir), seule, y demeure lorsque Pandore referme le couvercle." },
+];
+---
+<PageLayout
+  title="La Boîte de Pandore"
+  serie="Objets Légendaires du Monde"
+  description="Un récipient d'où s'échappent tous les maux de l'humanité, ne laissant derrière lui que l'Espoir — sauf que le texte grec original ne parle jamais d'une boîte, mais d'une jarre de terre cuite. La démonstration la plus courte de toute la série : comment une simple erreur de traduction du XVIe siècle a façonné une expression encore utilisée aujourd'hui."
+  href="objet-boite-pandore.html"
+  egg="pandore"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="HÉSIODE · GRÈCE ANTIQUE"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : <strong>le Sceau de jade impérial chinois</strong>"
+>
+  <p class="subtitle" slot="hero">Πίθος, pas πυξίς · La jarre devenue boîte</p>
+  <p class="tagline" slot="hero">
+    Aucune quête, aucune relique disputée ici : simplement une jarre de terre cuite
+    transformée en boîte par un traducteur du XVIe siècle — et une expression qui, cinq
+    siècles plus tard, continue de porter cette erreur sans que presque personne ne le sache.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet de fiction, né d'une erreur de traduction documentée"
+    note="Il n'existe et n'a jamais existé de « boîte » de Pandore : le texte grec d'Hésiode décrit un pithos, grande jarre de stockage. Le glissement vers « boîte » est directement attribuable à la traduction latine d'Érasme en 1508 — un cas rare où l'origine exacte de la déformation est datée et documentée avec précision."
+  />
+
+  <Section
+    id="origine"
+    label="D'une jarre à une boîte"
+    title="Le contresens le plus net de la série"
+    intro="Contrairement à la plupart des objets de cette série, il n'y a pas ici de mystère sur l'origine de la légende — seulement une erreur de traduction que l'on peut dater et attribuer avec une précision inhabituelle.">
+    <div class="card-grid">
+      {noms.map((n) => <InfoCard {...n} />)}
+    </div>
+  </Section>
+
+  <Section
+    id="description"
+    label="Forme réelle et forme imaginée"
+    title="Une grande jarre de terre cuite, pas un coffret"
+    intro="La description du récipient a directement structuré l'image collective qui en circule aujourd'hui — une image qui ne correspond pourtant pas à ce que dit le texte grec."
+    scrollFx="jarrePandore">
+    <div class="card-grid wide">
+      <FigureCard
+        name="Le pithos grec"
+        role="Objet domestique réel"
+        tags={['Terre cuite', 'Grande contenance']}
+        body="Dans les foyers grecs antiques, le pithos sert au stockage de grandes quantités de grain, d'huile ou de vin — un contenant utilitaire et familier pour tout lecteur ancien du texte d'Hésiode, bien loin d'un objet précieux ou exotique." />
+      <FigureCard
+        name="La pyxis latine"
+        role="Glissement de traduction"
+        tags={['Érasme, 1508', 'Petite boîte']}
+        body="En choisissant le mot latin pyxis pour traduire pithos, Érasme introduit, volontairement ou non, une image de petit contenant précieux qui s'éloigne nettement de la jarre domestique décrite par Hésiode." />
+      <FigureCard
+        name="L'image moderne consolidée"
+        role="Iconographie post-Renaissance"
+        tags={['Peinture', 'Illustration']}
+        body="Les artistes européens qui illustrent le mythe à partir de la Renaissance représentent presque systématiquement une boîte ou un coffret, fixant visuellement l'erreur de traduction bien au-delà du texte lui-même." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="De la création de Pandore à l'ouverture du récipient" title="Le récit tel que le rapporte Hésiode">
+    <StoryBlock
+      num="Récit I"
+      title="La création de Pandore, punition de Zeus"
+      body="Furieux que Prométhée ait dérobé le feu pour l'offrir aux hommes, Zeus ordonne la création de la première femme, Pandore, façonnée dans l'argile par Héphaïstos et dotée par chaque dieu d'un don particulier — sa beauté par Aphrodite, la ruse par Hermès. Son nom même, « tous les dons », désigne cette origine composite." />
+    <StoryBlock
+      num="Récit II"
+      title="La curiosité et l'ouverture du pithos"
+      body="Confiée en mariage à Épiméthée, frère de Prométhée, Pandore reçoit un pithos qu'il lui est interdit d'ouvrir. Poussée par la curiosité, elle soulève le couvercle et libère tous les maux qui s'y trouvaient enfermés — maladies, vieillesse, travail pénible, tourments de toutes sortes — qui se répandent alors définitivement sur l'humanité." quote="Une curiosité qui, chez Hésiode, achève ce que le vol du feu par Prométhée avait commencé." cite="Résumé du récit des Travaux et les Jours, v. 90-105" />
+    <StoryBlock
+      num="Récit III"
+      title="Elpis, seule restée au fond"
+      body="Au moment où Pandore referme précipitamment le couvercle, une seule entité reste emprisonnée au fond du pithos : Elpis, l'Espoir — un dénouement dont le sens exact divise depuis l'Antiquité les commentateurs, entre un dernier bien retenu loin des hommes ou un dernier mal heureusement contenu." />
+  </Section>
+
+  <Section
+    id="facture"
+    label="Matière et fabrication"
+    title="Un objet céramique ordinaire, jamais un artefact précieux"
+    intro="Rien à reconstituer techniquement ici : le pithos décrit correspond à une catégorie d'objets céramiques abondamment attestée par l'archéologie grecque, sans qu'aucun exemplaire spécifique ne soit associé au mythe.">
+    <div class="card-grid compact">
+      <MiniCard title="Une poterie de grande taille" tag="Production courante" body="Les pithoi grecs antiques, souvent hauts de plus d'un mètre, comptent parmi les productions céramiques les plus courantes et les mieux attestées archéologiquement de toute la Méditerranée antique." />
+      <MiniCard title="Un usage domestique documenté" tag="Stockage alimentaire" body="Leur usage principal, le stockage de denrées en grande quantité, est directement confirmé par de nombreuses fouilles de sites d'habitation grecs antiques, sans lien avec un quelconque usage rituel ou magique." />
+      <MiniCard title="Aucun exemplaire associé au mythe" tag="Absence de relique" body="Contrairement à d'autres objets de cette série, aucune tradition n'a jamais désigné un pithos précis, conservé quelque part, comme étant « le » récipient de Pandore — le récit reste entièrement littéraire." />
+    </div>
+  </Section>
+
+  <Section id="traces" label="Ce que le texte permet vraiment d'affirmer" title="Un objet fictif, une erreur bien réelle">
+    <div class="card-grid">
+      <InfoCard
+        title="Le texte grec original, accessible et non ambigu"
+        sub="Hésiode, Les Travaux et les Jours"
+        body="Le mot pithos employé par Hésiode ne prête à aucune ambiguïté lexicale pour les hellénistes : il désigne sans équivoque une grande jarre, jamais un petit contenant portatif." />
+      <InfoCard
+        title="La traduction d'Érasme, datée avec précision"
+        sub="Adagia, 1508"
+        body="Le glissement lexical est attribué avec une précision inhabituelle à un texte et une date identifiables, ce qui distingue nettement ce cas des origines floues de la plupart des autres objets légendaires de la série." />
+      <InfoCard
+        title="Une expression qui a définitivement absorbé l'erreur"
+        sub="Usage contemporain"
+        body="Y compris parmi les lecteurs avertis, l'expression « boîte de Pandore » reste aujourd'hui universellement comprise et employée sans référence au mot grec d'origine, preuve de la profondeur avec laquelle l'erreur de traduction s'est imposée dans l'usage courant." />
+    </div>
+  </Section>
+
+  <Section
+    id="culture-populaire"
+    label="D'une jarre grecque à une expression universelle"
+    title="Une métaphore devenue plus célèbre que le texte lui-même">
+    <div class="card-grid compact">
+      <MiniCard title="Une expression du langage courant" tag="Usage figuré" body="« Ouvrir la boîte de Pandore » désigne aujourd'hui, dans de très nombreuses langues, le fait de déclencher, souvent par inadvertance, une chaîne de conséquences négatives impossible à arrêter ensuite." />
+      <MiniCard title="Un motif artistique récurrent" tag="Peinture et illustration" body="De nombreux peintres, dont Jean Cousin l'Ancien ou John William Waterhouse, ont représenté Pandore au moment précis de l'ouverture du récipient, contribuant à ancrer visuellement l'image erronée de la boîte." />
+      <MiniCard title="Une référence technologique et culturelle actuelle" tag="Informatique, jeux vidéo, cinéma" body="Le nom « Pandora » est aujourd'hui largement repris dans des produits technologiques, des jeux vidéo et des films, généralement pour évoquer un pouvoir dangereux ou irréversible une fois déclenché, très éloigné du texte grec d'origine." />
+    </div>
+  </Section>
+
+  <Section
+    id="verite"
+    label="Section pivot"
+    title="Ce qu'on peut affirmer"
+    intro="Le cas le plus limpide de toute la série : ici, la vérité n'est pas un écart entre objet et légende, mais un écart entre un texte et sa traduction, daté et documenté avec une précision rare.">
+    <ScienceBlock
+      num="Enquête 1"
+      title="Une divergence lexicale confirmée par la philologie"
+      body="Les hellénistes s'accordent sans ambiguïté sur le sens du mot pithos chez Hésiode, confirmé par son usage identique dans de nombreux autres textes grecs anciens décrivant des objets de stockage domestique de grande taille." />
+    <ScienceBlock
+      num="Enquête 2"
+      title="Une attribution précise à la traduction d'Érasme"
+      body="Le choix du mot latin pyxis par Érasme dans ses Adagia de 1508 est directement identifiable comme le point de bascule qui a fixé, dans les langues européennes ultérieures, l'image erronée d'un petit contenant plutôt que d'une grande jarre." />
+    <TheoryCard
+      title="La « boîte » de Pandore résulte d'une erreur de traduction humaniste, pas d'une tradition antique"
+      level="consensus"
+      status="Consensus philologique"
+      body="Les spécialistes de la littérature grecque ancienne s'accordent largement sur cette origine précise du contresens, documentée par la comparaison directe du texte grec et de la traduction latine d'Érasme."
+      attrib="Position dominante en philologie classique"
+    />
+    <TheoryCard
+      title="Le sens exact du maintien d'Elpis (l'Espoir) dans le récipient reste discuté"
+      level="plausible"
+      status="Débat interprétatif ouvert"
+      body="Que le maintien de l'Espoir dans le pithos constitue un bienfait perdu pour l'humanité ou, à l'inverse, un mal potentiellement trompeur heureusement retenu, continue de diviser les commentateurs du texte d'Hésiode depuis l'Antiquité, sans qu'aucune lecture ne fasse consensus définitif."
+      attrib="Débat récurrent en études hellénistiques"
+    />
+    <TheoryCard
+      title="Le récit encoderait un tabou ancien plus large sur la curiosité féminine"
+      level="folklore"
+      status="Lecture culturelle, non philologique"
+      body="Certaines lectures modernes rapprochent le récit d'un motif narratif plus large de punition liée à la curiosité (comme Ève dans la tradition biblique) — une comparaison culturelle intéressante, mais qui relève de l'interprétation littéraire plutôt que d'un fait philologiquement établi sur le texte grec lui-même."
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette erreur de traduction laisse encore">
+    <HeritageBlock
+      title="Une expression internationalement comprise"
+      body="« Ouvrir la boîte de Pandore » reste une expression immédiatement comprise dans de très nombreuses langues, indépendamment de toute connaissance du texte grec d'origine ou de l'erreur de traduction qui l'a produite." />
+    <HeritageBlock
+      title="Un cas d'école en histoire de la traduction"
+      body="L'épisode est régulièrement cité dans l'enseignement de la traductologie et de la philologie classique comme exemple particulièrement net de la façon dont un choix de traduction précis peut durablement façonner la culture populaire bien au-delà du texte original." />
+    <HeritageBlock
+      title="Un mythe toujours réinterprété"
+      body="Le récit continue d'inspirer des œuvres nouvelles, littéraires comme visuelles, qui interrogent à leur tour le sens ambigu du maintien de l'Espoir dans le récipient." />
+    <CautionBox>
+      Cette page documente une erreur de traduction bien réelle et datée, sans pour autant
+      suggérer que la version « boîte », désormais solidement ancrée dans l'usage depuis cinq
+      siècles, devrait être corrigée dans le langage courant : les langues vivantes intègrent
+      leurs propres erreurs historiques sans que cela n'invalide leur usage actuel.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Hésiode, Les Travaux et les Jours, trad. Paul Mazon, Les Belles Lettres, v. 90-105", url: "https://remacle.org/bloodwolf/poetes/hesiode/travaux.htm", note: "Texte grec de référence employant le mot pithos, source première du récit" },
+    { label: "Erasmus, Adagia, 1508 (traduction latine ayant introduit le mot pyxis)", url: "https://www.uni-mannheim.de/mateo/camenaref/erasmus.html", note: "Source du glissement lexical de pithos vers pyxis documenté en #verite" },
+    { label: "Jean-Pierre Vernant, Mythe et société en Grèce ancienne, La Découverte, 1974", note: "Analyse de référence sur le mythe de Pandore et le statut ambigu d'Elpis dans le récit hésiodique" },
+    { label: "Dora & Erwin Panofsky, Pandora's Box: The Changing Aspects of a Mythical Symbol, Princeton University Press, 1956", url: "https://press.princeton.edu/books/paperback/9780691018505/pandoras-box", note: "Étude de référence sur l'évolution iconographique du mythe, du pithos à la boîte" },
+  ]} />
+</PageLayout>

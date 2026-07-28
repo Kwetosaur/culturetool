@@ -36,9 +36,9 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Le Mngwa | 5 | Tanzanie | "Chat mystère" est-africain, attaques rapportées dans les années 1900-1930, explication sceptique dominante : grand félin connu mal identifié |
 | La Bête de Bray Road | 5 | Wisconsin, États-Unis | Vague de témoignages des années 1980-90 largement médiatisée, cas régional bien documenté de panique locale |
 | Mokèlé-mbembé ✅ | 8 | Bassin du Congo | Non prouvé. Le cryptide le plus recherché d'Afrique : des dizaines d'expéditions depuis un siècle, dont **plusieurs financées par des créationnistes cherchant un dinosaure vivant** — un angle critique que peu de sujets offrent aussi nettement |
-| Le Thunderbird | 7 | Amérique du Nord | Figure spirituelle **vivante** dans de nombreuses nations autochtones (à traiter avec respect), doublée d'une légende moderne : une photo de 1890 montrant un oiseau géant clouté sur une grange, citée partout, que personne n'a jamais retrouvée |
+| Le Thunderbird ✅ | 7 | Amérique du Nord | Figure spirituelle **vivante** dans de nombreuses nations autochtones (à traiter avec respect), doublée d'une légende moderne : une photo de 1890 montrant un oiseau géant clouté sur une grange, citée partout, que personne n'a jamais retrouvée |
 | Le Golem de Prague ✅ | 7 | Prague, tradition juive | Créature d'argile animée par un mot. Le rabbin Loew est du XVIe siècle, mais **le golem ne lui est attaché qu'à partir du XIXe** : la même structure qu'Excalibur, un objet ancien et un récit récent |
-| La Tarasque | 6 | Tarascon, France | Dragon processionnel dont la fête est inscrite au patrimoine immatériel de l'UNESCO : le seul cas de la liste où la créature est encore **promenée dans les rues** chaque année |
+| La Tarasque ✅ | 6 | Tarascon, France | Dragon processionnel dont la fête est inscrite au patrimoine immatériel de l'UNESCO : le seul cas de la liste où la créature est encore **promenée dans les rues** chaque année |
 | Le Basilic | 6 | Europe | Créature de bestiaire née d'un passage de Pline l'Ancien, avec un cas « documenté » à Varsovie en 1587 — parfait pour montrer comment une erreur d'histoire naturelle devient un monstre |
 | Le Mapinguari | 6 | Amazonie occidentale | Non prouvé. Hypothèse sérieusement discutée d'un souvenir de paresseux géant (*Mylodon*), disparu il y a ~10 000 ans — la piste paléontologique la plus défendable de toute la liste |
 | Le Tatzelwurm | 5 | Alpes | Folklore alpin du « ver-chat », témoignages du XIXe siècle, explication sceptique dominante : orvet ou lézard apode, bien réels et inoffensifs |
@@ -60,7 +60,7 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | La Disparition d'Amelia Earhart ✅ | 8 | Pacifique, 1937 | Non résolu officiellement, plusieurs hypothèses sérieuses en concurrence |
 | Le Mary Celeste ✅ | 8 | Atlantique, 1872 | Événement réel, explication la plus probable aujourd'hui : évacuation précipitée par erreur d'appréciation, pas de mystère surnaturel |
 | L'Île de Pâques et l'Effondrement Rapa Nui ✅ | 8 | Polynésie | Hypothèses scientifiques concurrentes sérieuses (déforestation, maladies, esclavage colonial) |
-| Le Suaire de Turin | 7 | Italie | Datation au carbone 14 (1988) pointant vers le Moyen Âge, toujours contestée par certains |
+| Le Suaire de Turin ✅ | 7 | Italie | Datation au carbone 14 (1988) pointant vers le Moyen Âge, toujours contestée par certains |
 | Les Crop Circles (Cercles de Culture) | 6 | Principalement Angleterre | Majoritairement revendiqués et reproduits par des auteurs humains identifiés depuis les années 1990 |
 | L'Homme de Piltdown | 6 | Angleterre, 1912 | Canular archéologique entièrement démontré et documenté — excellent contre-exemple de mystère "résolu" |
 | La Colonie Perdue de Roanoke ✅ | 6 | Caroline du Nord, 1590 | Non résolu, plusieurs hypothèses archéologiques récentes prometteuses |
@@ -75,7 +75,7 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Le Triangle du Dragon (Devil's Sea) | 6 | Pacifique, au sud du Japon | "Triangle des Bermudes japonais", explicable de façon similaire (activité volcanique/tectonique réelle + statistique), bon effet miroir avec la page Bermudes |
 | Newgrange | 6 | Irlande, néolithique | Tombe à couloir alignée sur le solstice d'hiver, prouesse d'ingénierie bien documentée, complément direct de Stonehenge |
 | Les Pierres de Dropa | 5 | Chine (légende moderne) | Canular/légende du XXe siècle sans fondement archéologique sérieux, bon contre-exemple de pseudo-mystère viral |
-| La Cité Perdue de Paititi / El Dorado | 6 | Amazonie, Pérou/Bolivie | Légende de cité d'or jamais localisée malgré des siècles d'expéditions, toujours non résolue |
+| La Cité Perdue de Paititi / El Dorado ✅ | 6 | Amazonie, Pérou/Bolivie | Légende de cité d'or jamais localisée malgré des siècles d'expéditions, toujours non résolue |
 | Dwarka, la Cité Engloutie | 5 | Golfe de Cambay, Inde | Ruines sous-marines liées à la légende de Krishna, datation et interprétation encore débattues par les archéologues |
 | Göbekli Tepe ✅ | 9 | Turquie, ~9500 av. J.-C. | **L'absence la plus criante de cette liste.** Des enclos monumentaux à piliers en T bâtis par des chasseurs-cueilleurs, avant l'agriculture et la poterie : le site a inversé la séquence admise « d'abord les champs, ensuite les temples ». Fouillé depuis 1995, encore très largement enfoui |
 | Le Disque de Phaistos | 7 | Crète, ~1700 av. J.-C. | 241 signes imprimés au poinçon en spirale, 45 caractères distincts, **jamais déchiffrés** — et un corpus trop court pour espérer y arriver. Complément direct de la page Voynich, et lien avec la culture minoenne |
@@ -87,21 +87,21 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 
 ---
 
-## État de la série (27/07/2026)
+## État de la série (29/07/2026)
 
-**Créatures : 12 publiées** — Bête du Gévaudan, Monstre du Loch Ness, Bigfoot, Yeti,
-Chupacabra, Mothman, le Kraken, le Kappa, Mokèlé-mbembé, La Llorona, **le Golem de Prague**,
-**le Yeren**. **24 à venir**, dont 9 ajoutées le 26/07/2026 (Thunderbird, Tarasque, Basilic,
-Mapinguari, Tatzelwurm, l'Hombre Caimán, en plus de Mokèlé-mbembé, La Llorona, le Golem de
-Prague et le Yeren désormais publiés) — l'Afrique n'avait que 3 entrées, l'Amazonie aucune,
-et l'Amérique latine hispanique seulement le Chupacabra.
+**Créatures : 14 publiées** — Bête du Gévaudan, Monstre du Loch Ness, Bigfoot, Yeti,
+Chupacabra, Mothman, le Kraken, le Kappa, Mokèlé-mbembé, La Llorona, le Golem de Prague,
+le Yeren, **le Thunderbird**, **la Tarasque**. **22 à venir**, dont Basilic, Mapinguari,
+Tatzelwurm et l'Hombre Caimán (ajoutées le 26/07/2026, toujours en attente) — l'Afrique
+n'avait que 3 entrées, l'Amazonie aucune, et l'Amérique latine hispanique seulement le
+Chupacabra.
 
-**Mystères : 12 publiés** — Triangle des Bermudes, Stonehenge, Col Dyatlov, Manuscrit de
+**Mystères : 14 publiés** — Triangle des Bermudes, Stonehenge, Col Dyatlov, Manuscrit de
 Voynich, Lignes de Nazca, Mécanisme d'Anticythère, Göbekli Tepe, la disparition d'Amelia
-Earhart, le Mary Celeste, l'île de Pâques, **la Colonie de Roanoke**, **Sanxingdui**. **21 à
-venir**, dont 7 ajoutées le 26/07/2026 (disque de Phaistos, rongorongo, Toungouska, Somerton
-Man, Oak Island, sphères du Costa Rica — Göbekli Tepe, alors « l'absence la plus criante »,
-est désormais publié).
+Earhart, le Mary Celeste, l'île de Pâques, la Colonie de Roanoke, Sanxingdui, **le Suaire de
+Turin**, **la Cité perdue de Paititi / El Dorado**. **19 à venir**, dont disque de Phaistos,
+Toungouska, Somerton Man, Oak Island, sphères du Costa Rica (ajoutées le 26/07/2026, toujours
+en attente).
 
 **Note de recoupement — rongorongo et île de Pâques.** Les deux sont dans la liste, au même
 endroit sur la carte. Ce n'est pas la redondance volontaire du type Grand Zimbabwe : l'île de

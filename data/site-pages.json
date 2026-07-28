@@ -17,7 +17,9 @@
     {"href": "mythologie-inca.html", "title": "Inca", "cardTitle": "Mythologie Inca", "epigraph": "Hanan · Kay · Uku Pacha", "hook": "Viracocha créateur, culte solaire d'Inti, Pachamama toujours vénérée : la cosmologie andine des Trois Pacha, structurée autour de la verticalité des montagnes."},
     {"href": "mythologie-aborigene.html", "title": "Aborigène australienne", "epigraph": "Plus de 250 nations", "hook": "Le Temps du Rêve structure encore aujourd'hui le rapport au territoire de centaines de nations aborigènes distinctes — la cosmologie continue la plus ancienne du monde."},
     {"href": "mythologie-dogon.html", "title": "Mythologie Dogon", "epigraph": "Falaise de Bandiagara, Mali", "hook": "Une cosmologie ouest-africaine devenue mondialement celebre - et mondialement debattue - pour sa pretendue connaissance d'une etoile invisible."},
-    {"href": "mythologie-vietnamienne.html", "title": "Mythologie Vietnamienne", "epigraph": "Con Rong Chau Tien", "hook": "Cent fils nes d'un dragon des eaux et d'une fee des montagnes - le mythe fondateur qui donne encore au Vietnam son nom collectif."}
+    {"href": "mythologie-vietnamienne.html", "title": "Mythologie Vietnamienne", "epigraph": "Con Rong Chau Tien", "hook": "Cent fils nes d'un dragon des eaux et d'une fee des montagnes - le mythe fondateur qui donne encore au Vietnam son nom collectif."},
+    {"href": "mythologie-finnoise.html", "title": "Finnoise", "cardTitle": "Mythologie Finnoise", "epigraph": "Kalevala, Finlande", "hook": "Un monde né d'un œuf brisé, et des héros-chamanes plutôt que des guerriers."},
+    {"href": "mythologie-polynesienne.html", "title": "Polynésienne", "cardTitle": "Mythologie Polynésienne", "epigraph": "Triangle océanique", "hook": "Maui pêche des îles, Pele règne sur les volcans, du vide à la lumière."}
   ],
   "cultures": [
     {"href": "culture-chinoise.html", "title": "Chine", "epigraph": "中國", "hook": "Peuples, grandes figures, inventions et carte-récit d'une civilisation continue."},
@@ -31,7 +33,9 @@
     {"href": "culture-mesopotamie.html", "title": "Mésopotamie", "epigraph": "Uruk · Babylone · Ninive", "hook": "Les premières villes, la première écriture, le premier code de lois — et une capitale impériale, Akkad, dont personne n'a jamais retrouvé l'emplacement exact."},
     {"href": "culture-perse-achemenide.html", "title": "Empire perse achéménide", "epigraph": "Persépolis · Suse · Pasargades", "hook": "Une administration multiethnique tolérante, des routes royales de 2700 km : le plus grand empire que le monde ait connu jusqu'alors, du Nil à l'Indus."},
     {"href": "culture-byzance.html", "title": "Empire byzantin", "epigraph": "Constantinople, 330-1453", "hook": "Onze siecles de continuite romaine en Orient - et un peuple qui ne s'est jamais appele lui-meme byzantin."},
-    {"href": "culture-khmers.html", "title": "Khmers (Angkor)", "epigraph": "Angkor, IXe-XVe siecle", "hook": "La plus vaste agglomeration preindustrielle jamais batie - qu'un moine portugais decrivait deja en 1586."}
+    {"href": "culture-khmers.html", "title": "Khmers (Angkor)", "epigraph": "Angkor, IXe-XVe siecle", "hook": "La plus vaste agglomeration preindustrielle jamais batie - qu'un moine portugais decrivait deja en 1586."},
+    {"href": "culture-empire-mongol.html", "title": "Empire mongol", "epigraph": "Steppe, XIIIe siècle", "hook": "Le plus vaste empire contigu de l'histoire, bâti en une seule génération."},
+    {"href": "culture-inde.html", "title": "Inde", "cardTitle": "Inde (civilisation)", "epigraph": "Indus, Maurya, Gupta", "hook": "L'invention du zéro, une urbanisation précoce, et la route des épices."}
   ],
   "creatures": [
     {"href": "creature-gevaudan.html", "title": "Bête du Gévaudan", "cardTitle": "La Bête du Gévaudan", "epigraph": "1764 — 1767", "hook": "Un carnage bien réel dans la France de Louis XV, entre loups, dressage et légende."},
@@ -45,7 +49,9 @@
     {"href": "creature-mokele-mbembe.html", "title": "Mokèlé-mbembé", "epigraph": "Bassin du Congo · Likouala", "hook": "Le cryptide le plus recherché d'Afrique : des dizaines d'expéditions, dont plusieurs financées par des créationnistes cherchant un dinosaure vivant."},
     {"href": "creature-llorona.html", "title": "La Llorona", "epigraph": "Amérique hispanique", "hook": "Une revenante qui pleure ses enfants au bord de l'eau, présente dans au moins sept variantes régionales — un récit de deuil probablement enraciné dans une figure préhispanique."},
     {"href": "creature-golem-prague.html", "title": "Le Golem de Prague", "epigraph": "Prague, XVIe siecle", "hook": "Un geant d'argile anime par un mot hebreu - un recit mis par ecrit trois siecles apres la mort du rabbin auquel on l'attribue."},
-    {"href": "creature-yeren.html", "title": "Le Yeren", "epigraph": "Shennongjia, Hubei, Chine", "hook": "Le Bigfoot chinois - la seule grande enquete cryptozoologique a avoir mobilise une expedition scientifique directement organisee par un Etat."}
+    {"href": "creature-yeren.html", "title": "Le Yeren", "epigraph": "Shennongjia, Hubei, Chine", "hook": "Le Bigfoot chinois - la seule grande enquete cryptozoologique a avoir mobilise une expedition scientifique directement organisee par un Etat."},
+    {"href": "creature-tarasque.html", "title": "La Tarasque", "epigraph": "Tarascon, Provence", "hook": "Un dragon apaisé par une sainte, pas tué par un chevalier."},
+    {"href": "creature-thunderbird.html", "title": "Le Thunderbird", "epigraph": "Amérique du Nord", "hook": "Un oiseau si vaste que le battement de ses ailes produirait le tonnerre."}
   ],
   "mysteres": [
     {"href": "mystere-triangle-bermudes.html", "title": "Triangle des Bermudes", "cardTitle": "Le Triangle des Bermudes", "epigraph": "Atlantique Nord", "hook": "Comment la statistique a dégonflé l'un des plus grands mythes médiatiques du XXe siècle."},
@@ -59,7 +65,9 @@
     {"href": "mystere-mary-celeste.html", "title": "Le Mary Celeste", "epigraph": "Atlantique · 4 décembre 1872", "hook": "Un navire retrouvé en parfait état, cargaison intacte, vivres pour six mois — et son équipage de dix personnes disparu sans trace en 1872."},
     {"href": "mystere-ile-de-paques.html", "title": "Île de Pâques", "epigraph": "Rapa Nui · Pacifique Sud", "hook": "Environ 900 statues de plusieurs tonnes, sur l'une des îles les plus isolées du monde — et un débat scientifique toujours ouvert sur les causes réelles du déclin de la société qui les a bâties."},
     {"href": "mystere-roanoke.html", "title": "La Colonie de Roanoke", "epigraph": "Caroline du Nord, 1587-1590", "hook": "Cent quinze colons disparus sans trace, un seul mot grave sur un poteau - et aucun signe de detresse."},
-    {"href": "mystere-sanxingdui.html", "title": "Sanxingdui", "epigraph": "Sichuan, Chine, age du bronze", "hook": "Des masques de bronze aux yeux exorbites, et une civilisation entiere absente des textes historiques chinois."}
+    {"href": "mystere-sanxingdui.html", "title": "Sanxingdui", "epigraph": "Sichuan, Chine, age du bronze", "hook": "Des masques de bronze aux yeux exorbites, et une civilisation entiere absente des textes historiques chinois."},
+    {"href": "mystere-suaire-turin.html", "title": "Suaire de Turin", "cardTitle": "Le Suaire de Turin", "epigraph": "Turin, depuis 1578", "hook": "Un négatif photographique cinq siècles avant l'invention de la photographie."},
+    {"href": "mystere-paititi.html", "title": "Le Paititi", "epigraph": "Amazonie, Pérou-Bolivie", "hook": "Une cité inca d'or et de refuge, jamais localisée malgré un siècle d'expéditions."}
   ],
   "objets": [
     {"href": "objet-excalibur.html", "title": "Excalibur", "epigraph": "Caledfwlch", "hook": "L'épée la plus célèbre du monde n'a jamais existé : un nom en 1136, une pierre cinquante ans plus tard, et une seule relique — offerte en 1191, disparue depuis."},
@@ -76,6 +84,8 @@
     {"href": "objet-chambre-ambre.html", "title": "La Chambre d'Ambre", "epigraph": "Königsberg · 1945", "hook": "Six tonnes d'ambre offertes à Pierre le Grand en 1716, démontées par la Wehrmacht en 1941, disparues en 1945 — le seul objet de la série dont l'existence ne fait aucun doute."},
     {"href": "objet-goujian.html", "title": "L'Épée de Goujian", "epigraph": "Hubei · Ve siècle av. J.-C.", "hook": "Exhumée en 1965, sans corrosion après 2500 ans et encore tranchante — le seul objet de la série où l'exemplaire réel est plus impressionnant que la légende."},
     {"href": "objet-ulfberht.html", "title": "Les epees Ulfberht", "epigraph": "Scandinavie, Rhenanie, IXe-XIe siecle", "hook": "170 lames signees +VLFBERH+T, dans un acier d'une purete inattendue - et les premieres contrefacons de marque connues."},
-    {"href": "objet-vajra.html", "title": "Le Vajra", "epigraph": "Inde, Tibet, Himalaya", "hook": "La foudre du dieu Indra devenue sceptre rituel bouddhiste - le seul objet de la serie qui va du mythe vers la matiere."}
+    {"href": "objet-vajra.html", "title": "Le Vajra", "epigraph": "Inde, Tibet, Himalaya", "hook": "La foudre du dieu Indra devenue sceptre rituel bouddhiste - le seul objet de la serie qui va du mythe vers la matiere."},
+    {"href": "objet-toison-or.html", "title": "Toison d'Or", "cardTitle": "La Toison d'Or", "epigraph": "Colchide, Grèce antique", "hook": "Une explication matérielle plausible : l'orpaillage aux toisons de mouton."},
+    {"href": "objet-boite-pandore.html", "title": "Boîte de Pandore", "cardTitle": "La Boîte de Pandore", "epigraph": "Hésiode, Grèce antique", "hook": "Une jarre, pas une boîte : la démonstration la plus nette d'un contresens fondateur."}
   ]
 }

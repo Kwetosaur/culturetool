@@ -8,7 +8,7 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 | Mythologie | Score | Ce qui la rend unique |
 |---|---|---|
-| Finnoise (Kalevala) | 8 | Épopée compilée au XIXe s. par Elias Lönnrot à partir de chants runiques oraux ; cosmogonie née d'un œuf, héros-chamanes (Väinämöinen) plutôt que guerriers ; a directement inspiré Tolkien. |
+| Finnoise (Kalevala) ✅ | 8 | Épopée compilée au XIXe s. par Elias Lönnrot à partir de chants runiques oraux ; cosmogonie née d'un œuf, héros-chamanes (Väinämöinen) plutôt que guerriers ; a directement inspiré Tolkien. |
 | Sami | 6 | Mythologie chamanique des peuples autochtones de Scandinavie du Nord, tambours divinatoires, esprits de la toundra — tradition orale encore vivante. |
 | Balte (lettone/lituanienne) | 6 | L'une des dernières mythologies païennes d'Europe christianisée tardivement (XIVe s.), riche folklore solaire (Saulė) toujours présent dans les fêtes populaires. |
 | Basque | 6 | Cosmologie matriarcale singulière centrée sur Mari, déesse-montagne ; langue et mythe isolés, sans parenté indo-européenne connue. |
@@ -69,7 +69,7 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 | Mythologie | Score | Ce qui la rend unique |
 |---|---|---|
 | Aborigène australienne (Temps du Rêve) ✅ | 10 | Cosmologie continue la plus ancienne du monde (60 000+ ans), le Temps du Rêve (Dreamtime) structure encore aujourd'hui le rapport au territoire de centaines de nations aborigènes distinctes. |
-| Polynésienne (maorie, hawaïenne, etc.) | 9 | Maui pêchant les îles, Pele déesse des volcans, panthéon partagé à travers un triangle océanique immense (Hawaï-Nouvelle-Zélande-Île de Pâques). |
+| Polynésienne (maorie, hawaïenne, etc.) ✅ | 9 | Maui pêchant les îles, Pele déesse des volcans, panthéon partagé à travers un triangle océanique immense (Hawaï-Nouvelle-Zélande-Île de Pâques). |
 | Mélanésienne | 6 | Mythes du cargo cult et des esprits ancestraux (masalai), grande diversité locale sur des milliers d'îles peu documentées. |
 
 ## Régions arctiques
@@ -80,11 +80,11 @@ Liste des grandes traditions mythologiques non encore couvertes (la série initi
 
 ---
 
-## Déjà couvertes (17)
+## Déjà couvertes (19)
 
-Nordique · Grecque · Égyptienne · Romaine · Celtique · Mésopotamienne · Hindoue · Japonaise · Aztèque/Maya · Slave · Chinoise · Perse / zoroastrienne · Yoruba · Inca · Aborigène australienne · **Dogon** · **Vietnamienne**
+Nordique · Grecque · Égyptienne · Romaine · Celtique · Mésopotamienne · Hindoue · Japonaise · Aztèque/Maya · Slave · Chinoise · Perse / zoroastrienne · Yoruba · Inca · Aborigène australienne · Dogon · Vietnamienne · **Finnoise (Kalevala)** · **Polynésienne**
 
-**32 candidates restantes** dans les tableaux ci-dessus. 6 avaient été ajoutées le 26/07/2026
+**30 candidates restantes** dans les tableaux ci-dessus. 6 avaient été ajoutées le 26/07/2026
 pour combler des trous géographiques réels : Ainu (Japon autochtone), berbère (toute
 l'Afrique du Nord non égyptienne manquait), javanaise et philippine (Asie du Sud-Est
 absente), mapuche et guarani (aucun sujet au sud de l'Amazonie).
@@ -93,11 +93,11 @@ absente), mapuche et guarani (aucun sujet au sud de l'Amazonie).
 
 ## Top 5 recommandé pour une prochaine vague
 
-*(Mis à jour le 27/07/2026 — Dogon, qui occupait la troisième place, est publiée ; la
-Vietnamienne, hors top 5, a aussi été publiée dans la même vague.)*
+*(Mis à jour le 29/07/2026 — Polynésienne et Finnoise, qui occupaient les deux premières
+places, sont publiées.)*
 
-1. **Polynésienne** (9) — Maui pêchant les îles, Pele déesse des volcans, panthéon partagé sur un triangle océanique immense. Distincte de `culture-polynesie.html` (angle navigation/civilisationnel, déjà publié) : ici, panthéon et cosmogonie.
-2. **Finnoise (Kalevala)** (8) — cosmogonie née d'un œuf, héros-chamanes plutôt que guerriers, et une influence directe sur Tolkien qui parle à tout le monde.
-3. **Cananéenne / ougaritique** (7) — panthéon de Baal, El et Anat redécouvert via les tablettes d'Ougarit (1929), éclaire directement les textes bibliques par contraste.
-4. **Ashanti / Akan** (7) — cycle d'Anansi l'araignée-conteuse, dieu du ciel Nyame — a directement essaimé dans le folklore caribéen et afro-américain.
-5. **Coréenne** (7) — mythe fondateur de Dangun (fils d'un dieu et d'une ourse transformée en femme), chamanisme (mudang) toujours pratiqué aujourd'hui.
+1. **Cananéenne / ougaritique** (7) — panthéon de Baal, El et Anat redécouvert via les tablettes d'Ougarit (1929), éclaire directement les textes bibliques par contraste.
+2. **Ashanti / Akan** (7) — cycle d'Anansi l'araignée-conteuse, dieu du ciel Nyame — a directement essaimé dans le folklore caribéen et afro-américain.
+3. **Coréenne** (7) — mythe fondateur de Dangun (fils d'un dieu et d'une ourse transformée en femme), chamanisme (mudang) toujours pratiqué aujourd'hui.
+4. **Cosmologie bouddhiste (transversale)** (7) — système cosmique commun à toute l'Asie qui se superpose aux mythologies locales sans les remplacer.
+5. **Tibétaine / Bön** (7) — religion chamanique prébouddhiste fusionnée au bouddhisme tantrique, cosmologie de montagnes sacrées.

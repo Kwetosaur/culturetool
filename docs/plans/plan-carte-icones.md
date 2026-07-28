@@ -74,7 +74,7 @@ fait croire le travail terminé.
 | Romaine | ✅ fait | Aigle légionnaire |
 | Celtique | ✅ fait | Triskèle / nœud celtique |
 | Slave | ✅ fait | Oiseau de feu stylisé |
-| Finnoise | icône prête | Cygne ou kantele (harpe) |
+| Finnoise | ✅ fait | Cygne ou kantele (harpe) |
 | Sami | icône prête | Tambour chamanique |
 | Balte | icône prête | Soleil rayonnant |
 | Basque | icône prête | Lauburu (croix à 4 têtes) |
@@ -135,7 +135,7 @@ fait croire le travail terminé.
 | Page | Statut | Icône |
 |---|---|---|
 | Aborigène australienne | ✅ fait | Points concentriques (Temps du Rêve) |
-| Polynésienne | icône prête | Hameçon de Maui |
+| Polynésienne | ✅ fait | Hameçon de Maui |
 | Mélanésienne | icône prête | Masque cérémoniel |
 | Inuit | icône prête | Silhouette de baleine |
 
@@ -170,8 +170,8 @@ fait croire le travail terminé.
 | Page | Statut | Icône |
 |---|---|---|
 | Chine | ✅ fait | Dragon/nuage stylisé |
-| Inde (culture) | icône prête | Mudra (main stylisée) |
-| Empire mongol | icône prête | Arc + flèche ou yourte |
+| Inde (culture) | ✅ fait | Mudra (main stylisée) |
+| Empire mongol | ✅ fait | Arc + flèche ou yourte |
 | Civilisation de l'Indus | icône prête | Sceau à motif de taureau |
 | Japon (culture) | icône prête | Éventail plié |
 | Corée | icône prête | Toit de palais coréen |
@@ -219,7 +219,7 @@ fait croire le travail terminé.
 | Le Loup-Garou | icône prête | Silhouette de loup debout |
 | Black Shuck | icône prête | Chien noir, yeux rouges |
 | Le Golem de Prague | ✅ fait | Silhouette d'argile massive et sans visage, petit parchemin à la bouche |
-| La Tarasque | icône prête | Dragon trapu à carapace, monté sur roues de procession |
+| La Tarasque | ✅ fait | Dragon trapu à carapace, monté sur roues de procession |
 | Le Basilic | icône prête | Coq à queue de serpent |
 | Le Tatzelwurm | icône prête | Ver à tête de chat, deux pattes avant seulement |
 
@@ -236,7 +236,7 @@ fait croire le travail terminé.
 | Créature de Loveland | icône prête | Silhouette de grenouille humanoïde |
 | Champ | icône prête | Silhouette émergeant de l'eau (variante Nessie) |
 | Bête de Bray Road | icône prête | Silhouette de loup-garou debout (variante) |
-| Le Thunderbird | icône prête | Grand oiseau de face, ailes déployées, **éclairs sous les ailes** — l'éclair est ce qui le distingue du corbeau totémique du Pacifique Nord-Ouest |
+| Le Thunderbird | ✅ fait | Grand oiseau de face, ailes déployées, **éclairs sous les ailes** — l'éclair est ce qui le distingue du corbeau totémique du Pacifique Nord-Ouest |
 
 ### Amérique latine
 | Page | Statut | Icône |
@@ -280,7 +280,7 @@ fait croire le travail terminé.
 | Amelia Earhart | ✅ fait | Avion stylisé qui s'efface |
 | Le Mary Celeste | ✅ fait | Voilier fantôme |
 | Colonie de Roanoke | ✅ fait | Inscription stylisée |
-| Cité de Paititi / El Dorado | icône prête | Masque/pièce d'or stylisé |
+| Cité de Paititi / El Dorado | ✅ fait | Masque/pièce d'or stylisé |
 | Oak Island | icône prête | Puits circulaire vu en coupe, couches successives |
 | Sphères de pierre du Costa Rica | icône prête | Trois sphères de tailles différentes alignées |
 
@@ -289,7 +289,7 @@ fait croire le travail terminé.
 |---|---|---|
 | Stonehenge | ✅ fait | Cercle de pierres |
 | Manuscrit de Voynich | ✅ fait | Page/plume stylisée |
-| Suaire de Turin | icône prête | Tissu drapé |
+| Suaire de Turin | ✅ fait | Tissu drapé |
 | Crop circles | icône prête | Cercle géométrique dans un champ |
 | Homme de Piltdown | icône prête | Crâne fissuré |
 | Newgrange | icône prête | Tumulus/spirale néolithique |
@@ -366,9 +366,9 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 ### Méditerranée antique (3)
 | Page | Statut | Icône |
 |---|---|---|
-| La Toison d'Or | icône prête | Peau de mouton suspendue à une branche |
+| La Toison d'Or | ✅ fait | Peau de mouton suspendue à une branche |
 | Le Cheval de Troie | ✅ fait | Cheval de bois monté sur roues |
-| La Boîte de Pandore | icône prête | **Jarre** (pithos) au couvercle entrouvert — jamais un coffret, c'est tout le propos de la page |
+| La Boîte de Pandore | ✅ fait | **Jarre** (pithos) au couvercle entrouvert — jamais un coffret, c'est tout le propos de la page |
 
 ### Moyen-Orient (4)
 | Page | Statut | Icône |
