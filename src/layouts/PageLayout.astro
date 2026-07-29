@@ -20,16 +20,8 @@
   pages, les href de map.html et les motifs de sync_sidebar.py continuent de
   fonctionner sans changement.
 */
-import pages from '../../data/site-pages.json';
 import '../styles/tokens.css';
-
-const SIDE_GROUPS = [
-  ['Mythologies', 'mythologies'],
-  ['Cultures', 'cultures'],
-  ['Créatures', 'creatures'],
-  ['Mystères', 'mysteres'],
-  ['Objets légendaires', 'objets'],
-];
+import SideMenu from '../components/SideMenu.astro';
 
 export interface Props {
   /** Titre de la page, sans le suffixe de serie. Ex. "Excalibur" */
@@ -61,9 +53,6 @@ const {
 
 const base = import.meta.env.BASE_URL;
 const styleVars = Object.entries(palette).map(([k, v]) => `--${k}:${v}`).join(';');
-const groups = SIDE_GROUPS
-  .map(([label, key]) => [label, pages[key] || []])
-  .filter(([, items]) => items.length > 0);
 const shareUrl = Astro.site ? new URL(`${base}${href}`, Astro.site).href : '';
 const shareImg = Astro.site ? new URL(`${base}${ogImage}`, Astro.site).href : '';
 ---
@@ -86,24 +75,7 @@ const shareImg = Astro.site ? new URL(`${base}${ogImage}`, Astro.site).href : ''
 </head>
 <body data-egg={egg}>
 
-<button id="side-menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
-<div id="side-menu-overlay"></div>
-<nav id="side-menu">
-  <a href="./" class="side-home">&larr; Accueil</a>
-  <a href="map.html" class="side-home">&#128506; Carte du Monde</a>
-  <div class="side-divider"></div>
-  <div class="side-search"><input type="text" id="side-search-input" placeholder="Rechercher une page..." autocomplete="off" /></div>
-  {groups.map(([label, items]) => (
-    <Fragment>
-      <div class="side-label">{label}</div>
-      <div class="side-group">
-        {items.map((p) => (
-          <a href={p.href} class={p.href === href ? 'active' : undefined}>{p.title}</a>
-        ))}
-      </div>
-    </Fragment>
-  ))}
-</nav>
+<SideMenu activeHref={href} />
 
 <header class="hero">
   {epigraph && <div class="epigraph-row">{epigraph}</div>}
@@ -126,73 +98,6 @@ const shareImg = Astro.site ? new URL(`${base}${ogImage}`, Astro.site).href : ''
   <div class="divider"></div>
   {nextUp && <p class="next-up" set:html={nextUp}></p>}
 </footer>
-
-<script is:inline>
-/* Menu lateral : ouverture, replis par groupe, recherche.
-   Copie fonctionnelle du script des pages statiques — a garder aligne si l'un
-   des deux evolue (jusqu'a la fin de la migration, cf. plan-industrialisation). */
-(function () {
-  var menu = document.getElementById('side-menu');
-  var overlay = document.getElementById('side-menu-overlay');
-  var toggle = document.getElementById('side-menu-toggle');
-  if (!menu || !overlay || !toggle) return;
-  toggle.addEventListener('click', function () {
-    menu.classList.toggle('open');
-    overlay.classList.toggle('open');
-  });
-  overlay.addEventListener('click', function () {
-    menu.classList.remove('open');
-    overlay.classList.remove('open');
-  });
-
-  var labels = Array.prototype.slice.call(menu.querySelectorAll('.side-label'));
-  labels.forEach(function (label) {
-    var group = label.nextElementSibling;
-    if (!group) return;
-    if (!group.querySelector('a.active')) {
-      label.classList.add('collapsed');
-      group.classList.add('collapsed');
-    }
-    label.addEventListener('click', function () {
-      label.classList.toggle('collapsed');
-      group.classList.toggle('collapsed');
-    });
-  });
-
-  var input = document.getElementById('side-search-input');
-  if (!input) return;
-  var links = Array.prototype.slice.call(menu.querySelectorAll('.side-group a'));
-  function restoreCollapse() {
-    labels.forEach(function (label) {
-      var group = label.nextElementSibling;
-      if (!group) return;
-      var hasActive = !!group.querySelector('a.active');
-      label.classList.toggle('collapsed', !hasActive);
-      group.classList.toggle('collapsed', !hasActive);
-    });
-  }
-  input.addEventListener('input', function () {
-    var q = input.value.trim().toLowerCase();
-    if (!q) {
-      links.forEach(function (a) { a.classList.remove('search-hide'); });
-      restoreCollapse();
-      return;
-    }
-    links.forEach(function (a) {
-      a.classList.toggle('search-hide', a.textContent.toLowerCase().indexOf(q) === -1);
-    });
-    labels.forEach(function (label) {
-      label.classList.remove('collapsed');
-      if (label.nextElementSibling) label.nextElementSibling.classList.remove('collapsed');
-    });
-  });
-  input.addEventListener('keydown', function (e) {
-    if (e.key !== 'Enter') return;
-    var first = links.filter(function (a) { return !a.classList.contains('search-hide'); })[0];
-    if (first) window.location.href = first.getAttribute('href');
-  });
-})();
-</script>
 
 <script is:inline>
 /* Scroll-spy de la nav collante + apparition au scroll.

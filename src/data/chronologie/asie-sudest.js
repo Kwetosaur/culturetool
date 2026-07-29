@@ -1,0 +1,83 @@
+import { build } from "./meta.js";
+
+const ROWS = [
+  // --- Guerres / Conflits ---
+  [1293, "1293", "guerre", "Invasion mongole de Java", "La flotte de Kubilai Khan débarque à Java pour punir un roi rebelle, mais est finalement dupée et repoussée, contribuant à la fondation du royaume de Majapahit."],
+  [-200, "-200 à 500", "guerre", "Guerres et rivalités entre cités-États du royaume de Funan", "Ce premier grand État connu d'Asie du Sud-Est, dans le delta du Mékong, domine et rivalise avec des cités-États voisines pendant plusieurs siècles."],
+  [192, "192", "guerre", "Fondation du royaume du Champa", "Ce royaume hindouisé du littoral vietnamien central deviendra le rival historique et récurrent des Khmers puis des Vietnamiens pendant plus d'un millénaire."],
+  [1177, "1177", "guerre", "Sac d'Angkor par les Cham", "Une flotte cham surprend et pille la capitale khmère, un désastre qui précède le règne de Jayavarman VII, qui fera bâtir les murailles d'Angkor Thom en réponse."],
+  [1431, "1431", "guerre", "Sac d'Angkor par le royaume siamois d'Ayutthaya", "La prise d'Angkor par les Siamois précipite le déclin de l'empire khmer et le déplacement progressif de sa capitale vers Phnom Penh."],
+  [1511, "1511", "guerre", "Prise de Malacca par les Portugais", "Afonso de Albuquerque s'empare du grand entrepôt commercial du détroit de Malacca, ouvrant l'ère de la présence coloniale européenne en Asie du Sud-Est maritime."],
+  [1785, "1785-1786", "guerre", "Guerre siamo-birmane", "Ce nouvel affrontement entre les deux puissances rivales de la péninsule indochinoise s'inscrit dans une longue série de guerres siamo-birmanes séculaires."],
+  [1824, "1824-1826", "guerre", "Première guerre anglo-birmane", "Cette guerre coloniale, l'une des plus coûteuses de l'histoire de la Compagnie britannique des Indes orientales, entame le démantèlement progressif du royaume birman."],
+  [1946, "1946-1954", "guerre", "Guerre d'Indochine", "Le Viêt Minh de Hô Chi Minh mène une guerre d'indépendance contre la France, s'achevant par la défaite française de Diên Biên Phu et les accords de Genève."],
+  [1955, "1955-1975", "guerre", "Guerre du Vietnam", "Le conflit entre le Nord communiste et le Sud soutenu par les États-Unis s'achève par la chute de Saïgon et la réunification communiste du pays."],
+  [1965, "1965-1966", "guerre", "Purges anticommunistes en Indonésie", "Le renversement politique de Sukarno par l'armée s'accompagne d'un massacre de masse visant les communistes réels ou supposés, faisant probablement plusieurs centaines de milliers de morts."],
+  [1975, "1975-1979", "guerre", "Régime des Khmers rouges au Cambodge", "Le régime maoïste de Pol Pot vide les villes et impose un communisme agraire radical, provoquant la mort d'environ un quart de la population cambodgienne."],
+  [1978, "1978-1989", "guerre", "Guerre cambodgienne (invasion vietnamienne)", "Le Vietnam envahit le Cambodge et renverse les Khmers rouges, provoquant une occupation militaire prolongée et une guérilla résiduelle soutenue par la Chine et l'Occident."],
+  [1999, "1999", "guerre", "Crise du Timor oriental", "Un référendum d'autodétermination massivement favorable à l'indépendance déclenche des violences de milices proindonésiennes, avant une intervention internationale et l'indépendance effective en 2002."],
+  [1350, "1350-1767", "guerre", "Guerres siamo-birmanes récurrentes", "Le royaume siamois d'Ayutthaya et les royaumes birmans se livrent, sur plus de quatre siècles, une rivalité militaire quasi permanente pour la domination régionale."],
+  [1767, "1767", "guerre", "Destruction d'Ayutthaya par les Birmans", "L'armée birmane rase la capitale siamoise après un long siège, un traumatisme fondateur qui poussera à la refondation de la capitale à Bangkok."],
+  [1821, "1821-1826", "guerre", "Guerre anglo-birmane", "Ce conflit colonial marque le début de l'annexion progressive et par étapes du royaume birman par l'Empire britannique des Indes."],
+  [1899, "1899-1902", "guerre", "Guerre américano-philippine", "Après avoir acquis les Philippines à l'Espagne, les États-Unis répriment durement le mouvement indépendantiste philippin, faisant des centaines de milliers de morts civils."],
+  [1941, "1941-1942", "guerre", "Invasion japonaise de l'Asie du Sud-Est", "En quelques mois, les forces japonaises balaient les possessions coloniales britanniques, néerlandaises et américaines de toute la région, dont la chute retentissante de Singapour."],
+  [1948, "1948-1960", "guerre", "Insurrection communiste en Malaisie", "Les autorités coloniales britanniques mènent une longue campagne de contre-insurrection contre les guérilleros communistes, majoritairement d'origine chinoise."],
+  [1963, "1963-1966", "guerre", "Confrontation Indonésie-Malaisie", "L'Indonésie de Sukarno s'oppose militairement à la formation de la fédération malaisienne, un conflit de basse intensité qui prend fin après la chute de Sukarno."],
+  [1969, "1969-1990", "guerre", "Guerre civile au Laos", "Ce conflit, prolongement régional de la guerre du Vietnam, oppose le gouvernement royal aux communistes du Pathet Lao, sur fond de bombardements américains massifs et secrets."],
+  [2017, "2017", "guerre", "Crise des Rohingyas (Birmanie)", "Une campagne militaire birmane décrite par l'ONU comme un possible génocide pousse plus de sept cent mille Rohingyas musulmans à fuir vers le Bangladesh."],
+
+  // --- Inventions / Sciences ---
+  [1113, "1113-1150", "science", "Construction du temple d'Angkor Vat", "Voulu par le roi Suryavarman II en l'honneur de Vishnou, ce plus vaste monument religieux du monde reste un chef-d'œuvre d'ingénierie et de symbolisme cosmologique khmer."],
+  [850, "9e siècle", "science", "Construction du temple de Borobudur", "Ce gigantesque monument bouddhiste javanais, structuré en mandala, comporte des kilomètres de bas-reliefs sculptés retraçant la vie du Bouddha."],
+  [802, "802-1220", "science", "Développement du système hydraulique khmer", "Les vastes réservoirs (barays) et canaux d'Angkor permettent une riziculture intensive soutenant une population urbaine considérable pour l'époque préindustrielle."],
+  [1292, "1292", "science", "Inscription de Ramkhamhaeng", "Cette stèle, attribuée au roi de Sukhothai, constitue le plus ancien texte connu dans l'écriture thaïe, dont elle serait aussi l'invention."],
+
+  // --- Politique / Culture ---
+  [802, "802", "politique", "Fondation de l'empire khmer", "Jayavarman II se proclame « roi universel » sur le mont Kulen, fondant un empire qui dominera l'Asie du Sud-Est continentale pendant six siècles."],
+  [68, "68", "politique", "Fondation traditionnelle du royaume de Funan", "Ce royaume du delta du Mékong, influencé par la culture indienne, est considéré comme l'un des tout premiers États organisés d'Asie du Sud-Est."],
+  [500, "500-700", "politique", "Essor du royaume de Chenla", "Successeur du Funan, ce royaume khmer préfigure directement l'empire angkorien qui lui succédera au début du IXe siècle."],
+  [1238, "1238", "politique", "Fondation du royaume thaï de Sukhothai", "Souvent présenté comme le premier État thaï indépendant, il pose les bases culturelles et religieuses (bouddhisme theravada) de la civilisation siamoise."],
+  [1400, "1400s", "politique", "Islamisation progressive de l'Insulinde", "Portée par des marchands et missionnaires venus d'Inde et d'Arabie, la conversion progressive à l'islam transforme durablement Sumatra, Java et la péninsule malaise."],
+  [1600, "1600", "politique", "Fondation de la Compagnie néerlandaise des Indes orientales", "Cette société commerciale, dotée de pouvoirs quasi étatiques, bâtira un empire colonial néerlandais durable sur l'archipel indonésien."],
+  [1887, "1887", "politique", "Création de l'Indochine française", "La France regroupe ses possessions et protectorats du Vietnam, du Cambodge puis du Laos en une union administrative coloniale unique."],
+  [1942, "1942-1945", "politique", "Occupation japonaise de l'Asie du Sud-Est", "En délogeant les puissances coloniales européennes, l'occupation japonaise affaiblit durablement leur prestige et catalyse les mouvements indépendantistes locaux."],
+  [1945, "1945", "politique", "Proclamations d'indépendance du Vietnam et de l'Indonésie", "Hô Chi Minh et Sukarno proclament respectivement l'indépendance de leur pays dès la capitulation japonaise, avant de devoir la défendre par les armes face aux anciennes puissances coloniales."],
+  [1946, "1946", "politique", "Indépendance des Philippines", "Les États-Unis accordent l'indépendance à leur ancienne colonie asiatique, conformément à un engagement pris avant même la Seconde Guerre mondiale."],
+  [1948, "1948", "politique", "Indépendance de la Birmanie", "L'ancienne colonie britannique accède à l'indépendance en dehors du Commonwealth, choix rare parmi les anciennes possessions britanniques d'Asie."],
+  [1957, "1957", "politique", "Indépendance de la Malaisie", "La fédération malaise accède à l'indépendance après la défaite de l'insurrection communiste, sous une monarchie constitutionnelle tournante inédite."],
+  [1967, "1967", "politique", "Fondation de l'ASEAN", "Cinq pays fondateurs (Indonésie, Malaisie, Philippines, Singapour, Thaïlande) créent une organisation régionale de coopération économique et politique, aujourd'hui élargie à dix membres."],
+  [1975, "1975", "politique", "Réunification du Vietnam", "La chute de Saïgon met fin à la guerre du Vietnam et permet la réunification du pays sous un régime communiste unique."],
+  [1997, "1997", "politique", "Crise financière asiatique", "Partie de la dévaluation du baht thaïlandais, cette crise monétaire se propage à toute la région, provoquant récessions et bouleversements politiques durables."],
+  [2002, "2002", "politique", "Indépendance du Timor oriental", "Après une occupation indonésienne brutale de vingt-quatre ans et une transition sous administration onusienne, le Timor oriental devient le premier nouvel État souverain du XXIe siècle."],
+  [600, "7e-13e siècle", "politique", "Empire de Srivijaya (Sumatra)", "Cette thalassocratie bouddhiste contrôle le commerce maritime du détroit de Malacca pendant plusieurs siècles, reliant l'Inde à la Chine."],
+  [1293, "1293-1527", "politique", "Royaume de Majapahit (Java)", "Cet empire javanais, souvent présenté comme le plus vaste État précolonial d'Insulinde, influence durablement la culture et la mythologie politique indonésiennes."],
+  [1351, "1351", "politique", "Fondation du royaume d'Ayutthaya (Siam)", "Cette nouvelle capitale siamoise deviendra, pendant plus de quatre siècles, un carrefour commercial cosmopolite majeur de l'Asie du Sud-Est."],
+  [1521, "1521", "politique", "Passage de Magellan aux Philippines", "L'expédition espagnole, dans le cadre du premier tour du monde, atteint l'archipel où Magellan trouvera la mort lors d'un affrontement local à Mactan."],
+  [1858, "1858", "politique", "Début de la colonisation française en Indochine", "La prise de Saïgon marque le début de la conquête française du Vietnam, prélude à la constitution de l'Union indochinoise."],
+  [1932, "1932", "politique", "Révolution siamoise", "Un coup d'État sans effusion de sang met fin à la monarchie absolue thaïlandaise au profit d'une monarchie constitutionnelle."],
+  [1939, "1939", "politique", "Le Siam devient la Thaïlande", "Le changement officiel de nom du royaume traduit une affirmation nationaliste et pan-thaï portée par le gouvernement de l'époque."],
+  [1949, "1949", "politique", "Indépendance de l'Indonésie reconnue par les Pays-Bas", "Après plusieurs années de guerre coloniale, La Haye reconnaît enfin la souveraineté indonésienne proclamée dès 1945."],
+  [1954, "1954", "politique", "Accords de Genève", "Ces accords, faisant suite à la défaite française de Diên Biên Phu, partitionnent temporairement le Vietnam le long du 17e parallèle."],
+  [1965, "1965", "politique", "Indépendance de Singapour", "Exclue de la fédération malaisienne après des tensions politiques et raciales, la petite cité-État devient un pays souverain qui connaîtra un essor économique spectaculaire."],
+  [1986, "1986", "politique", "Révolution EDSA aux Philippines", "Un mouvement populaire pacifique renverse le régime autoritaire de Ferdinand Marcos, portant Corazon Aquino au pouvoir."],
+  [2015, "2015", "politique", "Formation de la Communauté économique de l'ASEAN", "Les dix pays membres approfondissent leur intégration économique régionale, sur un modèle partiellement inspiré du marché unique européen."],
+
+  // --- Grandes figures historiques ---
+  [1181, "1181-1218", "figure", "Jayavarman VII, roi khmer bâtisseur d'Angkor Thom", "Ce roi bouddhiste fait ériger la cité fortifiée d'Angkor Thom et ses célèbres tours à visages, tout en développant hôpitaux et routes dans tout l'empire."],
+  [1890, "1890-1969", "figure", "Hô Chi Minh, leader indépendantiste et communiste vietnamien", "Fondateur du Viêt Minh puis président du Nord-Vietnam, il incarne la lutte anticoloniale et communiste vietnamienne pendant un demi-siècle."],
+  [1917, "1917-2013", "figure", "Norodom Sihanouk, figure politique cambodgienne", "Roi puis chef d'État aux multiples reconversions politiques, il traverse l'indépendance, la guerre civile et le régime khmer rouge en tentant de préserver son influence."],
+  [1928, "1928-1998", "figure", "Pol Pot, dirigeant des Khmers rouges", "Ce chef communiste radical impose au Cambodge une expérience totalitaire agraire qui cause la mort d'environ un quart de la population du pays."],
+  [1917, "1917-1989", "figure", "Ferdinand Marcos, dirigeant autoritaire des Philippines", "Son long régime, marqué par la loi martiale et une corruption massive, s'achève par son renversement lors de la révolution populaire de 1986."],
+  [1923, "1923-2015", "figure", "Lee Kuan Yew, père fondateur de Singapour moderne", "Premier ministre pendant plus de trois décennies, il transforme une petite cité portuaire pauvre en l'une des économies les plus prospères d'Asie."],
+
+  // --- Catastrophes naturelles ---
+  [1815, "1815", "catastrophe", "Éruption du Tambora", "La plus puissante éruption volcanique de l'histoire moderne provoque un hiver volcanique mondial et « l'année sans été » de 1816 dans l'hémisphère nord."],
+  [1883, "1883", "catastrophe", "Éruption du Krakatoa", "L'explosion, entendue à des milliers de kilomètres, génère des tsunamis dévastateurs et un refroidissement climatique global temporaire."],
+  [1991, "1991", "catastrophe", "Éruption du mont Pinatubo", "L'une des plus fortes éruptions volcaniques du XXe siècle projette assez de cendres dans la stratosphère pour abaisser légèrement la température mondiale pendant plusieurs années."],
+  [2004, "2004", "catastrophe", "Tsunami de l'océan Indien", "Le séisme sous-marin au large de Sumatra déclenche un tsunami qui fait environ 230 000 morts dans la région, l'une des pires catastrophes naturelles de l'histoire moderne."],
+  [2006, "2006", "catastrophe", "Séisme de Java", "Ce séisme meurtrier frappe la région de Yogyakarta, faisant plusieurs milliers de victimes et détruisant de nombreux villages."],
+  [2013, "2013", "catastrophe", "Typhon Haiyan aux Philippines", "L'un des cyclones tropicaux les plus puissants jamais enregistrés dévaste la région de Tacloban, faisant plus de six mille morts."],
+  [2018, "2018", "catastrophe", "Tsunami de Palu (Sulawesi)", "Un séisme provoque un tsunami et une liquéfaction des sols particulièrement destructrice, ensevelissant des quartiers entiers de la ville indonésienne."],
+];
+
+export default build("sea", ROWS);

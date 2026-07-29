@@ -10,6 +10,7 @@
   simplement ignorée ici.
 */
 import pages from '../../data/site-pages.json';
+import SideMenu from '../components/SideMenu.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -108,6 +109,7 @@ const pageUrl = new URL(base, Astro.site).href;
       font-family: 'EB Garamond', Georgia, serif;
       font-size: 18px;
       line-height: 1.7;
+      zoom: 1.5; /* confort de lecture, comme le reste du site (voir tokens.css) */
     }
     h1, h2, h3 { font-family: 'Cinzel', serif; color: var(--gold-bright); letter-spacing: 0.03em; }
     a { color: var(--gold-bright); }
@@ -239,12 +241,14 @@ const pageUrl = new URL(base, Astro.site).href;
   </style>
 </head>
 <body data-egg="accueil">
+  <SideMenu />
   <header class="hero">
     <div class="kicker">Encyclopédie illustrée</div>
     <h1 class="title">Mythologies &amp; Cultures du Monde</h1>
     <div class="divider"></div>
     <p class="tagline">Cosmogonies, panthéons, généalogies, créatures, légendes, frises et héritages — une traversée culture par culture, chacune racontée à sa juste mesure.</p>
     <a href={`${base}map.html`} class="map-link">🗺️ Voir la carte du monde</a>
+    <a href={`${base}chronologie-mondiale.html`} class="map-link">⏳ Chronologie mondiale</a>
   </header>
 
   {series.map((s) => (

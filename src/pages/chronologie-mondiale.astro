@@ -1,0 +1,770 @@
+---
+/*
+  Chronologie Mondiale — UNE seule frise horizontale interactive.
+
+  Page autonome (comme map.html), pas rattachee au socle PageLayout : ce n'est
+  pas une page de contenu d'une des 5 series, mais un outil transversal, au
+  meme titre que la carte. Tri strictement chronologique ; region et categorie
+  restent des FILTRES, jamais des sections (demande explicite). Un seul ruban
+  horizontal defilant pour les 600+ evenements — pas 7 frises separees : les
+  ERES ne sont que des zones colorees a l'interieur de ce ruban unique
+  (segments + fanion vertical + degrade continu de la ligne, cf. meta.js).
+  Etiquettes en zigzag au-dessus/en-dessous de la ligne (le style que la
+  premiere version avait deja et qui a ete valide).
+*/
+import { EVENTS, REGIONS, CATEGORIES, ERAS } from '../data/chronologie/index.js';
+import SideMenu from '../components/SideMenu.astro';
+
+const base = import.meta.env.BASE_URL;
+const description = "Frise chronologique interactive de plus de 600 evenements mondiaux (guerres, sciences, politique, figures, catastrophes) en un seul ruban horizontal colore par ere, filtrable par region et categorie, avec un resume au clic sur chaque evenement.";
+const pageUrl = Astro.site ? new URL(`${base}chronologie-mondiale.html`, Astro.site).href : '';
+const shareImg = Astro.site ? new URL(`${base}map.jpg`, Astro.site).href : '';
+
+/* "-3100" -> "3100 av. J.-C." ; ne touche jamais un tiret de plage type "1806-1807". */
+function fmt(label) {
+  return label.replace(/(^|\s)-(\d+)/g, (_m, pre, d) => `${pre}${d} av. J.-C.`);
+}
+
+/* Hash deterministe (pas de vrai random, pour un rendu stable a chaque build) :
+   evite l'alternance haut/bas/haut/bas trop mecanique — un rythme plus naturel
+   admet des series de 2-3 etiquettes du meme cote. */
+function hash01(i) {
+  const x = Math.sin(i * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+}
+function sideOf(i) {
+  return hash01(i) < 0.5 ? 'up' : 'down';
+}
+
+/* Taille de tuile variable selon la longueur du texte le plus contraignant
+   (le libelle de categorie, souvent plus long que le titre affiche sur 3
+   lignes) — des tailles differentes rendent la lecture moins uniforme, et
+   la categorie la plus longue ("Grandes figures historiques") tient enfin
+   sur une seule ligne. */
+function sizeClassOf(ev) {
+  const catLen = CATEGORIES[ev.cat].label.length;
+  if (catLen > 24) return 'ev-lg';
+  if (catLen > 18) return 'ev-md';
+  return 'ev-sm';
+}
+
+/* Regroupement par ERE uniquement (jamais region/categorie) : comme EVENTS est
+   deja trie par annee et que les bornes d'ERAS sont strictement croissantes,
+   chaque ere forme naturellement un segment contigu du meme ruban. */
+const segments = [];
+let globalIndex = 0;
+for (const ev of EVENTS) {
+  const era = ERAS.find((e) => e.key === ev.era);
+  let seg = segments[segments.length - 1];
+  if (!seg || seg.era.key !== era.key) {
+    seg = { era, items: [] };
+    segments.push(seg);
+  }
+  seg.items.push({ ...ev, side: sideOf(globalIndex), sizeClass: sizeClassOf(ev) });
+  globalIndex++;
+}
+
+const total = EVENTS.length;
+
+/* Degrade continu de la ligne centrale, proportionnel au nombre d'evenements
+   de chaque ere (proxy simple et coherent avec la largeur reelle des segments,
+   puisque chaque etiquette occupe une largeur fixe). */
+let cum = 0;
+const spineStops = segments.map((seg) => {
+  const start = (cum / total) * 100;
+  cum += seg.items.length;
+  const end = (cum / total) * 100;
+  return `${seg.era.color} ${start}%, ${seg.era.color} ${end}%`;
+});
+const spineGradient = `linear-gradient(90deg, ${spineStops.join(', ')})`;
+---
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chronologie Mondiale — Mythologies &amp; Cultures du Monde</title>
+<meta name="description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Chronologie Mondiale" />
+<meta property="og:description" content={description} />
+{pageUrl && <meta property="og:url" content={pageUrl} />}
+{shareImg && <meta property="og:image" content={shareImg} />}
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg: #10131c;
+    --bg-deep: #0a0c13;
+    --panel: #171b28;
+    --panel-border: #2a2f42;
+    --gold: #c9982f;
+    --gold-bright: #e8c164;
+    --text: #e9e6db;
+    --text-dim: #9a9bb0;
+    --glow: rgba(201, 152, 47, 0.25);
+    --live-era-color: #33406b;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at top, #1a1f30 0%, var(--bg) 55%), var(--bg-deep);
+    color:var(--text);
+    font-family:'EB Garamond', Georgia, serif;
+    font-size:17px;
+    line-height:1.6;
+    position:relative;
+    zoom:1.5; /* confort de lecture, comme le reste du site (voir tokens.css) */
+  }
+  a{color:var(--gold-bright);}
+  h1,h2,h3{font-family:'Cinzel', serif; color:var(--gold-bright); letter-spacing:0.03em;}
+
+  .era-glow{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background: radial-gradient(ellipse at 50% 0%, var(--live-era-color), transparent 62%);
+    opacity:0.35; transition: background 0.9s ease;
+  }
+
+  /* ---------- topbar + filtres + rail : un seul bloc sticky ---------- */
+  .sticky-stack{ position:sticky; top:0; z-index:200; background:var(--bg-deep);}
+  /* padding-left degage la place du bouton hamburger fixe (SideMenu, en
+     position:fixed top:18px left:18px, donc en dehors du flux de #topbar) */
+  #topbar{
+    display:flex; align-items:center; gap:10px;
+    padding:10px 16px 10px 70px; background:rgba(10,12,19,0.88); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--panel-border);
+  }
+  #topbar a{
+    font-family:'Cinzel', serif; font-size:0.78rem; letter-spacing:0.04em; text-decoration:none;
+    color:var(--text); border:1px solid var(--panel-border); padding:7px 14px; border-radius:6px; white-space:nowrap;
+  }
+  #topbar a:hover{border-color:var(--gold); color:var(--gold-bright);}
+  #topbar .brand{flex:1; text-align:center; font-family:'Cinzel', serif; letter-spacing:0.16em; font-size:0.82rem; color:var(--text-dim); text-transform:uppercase;}
+
+  /* ---------- hero ---------- */
+  header.hero{ position:relative; z-index:2; text-align:center; padding:56px 20px 32px; max-width:900px; margin:0 auto;}
+  .kicker{ font-family:'Cinzel', serif; letter-spacing:0.35em; font-size:0.78rem; color:var(--gold); text-transform:uppercase;}
+  h1.title{ font-family:'Cinzel Decorative', serif; font-size:clamp(2.1rem, 6vw, 3.4rem); margin:16px 0 10px; text-shadow:0 0 40px var(--glow);}
+  .tagline{ font-size:1.08rem; color:var(--text-dim); font-style:italic; max-width:680px; margin:0 auto;}
+  .divider{ width:110px; height:2px; margin:24px auto; background:linear-gradient(90deg, transparent, var(--gold), transparent);}
+
+  /* ---------- filtres ---------- */
+  .filters{
+    background:rgba(12,14,22,0.94); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--panel-border); padding:14px 18px 16px; max-width:1240px; margin:0 auto;
+  }
+  .filters-row{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:8px;}
+  .filters-row:last-child{margin-bottom:0;}
+  .filters-label{ font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-dim); min-width:78px;}
+  .chip-group{ display:flex; flex-wrap:wrap; gap:7px;}
+  .chip{
+    font-family:'EB Garamond', Georgia, serif; font-size:0.84rem; padding:5px 13px; border-radius:20px;
+    border:1px solid var(--panel-border); background:rgba(255,255,255,0.03); color:var(--text-dim);
+    cursor:pointer; transition:all 0.18s ease; line-height:1.4;
+  }
+  .chip.active{ color:var(--text); border-color:var(--gold); background:rgba(201,152,47,0.14);}
+  .chip:hover{ border-color:var(--gold-bright);}
+  .cat-chip.cat-guerre.active{border-color:#e05a5a; background:rgba(177,59,59,0.18); color:#f0a0a0;}
+  .cat-chip.cat-science.active{border-color:#4fc4c4; background:rgba(47,138,138,0.18); color:#9de0e0;}
+  .cat-chip.cat-politique.active{border-color:#e8c164; background:rgba(201,152,47,0.18); color:#f0d38a;}
+  .cat-chip.cat-figure.active{border-color:#a67ee8; background:rgba(122,79,201,0.18); color:#c9aef2;}
+  .cat-chip.cat-catastrophe.active{border-color:#e0994f; background:rgba(179,112,47,0.18); color:#f0c090;}
+  .filters-tools{gap:12px;}
+  #searchInput{
+    flex:1; min-width:220px; max-width:360px; padding:7px 12px; border-radius:6px;
+    background:rgba(255,255,255,0.05); border:1px solid var(--panel-border); color:var(--text);
+    font-family:'EB Garamond', Georgia, serif; font-size:0.9rem;
+  }
+  #searchInput::placeholder{color:#6d6e80;}
+  #searchInput:focus{outline:none; border-color:var(--gold);}
+  #resetBtn{
+    font-family:'Cinzel', serif; font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase;
+    padding:8px 14px; border-radius:6px; border:1px solid var(--panel-border); background:transparent; color:var(--text-dim); cursor:pointer;
+  }
+  #resetBtn:hover{border-color:var(--gold); color:var(--gold-bright);}
+  .count{ margin-left:auto; font-size:0.82rem; color:var(--text-dim); font-family:'Cinzel', serif; letter-spacing:0.03em;}
+
+  /* ---------- era rail : navigation rapide, scrolle LE ruban unique ---------- */
+  .era-rail{
+    display:flex; gap:0; overflow-x:auto; max-width:1240px; margin:0 auto; padding:0 18px;
+    background:rgba(10,12,19,0.85); backdrop-filter:blur(4px); border-bottom:1px solid var(--panel-border);
+  }
+  .era-chip{
+    flex:0 0 auto; text-decoration:none; font-family:'Cinzel', serif; font-size:0.66rem; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--text-dim); padding:8px 14px; border:none; background:none; cursor:pointer;
+    border-bottom:3px solid transparent;
+  }
+  .era-chip.era-e1{border-bottom-color:#33406b;} .era-chip.era-e2{border-bottom-color:#3f5a7a;}
+  .era-chip.era-e3{border-bottom-color:#3f6b5c;} .era-chip.era-e4{border-bottom-color:#6b5a2f;}
+  .era-chip.era-e5{border-bottom-color:#8a4a2f;} .era-chip.era-e6{border-bottom-color:#9a3535;}
+  .era-chip.era-e7{border-bottom-color:#6b3d8a;}
+  .era-chip:hover, .era-chip.current{color:var(--text); background:rgba(255,255,255,0.05);}
+
+  /* =========================================================================
+     LE RUBAN UNIQUE
+     ========================================================================= */
+  main.frise{ position:relative; z-index:2; max-width:1400px; margin:0 auto; padding:30px 20px 40px;}
+  .mega-wrap{
+    position:relative; border-radius:18px; overflow:hidden; user-select:none;
+    /* fond "galaxy" tres leger : semis d'etoiles tuile, statique (pas de parallaxe,
+       reste discret) derriere le ruban defilant */
+    background-image:
+      radial-gradient(1.4px 1.4px at 24px 32px, rgba(255,255,255,0.55), transparent),
+      radial-gradient(1px 1px at 96px 84px, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.3px 1.3px at 152px 46px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 204px 128px, rgba(255,255,255,0.35), transparent),
+      radial-gradient(1.4px 1.4px at 64px 156px, rgba(255,255,255,0.45), transparent),
+      radial-gradient(1px 1px at 178px 190px, rgba(255,255,255,0.3), transparent),
+      linear-gradient(180deg, #171b28, #12141d);
+    background-size: 230px 230px, 230px 230px, 230px 230px, 230px 230px, 230px 230px, 230px 230px, 100% 100%;
+    background-repeat: repeat, repeat, repeat, repeat, repeat, repeat, no-repeat;
+    box-shadow:0 18px 44px rgba(0,0,0,0.42); border:1px solid rgba(255,255,255,0.07);
+  }
+  .mega-strip{
+    height:440px; overflow-x:auto; overflow-y:hidden; cursor:grab;
+    scrollbar-width:none; -ms-overflow-style:none;
+  }
+  .mega-strip::-webkit-scrollbar{display:none;}
+  .mega-strip.dragging{cursor:grabbing;}
+  .mega-wrap::before, .mega-wrap::after{
+    content:""; position:absolute; top:0; bottom:44px; width:64px; z-index:5; pointer-events:none;
+  }
+  .mega-wrap::before{ left:0; background:linear-gradient(90deg, #12141d, transparent);}
+  .mega-wrap::after{ right:0; background:linear-gradient(270deg, #12141d, transparent);}
+  .mega-nav{
+    position:absolute; top:calc(50% - 22px); transform:translateY(-50%); z-index:6; width:38px; height:38px; border-radius:50%;
+    border:1px solid rgba(255,255,255,0.25); background:rgba(10,12,19,0.78); color:#fff; font-size:1.1rem;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.18s ease;
+  }
+  .mega-nav:hover{ border-color:var(--gold); background:rgba(10,12,19,0.95); box-shadow:0 0 16px var(--glow);}
+  .mega-nav.prev{left:10px;} .mega-nav.next{right:10px;}
+
+  /* hauteur fixe + stretch par defaut sur toute la chaine flex (track > segment >
+     ev) : chaque etiquette dispose ainsi de la meme reference verticale que la
+     ligne (top:50%), sans jamais deborder de la zone visible. */
+  .mega-track{ display:flex; height:100%; position:relative; width:max-content; padding:0 66px;}
+  .mega-track::before{
+    content:""; position:absolute; left:0; right:0; top:50%; height:3px; border-radius:3px;
+    background:var(--spine); box-shadow:0 0 12px rgba(255,255,255,0.15);
+  }
+
+  /* segment d'ere : fanion vertical, tout a l'interieur du meme ruban */
+  .era-segment{ position:relative; display:flex; flex:0 0 auto;}
+  .era-segment.era-e1{--eb:#5a72c2;} .era-segment.era-e2{--eb:#6f9bd6;}
+  .era-segment.era-e3{--eb:#5fbf9f;} .era-segment.era-e4{--eb:#e0b04f;}
+  .era-segment.era-e5{--eb:#e0864f;} .era-segment.era-e6{--eb:#e0696e;}
+  .era-segment.era-e7{--eb:#b47ce8;}
+  .era-flag{
+    flex:0 0 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    margin-right:28px;
+    border-right:2px dashed color-mix(in srgb, var(--eb) 70%, transparent);
+    scroll-margin-left:66px;
+  }
+  .flag-name{
+    writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Cinzel', serif; font-size:0.92rem;
+    letter-spacing:0.1em; color:#fff; text-shadow:0 0 10px var(--eb); white-space:nowrap;
+  }
+  .flag-sub{
+    writing-mode:vertical-rl; transform:rotate(180deg); font-size:0.66rem; color:var(--text-dim);
+    font-style:italic; white-space:nowrap;
+  }
+
+  /* ---------- etiquette d'evenement : pastille sur la ligne + connecteur.
+     Cote (au-dessus/en-dessous) et taille varient par etiquette (voir sideOf/
+     sizeClassOf dans le frontmatter) : ni alternance mecanique, ni tuiles
+     toutes identiques — plus proche d'une lecture naturelle. ---------- */
+  .ev{ position:relative; margin-right:14px;}
+  .ev.ev-sm{ flex:0 0 138px;}
+  .ev.ev-md{ flex:0 0 168px;}
+  .ev.ev-lg{ flex:0 0 206px;}
+  .ev.ev-hidden{display:none;}
+  .ev::before{
+    content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:10px; height:10px; border-radius:50%; background:var(--eb); box-shadow:0 0 8px var(--eb); z-index:2;
+  }
+  .ev-card{
+    position:absolute; left:50%; transform:translateX(-50%) scale(1); text-align:center;
+    border:1px solid rgba(255,255,255,0.08);
+    padding:9px 11px 11px; border-radius:8px; cursor:pointer;
+    opacity:0; transition:transform 0.2s ease, background 0.15s ease, border-color 0.15s ease, opacity 0.5s ease, box-shadow 0.2s ease;
+  }
+  .ev.ev-sm .ev-card{width:128px;}
+  .ev.ev-md .ev-card{width:158px;}
+  .ev.ev-lg .ev-card{width:196px;}
+  .ev-card.in-view{opacity:1;}
+  .ev-card:hover{border-color:var(--eb); transform:translateX(-50%) translateY(-2px);}
+  .ev-card:focus-visible{outline:2px solid var(--gold-bright); outline-offset:2px;}
+  .ev-card.ev-focused{ border-color:var(--gold-bright); box-shadow:0 0 18px var(--glow);}
+  .ev.up .ev-card{ bottom:calc(50% + 18px);}
+  .ev.up .ev-connector{ position:absolute; left:50%; bottom:50%; width:2px; height:18px; background:var(--eb); opacity:0.7; transform:translateX(-50%);}
+  .ev.down .ev-card{ top:calc(50% + 18px);}
+  .ev.down .ev-connector{ position:absolute; left:50%; top:50%; width:2px; height:18px; background:var(--eb); opacity:0.7; transform:translateX(-50%);}
+  /* couleurs legeres par categorie, directement sur la tuile */
+  .ev.cat-guerre .ev-card{background:linear-gradient(160deg, rgba(224,90,90,0.13), rgba(255,255,255,0.02));}
+  .ev.cat-science .ev-card{background:linear-gradient(160deg, rgba(79,196,196,0.13), rgba(255,255,255,0.02));}
+  .ev.cat-politique .ev-card{background:linear-gradient(160deg, rgba(232,193,100,0.13), rgba(255,255,255,0.02));}
+  .ev.cat-figure .ev-card{background:linear-gradient(160deg, rgba(166,126,232,0.13), rgba(255,255,255,0.02));}
+  .ev.cat-catastrophe .ev-card{background:linear-gradient(160deg, rgba(224,153,79,0.13), rgba(255,255,255,0.02));}
+  .ev-date{ display:block; font-family:'Cinzel', serif; font-size:0.72rem; color:var(--text-dim); letter-spacing:0.03em; margin-bottom:4px;}
+  .ev-tags{ display:flex; flex-wrap:wrap; gap:4px; justify-content:center; margin-bottom:5px;}
+  .ev-cat, .ev-region{
+    font-size:0.6rem; letter-spacing:0.04em; text-transform:uppercase; padding:1px 7px; border-radius:20px;
+    border:1px solid var(--panel-border); color:var(--text-dim); white-space:normal; display:inline-block;
+    line-height:1.3;
+  }
+  .ev.cat-guerre .ev-cat{border-color:#e05a5a; color:#e79c9c;}
+  .ev.cat-science .ev-cat{border-color:#4fc4c4; color:#8fd6d6;}
+  .ev.cat-politique .ev-cat{border-color:#e8c164; color:#e8c164;}
+  .ev.cat-figure .ev-cat{border-color:#a67ee8; color:#bda0ec;}
+  .ev.cat-catastrophe .ev-cat{border-color:#e0994f; color:#e0ac7a;}
+  .ev-title{
+    margin:0; font-size:0.85rem; color:var(--text); font-weight:600; line-height:1.3;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+  }
+
+  /* ---------- barre de progression globale (un seul ruban = une seule barre) ---------- */
+  .mega-progress-row{ display:flex; align-items:center; gap:12px; padding:0 20px; max-width:1400px; margin:14px auto 0;}
+  .mega-progress{ flex:1; height:4px; border-radius:3px; background:rgba(255,255,255,0.08); overflow:hidden;}
+  .mega-progress-thumb{ height:100%; width:20%; background:var(--gold); border-radius:3px;}
+  .mega-hint{ font-size:0.72rem; color:#6d6e80; font-style:italic; white-space:nowrap;}
+
+  .reveal-init{opacity:0; transform:translateY(14px); transition:opacity 0.55s ease, transform 0.55s ease;}
+  .reveal-in{opacity:1; transform:translateY(0);}
+
+  /* ---------- modale ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; z-index:900; background:rgba(0,0,0,0.82);
+    display:flex; align-items:center; justify-content:center; padding:20px;
+    opacity:0; pointer-events:none; transition:opacity 0.2s ease;
+  }
+  .modal-backdrop.open{opacity:1; pointer-events:auto;}
+  .modal{
+    position:relative; overflow:visible; max-width:520px; width:100%; background:linear-gradient(160deg, var(--panel), var(--bg-deep));
+    border:1px solid var(--gold); border-radius:8px; padding:30px 28px 26px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.6);
+    transform:scale(0.94); transition:transform 0.22s ease;
+  }
+  .modal-backdrop.open .modal{transform:scale(1);}
+  .modal-close{
+    position:absolute; top:10px; right:12px; background:none; border:none; color:var(--text-dim);
+    font-size:1.6rem; line-height:1; cursor:pointer; padding:4px 8px;
+  }
+  .modal-close:hover{color:var(--gold-bright);}
+  .modal-date{ font-family:'Cinzel', serif; font-size:0.85rem; color:var(--gold); letter-spacing:0.06em; margin-bottom:8px;}
+  .modal h3{margin:0 0 12px; font-size:1.4rem; color:var(--text);}
+  .modal-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .modal-cat, .modal-region{ font-size:0.7rem; letter-spacing:0.05em; text-transform:uppercase; padding:3px 11px; border-radius:20px; border:1px solid var(--panel-border); color:var(--text-dim);}
+  .modal-cat.cat-guerre{border-color:#e05a5a; color:#e79c9c;}
+  .modal-cat.cat-science{border-color:#4fc4c4; color:#8fd6d6;}
+  .modal-cat.cat-politique{border-color:#e8c164; color:#e8c164;}
+  .modal-cat.cat-figure{border-color:#a67ee8; color:#bda0ec;}
+  .modal-cat.cat-catastrophe{border-color:#e0994f; color:#e0ac7a;}
+  .modal p{margin:0; font-size:0.98rem; color:var(--text-dim); line-height:1.7;}
+  .spark{position:absolute; top:50%; width:5px; height:5px; border-radius:50%; background:var(--gold-bright); opacity:0; animation:spark-fly 0.8s ease-out forwards; pointer-events:none;}
+  @keyframes spark-fly{ 0%{opacity:1; transform:translate(0,0) scale(1);} 100%{opacity:0; transform:translate(var(--dx),var(--dy)) scale(0.3);} }
+
+  footer{ position:relative; z-index:2; text-align:center; padding:40px 20px 80px; color:var(--text-dim); font-size:0.9rem; border-top:1px solid var(--panel-border); margin-top:20px;}
+
+  @media (max-width:640px){
+    .mega-strip{height:380px;}
+    .mega-track{padding:0 40px;}
+    .era-flag{margin-right:18px;}
+    .ev{margin-right:10px;}
+    .ev.ev-sm{flex-basis:112px;} .ev.ev-sm .ev-card{width:104px;}
+    .ev.ev-md{flex-basis:136px;} .ev.ev-md .ev-card{width:128px;}
+    .ev.ev-lg{flex-basis:164px;} .ev.ev-lg .ev-card{width:156px;}
+    .mega-nav{width:30px; height:30px; font-size:0.9rem;}
+    .filters-label{min-width:0; width:100%;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal-init{opacity:1; transform:none; transition:none;}
+    .ev-card{opacity:1; transition:none;}
+    .spark{display:none;}
+  }
+</style>
+</head>
+<body>
+<SideMenu />
+<div class="era-glow" id="eraGlow"></div>
+
+<header class="hero">
+  <div class="kicker">Frise interactive</div>
+  <h1 class="title">Chronologie Mondiale</h1>
+  <div class="divider"></div>
+  <p class="tagline">{total} événements, hors Europe et Amériques post-1492 privilégié, sur un seul ruban — sept ères, filtrables par région et catégorie. Glissez, cliquez sur les flèches, ou une étiquette pour son résumé.</p>
+</header>
+
+<div class="sticky-stack" id="stickyStack">
+<div id="topbar">
+  <a href={`${base}`}>&larr; Accueil</a>
+  <span class="brand">Chronologie Mondiale</span>
+  <a href={`${base}map.html`}>&#128506; Carte</a>
+</div>
+
+<div class="filters" id="filters">
+  <div class="filters-row">
+    <span class="filters-label">Régions</span>
+    <div class="chip-group" id="regionChips">
+      {Object.entries(REGIONS).map(([key, r]) => (
+        <button type="button" class="chip active" data-group="region" data-value={key}>{r.emoji} {r.label}</button>
+      ))}
+    </div>
+  </div>
+  <div class="filters-row">
+    <span class="filters-label">Catégories</span>
+    <div class="chip-group" id="catChips">
+      {Object.entries(CATEGORIES).map(([key, c]) => (
+        <button type="button" class={`chip active cat-chip cat-${key}`} data-group="cat" data-value={key}>{c.label}</button>
+      ))}
+    </div>
+  </div>
+  <div class="filters-row filters-tools">
+    <input type="text" id="searchInput" placeholder="Rechercher : mot-clé, région, ou une année (ex. 1789)…" autocomplete="off" />
+    <button type="button" id="resetBtn">Réinitialiser</button>
+    <span class="count" id="countDisplay">{total} / {total} événements</span>
+  </div>
+</div>
+
+<nav class="era-rail" id="eraRail">
+  {ERAS.map((e) => (
+    <button type="button" class={`era-chip era-${e.key}`} data-era={e.key}>{e.label}</button>
+  ))}
+</nav>
+</div>
+
+<main class="frise" id="frise">
+  <div class="mega-wrap">
+    <button type="button" class="mega-nav prev" aria-label="Reculer dans le temps">&#8249;</button>
+    <button type="button" class="mega-nav next" aria-label="Avancer dans le temps">&#8250;</button>
+    <div class="mega-strip" id="megaStrip">
+      <div class="mega-track" id="megaTrack" style={`--spine:${spineGradient}`}>
+        {segments.map((seg) => (
+          <div class={`era-segment era-${seg.era.key}`}>
+            <div class="era-flag" data-era={seg.era.key}>
+              <span class="flag-name">{seg.era.label}</span>
+              <span class="flag-sub">{seg.era.sub}</span>
+            </div>
+            {seg.items.map((ev) => (
+              <div class={`ev cat-${ev.cat} ${ev.side} ${ev.sizeClass}`} data-region={ev.region} data-cat={ev.cat}>
+                <span class="ev-connector"></span>
+                <div
+                  class="ev-card"
+                  data-title={ev.title}
+                  data-date={fmt(ev.label)}
+                  data-year={String(ev.y)}
+                  data-region-label={`${REGIONS[ev.region].emoji} ${REGIONS[ev.region].label}`}
+                  data-cat-label={CATEGORIES[ev.cat].label}
+                  data-summary={ev.summary}
+                  tabindex="0"
+                  role="button"
+                >
+                  <span class="ev-date">{fmt(ev.label)}</span>
+                  <div class="ev-tags">
+                    <span class="ev-cat">{CATEGORIES[ev.cat].label}</span>
+                    <span class="ev-region">{REGIONS[ev.region].emoji}</span>
+                  </div>
+                  <h3 class="ev-title">{ev.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+  <div class="mega-progress-row">
+    <span class="mega-hint">&#8592; glisser / molette &#8594;</span>
+    <div class="mega-progress"><div class="mega-progress-thumb" id="megaProgressThumb"></div></div>
+  </div>
+</main>
+
+<footer>
+  Chronologie mondiale — un aperçu, pas un traité exhaustif. Dates approximatives pour les périodes longues ou incertaines.
+</footer>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">&times;</button>
+    <div class="modal-date" id="modalDate"></div>
+    <h3 id="modalTitle"></h3>
+    <div class="modal-tags">
+      <span class="modal-cat" id="modalCat"></span>
+      <span class="modal-region" id="modalRegion"></span>
+    </div>
+    <p id="modalSummary"></p>
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  var ERA_COLORS = { e1:'#33406b', e2:'#3f5a7a', e3:'#3f6b5c', e4:'#6b5a2f', e5:'#8a4a2f', e6:'#9a3535', e7:'#6b3d8a' };
+  var total = document.querySelectorAll('.ev').length;
+  var countDisplay = document.getElementById('countDisplay');
+  var searchInput = document.getElementById('searchInput');
+  var megaStrip = document.getElementById('megaStrip');
+
+  function updateStackHeight() {
+    var stack = document.getElementById('stickyStack');
+    if (stack) document.documentElement.style.setProperty('--stack-h', stack.getBoundingClientRect().height + 'px');
+  }
+  updateStackHeight();
+  window.addEventListener('resize', updateStackHeight);
+
+  /* ---------- position absolue (dans le contenu defilant) d'un element ---------- */
+  function contentX(el) {
+    return el.getBoundingClientRect().left - megaStrip.getBoundingClientRect().left + megaStrip.scrollLeft;
+  }
+
+  /* ---------- barre de progression + surbrillance d'ere, un seul ruban ---------- */
+  var progressThumb = document.getElementById('megaProgressThumb');
+  var flags = Array.prototype.slice.call(document.querySelectorAll('.era-flag'));
+  function updateProgress() {
+    var max = megaStrip.scrollWidth - megaStrip.clientWidth;
+    var ratio = max > 0 ? megaStrip.scrollLeft / max : 0;
+    var visibleRatio = Math.min(1, megaStrip.clientWidth / megaStrip.scrollWidth);
+    var widthPct = Math.max(4, visibleRatio * 100);
+    progressThumb.style.width = widthPct + '%';
+    progressThumb.style.marginLeft = ratio * (100 - widthPct) + '%';
+
+    var current = flags[0];
+    flags.forEach(function (f) { if (contentX(f) - 60 <= megaStrip.scrollLeft) current = f; });
+    if (current) {
+      var key = current.dataset.era;
+      document.documentElement.style.setProperty('--live-era-color', ERA_COLORS[key] || ERA_COLORS.e1);
+      Array.prototype.forEach.call(document.querySelectorAll('.era-chip.current'), function (c) { c.classList.remove('current'); });
+      var railChip = document.querySelector('.era-chip[data-era="' + key + '"]');
+      if (railChip) railChip.classList.add('current');
+    }
+  }
+  megaStrip.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+
+  /* ---------- fleches ---------- */
+  document.querySelector('.mega-nav.prev').addEventListener('click', function () { stopMomentum(); megaStrip.scrollBy({ left: -360, behavior: 'smooth' }); });
+  document.querySelector('.mega-nav.next').addEventListener('click', function () { stopMomentum(); megaStrip.scrollBy({ left: 360, behavior: 'smooth' }); });
+
+  /* ---------- rail d'eres : saute au fanion correspondant dans le ruban unique ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.era-chip'), function (chip) {
+    chip.addEventListener('click', function () {
+      stopMomentum();
+      var flag = document.querySelector('.era-flag[data-era="' + chip.dataset.era + '"]');
+      if (flag) megaStrip.scrollTo({ left: Math.max(0, contentX(flag) - 70), behavior: 'smooth' });
+    });
+  });
+
+  /* ---------- molette : deltaY vertical pilote le defilement horizontal,
+     sauf en bord de ruban ou la page reprend la main normalement ---------- */
+  megaStrip.addEventListener('wheel', function (e) {
+    var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    var atStart = megaStrip.scrollLeft <= 0 && delta < 0;
+    var atEnd = megaStrip.scrollLeft >= megaStrip.scrollWidth - megaStrip.clientWidth - 1 && delta > 0;
+    if (atStart || atEnd) return;
+    e.preventDefault();
+    stopMomentum();
+    megaStrip.scrollLeft += delta;
+  }, { passive: false });
+
+  /* ---------- glisser pour faire defiler, avec inertie a la relache (souris
+     uniquement ; le tactile a deja son scroll natif). Seuil de 6px pour
+     distinguer un clic d'un glisse, meme logique que genealogy-interactive.js ---------- */
+  var dragging = false, dragMoved = false, startX = 0, startScroll = 0;
+  var velocity = 0, lastX = 0, lastT = 0, momentumRAF = null;
+  function stopMomentum() {
+    if (momentumRAF) { cancelAnimationFrame(momentumRAF); momentumRAF = null; }
+  }
+  function startMomentum() {
+    stopMomentum();
+    function step() {
+      velocity *= 0.94;
+      megaStrip.scrollLeft -= velocity;
+      if (Math.abs(velocity) > 0.3) momentumRAF = requestAnimationFrame(step);
+      else momentumRAF = null;
+    }
+    momentumRAF = requestAnimationFrame(step);
+  }
+  megaStrip.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse') return;
+    stopMomentum();
+    dragging = true; dragMoved = false; startX = e.clientX; startScroll = megaStrip.scrollLeft;
+    lastX = e.clientX; lastT = performance.now(); velocity = 0;
+    megaStrip.classList.add('dragging');
+  });
+  window.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var dx = e.clientX - startX;
+    if (Math.abs(dx) > 6) dragMoved = true;
+    megaStrip.scrollLeft = startScroll - dx;
+    var now = performance.now();
+    var dt = now - lastT;
+    if (dt > 0) velocity = (e.clientX - lastX) / dt * 16;
+    lastX = e.clientX; lastT = now;
+  });
+  window.addEventListener('pointerup', function () {
+    if (!dragging) return;
+    dragging = false;
+    megaStrip.classList.remove('dragging');
+    if (Math.abs(velocity) > 0.5) startMomentum();
+  });
+
+  /* ---------- clavier : fleches gauche/droite pour naviguer, sauf en train de taper ---------- */
+  document.addEventListener('keydown', function (e) {
+    if (document.activeElement === searchInput) return;
+    if (e.key === 'ArrowLeft') { stopMomentum(); megaStrip.scrollBy({ left: -160, behavior: 'smooth' }); }
+    if (e.key === 'ArrowRight') { stopMomentum(); megaStrip.scrollBy({ left: 160, behavior: 'smooth' }); }
+  });
+
+  function getActive(group) {
+    var out = {};
+    var chips = document.querySelectorAll('.chip[data-group="' + group + '"].active');
+    Array.prototype.forEach.call(chips, function (c) { out[c.dataset.value] = true; });
+    return out;
+  }
+
+  function applyFilters() {
+    var regions = getActive('region');
+    var cats = getActive('cat');
+    var q = searchInput.value.trim().toLowerCase();
+    var events = document.querySelectorAll('.ev');
+    var visible = 0;
+    Array.prototype.forEach.call(events, function (el) {
+      var show = !!regions[el.dataset.region] && !!cats[el.dataset.cat];
+      if (show && q) {
+        var card = el.querySelector('.ev-card');
+        var hay = (card.dataset.title + ' ' + card.dataset.summary + ' ' + card.dataset.date + ' ' + card.dataset.year + ' ' + card.dataset.regionLabel + ' ' + card.dataset.catLabel).toLowerCase();
+        show = hay.indexOf(q) !== -1;
+      }
+      el.classList.toggle('ev-hidden', !show);
+      if (show) visible++;
+    });
+    countDisplay.textContent = visible + ' / ' + total + ' événements';
+    updateStackHeight();
+    updateProgress();
+    if (typeof updateFocusedCard === 'function') updateFocusedCard();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.chip'), function (chip) {
+    chip.addEventListener('click', function () {
+      chip.classList.toggle('active');
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', applyFilters);
+
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    Array.prototype.forEach.call(document.querySelectorAll('.chip'), function (c) { c.classList.add('active'); });
+    searchInput.value = '';
+    applyFilters();
+  });
+
+  /* ---------- modale ---------- */
+  var backdrop = document.getElementById('modalBackdrop');
+  var modal = backdrop.querySelector('.modal');
+  var modalClose = document.getElementById('modalClose');
+  var lastFocused = null;
+
+  function spawnSparks() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    for (var i = 0; i < 9; i++) {
+      var s = document.createElement('span');
+      s.className = 'spark';
+      s.style.left = (38 + Math.random() * 24) + '%';
+      s.style.setProperty('--dx', (Math.random() * 90 - 45) + 'px');
+      s.style.setProperty('--dy', (-(40 + Math.random() * 60)) + 'px');
+      s.style.animationDelay = (Math.random() * 0.15) + 's';
+      modal.appendChild(s);
+      (function (el) { setTimeout(function () { el.remove(); }, 900); })(s);
+    }
+  }
+
+  function openModal(el) {
+    document.getElementById('modalDate').textContent = el.dataset.date;
+    document.getElementById('modalTitle').textContent = el.dataset.title;
+    var catEl = document.getElementById('modalCat');
+    catEl.textContent = el.dataset.catLabel;
+    catEl.className = 'modal-cat cat-' + el.dataset.cat;
+    document.getElementById('modalRegion').textContent = el.dataset.regionLabel;
+    document.getElementById('modalSummary').textContent = el.dataset.summary;
+    backdrop.classList.add('open');
+    spawnSparks();
+    lastFocused = el;
+    modalClose.focus();
+  }
+  function closeModal() {
+    backdrop.classList.remove('open');
+    if (lastFocused) lastFocused.focus();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.ev-card'), function (el) {
+    el.addEventListener('click', function () {
+      if (dragMoved) { dragMoved = false; return; }
+      openModal(el);
+    });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(el); }
+    });
+  });
+  backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeModal(); });
+  modalClose.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+  /* ---------- apparition au scroll (page verticale, le ruban entier) ---------- */
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion && window.IntersectionObserver) {
+    var targets = document.querySelectorAll('.mega-wrap');
+    var revealIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-in');
+          revealIo.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    Array.prototype.forEach.call(targets, function (el) { el.classList.add('reveal-init'); revealIo.observe(el); });
+  }
+
+  /* ---------- effet au defilement HORIZONTAL : chaque tuile apparait en
+     fondu la premiere fois qu'elle entre dans le ruban visible ---------- */
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.ev-card'));
+  if (window.IntersectionObserver) {
+    var cardIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          cardIo.unobserve(entry.target);
+        }
+      });
+    }, { root: megaStrip, rootMargin: '0px 80px 0px 80px', threshold: 0.1 });
+    cards.forEach(function (c) { cardIo.observe(c); });
+  } else {
+    cards.forEach(function (c) { c.classList.add('in-view'); });
+  }
+
+  /* ---------- tuile "au centre" mise en valeur pendant le defilement ---------- */
+  function updateFocusedCard() {
+    var center = megaStrip.scrollLeft + megaStrip.clientWidth / 2;
+    var best = null, bestDist = Infinity;
+    Array.prototype.forEach.call(document.querySelectorAll('.ev:not(.ev-hidden) .ev-card'), function (c) {
+      var x = contentX(c) + c.offsetWidth / 2;
+      var d = Math.abs(x - center);
+      if (d < bestDist) { bestDist = d; best = c; }
+    });
+    var prevFocused = document.querySelector('.ev-card.ev-focused');
+    if (prevFocused && prevFocused !== best) prevFocused.classList.remove('ev-focused');
+    if (best) best.classList.add('ev-focused');
+  }
+  var focusRAF = null;
+  megaStrip.addEventListener('scroll', function () {
+    if (focusRAF) return;
+    focusRAF = requestAnimationFrame(function () { updateFocusedCard(); focusRAF = null; });
+  }, { passive: true });
+  updateFocusedCard();
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
