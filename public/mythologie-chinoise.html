@@ -203,9 +203,10 @@
   #side-menu .side-label{padding:12px 22px 6px; margin-top:2px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:space-between;}
   #side-menu .side-label::after{content:'\25BE'; font-size:0.65rem; transition:transform 0.2s ease; color:#6d6e7e;}
   #side-menu .side-label.collapsed::after{transform:rotate(-90deg);}
-  #side-menu .side-group{overflow:hidden; max-height:600px; transition:max-height 0.25s ease;}
+  #side-menu .side-group{overflow:hidden; max-height:3000px; transition:max-height 0.25s ease;}
   #side-menu .side-group.collapsed{max-height:0;}
 </style>
+<style>body{ zoom:1.5; } /* confort de lecture par defaut : vise l'equivalent d'un zoom navigateur a 150% */</style>
 </head>
 <body data-egg="chinoise">
 <button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>

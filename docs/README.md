@@ -15,6 +15,7 @@ Index de la documentation. Si tu ne sais pas où chercher, tu es au bon endroit.
 |---|---|
 | [plans/plan-industrialisation.md](plans/plan-industrialisation.md) | Stratégie de réduction du coût de rédaction d'une page : mesures, socle Astro, phasage, décisions tranchées. |
 | [plans/plan-effets.md](plans/plan-effets.md) | Architecture de `effects.js` (5 couches), pièges connus, effets déjà en place, **et une piste d'effet pour chacune des 160 pages à venir**. |
+| [plans/plan-graphes.md](plans/plan-graphes.md) | Vue interactive facultative des diagrammes `#genealogie` (`genealogy-interactive.js`) : architecture, règles, intégrations déjà faites (legacy + Astro). |
 | [plans/plan-carte-icones.md](plans/plan-carte-icones.md) | Icônes de la carte : statut par page, couleurs par catégorie, gestion de la densité, collisions à trancher. |
 | [plans/carte-monde-interactive.md](plans/carte-monde-interactive.md) | Contexte et objectif d'origine de la carte interactive. |
 | [plans/plan-serie-mythologies.md](plans/plan-serie-mythologies.md) | Structure des pages mythologie (10 sections) + le correctif sur le nombre de royaumes. |

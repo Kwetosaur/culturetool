@@ -1,0 +1,89 @@
+---
+/*
+  InteractiveGenealogy — enveloppe Astro autour du moteur partagé
+  public/genealogy-interactive.js (le même fichier que les pages
+  statiques utilisent, pas une réimplémentation Astro séparée).
+
+  Usage dans une page mythologie, à la place du diagramme SVG figé
+  fait main (voir docs/plans/plan-graphes.md — décision du 29/07/2026 :
+  la vue interactive remplace le diagramme statique plutôt que de
+  s'ajouter en dessous derrière un bouton, une fois vérifiée fiable) :
+
+    <InteractiveGenealogy
+      nodes={NODES}
+      edges={EDGES}
+      houses={HOUSES}
+      houseLabels={{ tane: 'Maison de Tāne', ... }}
+      glyphs="▲◆✦❖"
+      viewBox={{ w: 600, h: 260 }}
+    />
+
+  Les couleurs de fond/texte par défaut pointent vers les tokens de la
+  page (var(--surface), var(--border)...) plutôt que des couleurs en
+  dur, pour rester cohérentes avec la palette bespoke de chaque page —
+  seules les couleurs de "maison" (houses) sont propres au sujet et
+  doivent être fournies par l'appelant.
+*/
+export interface GenealogyNode {
+  id: string;
+  label: string;
+  house: string;
+  head?: boolean;
+  dim?: boolean;
+  x: number;
+  y: number;
+  detail: string;
+}
+export type GenealogyEdge = [string, string, 'filiation' | 'union' | 'special'];
+export interface HouseColors { head: string; normal: string; dim: string; }
+
+interface Props {
+  nodes: GenealogyNode[];
+  edges: GenealogyEdge[];
+  houses: Record<string, HouseColors>;
+  houseLabels?: Record<string, string>;
+  glyphs: string;
+  viewBox: { w: number; h: number };
+  lineColor?: string;
+}
+
+const {
+  nodes,
+  edges,
+  houses,
+  houseLabels = {},
+  glyphs,
+  viewBox,
+  lineColor = 'var(--border)',
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const uid = 'gi-' + Math.random().toString(36).slice(2, 9);
+const configJson = JSON.stringify({
+  nodes, edges, houses, houseLabels, glyphs, viewBox, lineColor,
+  bg: 'var(--surface)', panel: 'var(--surface-alt)', border: 'var(--border)',
+  text: 'var(--ink)', textDim: 'var(--text-dim)', accent: 'var(--accent-bright)',
+});
+---
+
+<div id={uid} class="gi-mount" data-gi-config={configJson}></div>
+
+<script is:inline>
+  /* is:inline : injecte tel quel, non traite par Vite — donc JS pur,
+     aucune annotation TypeScript ici (elle partirait dans le bundle final
+     sans etre depouillee et casserait au chargement). */
+  document.addEventListener('DOMContentLoaded', function () {
+    var mounts = document.querySelectorAll('.gi-mount[data-gi-config]');
+    Array.prototype.forEach.call(mounts, function (mount) {
+      var raw = mount.getAttribute('data-gi-config');
+      if (!raw || !window.initInteractiveGenealogy) return;
+      window.initInteractiveGenealogy(mount, JSON.parse(raw));
+    });
+  });
+</script>
+
+<script src={`${base}genealogy-interactive.js`} is:inline defer></script>
+
+<style>
+  .gi-mount{ margin-top:26px; }
+</style>

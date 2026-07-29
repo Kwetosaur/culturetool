@@ -211,6 +211,9 @@
   }
   .tree-diagram svg{max-width:100%; height:auto;}
 
+  /* ===== VUE INTERACTIVE (genealogy-interactive.js) ===== */
+  #genealogy-interactive{ margin-top:26px; }
+
   /* ===== PANTHEON CARDS ===== */
   .pantheon-grid{
     display:grid;
@@ -558,9 +561,10 @@
   #side-menu .side-label{padding:12px 22px 6px; margin-top:2px; font-family:'Cinzel', serif; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:#8b8ca0; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:space-between;}
   #side-menu .side-label::after{content:'\25BE'; font-size:0.65rem; transition:transform 0.2s ease; color:#6d6e7e;}
   #side-menu .side-label.collapsed::after{transform:rotate(-90deg);}
-  #side-menu .side-group{overflow:hidden; max-height:600px; transition:max-height 0.25s ease;}
+  #side-menu .side-group{overflow:hidden; max-height:3000px; transition:max-height 0.25s ease;}
   #side-menu .side-group.collapsed{max-height:0;}
 </style>
+<style>body{ zoom:1.5; } /* confort de lecture par defaut : vise l'equivalent d'un zoom navigateur a 150% */</style>
 </head>
 <body data-egg="nordique">
 <button id="side-menu-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('side-menu').classList.toggle('open'); document.getElementById('side-menu-overlay').classList.toggle('open');">&#9776;</button>
@@ -1179,119 +1183,9 @@
   <h2 class="section-title"><span class="fx-decode" data-glyphs="rune">L&#x27;Arbre Généalogique des Dieux</span></h2>
   <p class="section-intro">Trois lignées s'entremêlent dans la mythologie nordique : la maison d'Odin qui règne sur Ásgard, la lignée trouble de Loki dont naissent les grandes menaces du Ragnarök, et la maison vane de Njörd, unie aux Ases par un pacte de paix. Trait plein = filiation. Trait pointillé = union ou mariage. Trait en tirets = lien particulier (adoption, don, otage).</p>
 
-  <div class="tree-diagram diagram-scroll">
-    <svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" style="max-width:1100px;">
-      <defs>
-        <marker id="dot" markerWidth="6" markerHeight="6" refX="3" refY="3"><circle cx="3" cy="3" r="2.5" fill="#c9a15a"/></marker>
-      </defs>
+  <div id="genealogy-interactive"></div>
 
-      <!-- House labels -->
-      <text x="180" y="24" fill="#b8402d" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">MAISON DE LOKI</text>
-      <text x="620" y="24" fill="#e8c27a" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">MAISON D'ODIN — LES ASES</text>
-      <text x="1040" y="24" fill="#6f93a3" font-family="Cinzel, serif" font-size="15" text-anchor="middle" letter-spacing="2">MAISON DE NJÖRD — LES VANES</text>
-
-      <g stroke="#5a4425" stroke-width="1.4" fill="none">
-        <!-- Loki house lines -->
-        <line x1="110" y1="60" x2="160" y2="95"/>
-        <line x1="210" y1="60" x2="160" y2="95"/>
-        <line x1="160" y1="95" x2="160" y2="120"/>
-        <line x1="90" y1="150" x2="160" y2="130" stroke-dasharray="3,3"/>
-        <line x1="260" y1="150" x2="160" y2="130" stroke-dasharray="3,3"/>
-        <line x1="90" y1="160" x2="55" y2="225"/>
-        <line x1="90" y1="160" x2="140" y2="225"/>
-        <line x1="90" y1="160" x2="225" y2="225"/>
-        <line x1="260" y1="160" x2="240" y2="225"/>
-        <line x1="260" y1="160" x2="300" y2="225"/>
-        <line x1="90" y1="160" x2="170" y2="290" stroke-dasharray="2,4"/>
-        <line x1="170" y1="290" x2="640" y2="185" stroke-dasharray="2,4"/>
-
-        <!-- Odin house lines -->
-        <line x1="560" y1="60" x2="600" y2="95"/>
-        <line x1="560" y1="95" x2="640" y2="95" stroke-dasharray="3,3"/>
-        <line x1="600" y1="95" x2="620" y2="130"/>
-        <line x1="640" y1="95" x2="620" y2="130"/>
-        <line x1="580" y1="150" x2="660" y2="150" stroke-dasharray="3,3"/>
-        <line x1="620" y1="160" x2="470" y2="225"/>
-        <line x1="620" y1="160" x2="560" y2="225"/>
-        <line x1="620" y1="160" x2="605" y2="225"/>
-        <line x1="620" y1="160" x2="650" y2="225"/>
-        <line x1="620" y1="160" x2="695" y2="225"/>
-        <line x1="620" y1="160" x2="740" y2="225"/>
-        <line x1="620" y1="160" x2="790" y2="225"/>
-        <line x1="470" y1="260" x2="440" y2="290" stroke-dasharray="3,3"/>
-        <line x1="440" y1="320" x2="400" y2="360"/>
-        <line x1="440" y1="320" x2="460" y2="360"/>
-        <line x1="560" y1="225" x2="560" y2="265" stroke-dasharray="3,3"/>
-        <line x1="560" y1="280" x2="560" y2="308"/>
-        <line x1="800" y1="238" x2="855" y2="285" stroke="#6f93a3" stroke-dasharray="2,4"/>
-
-        <!-- Vanir house lines -->
-        <line x1="1040" y1="95" x2="1040" y2="130"/>
-        <line x1="1040" y1="95" x2="1110" y2="130" stroke-dasharray="3,3"/>
-        <line x1="1040" y1="160" x2="990" y2="225"/>
-        <line x1="1040" y1="160" x2="1080" y2="225"/>
-        <line x1="990" y1="260" x2="960" y2="310" stroke-dasharray="3,3"/>
-        <line x1="960" y1="330" x2="960" y2="360"/>
-        <line x1="1080" y1="260" x2="1110" y2="310" stroke-dasharray="3,3"/>
-        <line x1="1110" y1="330" x2="1090" y2="360"/>
-        <line x1="1110" y1="330" x2="1140" y2="360"/>
-
-        <!-- bridge Aesir / Vanir -->
-        <line x1="800" y1="230" x2="960" y2="245" stroke="#6f93a3" stroke-dasharray="1,5"/>
-      </g>
-
-      <g font-family="EB Garamond, serif" font-size="12.5" fill="#e6ddc9" text-anchor="middle">
-        <text x="110" y="52" fill="#a89a7e">Fárbauti</text>
-        <text x="210" y="52" fill="#a89a7e">Laufey</text>
-        <text x="160" y="112" fill="#b8402d" font-weight="bold">LOKI</text>
-        <text x="90" y="148" fill="#a89a7e" font-size="11">Angrboða</text>
-        <text x="260" y="148" fill="#a89a7e" font-size="11">Sigyn</text>
-        <text x="55" y="223" font-size="11">Fenrir</text>
-        <text x="140" y="223" font-size="11">Jörmungandr</text>
-        <text x="225" y="223" font-size="11">Hel</text>
-        <text x="240" y="223" font-size="11">Narfi</text>
-        <text x="300" y="223" font-size="11">Váli</text>
-        <text x="170" y="286" font-size="10.5" fill="#a89a7e">Sleipnir (né jument)</text>
-
-        <text x="560" y="52" fill="#a89a7e">Búri</text>
-        <text x="600" y="90" fill="#a89a7e" font-size="11">Borr</text>
-        <text x="640" y="90" fill="#a89a7e" font-size="11">Bestla</text>
-        <text x="580" y="148" fill="#e8c27a" font-weight="bold">ODIN</text>
-        <text x="660" y="148" fill="#a89a7e" font-size="11">Frigg</text>
-        <text x="470" y="223" font-size="11">Thor</text>
-        <text x="560" y="223" font-size="11">Baldr</text>
-        <text x="605" y="223" font-size="11">Höðr</text>
-        <text x="650" y="223" font-size="11">Tyr</text>
-        <text x="695" y="223" font-size="11">Víðarr</text>
-        <text x="740" y="223" font-size="11">Váli</text>
-        <text x="790" y="223" font-size="11">Bragi</text>
-        <text x="440" y="288" font-size="10.5" fill="#a89a7e">+ Sif</text>
-        <text x="400" y="378" font-size="10.5">Móði</text>
-        <text x="460" y="378" font-size="10.5">Þrúðr</text>
-        <text x="850" y="223" font-size="10.5" fill="#a89a7e">Heimdall (9 mères)</text>
-        <text x="560" y="278" font-size="10" fill="#a89a7e">+ Nanna</text>
-        <text x="560" y="322" font-size="11">Forseti</text>
-        <text x="858" y="298" font-size="10.5" fill="#6f93a3">Hœnir</text>
-        <text x="858" y="312" font-size="10.5" fill="#6f93a3">Mímir</text>
-        <text x="858" y="326" font-size="9" fill="#a89a7e" font-style="italic">(otages à Vanaheim)</text>
-
-        <text x="1040" y="52" fill="#a89a7e">(ancêtres vanes)</text>
-        <text x="1040" y="148" fill="#6f93a3" font-weight="bold">NJÖRD</text>
-        <text x="1110" y="148" fill="#a89a7e" font-size="11">Skadi</text>
-        <text x="990" y="223" font-size="11">Freyr</text>
-        <text x="1080" y="223" font-size="11">Freyja</text>
-        <text x="960" y="308" font-size="10.5" fill="#a89a7e">+ Gerd</text>
-        <text x="960" y="378" font-size="10.5">Fjölnir</text>
-        <text x="1110" y="308" font-size="10.5" fill="#a89a7e">+ Óðr</text>
-        <text x="1090" y="378" font-size="10.5">Hnoss</text>
-        <text x="1140" y="378" font-size="10.5">Gersemi</text>
-      </g>
-
-      <text x="880" y="242" fill="#6f93a3" font-family="EB Garamond, serif" font-style="italic" font-size="10.5" text-anchor="middle">otages de paix</text>
-    </svg>
-  </div>
-
-  <p class="section-intro" style="margin-top:10px;">Cet arbre simplifie volontairement des généalogies parfois contradictoires selon les sources (Edda poétique, Edda de Snorri, sagas tardives) — les mythographes eux-mêmes ne s'accordaient pas toujours sur la parenté exacte de Tyr ou de Váli, par exemple.</p>
+  <p class="section-intro" style="margin-top:10px;">Cet arbre simplifie volontairement des généalogies parfois contradictoires selon les sources (Edda poétique, Edda de Snorri, sagas tardives) — les mythographes eux-mêmes ne s'accordaient pas toujours sur la parenté exacte de Tyr ou de Váli, par exemple. Glissez un nom pour l'écarter du reste, cliquez pour lire un court repère sur la figure.</p>
 </section>
 
 <!-- ================= CREATURES ================= -->
@@ -1800,5 +1694,92 @@
 })();
 </script>
 <script src="./effects.js" defer></script>
+<script src="./genealogy-interactive.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var mount = document.getElementById('genealogy-interactive');
+  if (!mount || !window.initInteractiveGenealogy) return;
+  window.initInteractiveGenealogy(mount, {
+        viewBox: { w: 1200, h: 460 },
+        lineColor: '#5a4425',
+        bg: '#0c0b09', panel: '#171412', border: '#3a2f22',
+        text: '#e6ddc9', textDim: '#a89a7e', accent: '#c9a15a',
+        glyphs: 'ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛋᛏᛒᛖᛗᛚᛜᛞᛟ',
+        houses: {
+          loki:  { head: '#b8402d', normal: '#e6ddc9', dim: '#a89a7e' },
+          odin:  { head: '#e8c27a', normal: '#e6ddc9', dim: '#a89a7e' },
+          njord: { head: '#6f93a3', normal: '#e6ddc9', dim: '#a89a7e' }
+        },
+        houseLabels: { loki: 'Maison de Loki', odin: "Maison d'Odin — les Ases", njord: 'Maison de Njörd — les Vanes' },
+        nodes: [
+          { id:'farbauti', label:'Fárbauti', x:130, y:55, house:'loki', dim:true, detail:"Géant du feu, père de Loki selon l'Edda de Snorri — l'un des rares détails fermes sur les origines paternelles du dieu rusé." },
+          { id:'laufey', label:'Laufey', x:250, y:55, house:'loki', dim:true, detail:'Mère de Loki, dont le fils porte parfois le patronyme « Laufeyjarson » plutôt que celui de son père — signe possible d’une filiation matrilinéaire inhabituelle chez les Ases.' },
+          { id:'loki', label:'LOKI', x:190, y:180, house:'loki', head:true, detail:"Dieu rusé et changeant de forme, fils d'un géant, jamais pleinement ni Ase ni géant lui-même — son ambiguïté structure tout le personnage jusqu'à sa capture finale après le meurtre de Baldr." },
+          { id:'angrboda', label:'Angrboða', x:110, y:250, house:'loki', dim:true, detail:'Géante avec qui Loki engendre trois enfants monstrueux — Fenrir, Jörmungandr et Hel — dont la naissance inquiète tant les dieux qu’ils décident de les séparer et de les exiler.' },
+          { id:'sigyn', label:'Sigyn', x:270, y:250, house:'loki', dim:true, detail:'Épouse loyale de Loki, elle recueille dans un bol le venin d’un serpent suspendu au-dessus de lui pendant son châtiment, ne le laissant couler sur son visage que lorsqu’elle doit vider le récipient.' },
+          { id:'fenrir', label:'Fenrir', x:40, y:340, house:'loki', detail:'Loup monstrueux enchaîné par les dieux au prix du sacrifice de la main de Tyr — il rompra ses liens au Ragnarök et tuera Odin avant d’être tué à son tour par Víðarr.' },
+          { id:'jormungandr', label:'Jörmungandr', x:120, y:340, house:'loki', detail:'Serpent-monde si vaste qu’il encercle toute la terre en se mordant la queue — Thor l’affronte deux fois, la seconde lors du Ragnarök, où les deux s’entretuent.' },
+          { id:'hel', label:'Hel', x:195, y:340, house:'loki', detail:'Souveraine du royaume des morts qui porte son nom, réservé à ceux qui ne meurent pas au combat — un rôle administratif plus que malveillant dans la plupart des sources.' },
+          { id:'narfi', label:'Narfi', x:250, y:340, house:'loki', detail:'Fils de Loki et Sigyn ; selon l’Edda de Snorri, ses propres entrailles servent à lier son père après la mort de Baldr.' },
+          { id:'vali_loki', label:'Váli', x:315, y:340, house:'loki', detail:'Transformé en loup par les dieux, il déchire son propre frère Narfi — l’un des épisodes les plus sombres du châtiment de Loki. À ne pas confondre avec le Váli fils d’Odin.' },
+          { id:'sleipnir', label:'Sleipnir (né jument)', x:190, y:420, house:'loki', dim:true, detail:'Cheval à huit pattes né de Loki métamorphosé en jument et d’un étalon géant — offert à Odin, il devient sa monture pour parcourir tous les mondes, y compris jusqu’à Hel.' },
+
+          { id:'buri', label:'Búri', x:520, y:55, house:'odin', dim:true, detail:'Premier des dieux, léché hors de la glace primordiale par la vache cosmique Auðumbla — ancêtre commun de toute la lignée d’Odin.' },
+          { id:'borr', label:'Borr', x:600, y:100, house:'odin', dim:true, detail:'Fils de Búri, il épouse la géante Bestla et devient le père d’Odin et de ses deux frères, Vili et Vé.' },
+          { id:'bestla', label:'Bestla', x:680, y:100, house:'odin', dim:true, detail:'Géante, épouse de Borr et mère d’Odin — l’un des nombreux signes que la lignée des Ases reste, dans les sources, mêlée de sang de géants.' },
+          { id:'odin', label:'ODIN', x:600, y:180, house:'odin', head:true, detail:"Souverain d'Ásgard, dieu de la sagesse, de la guerre et de la magie runique, qui sacrifie un œil pour boire à la source de Mímir et se pend lui-même à Yggdrasil pour obtenir les runes." },
+          { id:'frigg', label:'Frigg', x:700, y:180, house:'odin', dim:true, detail:'Épouse d’Odin, elle connaît le destin de tous mais ne le révèle jamais — y compris celui de son fils Baldr, qu’elle ne parvient pourtant pas à sauver.' },
+          { id:'thor', label:'Thor', x:400, y:280, house:'odin', detail:'Dieu du tonnerre armé du marteau Mjöllnir, protecteur d’Ásgard contre les géants — sa mort au Ragnarök, empoisonné par le souffle de Jörmungandr après l’avoir tué, clôt leur rivalité.' },
+          { id:'baldr', label:'Baldr', x:490, y:280, house:'odin', detail:'Fils d’Odin et de Frigg, réputé si beau et si bon que sa mort — une flèche de gui tirée par Höðr sur instigation de Loki, seule chose non protégée par le serment maternel — annonce le Ragnarök.' },
+          { id:'hodr', label:'Höðr', x:545, y:280, house:'odin', detail:'Frère aveugle de Baldr, manipulé par Loki pour lui lancer la branche de gui qui le tue — un meurtre involontaire dont il sera lui-même tué en vengeance par Váli.' },
+          { id:'tyr', label:'Tyr', x:600, y:280, house:'odin', detail:'Dieu du droit et du serment qui sacrifie sa main dans la gueule de Fenrir pour permettre son enchaînement — un geste dont le prix reste pleinement assumé dans les sources.' },
+          { id:'vidarr', label:'Víðarr', x:655, y:280, house:'odin', detail:'Fils d’Odin réputé pour sa force silencieuse, destiné à venger son père en tuant Fenrir au Ragnarök.' },
+          { id:'vali_odin', label:'Váli', x:710, y:280, house:'odin', detail:'Conçu spécifiquement pour venger Baldr, il atteint l’âge adulte en un jour et tue Höðr. À ne pas confondre avec le Váli fils de Loki.' },
+          { id:'bragi', label:'Bragi', x:765, y:280, house:'odin', detail:'Dieu associé à la poésie et à l’éloquence, souvent présenté comme l’époux d’Idunn, gardienne des pommes de jouvence.' },
+          { id:'sif', label:'Sif', x:400, y:350, house:'odin', dim:true, detail:'Épouse de Thor, dont la chevelure d’or — coupée par Loki puis remplacée par une prothèse forgée par les nains — est à l’origine directe du marteau Mjöllnir.' },
+          { id:'modi', label:'Móði', x:370, y:420, house:'odin', detail:'Fils de Thor et de Sif, dont le nom signifie « courage » — l’un des rares dieux annoncés comme survivant au Ragnarök.' },
+          { id:'thrud', label:'Þrúðr', x:430, y:420, house:'odin', detail:'Fille de Thor et de Sif, dont le nom signifie « force » — mentionnée brièvement dans les sources, sans récit propre développé.' },
+          { id:'nanna', label:'Nanna', x:490, y:350, house:'odin', dim:true, detail:'Épouse de Baldr, elle meurt de chagrin sur son bûcher funéraire et le rejoint dans le royaume de Hel.' },
+          { id:'forseti', label:'Forseti', x:490, y:420, house:'odin', detail:'Fils de Baldr et de Nanna, dieu de la justice et de la conciliation, réputé rendre des jugements si équitables que nul ne les conteste.' },
+          { id:'heimdall', label:'Heimdall (9 mères)', x:860, y:280, house:'odin', dim:true, detail:'Gardien du pont Bifröst, né de neuf mères selon la tradition — il sonnera le cor Gjallarhorn pour annoncer le début du Ragnarök.' },
+          { id:'hoenir', label:'Hœnir', x:860, y:350, house:'odin', dim:true, detail:'Dieu envoyé en otage à Vanaheim dans le cadre du pacte de paix Ases-Vanes, en échange de Njörd, Freyr et Freyja.' },
+          { id:'mimir', label:'Mímir', x:860, y:385, house:'odin', dim:true, detail:'Envoyé aux côtés de Hœnir comme second otage, il est décapité par les Vanes déçus par ses silences sans Hœnir ; sa tête, préservée par Odin, continue de délivrer des conseils.' },
+
+          { id:'ancetres_vanes', label:'(ancêtres vanes)', x:1000, y:55, house:'njord', dim:true, detail:'Origines non détaillées dans les sources qui nous sont parvenues — le lignage propre des Vanes reste bien plus flou que celui des Ases.' },
+          { id:'njord', label:'NJÖRD', x:1000, y:180, house:'njord', head:true, detail:'Dieu vane de la mer et de la prospérité, envoyé à Ásgard comme otage de paix après la guerre entre Ases et Vanes — son mariage avec la géante Skadi échoue faute d’accord sur le lieu de résidence.' },
+          { id:'skadi', label:'Skadi', x:1090, y:180, house:'njord', dim:true, detail:'Géante qui choisit Njörd pour époux en réparation du meurtre de son père par les dieux, avant de s’en séparer, ni l’un ni l’autre n’acceptant de renoncer à son propre territoire (mer contre montagne).' },
+          { id:'freyr', label:'Freyr', x:950, y:280, house:'njord', detail:'Dieu vane de la fertilité et de la prospérité, il renonce à son épée magique par amour pour la géante Gerð — un sacrifice qui lui coûtera cher lors du Ragnarök, faute d’arme pour affronter Surtr.' },
+          { id:'freyja', label:'Freyja', x:1040, y:280, house:'njord', detail:'Déesse vane de l’amour, de la fertilité et aussi de la guerre : elle reçoit la moitié des guerriers tombés au combat dans son propre séjour, Fólkvangr, l’autre moitié allant au Valhalla d’Odin.' },
+          { id:'gerd', label:'Gerð', x:950, y:350, house:'njord', dim:true, detail:'Géante dont Freyr tombe amoureux au point de renoncer à son épée pour l’épouser — leur union illustre la porosité entre dieux vanes et géants.' },
+          { id:'fjolnir', label:'Fjölnir', x:950, y:420, house:'njord', detail:'Fils de Freyr, présenté dans certaines sources tardives comme un roi légendaire de Suède, à la frontière entre mythe et légende dynastique.' },
+          { id:'odr', label:'Óðr', x:1040, y:350, house:'njord', dim:true, detail:'Époux de Freyja, souvent absent et parti au loin, ce qui pousse la déesse à pleurer des larmes d’or en son absence — certains chercheurs discutent un possible lien avec Odin lui-même.' },
+          { id:'hnoss', label:'Hnoss', x:1010, y:420, house:'njord', detail:'Fille de Freyja et Óðr, dont le nom donne le mot norrois désignant un joyau ou trésor précieux.' },
+          { id:'gersemi', label:'Gersemi', x:1070, y:420, house:'njord', detail:'Seconde fille de Freyja et Óðr, dont le nom signifie également « joyau » — souvent mentionnée en parallèle de sa sœur Hnoss.' }
+        ],
+        edges: [
+          ['farbauti','loki','filiation'], ['laufey','loki','filiation'],
+          ['loki','angrboda','union'], ['loki','sigyn','union'],
+          ['loki','fenrir','filiation'], ['loki','jormungandr','filiation'], ['loki','hel','filiation'],
+          ['loki','narfi','filiation'], ['loki','vali_loki','filiation'],
+          ['loki','sleipnir','special'], ['sleipnir','odin','special'],
+
+          ['buri','borr','filiation'], ['borr','bestla','union'], ['borr','odin','filiation'],
+          ['odin','frigg','union'],
+          ['odin','thor','filiation'], ['odin','baldr','filiation'], ['odin','hodr','filiation'],
+          ['odin','tyr','filiation'], ['odin','vidarr','filiation'], ['odin','vali_odin','filiation'],
+          ['odin','bragi','filiation'],
+          ['thor','sif','union'], ['thor','modi','filiation'], ['thor','thrud','filiation'],
+          ['baldr','nanna','union'], ['baldr','forseti','filiation'],
+          ['odin','heimdall','special'], ['odin','hoenir','special'], ['odin','mimir','special'],
+          ['mimir','freyr','special'],
+
+          ['ancetres_vanes','njord','filiation'], ['njord','skadi','union'],
+          ['njord','freyr','filiation'], ['njord','freyja','filiation'],
+          ['freyr','gerd','union'], ['freyr','fjolnir','filiation'],
+          ['freyja','odr','union'], ['freyja','hnoss','filiation'], ['freyja','gersemi','filiation']
+        ]
+      });
+});
+</script>
 </body>
 </html>
