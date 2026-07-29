@@ -159,21 +159,88 @@ redevenue cliquable** une fois le bug `pointer-events` du paragraphe précédent
 
 ---
 
-## Pistes futures (à valider avant d'être lancées)
+## Catalogue des candidats (vérifié page par page, pas deviné)
 
-Ce document ne couvre pour l'instant que le cas généalogie. D'autres familles ont des
-diagrammes relationnels qui pourraient s'y prêter — **ou pas**, l'intérêt réel prime sur la
-couverture systématique :
+Chaque entrée ci-dessous a été confirmée en relisant le contenu réel de la page (grep sur des
+formulations précises : "reliques concurrentes", "au moins X lances/otages", "variantes
+régionales", "route commerciale/royale"...), pas supposée depuis un titre. Une page absente
+d'une famille n'a simplement rien remonté à la vérification — c'est un "rien" assumé, pas un
+oubli. Quatre familles de structure différentes ressortent, pas une seule :
 
-- **Mythologies** : le cas déjà traité ici — candidat naturel sur toute page ayant un
-  `#genealogie` à 3 maisons.
-- **Mystères** : une frise-réseau reliant expéditions/témoignages à une même énigme
-  (Amelia Earhart, Dyatlov) pourrait avoir un intérêt similaire — à évaluer page par page,
-  seulement si la page a réellement plusieurs événements distincts à relier entre eux.
-- **Cultures/Objets/Créatures** : pas de candidat évident à ce stade — plusieurs pages
-  n'ont tout simplement rien qui gagnerait à devenir un graphe (un bestiaire de créatures
-  compactes, par exemple, n'a pas de relations à montrer). Mieux vaut ne rien faire que
-  forcer un graphe sans rapport de force réel entre les éléments.
+### A. Arbre généalogique (moteur existant, `genealogy-interactive.js`)
+
+Toutes les 19 pages mythologie ont un `#genealogie` à 3 maisons — c'est le candidat le plus
+uniforme de tout le site, puisque la structure est déjà strictement identique partout.
+
+| Statut | Page |
+|---|---|
+| ✅ Fait | Nordique, Polynésienne |
+| À faire | Grecque, Égyptienne, Romaine, Celtique, Mésopotamienne, Hindoue, Japonaise, Aztèque & Maya, Slave, Chinoise, Perse/Zoroastrienne, Yoruba, Inca, Aborigène australienne, Dogon, Vietnamienne, Finnoise |
+
+Ordre suggéré : reprendre l'ordre de publication (le plus ancien contenu d'abord, cohérent avec
+`plan-serie-mythologies.md`), pas un ordre alphabétique arbitraire.
+
+### B. Chaîne de possession / reliques concurrentes (nouveau type, à concevoir)
+
+Pas un arbre familial : ici les nœuds sont des **objets et des propriétaires successifs**,
+parfois plusieurs branches concurrentes (plusieurs "vraies" reliques revendiquées). Même
+mécanique d'interaction (glisser, cliquer → fiche) mais un modèle de données différent — pas de
+notion de "maison", juste une chronologie ramifiée. Confirmé par page, pas supposé :
+
+| Page | Ce qui rend le graphe pertinent (relu dans la page) |
+|---|---|
+| Le Saint Graal | Reliques concurrentes à Valence et à Gênes + chaîne d'auteurs (Chrétien de Troyes → Robert de Boron) qui ont façonné le récit |
+| La Lance Sacrée | Au moins quatre lances concurrentes, chacune avec sa propre chaîne de propriétaires (Otton Ier, jusqu'à la récupération nazie) — le candidat le plus riche de cette catégorie |
+| Le Koh-i-Noor | Chaîne de propriétaires historiques (maharajah de dix ans → couronne britannique) + contentieux actif à quatre pays (Inde, Pakistan, Iran, Afghanistan) |
+
+*Écartés après vérification* : la Chambre d'Ambre a bien une chronologie de disparition, mais
+elle est linéaire (pas de branches concurrentes) — déjà bien servie par le composant
+`Timeline` existant, un graphe n'ajouterait rien.
+
+### C. Réseau de routes (nouveau type, nécessite un fond de carte — pas le moteur généalogie)
+
+Ici les nœuds sont des **lieux réels**, les arêtes des **routes attestées** — la bonne
+mécanique serait plus proche de `map.html` (positions sur un fond, pas un arbre) que de
+`genealogy-interactive.js`. Confirmé par page :
+
+| Page | Réseau réel documenté sur la page |
+|---|---|
+| Empire mongol | Réseau de relais postaux (yam) reliant tout l'empire, routes commerciales unifiées sous la Pax Mongolica |
+| Incas | Le Qhapaq Ñan, réseau routier andin réel — le candidat le plus direct, la route EST le sujet de la page |
+| Empire perse achéménide | La Route royale, infrastructure impériale documentée |
+| Rome antique | Réseau routier ("tous les chemins mènent à Rome"), infrastructure de conquête |
+| Vikings | Routes de raid et de commerce vers Constantinople, Terre-Neuve, etc. |
+| Khmers (Angkor) | Réseau hydraulique de barays et canaux — un réseau de gestion de l'eau plutôt que commercial, mais même logique de nœuds/arêtes |
+| Chine (culture) | Route de la soie |
+| Inde (culture) | Routes des épices, commerce indo-romain |
+
+C'est la piste la plus prometteuse après les généalogies, mais elle **ne réutilise pas le
+moteur existant tel quel** — prévoir une conception dédiée avant de se lancer, pas une
+adaptation à la va-vite du modèle nœuds/maisons.
+
+### D. Réseau de théories concurrentes (nouveau type, prolonge `TheoryCard`)
+
+Candidat seulement quand une page a un vrai foisonnement de théories/acteurs à relier entre
+eux — pas quand `#theories` compare simplement 2-3 lectures figées (ce que le composant
+`TheoryCard` fait déjà très bien seul, sans graphe) :
+
+| Page | Ce qui rend le graphe pertinent |
+|---|---|
+| Manuscrit de Voynich | Nombreux candidats-auteurs et tentatives de déchiffrement étalées sur des siècles — un vrai réseau, pas juste 2 écoles de pensée |
+| Col Dyatlov | Multiplicité réelle de théories (avalanche, infrasons, militaire, paranormal) avec des éléments de preuve qui se recoupent différemment selon la théorie |
+
+*Écarté après vérification* : l'Île de Pâques n'oppose que deux lectures scientifiques
+(Diamond contre Hunt & Lipo) — un `TheoryCard` suffit, un graphe serait disproportionné pour
+deux nœuds.
+
+### Créatures : rien pour l'instant
+
+Une seule page a remonté un signal ("variantes régionales") — La Llorona, 7 versions
+régionales du même récit. Écartée volontairement : la page traite un infanticide avec une
+sobriété délibérée (voir son commentaire d'en-tête), et un graphe interactif, aussi sobre
+soit-il, introduit un geste ludique (glisser, particules) qui irait à l'encontre de cette
+retenue. Le reste du bestiaire est fait de portraits individuels sans relations à montrer entre
+eux — correct de laisser cette famille sans graphe plutôt que d'en forcer un.
 
 Liste détaillée page par page à faire dans un second temps, une fois l'usage réel de ces deux
 premières intégrations confirmé.

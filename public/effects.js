@@ -42,7 +42,7 @@
 
   var toggleStyle = document.createElement('style');
   toggleStyle.textContent =
-    '#fx-toggle{position:fixed;top:18px;right:18px;z-index:9999;width:44px;height:44px;' +
+    '#fx-toggle{position:fixed;zoom:0.6667;top:18px;right:18px;z-index:9999;width:44px;height:44px;' +
       'border-radius:8px;border:1px solid rgba(255,255,255,.18);background:rgba(10,10,15,.72);' +
       'backdrop-filter:blur(6px);color:' + ACCENT + ';font-size:19px;line-height:1;cursor:pointer;' +
       'display:flex;align-items:center;justify-content:center;transition:opacity .2s,border-color .2s;}' +
@@ -72,14 +72,14 @@
      --------------------------------------------------------------------- */
   var style = document.createElement('style');
   style.textContent = [
-    '.fx-progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:99999;',
+    '.fx-progress{position:fixed;zoom:0.6667;top:0;left:0;height:2px;width:0;z-index:99999;',
       'background:linear-gradient(90deg,transparent,' + ACCENT + ');',
       'box-shadow:0 0 8px ' + ACCENT + ';pointer-events:none;transition:width .08s linear;}',
     '.fx-hero-glow{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;',
       'transition:opacity .5s ease;mix-blend-mode:screen;',
       'background:radial-gradient(280px circle at var(--mx,50%) var(--my,40%),' +
         'rgba(255,255,255,.10),transparent 60%);}',
-    '.fx-layer{position:fixed;inset:0;z-index:99990;pointer-events:none;overflow:hidden;}',
+    '.fx-layer{position:fixed;zoom:0.6667;inset:0;z-index:99990;pointer-events:none;overflow:hidden;}',
     '.fx-col{position:absolute;top:0;will-change:transform;}',
     '.fx-glyph{display:block;will-change:transform;font-family:"Cinzel","EB Garamond",serif;',
       'text-shadow:0 0 12px currentColor;}',
