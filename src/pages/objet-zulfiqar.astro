@@ -1,0 +1,175 @@
+---
+/*
+  Zulfiqar — vingt-et-unième objet de la série. Structure imposée par
+  docs/plans/plan-serie-objets.md : 9 sections, badge de nature.
+
+  Point de vigilance majeur : objet de dévotion vivante pour des centaines
+  de millions de musulmans, en particulier dans la tradition chiite, et
+  emblème politique et militaire historique (Empire ottoman) toujours
+  utilisé aujourd'hui. Traité avec le même surcroît de prudence que le
+  Tabouret d'or des Ashanti : jamais d'authentification ni de disqualification
+  de la relique à la place des institutions concernées, aucune mise en
+  scène religieuse dans l'effet visuel.
+
+  Pas de fx-decode sur cette page : aucune inscription réelle n'est
+  attestée sur les lames revendiquées, contrairement aux épées Ulfberht.
+
+  Effets : data-egg="zulfiqar" + data-scroll-fx="zulfiqarLame" sur
+  #description — une lame bifide qui s'illumine brièvement, strictement
+  neutre, aucune mise en scène religieuse.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Acier bruni, vert islamique, filigrane d'or : la matière de l'objet
+   plutôt qu'une palette régionale déjà utilisée ailleurs sur le site. */
+const palette = {
+  bg: '#0f1712',
+  'bg-deep': '#080d0a',
+  surface: '#182420',
+  'surface-alt': '#20302a',
+  border: '#3a5c4a',
+  ink: '#eef5ee',
+  text: '#c4d8c8',
+  'text-dim': '#7ea888',
+  accent: '#8a95a0',
+  'accent-bright': '#c3ccd4',
+  accent2: '#1e6a4a',
+  'accent2-bright': '#3a9a6e',
+  verdict: '#6b4a1e',
+  'verdict-bright': '#9a7830',
+  glow: 'rgba(138,149,160,0.2)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Zulfiqar"
+  serie="Objets Légendaires du Monde"
+  description="L'épée attribuée à Ali ibn Abi Talib, cousin et gendre du prophète Muhammad, associée à la bataille d'Uhud (625) et à la formule « Pas de héros sinon Ali, pas d'épée sinon Zulfiqar ». Objet de dévotion vivante pour des centaines de millions de musulmans, en particulier dans la tradition chiite, et emblème politique repris jusque sur les étendards ottomans."
+  href="objet-zulfiqar.html"
+  egg="zulfiqar"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ARABIE · ISTANBUL"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">L'épée dont la ferveur dépasse la lame</p>
+  <p class="tagline" slot="hero">
+    Une épée attribuée au cousin et gendre du prophète Muhammad, restée depuis quatorze
+    siècles un objet de dévotion vivante — et un emblème dont la silhouette à lame bifide a
+    fini par orner des étendards militaires bien après sa signification religieuse d'origine.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Relique contestée"
+    note="Plusieurs lames sont aujourd'hui revendiquées comme Zulfiqar ou comme reliques associées à Ali, notamment au Trésor de Topkapı à Istanbul, sans chaîne de possession vérifiable de façon indépendante jusqu'au VIIe siècle. Cette page rapporte les traditions et les revendications documentées sans se prononcer sur leur authenticité, qui relève des institutions et communautés concernées."
+  />
+
+  <Section id="origine" label="Première attestation" title="Une épée reçue du Prophète, selon la tradition" intro="Distinguer la tradition islamique ancienne sur l'origine de l'épée de la question distincte de la survivance matérielle d'un exemplaire précis jusqu'à aujourd'hui.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une épée associée à la bataille d'Uhud" sub="625 apr. J.-C." body="La tradition islamique rapporte qu'Ali combat avec cette épée lors de la bataille d'Uhud, où le prophète Muhammad l'aurait lui-même remise à son cousin et futur gendre." />
+      <InfoCard num="II" title="Une formule devenue proverbiale" sub="« Lā fatā illā ʿAlī »" body="Selon la tradition, une voix céleste proclame lors de la bataille : « Pas de héros sinon Ali, pas d'épée sinon Zulfiqar » — une formule reprise depuis dans de nombreux contextes dévotionnels et culturels musulmans." />
+      <InfoCard num="III" title="Une importance particulière en tradition chiite" sub="Ali, premier imam" body="La figure d'Ali occupant une place centrale dans le chiisme comme premier imam, l'épée qui lui est associée y revêt une signification religieuse particulièrement forte, sans être absente de la tradition sunnite." />
+    </div>
+  </Section>
+
+  <Section id="description" label="Forme et signification" title="Une lame bifide, surtout dans l'art plus tardif" scrollFx="zulfiqarLame">
+    <div class="card-grid wide">
+      <FigureCard name="Une pointe fourchue devenue signature visuelle" role="Convention artistique" tags={['Iconographie tardive', 'Pas systématiquement textuelle']} body="La représentation la plus reconnaissable de Zulfiqar, à double pointe, s'impose surtout dans l'art et l'héraldique islamiques plus tardifs (notamment ottomans et chiites) ; les toutes premières sources textuelles ne décrivent pas systématiquement cette forme avec la même précision." />
+      <FigureCard name="Un nom aux significations débattues" role="Étymologie discutée" tags={['« Possesseur de rainures »']} body="Le nom Dhu'l-Fiqar est généralement traduit par une référence à des rainures ou entailles le long de la lame, sans consensus définitif sur le sens exact du terme arabe." />
+      <FigureCard name="Un objet de dévotion vivante" role="Prudence requise" tags={['Vivant', 'Emblème politique contemporain']} body="Contrairement aux objets purement littéraires de cette série, Zulfiqar reste aujourd'hui un symbole de dévotion active pour des centaines de millions de croyants et un emblème politique mobilisé dans des contextes contemporains, ce qui appelle la même prudence que le Tabouret d'or des Ashanti." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="D'Uhud aux bannières ottomanes">
+    <StoryBlock num="Récit I" title="La bataille d'Uhud" body="Selon la tradition, Ali se distingue par sa bravoure lors de cette bataille difficile pour les premiers musulmans, combattant avec l'épée que le Prophète lui aurait confiée — un épisode fondateur de l'image martiale d'Ali dans la tradition islamique." />
+    <StoryBlock num="Récit II" title="La formule proclamée du ciel" body={["La tradition rapporte qu'une voix céleste proclame, au cœur de la bataille, la formule associant définitivement le nom d'Ali à celui de son épée.", "Cette formule reste aujourd'hui récitée et inscrite dans de nombreux contextes dévotionnels, notamment lors des commémorations chiites de Muharram."]} quote="Lā fatā illā ʿAlī, lā sayf illā Dhū al-Fiqār." cite="Formule traditionnelle associée à la bataille d'Uhud" />
+    <StoryBlock num="Récit III" title="L'adoption ottomane du motif" body="Bien plus tard, l'Empire ottoman reprend la silhouette à lame bifide de Zulfiqar comme motif sur des étendards militaires et navals, notamment ceux associés aux corps de janissaires — un emprunt qui déplace le symbole du strict registre religieux vers un usage également martial et politique." />
+  </Section>
+
+  <Section id="facture" label="Matière et fabrication" title="Ce que la métallurgie arabe ancienne permettait" intro="Même à partir d'une tradition en partie littéraire, on peut situer l'objet dans un contexte technique réel : celui des lames arabes du haut Moyen Âge islamique.">
+    <div class="card-grid compact">
+      <MiniCard title="L'acier au creuset" tag="Tradition technique régionale" body="Les régions arabes et perses de cette période bénéficient de techniques de production d'acier au creuset réputées, dont l'acier dit « damassé » (wootz), recherché pour sa combinaison de dureté et de flexibilité." />
+      <MiniCard title="La forme bifide, un défi de forge" tag="Question technique ouverte" body="Une lame véritablement fourchue sur toute sa longueur pose des défis structurels réels ; la plupart des spécialistes en armes anciennes jugent plus probable une pointe fendue sur une portion limitée de la lame plutôt qu'une bifurcation complète." />
+      <MiniCard title="Les épées attribuées du Trésor de Topkapı" tag="Comparaison matérielle" body="Les lames conservées à Istanbul et présentées comme liées à Ali ou à d'autres figures des débuts de l'islam permettent des comparaisons techniques avec l'armement de la période, sans que leur datation exacte au VIIe siècle soit indépendamment confirmée." />
+    </div>
+  </Section>
+
+  <Section id="traces" label="Candidats matériels" title="Le Trésor de Topkapı et les reliques du Saint Dépôt">
+    <Timeline items={[
+      { year: '625 apr. J.-C.', title: 'Bataille d\'Uhud', body: "Selon la tradition, Ali combat avec l'épée qui deviendra Zulfiqar." },
+      { year: 'VIIe-VIIIe siècle apr. J.-C.', title: 'Transmission au sein de la tradition islamique naissante', body: "Le récit et le nom de l'épée se diffusent avec l'expansion et la structuration des traditions sunnite et chiite." },
+      { year: 'Moyen Âge islamique', title: 'Essor de l\'iconographie à lame bifide', body: "La représentation à double pointe s'impose progressivement dans l'art et l'héraldique islamiques, sans qu'on puisse dater précisément le tournant." },
+      { year: 'XVIe siècle apr. J.-C.', title: 'Constitution du Trésor de Topkapı', body: "Les sultans ottomans rassemblent à Istanbul des reliques attribuées au prophète Muhammad et à ses compagnons, dont des épées associées à Ali." },
+      { year: 'XVIe-XIXe siècle apr. J.-C.', title: 'Usage du motif sur les étendards ottomans', body: "La silhouette de Zulfiqar orne des drapeaux et emblèmes militaires ottomans, notamment navals et janissaires." },
+      { year: "Aujourd'hui", title: 'Conservation au Musée du Palais de Topkapı', body: "Les pièces revendiquées restent conservées et exposées à Istanbul, sans authentification archéologique indépendante remontant au VIIe siècle." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="De la dévotion à l'emblème contemporain" title="Un symbole toujours porté aujourd'hui">
+    <div class="card-grid compact">
+      <MiniCard title="Les bannières de Muharram" tag="Commémoration chiite vivante" body="Le motif de Zulfiqar continue d'apparaître sur des bannières et étendards portés lors des commémorations chiites de Muharram, en mémoire d'Ali et de sa lignée." />
+      <MiniCard title="Un motif héraldique largement diffusé" tag="Art et artisanat islamiques" body="La silhouette bifide reste un motif décoratif reconnaissable dans l'art, la calligraphie et l'artisanat de nombreuses traditions islamiques contemporaines." />
+      <MiniCard title="Une référence dans la culture populaire mondiale" tag="Jeux vidéo et fiction" body="Le nom et la silhouette de Zulfiqar sont parfois repris dans des œuvres de fiction contemporaines, généralement de façon stylisée et distincte de son usage dévotionnel d'origine." />
+    </div>
+  </Section>
+
+  <Section id="verite" label="Section pivot" title="Ce qu'on peut affirmer aujourd'hui">
+    <ScienceBlock num="Enquête 1" title="Une tradition religieuse ancienne, une iconographie en partie postérieure" body="Le récit associant Ali à une épée nommée Zulfiqar remonte aux tout premiers siècles de l'islam ; la représentation systématique à lame bifide, en revanche, s'affirme plus nettement dans l'art islamique des périodes ultérieures, sans qu'on puisse fixer une date précise de ce glissement iconographique." />
+    <TheoryCard
+      title="Les lames conservées à Topkapı sont des reliques de dévotion, pas des objets archéologiquement authentifiés au VIIe siècle"
+      level="plausible"
+      status="Position prudente courante"
+      body="Comme pour de nombreuses reliques religieuses médiévales ailleurs dans le monde, la valeur de ces objets pour les croyants ne dépend pas d'une authentification archéologique indépendante, que les méthodes actuelles ne permettent généralement pas d'établir avec certitude pour ce type de pièce."
+      attrib="Approche prudente courante en histoire des reliques religieuses"
+    />
+    <TheoryCard
+      title="La forme bifide existait dès l'origine de l'épée historique d'Ali"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune source textuelle des tout premiers siècles de l'islam ne décrit avec certitude une lame fourchue ; cette hypothèse reste possible mais non établie avec la même solidité que le récit religieux lui-même." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cet objet fait encore">
+    <HeritageBlock title="Une dévotion active pour des centaines de millions de croyants" body="Zulfiqar reste un symbole religieux vivant, particulièrement central dans la piété chiite, mais reconnu bien au-delà de cette seule tradition." />
+    <HeritageBlock title="Un héritage visuel dans l'art islamique" body="La silhouette de l'épée continue d'inspirer calligraphie, bannières et objets d'art dans de nombreuses cultures islamiques contemporaines." />
+    <HeritageBlock title="Un emblème encore mobilisé politiquement" body="Le symbole continue d'être repris dans des contextes politiques et identitaires contemporains, en particulier dans certains mouvements chiites, un usage qui dépasse le strict cadre religieux d'origine." />
+    <CautionBox>
+      Cet objet reste un symbole de dévotion vivante pour des centaines de millions de
+      personnes et un emblème mobilisé dans des contextes politiques contemporains sensibles.
+      Cette page rapporte la tradition religieuse et son histoire matérielle documentée, sans
+      prendre position sur l'authenticité des reliques revendiquées ni sur les usages
+      politiques actuels du symbole, qui dépassent le cadre d'une page consacrée à l'objet et
+      à son histoire.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Wilferd Madelung, The Succession to Muhammad: A Study of the Early Caliphate, Cambridge University Press, 1997", note: "Contexte historique de la bataille d'Uhud et de la figure d'Ali cité en #origine et #recits." },
+    { label: "Hülya Tezcan, Topkapı Palace Museum: The Sacred Relics, publication officielle du Musée du Palais de Topkapı", note: "Documentation muséale des reliques attribuées conservées à Istanbul, citée en #traces et #verite." },
+    { label: "David Nicolle, Arms and Armour of the Crusading Era, 1050-1350, Greenhill Books, 1999", note: "Contexte technique sur les lames arabes anciennes cité en #facture." },
+    { label: "Moojan Momen, An Introduction to Shi'i Islam, Yale University Press, 1985", note: "Contexte sur la place d'Ali et de Zulfiqar dans la tradition chiite, cité en #origine et #heritage." },
+  ]} />
+</PageLayout>

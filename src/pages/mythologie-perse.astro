@@ -35,6 +35,42 @@ import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
 import Decode from '../components/Decode.astro';
 import Sources from '../components/Sources.astro';
+import InteractiveGenealogy from '../components/InteractiveGenealogy.astro';
+
+/* #genealogie : « maisons » = camps/émanations, pas des lignées de sang —
+   voir la note en tête de fichier. Tous les liens sont donc de type
+   'special' (aucun 'filiation'/'union' ne s'applique ici), ce qui
+   correspond au rendu finement pointillé déjà utilisé pour ce sens dans
+   le diagramme statique d'origine. */
+const PERSE_HOUSES = {
+  mazda: { head: '#f7c667', normal: '#e8d2b0', dim: '#b09570' },
+  ahriman: { head: '#6a6f9c', normal: '#8a94b8', dim: '#6a6f9c' },
+  yazata: { head: '#c9384a', normal: '#e0a0a8', dim: '#c9384a' },
+};
+const PERSE_HOUSE_LABELS = {
+  mazda: "Maison d'Ahura Mazda",
+  ahriman: "Maison d'Angra Mainyu",
+  yazata: 'Yazata plus anciens',
+};
+const PERSE_NODES = [
+  { id: 'mazda', label: 'Ahura Mazda', house: 'mazda', head: true, x: 200, y: 60, detail: "Dieu unique de la sagesse, source de toute création bonne. Il n'a ni parents ni rivaux de son rang — seulement un antagoniste, Angra Mainyu, qu'il n'a pas créé mais dont il n'a pas empêché l'existence." },
+  { id: 'vohu_manah', label: 'Vohu Manah', house: 'mazda', x: 50, y: 210, detail: "Premier des Immortels Bienfaisants à accueillir Zoroastre lors de sa révélation, protecteur du bétail et de l'esprit de discernement." },
+  { id: 'asha', label: 'Asha Vahishta', house: 'mazda', x: 130, y: 210, detail: "Incarnation de l'ordre cosmique et de la vérité, gardien du feu — le principe le plus proche d'une divinité du feu, sans jamais en être un objet de culte matériel séparé." },
+  { id: 'khshathra', label: 'Khshathra Vairya', house: 'mazda', x: 210, y: 210, detail: 'Protecteur du ciel et des métaux, associé à la royauté juste — un pouvoir légitime seulement quand il sert le bien commun.' },
+  { id: 'armaiti', label: 'Spenta Armaiti', house: 'mazda', x: 290, y: 210, detail: "Protectrice de la terre et de la piété silencieuse, l'une des rares figures féminines du groupe des Amesha Spenta." },
+  { id: 'haurvatat', label: 'Haurvatat', house: 'mazda', x: 370, y: 210, detail: 'Protectrice des eaux, associée à la santé et à la perfection — souvent invoquée aux côtés d’Ameretat.' },
+  { id: 'ameretat', label: 'Ameretat', house: 'mazda', x: 450, y: 210, detail: 'Protectrice des plantes, garante que la vie végétale se renouvelle indéfiniment malgré l’assaut du Mal.' },
+  { id: 'ahriman', label: 'Angra Mainyu', house: 'ahriman', head: true, x: 760, y: 60, detail: "Principe du mensonge et de la destruction, à l'origine de tout mal, souffrance et mort. Il n'est pas l'égal d'Ahura Mazda en pouvoir : sa défaite finale est annoncée comme certaine, pas seulement espérée." },
+  { id: 'aeshma', label: 'Aeshma', house: 'ahriman', x: 760, y: 210, detail: 'Général des forces d’Angra Mainyu, personnification de la rage aveugle — son nom a traversé les langues jusqu’à « Asmodée » dans les traditions juive et chrétienne tardives.' },
+  { id: 'mithra', label: 'Mithra', house: 'yazata', x: 530, y: 300, detail: "Dieu de l'alliance jurée et du serment, « aux mille oreilles » — vénéré avant la réforme de Zoroastre, intégré au culte après." },
+  { id: 'anahita', label: 'Anahita', house: 'yazata', x: 650, y: 300, detail: "Déesse des eaux et de la fertilité, l'une des divinités les plus vénérées de l'Iran antique — vénérée avant la réforme de Zoroastre, intégrée au culte après." },
+];
+const PERSE_EDGES = [
+  ['mazda', 'vohu_manah', 'special'], ['mazda', 'asha', 'special'], ['mazda', 'khshathra', 'special'],
+  ['mazda', 'armaiti', 'special'], ['mazda', 'haurvatat', 'special'], ['mazda', 'ameretat', 'special'],
+  ['ahriman', 'aeshma', 'special'],
+  ['mazda', 'mithra', 'special'], ['mazda', 'anahita', 'special'],
+];
 
 /* Braise et nuit : le feu sacré (Ahura Mazda) contre l'obscurité (Angra
    Mainyu) — le dualisme fondateur de la religion, en couleurs. */
@@ -161,35 +197,16 @@ const creations = [
     title="Une structure sans arbre de parenté"
     intro="Ici, la généalogie classique (parents, mariages, enfants) ne convient pas : le zoroastrisme est fondé sur un dualisme de camps, pas une famille divine. Les « 3 maisons » sont donc redéfinies en conséquence — un choix explicite, pas un gabarit forcé.">
     <Fragment slot="title"><Decode glyphs="cunei">Une structure sans arbre de parenté</Decode></Fragment>
-    <div class="map-diagram">
-      <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
-        <text x="150" y="40" text-anchor="middle" fill="#f7c667" font-family="Cinzel, serif" font-size="14">MAISON D'AHURA MAZDA</text>
-        <circle cx="150" cy="90" r="22" fill="#e8a23c" stroke="#fbead0" stroke-width="2"/>
-        <text x="150" y="95" text-anchor="middle" font-size="10" fill="#171009" font-weight="700">Mazda</text>
-        {['Vohu Manah','Asha','Khshathra','Armaiti','Haurvatat','Ameretat'].map((n,i) => {
-          const cx = 60 + i * 36;
-          return (
-            <g>
-              <line x1="150" y1="112" x2={cx} y2="190" stroke="#e8a23c" stroke-width="1" stroke-dasharray="2 4" opacity="0.7"/>
-              <circle cx={cx} cy="200" r="13" fill="#2e2214" stroke="#e8a23c" stroke-width="1.3"/>
-            </g>
-          );
-        })}
-        <text x="150" y="240" text-anchor="middle" fill="#b09570" font-size="10">émanations, pas naissances</text>
-
-        <text x="470" y="40" text-anchor="middle" fill="#6a6f9c" font-family="Cinzel, serif" font-size="14">MAISON D'ANGRA MAINYU</text>
-        <circle cx="470" cy="90" r="22" fill="#3a3d5c" stroke="#6a6f9c" stroke-width="2"/>
-        <text x="470" y="95" text-anchor="middle" font-size="9" fill="#fbead0" font-weight="700">Ahriman</text>
-        <line x1="470" y1="112" x2="470" y2="190" stroke="#6a6f9c" stroke-width="1" stroke-dasharray="2 4" opacity="0.7"/>
-        <circle cx="470" cy="200" r="13" fill="#171009" stroke="#6a6f9c" stroke-width="1.3"/>
-        <text x="470" y="240" text-anchor="middle" fill="#8a94b8" font-size="10">Aeshma et les daeva</text>
-
-        <text x="310" y="270" text-anchor="middle" fill="#c9384a" font-family="Cinzel, serif" font-size="13">YAZATA PLUS ANCIENS</text>
-        <line x1="150" y1="112" x2="310" y2="245" stroke="#c9384a" stroke-width="1" stroke-dasharray="1 3" opacity="0.5"/>
-        <text x="310" y="250" text-anchor="middle" fill="#e0a0a8" font-size="9">Mithra, Anahita — vénérés avant Zoroastre, intégrés après</text>
-      </svg>
-    </div>
-    <p class="map-caption">Trait pointillé = émanation (pas une naissance) ; les Yazata comme Mithra et Anahita appartiennent à un culte antérieur à la réforme de Zoroastre, absorbé plutôt qu'engendré.</p>
+    <InteractiveGenealogy
+      nodes={PERSE_NODES}
+      edges={PERSE_EDGES}
+      houses={PERSE_HOUSES}
+      houseLabels={PERSE_HOUSE_LABELS}
+      glyphs="𐎠𐎢𐎼𐎣𐎨𐎫𐎭𐎱𐎲𐎳"
+      viewBox={{ w: 900, h: 350 }}
+      lineColor="#5a4020"
+    />
+    <p class="map-caption">Trait pointillé = émanation (pas une naissance) ; les Yazata comme Mithra et Anahita appartiennent à un culte antérieur à la réforme de Zoroastre, absorbé plutôt qu'engendré. Glissez un nom pour l'écarter du reste, cliquez pour lire un court repère sur la figure.</p>
     <p class="source-note" style="text-align:center;">
       Les sources elles-mêmes hésitent sur le statut exact de Spenta Mainyu — parfois distinct
       d'Ahura Mazda, parfois son simple aspect actif. Ce flou n'est pas lissé ici : il appartient

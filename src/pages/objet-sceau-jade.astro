@@ -1,0 +1,174 @@
+---
+/*
+  Le Sceau de jade impérial — dix-neuvième objet de la série. Structure
+  imposée par docs/plans/plan-serie-objets.md : 9 sections, badge de nature.
+
+  Angle éditorial central de la page : un objet dont l'ABSENCE, pas la
+  présence, a pesé sur l'histoire politique chinoise — plusieurs dynasties
+  sans le sceau authentique ont dû composer avec des répliques, ce qui a
+  fragilisé leur revendication du Mandat du Ciel. #traces et #verite
+  insistent sur ce point plutôt que de traiter l'objet comme une simple
+  relique perdue parmi d'autres.
+
+  Effets : data-egg="sceaujade" + data-scroll-fx="sceauJadeEmpreinte" sur
+  #description — un sceau qui s'imprime en rouge sur un document, puis dont
+  l'empreinte s'efface.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Jade impérial, encre de sceau rouge, or de cour : la matière de l'objet
+   plutôt qu'une palette "Chine" générique déjà utilisée ailleurs sur le site. */
+const palette = {
+  bg: '#12180f',
+  'bg-deep': '#0a0e08',
+  surface: '#1c2617',
+  'surface-alt': '#26321e',
+  border: '#455c3a',
+  ink: '#eef5e8',
+  text: '#c8d8b8',
+  'text-dim': '#84a074',
+  accent: '#4a8a5a',
+  'accent-bright': '#6cb47e',
+  accent2: '#9a2e2a',
+  'accent2-bright': '#c85a4a',
+  verdict: '#5c4a1e',
+  'verdict-bright': '#8a7030',
+  glow: 'rgba(74,138,90,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Sceau de jade impérial"
+  serie="Objets Légendaires du Monde"
+  description="Taillé selon la tradition dans le légendaire jade He Shi Bi pour le Premier Empereur Qin Shi Huang vers 221 av. J.-C., ce sceau a servi pendant plus d'un millénaire de preuve matérielle du Mandat du Ciel — jusqu'à sa disparition en 938 apr. J.-C., dont l'absence a directement fragilisé la légitimité de plusieurs dynasties qui ne l'ont jamais retrouvé."
+  href="objet-sceau-jade.html"
+  egg="sceaujade"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="受命於天，既壽永昌"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">L'objet dont l'absence a délégitimé des dynasties entières</p>
+  <p class="tagline" slot="hero">
+    Pendant plus de mille ans, un empereur chinois sans ce sceau précis voyait sa légitimité
+    mise en doute — jusqu'à sa disparition en 938, dans les cendres d'un palais assiégé, sans
+    qu'aucune dynastie postérieure n'ait jamais pu prouver en détenir l'original.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet réel disparu"
+    note="L'existence du sceau est attestée par des sources historiques chinoises continues sur plus d'un millénaire. Sa disparition en 938 apr. J.-C. est également bien documentée ; toutes les « redécouvertes » revendiquées par des dynasties postérieures sont considérées par les historiens comme des fabrications de légitimation politique."
+  />
+
+  <Section id="origine" label="Première attestation" title="Du jade de Chu au sceau du Premier Empereur" intro="Distinguer la légende du jade lui-même de la légende du sceau qui en est tiré : deux récits distincts, séparés de plusieurs décennies, que les sources chinoises elles-mêmes ne confondent pas.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Le jade He Shi Bi" sub="Royaume de Chu, IIIe siècle av. J.-C." body="Un disque de jade d'une qualité exceptionnelle, au cœur d'un épisode diplomatique fameux entre les royaumes de Zhao et de Qin, où l'émissaire Lin Xiangru ramène le jade intact malgré la ruse du roi de Qin — un récit d'intégrité resté proverbial en Chine jusqu'à aujourd'hui." />
+      <InfoCard num="II" title="La taille du sceau, v. 221 av. J.-C." sub="Qin Shi Huang, Premier Empereur" body="Selon la tradition historiographique chinoise, le jade He Shi Bi est taillé en sceau impérial peu après l'unification de la Chine par Qin Shi Huang, inscrit par son chancelier et calligraphe Li Si." />
+      <InfoCard num="III" title="L'inscription du Mandat du Ciel" sub="Huit caractères en écriture sigillaire" body="Le sceau porte l'inscription « 受命於天，既壽永昌 » (« Ayant reçu le mandat du Ciel, que [le souverain] connaisse longévité et prospérité éternelle ») — la formule même qui fera de sa possession la preuve matérielle de la légitimité impériale." />
+    </div>
+  </Section>
+
+  <Section id="description" label="Forme et fonction" title="Un sceau, pas un bijou de cour" scrollFx="sceauJadeEmpreinte">
+    <div class="card-grid wide">
+      <FigureCard name="Un sceau de transmission, pas d'usage courant" role="Fonction politique" tags={['Légitimité', 'Mandat du Ciel']} body="Contrairement aux nombreux sceaux personnels que chaque empereur faisait généralement graver à son propre nom, ce sceau précis fonctionnait comme un objet de transmission dynastique, symbole matériel unique du Mandat du Ciel plutôt que sceau d'usage administratif quotidien." />
+      <FigureCard name="Une inscription en écriture sigillaire" role="Calligraphie de Li Si" tags={['Huit caractères', 'Li Si']} body="Le texte, attribué au chancelier et calligraphe Li Si, est gravé dans le style d'écriture sigillaire (zhuanshu) propre aux sceaux chinois de cette période, encore étudié aujourd'hui par les spécialistes de paléographie." />
+      <FigureCard name="Un coin réparé à l'or" role="Détail semi-légendaire" tags={['Impératrice douairière Han', 'Réparation']} body="La tradition rapporte qu'une impératrice douairière Han, lors d'une crise de succession, aurait jeté le sceau au sol avec une telle colère qu'un coin s'en serait brisé, réparé ensuite avec un incrustation d'or — un détail transmis par plusieurs sources tardives, à traiter comme une tradition plutôt qu'un fait matériellement vérifié." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="De l'intégrité de Lin Xiangru à l'incendie du palais">
+    <StoryBlock num="Récit I" title="« Rendre le jade intact au Zhao »" body={["Le roi de Qin propose au royaume de Zhao d'échanger le jade He Shi Bi contre quinze cités, une offre que le royaume de Zhao soupçonne d'être un prétexte pour s'emparer du jade sans contrepartie réelle. L'émissaire Lin Xiangru se rend à la cour de Qin avec le jade, menace de le briser contre un pilier si le roi ne tient pas parole, puis parvient à le faire secrètement rapatrier intact au Zhao avant la cérémonie d'échange.", "L'expression « rendre le jade intact au Zhao » (完璧归赵) reste aujourd'hui une formule proverbiale chinoise désignant la restitution honnête d'un bien précieux confié."]} quote="Rendre le jade intact au Zhao." cite="Expression proverbiale tirée du Shiji de Sima Qian" />
+    <StoryBlock num="Récit II" title="Le sceau lancé par une impératrice douairière" body="Lors d'une crise de succession sous les Han, une impératrice douairière, sommée de remettre le sceau à un usurpateur, le jette au sol de rage plutôt que de le céder de bonne grâce — un geste qui, selon la tradition, ébrèche l'un de ses coins, réparé depuis à l'or." />
+    <StoryBlock num="Récit III" title="L'incendie du palais des Tang postérieurs, 938" body="Assiégé par les forces de la future dynastie des Jin postérieurs, l'empereur Li Congke des Tang postérieurs se serait donné la mort par le feu avec toute sa cour, emportant le sceau impérial dans les flammes du palais. Aucun fragment de jade n'est retrouvé dans les décombres — c'est la dernière mention fiable du sceau authentique dans les sources historiques chinoises." />
+  </Section>
+
+  <Section id="facture" label="Matière et fabrication" title="Ce que la taille du jade impérial exigeait vraiment" intro="Même réduit aujourd'hui à un objet disparu, le sceau renseigne sur un savoir-faire technique réel : celui des lapidaires chinois de l'Antiquité.">
+    <div class="card-grid compact">
+      <MiniCard title="Une pierre extrêmement dure à travailler" tag="Lapidaire antique" body="Le jade (néphrite ou jadéite selon les pièces) ne se taille pas au ciseau comme la pierre tendre : les artisans chinois anciens le façonnaient par abrasion patiente à l'aide de poudres abrasives et d'outils rotatifs rudimentaires, un travail pouvant s'étendre sur des mois pour une seule pièce prestigieuse." />
+      <MiniCard title="La gravure en écriture sigillaire" tag="Calligraphie inversée" body="Graver un sceau exige de sculpter le texte en miroir et en relief ou en creux selon le type d'empreinte recherché — une compétence calligraphique et technique combinée, bien documentée par les sceaux impériaux chinois parvenus jusqu'à nous." />
+      <MiniCard title="Le jade, matière de pouvoir en Chine" tag="Continuité culturelle" body="Bien au-delà de ce seul sceau, le jade occupe dans la culture chinoise une place rituelle et politique unique, associée à la pureté morale et à l'autorité — un statut symbolique qui rend plausible qu'un objet de légitimation suprême ait été taillé dans cette matière plutôt que dans l'or ou le bronze." />
+      <MiniCard title="Les 25 sceaux impériaux Qing" tag="Point de comparaison" body="La dynastie Qing conservait officiellement une collection de vingt-cinq sceaux impériaux dans le Palais de la Préservation de l'Harmonie — sans jamais y inclure de pièce revendiquée comme le sceau authentique de Qin Shi Huang, signe que même la cour impériale reconnaissait implicitement sa perte." />
+    </div>
+  </Section>
+
+  <Section id="traces" label="Candidats matériels" title="Un objet dont l'absence a délégitimé des dynasties">
+    <Timeline items={[
+      { year: 'v. 221 av. J.-C.', title: 'Taille du sceau pour Qin Shi Huang', body: "Le jade He Shi Bi est transformé en sceau impérial, inscrit par le chancelier Li Si." },
+      { year: 'Dynastie Han (206 av. J.-C.-220 apr. J.-C.)', title: 'Transmission comme preuve du Mandat du Ciel', body: "Le sceau passe de règne en règne comme preuve matérielle de la légitimité impériale, y compris lors de l'épisode de l'impératrice douairière." },
+      { year: 'Période des Trois Royaumes (220-280)', title: 'Disputes de possession entre royaumes rivaux', body: "Plusieurs prétendants au trône impérial chinois revendiquent la possession du sceau authentique pour asseoir leur légitimité respective." },
+      { year: 'Dynasties suivantes (280-907)', title: 'Transmission continue revendiquée', body: "Chaque nouvelle dynastie affirme détenir le sceau authentique, sans qu'aucune source indépendante ne permette de vérifier la continuité réelle de sa possession sur toute cette période." },
+      { year: '938 apr. J.-C.', title: 'Disparition dans l\'incendie du palais des Tang postérieurs', body: "Le dernier empereur des Tang postérieurs se serait donné la mort par le feu avec le sceau lors d'un siège — dernière mention fiable de l'objet authentique." },
+      { year: 'Dynasties Song, Yuan, Ming (960-1644)', title: '« Redécouvertes » jugées suspectes', body: "Plusieurs dynasties annoncent successivement avoir retrouvé le sceau authentique ; les historiens modernes considèrent la plupart de ces annonces comme des fabrications de légitimation politique." },
+      { year: 'Dynastie Qing (1644-1912)', title: 'Absence du sceau parmi les 25 sceaux officiels', body: "La cour Qing, pourtant soucieuse de légitimité dynastique, n'inclut aucune pièce revendiquée comme le sceau de Qin Shi Huang dans sa collection officielle des vingt-cinq grands sceaux impériaux." },
+      { year: "Aujourd'hui", title: 'Un objet considéré comme définitivement perdu', body: "Aucune institution muséale chinoise ou internationale ne revendique aujourd'hui posséder l'original, considéré par le consensus historique comme perdu depuis 938." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="De la chronique dynastique à la fiction historique" title="Un objet qui hante l'imaginaire politique chinois">
+    <div class="card-grid compact">
+      <MiniCard title="Un motif récurrent des séries historiques chinoises" tag="Fiction télévisée" body="La quête ou la possession du sceau impérial reste un ressort narratif classique des drames historiques et des récits de cape et d'épée chinois (wuxia), qui en exploitent la charge symbolique de légitimité." />
+      <MiniCard title="Une expression proverbiale toujours en usage" tag="Langue chinoise contemporaine" body="L'expression « rendre le jade intact au Zhao », tirée de l'épisode de Lin Xiangru, reste employée aujourd'hui en mandarin pour désigner la restitution honnête d'un bien confié." />
+      <MiniCard title="Un objet absent des collections impériales visibles" tag="Contraste muséal" body="Contrairement à de nombreux trésors impériaux chinois aujourd'hui exposés à Pékin ou Taipei, aucune pièce ne peut être présentée au public comme ce sceau précis — son absence même est devenue une partie de sa légende." />
+    </div>
+  </Section>
+
+  <Section id="verite" label="Section pivot" title="Ce qu'on peut affirmer aujourd'hui">
+    <ScienceBlock num="Enquête 1" title="Une existence bien attestée, une disparition documentée" body="Contrairement à des objets purement littéraires comme Durandal ou Excalibur, l'existence de ce sceau repose sur une continuité de sources historiographiques chinoises sur plus d'un millénaire, tout comme sa disparition en 938 — ce n'est pas un objet de fiction, mais un objet réel dont la trace matérielle s'arrête net." />
+    <TheoryCard
+      title="Les « redécouvertes » dynastiques postérieures sont des fabrications politiques"
+      level="consensus"
+      status="Position dominante en sinologie"
+      body="Les historiens s'accordent largement à considérer les annonces répétées de redécouverte du sceau, du Xe au XVIIe siècle, comme des instruments de légitimation politique plutôt que des découvertes archéologiques réelles — la disparition de 938 est traitée comme définitive dans l'historiographie moderne."
+      attrib="Position dominante en histoire impériale chinoise"
+    />
+    <TheoryCard
+      title="Le sceau pourrait avoir survécu, caché ou non identifié"
+      level="folklore"
+      status="Spéculatif, non étayé"
+      body="Certains récits populaires imaginent que le sceau aurait pu échapper à l'incendie de 938 et demeurer caché ou mal identifié dans une collection privée ou institutionnelle — une hypothèse qu'aucune preuve documentaire ou matérielle ne vient aujourd'hui appuyer." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cet objet fait encore">
+    <HeritageBlock title="Un cas d'école sur le pouvoir symbolique des objets" body="Peu d'objets illustrent aussi nettement comment l'absence d'une relique peut peser autant sur l'histoire politique que sa présence : plusieurs dynasties ont dû composer avec le doute que leur absence de sceau authentique faisait peser sur leur légitimité." />
+    <HeritageBlock title="Une expression toujours vivante dans la langue chinoise" body="L'épisode de Lin Xiangru continue d'irriguer le mandarin contemporain à travers une expression encore couramment utilisée aujourd'hui." />
+    <HeritageBlock title="Un contraste instructif avec les autres reliques de la série" body="À la différence du Saint Graal ou d'Excalibur, purement littéraires, ce sceau a existé et disparu dans un cadre historique documenté — un rappel que « objet réel disparu » et « objet de fiction » recouvrent des réalités très différentes, alors même que le résultat (l'absence de l'objet aujourd'hui) est identique." />
+    <CautionBox>
+      Les récits de « redécouverte » du sceau, produits par des dynasties en quête de
+      légitimité, illustrent comment les objets de pouvoir peuvent être délibérément fabriqués
+      ou falsifiés à des fins politiques. Le rappeler n'est pas une façon de discréditer
+      l'historiographie chinoise ancienne, mais de la lire avec la même rigueur critique
+      qu'on appliquerait à n'importe quelle relique politique revendiquée ailleurs dans le
+      monde.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Sima Qian, Shiji (Mémoires historiques), « Biographie de Lin Xiangru », trad. Édouard Chavannes, Les Belles Lettres (IIe-Ier s. av. J.-C., éd. moderne)", note: "Source de l'épisode du jade He Shi Bi cité en #origine et #recits." },
+    { label: "Michael Loewe, The Men Who Governed Han China, Brill, 2004", note: "Contexte historique de la transmission du sceau sous les Han cité en #recits et #traces." },
+    { label: "Denis Twitchett et Michael Loewe (dir.), The Cambridge History of China, vol. 1 : The Ch'in and Han Empires, Cambridge University Press, 1986", note: "Synthèse de référence sur la fonction politique des sceaux impériaux citée en #description et #verite." },
+    { label: "Patricia Ebrey, The Cambridge Illustrated History of China, Cambridge University Press, 1996", note: "Contexte des périodes de disparition et de « redécouvertes » revendiquées, cité en #traces et #culture-populaire." },
+  ]} />
+</PageLayout>

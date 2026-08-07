@@ -1,0 +1,160 @@
+---
+/*
+  Black Shuck — dix-huitième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict.
+
+  Point de vigilance : l'événement de 1577 rapporte la mort de
+  paroissiens réels lors d'un orage — traité avec la même sobriété que les
+  autres événements historiques documentés de cette série, sans mise en
+  scène macabre. La source (pamphlet de 1577) est un document d'époque
+  réel, pas une reconstruction moderne.
+
+  Effets : data-egg="blackshuck" + data-scroll-fx="blackShuckYeux" sur
+  #portrait — deux yeux rouges au ras du sol qui s'allument puis
+  s'éloignent en tremblant (variante de eyes).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Brume des fens anglais, orage sombre, braise rouge des yeux : la
+   matière du folklore est-anglais plutôt qu'une palette "chien fantôme"
+   générique. */
+const palette = {
+  bg: '#12160f',
+  'bg-deep': '#0a0c08',
+  surface: '#1c2218',
+  'surface-alt': '#262e20',
+  border: '#4a5c3a',
+  ink: '#eef2e8',
+  text: '#c8d0b8',
+  'text-dim': '#84947a',
+  accent: '#8a2a2a',
+  'accent-bright': '#c44a3a',
+  accent2: '#4a5848',
+  'accent2-bright': '#748a70',
+  verdict: '#2e3a1e',
+  'verdict-bright': '#4a5c30',
+  glow: 'rgba(138,42,42,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Récits' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Black Shuck"
+  serie="Créatures Légendaires du Monde"
+  description="Un chien noir spectral du folklore d'East Anglia, lié à un événement historique rapporté avec précision : le 4 août 1577, un orage violent à Bungay et Blythburgh (Suffolk) où un pamphlet d'époque décrit sa surgie dans deux églises, laissant des marques de griffes encore visibles aujourd'hui sur une porte."
+  href="creature-black-shuck.html"
+  egg="blackshuck"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ANGLETERRE · EAST ANGLIA"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Le chien noir des Fens</p>
+  <p class="tagline" slot="hero">
+    Une légende de chien fantôme comme il en existe dans tout le folklore européen — mais
+    adossée à un document imprimé de 1577 qui rapporte, avec une précision inhabituelle pour
+    l'époque, sa surgie dans deux églises pendant un orage réellement meurtrier.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Folklore local ancien, lié à un événement historique rapporté (1577)"
+    note="Aucune preuve zoologique d'un chien spectral n'existe évidemment. L'événement de 1577 à Bungay et Blythburgh, en revanche, est documenté par un pamphlet imprimé d'époque et correspond probablement à un orage violent ayant causé des morts réelles, interprétées sur le moment comme l'œuvre d'une bête surnaturelle."
+  />
+
+  <Section id="origine" label="Première mention" title="Un motif européen ancien, un nom local" intro="Le chien noir spectral appartient à une vaste famille de folklores européens ; le nom Black Shuck et sa forme la plus documentée restent propres à l'Est de l'Angleterre.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Un motif pan-européen" sub="Barghest, Padfoot, Gytrash, Grim" body="Le folklore anglais et scandinave connaît de nombreuses variantes régionales de chien noir spectral, souvent perçu comme un présage de mort — Black Shuck en est la variante la mieux documentée d'East Anglia." />
+      <InfoCard num="II" title="Une étymologie discutée" sub="Vieil anglais « scucca »" body="Le nom pourrait dériver d'un terme désignant un démon ou un esprit malfaisant, ou d'un mot dialectal signifiant simplement « hirsute » — les deux pistes restent débattues par les folkloristes." />
+      <InfoCard num="III" title="L'événement de Bungay et Blythburgh, 1577" sub="Première attestation écrite précise" body="Le pamphlet contemporain du révérend Abraham Fleming, A Straunge and Terrible Wunder, fixe pour la première fois par écrit un épisode précis attribué à la créature." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapporte la tradition" title="Un chien noir aux yeux de braise" scrollFx="blackShuckYeux">
+    <div class="card-grid wide">
+      <FigureCard name="Une silhouette canine massive" role="Description dominante" tags={['Noir', 'Grande taille']} body="La plupart des témoignages décrivent un chien de grande taille, au pelage sombre, parfois décrit comme plus imposant qu'un chien ordinaire." />
+      <FigureCard name="Des yeux rouges ou luisants" role="Détail récurrent" tags={['Braise', 'Présage']} body="Le détail des yeux rougeoyants ou luisant dans l'obscurité revient dans la quasi-totalité des récits, fonction d'avertissement plus que de simple description physique." />
+      <FigureCard name="Un présage, pas systématiquement un tueur" role="Nuance importante" tags={['Ambivalence régionale']} body="Si la tradition dominante veut que voir Black Shuck annonce une mort dans l'année, certaines variantes régionales le décrivent au contraire comme un protecteur silencieux des voyageurs isolés la nuit." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Le récit fondateur" title="L'orage de Bungay et Blythburgh, 4 août 1577">
+    <StoryBlock num="Récit I" title="L'irruption à l'église de Blythburgh" body={["Selon le pamphlet d'Abraham Fleming, un orage d'une violence inhabituelle s'abat sur le Suffolk le dimanche 4 août 1577. Un chien noir surgit dans l'église de Blythburgh en pleine assemblée, traverse la nef à toute allure et laisserait, selon le récit, deux paroissiens morts sur son passage.", "Le texte rapporte également des marques de griffes calcinées sur la porte de l'église — des marques que la tradition locale montre encore aujourd'hui aux visiteurs, sans qu'une origine autre que légendaire ait jamais été démontrée pour elles."]} quote="Ce chien noir, ou plutôt ce diable sous une telle apparence." cite="Abraham Fleming, A Straunge and Terrible Wunder, 1577" />
+    <StoryBlock num="Récit II" title="Le même orage à Bungay" body="Le même jour, un événement similaire est rapporté à l'église Sainte-Marie de Bungay, à une douzaine de kilomètres de Blythburgh — la simultanéité des deux incidents, dans le même orage, est l'un des éléments qui a le plus solidement ancré le récit dans la mémoire régionale." />
+    <StoryBlock num="Récit III" title="Une tradition orale continue jusqu'à aujourd'hui" body="Au-delà de l'épisode de 1577, des témoignages de rencontres avec un grand chien noir continuent d'être rapportés dans la région jusqu'à une période récente, sans qu'aucun ne bénéficie de la même précision documentaire que le pamphlet original." />
+  </Section>
+
+  <Section id="culture-populaire" label="Du folklore local à la littérature gothique" title="L'ombre portée sur la fiction anglaise">
+    <div class="card-grid compact">
+      <MiniCard title="Le Chien des Baskerville, 1902" tag="Arthur Conan Doyle" body="Le folklore anglais du chien noir spectral, dans ses diverses variantes régionales (dont celles du Devon plus que celles d'East Anglia proprement dites), est généralement cité comme source d'inspiration du roman de Conan Doyle." />
+      <MiniCard title="Sirius Black et son « Grim »" tag="Harry Potter" body="La saga de J. K. Rowling reprend directement le folklore du chien noir présage de mort, désigné dans les romans sous le nom de « Grim » — un emprunt assumé au folklore britannique traditionnel." />
+      <MiniCard title="Un motif touristique local" tag="Suffolk et Norfolk" body="Les églises de Bungay et Blythburgh continuent d'attirer des visiteurs venus voir les marques de griffes attribuées à l'épisode de 1577, entretenant une économie touristique locale modeste mais durable." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que l'histoire peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Un événement météorologique réel et documenté" body="La violence de l'orage du 4 août 1577 est attestée par un document imprimé contemporain, une source relativement rare et précieuse pour ce type d'événement à cette époque — la tempête elle-même, et les morts qu'elle a probablement causées par la foudre ou la panique, sont les faits les plus solidement établis du dossier." />
+    <ScienceBlock num="Enquête 2" title="Une explication naturelle plausible pour les décès" body="Les historiens modernes privilégient l'hypothèse d'un décès par foudroiement direct ou par la panique et la chute de éléments architecturaux pendant l'orage, plutôt qu'une attaque animale réelle — une explication cohérente avec la violence orageuse décrite par le texte lui-même." />
+    <ScienceBlock num="Enquête 3" title="Aucune preuve zoologique, mais un motif folklorique ancien" body="Le folklore du chien noir spectral préexistait probablement à l'événement de 1577 dans la région ; l'orage a vraisemblablement servi de catalyseur donnant une forme concrète et datée à une croyance déjà présente plutôt que de la créer de toutes pièces." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Des décès réels par foudre ou panique, interprétés à travers un folklore préexistant"
+      level="plausible"
+      status="Explication historique dominante"
+      body="La plupart des historiens du folklore anglais retiennent que des morts bien réelles, causées par un orage d'une violence exceptionnelle, ont été interprétées par les témoins à travers la grille de lecture d'une créature déjà connue de la tradition orale locale."
+      attrib="Position dominante en histoire du folklore britannique"
+    />
+    <TheoryCard
+      title="Un grand chien errant réel, mal interprété dans la panique"
+      level="plausible"
+      status="Hypothèse complémentaire"
+      body="Certains chercheurs suggèrent qu'un chien de grande taille, effrayé lui-même par l'orage, aurait pu réellement s'introduire dans l'une des églises, sa présence bien réelle se combinant à la panique ambiante pour nourrir le récit surnaturel."
+      attrib="Hypothèse secondaire en histoire locale"
+    />
+    <TheoryCard
+      title="Une créature surnaturelle réellement intervenue"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune preuve matérielle ne vient appuyer l'intervention d'un chien surnaturel au sens strict — l'interprétation surnaturelle relève de la croyance de l'époque, pas d'un fait vérifiable aujourd'hui." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette légende fait encore">
+    <HeritageBlock title="Des marques de griffes toujours montrées aux visiteurs" body="La porte de l'église de Blythburgh porte encore aujourd'hui des marques de brûlure présentées aux visiteurs comme celles laissées par Black Shuck en 1577." />
+    <HeritageBlock title="Une empreinte littéraire durable" body="Du Chien des Baskerville au « Grim » de Harry Potter, le motif anglais du chien noir spectral continue d'irriguer la littérature britannique et sa réception mondiale." />
+    <HeritageBlock title="Une identité régionale assumée" body="Le folklore de Black Shuck reste revendiqué comme un élément distinctif de l'identité culturelle du Suffolk et du Norfolk, au-delà du simple intérêt touristique." />
+    <CautionBox>
+      L'épisode fondateur de 1577 rapporte la mort de paroissiens réels pendant un office
+      religieux. Le traiter uniquement comme une curiosité de folklore pittoresque risquerait
+      d'effacer qu'il s'agit, à l'origine, du récit d'un drame humain documenté, quelle que
+      soit l'explication qu'on retienne pour les circonstances exactes de ces décès.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Abraham Fleming, A Straunge and Terrible Wunder, Londres, 1577 (fac-similé et transcription modernes, British Library)", url: "https://www.bl.uk/", note: "Source primaire de l'événement de Bungay et Blythburgh citée en #origine et #temoins-recits." },
+    { label: "Christopher Reeve, Black Shuck: The Ghost Dog of Eastern England, Countryside Books, 1988", note: "Synthèse de référence sur le folklore régional citée en #portrait et #heritage." },
+    { label: "Theo Brown, \"The Black Dog\", Folklore, vol. 69, 1958", note: "Étude comparative du motif européen du chien noir spectral citée en #origine et #theories." },
+    { label: "Église Holy Trinity de Blythburgh, documentation patrimoniale locale sur les marques de la porte", note: "Source de la tradition touristique locale citée en #culture-populaire et #heritage." },
+  ]} />
+</PageLayout>

@@ -1,0 +1,172 @@
+---
+/*
+  Le Honjo Masamune — vingt-troisième objet de la série. Structure imposée
+  par docs/plans/plan-serie-objets.md : 9 sections, badge de nature.
+
+  Angle éditorial : contrairement aux disparitions anciennes de cette
+  série (Chambre d'Ambre, Sceau de jade), celle-ci se situe dans un passé
+  presque contemporain (décembre 1945) et documenté par un vrai dossier
+  administratif d'occupation militaire — la piste s'arrête net sur un nom
+  de soldat probablement mal transcrit, pas sur des siècles de silence.
+
+  Effets : data-egg="honjo" + data-scroll-fx="honjoFourreau" sur
+  #description — un katana qui rentre dans son fourreau et disparaît avec
+  lui.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Laque noire japonaise, acier de katana, crête dorée des Tokugawa : la
+   matière de l'objet plutôt qu'une palette "Japon" déjà utilisée par les
+   pages mythologie et créatures japonaises. */
+const palette = {
+  bg: '#12100f',
+  'bg-deep': '#0a0908',
+  surface: '#1c1a18',
+  'surface-alt': '#262220',
+  border: '#4a4038',
+  ink: '#f0ece4',
+  text: '#d0c8bc',
+  'text-dim': '#948a7c',
+  accent: '#8a95a0',
+  'accent-bright': '#c3ccd4',
+  accent2: '#9a2e2a',
+  'accent2-bright': '#c85a4a',
+  verdict: '#6b4a1e',
+  'verdict-bright': '#9a7830',
+  glow: 'rgba(138,149,160,0.2)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Honjo Masamune"
+  serie="Objets Légendaires du Monde"
+  description="Un sabre forgé par Masamune, le plus grand maître-armurier de l'histoire japonaise, transmis pendant des siècles comme trésor de la famille Tokugawa — remis aux autorités d'occupation américaines en décembre 1945 dans le cadre du désarmement du Japon, et jamais retrouvé depuis, sur la base d'un nom de soldat probablement mal transcrit."
+  href="objet-honjo-masamune.html"
+  egg="honjo"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="JAPON · DÉCEMBRE 1945"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Un trésor national perdu il y a quatre-vingts ans, pas quatre siècles</p>
+  <p class="tagline" slot="hero">
+    Contrairement aux reliques antiques de cette série, ce sabre a disparu de mémoire humaine
+    récente — remis à un soldat américain dont le nom, mal transcrit sur un registre de
+    guerre, empêche depuis huit décennies toute piste sérieuse de le retrouver.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet réel disparu"
+    note="L'existence, la qualité et la remise du sabre en décembre 1945 sont documentées par des registres d'occupation militaire américains. Sa trace s'arrête ensuite net, faute d'identification fiable du destinataire — un cas de disparition moderne et documentée, pas une légende ancienne incertaine."
+  />
+
+  <Section id="origine" label="Première attestation" title="Un chef-d'œuvre de Masamune, transmis par les Tokugawa" intro="Distinguer la réputation du forgeron, bien attestée sur plusieurs siècles, de l'histoire propre de cette lame précise au sein du clan Tokugawa.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Gorō Nyūdō Masamune, maître incontesté" sub="XIIIe-XIVe siècle" body="Considéré depuis des siècles comme le plus grand forgeron de sabres de l'histoire japonaise, bien que les détails de sa biographie personnelle restent en partie légendaires faute de sources contemporaines directes." />
+      <InfoCard num="II" title="Le nom « Honjo »" sub="Honjo Shigenaga, XVIe siècle" body="Le sabre tire son nom du général Honjo Shigenaga, qui l'aurait acquis après qu'un adversaire l'ait utilisé contre lui au combat, avant qu'il n'en devienne finalement le possesseur." />
+      <InfoCard num="III" title="Transmission comme trésor Tokugawa" sub="Shogunat, XVIIe-XIXe siècle" body="Le sabre devient un bien de transmission de la lignée principale du clan Tokugawa, shoguns du Japon pendant plus de deux siècles, et reçoit finalement le statut officiel de Trésor national." />
+    </div>
+  </Section>
+
+  <Section id="description" label="Forme et statut" title="Un katana de très haut rang, pas un objet de combat courant" scrollFx="honjoFourreau">
+    <div class="card-grid wide">
+      <FigureCard name="Un katana de rang exceptionnel" role="Classification" tags={['Trésor national', 'Qualité de forge']} body="Reconnu comme l'un des sabres les plus prestigieux jamais recensés au Japon, sa désignation officielle de Trésor national atteste d'une qualité de forge exceptionnelle même selon les standards très élevés de l'expertise japonaise en la matière." />
+      <FigureCard name="Un objet de transmission dynastique, pas d'usage courant" role="Fonction symbolique" tags={['Tokugawa', 'Prestige plutôt que combat']} body="Comme de nombreux grands sabres de cette catégorie, sa fonction principale au fil des siècles devient symbolique et dynastique plutôt que purement martiale." />
+      <FigureCard name="Une disparition récente et documentée" role="Contraste avec le reste de la série" tags={['1945', 'Registre administratif']} body="Contrairement à la plupart des objets disparus de cette série, sa disparition se situe dans une mémoire administrative récente, avec un début de piste documentaire concret plutôt qu'un simple silence historique de plusieurs siècles." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="Du champ de bataille du XVIe siècle au poste de police de 1945">
+    <StoryBlock num="Récit I" title="L'acquisition par Honjo Shigenaga" body="Selon la tradition, le général Honjo Shigenaga affronte un adversaire armé de ce sabre lors d'un combat, survit à l'attaque, et finit par obtenir la lame lui-même — un récit d'origine martiale qui donne son nom définitif à l'objet." />
+    <StoryBlock num="Récit II" title="La transmission comme trésor Tokugawa" body="Le sabre passe ensuite, selon les sources, entre plusieurs mains du Japon en guerre civile avant de devenir un bien de prestige conservé par la lignée principale du clan Tokugawa jusqu'à la fin du shogunat au XIXe siècle." />
+    <StoryBlock num="Récit III" title="La remise de décembre 1945" body={["Dans le cadre du programme de désarmement mené par les autorités d'occupation américaines après la capitulation japonaise, le descendant de la famille Tokugawa remet le sabre à un poste de police du quartier de Mejiro, à Tokyo.", "L'arme est ensuite transmise à un militaire américain dont le nom, consigné à la hâte sur un registre japonais de l'époque, ne correspond à aucun soldat identifiable avec certitude aujourd'hui — la piste documentaire s'arrête littéralement sur une erreur de transcription."]} quote="Un nom mal transcrit, et quatre-vingts ans de silence depuis." cite="Résumé du dossier administratif de remise de 1945" />
+  </Section>
+
+  <Section id="facture" label="Matière et fabrication" title="Ce que la forge de Masamune représente vraiment" intro="Même disparu, l'objet renseigne sur un sommet technique réel de la métallurgie japonaise traditionnelle.">
+    <div class="card-grid compact">
+      <MiniCard title="Le pliage et le corroyage de l'acier" tag="Technique japonaise classique" body="La technique de forge japonaise traditionnelle, par pliages successifs de couches d'acier de dureté différente, permet d'obtenir un tranchant très dur associé à une âme plus souple qui absorbe les chocs." />
+      <MiniCard title="La trempe différentielle" tag="Signature visible sur la lame" body="L'application d'argile en épaisseur variable avant la trempe crée la ligne de trempe (hamon) caractéristique, à la fois esthétique et fonctionnelle, signature reconnaissable du travail de Masamune." />
+      <MiniCard title="Une réputation qui dépasse la vérification matérielle" tag="Question d'expertise" body="Faute de l'objet lui-même aujourd'hui, son évaluation technique repose uniquement sur des documents d'expertise antérieurs à sa disparition, impossibles à vérifier à nouveau par une analyse moderne." />
+      <MiniCard title="Un cas d'école pour l'expertise des sabres japonais" tag="Discipline spécialisée" body="L'authentification des sabres japonais anciens reste une discipline experte à part entière au Japon (shinsa), fondée sur l'étude du grain de l'acier, du profil de la lame et des signatures de forge." />
+    </div>
+  </Section>
+
+  <Section id="traces" label="Candidats matériels" title="Une piste qui s'arrête sur un nom mal transcrit">
+    <Timeline items={[
+      { year: 'XIIIe-XIVe siècle', title: 'Vie et travail de Masamune', body: "Le maître-forgeron établit une réputation qui traverse ensuite l'histoire du Japon jusqu'à aujourd'hui." },
+      { year: 'XVIe siècle', title: 'Acquisition par Honjo Shigenaga', body: "Le général donne son nom définitif au sabre après l'avoir obtenu au terme d'un combat." },
+      { year: 'XVIIe-XIXe siècle', title: 'Transmission comme trésor du clan Tokugawa', body: "Le sabre devient un bien de prestige dynastique conservé par la lignée principale des shoguns Tokugawa." },
+      { year: 'Désignation officielle', title: 'Reconnaissance comme Trésor national', body: "L'État japonais reconnaît officiellement la valeur exceptionnelle de la pièce avant sa disparition." },
+      { year: 'Décembre 1945', title: 'Remise aux autorités d\'occupation', body: "Le descendant Tokugawa remet le sabre à un poste de police de Mejiro, Tokyo, dans le cadre du désarmement d'après-guerre." },
+      { year: 'Décembre 1945', title: 'Transfert à un militaire américain non identifié avec certitude', body: "Le registre japonais consigne un nom (parfois transcrit « Coldy Bimore ») ne correspondant à aucun soldat américain vérifiable — la dernière trace documentaire connue de l'objet." },
+      { year: "Aujourd'hui", title: 'Aucune retrouvaille confirmée', body: "Le sabre est présumé conservé sans le savoir dans une collection privée américaine, ou perdu, sans qu'aucune piste n'ait abouti à ce jour." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un trésor national à un cas d'étude patrimonial" title="Un symbole du patrimoine perdu de l'après-guerre">
+    <div class="card-grid compact">
+      <MiniCard title="Un cas emblématique des pertes patrimoniales de 1945" tag="Contexte plus large" body="Des milliers de sabres japonais ont été confisqués lors du désarmement d'après-guerre ; le Honjo Masamune reste le cas le plus emblématique de cette perte patrimoniale en raison de son statut exceptionnel." />
+      <MiniCard title="Un sujet de recherche généalogique et historique actif" tag="Enquêtes contemporaines" body="Des chercheurs et passionnés continuent aujourd'hui de tenter d'identifier le militaire réellement destinataire du sabre en 1945, sans succès confirmé à ce jour." />
+      <MiniCard title="Une référence dans la culture populaire japonaise" tag="Fiction et jeux vidéo" body="Le nom et la légende du sabre perdu inspirent régulièrement des œuvres de fiction contemporaines centrées sur le patrimoine japonais disparu." />
+    </div>
+  </Section>
+
+  <Section id="verite" label="Section pivot" title="Ce qu'on peut affirmer aujourd'hui">
+    <ScienceBlock num="Enquête 1" title="Une disparition documentée, pas une légende incertaine" body="Contrairement à de nombreux objets de cette série dont la trace se perd dans des siècles de silence, la disparition du Honjo Masamune est documentée par un dossier administratif précis et relativement récent — ce qui rend d'autant plus frappant qu'aucune piste sérieuse n'ait jamais abouti." />
+    <TheoryCard
+      title="Le sabre a été fondu ou détruit par erreur lors du désarmement"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Certains chercheurs estiment que, faute d'appréciation de sa valeur exceptionnelle par les autorités d'occupation, le sabre a pu être traité comme un simple sabre militaire ordinaire et détruit lors des opérations de désarmement de masse."
+      attrib="Hypothèse discutée en histoire du patrimoine japonais d'après-guerre"
+    />
+    <TheoryCard
+      title="Le sabre est conservé, sans que son détenteur actuel n'en connaisse la valeur"
+      level="plausible"
+      status="Hypothèse la plus optimiste"
+      body="D'autres chercheurs privilégient l'hypothèse d'une conservation méconnue dans une collection privée américaine héritée sans documentation suffisante sur son origine exceptionnelle."
+      attrib="Hypothèse optimiste avancée par plusieurs passionnés d'histoire de l'armement japonais" />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette disparition enseigne encore">
+    <HeritageBlock title="Un symbole des pertes patrimoniales de l'après-guerre" body="Le cas reste régulièrement cité pour illustrer les pertes patrimoniales subies par le Japon lors du désarmement de 1945, au-delà du strict cadre militaire." />
+    <HeritageBlock title="Une piste de recherche toujours active" body="Des chercheurs continuent de consulter les archives militaires américaines dans l'espoir, encore jamais concrétisé, de résoudre l'énigme du nom mal transcrit." />
+    <HeritageBlock title="Un rappel sur la fragilité du patrimoine en temps de rupture historique" body="L'épisode illustre concrètement comment des bouleversements historiques rapides peuvent faire disparaître, presque accidentellement, un objet ayant traversé plusieurs siècles sans encombre." />
+    <CautionBox>
+      Cette disparition s'inscrit dans le contexte plus large et douloureux de la défaite et de
+      l'occupation du Japon en 1945. La traiter comme une simple anecdote de collectionneur
+      reviendrait à minimiser le contexte historique réel — désarmement forcé d'une nation
+      vaincue — dans lequel cette perte patrimoniale a eu lieu.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Markus Sesko, Legends and Stories Around the Japanese Sword, Lulu.com, 2013", note: "Synthèse de référence sur l'histoire du sabre et de Masamune citée en #origine et #recits." },
+    { label: "Kōkan Nagayama, The Connoisseur's Book of Japanese Swords, trad. Kenji Mishina, Kodansha International, 1997", note: "Référence technique sur l'expertise et la forge des sabres japonais citée en #facture." },
+    { label: "Archives de l'occupation alliée du Japon (GHQ/SCAP), documentation sur le programme de désarmement de 1945-1946", note: "Source du contexte administratif de la remise de décembre 1945 citée en #traces." },
+    { label: "The Japan Times, articles rétrospectifs sur la disparition du Honjo Masamune et les recherches contemporaines", url: "https://www.japantimes.co.jp/", note: "Couverture journalistique moderne citée en #culture-populaire et #heritage." },
+  ]} />
+</PageLayout>

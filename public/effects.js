@@ -2354,6 +2354,715 @@
     }, 800);
   }
 
+  // Mythologie cananéenne — les cornes d'un taureau s'illuminent sous un
+  // éclair bref (Baal, « Chevaucheur des nuées », fils du « Taureau El »).
+  function baalCornes() {
+    var l = layer(3200);
+    var flash = document.createElement('div');
+    flash.style.cssText = 'position:absolute;inset:0;background:rgba(200,220,240,0.85);opacity:0;';
+    l.appendChild(flash);
+    flash.animate([{ opacity: 0 }, { opacity: .7, offset: .08 }, { opacity: 0, offset: .16 }, { opacity: 0 }],
+      { duration: 900, easing: 'ease-out', fill: 'forwards' });
+    var horns = document.createElement('div');
+    horns.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(24vh,170px);opacity:0;';
+    horns.innerHTML = '<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path d="M100 90 Q80 40 40 20 Q30 15 35 30 Q55 45 70 80 Z" fill="#c9982f"/>' +
+      '<path d="M100 90 Q120 40 160 20 Q170 15 165 30 Q145 45 130 80 Z" fill="#c9982f"/>' +
+    '</svg>';
+    l.appendChild(horns);
+    horns.animate([{ opacity: 0 }, { opacity: 1, offset: .2 }, { opacity: 1, offset: .8 }, { opacity: 0 }],
+      { duration: 3200, delay: 200, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Nubie / Koush — une pyramide méroïtique se dessine, nettement plus
+  // effilée (angle plus raide) qu'une pyramide égyptienne.
+  function pyramideMeroe() {
+    var l = layer(3600);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:10vh;transform:translateX(-50%);width:min(16vh,110px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path id="fx-meroe-path" d="M50 6 L82 130 L18 130 Z" fill="none" stroke="#d68a52" stroke-width="3" stroke-dasharray="300" stroke-dashoffset="300"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 3600, easing: 'ease-out', fill: 'forwards' });
+    wrap.querySelector('#fx-meroe-path').animate([{ strokeDashoffset: 300 }, { strokeDashoffset: 0 }],
+      { duration: 2000, delay: 300, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Le Loup-Garou — une ombre humaine portée au sol s'allonge et se
+  // transforme en silhouette de loup ; la transformation par l'ombre seule,
+  // aucune violence montrée.
+  function ombreLoupGarou() {
+    var l = layer(4200);
+    var human = document.createElement('div');
+    human.style.cssText = 'position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);width:min(10vh,70px);height:min(20vh,140px);opacity:0;';
+    human.innerHTML = '<svg viewBox="0 0 60 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path d="M30 20 Q40 20 40 34 Q40 46 34 50 L38 130 L22 130 L26 50 Q20 46 20 34 Q20 20 30 20 Z" fill="#0a0e10"/>' +
+    '</svg>';
+    l.appendChild(human);
+    human.animate([{ opacity: 0 }, { opacity: 1, offset: .12 }, { opacity: 1, offset: .4 }, { opacity: 0, offset: .55 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+    var wolf = document.createElement('div');
+    wolf.style.cssText = 'position:absolute;left:50%;bottom:8vh;transform:translateX(-50%);width:min(22vh,150px);height:min(11vh,75px);opacity:0;';
+    wolf.innerHTML = '<svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path d="M10 75 Q20 40 60 38 Q70 20 85 15 L82 32 Q100 28 130 38 Q160 42 190 75 Z" fill="#0a0e10"/>' +
+      '<path d="M85 15 L92 4 L96 20 Z" fill="#0a0e10"/>' +
+    '</svg>';
+    l.appendChild(wolf);
+    wolf.animate([{ opacity: 0 }, { opacity: 0, offset: .42 }, { opacity: 1, offset: .58 }, { opacity: 1, offset: .85 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Le Disque de Phaistos — des signes s'impriment en spirale du bord vers
+  // le centre, puis s'arrêtent sans rien livrer.
+  function phaistosSpirale() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(20vh,140px);height:min(20vh,140px);opacity:0;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var disc = document.createElement('div');
+    disc.style.cssText = 'position:absolute;inset:0;border-radius:50%;border:2px solid #d68a5a;opacity:.6;';
+    wrap.appendChild(disc);
+    var marks = 18;
+    for (var i = 0; i < marks; i++) {
+      (function (i) {
+        var t = i / marks;
+        var angle = t * Math.PI * 7;
+        var r = 8 + t * 58;
+        var x = 70 + Math.cos(angle) * r, y = 70 + Math.sin(angle) * r;
+        var dot = document.createElement('div');
+        dot.style.cssText = 'position:absolute;left:' + x + 'px;top:' + y + 'px;width:5px;height:5px;border-radius:1px;background:#4a86a8;opacity:0;';
+        wrap.appendChild(dot);
+        dot.animate([{ opacity: 0 }, { opacity: 1 }],
+          { duration: 300, delay: 400 + i * 130, easing: 'ease-out', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Durandal — une lame s'enfonce horizontalement dans une paroi rocheuse,
+  // éclats de roche ; angle volontairement différent d'Excalibur (verticale,
+  // dans la pierre du rocher).
+  function durandalParoi() {
+    var l = layer(3800);
+    var wall = document.createElement('div');
+    wall.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(30vh,210px);height:min(18vh,120px);opacity:0;background:linear-gradient(180deg,#5c5040,#4a3f30);border-radius:4px;overflow:hidden;';
+    l.appendChild(wall);
+    wall.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 3800, easing: 'ease-out', fill: 'forwards' });
+    var blade = document.createElement('div');
+    blade.style.cssText = 'position:absolute;left:120%;top:50%;transform:translateY(-50%);width:70%;height:14px;opacity:0;';
+    blade.innerHTML = '<svg viewBox="0 0 200 26" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path d="M0 13 L170 4 L200 13 L170 22 Z" fill="#c3ccd4"/>' +
+      '<rect x="0" y="8" width="14" height="10" fill="#8a6a45"/>' +
+    '</svg>';
+    wall.appendChild(blade);
+    blade.animate([{ opacity: 0, left: '120%' }, { opacity: 1, offset: .15 }, { left: '38%', offset: .6 }, { left: '38%' }],
+      { duration: 3800, delay: 200, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'forwards' });
+    for (var i = 0; i < 8; i++) {
+      (function (i) {
+        var chip = document.createElement('div');
+        chip.style.cssText = 'position:absolute;left:38%;top:' + rand(30, 70) + '%;width:4px;height:4px;background:#8a7a60;opacity:0;';
+        wall.appendChild(chip);
+        chip.animate([
+          { opacity: 0, transform: 'translate(0,0)' },
+          { opacity: 1, offset: .1, transform: 'translate(0,0)' },
+          { opacity: 0, transform: 'translate(' + rand(-40, -10) + 'px,' + rand(-30, 30) + 'px)' }
+        ], { duration: 700, delay: 2000 + i * 40, easing: 'ease-out', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Ashanti / Akan — une toile d'araignée se tisse fil par fil (Anansi,
+  // « propriétaire de toutes les histoires »).
+  function anansiToile() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(22vh,150px);height:min(22vh,150px);opacity:0;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', '0 0 150 150');
+    svg.style.cssText = 'width:100%;height:100%;overflow:visible';
+    wrap.appendChild(svg);
+    var cx = 75, cy = 75, spokes = 6, rings = 4, delay = 300;
+    for (var s = 0; s < spokes; s++) {
+      var a = (s / spokes) * Math.PI * 2;
+      var line = document.createElementNS(svgNS, 'line');
+      line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+      line.setAttribute('x2', cx + Math.cos(a) * 66); line.setAttribute('y2', cy + Math.sin(a) * 66);
+      line.setAttribute('stroke', '#c9982f'); line.setAttribute('stroke-width', '1.4'); line.setAttribute('opacity', '0');
+      svg.appendChild(line);
+      line.animate([{ opacity: 0 }, { opacity: .8 }], { duration: 260, delay: delay, easing: 'ease-out', fill: 'forwards' });
+      delay += 90;
+    }
+    for (var r = 1; r <= rings; r++) {
+      var pts = [];
+      for (var s2 = 0; s2 < spokes; s2++) {
+        var a2 = (s2 / spokes) * Math.PI * 2;
+        var rad = 14 * r;
+        pts.push((cx + Math.cos(a2) * rad) + ',' + (cy + Math.sin(a2) * rad));
+      }
+      pts.push(pts[0]);
+      var poly = document.createElementNS(svgNS, 'polyline');
+      poly.setAttribute('points', pts.join(' '));
+      poly.setAttribute('fill', 'none'); poly.setAttribute('stroke', '#e8c164'); poly.setAttribute('stroke-width', '1'); poly.setAttribute('opacity', '0');
+      svg.appendChild(poly);
+      poly.animate([{ opacity: 0 }, { opacity: .7 }], { duration: 260, delay: delay, easing: 'ease-out', fill: 'forwards' });
+      delay += 160;
+    }
+  }
+
+  // Al-Andalus — une arcade d'arcs outrepassés se répète en profondeur,
+  // chaque arc s'allumant après le précédent (la forêt de colonnes de Cordoue).
+  function arcadeCordoue() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(30vh,210px);height:min(18vh,120px);opacity:0;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', '0 0 210 120');
+    svg.style.cssText = 'width:100%;height:100%;overflow:visible';
+    wrap.appendChild(svg);
+    var n = 6;
+    for (var i = 0; i < n; i++) {
+      var x = 15 + i * 32, scale = 1 - i * 0.06, w = 26 * scale, h = 70 * scale, y = 118 - h;
+      var arch = document.createElementNS(svgNS, 'path');
+      var r = w / 2;
+      var d = 'M' + x + ' ' + 118 + ' L' + x + ' ' + (y + r) +
+        ' A' + r + ' ' + r + ' 0 1 1 ' + (x + w) + ' ' + (y + r) +
+        ' L' + (x + w) + ' ' + 118;
+      arch.setAttribute('d', d);
+      arch.setAttribute('fill', 'none');
+      arch.setAttribute('stroke', i % 2 === 0 ? '#c25a48' : '#f0e4d0');
+      arch.setAttribute('stroke-width', '3');
+      arch.setAttribute('opacity', '0');
+      svg.appendChild(arch);
+      arch.animate([{ opacity: 0 }, { opacity: .9 }], { duration: 380, delay: 300 + i * 260, easing: 'ease-out', fill: 'forwards' });
+    }
+  }
+
+  // Les Sirènes — une silhouette assise sur un rocher plonge, ne laissant
+  // que des ondes concentriques (variante de nessie).
+  function sireneRocher() {
+    var l = layer(4200);
+    var rock = document.createElement('div');
+    rock.style.cssText = 'position:absolute;left:50%;bottom:14vh;transform:translateX(-50%);width:min(10vh,70px);opacity:0;';
+    rock.innerHTML = '<svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path d="M4 40 Q10 14 40 12 Q70 14 76 40 Z" fill="#243034"/>' +
+    '</svg>';
+    l.appendChild(rock);
+    rock.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var figure = document.createElement('div');
+    figure.style.cssText = 'position:absolute;left:50%;bottom:19vh;transform:translateX(-50%);width:min(4vh,28px);height:min(7vh,48px);opacity:0;';
+    figure.innerHTML = '<svg viewBox="0 0 28 48" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path d="M14 4 Q20 4 20 14 L20 30 Q26 36 22 44 L6 44 Q2 36 8 30 L8 14 Q8 4 14 4 Z" fill="#0e2a2e"/>' +
+    '</svg>';
+    l.appendChild(figure);
+    figure.animate([{ opacity: 0 }, { opacity: 1, offset: .12 }, { opacity: 1, offset: .5 }, { opacity: 0, offset: .58 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-in-out', fill: 'forwards' });
+    for (var i = 0; i < 3; i++) {
+      (function (i) {
+        var ring = document.createElement('div');
+        ring.style.cssText = 'position:absolute;left:50%;bottom:15vh;transform:translate(-50%,50%);width:10px;height:10px;border-radius:50%;border:1.5px solid #5ab4c4;opacity:0;';
+        l.appendChild(ring);
+        ring.animate([
+          { opacity: 0, width: '10px', height: '10px' },
+          { opacity: .8, offset: .1, width: '10px', height: '10px' },
+          { opacity: 0, width: 'min(20vh,140px)', height: 'min(20vh,140px)' }
+        ], { duration: 1800, delay: 2500 + i * 260, easing: 'ease-out', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // L'Explosion de la Toungouska — une onde traverse l'écran et couche des
+  // troncs en éventail, sans flash ni explosion spectaculaire.
+  function toungouskaOnde() {
+    var l = layer(3800);
+    var wave = document.createElement('div');
+    wave.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) scale(0);width:min(8vh,56px);height:min(8vh,56px);border-radius:50%;border:2px solid #e8c164;opacity:0;';
+    l.appendChild(wave);
+    wave.animate([{ opacity: .8, transform: 'translate(-50%,-50%) scale(0)' }, { opacity: 0, transform: 'translate(-50%,-50%) scale(9)' }],
+      { duration: 1400, delay: 200, easing: 'ease-out', fill: 'forwards' });
+    var n = 10;
+    for (var i = 0; i < n; i++) {
+      (function (i) {
+        var angleDeg = (i / n) * 180 - 90;
+        var dist = 30 + rand(0, 20);
+        var pivot = document.createElement('div');
+        pivot.style.cssText = 'position:absolute;left:50%;top:44%;width:0;height:0;transform:translate(-50%,-50%) rotate(' + angleDeg + 'deg) translateY(-' + dist + 'px);';
+        l.appendChild(pivot);
+        var trunk = document.createElement('div');
+        trunk.style.cssText = 'position:absolute;left:0;top:0;width:3px;height:min(6vh,42px);background:#5c5030;opacity:0;transform-origin:top center;transform:rotate(0deg);';
+        pivot.appendChild(trunk);
+        trunk.animate([{ opacity: 0 }, { opacity: 1, offset: .15 }, { opacity: 1, offset: .85 }, { opacity: 0 }],
+          { duration: 3800, delay: 500 + i * 40, easing: 'ease-out', fill: 'forwards' });
+        trunk.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(88deg)' }],
+          { duration: 500, delay: 900 + i * 40, easing: 'ease-out', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Le Sceau de jade impérial — un sceau s'imprime en rouge sur un
+  // document, puis dont l'empreinte s'efface.
+  function sceauJadeEmpreinte() {
+    var l = layer(4000);
+    var doc = document.createElement('div');
+    doc.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(16vh,110px);height:min(20vh,140px);background:#e8dcb8;opacity:0;';
+    l.appendChild(doc);
+    doc.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    var seal = document.createElement('div');
+    seal.style.cssText = 'position:absolute;left:50%;top:50%;width:34px;height:34px;margin:-17px 0 0 -17px;background:#9a2e2a;opacity:0;transform:scale(1.6);border-radius:2px;';
+    doc.appendChild(seal);
+    seal.animate([{ opacity: 0, transform: 'scale(1.6)' }, { opacity: .9, offset: .12, transform: 'scale(1)' }, { opacity: .9, offset: .6 }, { opacity: 0, transform: 'scale(1.04)' }],
+      { duration: 2600, delay: 900, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Mythologie coréenne — une silhouette d'ourse devient femme par un
+  // fondu très progressif, sobre, aucune métamorphose spectaculaire.
+  function ungnyeoTransform() {
+    var l = layer(4600);
+    var bear = document.createElement('div');
+    bear.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(14vh,100px);height:min(10vh,72px);opacity:0;';
+    bear.innerHTML = '<svg viewBox="0 0 100 72" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<ellipse cx="50" cy="46" rx="34" ry="20" fill="#3a2c1e"/>' +
+      '<circle cx="24" cy="24" r="14" fill="#3a2c1e"/>' +
+      '<circle cx="14" cy="14" r="5" fill="#3a2c1e"/><circle cx="34" cy="14" r="5" fill="#3a2c1e"/>' +
+    '</svg>';
+    l.appendChild(bear);
+    bear.animate([{ opacity: 0 }, { opacity: 1, offset: .12 }, { opacity: 1, offset: .45 }, { opacity: 0, offset: .62 }, { opacity: 0 }],
+      { duration: 4600, easing: 'ease-in-out', fill: 'forwards' });
+    var woman = document.createElement('div');
+    woman.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(6vh,42px);height:min(14vh,100px);opacity:0;';
+    woman.innerHTML = '<svg viewBox="0 0 42 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<circle cx="21" cy="14" r="11" fill="#3a2c1e"/>' +
+      '<path d="M21 26 Q34 30 32 60 Q40 80 32 98 L10 98 Q2 80 10 60 Q8 30 21 26 Z" fill="#3a2c1e"/>' +
+    '</svg>';
+    l.appendChild(woman);
+    woman.animate([{ opacity: 0 }, { opacity: 0, offset: .42 }, { opacity: 1, offset: .68 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4600, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Culture maya — un nombre se compose en points et barres (numération
+  // maya en base vingt).
+  function mayaNombre() {
+    var l = layer(3800);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(8vh,56px);opacity:0;display:flex;flex-direction:column;align-items:center;gap:6px;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 3800, easing: 'ease-out', fill: 'forwards' });
+    var dotsRow = document.createElement('div');
+    dotsRow.style.cssText = 'display:flex;gap:6px;';
+    wrap.appendChild(dotsRow);
+    var delay = 300;
+    for (var i = 0; i < 3; i++) {
+      var dot = document.createElement('div');
+      dot.style.cssText = 'width:10px;height:10px;border-radius:50%;background:#4fb3a0;opacity:0;';
+      dotsRow.appendChild(dot);
+      dot.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250, delay: delay, easing: 'ease-out', fill: 'forwards' });
+      delay += 220;
+    }
+    delay += 200;
+    for (var b = 0; b < 2; b++) {
+      var bar = document.createElement('div');
+      bar.style.cssText = 'width:44px;height:9px;border-radius:3px;background:#3a94c4;opacity:0;';
+      wrap.appendChild(bar);
+      bar.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250, delay: delay, easing: 'ease-out', fill: 'forwards' });
+      delay += 260;
+    }
+  }
+
+  // Ogopogo — une série d'arceaux perce la surface d'un lac puis disparaît
+  // (variante de nessie).
+  function ogopogoArceaux() {
+    var l = layer(4000);
+    var n = 4;
+    for (var i = 0; i < n; i++) {
+      (function (i) {
+        var arc = document.createElement('div');
+        arc.style.cssText = 'position:absolute;left:' + (30 + i * 12) + 'vw;bottom:22vh;width:min(9vh,64px);height:min(6vh,42px);opacity:0;';
+        arc.innerHTML = '<svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+          '<path d="M4 40 Q30 -6 56 40 Z" fill="#0c2024"/>' +
+        '</svg>';
+        l.appendChild(arc);
+        var delay = 300 + i * 340;
+        arc.animate([
+          { opacity: 0, transform: 'translateY(30px)' },
+          { opacity: 1, offset: .3, transform: 'translateY(0)' },
+          { opacity: 1, offset: .55, transform: 'translateY(0)' },
+          { opacity: 0, transform: 'translateY(24px)' }
+        ], { duration: 1400, delay: delay, easing: 'ease-in-out', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Le Somerton Man — un bout de papier déchiré se pose, et rien d'autre.
+  // Sobriété absolue, une mort réelle.
+  function somertonPapier() {
+    var l = layer(3600);
+    var paper = document.createElement('div');
+    paper.style.cssText = 'position:absolute;left:50%;top:30%;transform:translate(-50%,0) rotate(-8deg);width:min(7vh,50px);height:min(5vh,36px);background:#e8ddc4;opacity:0;clip-path:polygon(0 0,100% 4%,96% 100%,2% 94%);';
+    l.appendChild(paper);
+    paper.animate([
+      { opacity: 0, top: '30%' },
+      { opacity: 1, offset: .2, top: '30%' },
+      { opacity: 1, offset: .75, top: '58%' },
+      { opacity: 0, top: '60%' }
+    ], { duration: 3600, easing: 'ease-in', fill: 'forwards' });
+  }
+
+  // La Ménorah du Second Temple — sept flammes s'allument de gauche à
+  // droite, puis un relief de pierre les recouvre (l'arc de Titus).
+  function menorahFlammes() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:12vh;transform:translateX(-50%);width:min(20vh,140px);height:min(14vh,98px);opacity:0;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .82 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', '0 0 140 98');
+    svg.style.cssText = 'width:100%;height:100%;overflow:visible';
+    wrap.appendChild(svg);
+    var base = document.createElementNS(svgNS, 'rect');
+    base.setAttribute('x', '10'); base.setAttribute('y', '80'); base.setAttribute('width', '120'); base.setAttribute('height', '8');
+    base.setAttribute('fill', '#c9982f');
+    svg.appendChild(base);
+    var delay = 300;
+    for (var i = 0; i < 7; i++) {
+      var x = 16 + i * 18;
+      var stem = document.createElementNS(svgNS, 'line');
+      stem.setAttribute('x1', x); stem.setAttribute('y1', '80'); stem.setAttribute('x2', x); stem.setAttribute('y2', 30 + Math.abs(i - 3) * 6);
+      stem.setAttribute('stroke', '#c9982f'); stem.setAttribute('stroke-width', '3');
+      svg.appendChild(stem);
+      var flame = document.createElementNS(svgNS, 'circle');
+      flame.setAttribute('cx', x); flame.setAttribute('cy', 26 + Math.abs(i - 3) * 6); flame.setAttribute('r', '5');
+      flame.setAttribute('fill', '#ffdf8a'); flame.setAttribute('opacity', '0');
+      svg.appendChild(flame);
+      flame.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: delay, easing: 'ease-out', fill: 'forwards' });
+      delay += 160;
+    }
+    var relief = document.createElement('div');
+    relief.style.cssText = 'position:absolute;inset:0;background:#4a4038;opacity:0;';
+    wrap.appendChild(relief);
+    relief.animate([{ opacity: 0 }, { opacity: .82 }], { duration: 900, delay: delay + 500, easing: 'ease-in', fill: 'forwards' });
+  }
+
+  // Cosmologie bouddhiste — le mont Meru s'élève strate par strate en
+  // cercles concentriques.
+  function meruStrate() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:14vh;transform:translateX(-50%);width:min(18vh,126px);height:min(16vh,112px);opacity:0;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .08 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    var n = 5;
+    for (var i = 0; i < n; i++) {
+      var w = 126 - i * 22, h = 16, y = 112 - (i + 1) * 20;
+      var ring = document.createElement('div');
+      ring.style.cssText = 'position:absolute;left:50%;bottom:' + (i * 20) + 'px;transform:translate(-50%,0) scale(0.7);width:' + w + 'px;height:' + h + 'px;border-radius:50%;background:' + (i % 2 === 0 ? '#e8c164' : '#c9982f') + ';opacity:0;';
+      wrap.appendChild(ring);
+      ring.animate([{ opacity: 0, transform: 'translate(-50%,0) scale(0.7)' }, { opacity: .9, transform: 'translate(-50%,0) scale(1)' }],
+        { duration: 500, delay: 300 + i * 380, easing: 'ease-out', fill: 'forwards' });
+    }
+  }
+
+  // Phéniciens — des lettres d'alphabet se propagent de port en port le
+  // long d'une côte.
+  function alphabetPropagation() {
+    var l = layer(4200);
+    var coast = document.createElement('div');
+    coast.style.cssText = 'position:absolute;left:10vw;right:10vw;bottom:24vh;height:2px;background:#3a84b4;opacity:0;';
+    l.appendChild(coast);
+    coast.animate([{ opacity: 0 }, { opacity: .5, offset: .1 }, { opacity: .5, offset: .88 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var letters = ['𐤀', '𐤁', '𐤂', 'A', 'B', 'Γ'];
+    for (var i = 0; i < letters.length; i++) {
+      (function (i) {
+        var x = 12 + i * 14;
+        var g = document.createElement('div');
+        g.style.cssText = 'position:absolute;left:' + x + 'vw;bottom:24vh;transform:translateY(10px);font-family:Cinzel,serif;font-size:22px;color:#e8c164;opacity:0;';
+        g.textContent = letters[i];
+        l.appendChild(g);
+        g.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0)' }, { opacity: 1 }, { opacity: 0 }],
+          { duration: 900, delay: 400 + i * 280, easing: 'ease-out', fill: 'forwards' });
+      })(i);
+    }
+  }
+
+  // Black Shuck — deux yeux rouges au ras du sol s'allument puis
+  // s'éloignent en tremblant (variante de eyes).
+  function blackShuckYeux() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:' + rand(20, 60) + 'vw;bottom:16vh;opacity:0;';
+    wrap.innerHTML = '<svg width="60" height="20" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">' +
+      '<circle cx="16" cy="10" r="6" fill="#c44a3a" style="filter:drop-shadow(0 0 6px #8a2a2a)"/>' +
+      '<circle cx="44" cy="10" r="6" fill="#c44a3a" style="filter:drop-shadow(0 0 6px #8a2a2a)"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .15 }, { opacity: 1, offset: .6 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-in-out', fill: 'forwards' });
+    wrap.animate([
+      { transform: 'translate(0,0)' },
+      { transform: 'translate(' + rand(-14, 14) + 'px,' + rand(-4, 4) + 'px)', offset: .3 },
+      { transform: 'translate(' + rand(-14, 14) + 'px,0)', offset: .6 },
+      { transform: 'translate(' + rand(-160, -80) + 'px,-6px)' }
+    ], { duration: 4000, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // La Malédiction de Toutânkhamon — un titre de presse des années 1920
+  // se compose puis se dissout.
+  function toutankhamonTitre() {
+    var l = layer(3800);
+    var headline = document.createElement('div');
+    headline.style.cssText = 'position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(70vw,420px);text-align:center;font-family:Cinzel,serif;font-weight:700;font-size:clamp(16px,3vw,26px);color:#e8c164;opacity:0;letter-spacing:1px;';
+    headline.textContent = 'LA MALÉDICTION DU PHARAON';
+    l.appendChild(headline);
+    headline.animate([{ opacity: 0, filter: 'blur(4px)' }, { opacity: 1, offset: .35, filter: 'blur(0px)' }, { opacity: 1, offset: .65 }, { opacity: 0, filter: 'blur(3px)' }],
+      { duration: 3800, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Zulfiqar — une lame bifide s'illumine brièvement, strictement
+  // neutre, aucune mise en scène religieuse.
+  function zulfiqarLame() {
+    var l = layer(3400);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(10vh,70px);height:min(20vh,140px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 70 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path d="M35 8 L44 60 L35 76 L26 60 Z" fill="#c3ccd4"/>' +
+      '<path d="M35 8 L14 24 L26 60 L35 76 Z" fill="#a4b0ba" opacity="0.9"/>' +
+      '<rect x="26" y="76" width="18" height="12" fill="#8a6a3a"/>' +
+      '<rect x="30" y="88" width="10" height="40" fill="#3a9a6e"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .18 }, { opacity: 1, offset: .7 }, { opacity: 0 }],
+      { duration: 3400, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // Mythologie tibétaine / Bön — des drapeaux de prière claquent en
+  // chaîne, révélant une montagne sortie de la brume.
+  function priereDrapeaux() {
+    var l = layer(4400);
+    var mist = document.createElement('div');
+    mist.style.cssText = 'position:absolute;inset:0;background:linear-gradient(180deg,rgba(200,210,200,.22),rgba(200,210,200,0) 60%);opacity:0;';
+    l.appendChild(mist);
+    mist.animate([{ opacity: 0 }, { opacity: 1, offset: .25 }, { opacity: 1, offset: .7 }, { opacity: 0 }],
+      { duration: 4400, easing: 'ease-in-out', fill: 'forwards' });
+    var colors = ['#8a2a2a', '#c9982f', '#2a8a8a', '#eef5ee', '#2a4a8a'];
+    for (var i = 0; i < 6; i++) {
+      (function (i) {
+        var flag = document.createElement('div');
+        flag.style.cssText = 'position:absolute;top:' + rand(6, 20) + 'vh;left:' + (i * 16 + 4) + 'vw;width:34px;height:24px;background:' + colors[i % colors.length] + ';opacity:0;transform-origin:top center;clip-path:polygon(0 0,100% 0,80% 100%,20% 100%);';
+        l.appendChild(flag);
+        flag.animate([{ opacity: 0 }, { opacity: .9, offset: .15 }, { opacity: .9, offset: .8 }, { opacity: 0 }],
+          { duration: 4400, delay: i * 120, easing: 'ease-out', fill: 'forwards' });
+        flag.animate([{ transform: 'rotate(-6deg)' }, { transform: 'rotate(6deg)' }],
+          { duration: 900 + rand(0, 300), delay: i * 120, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
+      })(i);
+    }
+  }
+
+  // Mythologie hittite — un serpent-dragon s'enroule puis se dénoue et
+  // s'efface (Illuyanka).
+  function illuyankaSerpent() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(20vh,140px);height:min(20vh,140px);opacity:0;';
+    wrap.innerHTML = '<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path id="fx-illu-path" d="M70 20 C 110 20 120 60 90 70 C 60 80 60 110 90 120 C 110 128 120 100 100 90" ' +
+        'fill="none" stroke="#7a94c4" stroke-width="8" stroke-linecap="round" stroke-dasharray="220" stroke-dashoffset="220"/>' +
+    '</svg>';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .75 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    var path = wrap.querySelector('#fx-illu-path');
+    path.animate([{ strokeDashoffset: 220 }, { strokeDashoffset: 0 }],
+      { duration: 1600, delay: 300, easing: 'ease-in-out', fill: 'forwards' });
+    path.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -220 }],
+      { duration: 1600, delay: 2400, easing: 'ease-in', fill: 'forwards' });
+  }
+
+  // Empire ottoman — un dôme se referme pierre par pierre.
+  function domeIznik() {
+    var l = layer(4000);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:min(20vh,140px);height:min(12vh,84px);opacity:0;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .85 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', '0 0 140 84');
+    svg.style.cssText = 'width:100%;height:100%;overflow:visible';
+    wrap.appendChild(svg);
+    var n = 9;
+    for (var i = 0; i < n; i++) {
+      var a = (i / (n - 1)) * Math.PI;
+      var x = 70 - Math.cos(a) * 62, y = 78 - Math.sin(a) * 62;
+      var seg = document.createElementNS(svgNS, 'circle');
+      seg.setAttribute('cx', x); seg.setAttribute('cy', y); seg.setAttribute('r', '7');
+      seg.setAttribute('fill', '#4ab4b4'); seg.setAttribute('opacity', '0');
+      svg.appendChild(seg);
+      seg.animate([{ opacity: 0 }, { opacity: .95 }], { duration: 260, delay: 300 + i * 130, easing: 'ease-out', fill: 'forwards' });
+    }
+  }
+
+  // Grand Zimbabwe (culture) — un mur de pierres sèches s'assemble bloc
+  // par bloc, sans mortier.
+  function murZimbabwe() {
+    var l = layer(3800);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:14vh;transform:translateX(-50%);width:min(24vh,168px);height:min(12vh,84px);opacity:0;display:flex;flex-direction:column-reverse;gap:3px;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .88 }, { opacity: 0 }],
+      { duration: 3800, easing: 'ease-out', fill: 'forwards' });
+    var rows = 5, delay = 300;
+    for (var r = 0; r < rows; r++) {
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex;gap:3px;justify-content:center;';
+      wrap.appendChild(row);
+      var cols = 6 + (r % 2);
+      for (var c = 0; c < cols; c++) {
+        var block = document.createElement('div');
+        block.style.cssText = 'width:24px;height:14px;background:#b5862f;border:1px solid #7a5c1e;opacity:0;';
+        row.appendChild(block);
+        block.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, delay: delay, easing: 'ease-out', fill: 'forwards' });
+        delay += 45;
+      }
+    }
+  }
+
+  // Le Jersey Devil — une ombre ailée cornue traverse très vite (variante
+  // de mothmanShadow).
+  function jerseyDevilOmbre() {
+    var l = layer(2400);
+    var el = document.createElement('div');
+    var top = rand(10, 34);
+    el.style.cssText = 'position:absolute;top:' + top + 'vh;left:-18vw;width:130px;opacity:0;';
+    el.innerHTML = '<svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;overflow:visible">' +
+      '<path d="M60 30 L30 10 L36 24 L6 18 L30 34 L10 40 L34 38 L26 52 L46 38 Z" fill="#1a1210"/>' +
+      '<path d="M60 30 L90 10 L84 24 L114 18 L90 34 L110 40 L86 38 L94 52 L74 38 Z" fill="#1a1210"/>' +
+      '<circle cx="58" cy="28" r="2.4" fill="#c44a3a"/><circle cx="62" cy="28" r="2.4" fill="#c44a3a"/>' +
+    '</svg>';
+    l.appendChild(el);
+    el.animate([
+      { opacity: 0, transform: 'translateX(0)' },
+      { opacity: 1, offset: .12 },
+      { transform: 'translateX(136vw)', opacity: 1, offset: .88 },
+      { opacity: 0 }
+    ], { duration: 2400, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Champ — une vague en V traverse un lac calme, sans créature visible.
+  function champVague() {
+    var l = layer(4000);
+    var lake = document.createElement('div');
+    lake.style.cssText = 'position:absolute;left:0;right:0;bottom:18vh;height:6vh;background:linear-gradient(180deg,rgba(42,92,138,.18),transparent);opacity:0;';
+    l.appendChild(lake);
+    lake.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    var wake = document.createElement('div');
+    wake.style.cssText = 'position:absolute;left:-10vw;bottom:19vh;width:60px;height:20px;opacity:0;';
+    wake.innerHTML = '<svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">' +
+      '<path d="M0 0 L30 14 L60 0" fill="none" stroke="#4a84b4" stroke-width="2" opacity=".8"/>' +
+    '</svg>';
+    l.appendChild(wake);
+    wake.animate([{ opacity: 0, transform: 'translateX(0)' }, { opacity: 1, offset: .15 }, { transform: 'translateX(120vw)', opacity: 1, offset: .85 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Grand Zimbabwe (mystère) — un mur s'assemble bloc par bloc, puis une
+  // fausse étiquette explicative s'effrite.
+  function zimbabweEtiquette() {
+    var l = layer(4200);
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute;left:50%;bottom:14vh;transform:translateX(-50%);width:min(20vh,140px);height:min(10vh,70px);opacity:0;display:flex;flex-direction:column-reverse;gap:3px;';
+    l.appendChild(wrap);
+    wrap.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .85 }, { opacity: 0 }],
+      { duration: 4200, easing: 'ease-out', fill: 'forwards' });
+    var delay = 300;
+    for (var r = 0; r < 4; r++) {
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex;gap:3px;justify-content:center;';
+      wrap.appendChild(row);
+      for (var c = 0; c < 5; c++) {
+        var block = document.createElement('div');
+        block.style.cssText = 'width:24px;height:14px;background:#b5862f;border:1px solid #7a5c1e;opacity:0;';
+        row.appendChild(block);
+        block.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, delay: delay, easing: 'ease-out', fill: 'forwards' });
+        delay += 40;
+      }
+    }
+    var label = document.createElement('div');
+    label.style.cssText = 'position:absolute;left:50%;bottom:26vh;transform:translateX(-50%);padding:4px 10px;background:#f0e8d0;color:#8a2e2a;font-family:Cinzel,serif;font-size:12px;opacity:0;';
+    label.textContent = '« origine étrangère »';
+    l.appendChild(label);
+    label.animate([{ opacity: 0 }, { opacity: 1, offset: .55 }, { opacity: 1, offset: .68 }, { opacity: 0, filter: 'blur(3px)' }],
+      { duration: 4200, delay: delay + 200, easing: 'ease-in', fill: 'forwards' });
+  }
+
+  // Newgrange — un rai de lumière progresse dans un couloir jusqu'à la
+  // chambre (variante directe de solstice).
+  function newgrangeRai() {
+    var l = layer(4400);
+    var beam = document.createElement('div');
+    beam.style.cssText = 'position:absolute;left:8vw;top:48%;width:0;height:10px;transform:translateY(-50%);background:linear-gradient(90deg,#ffe9a8,#e8c164);opacity:0;box-shadow:0 0 12px #e8c164;';
+    l.appendChild(beam);
+    beam.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .8 }, { opacity: 0 }],
+      { duration: 4400, easing: 'ease-out', fill: 'forwards' });
+    beam.animate([{ width: '0' }, { width: 'min(70vw,480px)' }],
+      { duration: 2600, delay: 400, easing: 'ease-in', fill: 'forwards' });
+    var glow = document.createElement('div');
+    glow.style.cssText = 'position:absolute;left:min(78vw,488px);top:48%;width:36px;height:36px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#fff,#e8c164,transparent 70%);opacity:0;';
+    l.appendChild(glow);
+    glow.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 800, delay: 2900, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  // La Pierre de Scone — un bloc de pierre glisse d'un socle à un autre,
+  // aller-retour (1296 → 1996).
+  function pierreSconeGlisse() {
+    var l = layer(4000);
+    var stone = document.createElement('div');
+    stone.style.cssText = 'position:absolute;left:20%;bottom:22vh;width:min(10vh,70px);height:min(6vh,42px);background:#9a4a2a;border:2px solid #6a3018;opacity:0;';
+    l.appendChild(stone);
+    stone.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 4000, easing: 'ease-out', fill: 'forwards' });
+    stone.animate([
+      { left: '20%' },
+      { left: '70%', offset: .5 },
+      { left: '20%' }
+    ], { duration: 3600, delay: 300, easing: 'ease-in-out', fill: 'forwards' });
+  }
+
+  // Le Honjo Masamune — un katana rentre dans son fourreau et disparaît
+  // avec lui.
+  function honjoFourreau() {
+    var l = layer(3600);
+    var saya = document.createElement('div');
+    saya.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-8deg);width:min(28vh,196px);height:14px;background:#1c1a18;border-radius:3px;opacity:0;overflow:visible;';
+    l.appendChild(saya);
+    saya.animate([{ opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .9 }, { opacity: 0 }],
+      { duration: 3600, easing: 'ease-out', fill: 'forwards' });
+    var blade = document.createElement('div');
+    blade.style.cssText = 'position:absolute;right:-2px;top:2px;width:70%;height:10px;background:linear-gradient(90deg,#c3ccd4,#eef2f5);border-radius:2px;';
+    saya.appendChild(blade);
+    blade.animate([{ transform: 'translateX(0)', opacity: 1 }, { transform: 'translateX(60%)', opacity: 0 }],
+      { duration: 1400, delay: 700, easing: 'ease-in', fill: 'forwards' });
+  }
+
   /* ---------------------------------------------------------------------
      3. Inscriptions qui se "déchiffrent" au scroll — glyphes -> texte lisible,
         lettre par lettre, avec un bref éclat lumineux quand chacune se fixe.
@@ -2377,7 +3086,9 @@
     rune: RUNES, greek: GREEK, hiero: HIERO, cunei: CUNEI, ogham: OGHAM, roman: ROMAN,
     hindu: 'ॐ☸✴◈', japan: '❀✿花結', azteque: '☀✴◈❂', slave: '☀✺❉✵', chine: '福龍鳳春',
     lapidaire: LAPID, yoruba: '☀◈✦❖', inca: '☀◈▲✦', dreaming: '●○◐◑✦',
-    dogon: '▲▽◇✦', kalevala: '✦❆◆✶', polynesienne: '▲◆✦❖'
+    dogon: '▲▽◇✦', kalevala: '✦❆◆✶', polynesienne: '▲◆✦❖',
+    ougaritique: '𐎀𐎁𐎂𐎄𐎐𐎚', akan: '☉◆❖✤', coreen: '단군곰범천', bouddhiste: '☸ॐ◉✴',
+    tibetain: 'ཀཁགང', hittite: CUNEI
   };
 
   function glyphify(el, pool) {
@@ -2515,7 +3226,37 @@
     suaireDeplie: suaireDeplie,
     canopeeDoree: canopeeDoree,
     toisonOrEclat: toisonOrEclat,
-    jarrePandore: jarrePandore
+    jarrePandore: jarrePandore,
+    baalCornes: baalCornes,
+    pyramideMeroe: pyramideMeroe,
+    ombreLoupGarou: ombreLoupGarou,
+    phaistosSpirale: phaistosSpirale,
+    durandalParoi: durandalParoi,
+    anansiToile: anansiToile,
+    arcadeCordoue: arcadeCordoue,
+    sireneRocher: sireneRocher,
+    toungouskaOnde: toungouskaOnde,
+    sceauJadeEmpreinte: sceauJadeEmpreinte,
+    ungnyeoTransform: ungnyeoTransform,
+    mayaNombre: mayaNombre,
+    ogopogoArceaux: ogopogoArceaux,
+    somertonPapier: somertonPapier,
+    menorahFlammes: menorahFlammes,
+    meruStrate: meruStrate,
+    alphabetPropagation: alphabetPropagation,
+    blackShuckYeux: blackShuckYeux,
+    toutankhamonTitre: toutankhamonTitre,
+    zulfiqarLame: zulfiqarLame,
+    priereDrapeaux: priereDrapeaux,
+    illuyankaSerpent: illuyankaSerpent,
+    domeIznik: domeIznik,
+    murZimbabwe: murZimbabwe,
+    jerseyDevilOmbre: jerseyDevilOmbre,
+    champVague: champVague,
+    zimbabweEtiquette: zimbabweEtiquette,
+    newgrangeRai: newgrangeRai,
+    pierreSconeGlisse: pierreSconeGlisse,
+    honjoFourreau: honjoFourreau
   };
   var scrollFxLastPlayed = {};
   function initScrollHappenings() {
@@ -2619,6 +3360,36 @@
     paititi:       canopeeDoree,
     toisonor:      toisonOrEclat,
     pandore:       jarrePandore,
+    cananeen:      baalCornes,
+    nubie:         pyramideMeroe,
+    loupgarou:     ombreLoupGarou,
+    phaistos:      phaistosSpirale,
+    durandal:      durandalParoi,
+    ashanti:       anansiToile,
+    andalus:       arcadeCordoue,
+    sirenes:       sireneRocher,
+    toungouska:    toungouskaOnde,
+    sceaujade:     sceauJadeEmpreinte,
+    coreenne:      ungnyeoTransform,
+    maya:          mayaNombre,
+    ogopogo:       ogopogoArceaux,
+    somerton:      somertonPapier,
+    menorah:       menorahFlammes,
+    bouddhiste:    meruStrate,
+    pheniciens:    alphabetPropagation,
+    blackshuck:    blackShuckYeux,
+    toutankhamon:  toutankhamonTitre,
+    zulfiqar:      zulfiqarLame,
+    tibetaine:     priereDrapeaux,
+    hittite:       illuyankaSerpent,
+    ottoman:       domeIznik,
+    zimbabwe:      murZimbabwe,
+    jerseydevil:   jerseyDevilOmbre,
+    champ:         champVague,
+    zimbabwemystere: zimbabweEtiquette,
+    newgrange:     newgrangeRai,
+    pierrescone:   pierreSconeGlisse,
+    honjo:         honjoFourreau,
     // page d'accueil : un mélange de glyphes de toutes les cultures
     accueil:       function () { glyphShower({ glyphs: RUNES + GREEK + OGHAM + 'ॐ福', mode: 'rise' }); },
     carte:         function () { glyphShower({ glyphs: RUNES + HIERO + CUNEI + '❀✴', mode: 'fall', count: 34 }); }

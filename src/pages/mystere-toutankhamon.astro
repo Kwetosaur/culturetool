@@ -1,0 +1,170 @@
+---
+/*
+  La Malédiction de Toutânkhamon — dix-huitième mystère de la série.
+  Structure imposée par docs/plans/plan-serie-mysteres.md : 7 sections,
+  badge de verdict.
+
+  Bon parallèle explicite avec le Triangle des Bermudes déjà publié (voir
+  docs/listes/liste-creatures-mysteres-monde.md) : les deux pages
+  démontrent comment la statistique dégonfle un mythe médiatique du XXe
+  siècle. Palette volontairement distincte des pages Égypte antique et
+  mythologie égyptienne déjà publiées (papyrus/lapis/turquoise/carnelian) :
+  ici, le sujet est la presse des années 1920, pas l'Égypte ancienne
+  elle-même — sepia de journal plutôt que palette pharaonique.
+
+  Effets : data-egg="toutankhamon" + data-scroll-fx="toutankhamonTitre"
+  sur #enigme — un titre de presse des années 1920 qui se compose puis se
+  dissout.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Sepia de la presse des années 1920, or égyptien, noir d'encre : la
+   matière du canular médiatique plutôt qu'une palette pharaonique déjà
+   utilisée par les pages Égypte du site. */
+const palette = {
+  bg: '#171410',
+  'bg-deep': '#0d0b08',
+  surface: '#241f18',
+  'surface-alt': '#2f2820',
+  border: '#5c4e34',
+  ink: '#f0e8d0',
+  text: '#d0c4a0',
+  'text-dim': '#98886a',
+  accent: '#8a7040',
+  'accent-bright': '#b89a5e',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#1e3a6e',
+  'verdict-bright': '#3a5a9a',
+  glow: 'rgba(138,112,64,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="La Malédiction de Toutânkhamon"
+  serie="Grands Mystères du Monde"
+  description="La mort de Lord Carnarvon en 1923, quelques semaines après l'ouverture de la tombe de Toutânkhamon par Howard Carter, a déclenché une panique médiatique mondiale autour d'une « malédiction du pharaon ». Les études statistiques modernes montrent que les personnes présentes à l'ouverture n'ont pas connu une mortalité anormale — Carter lui-même a vécu dix-sept ans de plus, jusqu'à 64 ans."
+  href="mystere-toutankhamon.html"
+  egg="toutankhamon"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ÉGYPTE · 1922-1923"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Comment la presse a inventé une malédiction</p>
+  <p class="tagline" slot="hero">
+    Une mort par infection, largement explicable médicalement, transformée en malédiction
+    pharaonique mondiale par la presse des années 1920 — et un homme, Howard Carter lui-même,
+    dont la longévité dément à elle seule le récit qu'on a construit autour de sa découverte.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Canular médiatique largement démonté par l'analyse statistique"
+    note="Plusieurs études, dont une analyse rigoureuse publiée dans le British Medical Journal en 2002, ne trouvent aucune surmortalité statistiquement significative chez les personnes exposées à la « malédiction » par rapport à des groupes de comparaison équivalents."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Une découverte archéologique majeure, une mort bien réelle" intro="Avant d'aborder la légende, ce qui ne fait pas débat : la découverte elle-même, et les circonstances médicales du décès qui a lancé la rumeur.">
+    <div class="card-grid">
+      <InfoCard num="I" title="La découverte de la tombe, 1922" sub="Howard Carter, vallée des Rois" body="Financé par Lord Carnarvon, Carter met au jour la tombe de Toutânkhamon quasiment intacte — l'une des plus grandes découvertes archéologiques de l'histoire égyptologique." />
+      <InfoCard num="II" title="La mort de Lord Carnarvon, avril 1923" sub="Quelques semaines après l'ouverture" body="Carnarvon meurt d'une infection consécutive à une piqûre d'insecte qu'il aurait aggravée en se coupant en se rasant, développant un empoisonnement du sang — une cause médicale documentée, pas un mystère en soi." />
+      <InfoCard num="III" title="Une presse déjà en quête de sensation" sub="Contexte médiatique des années 1920" body="La couverture massive de la découverte, combinée à des déclarations publiques inquiétantes de personnalités comme la romancière Marie Corelli avant même la mort de Carnarvon, crée un climat propice à l'emballement médiatique." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Une inscription-malédiction qui n'a peut-être jamais existé telle quelle" scrollFx="toutankhamonTitre" intro="La question centrale n'est pas de savoir si la « malédiction » a frappé, mais d'où vient précisément cette histoire de malédiction elle-même.">
+    <div class="card-grid wide">
+      <FigureCard name="Une formule de malédiction largement exagérée" role="Origine textuelle floue" tags={['Presse', 'Amplification']} body="La phrase la plus souvent citée (« la mort viendra sur des ailes rapides pour celui qui trouble le repos du pharaon ») ne correspond à aucune inscription clairement identifiée dans la tombe elle-même et semble largement inventée ou amplifiée par la presse de l'époque plutôt que traduite d'un texte réel." />
+      <FigureCard name="Un décompte des morts flottant selon les auteurs" role="Confusion statistique" tags={['Liste variable', 'Définition floue']} body="Le nombre de personnes comptées comme « victimes de la malédiction » varie fortement selon les articles et les décennies, sans définition rigoureuse de qui doit être inclus dans le décompte — un flou méthodologique qui a longtemps permis à la légende de prospérer." />
+      <FigureCard name="Une confusion entre corrélation et causalité" role="Biais de sélection" tags={['Décès a posteriori sélectionnés']} body="La plupart des décès attribués à la malédiction concernent des personnes ayant un lien parfois très indirect avec la tombe, sélectionnées après coup parmi toutes celles ayant eu un rapport quelconque avec l'expédition, un biais classique de sélection rétrospective." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment le mythe s'est construit" title="De la presse des années 1920 aux études statistiques modernes">
+    <Timeline items={[
+      { year: 'Novembre 1922', title: 'Ouverture de la tombe', body: "Howard Carter et Lord Carnarvon découvrent l'entrée de la tombe de Toutânkhamon dans la vallée des Rois." },
+      { year: 'Début 1923', title: 'Mises en garde publiques', body: "La romancière Marie Corelli publie des avertissements sur les dangers de perturber une tombe pharaonique, quelques semaines avant la mort de Carnarvon." },
+      { year: 'Avril 1923', title: 'Mort de Lord Carnarvon', body: "Le financier de l'expédition meurt d'une infection ; la presse mondiale relaie immédiatement l'idée d'une malédiction pharaonique." },
+      { year: 'Années 1920-1930', title: 'Multiplication des décès attribués à la malédiction', body: "La presse continue d'attribuer de nombreux décès ultérieurs, parfois très indirectement liés à l'expédition, à la même « malédiction »." },
+      { year: '1934', title: 'Première réfutation statistique sérieuse', body: "L'égyptologue Herbert E. Winlock publie une analyse démontant déjà largement la thèse de la surmortalité chez les personnes présentes à la découverte." },
+      { year: '1939', title: 'Mort de Howard Carter', body: "L'homme le plus directement associé à l'ouverture de la tombe meurt à 64 ans, dix-sept ans après la découverte, d'un lymphome sans rapport avec une quelconque malédiction." },
+      { year: '2002', title: 'Étude du British Medical Journal', body: "Une analyse statistique rigoureuse menée par Mark Nelson ne trouve aucune différence significative de longévité entre les personnes exposées à la tombe et des groupes de comparaison." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un fait divers égyptologique à un mythe mondial" title="Comment la malédiction a conquis le cinéma et la presse">
+    <div class="card-grid compact">
+      <MiniCard title="La Momie et ses suites cinématographiques" tag="Cinéma d'horreur" body="Le motif de la malédiction pharaonique devient un pilier du cinéma fantastique occidental dès les années 1930, bien au-delà du cas spécifique de Toutânkhamon." />
+      <MiniCard title="Un cas d'école des médias étudié en cours de journalisme" tag="Analyse critique des médias" body="L'épisode reste aujourd'hui cité comme exemple classique d'amplification médiatique d'une coïncidence en légende durable, comparé explicitement au Triangle des Bermudes." />
+      <MiniCard title="Une exposition mondiale toujours attractive" tag="Tourisme culturel" body="Les objets du tombeau de Toutânkhamon continuent d'attirer des foules considérables lors de leurs expositions internationales, la légende de la malédiction n'ayant jamais nui à cette popularité — bien au contraire." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucune surmortalité statistiquement démontrée" body="L'étude de référence publiée en 2002 dans le British Medical Journal compare la durée de vie des personnes présentes lors des moments clés de la découverte à des groupes de comparaison équivalents en âge et en époque, sans trouver de différence statistiquement significative." />
+    <ScienceBlock num="Enquête 2" title="Howard Carter dément lui-même la légende par sa propre longévité" body="L'homme le plus exposé et le plus directement responsable de l'ouverture de la tombe vit dix-sept années supplémentaires après la découverte, mourant à 64 ans d'une cause sans rapport — un argument à lui seul difficile à concilier avec l'idée d'une malédiction efficace." />
+    <ScienceBlock num="Enquête 3" title="Une mort par infection médicalement banale pour l'époque" body="La mort de Lord Carnarvon par septicémie consécutive à une plaie infectée reste une cause de décès tout à fait ordinaire pour le début du XXe siècle, avant la généralisation des antibiotiques." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Un emballement médiatique autour d'une coïncidence"
+      level="consensus"
+      status="Position dominante"
+      body="La quasi-totalité des historiens et statisticiens qui ont étudié le dossier concluent à une simple coïncidence temporelle, amplifiée par une presse déjà encline au sensationnalisme et par des déclarations publiques inquiétantes antérieures à la mort de Carnarvon."
+      attrib="Consensus dominant en histoire des médias et en analyse statistique"
+    />
+    <TheoryCard
+      title="Des moisissures ou toxines présentes dans la tombe"
+      level="folklore"
+      status="Hypothèse marginale non confirmée"
+      body="Certains ont avancé l'idée de moisissures ou de toxines anciennes ayant pu affaiblir certains visiteurs de la tombe ; aucune étude sérieuse n'a confirmé de lien causal direct avec les décès attribués à la malédiction."
+      attrib="Hypothèse marginale évoquée occasionnellement, non retenue par le consensus"
+    />
+    <TheoryCard
+      title="Une malédiction surnaturelle réellement agissante"
+      level="folklore"
+      status="Écarté"
+      body="Aucune preuve statistique ou matérielle ne vient appuyer l'existence d'un mécanisme surnaturel de représailles lié à la tombe." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ce mythe fait encore">
+    <HeritageBlock title="Un cas d'école de la sociologie des médias" body="L'épisode continue d'être enseigné comme exemple de la manière dont une presse en quête de sensation peut transformer une coïncidence statistique banale en légende mondiale durable." />
+    <HeritageBlock title="Une popularité touristique jamais entamée" body="Les trésors de Toutânkhamon restent parmi les objets égyptiens antiques les plus visités au monde lors de leurs expositions internationales." />
+    <HeritageBlock title="Un parallèle direct avec le Triangle des Bermudes" body="Les deux dossiers illustrent, chacun à sa manière, comment l'analyse statistique rigoureuse peut dégonfler un mythe médiatique du XXe siècle sans nier les faits réels qui l'ont initialement nourri." />
+    <CautionBox>
+      Démonter la légende de la malédiction ne doit pas faire oublier le contexte plus large
+      de l'égyptologie de cette époque : le pillage et l'exportation massive d'antiquités
+      égyptiennes vers des collections occidentales, dont celle de Toutânkhamon a en partie
+      échappé grâce à son intégrité retrouvée, reste un sujet historique distinct et
+      légitime, qui dépasse le seul cadre de cette page.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Mark R. Nelson, \"The mummy's curse: historical cohort study\", BMJ, vol. 325, 2002", url: "https://doi.org/10.1136/bmj.325.7378.1482", note: "Étude statistique de référence citée en #enigme, #decouverte et #science." },
+    { label: "Herbert E. Winlock, correspondance et notes sur la mortalité de l'expédition Carter-Carnarvon, Metropolitan Museum of Art, 1934", note: "Première réfutation statistique de référence citée en #decouverte." },
+    { label: "Howard Carter et A. C. Mace, The Tomb of Tut.Ankh.Amen, Cassell and Company, 1923-1933", note: "Compte-rendu de première main de la découverte cité en #contexte." },
+    { label: "T. G. H. James, Howard Carter: The Path to Tutankhamun, Kegan Paul International, 1992", note: "Biographie de référence sur Howard Carter et sa longévité citée en #decouverte et #science." },
+  ]} />
+</PageLayout>

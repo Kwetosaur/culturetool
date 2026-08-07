@@ -1,0 +1,168 @@
+---
+/*
+  Le Disque de Phaistos — quinzième mystère de la série. Structure imposée
+  par docs/plans/plan-serie-mysteres.md : 7 sections, badge de verdict.
+
+  Point de vigilance : contrairement au Manuscrit de Voynich (des dizaines
+  de pages de texte suivi), le disque est un objet unique de 241 signes sans
+  aucun second exemplaire connu — la raison même pour laquelle un
+  déchiffrement futur est jugé peu probable par la majorité des
+  spécialistes, pas seulement « pas encore fait ». #enigme et #science
+  doivent poser cette distinction clairement plutôt que de laisser croire
+  qu'il s'agit d'un manuscrit de Voynich miniature.
+
+  Effets : data-egg="phaistos" + data-scroll-fx="phaistosSpirale" sur
+  #enigme — des signes qui s'impriment en spirale du bord vers le centre,
+  puis s'arrêtent sans rien livrer.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Argile cuite de Phaistos, bleu égéen minoen, ocre fresque : la matière
+   crétoise plutôt qu'une palette "mystère" indigo générique. */
+const palette = {
+  bg: '#191510',
+  'bg-deep': '#0e0c09',
+  surface: '#26201a',
+  'surface-alt': '#302822',
+  border: '#5c4a3a',
+  ink: '#f5ece0',
+  text: '#d8c4a8',
+  'text-dim': '#a08868',
+  accent: '#b5623a',
+  'accent-bright': '#d68a5a',
+  accent2: '#2e5a7a',
+  'accent2-bright': '#4a86a8',
+  verdict: '#1e3a6e',
+  'verdict-bright': '#3a5a9a',
+  glow: 'rgba(181,98,58,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Disque de Phaistos"
+  serie="Grands Mystères du Monde"
+  description="Un disque d'argile cuite découvert en 1908 en Crète, couvert de 241 signes estampés en spirale — 45 symboles distincts, jamais déchiffrés, sur un objet resté unique au monde : aucun second exemplaire de cette écriture n'a jamais été retrouvé."
+  href="mystere-disque-phaistos.html"
+  egg="phaistos"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="PHAISTOS · CRÈTE · v. 1700 AV. J.-C."
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Un texte de 241 signes, et lui seul au monde</p>
+  <p class="tagline" slot="hero">
+    Contrairement au manuscrit de Voynich, dont des dizaines de pages permettent au moins des
+    analyses statistiques poussées, le disque de Phaistos est un objet unique : aucun second
+    exemplaire de son écriture n'existe nulle part ailleurs, ce qui rend un déchiffrement futur
+    improbable plutôt que simplement difficile.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Non déchiffré à ce jour — et probablement indéchiffrable faute de second exemplaire"
+    note="45 signes distincts sur un corpus de 241 occurrences suffisent à des analyses statistiques, mais pas à une décipherment fiable sans texte bilingue ni second témoin de cette écriture. L'authenticité de l'objet lui-même, en revanche, ne fait pas débat sérieux."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Un disque d'argile, deux faces, une spirale" intro="Avant d'aborder ce qui reste incertain, ce qui ne fait pas débat : les circonstances de la découverte, la matière de l'objet et le nombre de signes qu'il porte sont solidement documentés.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Découverte en 1908" sub="Palais de Phaistos, Crète" body="L'archéologue italien Luigi Pernier met au jour le disque dans un contexte associé au palais minoen de Phaistos, lors de fouilles menées par la Mission archéologique italienne en Crète." />
+      <InfoCard num="II" title="Un disque d'argile cuite" sub="Environ 16 cm de diamètre" body="Les deux faces portent des signes disposés en spirale du bord vers le centre, séparés en sections par des traits incisés — une mise en page qui n'a, à ce jour, aucun équivalent connu ailleurs." />
+      <InfoCard num="III" title="241 signes, 45 symboles distincts" sub="Technique d'estampage" body="Chaque signe a été imprimé dans l'argile encore fraîche à l'aide de poinçons individuels sculptés, plutôt que gravé à main levée — une technique remarquablement proche, dans son principe, d'une forme précoce d'impression à caractères mobiles." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Que dit-il, et dans quel sens le lire ?" scrollFx="phaistosSpirale" intro="Deux questions distinctes se posent, et aucune des deux n'a de réponse consensuelle : quelle langue et quel système ce texte encode-t-il, et dans quel sens la spirale doit-elle être lue ?">
+    <div class="card-grid wide">
+      <FigureCard name="Un objet resté unique au monde" role="Obstacle méthodologique central" tags={['Aucun second exemplaire', 'Corpus trop court']} body="Le déchiffrement d'une écriture inconnue repose presque toujours sur un corpus étendu ou un texte bilingue (la pierre de Rosette en est l'exemple classique). Le disque ne dispose d'aucun des deux : 241 signes sur un seul objet, sans aucun parallèle connu ailleurs." />
+      <FigureCard name="Le sens de lecture lui-même est disputé" role="Désaccord de base" tags={['Bord vers centre ?', 'Centre vers bord ?']} body="Même la direction de lecture de la spirale ne fait pas consensus parmi les spécialistes, ce qui illustre à quel point l'interprétation du disque reste, à sa base, non stabilisée." />
+      <FigureCard name="Une langue et un système d'écriture inconnus" role="Question ouverte" tags={['Ni Linéaire A', 'Ni hiéroglyphes crétois confirmés']} body="Le système de signes ne correspond pas exactement au linéaire A ni aux hiéroglyphes crétois déjà attestés en Crète à la même période — s'il est apparenté à l'un d'eux, la nature exacte du lien reste elle-même débattue." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment on l'a étudié" title="De la fouille italienne aux analyses statistiques">
+    <Timeline items={[
+      { year: '1900', title: 'Début des fouilles italiennes à Phaistos', body: "La Mission archéologique italienne en Crète, dirigée par Federico Halbherr, entame l'exploration systématique du site palatial." },
+      { year: '1908', title: 'Découverte du disque par Luigi Pernier', body: "L'objet est mis au jour dans un contexte associé au palais, puis publié la même année, provoquant une attention immédiate de la communauté archéologique." },
+      { year: 'Années 1900-1910', title: 'Publication et premières tentatives de lecture', body: "Les 45 signes distincts sont catalogués et numérotés pour la première fois, posant les bases de toutes les études ultérieures." },
+      { year: 'Années 1950-1970', title: 'Multiplication des tentatives de déchiffrement', body: "Plusieurs chercheurs, professionnels et amateurs, proposent des lectures concurrentes (hymne religieux, calendrier, jeu), sans qu'aucune n'emporte l'adhésion de la discipline." },
+      { year: 'Années 1990-2000', title: 'Analyses statistiques informatisées', body: "Des études de fréquence et de répartition des signes, menées par ordinateur, affinent la compréhension de la structure du texte sans percer son sens." },
+      { year: 'Aujourd\'hui', title: 'Conservation au musée archéologique d\'Héraklion', body: "Le disque reste exposé en Crète, où il demeure l'une des pièces les plus visitées de la collection minoenne." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'une curiosité savante à une icône populaire" title="Le disque des « grandes énigmes indéchiffrées »">
+    <div class="card-grid compact">
+      <MiniCard title="Un habitué des classements de mystères non résolus" tag="Culture générale" body="Le disque figure systématiquement aux côtés du manuscrit de Voynich et du rongorongo de l'île de Pâques dans les articles et documentaires consacrés aux écritures jamais déchiffrées." />
+      <MiniCard title="Des centaines de « décodages » amateurs publiés" tag="Internet et autoédition" body="Depuis les années 2000, de nombreuses lectures alternatives circulent en ligne, sans validation académique — un phénomène comparable à celui observé autour du manuscrit de Voynich." />
+      <MiniCard title="Une icône du design évoquant l'Antiquité mystérieuse" tag="Image populaire" body="La forme circulaire et la spirale de signes en font un motif visuel fréquemment repris pour évoquer une Antiquité énigmatique, dans l'illustration comme dans certains jeux et fictions." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="L'authenticité de l'objet ne fait pas débat sérieux" body="Malgré son caractère unique, qui a occasionnellement nourri des soupçons de canular moderne, l'analyse du matériau et le contexte de découverte n'ont jamais produit de doute sérieux au sein de la communauté archéologique sur l'authenticité et l'ancienneté du disque." />
+    <ScienceBlock num="Enquête 2" title="La technique d'estampage est un fait établi, indépendant du sens du texte" body="Que le contenu reste illisible n'enlève rien à ce qui est solidement démontré : chaque signe a été imprimé avec un poinçon individuel réutilisable, une méthode qui anticipe, dans son principe technique, la logique des caractères mobiles bien avant l'imprimerie." />
+    <ScienceBlock num="Enquête 3" title="Un corpus trop court pour un déchiffrement classique" body="Les méthodes de décipherment qui ont fonctionné pour d'autres écritures anciennes (linéaire B, hiéroglyphes égyptiens) reposaient sur des corpus bien plus vastes ou des textes bilingues. Avec 241 signes sur un seul objet, la majorité des spécialistes considèrent qu'un déchiffrement complet et vérifiable est hautement improbable, pas seulement « pas encore réalisé »." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Un texte religieux ou administratif dans une langue minoenne inconnue"
+      level="plausible"
+      status="Cadre le plus largement accepté"
+      body="La majorité des spécialistes s'accordent sur le fait qu'il s'agit vraisemblablement d'un texte réel, religieux ou administratif, rédigé dans une langue égéenne de l'âge du bronze aujourd'hui perdue — sans pouvoir aller au-delà de ce cadre général."
+      attrib="Position dominante en épigraphie égéenne"
+    />
+    <TheoryCard
+      title="Un hymne ou une prière à une divinité, un calendrier, ou un jeu"
+      level="folklore"
+      status="Lectures spécifiques concurrentes, non consensuelles"
+      body="Plusieurs propositions précises de lecture (hymne à une déesse, calendrier lunaire, plateau ou règle de jeu) ont été publiées au fil du XXe siècle ; aucune n'a convaincu la discipline dans son ensemble faute de preuve indépendante vérifiable."
+      attrib="Propositions individuelles, non retenues collectivement"
+    />
+    <TheoryCard
+      title="Un canular ou une fabrication moderne"
+      level="folklore"
+      status="Écarté par la communauté archéologique"
+      body="L'hypothèse d'un faux fabriqué à l'époque de la découverte est mentionnée ici parce qu'elle circule occasionnellement, pas parce qu'elle est soutenable : le contexte de fouille et l'analyse du matériau ne l'appuient pas." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette énigme fait encore">
+    <HeritageBlock title="Une pièce maîtresse du musée d'Héraklion" body="Le disque reste l'un des objets les plus regardés de la collection minoenne du musée archéologique d'Héraklion, en Crète." />
+    <HeritageBlock title="Un objet d'étude toujours actif" body="Des travaux d'épigraphie égéenne et d'analyse statistique continuent de paraître régulièrement, sans prétendre à un déchiffrement définitif à court terme." />
+    <HeritageBlock title="Un cas d'école sur les limites du déchiffrement" body="Le disque sert aujourd'hui de référence pédagogique pour expliquer pourquoi certains textes anciens, même authentiques et bien conservés, peuvent rester durablement illisibles faute de corpus suffisant." />
+    <CautionBox>
+      Présenter ce disque comme un mystère « à résoudre un jour » entretient une attente
+      probablement irréaliste : la quasi-totalité des spécialistes s'accordent sur le fait
+      qu'un texte unique de 241 signes, sans second témoin, ne réunit tout simplement pas les
+      conditions d'un déchiffrement vérifiable, quels que soient les progrès futurs des
+      méthodes d'analyse.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Luigi Pernier, \"Il disco di Phaestos con caratteri pittografici\", Ausonia, vol. III, 1908", note: "Publication originale de la découverte, décrite en #contexte et #decouverte." },
+    { label: "Louis Godart, Le Disque de Phaistos : L'énigme d'une écriture, Imprimerie nationale, 1995", note: "Synthèse de référence sur l'objet, sa technique de fabrication et l'état des tentatives de lecture, citée en #enigme et #science." },
+    { label: "Torsten Timm, \"The Structure of the Phaistos Disk\", Kadmos, vol. 63, 2004", url: "https://doi.org/10.1515/kadmos-2004-0009", note: "Étude statistique moderne de la structure du texte citée en #decouverte et #science." },
+    { label: "Musée archéologique d'Héraklion, notice de collection sur le Disque de Phaistos", url: "https://www.heraklionmuseum.gr/en/exhibits/the-phaistos-disc/", note: "Description muséale de référence de l'objet, citée en #contexte et #heritage." },
+  ]} />
+</PageLayout>

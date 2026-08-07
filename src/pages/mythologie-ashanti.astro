@@ -1,0 +1,298 @@
+---
+/*
+  Mythologie Ashanti / Akan — vingt-et-unième mythologie de la série.
+  Structure imposée par docs/plans/plan-serie-mythologies.md : 10 sections fixes.
+
+  #royaumes : cosmologie akan authentique en trois domaines — le ciel de
+  Nyame, la terre d'Asase Yaa, le monde des ancêtres (Asamando) — pas un
+  chiffre emprunté à un autre chapitre (cf. correctif du 26/07/2026).
+
+  #genealogie : les « 3 maisons » sont la maison de Nyame (le dieu du ciel
+  et Asase Yaa, la terre), la maison d'Anansi (l'araignée rusée et sa
+  propre famille : Aso, Ntikuma) et la maison des ancêtres/prêtres
+  (Okomfo Anokye et la lignée royale asante) — trois logiques de
+  transmission différentes, sur le même principe que Yoruba.
+
+  Traitement : religion vivante, pratiquée aujourd'hui au Ghana et en Côte
+  d'Ivoire aux côtés du christianisme et de l'islam, et diffusée mondialement
+  via les contes d'Anansi transportés par la traite transatlantique — aucun
+  ton de curiosité pour un folklore éteint.
+
+  Point de vigilance recoupement : le Tabouret d'or (Sika Dwa Kofi) a déjà
+  sa propre page dans la série Objets légendaires (`objet-tabouret-or.html`),
+  centrée sur la guerre coloniale de 1900. Cette page-ci traite l'angle
+  mythologique et fondateur (Okomfo Anokye, la légitimation divine du
+  pouvoir asante) sans répéter ce contenu — même principe que Mjöllnir/
+  mythologie nordique.
+
+  Effets : data-egg="ashanti" + data-scroll-fx="anansiToile" sur #pantheon.
+  Déchiffrement des titres (mécanisme 3, minimum non négociable) :
+  glyphs="akan", nouveau pool décoratif ajouté à GLYPH_POOLS — les Adinkra
+  ne sont pas une écriture au sens strict (aucun système d'écriture propre
+  précolonial attesté chez les Akan), donc un jeu de glyphes symbolique
+  choisi en connaissance de cause, sur le même principe que le pool yoruba.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
+import InteractiveGenealogy from '../components/InteractiveGenealogy.astro';
+
+const AKAN_HOUSES = {
+  nyame: { head: '#c9982f', normal: '#d8c896', dim: '#a08858' },
+  anansi: { head: '#2f6a3a', normal: '#7ea884', dim: '#a08858' },
+  ancetres: { head: '#8a2a2a', normal: '#c47a7a', dim: '#a08858' },
+};
+const AKAN_HOUSE_LABELS = {
+  nyame: 'Maison de Nyame', anansi: "Maison d'Anansi", ancetres: 'Maison des ancêtres',
+};
+const AKAN_NODES = [
+  { id: 'nyame', label: 'Nyame', house: 'nyame', head: true, x: 110, y: 60, detail: "Dieu du ciel, créateur distant — invoqué dans des proverbes plus que dans un culte à temple dédié, à la différence des abosom plus proches des vivants." },
+  { id: 'asaseyaa', label: 'Asase Yaa', house: 'nyame', x: 110, y: 190, detail: "La Terre elle-même, épouse ou parèdre de Nyame selon les traditions — le jeudi lui est consacré, jour où l'on évite de retourner durement le sol." },
+  { id: 'anansi', label: 'Anansi', house: 'anansi', head: true, x: 380, y: 60, detail: "L'araignée rusée, « propriétaire de toutes les histoires » — dans plusieurs versions du corpus, un fils de Nyame lui-même, ce qui inscrit la ruse au cœur même de la famille divine." },
+  { id: 'aso', label: 'Aso', house: 'anansi', x: 300, y: 190, detail: "Épouse d'Anansi, présente dans plusieurs contes comme complice ou spectatrice avisée de ses ruses." },
+  { id: 'ntikuma', label: 'Ntikuma', house: 'anansi', x: 460, y: 190, detail: "Fils d'Anansi, le premier à deviner la solution d'une énigme dans le conte du pot de sagesse — la ruse du père ne trompe pas toujours ses propres enfants." },
+  { id: 'okomfoanokye', label: 'Okomfo Anokye', house: 'ancetres', head: true, x: 630, y: 60, detail: "Grand prêtre semi-légendaire à qui la tradition attribue d'avoir fait descendre le Tabouret d'or du ciel pour légitimer l'union des clans asante sous Osei Tutu, vers 1701." },
+  { id: 'nsamanfo', label: 'Nsamanfo', house: 'ancetres', x: 630, y: 190, detail: "Les ancêtres divinisés, dont l'assentiment continue d'être sollicité par la lignée royale et par les familles ordinaires lors des grandes décisions." },
+];
+const AKAN_EDGES = [
+  ['nyame', 'asaseyaa', 'union'],
+  ['nyame', 'anansi', 'special'],
+  ['anansi', 'aso', 'union'], ['anansi', 'ntikuma', 'filiation'],
+  ['okomfoanokye', 'nsamanfo', 'special'],
+];
+
+/* Or du kente, vert de la forêt guinéenne, rouge profond des teintures
+   adinkra : la matière akan plutôt qu'une palette « Afrique » générique. */
+const palette = {
+  bg: '#171307',
+  'bg-deep': '#0d0a04',
+  surface: '#241d0f',
+  'surface-alt': '#2f2614',
+  border: '#5c4a1e',
+  ink: '#f5ecd0',
+  text: '#d8c896',
+  'text-dim': '#a08858',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#2f6a3a',
+  'accent2-bright': '#4f9a5a',
+  verdict: '#5c1a1a',
+  'verdict-bright': '#8a2a2a',
+  glow: 'rgba(201,152,47,0.24)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Domaines' },
+  { id: 'pantheon', nav: 'Panthéon' },
+  { id: 'genealogie', nav: 'Généalogie' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const domaines = [
+  { num: 'I', title: 'Le ciel de Nyame', sub: 'Créateur distant', body: "Onyankopon, « le grand qui seul est grand », reste plus invoqué dans les proverbes que dans un culte quotidien direct : c'est aux abosom, plus proches, que s'adressent la plupart des rites." },
+  { num: 'II', title: "La terre d'Asase Yaa", sub: 'Fécondité et serment', body: "La terre elle-même, dont le jeudi est le jour sacré : on évite ce jour-là de la retourner durement, et les serments les plus graves s'y prêtent au nom de la terre." },
+  { num: 'III', title: 'Asamando', sub: 'Le monde des ancêtres', body: "Royaume des Nsamanfo, les ancêtres divinisés, dont l'assentiment continue d'être recherché par les vivants pour les décisions les plus importantes de la lignée." },
+];
+---
+<PageLayout
+  title="Mythologie Ashanti / Akan"
+  serie="Mythologies du Monde"
+  description="Nyame le créateur distant, Asase Yaa la terre, et surtout Anansi l'araignée rusée, « propriétaire de toutes les histoires » — un panthéon toujours pratiqué au Ghana et en Côte d'Ivoire, dont les contes ont traversé l'Atlantique par la force de la traite négrière pour irriguer tout le folklore caribéen et afro-américain."
+  href="mythologie-ashanti.html"
+  egg="ashanti"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="GYE NYAME"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Nyame · Asase Yaa · Anansi</p>
+  <p class="tagline" slot="hero">
+    Un dieu du ciel distant, une terre-mère qu'on jure sur son nom, et surtout une araignée
+    rusée devenue « propriétaire de toutes les histoires » — un panthéon toujours vivant,
+    dont les contes ont traversé l'Atlantique dans les cales de la traite négrière pour
+    devenir un patrimoine narratif mondial.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="Trois domaines, pas un chiffre emprunté"
+    intro="La cosmologie akan authentique distingue le ciel du créateur, la terre nourricière et le monde des ancêtres — une structure dérivée de la tradition elle-même, pas alignée sur un autre chapitre de la série.">
+    <Fragment slot="title"><Decode glyphs="akan">Trois domaines, pas un chiffre emprunté</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="300" cy="50" rx="200" ry="36" fill="none" stroke="#e8c164" stroke-width="2" opacity="0.7"/>
+        <text x="300" y="36" text-anchor="middle" fill="#e8c164" font-family="Cinzel, serif" font-size="13">NYAME</text>
+        <line x1="300" y1="86" x2="300" y2="150" stroke="#4f9a5a" stroke-width="2" stroke-dasharray="4 4"/>
+        <ellipse cx="300" cy="180" rx="170" ry="30" fill="none" stroke="#4f9a5a" stroke-width="2" opacity="0.8"/>
+        <text x="300" y="184" text-anchor="middle" fill="#d8c896" font-family="Cinzel, serif" font-size="12">ASASE YAA</text>
+        <circle cx="300" cy="230" r="6" fill="#8a2a2a"/>
+        <text x="300" y="216" text-anchor="middle" fill="#c47a7a" font-size="10">ASAMANDO</text>
+      </svg>
+    </div>
+    <p class="map-caption">Le ciel de Nyame, la terre d'Asase Yaa, le monde des ancêtres en dessous — trois domaines reliés à la verticale, jamais confondus.</p>
+    <div class="card-grid compact">
+      {domaines.map((d) => <InfoCard {...d} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~16 figures majeures" title="Le panthéon akan" scrollFx="anansiToile">
+    <Fragment slot="title"><Decode glyphs="akan">Le panthéon akan</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Nyame (Onyankopon)" role="Créateur du ciel" tags={['Distant', 'Proverbes']} body="« Le grand qui seul est grand » : un créateur invoqué dans d'innombrables proverbes akan, mais rarement l'objet d'un culte à temple dédié, à la différence des abosom plus proches des affaires humaines." />
+      <FigureCard name="Odomankoma" role="Aspect infini du créateur" tags={['Épithète', 'Philosophie']} body="Nom ou épithète associé à Nyame dans certains proverbes philosophiques akan, notamment celui, célèbre, sur la mort : « Odomankoma a créé la mort, et la mort a tué Odomankoma. »" />
+      <FigureCard name="Asase Yaa" role="Déesse de la terre" tags={['Fécondité', 'Jeudi sacré']} body="La terre elle-même, dont le jeudi est le jour sacré — on évite ce jour-là de la retourner durement, et les serments les plus graves se prêtent en son nom." />
+      <FigureCard name="Anansi (Kwaku Ananse)" role="Araignée rusée, propriétaire des histoires" tags={['Trickster', 'Conteur']} body="La figure centrale du corpus narratif akan : rusé, parfois cupide, souvent puni par sa propre malice, mais toujours celui qui a « acheté » toutes les histoires du monde à Nyame." />
+      <FigureCard name="Aso" role="Épouse d'Anansi" tags={['Complice', 'Témoin']} body="Présente dans plusieurs contes comme complice avisée ou spectatrice lucide des ruses de son époux, sans jamais être dupe elle-même." />
+      <FigureCard name="Ntikuma" role="Fils d'Anansi" tags={['Sagesse', 'Enfant plus malin']} body="Le premier à deviner la solution d'une énigme dans le célèbre conte du pot de sagesse — même le maître de la ruse ne trompe pas toujours ses propres enfants." />
+      <FigureCard name="Tano" role="Dieu-fleuve, patron guerrier" tags={['Rivière', 'Guerre']} body="L'un des abosom (esprits/dieux mineurs) les plus puissants, associé à un fleuve réel et invoqué traditionnellement pour la protection au combat." />
+      <FigureCard name="Bia" role="Divinité-fleuve frontalière" tags={['Frontière', 'Rivière Bia']} body="Associée au fleuve Bia, à la frontière actuelle entre le Ghana et la Côte d'Ivoire — un dieu de rivière qui marque littéralement une limite géographique encore en usage aujourd'hui." />
+      <FigureCard name="Bosomtwe (Twe)" role="Divinité du lac Bosomtwe" tags={['Lac sacré', 'Tabou du métal']} body="Le seul lac naturel du Ghana lui est associé et considéré sacré : la pêche s'y pratique traditionnellement sans bateaux à moteur ni hameçons métalliques, par respect pour le dieu." />
+      <FigureCard name="Nsamanfo" role="Ancêtres divinisés" tags={['Continuité', 'Lignage']} body="Les esprits des ancêtres, dont l'assentiment reste recherché par les familles et par la lignée royale pour les décisions les plus importantes." />
+      <FigureCard name="Okomfo Anokye" role="Grand prêtre semi-légendaire" tags={['Fondateur', 'Union asante']} body="À qui la tradition attribue d'avoir fait descendre le Tabouret d'or du ciel pour sceller l'union des clans asante sous Osei Tutu, vers 1701 — un épisode fondateur traité plus en détail sur la page dédiée à l'objet lui-même." />
+      <FigureCard name="Sasabonsam" role="Monstre des forêts profondes" tags={['Redouté', 'Dents de fer']} body="Créature terrifiante à dents de fer et longues jambes, censée habiter les forêts les plus reculées — une figure d'avertissement contre l'aventure imprudente en forêt." />
+      <FigureCard name="Mmoatia" role="Petits esprits de la forêt" tags={['Pieds retournés', 'Savoir médicinal']} body="Esprits diminutifs aux pieds parfois décrits tournés vers l'arrière, réputés détenir un grand savoir herboriste qu'ils transmettent parfois à des humains capturés puis relâchés." />
+      <FigureCard name="Obayifo" role="Figure de sorcellerie redoutée" tags={['Croyance vivante', 'Prudence requise']} body="Personne réputée capable de nuire par des moyens occultes, notamment aux récoltes et aux enfants — une croyance toujours vivante dans certaines communautés, à traiter avec la même prudence que le Wendigo ou le Skinwalker ailleurs sur ce site." />
+      <FigureCard name="Ntoro" role="Groupes spirituels patrilinéaires" tags={['Transmission', 'Père à enfant']} body="Système de groupes spirituels transmis du père à l'enfant, complémentaire du système matrilinéaire (abusua) qui régit l'héritage et la succession chez les Akan." />
+      <FigureCard name="Okra" role="Fragment d'âme venu de Nyame" tags={['Souffle vital', 'Nom du jour']} body="Chaque personne reçoit à la naissance un fragment de l'énergie vitale de Nyame, associé au jour de la semaine de sa naissance — ce qui donne à chaque Akan son « nom de jour », comme Kwaku pour un mercredi." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 maisons, trois logiques"
+    title="Le ciel, la ruse et la lignée des ancêtres"
+    intro="Anansi apparaît, dans plusieurs versions du corpus, comme un fils de Nyame lui-même — la ruse n'est donc pas extérieure à l'ordre divin, elle en fait partie, aux côtés de la lignée bien distincte des grands prêtres et ancêtres royaux.">
+    <Fragment slot="title"><Decode glyphs="akan">Le ciel, la ruse et la lignée des ancêtres</Decode></Fragment>
+    <InteractiveGenealogy
+      nodes={AKAN_NODES}
+      edges={AKAN_EDGES}
+      houses={AKAN_HOUSES}
+      houseLabels={AKAN_HOUSE_LABELS}
+      glyphs="☉◆❖✤"
+      viewBox={{ w: 700, h: 260 }}
+      lineColor="#5c4a1e"
+    />
+    <p class="map-caption">Trait plein = filiation ; pointillé = union ou lien spécial. La ligne Nyame→Anansi est marquée « spécial » : toutes les versions du corpus ne s'accordent pas sur cette filiation.</p>
+  </Section>
+
+  <Section id="creatures" label="8 êtres notables" title="Monstres, esprits et bêtes du conte">
+    <Fragment slot="title"><Decode glyphs="akan">Monstres, esprits et bêtes du conte</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Sasabonsam" tag="Monstre forestier" body="Créature à dents de fer et longues jambes, censée habiter les forêts les plus reculées — une figure d'avertissement plus qu'un cryptide qu'on chercherait sur le terrain." />
+      <MiniCard title="Mmoatia" tag="Petit peuple de la forêt" body="Esprits diminutifs réputés détenir un grand savoir herboriste, parfois enlevant puis relâchant des humains après leur avoir enseigné des secrets de guérison." />
+      <MiniCard title="Onini le python" tag="Adversaire d'Anansi" body="Le serpent qu'Anansi capture par la ruse (en le convainquant de se mesurer à une branche) pour l'offrir à Nyame en échange des histoires du monde." />
+      <MiniCard title="Osebo le léopard" tag="Adversaire d'Anansi" body="Piégé par Anansi grâce à un trou creusé et recouvert, l'un des quatre êtres redoutables qu'il doit capturer pour acheter les histoires de Nyame." />
+      <MiniCard title="Mmoboro les frelons" tag="Adversaires d'Anansi" body="Un essaim entier, trompé par Anansi qui les fait entrer dans une calebasse en simulant la pluie — capturés sans qu'une seule piqûre ne soit nécessaire." />
+      <MiniCard title="Obayifo" tag="Croyance vivante" body="Figure de sorcellerie redoutée, réputée s'attaquer aux récoltes et aux enfants — une croyance encore prise au sérieux dans certaines communautés aujourd'hui, à traiter sans folklorisation excessive." />
+      <MiniCard title="Denkyem" tag="Le crocodile symbolique" body="Figure du crocodile, présente dans le répertoire des symboles adinkra comme image d'adaptabilité — un animal réel élevé au rang de symbole moral plutôt qu'un monstre à proprement parler." />
+      <MiniCard title="L'oiseau Sankofa" tag="Symbole du retour" body="Un oiseau mythique représenté la tête tournée vers l'arrière, saisissant un œuf sur son dos — l'un des symboles adinkra les plus mondialement reconnus, signifiant qu'il n'est jamais trop tard pour retourner chercher ce qu'on a oublié." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="9 légendes" title="Les grands récits akan">
+    <Fragment slot="title"><Decode glyphs="akan">Les grands récits akan</Decode></Fragment>
+    <StoryBlock num="Légende I" title="Comment Anansi a acheté les histoires du monde" body={["À l'origine, toutes les histoires appartiennent à Nyame, le dieu du ciel, qui les appelle simplement « histoires de Nyame ». Anansi demande à les acheter ; Nyame, certain que le prix est impossible à réunir, fixe un prix exorbitant : le python Onini, les frelons Mmoboro, le léopard Osebo et la fée Mmoatia.", "Anansi capture chacun par la ruse plutôt que par la force — une branche pour mesurer le python, une calebasse et de la fausse pluie pour les frelons, un trou dissimulé pour le léopard, une poupée engluée de gomme pour Mmoatia. Nyame, stupéfait, tient parole : les histoires deviennent désormais « Anansesem », les histoires d'Anansi."]} quote="Depuis ce jour, quand on raconte une histoire, on l'appelle Anansesem — les histoires d'Anansi." cite="Formule traditionnelle de clôture des contes akan" />
+    <StoryBlock num="Légende II" title="Le pot de sagesse d'Anansi" body="Voulant garder toute la sagesse du monde pour lui seul, Anansi la rassemble dans un pot qu'il tente de cacher au sommet d'un arbre, l'attachant devant lui pour grimper. Son fils Ntikuma, l'observant, lui suggère qu'il grimperait plus facilement en l'attachant dans le dos. Furieux de constater que son propre enfant a plus de bon sens que lui malgré tout son pot de sagesse, Anansi le brise de dépit — et c'est ainsi, dit le conte, que la sagesse s'est dispersée dans le monde entier plutôt que de rester la propriété d'un seul." />
+    <StoryBlock num="Légende III" title="Comment Anansi a obtenu sa taille fine" body="Affamé, Anansi apprend que deux villages organisent un grand festin le même jour. Il attache une corde à sa taille reliée à chaque village, demandant qu'on tire dès que le repas commence, pour savoir lequel rejoindre en premier. Les deux festins débutent au même instant : tiré des deux côtés à la fois, Anansi voit sa taille se resserrer douloureusement — une étiologie comique de la silhouette de l'araignée, et une mise en garde contre la cupidité qui veut tout avoir à la fois." />
+    <StoryBlock num="Légende IV" title="Le message de la mort" body={["Nyame envoie un caméléon porter aux hommes le message que la mort ne serait pas définitive. Mais un lézard, plus rapide, devance le caméléon et proclame le premier que la mort serait, au contraire, sans retour.", "Les hommes, ayant entendu le lézard avant le caméléon, tiennent sa version pour vraie — un mythe étiologique sur l'origine de la mortalité humaine, partagé sous des formes voisines par de nombreux peuples d'Afrique de l'Ouest."]} />
+    <StoryBlock num="Légende V" title="Le tabouret d'or descendu du ciel" body="Selon la tradition, le grand prêtre Okomfo Anokye fait descendre du ciel, dans un nuage de fumée noire, un tabouret d'or qui vient se poser sur les genoux du roi Osei Tutu — signe de l'union divinement sanctionnée des clans asante. Le récit complet de l'objet et de son histoire ultérieure, y compris la guerre coloniale qu'il a déclenchée en 1900, est traité dans la page qui lui est consacrée." />
+    <StoryBlock num="Légende VI" title="L'origine du lac Bosomtwe" body="La tradition locale rapporte qu'un chasseur, poursuivant une antilope blessée, la voit disparaître dans une dépression qui se remplit aussitôt d'eau — le lac lui-même, considéré depuis comme la demeure du dieu Twe. Encore aujourd'hui, la pêche s'y pratique traditionnellement à la seule ligne à main, sans bateau à moteur ni hameçon de métal." />
+    <StoryBlock num="Légende VII" title="Anansi et le jardin de Nyame" body="Dans plusieurs versions régionales, Anansi convainct les autres animaux de l'aider à cultiver un champ en leur promettant un partage égal, puis les congédie un à un par des ruses successives pour garder la récolte entière — un conte qui se retourne souvent contre lui dans l'épisode suivant, la ruse d'Anansi n'étant jamais présentée comme un modèle à suivre sans réserve." />
+    <StoryBlock num="Légende VIII" title="Anansi puni par sa propre ruse" body="De nombreux contes se terminent par le retournement de la ruse d'Anansi contre lui-même — englué, affamé ou humilié par ses propres pièges. Ce trait constant du corpus distingue le trickster akan d'un simple héros : il gagne souvent, mais jamais sans conséquence ni leçon." />
+    <StoryBlock num="Légende IX" title="Le serment de la terre" body="Dans la tradition akan, jurer « par Asase Yaa » engage la parole avec une gravité particulière, et certains travaux agricoles s'interrompent le jeudi par respect pour la déesse de la terre — une pratique rituelle du quotidien plutôt qu'un simple récit, qui montre combien la cosmologie irrigue la vie ordinaire." />
+  </Section>
+
+  <Section id="anecdotes" label="8 curiosités" title="Faits marquants et diffusion mondiale">
+    <Fragment slot="title"><Decode glyphs="akan">Faits marquants et diffusion mondiale</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Anansi devenu Aunt Nancy" tag="Diaspora aux Amériques" body="Déportés par la traite transatlantique, les contes d'Anansi survivent et se transforment dans les Caraïbes et le sud des États-Unis, où le nom se déforme parfois en « Aunt Nancy » ou « Anancy »." />
+      <MiniCard title="Le lac Bosomtwe, un cratère de météorite réel" tag="Fait géologique" body="Le seul lac naturel du Ghana s'est en réalité formé par l'impact d'une météorite il y a environ 10 700 ans — la science confirme l'origine extraordinaire d'un lieu que la tradition tenait déjà pour sacré, sans se rejoindre sur les causes." />
+      <MiniCard title="Le nom du jour, une pratique vivante" tag="Noms de jour akan" body="Chaque personne akan porte traditionnellement un nom lié à son jour de naissance — Anansi lui-même, « Kwaku Ananse », porte le nom du mercredi, une pratique de nomination toujours courante aujourd'hui." />
+      <MiniCard title="Gye Nyame, symbole omniprésent" tag="Design contemporain" body="Ce symbole adinkra signifiant « sauf Dieu » (rien à craindre sauf Dieu) reste l'un des motifs graphiques ghanéens les plus reconnus au monde, imprimé sur des textiles, bâtiments et objets bien au-delà du Ghana." />
+      <MiniCard title="Neil Gaiman et Anansi Boys" tag="Littérature mondiale, 2005" body="Le roman de l'auteur britannique met en scène un fils d'Anansi dans le Londres contemporain, preuve de la portée toujours actuelle du personnage dans la fiction mondiale." />
+      <MiniCard title="R. S. Rattray, ethnographe colonial" tag="Sources et limites" body="L'essentiel de la documentation académique ancienne sur la religion akan provient d'ethnographes britanniques de l'époque coloniale ; leurs travaux restent des sources précieuses, à lire avec conscience du regard extérieur et parfois biaisé qui les a produits." />
+      <MiniCard title="Un système de succession matrilinéaire" tag="Organisation sociale" body="Contrairement à de nombreuses sociétés voisines, la succession et l'héritage akan traditionnels passent par la lignée maternelle (abusua) — une organisation sociale qui structure directement la légitimité royale évoquée en #genealogie." />
+      <MiniCard title="Br'er Rabbit, un parent probable" tag="Folklore afro-américain" body="De nombreux folkloristes voient dans les histoires de Br'er Rabbit du sud des États-Unis un parent direct ou indirect des contes d'Anansi transmis par les personnes réduites en esclavage." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="Du Ghana aux Caraïbes, de force">
+    <Fragment slot="title"><Decode glyphs="akan">Du Ghana aux Caraïbes, de force</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="300" cy="110" r="9" fill="#c9982f"/>
+        <text x="300" y="92" text-anchor="middle" fill="#e8c164" font-size="12" font-family="Cinzel, serif">GHANA</text>
+        {[[130,60,'Jamaïque'],[100,150,'Suriname'],[480,150,'États-Unis (Sud)'],[440,60,"Côte d'Ivoire"],[250,175,'Haïti / Caraïbes']].map(([x,y,label]) => (
+          <g>
+            <line x1="300" y1="110" x2={x} y2={y} stroke="#a08858" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#2f2614" stroke="#c9982f" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#d8c896" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">Une dispersion forcée par la traite transatlantique — la survie et la transformation des contes d'Anansi dans les Amériques sont un fait historique documenté, pas une exportation choisie.</p>
+    <div class="card-grid">
+      <InfoCard title="Ghana et Côte d'Ivoire" sub="Foyer d'origine" body="Le pays akan reste le centre vivant de la pratique religieuse et narrative, avec la cour asante de Kumasi comme foyer historique majeur." />
+      <InfoCard title="Jamaïque — Anancy stories" sub="Tradition orale majeure" body="Les contes d'Anansi y forment un corpus narratif central, transmis oralement de génération en génération jusqu'à aujourd'hui." />
+      <InfoCard title="Suriname — Anansi tori" sub="Tradition orale vivante" body="La tradition surinamaise conserve une pratique de conte communautaire particulièrement vivace autour de la figure d'Anansi." />
+      <InfoCard title="Sud des États-Unis" sub="Br'er Rabbit et parents" body="Un parent probable ou direct du corpus d'Anansi survit dans les histoires de Br'er Rabbit du folklore afro-américain." />
+      <InfoCard title="Haïti et les Caraïbes" sub="Influences croisées" body="D'autres traditions caribéennes portent elles aussi des traces du corpus akan, mêlées à d'autres apports ouest-africains." />
+      <InfoCard title="Diaspora contemporaine mondiale" sub="Littérature et cinéma" body="Des romans aux adaptations télévisées, Anansi continue d'être réinventé pour des publics mondiaux bien au-delà de son aire culturelle d'origine." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="akan">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'Avant le XVIIe siècle', title: 'Tradition orale akan préexistante', body: "Le corpus de contes d'Anansi et la cosmologie de Nyame et Asase Yaa se transmettent oralement bien avant toute mise par écrit." },
+      { year: 'v. 1701', title: 'Fondation de l\'union asante', body: "Selon la tradition, Okomfo Anokye fait descendre le Tabouret d'or pour légitimer l'union des clans sous Osei Tutu." },
+      { year: 'XVIIIe-XIXe siècle', title: 'Traite transatlantique', body: "Déportation forcée de populations akan vers les Amériques, avec leurs récits, transformés et préservés clandestinement." },
+      { year: '1817', title: 'Mission britannique de Bowdich', body: "L'un des premiers comptes rendus européens détaillés sur la société et la cour asante." },
+      { year: 'XIXe siècle', title: 'Premières collectes caribéennes de contes d\'Anansi', body: "Des folkloristes commencent à documenter par écrit les récits d'Anansi tels que transmis en Jamaïque et ailleurs dans les Caraïbes." },
+      { year: '1900', title: 'Guerre du Tabouret d\'or', body: "Conflit déclenché par la demande d'un gouverneur britannique de s'asseoir sur le Tabouret d'or — traité en détail sur la page objet dédiée." },
+      { year: '1902', title: 'Protectorat britannique de l\'Ashanti', body: "Le royaume asante devient formellement un protectorat de l'Empire britannique." },
+      { year: '1923-1927', title: 'Travaux ethnographiques de R. S. Rattray', body: "Publication de Ashanti puis Religion and Art in Ashanti, sources majeures (et marquées par leur époque coloniale) sur la religion akan." },
+      { year: '1957', title: 'Indépendance du Ghana', body: "Le Ghana devient la première colonie subsaharienne britannique à accéder à l'indépendance." },
+      { year: '2005', title: 'Publication d\'Anansi Boys', body: "Le roman de Neil Gaiman porte la figure d'Anansi à une audience mondiale contemporaine." },
+      { year: "Aujourd'hui", title: 'Une tradition religieuse et narrative toujours vivante', body: "La religion traditionnelle akan continue d'être pratiquée aux côtés du christianisme et de l'islam, et les contes d'Anansi restent racontés au Ghana comme dans toute la diaspora." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ce panthéon fait encore">
+    <Fragment slot="title"><Decode glyphs="akan">Ce que ce panthéon fait encore</Decode></Fragment>
+    <HeritageBlock title="Un patrimoine narratif mondial" body="Peu de figures mythologiques ont une empreinte narrative aussi large qu'Anansi, présent des villages akan du Ghana jusqu'aux romans et séries télévisées contemporains." />
+    <HeritageBlock title="Une religion vivante au Ghana" body="La religion traditionnelle akan continue d'être pratiquée aujourd'hui, souvent aux côtés du christianisme ou de l'islam plutôt qu'en substitution stricte." />
+    <HeritageBlock title="Un symbole graphique mondialement reconnu" body="Le motif Gye Nyame et les autres symboles adinkra ont dépassé leur contexte d'origine pour devenir un vocabulaire graphique utilisé bien au-delà du Ghana." />
+    <CautionBox>
+      Les tricksters comme Anansi sont souvent réduits, dans les adaptations populaires
+      occidentales, à un simple personnage comique. La tradition akan lui prête une fonction
+      plus ambivalente : Anansi enseigne autant par ses succès que par ses échecs et ses
+      punitions — le réduire à un clown effacerait une bonne part de ce que ces récits
+      transmettent réellement. De même, des croyances comme l'obayifo restent vivantes et
+      sérieuses pour certaines communautés aujourd'hui : elles méritent la même prudence que
+      les traditions spirituelles vivantes déjà rencontrées ailleurs dans cette série.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "R. S. Rattray, Religion and Art in Ashanti, Oxford University Press, 1927", note: "Source ethnographique de référence (à lire avec conscience de son contexte colonial) sur le panthéon et les rites décrits en #royaumes et #pantheon." },
+    { label: "Peggy Appiah, Ananse the Spider: Tales from an Ashanti Village, Pantheon Books, 1966", note: "Recueil de référence des contes d'Anansi résumés en #legendes." },
+    { label: "Kwame Anthony Appiah, In My Father's House: Africa in the Philosophy of Culture, Oxford University Press, 1992", note: "Contexte philosophique et culturel akan cité en #anecdotes et #heritage." },
+    { label: "UNESCO / Ghana Museums and Monuments Board, documentation sur le lac Bosomtwe et le cratère d'impact", note: "Source du fait géologique cité en #anecdotes." },
+  ]} />
+</PageLayout>

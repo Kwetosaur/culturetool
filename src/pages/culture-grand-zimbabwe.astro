@@ -1,0 +1,203 @@
+---
+/*
+  Grand Zimbabwe (culture) — vingtième page de la série « Peuples &
+  Cultures du Monde ». Même structure à 10 sections que
+  culture-khmers.astro.
+
+  Redondance volontaire avec mystere-grand-zimbabwe.astro : cette page
+  traite la civilisation shona elle-même (société, commerce, architecture),
+  le récit détaillé de la controverse coloniale sur l'attribution du site
+  étant réservé à la page mystère — même principe déjà appliqué à
+  l'Égypte (mythologie + culture) et documenté dans
+  docs/plans/plan-carte-icones.md.
+
+  Effets : data-egg="zimbabwe" + data-scroll-fx="murZimbabwe" sur
+  #style-de-vie, piste documentée dans plan-effets.md ("un mur de pierres
+  sèches qui s'assemble bloc par bloc, sans mortier").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Granite doré, ocre de la savane, vert bruni du soapstone des oiseaux
+   sculptés : la matière du site plutôt qu'une palette "Afrique" générique. */
+const palette = {
+  bg: '#171207',
+  'bg-deep': '#0d0a05',
+  surface: '#241d10',
+  'surface-alt': '#302818',
+  border: '#5c4a24',
+  ink: '#f5ecd8',
+  text: '#d8c8a0',
+  'text-dim': '#a08858',
+  accent: '#b5862f',
+  'accent-bright': '#d6ac52',
+  accent2: '#4a6a3a',
+  'accent2-bright': '#7a9a5a',
+  verdict: '#5c3418',
+  'verdict-bright': '#8a5c2a',
+  glow: 'rgba(181,134,47,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Grand Zimbabwe (culture)"
+  serie="Peuples & Cultures du Monde"
+  description="Une cité de pierre bâtie sans mortier par les ancêtres du peuple shona, centre d'un vaste réseau commercial reliant l'intérieur de l'Afrique australe à l'océan Indien — assez impressionnante pour donner son nom au pays qui la revendique aujourd'hui comme son symbole national."
+  href="culture-grand-zimbabwe.html"
+  egg="zimbabwe"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ZIMBABWE · XIe-XVe SIÈCLE"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">La cité qui a donné son nom à un pays</p>
+  <p class="tagline" slot="hero">
+    Des murs de granite assemblés sans une seule goutte de mortier, un commerce qui atteignait
+    la côte de l'océan Indien, et un nom — « maisons de pierre » en shona — devenu si central
+    à l'identité nationale qu'un pays entier le porte aujourd'hui.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="Le plateau du Zimbabwe et ses routes commerciales"
+    intro="La cité s'élève sur le plateau du Zimbabwe actuel, au carrefour de routes commerciales reliant les mines d'or de l'intérieur aux ports swahilis de l'océan Indien.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="140" r="9" fill="#d6ac52"/>
+        <text x="200" y="122" text-anchor="middle" fill="#e8dcc8" font-size="12" font-family="Cinzel, serif">GRAND ZIMBABWE</text>
+        <circle cx="320" cy="200" r="6" fill="#7a9a5a"/>
+        <text x="320" y="216" fill="#c0d8a8" font-size="10">Sofala (côte)</text>
+        <circle cx="100" cy="100" r="6" fill="#7a9a5a"/>
+        <text x="100" y="86" fill="#c0d8a8" font-size="10">Mines d'or intérieures</text>
+      </svg>
+    </div>
+    <p class="map-caption">Une position charnière entre les zones aurifères de l'intérieur du plateau et les comptoirs côtiers swahilis, à l'origine de la prospérité commerciale du site.</p>
+    <div class="card-grid">
+      <InfoCard title="La Grande Enceinte" sub="Mur d'enceinte le plus vaste" body="La plus grande structure préindustrielle d'Afrique subsaharienne au sud du Sahara, un mur elliptique de granite atteignant localement onze mètres de haut, bâti entièrement sans mortier." />
+      <InfoCard title="Le Complexe de la Colline" sub="Acropole ancienne" body="Occupation la plus ancienne du site, perchée sur un promontoire rocheux, probablement centre religieux et résidence des premiers dirigeants." />
+      <InfoCard title="La Tour conique" sub="Fonction toujours débattue" body="Structure massive sans ouverture interne connue, dont la fonction précise — grenier symbolique, représentation phallique, symbole de pouvoir — reste discutée par les archéologues." />
+      <InfoCard title="Les routes vers Sofala" sub="Débouché commercial" body="Le site est relié par des routes commerciales au port swahili de Sofala, sur la côte de l'actuel Mozambique, point d'exportation vers l'océan Indien." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Une société shona centralisée par le commerce de l'or" intro="Une société organisée autour d'une autorité royale centralisée, dont la prospérité repose directement sur le contrôle des routes commerciales de l'or et de l'ivoire.">
+    <div class="card-grid wide">
+      <FigureCard name="Les ancêtres du peuple shona" role="Bâtisseurs du site" tags={['Confirmé archéologiquement']} body="L'archéologie moderne confirme sans ambiguïté que le site a été conçu, bâti et habité par les ancêtres directs des populations shona actuelles du Zimbabwe." />
+      <FigureCard name="La royauté du Grand Zimbabwe" role="Autorité centralisée" tags={['Contrôle du commerce']} body="Un pouvoir royal centralisé tire sa légitimité et sa richesse du contrôle des routes commerciales reliant l'intérieur aurifère à la côte swahilie." />
+      <FigureCard name="Les artisans bâtisseurs" role="Savoir-faire spécialisé" tags={['Pierre sèche', 'Anonymat']} body="Des artisans hautement spécialisés maîtrisent une technique de construction en pierre sèche sans équivalent connu ailleurs en Afrique australe à cette échelle, restés anonymes dans les sources." />
+      <FigureCard name="Les marchands de l'intérieur" role="Réseau commercial" tags={['Or', 'Ivoire']} body="Des réseaux marchands relient le site aux zones aurifères de l'intérieur du plateau, alimentant un commerce d'exportation vers l'océan Indien." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Une histoire sans nom de souverain connu">
+    <div class="card-grid wide">
+      <FigureCard name="Les rois anonymes de la Colline" role="Première dynastie" tags={['XIe-XIIIe siècle']} body="Aucun nom de souverain de cette première période n'est parvenu jusqu'à nous par une source écrite directe — l'histoire politique précise du site reste largement reconstituée par l'archéologie plutôt que par des annales royales." />
+      <FigureCard name="Les commerçants swahilis de Sofala" role="Partenaires commerciaux" tags={["Côte de l'océan Indien"]} body="Les marchands swahilis du littoral, déjà documentés dans la page consacrée à la côte swahilie de cette série, constituent le débouché commercial essentiel du site vers le monde de l'océan Indien." />
+      <FigureCard name="Vincent Mudariki et les archéologues zimbabwéens contemporains" role="Recherche postcoloniale" tags={['XXe-XXIe siècle']} body="Depuis l'indépendance du pays en 1980, des chercheurs zimbabwéens ont pris une part active à la réappropriation scientifique et culturelle du site, longtemps interprété principalement par des chercheurs étrangers." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="De l'essor commercial à l'abandon du site">
+    <StoryBlock num="Épisode I" title="L'essor du commerce de l'or" body="À partir du XIe siècle, le site tire une prospérité croissante du commerce de l'or extrait dans la région, exporté via les comptoirs swahilis de la côte vers des marchés aussi lointains que l'Inde et la Chine, comme l'attestent des tessons de céramique et des perles de verre retrouvés sur place." />
+    <StoryBlock num="Épisode II" title="L'apogée du XIVe siècle" body="Le site atteint son extension maximale, avec une population estimée jusqu'à environ dix-huit mille habitants — l'une des plus vastes agglomérations d'Afrique subsaharienne de son temps — et l'achèvement des grandes enceintes de pierre encore visibles aujourd'hui." />
+    <StoryBlock num="Épisode III" title="Le déclin et l'abandon, XVe siècle" body="Pour des raisons encore débattues — épuisement des ressources locales, déplacement des routes commerciales, facteurs environnementaux — le site est progressivement abandonné au profit d'autres centres de pouvoir shona, sans qu'aucune catastrophe unique ne soit clairement identifiée comme cause." />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="La pierre sèche et les oiseaux de soapstone">
+    <div class="card-grid compact">
+      <MiniCard title="La construction en pierre sèche" tag="Prouesse technique" body="Des murs de granite taillé assemblés sans aucun mortier, ajustés avec une précision suffisante pour tenir depuis près de mille ans." />
+      <MiniCard title="Les oiseaux de Zimbabwe" tag="Sculptures en stéatite" body="Des oiseaux stylisés sculptés en stéatite (soapstone), retrouvés au sommet de monolithes, devenus le symbole national du Zimbabwe moderne, présent sur son drapeau et ses armoiries." />
+      <MiniCard title="La gestion de l'eau" tag="Adaptation environnementale" body="Le site intègre des dispositifs de gestion des eaux de ruissellement adaptés au climat semi-aride du plateau zimbabwéen." />
+      <MiniCard title="L'urbanisme sans plan centralisé rigide" tag="Organisation spatiale" body="Contrairement à certains urbanismes très planifiés d'autres civilisations de cette série, l'organisation spatiale du site semble avoir évolué de façon plus organique au fil des siècles." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="Le pays porte le nom du site" tag="« Maisons de pierre »" body="Le nom Zimbabwe dérive du shona dzimba dza mabwe, « maisons de pierre » — un cas rare où un site archéologique donne directement son nom à un État moderne." />
+      <MiniCard title="Une controverse longtemps entretenue" tag="Renvoi à la page mystère" body="L'attribution du site à des bâtisseurs africains a longtemps été niée pour des raisons coloniales explicitement racistes — un dossier historiographique traité en détail dans la page « Grand Zimbabwe » de la série Mystères de ce site." />
+      <MiniCard title="Plus de 150 sites apparentés" tag="Réseau régional" body="Le Grand Zimbabwe n'est que le plus grand d'un réseau de plus de cent cinquante sites de constructions en pierre similaires disséminés en Afrique australe, tous attribués à des cultures apparentées." />
+      <MiniCard title="Céramiques chinoises et persanes retrouvées" tag="Preuve matérielle du commerce" body="Des fragments de porcelaine chinoise et de céramique persane mis au jour sur le site attestent concrètement de l'ampleur du réseau commercial reliant le plateau à l'océan Indien." />
+      <MiniCard title="Classement UNESCO en 1986" tag="Reconnaissance patrimoniale" body="Le site rejoint la liste du patrimoine mondial, consacrant sa valeur universelle après des décennies de controverses sur son interprétation." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="Bétail, poterie et hiérarchie spatiale"
+    intro="La vie quotidienne du Grand Zimbabwe se documente principalement par l'archéologie : céramiques, restes fauniques et organisation spatiale des différents quartiers du site."
+    scrollFx="murZimbabwe">
+    <div class="card-grid compact">
+      <MiniCard title="L'élevage bovin" tag="Richesse et statut" body="Le bétail constitue une mesure de richesse et de statut social centrale, une importance culturelle qui perdure aujourd'hui dans de nombreuses sociétés d'Afrique australe." />
+      <MiniCard title="La poterie graphite" tag="Artisanat distinctif" body="Une céramique à la surface polie au graphite, distinctive de la culture du Grand Zimbabwe, aide aujourd'hui les archéologues à dater et identifier les sites apparentés." />
+      <MiniCard title="La hiérarchie spatiale du site" tag="Organisation sociale visible" body="La répartition entre le Complexe de la Colline, la Grande Enceinte et la vallée reflète probablement une hiérarchie sociale et politique directement lisible dans l'organisation de l'espace bâti." />
+      <MiniCard title="Le travail du fer et de l'or" tag="Métallurgie locale" body="Des ateliers de traitement du fer et de l'or sont attestés sur le site, cœur de l'activité économique qui a permis son essor commercial." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="De l'océan Indien au drapeau national">
+    <div class="card-grid">
+      <InfoCard title="Le réseau commercial de l'océan Indien" sub="Lien avec la côte swahilie" body="Le site s'inscrit dans le même grand réseau commercial que les cités-États swahilies déjà traitées dans cette série, reliant l'Afrique australe à l'Inde, à la Perse et à la Chine." />
+      <InfoCard title="L'identité nationale zimbabwéenne" sub="Symbole d'État" body="L'oiseau de Zimbabwe figure sur le drapeau et les armoiries du pays moderne, qui tire directement son nom du site." />
+      <InfoCard title="Le tourisme patrimonial" sub="Destination archéologique majeure" body="Le site reste l'une des principales destinations archéologiques d'Afrique australe, malgré une fréquentation touristique inférieure à son importance historique réelle." />
+      <InfoCard title="La réhabilitation archéologique postcoloniale" sub="Depuis 1980" body="Depuis l'indépendance, la recherche zimbabwéenne a activement repris et corrigé une interprétation longtemps déformée par des motivations coloniales." />
+      <InfoCard title="Un réseau de sites apparentés" sub="Afrique australe" body="Plus de cent cinquante sites de construction en pierre similaires attestent d'une civilisation régionale bien plus vaste que le seul site principal." />
+      <InfoCard title="Les études archéologiques africaines" sub="Discipline en plein essor" body="Le Grand Zimbabwe reste un cas d'école pour l'archéologie africaine postcoloniale et la restitution d'une histoire longtemps déformée." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. XIe siècle apr. J.-C.', title: 'Premières occupations du Complexe de la Colline', body: "Début de l'installation qui deviendra le centre du Grand Zimbabwe." },
+      { year: 'v. XIIIe-XIVe siècle apr. J.-C.', title: 'Construction de la Grande Enceinte', body: "Édification des plus vastes structures de pierre sèche du site, à son apogée démographique et commerciale." },
+      { year: 'v. XVe siècle apr. J.-C.', title: 'Déclin et abandon progressif', body: "Le centre de pouvoir shona se déplace vers d'autres sites, pour des raisons encore débattues par les chercheurs." },
+      { year: '1531', title: 'Première mention écrite connue', body: "Le chroniqueur portugais João de Barros rapporte des récits de ruines de pierre à l'intérieur des terres, sans les avoir visitées lui-même." },
+      { year: '1871', title: 'Première visite européenne documentée', body: "L'explorateur allemand Karl Mauch décrit le site, ouvrant la voie aux controverses coloniales ultérieures sur son attribution." },
+      { year: 'Années 1970', title: 'Confirmation archéologique définitive de l\'origine shona', body: "Les travaux de Peter Garlake et d'autres chercheurs établissent scientifiquement l'attribution africaine du site, malgré une forte pression politique contraire en Rhodésie." },
+      { year: '1980', title: 'Indépendance du Zimbabwe', body: "Le nouveau pays adopte le nom du site comme nom national, consacrant sa portée symbolique." },
+      { year: '1986', title: 'Classement UNESCO', body: "Le site rejoint la liste du patrimoine mondial de l'humanité." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que le Grand Zimbabwe laisse encore">
+    <HeritageBlock title="Un symbole national fondateur" body="Le site a donné son nom à un pays entier et continue de figurer sur son drapeau à travers l'oiseau de stéatite qui en est devenu l'emblème." />
+    <HeritageBlock title="Une prouesse architecturale reconnue mondialement" body="La technique de construction en pierre sèche du site reste étudiée comme un accomplissement architectural africain majeur, aujourd'hui pleinement reconnu par la recherche internationale." />
+    <HeritageBlock title="Un cas d'école de réappropriation historique" body="La confirmation scientifique de son origine africaine, après des décennies de déni colonial, en fait une référence pour l'histoire de l'archéologie postcoloniale sur le continent." />
+    <CautionBox>
+      L'attribution du site à ses véritables bâtisseurs africains a longtemps été niée pour des
+      raisons ouvertement racistes durant la période coloniale — un dossier suffisamment
+      important pour mériter sa propre page dans la série des Grands Mystères de ce site,
+      consacrée spécifiquement à cette controverse historiographique plutôt qu'à la
+      civilisation elle-même, ici traitée pour son mérite propre.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Peter Garlake, Great Zimbabwe, Thames & Hudson, 1973", note: "Étude archéologique fondatrice confirmant l'origine shona du site, citée en #figures et #frise." },
+    { label: "Innocent Pikirayi, The Zimbabwe Culture: Origins and Decline of Southern Zambezian States, AltaMira Press, 2001", note: "Synthèse de référence sur la société et le réseau commercial cités en #peuples et #monde." },
+    { label: "UNESCO, Centre du patrimoine mondial, « Grand Zimbabwe National Monument » (n° 364), inscrit en 1986", url: "https://whc.unesco.org/en/list/364/", note: "Statut patrimonial du site cité en #anecdotes et #frise." },
+    { label: "Shadreck Chirikure et al., \"Zimbabwe Culture Before Mapungubwe\", PLOS ONE, 2013", note: "Étude archéologique moderne sur la chronologie et l'économie du site citée en #recits et #inventions." },
+  ]} />
+</PageLayout>

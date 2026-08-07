@@ -14,21 +14,21 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | La Bête du Gévaudan ✅ | 9 | France, XVIIIe siècle | Événement réel documenté, explication la plus probable : loups (éventuellement hybrides ou dressés) |
 | Le Chupacabra ✅ | 8 | Porto Rico / Amérique latine | Phénomène récent (1990s), cas attribués à des canidés galeux |
 | Le Kraken ✅ | 8 | Scandinavie | Légende ancienne, probablement inspirée du calmar géant, réellement découvert bien plus tard |
-| Les Sirènes / Femmes-poissons | 7 | Mondiale | Croyance ancienne largement attribuée à des méprises sur des mammifères marins (lamantins, dugongs) |
+| Les Sirènes / Femmes-poissons ✅ | 7 | Mondiale | Croyance ancienne largement attribuée à des méprises sur des mammifères marins (lamantins, dugongs) |
 | Le Mothman ✅ | 7 | Point Pleasant, États-Unis | Panique collective documentée, explication sceptique dominante (hibou mal identifié) |
 | Le Wendigo | 7 | Peuples algonquins | Figure spirituelle vivante — à traiter avec respect culturel, pas comme simple "monstre" |
 | Le Skinwalker | 7 | Peuple navajo | Croyance spirituelle sensible et vivante — nécessite prudence et contextualisation, sujet parfois considéré tabou par les Navajos eux-mêmes |
-| Le Loup-Garou | 7 | Europe | Croyance ancienne, en partie liée historiquement à des maladies réelles (rage, porphyrie) et à des procès historiques documentés |
-| Ogopogo | 6 | Lac Okanagan, Canada | Folklore local + méprises probables (esturgeons, effets de vagues) |
-| Le Jersey Devil | 6 | New Jersey, États-Unis | Folklore régional du XIXe siècle, jamais de preuve tangible |
-| Black Shuck | 6 | Angleterre | Folklore local ancien, lié à des événements historiques rapportés (1577) |
+| Le Loup-Garou ✅ | 7 | Europe | Croyance ancienne, en partie liée historiquement à des maladies réelles (rage, porphyrie) et à des procès historiques documentés |
+| Ogopogo ✅ | 6 | Lac Okanagan, Canada | Folklore local + méprises probables (esturgeons, effets de vagues) |
+| Le Jersey Devil ✅ | 6 | New Jersey, États-Unis | Folklore régional du XIXe siècle, jamais de preuve tangible |
+| Black Shuck ✅ | 6 | Angleterre | Folklore local ancien, lié à des événements historiques rapportés (1577) |
 | Le Rougarou | 5 | Louisiane cajun | Variante régionale du loup-garou, forte identité culturelle locale |
 | Le Popobawa | 5 | Zanzibar | Panique collective documentée dans les années 1990-2000 |
 | Le Yowie | 5 | Australie | Équivalent local du Bigfoot, très peu de dossier scientifique |
 | La Créature de Loveland | 4 | Ohio, États-Unis | Anecdote locale isolée, aucune corroboration sérieuse |
 | Le Kappa ✅ | 7 | Japon | Croyance folklorique très vivante (mascotte, culture pop), esprit aquatique espiègle et dangereux, non un cryptide "chassé" comme les autres |
 | L'Orang Pendek | 6 | Sumatra, Indonésie | Non prouvé, expéditions régulières, moulages de traces jamais concluants |
-| Champ | 6 | Lac Champlain, États-Unis/Canada | Folklore du XIXe s. + photo "Mansi" (1977) jamais authentifiée formellement, parallèle direct de Nessie |
+| Champ ✅ | 6 | Lac Champlain, États-Unis/Canada | Folklore du XIXe s. + photo "Mansi" (1977) jamais authentifiée formellement, parallèle direct de Nessie |
 | Nahuelito | 6 | Lac Nahuel Huapi, Argentine | "Nessie sud-américaine", témoignages depuis les années 1920, aucune preuve scientifique |
 | Le Bunyip | 6 | Australie (folklore aborigène puis colonial) | Créature aquatique composite, description très variable selon les récits, jamais corroborée |
 | Le Yeren ✅ | 6 | Chine (Hubei) | "Bigfoot chinois", expéditions officielles chinoises dans les années 1970-80, aucune preuve concluante |
@@ -69,38 +69,40 @@ Deux listes, un même principe : score de pertinence /10 basé sur la notoriét�
 | Le Zodiac Killer | 6 | Californie, fin des années 1960 | Affaire criminelle réelle non résolue — sujet sensible, à traiter factuellement et sans spectacle |
 | La Cité Engloutie d'Héracléion | 5 | Égypte antique | Redécouverte archéologique réelle (2000), mystère largement résolu par la science |
 | La Disparition du Vol MH370 | 5 | Océan Indien, 2014 | Tragédie récente non résolue impliquant des victimes réelles — nécessite sobriété et respect absolu des familles |
-| La "Malédiction" de Toutânkhamon | 7 | Égypte, 1922 | Canular médiatique bien documenté (presse des années 1920), décès des fouilleurs statistiquement non anormaux — bon parallèle du Triangle des Bermudes |
-| Le Grand Zimbabwe | 7 | Zimbabwe, XIe-XVe s. | Mystère largement résolu aujourd'hui (bâti par des ancêtres des Shona), mais longtemps nié pour des raisons coloniales racistes — angle historiographique fort |
+| La "Malédiction" de Toutânkhamon ✅ | 7 | Égypte, 1922 | Canular médiatique bien documenté (presse des années 1920), décès des fouilleurs statistiquement non anormaux — bon parallèle du Triangle des Bermudes |
+| Le Grand Zimbabwe ✅ | 7 | Zimbabwe, XIe-XVe s. | Mystère largement résolu aujourd'hui (bâti par des ancêtres des Shona), mais longtemps nié pour des raisons coloniales racistes — angle historiographique fort |
 | Sanxingdui ✅ | 7 | Chine, âge du bronze | Masques et artefacts d'une civilisation inconnue des textes historiques chinois, fouilles et recherches encore actives aujourd'hui |
 | Le Triangle du Dragon (Devil's Sea) | 6 | Pacifique, au sud du Japon | "Triangle des Bermudes japonais", explicable de façon similaire (activité volcanique/tectonique réelle + statistique), bon effet miroir avec la page Bermudes |
-| Newgrange | 6 | Irlande, néolithique | Tombe à couloir alignée sur le solstice d'hiver, prouesse d'ingénierie bien documentée, complément direct de Stonehenge |
+| Newgrange ✅ | 6 | Irlande, néolithique | Tombe à couloir alignée sur le solstice d'hiver, prouesse d'ingénierie bien documentée, complément direct de Stonehenge |
 | Les Pierres de Dropa | 5 | Chine (légende moderne) | Canular/légende du XXe siècle sans fondement archéologique sérieux, bon contre-exemple de pseudo-mystère viral |
 | La Cité Perdue de Paititi / El Dorado ✅ | 6 | Amazonie, Pérou/Bolivie | Légende de cité d'or jamais localisée malgré des siècles d'expéditions, toujours non résolue |
 | Dwarka, la Cité Engloutie | 5 | Golfe de Cambay, Inde | Ruines sous-marines liées à la légende de Krishna, datation et interprétation encore débattues par les archéologues |
 | Göbekli Tepe ✅ | 9 | Turquie, ~9500 av. J.-C. | **L'absence la plus criante de cette liste.** Des enclos monumentaux à piliers en T bâtis par des chasseurs-cueilleurs, avant l'agriculture et la poterie : le site a inversé la séquence admise « d'abord les champs, ensuite les temples ». Fouillé depuis 1995, encore très largement enfoui |
-| Le Disque de Phaistos | 7 | Crète, ~1700 av. J.-C. | 241 signes imprimés au poinçon en spirale, 45 caractères distincts, **jamais déchiffrés** — et un corpus trop court pour espérer y arriver. Complément direct de la page Voynich, et lien avec la culture minoenne |
+| Le Disque de Phaistos ✅ | 7 | Crète, ~1700 av. J.-C. | 241 signes imprimés au poinçon en spirale, 45 caractères distincts, **jamais déchiffrés** — et un corpus trop court pour espérer y arriver. Complément direct de la page Voynich, et lien avec la culture minoenne |
 | Le Rongorongo | 7 | Île de Pâques | Une vingtaine d'objets gravés subsistants, non déchiffrés, et un débat de fond : est-ce même une écriture, ou une proto-écriture ? La seule écriture indéchiffrée d'Océanie — *voir la note de recoupement ci-dessous* |
-| L'Explosion de la Toungouska | 7 | Sibérie, 1908 | Événement réel et colossal (2 000 km² de forêt couchée), consensus scientifique solide (explosion aérienne d'un corps céleste) mais **aucun cratère**, ce qui alimente toujours les théories exotiques |
-| Le Somerton Man | 7 | Adélaïde, Australie, 1948 | Un inconnu mort sur une plage, un bout de papier « Tamám Shud » arraché à un recueil de poèmes, un code jamais résolu. Identifié en 2022 par généalogie génétique, avec des réserves officielles persistantes — **mort réelle, sobriété requise** |
+| L'Explosion de la Toungouska ✅ | 7 | Sibérie, 1908 | Événement réel et colossal (2 000 km² de forêt couchée), consensus scientifique solide (explosion aérienne d'un corps céleste) mais **aucun cratère**, ce qui alimente toujours les théories exotiques |
+| Le Somerton Man ✅ | 7 | Adélaïde, Australie, 1948 | Un inconnu mort sur une plage, un bout de papier « Tamám Shud » arraché à un recueil de poèmes, un code jamais résolu. Identifié en 2022 par généalogie génétique, avec des réserves officielles persistantes — **mort réelle, sobriété requise** |
 | Oak Island | 6 | Nouvelle-Écosse, 1795 | Deux siècles de fouilles, six morts, une industrie télévisuelle entière — et **rien de trouvé**. Le meilleur cas d'étude d'un mystère qui s'auto-entretient par l'argent qu'on y a déjà mis |
 | Les Sphères de pierre du Costa Rica | 6 | Delta du Diquís | ~300 sphères de gabbro d'une régularité remarquable, classées UNESCO. Leur fonction restera probablement inconnue : **presque toutes ont été déplacées** hors de leur contexte archéologique, qui portait la réponse |
 
 ---
 
-## État de la série (29/07/2026)
+## État de la série (07/08/2026)
 
-**Créatures : 14 publiées** — Bête du Gévaudan, Monstre du Loch Ness, Bigfoot, Yeti,
+**Créatures : 20 publiées** — Bête du Gévaudan, Monstre du Loch Ness, Bigfoot, Yeti,
 Chupacabra, Mothman, le Kraken, le Kappa, Mokèlé-mbembé, La Llorona, le Golem de Prague,
-le Yeren, **le Thunderbird**, **la Tarasque**. **22 à venir**, dont Basilic, Mapinguari,
+le Yeren, **le Thunderbird**, **la Tarasque**, **le Loup-Garou**, **Les Sirènes**, **Ogopogo**, **Black Shuck**, **le Jersey Devil**, **Champ**. **16 à venir**, dont Basilic, Mapinguari,
 Tatzelwurm et l'Hombre Caimán (ajoutées le 26/07/2026, toujours en attente) — l'Afrique
 n'avait que 3 entrées, l'Amazonie aucune, et l'Amérique latine hispanique seulement le
 Chupacabra.
 
-**Mystères : 14 publiés** — Triangle des Bermudes, Stonehenge, Col Dyatlov, Manuscrit de
+**Mystères : 20 publiés** — Triangle des Bermudes, Stonehenge, Col Dyatlov, Manuscrit de
 Voynich, Lignes de Nazca, Mécanisme d'Anticythère, Göbekli Tepe, la disparition d'Amelia
 Earhart, le Mary Celeste, l'île de Pâques, la Colonie de Roanoke, Sanxingdui, **le Suaire de
-Turin**, **la Cité perdue de Paititi / El Dorado**. **19 à venir**, dont disque de Phaistos,
-Toungouska, Somerton Man, Oak Island, sphères du Costa Rica (ajoutées le 26/07/2026, toujours
+Turin**, **la Cité perdue de Paititi / El Dorado**, **le Disque de Phaistos**, **l'Explosion de la
+Toungouska**, **le Somerton Man**, **la « Malédiction » de Toutânkhamon**, **le Grand
+Zimbabwe**, **Newgrange**. **13 à venir**, dont
+Oak Island, sphères du Costa Rica (ajoutées le 26/07/2026, toujours
 en attente).
 
 **Note de recoupement — rongorongo et île de Pâques.** Les deux sont dans la liste, au même

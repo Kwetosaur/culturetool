@@ -1,0 +1,173 @@
+---
+/*
+  La Pierre de Scone — vingt-deuxième objet de la série. Structure imposée
+  par docs/plans/plan-serie-objets.md : 9 sections, badge de nature.
+
+  Angle éditorial : le seul « pouvoir » réel de cet objet est politique —
+  un simple bloc de grès dont la géologie locale contredit d'emblée les
+  légendes d'origine exotique (pierre de Jacob, Égypte, Irlande via Scota).
+  #verite insiste sur ce contraste entre légende d'origine et réalité
+  géologique, dans l'esprit de la série.
+
+  Effets : data-egg="pierrescone" + data-scroll-fx="pierreSconeGlisse" sur
+  #description — un bloc de pierre qui glisse d'un socle à un autre,
+  aller-retour (1296 → 1996).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Grès rouge d'Écosse, chardon violet, or du couronnement : la matière de
+   l'objet plutôt qu'une palette "Écosse" générique. */
+const palette = {
+  bg: '#171310',
+  'bg-deep': '#0d0a08',
+  surface: '#241e18',
+  'surface-alt': '#302820',
+  border: '#5c4a34',
+  ink: '#f5ecdc',
+  text: '#d8c4a0',
+  'text-dim': '#a08868',
+  accent: '#9a4a2a',
+  'accent-bright': '#c47a4a',
+  accent2: '#5c3a6a',
+  'accent2-bright': '#8a6a9a',
+  verdict: '#5c4a1e',
+  'verdict-bright': '#8a7830',
+  glow: 'rgba(154,74,42,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="La Pierre de Scone"
+  serie="Objets Légendaires du Monde"
+  description="Un simple bloc de grès rouge, utilisé pendant des siècles pour introniser les rois d'Écosse, saisi par Édouard Ier en 1296 et encastré dans le trône du couronnement britannique — volé par des étudiants nationalistes en 1950, officiellement rendu à l'Écosse en 1996, et toujours de retour à Londres pour chaque couronnement, la plus récente en 2023."
+  href="objet-pierre-scone.html"
+  egg="pierrescone"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="SCONE · WESTMINSTER · ÉDIMBOURG"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Un bloc de grès dont le seul pouvoir est politique</p>
+  <p class="tagline" slot="hero">
+    Aucune légende de pouvoir magique ne colle vraiment à cet objet : sa seule vraie force
+    tient à ce qu'un roi anglais l'a volé en 1296, que des étudiants l'ont revolé sept
+    siècles plus tard, et que chaque monarque britannique continue d'être couronné assis
+    au-dessus de lui.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet réel, pouvoirs légendaires"
+    note="Le bloc lui-même est bien réel et identifié géologiquement comme du grès local écossais, ce qui contredit directement les légendes d'origine biblique ou égyptienne qui lui sont parfois attribuées. Son pouvoir n'est ni magique ni surnaturel : il est entièrement politique et symbolique."
+  />
+
+  <Section id="origine" label="Première attestation" title="Une pierre locale, des légendes exotiques" intro="Distinguer nettement l'origine géologique réelle du bloc des légendes d'origine lointaine qui lui sont attachées depuis le Moyen Âge.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Un usage d'intronisation médiéval attesté" sub="Abbaye de Scone, Écosse" body="La pierre sert de siège rituel pour l'intronisation des rois d'Écosse à Scone, une pratique attestée par les sources depuis le Moyen Âge central." />
+      <InfoCard num="II" title="Des légendes d'origine bibliques ou égyptiennes" sub="Traditions concurrentes tardives" body="Différentes traditions font remonter la pierre à l'oreiller de Jacob de la Genèse, ou à un transport depuis l'Égypte via l'Irlande par l'intermédiaire d'une princesse légendaire nommée Scota — aucune n'est corroborée par une preuve matérielle." />
+      <InfoCard num="III" title="Une identification géologique locale" sub="Grès de la région de Perthshire" body="L'analyse géologique moderne identifie la pierre comme un grès rouge originaire de la région même de Scone, contredisant directement toute origine exotique lointaine." />
+    </div>
+  </Section>
+
+  <Section id="description" label="Forme et fonction" title="Un bloc brut, pas un joyau" scrollFx="pierreSconeGlisse">
+    <div class="card-grid wide">
+      <FigureCard name="Un simple bloc rectangulaire" role="Description matérielle" tags={['Grès rouge', 'Anneaux de transport']} body="Contrairement à la plupart des objets de cette série, la pierre ne présente aucun ornement ni inscription notable — deux anneaux de fer permettent seulement de la transporter plus commodément." />
+      <FigureCard name="Un pouvoir purement symbolique" role="Absence de légende de pouvoir surnaturel" tags={['Politique', 'Pas de magie revendiquée']} body="À la différence de nombreux objets de cette série, aucune tradition sérieuse ne lui prête de pouvoir magique propre : sa seule force tient à sa fonction rituelle d'intronisation." />
+      <FigureCard name="Une pierre brisée puis réparée" role="Épisode du XXe siècle" tags={['Vol de 1950', 'Réparation discrète']} body="Le bloc s'est accidentellement fracturé en deux lors de son vol de 1950 ; un maçon de Glasgow l'a réparé, laissant selon certains récits une marque d'identification discrète toujours débattue." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="De la saisie d'Édouard Ier au retour de 1996">
+    <StoryBlock num="Récit I" title="La saisie de 1296" body="Édouard Ier d'Angleterre s'empare de la pierre lors de sa campagne contre l'Écosse et la fait transporter à l'abbaye de Westminster, où elle est intégrée à un trône de couronnement spécialement conçu pour l'accueillir — un geste délibéré d'appropriation symbolique de la souveraineté écossaise." />
+    <StoryBlock num="Récit II" title="Le vol de Noël 1950" body={["Quatre étudiants nationalistes écossais s'introduisent dans l'abbaye de Westminster la nuit de Noël et dérobent la pierre, la brisant accidentellement en deux lors de leur fuite précipitée.", "Elle est finalement laissée, plusieurs mois plus tard, sur l'autel en ruines de l'abbaye d'Arbroath — site symbolique de la déclaration d'indépendance écossaise de 1320 — avant d'être rapportée à Westminster."]} quote="Un geste symbolique plutôt qu'un vol crapuleux, revendiqué comme tel dès le départ." cite="Résumé du récit rapporté par les auteurs du vol de 1950" />
+    <StoryBlock num="Récit III" title="Le retour officiel de 1996" body="Sept cents ans après sa saisie, le gouvernement britannique restitue formellement la pierre à l'Écosse, où elle est désormais exposée au château d'Édimbourg, avec l'accord qu'elle retourne à Westminster uniquement pour les futurs couronnements royaux, comme ce fut le cas pour le couronnement de Charles III en 2023." />
+  </Section>
+
+  <Section id="facture" label="Matière et fabrication" title="Ce que la géologie révèle, mieux que la légende" intro="La véritable information technique sur cet objet ne vient pas d'un savoir-faire artisanal disparu, mais d'une analyse géologique moderne qui tranche directement un débat ancien.">
+    <div class="card-grid compact">
+      <MiniCard title="Une identification pétrographique précise" tag="Analyse géologique moderne" body="Les géologues identifient la pierre comme un grès rouge à grain fin caractéristique de la région de Perthshire, une origine strictement locale plutôt qu'exotique." />
+      <MiniCard title="Aucune trace de taille sophistiquée" tag="Objet volontairement brut" body="Contrairement à de nombreuses reliques travaillées de cette série, la pierre ne présente aucun décor sculpté élaboré — sa valeur ne tient jamais à sa facture artisanale." />
+      <MiniCard title="Une réparation du XXe siècle bien documentée" tag="Restauration de 1951" body="La fracture accidentelle survenue lors du vol de 1950 est réparée par un maçon professionnel de Glasgow, un épisode de restauration moderne relativement bien documenté par la presse de l'époque." />
+      <MiniCard title="Un contraste instructif avec les autres reliques de couronnement" tag="Sobriété matérielle assumée" body="La simplicité brute de la pierre, comparée à l'orfèvrerie des autres regalia britanniques, souligne combien sa valeur symbolique dépasse largement sa valeur matérielle intrinsèque." />
+    </div>
+  </Section>
+
+  <Section id="traces" label="Candidats matériels" title="Une chaîne de possession clairement documentée">
+    <Timeline items={[
+      { year: 'Moyen Âge central', title: 'Usage d\'intronisation à Scone', body: "La pierre sert de siège rituel pour l'intronisation des rois d'Écosse." },
+      { year: '1296', title: 'Saisie par Édouard Ier', body: "Le roi d'Angleterre s'empare de la pierre lors de sa campagne militaire contre l'Écosse." },
+      { year: 'Début du XIVe siècle', title: 'Intégration au trône du couronnement', body: "La pierre est incorporée sous le siège du trône de couronnement de Westminster, désormais appelé « chaise du Roi Édouard »." },
+      { year: '25 décembre 1950', title: 'Vol par des étudiants nationalistes', body: "Ian Hamilton, Gavin Vernon, Kay Matheson et Alan Stuart dérobent la pierre à Westminster, la brisant accidentellement en deux." },
+      { year: 'Avril 1951', title: 'Dépôt symbolique à l\'abbaye d\'Arbroath', body: "La pierre est retrouvée sur le site de la déclaration d'indépendance écossaise de 1320, avant d'être rendue à Westminster." },
+      { year: '1996', title: 'Restitution officielle à l\'Écosse', body: "Le gouvernement britannique renvoie formellement la pierre, exposée depuis au château d'Édimbourg." },
+      { year: '2023', title: 'Retour temporaire pour le couronnement de Charles III', body: "La pierre est transportée à Westminster pour la cérémonie avant de repartir en Écosse, conformément à l'accord de 1996." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un objet de couronnement à un symbole national" title="Une pierre devenue étendard politique">
+    <div class="card-grid compact">
+      <MiniCard title="Un symbole du nationalisme écossais moderne" tag="Identité politique" body="Le vol de 1950 reste célébré dans certains cercles nationalistes écossais comme un geste fondateur de l'affirmation identitaire moderne, bien avant les débats contemporains sur l'indépendance." />
+      <MiniCard title="Une théorie persistante de substitution" tag="Légende alternative non confirmée" body="Une rumeur tenace prétend que les moines de Scone auraient dissimulé la véritable pierre à Édouard Ier en lui laissant une simple pierre de rechange — une théorie séduisante mais jamais appuyée par une preuve matérielle solide." />
+      <MiniCard title="Un objet régulièrement médiatisé lors des couronnements" tag="Attention médiatique périodique" body="Chaque retour de la pierre à Westminster pour un couronnement relance une couverture médiatique importante sur son histoire mouvementée." />
+    </div>
+  </Section>
+
+  <Section id="verite" label="Section pivot" title="Ce qu'on peut affirmer aujourd'hui">
+    <ScienceBlock num="Enquête 1" title="Une origine locale qui contredit les légendes exotiques" body="L'analyse géologique moderne établit sans ambiguïté que la pierre provient de la région écossaise même où elle a toujours servi, rendant les légendes d'origine biblique ou égyptienne intenables au sens littéral — elles relèvent du registre de la légitimation symbolique, pas de l'histoire matérielle." />
+    <TheoryCard
+      title="Les moines de Scone auraient substitué une fausse pierre à Édouard Ier"
+      level="folklore"
+      status="Non démontré"
+      body="Cette théorie de substitution circule depuis des siècles sans jamais avoir été confirmée par une preuve matérielle ou documentaire solide — elle relève davantage du désir populaire de préserver symboliquement l'objet authentique que d'un fait établi."
+      attrib="Légende populaire écossaise récurrente, non confirmée"
+    />
+    <TheoryCard
+      title="La pierre actuelle est bien celle utilisée depuis le Moyen Âge écossais"
+      level="plausible"
+      status="Position la plus prudente et la mieux documentée"
+      body="En l'absence de toute preuve de substitution, la continuité matérielle de l'objet reste l'hypothèse la plus économe et la mieux appuyée par la documentation historique disponible."
+      attrib="Position par défaut de la plupart des historiens" />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cet objet fait encore">
+    <HeritageBlock title="Un rôle actif dans le cérémonial royal britannique" body="La pierre continue de jouer un rôle rituel concret lors de chaque couronnement britannique, comme démontré à nouveau en 2023." />
+    <HeritageBlock title="Un symbole de la relation Écosse-Angleterre" body="Son parcours entre saisie, vol, retour temporaire et restitution reflète directement l'évolution des rapports politiques entre les deux nations sur plusieurs siècles." />
+    <HeritageBlock title="Une attraction patrimoniale majeure" body="Exposée au château d'Édimbourg, elle reste l'un des objets historiques les plus visités d'Écosse." />
+    <CautionBox>
+      Le pouvoir de cet objet n'a jamais été magique : il a toujours été directement politique,
+      de sa saisie délibérée en 1296 comme geste de domination à sa restitution négociée de
+      1996 comme geste de réconciliation partielle. Le présenter comme un simple objet
+      légendaire sans reconnaître cette dimension politique continue serait passer à côté de
+      l'essentiel de son histoire.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Nick Aitchison, Scotland's Stone of Destiny: Myth, History and Nationhood, Tempus Publishing, 2000", note: "Synthèse de référence sur l'histoire et les légendes de la pierre citée en #origine et #verite." },
+    { label: "Ian Hamilton, No Stone Unturned: The Story of the Stone of Destiny, Souvenir Press, 1952 (éd. révisée 2008)", note: "Récit de première main de l'un des auteurs du vol de 1950, cité en #recits et #culture-populaire." },
+    { label: "Historic Environment Scotland, documentation officielle sur la Pierre de Destinée et le château d'Édimbourg", url: "https://www.historicenvironment.scot/", note: "Source institutionnelle sur la conservation actuelle citée en #traces et #heritage." },
+    { label: "Royal Collection Trust, documentation sur la chaise du couronnement de Westminster", url: "https://www.rct.uk/", note: "Source sur l'intégration de la pierre au trône de couronnement citée en #description et #recits." },
+  ]} />
+</PageLayout>

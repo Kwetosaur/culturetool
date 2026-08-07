@@ -6,14 +6,15 @@ Même principe de score /10 que les autres listes, basé sur la richesse du doss
 
 ---
 
-## Déjà couvertes (14)
+## Déjà couvertes (20)
 
 Chine · Égypte Antique · Rome antique · Grèce antique · Vikings / Scandinavie médiévale ·
 Empire du Mali · Incas · Polynésie (navigation) · Mésopotamie (culture) ·
 Empire perse achéménide · Empire byzantin · Khmers (Angkor) · **Empire mongol** · **Inde
-(culture)**
+(culture)** · **Nubie / Koush** · **Al-Andalus** · **Maya (culture)** · **Phéniciens** ·
+**Empire ottoman** · **Grand Zimbabwe (culture)**
 
-**20 candidates restantes** dans les tableaux ci-dessous. 6 avaient été ajoutées le
+**14 candidates restantes** dans les tableaux ci-dessous. 6 avaient été ajoutées le
 26/07/2026 pour combler des trous réels : Al-Andalus (huit siècles d'Europe absents),
 Minoens (première civilisation européenne), Carthage (angle historiographique), côte
 swahilie (tout l'océan Indien), Empire songhaï (suite du Mali), Empire timouride (Asie
@@ -31,7 +32,7 @@ centrale savante).
 | Celtes (Gaule &amp; Îles britanniques) | 7 | Société tribale/druidique, artisanat métallurgique (art de La Tène), résistance à la romanisation — angle civilisationnel distinct de `mythologie-celtique.html` |
 | Empire byzantin ✅ | 7 | Continuité romaine jusqu'en 1453, droit justinien, pont culturel entre Antiquité et Moyen Âge |
 | Cités-États italiennes (Venise, Florence...) | 6 | République maritime marchande, mécénat des arts, banque moderne naissante |
-| Al-Andalus | 9 | Cordoue comme plus grande ville d'Europe au Xe siècle, transmission des savoirs grecs vers l'Occident latin, et une *convivencia* dont l'ampleur réelle est aujourd'hui débattue — l'Espagne musulmane, huit siècles d'histoire européenne, était totalement absente de la liste |
+| Al-Andalus ✅ | 9 | Cordoue comme plus grande ville d'Europe au Xe siècle, transmission des savoirs grecs vers l'Occident latin, et une *convivencia* dont l'ampleur réelle est aujourd'hui débattue — l'Espagne musulmane, huit siècles d'histoire européenne, était totalement absente de la liste |
 | Minoens (Crète) | 8 | Première civilisation d'Europe, palais **sans fortifications**, fresques d'une modernité déconcertante, écriture linéaire A toujours non déchiffrée — bon pont avec `docs/listes/liste-creatures-mysteres-monde.md` (disque de Phaistos) |
 
 ## Moyen-Orient & Méditerranée
@@ -40,8 +41,8 @@ centrale savante).
 |---|---|---|
 | Mésopotamie (culture) ✅ | 9 | Premières villes, premier code de lois écrit (Hammurabi), invention de l'écriture — angle civilisationnel distinct de `mythologie-mesopotamienne.html` |
 | Empire perse achéménide ✅ | 9 | Administration multiethnique tolérante, routes royales, plus grand empire de son temps |
-| Phéniciens | 8 | Invention de l'alphabet consonantique (ancêtre du nôtre), thalassocratie commerciale, comptoirs de Carthage à Cadix |
-| Empire ottoman | 8 | Carrefour Europe/Asie pendant six siècles, architecture (Sinan), administration multiconfessionnelle |
+| Phéniciens ✅ | 8 | Invention de l'alphabet consonantique (ancêtre du nôtre), thalassocratie commerciale, comptoirs de Carthage à Cadix |
+| Empire ottoman ✅ | 8 | Carrefour Europe/Asie pendant six siècles, architecture (Sinan), administration multiconfessionnelle |
 | Carthage | 8 | Thalassocratie punique rasée en 146 av. J.-C., dont il ne reste presque **aucune source propre** : on la connaît par les textes de ceux qui l'ont détruite. Angle historiographique fort, distinct de la page Phéniciens (qui traite le Levant, l'alphabet et les comptoirs) |
 
 ## Asie
@@ -61,8 +62,8 @@ centrale savante).
 | Culture | Score | Ce qui la rend unique |
 |---|---|---|
 | Empire du Mali ✅ | 9 | Richesse légendaire de Mansa Moussa, Tombouctou comme centre intellectuel, contrôle du commerce transsaharien de l'or et du sel |
-| Nubie / Koush | 8 | Rivale puis conquérante de l'Égypte (pharaons noirs, XXVe dynastie), pyramides méroïtiques plus nombreuses que les égyptiennes |
-| Grand Zimbabwe | 7 | Cité de pierre commerciale médiévale, mystère de sa construction longtemps nié pour des raisons coloniales — bon lien avec `docs/listes/liste-creatures-mysteres-monde.md` |
+| Nubie / Koush ✅ | 8 | Rivale puis conquérante de l'Égypte (pharaons noirs, XXVe dynastie), pyramides méroïtiques plus nombreuses que les égyptiennes |
+| Grand Zimbabwe ✅ | 7 | Cité de pierre commerciale médiévale, mystère de sa construction longtemps nié pour des raisons coloniales — bon lien avec `docs/listes/liste-creatures-mysteres-monde.md` |
 | Éthiopie / Aksoum | 7 | Christianisme d'État parmi les plus anciens au monde, stèles monumentales, continuité historique rare en Afrique |
 | Côte swahilie (Kilwa, Mombasa, Zanzibar) | 7 | Cités-États marchandes de l'océan Indien, et une langue née **du commerce lui-même** (le swahili, aujourd'hui parlée par plus de 100 millions de personnes) — tout l'océan Indien manquait à la série |
 | Empire songhaï | 7 | Successeur du Mali et plus vaste empire d'Afrique de l'Ouest, Gao et Tombouctou sous les Askia, effondré en une seule bataille (Tondibi, 1591) face aux armes à feu marocaines — suite directe de `culture-mali.html` |
@@ -87,14 +88,14 @@ centrale savante).
 
 ## Top 5 recommandé pour la prochaine vague
 
-*(Mis à jour le 29/07/2026 — Empire mongol et Inde (culture), qui occupaient les deux
-premières places, sont publiées.)*
+*(Mis à jour le 07/08/2026 — Nubie / Koush, Al-Andalus, Maya (culture), Phéniciens, Empire
+ottoman et Grand Zimbabwe (culture), qui occupaient les six premières places, sont
+publiées.)*
 
-1. **Nubie / Koush** (8) — deuxième page africaine, rivale puis conquérante de l'Égypte.
-2. **Al-Andalus** (9) — Cordoue comme plus grande ville d'Europe au Xe siècle, huit siècles d'Europe musulmane toujours absents de la série.
-3. **Maya (culture)** (9) — astronomie et calendrier d'une précision remarquable, angle civilisationnel distinct de `mythologie-azteque-maya.html`.
-4. **Phéniciens** (8) — invention de l'alphabet consonantique, thalassocratie commerciale de Carthage à Cadix.
-5. **Empire ottoman** (8) — carrefour Europe/Asie pendant six siècles, administration multiconfessionnelle.
+1. **Minoens (Crète)** (8) — première civilisation d'Europe, bon pont avec le disque de
+   Phaistos déjà publié.
+2. **Aztèques (culture)** (8) — Tenochtitlan et son urbanisme lacustre, société guerrière
+   hiérarchisée, distinct de `mythologie-azteque-maya.html`.
 
 ---
 

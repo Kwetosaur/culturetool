@@ -1,0 +1,219 @@
+---
+/*
+  Al-Andalus — seizième page de la série « Peuples & Cultures du Monde ».
+  Même structure à 10 sections que culture-khmers.astro.
+
+  Point de vigilance : le concept de « convivencia » (coexistence pacifique
+  des trois religions) reste un objet de débat historiographique réel, pas
+  un fait acquis — certains historiens (Américo Castro, qui a forgé le
+  terme) le défendent, d'autres (Darío Fernández-Morera notamment) le
+  contestent fortement. #anecdotes et #heritage présentent le débat comme
+  tel plutôt que de trancher dans un sens ou dans l'autre.
+
+  Effets : data-egg="andalus" + data-scroll-fx="arcadeCordoue" sur
+  #style-de-vie, piste documentée dans plan-effets.md ("une arcade d'arcs
+  outrepassés qui se répète en profondeur, chaque arc s'allumant après le
+  précédent — la forêt de colonnes de Cordoue").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Brique rouge et voussures blanches de la Mezquita, zellige teal, or
+   nasride : la matière andalouse plutôt qu'une palette « Espagne » générique. */
+const palette = {
+  bg: '#1a120f',
+  'bg-deep': '#0f0a08',
+  surface: '#261b16',
+  'surface-alt': '#32241d',
+  border: '#5c4030',
+  ink: '#f5ece0',
+  text: '#d8c0a8',
+  'text-dim': '#a08868',
+  accent: '#9a3a2e',
+  'accent-bright': '#c25a48',
+  accent2: '#2e7a7a',
+  'accent2-bright': '#4aa8a8',
+  verdict: '#3a5c3a',
+  'verdict-bright': '#5c8a5c',
+  glow: 'rgba(154,58,46,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Al-Andalus"
+  serie="Peuples & Cultures du Monde"
+  description="Huit siècles d'Europe musulmane : Cordoue, plus grande ville d'Europe au Xe siècle, carrefour où les savoirs grecs ont transité vers l'Occident latin, et une coexistence entre musulmans, chrétiens et juifs dont l'ampleur réelle reste débattue par les historiens."
+  href="culture-al-andalus.html"
+  egg="andalus"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="CORDOUE · GRENADE · 711-1492"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Huit siècles d'Europe musulmane</p>
+  <p class="tagline" slot="hero">
+    Une civilisation qui a fait de Cordoue la plus grande ville d'Europe, transmis les
+    philosophes grecs à l'Occident latin par la traduction, et dont le degré réel de
+    coexistence entre religions reste, encore aujourd'hui, un débat d'historiens plutôt
+    qu'un fait acquis.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="De Cordoue à Grenade, huit siècles de recul"
+    intro="Al-Andalus désigne la péninsule Ibérique sous domination musulmane, dont le territoire se réduit progressivement du VIIIe au XVe siècle, de la quasi-totalité de l'Espagne et du Portugal actuels jusqu'au seul royaume de Grenade.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 40 L340 40 L320 220 L200 270 L80 220 Z" fill="none" stroke="#5c4030" stroke-width="2" opacity="0.6"/>
+        <circle cx="190" cy="140" r="8" fill="#c25a48"/>
+        <text x="190" y="126" text-anchor="middle" fill="#e8dcc8" font-size="12" font-family="Cinzel, serif">CORDOUE</text>
+        <circle cx="230" cy="220" r="7" fill="#e8c164"/>
+        <text x="230" y="240" text-anchor="middle" fill="#e8dcc8" font-size="11" font-family="Cinzel, serif">GRENADE</text>
+        <circle cx="150" cy="80" r="6" fill="#4aa8a8"/>
+        <text x="150" y="66" fill="#a0c8c8" font-size="10">Tolède</text>
+        <circle cx="120" cy="190" r="6" fill="#4aa8a8"/>
+        <text x="120" y="206" fill="#a0c8c8" font-size="10">Séville</text>
+      </svg>
+    </div>
+    <p class="map-caption">Cordoue puis Séville comme foyers du pouvoir omeyyade, Tolède comme grand centre de traduction après sa reconquête, Grenade comme dernier réduit nasride jusqu'en 1492.</p>
+    <div class="card-grid">
+      <InfoCard title="Cordoue" sub="Capitale de l'émirat puis du califat" body="Plus grande ville d'Europe au Xe siècle selon la plupart des estimations, dotée d'une bibliothèque califale réputée compter plusieurs centaines de milliers de volumes." />
+      <InfoCard title="Grenade et l'Alhambra" sub="Dernier royaume, 1238-1492" body="Capitale du dernier État nasride, dont l'Alhambra reste l'un des monuments islamiques les mieux conservés d'Europe." />
+      <InfoCard title="Tolède" sub="École de traducteurs, XIIe-XIIIe s." body="Reconquise en 1085, la ville devient un centre majeur de traduction de l'arabe vers le latin, sous protection chrétienne." />
+      <InfoCard title="Séville" sub="Capitale almohade" body="Devient capitale sous la dynastie almohade, dont la grande mosquée laisse pour minaret la Giralda, encore debout aujourd'hui." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Musulmans, chrétiens et juifs sous administration andalouse" intro="Une société stratifiée où la position légale dépend de la religion, avec des périodes et des dynasties très inégalement tolérantes — la coexistence n'a jamais été un long fleuve tranquille uniforme.">
+    <div class="card-grid wide">
+      <FigureCard name="Les Omeyyades d'al-Andalus" role="Dynastie fondatrice" tags={['Émirat puis califat', '756-1031']} body="Fondée par un survivant de la dynastie omeyyade de Damas renversée par les Abbassides, cette lignée fait de Cordoue une capitale rivale de Bagdad par le prestige." />
+      <FigureCard name="Les dhimmis (chrétiens et juifs)" role="Statut protégé, taxé" tags={['Jizya', 'Autonomie religieuse']} body="Chrétiens et juifs conservent un statut légal protégé moyennant un impôt spécifique, avec une autonomie religieuse et judiciaire interne — un cadre juridique réel, dont l'application concrète varie fortement selon les époques et les dynasties." />
+      <FigureCard name="Les Almoravides puis les Almohades" role="Dynasties berbères rigoristes" tags={['XIe-XIIIe s.', 'Intolérance accrue']} body="Deux dynasties venues du Maghreb qui imposent des politiques religieuses nettement plus rigoristes, avec des persécutions documentées contre juifs et chrétiens — la période la moins « conviviale » de toute l'histoire andalouse." />
+      <FigureCard name="Les Mozarabes" role="Chrétiens arabisés" tags={['Culture mixte']} body="Chrétiens ayant adopté la langue et une part des mœurs arabes tout en conservant leur foi — un exemple concret de métissage culturel qui complique tout récit à sens unique de la période." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Ceux qui ont pensé, gouverné et bâti Al-Andalus">
+    <div class="card-grid wide">
+      <FigureCard name="Abd al-Rahman Ier" role="Fondateur de l'émirat de Cordoue" tags={['756']} body="Seul survivant de la dynastie omeyyade massacrée par les Abbassides, il fuit jusqu'en Espagne et y fonde un émirat indépendant, posant les bases politiques d'al-Andalus." />
+      <FigureCard name="Abd al-Rahman III" role="Premier calife de Cordoue" tags={['929']} body="Proclame le califat de Cordoue, rivalisant en prestige avec Bagdad et le Caire, à l'apogée politique et culturelle de la période omeyyade andalouse." />
+      <FigureCard name="Averroès (Ibn Rushd)" role="Philosophe et commentateur d'Aristote" tags={['Cordoue, 1126-1198']} body="Ses commentaires sur Aristote influencent profondément la scolastique médiévale latine, au point que Thomas d'Aquin le désigne simplement « le Commentateur »." />
+      <FigureCard name="Maïmonide (Moshe ben Maimon)" role="Philosophe et médecin juif" tags={['Cordoue, 1138-1204']} body="Né à Cordoue, contraint à l'exil vers l'Égypte par les persécutions almohades, il devient l'un des plus grands penseurs juifs de l'histoire — sa trajectoire illustre à elle seule les deux visages de la période, éclat intellectuel et intolérance religieuse." />
+      <FigureCard name="Ziryab" role="Musicien et arbitre des raffinements de cour" tags={['Bagdad puis Cordoue, IXe s.']} body="Musicien venu de Bagdad, on lui attribue traditionnellement l'introduction à la cour de Cordoue de raffinements de mode de vie (étiquette de table, coiffure) — des attributions en partie légendaires, à traiter avec la prudence qui s'impose sur des sources tardives." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="De la conquête de 711 à la chute de Grenade">
+    <StoryBlock num="Épisode I" title="La conquête de 711" body="Une armée commandée par Tariq ibn Ziyad franchit le détroit qui portera désormais son nom (Jabal Tariq, devenu Gibraltar) et défait le dernier roi wisigoth à la bataille de Guadalete, ouvrant la voie à la conquête de la quasi-totalité de la péninsule en quelques années." />
+    <StoryBlock num="Épisode II" title="L'exil d'un survivant omeyyade" body="Après le massacre de sa famille par les Abbassides à Damas, le jeune Abd al-Rahman traverse l'Afrique du Nord en fugitif avant de rejoindre l'Espagne, où il fonde en 756 un émirat indépendant qui devient, deux siècles plus tard sous son descendant Abd al-Rahman III, un califat rival de Bagdad." />
+    <StoryBlock num="Épisode III" title="Le tournant de Tolède, 1085" body="La reconquête chrétienne de Tolède transforme la ville, plutôt que de rompre son rayonnement intellectuel, en un grand centre de traduction : des œuvres philosophiques et scientifiques arabes (souvent elles-mêmes traduites du grec) y sont converties en latin, alimentant directement la renaissance intellectuelle de l'Europe médiévale." />
+    <StoryBlock num="Épisode IV" title="La chute de Grenade, 1492" body={["Le 2 janvier 1492, le dernier sultan nasride Boabdil rend les clés de l'Alhambra aux Rois Catholiques, mettant fin à près de huit siècles de présence politique musulmane en Espagne.", "La même année voit le décret de l'Alhambra ordonnant l'expulsion des juifs et le premier voyage de Christophe Colomb — trois événements qui redessinent simultanément la carte religieuse et géopolitique de l'Espagne et du monde."]} quote="La même année où tombe Grenade, l'Espagne expulse ses juifs et finance la traversée de Colomb." cite="Résumé du consensus historiographique sur l'année 1492" />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Traduction, irrigation et papier">
+    <div class="card-grid compact">
+      <MiniCard title="L'École de traducteurs de Tolède" tag="Transmission du savoir" body="Après 1085, des équipes de traducteurs convertissent en latin des textes philosophiques et scientifiques arabes — dont des œuvres grecques antiques disparues en Occident — irriguant directement la scolastique médiévale européenne." />
+      <MiniCard title="La révolution agricole andalouse" tag="Irrigation et nouvelles cultures" body="Introduction de systèmes d'irrigation sophistiqués (acequias) et de cultures nouvelles pour l'Europe — riz, agrumes, canne à sucre, coton, safran — qui transforment durablement l'agriculture ibérique." />
+      <MiniCard title="Le papier, via Xàtiva" tag="XIe siècle" body="L'un des tout premiers moulins à papier d'Europe s'installe à Xàtiva, introduisant en Occident une technique venue de Chine via le monde arabo-musulman, appelée à remplacer progressivement le parchemin." />
+      <MiniCard title="La chirurgie d'Al-Zahrawi" tag="Médecine, Xe siècle" body="Son encyclopédie médicale Al-Tasrif, largement illustrée d'instruments chirurgicaux, reste une référence étudiée en Europe pendant des siècles après sa traduction en latin." />
+      <MiniCard title="L'architecture à arcs outrepassés" tag="Signature visuelle" body="La forêt de colonnes et d'arcs outrepassés rouge et blanc de la Grande Mosquée de Cordoue devient l'une des signatures architecturales les plus reconnaissables de toute la période." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="La « convivencia », un concept débattu" tag="Débat historiographique réel" body="Le terme, forgé par l'historien Américo Castro pour désigner la coexistence des trois religions, est contesté par d'autres historiens qui pointent des périodes de persécution bien réelles — la nuance appartient au débat académique, pas à un récit tranché d'un côté ou de l'autre." />
+      <MiniCard title="Une bibliothèque légendaire" tag="Cordoue, Xe siècle" body="La bibliothèque du califat de Cordoue est traditionnellement créditée de plusieurs centaines de milliers de volumes — un chiffre transmis par les chroniques de l'époque, difficile à vérifier avec une précision moderne mais révélateur du prestige intellectuel de la cour." />
+      <MiniCard title="Abbas ibn Firnas et le vol plané" tag="IXe siècle, anecdote popularisée" body="La tradition lui attribue une tentative de vol plané à Cordoue, souvent citée comme un précurseur de l'aviation — un récit largement rapporté dans la culture populaire, à l'attestation historique plus mince que sa notoriété ne le laisse penser." />
+      <MiniCard title="Averroès censuré par les deux bords" tag="Trajectoire contrastée" body="Ses œuvres sont à la fois interdites en al-Andalus sous les Almohades et mises à l'index par l'Église catholique en Europe quelques décennies plus tard — un même penseur jugé dangereux par deux autorités religieuses différentes." />
+      <MiniCard title="Un an, trois bascules historiques" tag="1492" body="La chute de Grenade, l'expulsion des juifs d'Espagne et le départ de Colomb pour les Amériques se produisent la même année — une coïncidence calendaire aux conséquences mondiales considérables." />
+      <MiniCard title="La Giralda, un minaret devenu clocher" tag="Continuité architecturale" body="L'ancien minaret de la grande mosquée almohade de Séville est reconverti en clocher de la cathédrale chrétienne plutôt que détruit — un cas fréquent de réemploi plutôt que d'effacement du bâti islamique." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="Bains, poésie et jardins d'eau"
+    intro="La vie quotidienne andalouse se documente par l'architecture domestique conservée, les traités de l'époque et une riche tradition poétique de cour, mêlant influences arabes, berbères et locales."
+    scrollFx="arcadeCordoue">
+    <div class="card-grid compact">
+      <MiniCard title="Les bains publics (hammams)" tag="Hygiène et sociabilité" body="Hérités de la tradition romaine puis réinterprétés selon les usages islamiques, les bains publics structurent une part importante de la vie sociale urbaine andalouse." />
+      <MiniCard title="La poésie de cour" tag="Genre raffiné" body="Une tradition poétique arabe particulièrement raffinée se développe dans les cours andalouses, y compris sous forme de dialogues amoureux et de joutes verbales entre poètes." />
+      <MiniCard title="Les jardins à eau courante" tag="Art paysager" body="Fontaines, bassins et canaux organisent les jardins de palais comme ceux de l'Alhambra, où l'eau structure autant l'esthétique que le confort thermique." />
+      <MiniCard title="Le marché (souk) urbain" tag="Vie économique" body="Les grandes villes andalouses s'organisent autour de marchés spécialisés par corps de métier, un modèle urbain hérité du monde islamique plus large." />
+      <MiniCard title="La cuisine métissée" tag="Héritage culinaire" body="L'introduction de nouveaux ingrédients (agrumes, amandes, épices) laisse une empreinte durable dans la cuisine espagnole et portugaise bien après 1492." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="De Cordoue à la Renaissance européenne">
+    <div class="card-grid">
+      <InfoCard title="La transmission d'Aristote" sub="Via Averroès et Tolède" body="Les commentaires d'Averroès et les traductions tolédanes réintroduisent une part importante de la philosophie grecque antique dans l'Europe latine médiévale." />
+      <InfoCard title="L'influence sur la médecine européenne" sub="Al-Zahrawi et l'école de Salerne" body="Les traités médicaux andalous, traduits en latin, nourrissent directement l'enseignement médical européen pendant des siècles." />
+      <InfoCard title="L'architecture mudéjare" sub="Style hybride post-1492" body="Après la Reconquista, des artisans musulmans continuent de bâtir pour des commanditaires chrétiens dans un style hybride qui perpétue le vocabulaire décoratif andalou." />
+      <InfoCard title="L'héritage linguistique" sub="Mots d'origine arabe en espagnol" body="Plusieurs milliers de mots espagnols et portugais actuels dérivent directement de l'arabe andalou, des noms de lieux jusqu'au vocabulaire agricole et scientifique." />
+      <InfoCard title="Le tourisme patrimonial contemporain" sub="Cordoue, Grenade, Séville" body="La Mezquita, l'Alhambra et la Giralda comptent aujourd'hui parmi les sites les plus visités d'Espagne, au cœur de l'identité touristique andalouse moderne." />
+      <InfoCard title="Un objet de mémoire politique contemporain" sub="Usages contemporains variés" body="La période continue d'être mobilisée dans des discours contemporains très divers, du dialogue interreligieux à des usages identitaires opposés — un héritage encore disputé aujourd'hui." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: '711', title: 'Conquête musulmane de la péninsule Ibérique', body: "Victoire de Tariq ibn Ziyad à la bataille de Guadalete contre le dernier roi wisigoth." },
+      { year: '756', title: 'Fondation de l\'émirat de Cordoue', body: "Abd al-Rahman Ier, seul survivant omeyyade rescapé du massacre abbasside, fonde un État indépendant." },
+      { year: '929', title: 'Proclamation du califat de Cordoue', body: "Abd al-Rahman III élève l'émirat au rang de califat, rival de Bagdad et du Caire en prestige." },
+      { year: 'Xe siècle', title: 'Apogée de Cordoue', body: "La ville devient, selon la plupart des estimations, la plus peuplée et la plus sophistiquée d'Europe occidentale." },
+      { year: '1031', title: 'Fragmentation en royaumes de taïfas', body: "L'effondrement du califat divise al-Andalus en petits royaumes rivaux, plus vulnérables face à l'avancée chrétienne." },
+      { year: '1085', title: 'Prise chrétienne de Tolède', body: "La ville devient un grand centre de traduction de l'arabe vers le latin sous administration chrétienne." },
+      { year: '1212', title: 'Bataille de Las Navas de Tolosa', body: "Défaite décisive des Almohades qui accélère durablement l'avancée de la Reconquista chrétienne." },
+      { year: '1236 et 1248', title: 'Chute de Cordoue puis de Séville', body: "Les deux grandes capitales historiques passent sous contrôle chrétien en l'espace de douze ans." },
+      { year: '1238-1492', title: 'Royaume nasride de Grenade', body: "Dernier État musulman de la péninsule, tributaire des royaumes chrétiens, qui construit l'essentiel de l'Alhambra actuelle." },
+      { year: '2 janvier 1492', title: 'Chute de Grenade', body: "Le sultan Boabdil rend la ville aux Rois Catholiques, mettant fin à la présence politique musulmane en Espagne." },
+      { year: '1492', title: 'Décret de l\'Alhambra et voyage de Colomb', body: "La même année voit l'expulsion des juifs d'Espagne et le premier voyage transatlantique de Christophe Colomb." },
+      { year: '1609-1614', title: 'Expulsion des Morisques', body: "Les descendants des musulmans convertis de force sont à leur tour expulsés d'Espagne, achevant l'effacement politique d'al-Andalus." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce qu'Al-Andalus laisse encore">
+    <HeritageBlock title="Un patrimoine architectural mondial" body="La Mezquita de Cordoue, l'Alhambra de Grenade et la Giralda de Séville comptent parmi les monuments islamiques les mieux conservés et les plus visités au monde." />
+    <HeritageBlock title="Une empreinte intellectuelle durable" body="La transmission des savoirs grecs et arabes via Tolède reste considérée comme l'un des apports majeurs à la formation de la pensée scolastique puis de la Renaissance européenne." />
+    <HeritageBlock title="Un objet de mémoire toujours disputé" body="La période continue d'alimenter des lectures contemporaines très différentes, du symbole de dialogue interreligieux à des usages identitaires opposés, en Espagne comme ailleurs." />
+    <CautionBox>
+      Présenter Al-Andalus comme un âge d'or de tolérance parfaite, ou au contraire comme une
+      simple occupation sans apport culturel réel, sont deux simplifications également
+      trompeuses. La réalité documentée varie fortement selon les dynasties et les décennies :
+      des périodes de coexistence relativement ouverte ont bien existé, tout comme des
+      persécutions religieuses bien réelles — notamment sous les Almohades. Le débat
+      historiographique sur l'ampleur exacte de la « convivencia » reste ouvert, et le rappeler
+      est plus honnête que de trancher pour satisfaire un récit préétabli.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "María Rosa Menocal, The Ornament of the World: How Muslims, Jews, and Christians Created a Culture of Tolerance in Medieval Spain, Little, Brown and Company, 2002", note: "Défense influente du concept de convivencia, à mettre en regard des critiques citées en #anecdotes et #heritage." },
+    { label: "Darío Fernández-Morera, The Myth of the Andalusian Paradise: Muslims, Christians, and Jews under Islamic Rule in Medieval Spain, ISI Books, 2016", note: "Contrepoint critique de la thèse de la convivencia, cité pour la nuance du débat en #heritage." },
+    { label: "Charles Burnett, \"The Coherence of the Arabic-Latin Translation Program in Toledo in the Twelfth Century\", Science in Context, vol. 14, 2001", note: "Étude de référence sur l'École de traducteurs de Tolède citée en #recits et #inventions." },
+    { label: "UNESCO, Centre du patrimoine mondial, « Mosquée-cathédrale de Cordoue » (n° 313) et « Alhambra, Generalife et Albayzín, Grenade » (n° 314)", url: "https://whc.unesco.org/en/list/313/", note: "Statut patrimonial des monuments cités en #carte et #heritage." },
+  ]} />
+</PageLayout>

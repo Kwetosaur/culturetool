@@ -1,0 +1,287 @@
+---
+/*
+  Cosmologie bouddhiste (transversale) — vingt-troisième mythologie de la
+  série, et la première mythologie transversale (pas rattachée à un seul
+  peuple). Structure imposée par docs/plans/plan-serie-mythologies.md : 10
+  sections fixes, adaptées à un objet transversal — même principe déjà
+  suivi pour les pages Aborigène et Polynésienne, qui adaptaient la
+  structure à leur cosmologie propre plutôt que de forcer un moule.
+
+  #royaumes : trois sphères authentiquement bouddhistes (Kamadhatu,
+  Rupadhatu, Arupadhatu) et la géographie du mont Meru — le compte de « 31
+  plans » suit la tradition theravada (Canon pali) ; les traditions
+  mahayana et vajrayana comptent différemment, ce que la page dit
+  explicitement plutôt que de lisser l'incertitude (même principe que le
+  correctif du 26/07/2026 sur le nombre de royaumes).
+
+  #genealogie : ici, pas de lignée de sang — les « 3 maisons » sont les
+  trois sphères elles-mêmes, organisées par degré de détachement spirituel
+  plutôt que par filiation. Écart assumé et expliqué en intro de section.
+
+  Traitement : ce substrat cosmologique reste vivant dans la pratique
+  bouddhiste contemporaine à travers l'Asie — aucun ton de curiosité pour
+  un système « dépassé » par la science moderne : la plupart des
+  praticiens et enseignants contemporains le lisent aujourd'hui de façon
+  symbolique/psychologique plutôt que littérale, un débat interne à la
+  tradition elle-même, traité en #heritage.
+
+  Effets : data-egg="bouddhiste" + data-scroll-fx="meruStrate" sur
+  #pantheon — le mont Meru qui s'élève strate par strate en cercles
+  concentriques. Déchiffrement des titres (mécanisme 3, minimum non
+  négociable) : glyphs="bouddhiste", nouveau pool ajouté à GLYPH_POOLS
+  (roue du dharma et symboles associés).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
+import InteractiveGenealogy from '../components/InteractiveGenealogy.astro';
+
+const SPHERE_HOUSES = {
+  kama: { head: '#e89a5a', normal: '#e0b090', dim: '#8088a0' },
+  rupa: { head: '#c9982f', normal: '#e8c164', dim: '#8088a0' },
+  arupa: { head: '#5c4a8a', normal: '#8a72c4', dim: '#8088a0' },
+};
+const SPHERE_HOUSE_LABELS = {
+  kama: 'Kamadhatu (sphère du désir)', rupa: 'Rupadhatu (sphère de la forme)', arupa: 'Arupadhatu (sphère sans forme)',
+};
+const SPHERE_NODES = [
+  { id: 'indra', label: 'Indra (Śakra)', house: 'kama', head: true, x: 110, y: 60, detail: "Roi des dieux du sommet du mont Meru, dans le ciel Trāyastriṃśa — le plus élevé des cieux du désir encore accessible aux humains par la pratique méritoire." },
+  { id: 'yama', label: 'Yama', house: 'kama', x: 110, y: 190, detail: "Juge des morts, tient la Roue de la Vie dans ses mâchoires sur les représentations traditionnelles — moins un souverain des enfers qu'un miroir impartial du karma de chacun." },
+  { id: 'mara', label: 'Māra', house: 'kama', x: 220, y: 130, detail: "Personnification de la tentation et de la mort, tente le Bouddha sous l'arbre de la Bodhi — une figure de l'attachement, pas un dieu malveillant au sens occidental." },
+  { id: 'brahma', label: 'Brahma', house: 'rupa', head: true, x: 460, y: 90, detail: "Habitant des cieux de la forme, doté d'un corps subtil mais dénué de désir — implore le Bouddha nouvellement éveillé d'enseigner plutôt que de rester en silence." },
+  { id: 'maitreya', label: 'Maitreya', house: 'rupa', x: 460, y: 190, detail: "Le Bouddha du futur, actuellement en attente dans le ciel Tushita avant sa venue prophétisée sur terre — une figure d'espérance partagée par toutes les grandes traditions bouddhistes." },
+  { id: 'arupabeings', label: 'Êtres sans forme', house: 'arupa', head: true, x: 630, y: 130, detail: "Pure conscience sans corps ni lieu au sens ordinaire, résultat des plus hauts états méditatifs (dhyana sans forme) — la limite supérieure du samsara, encore distincte de l'éveil complet." },
+];
+const SPHERE_EDGES = [
+  ['indra', 'yama', 'special'], ['indra', 'mara', 'special'],
+  ['brahma', 'maitreya', 'special'],
+  ['brahma', 'arupabeings', 'special'],
+];
+
+/* Indigo cosmique, or du mont Meru, safran des robes monastiques : la
+   matière d'une cosmologie transversale plutôt qu'une palette régionale. */
+const palette = {
+  bg: '#12141c',
+  'bg-deep': '#0a0b12',
+  surface: '#1c1f2c',
+  'surface-alt': '#242838',
+  border: '#3a4058',
+  ink: '#f0eef8',
+  text: '#c8ccd8',
+  'text-dim': '#8088a0',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#c9682f',
+  'accent2-bright': '#e89a5a',
+  verdict: '#3a2e5c',
+  'verdict-bright': '#5c4a8a',
+  glow: 'rgba(201,152,47,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Sphères' },
+  { id: 'pantheon', nav: 'Figures' },
+  { id: 'genealogie', nav: 'Hiérarchie' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const spheres = [
+  { num: 'I', title: 'Kamadhatu', sub: 'La sphère du désir', body: "Comprend les enfers, les esprits affamés, les animaux, les humains, les asuras et six cieux de dieux encore soumis au désir — la sphère la plus vaste et la plus détaillée des textes." },
+  { num: 'II', title: 'Rupadhatu', sub: 'La sphère de la forme subtile', body: "Seize à dix-sept cieux (le compte varie selon les écoles) peuplés d'êtres dotés d'un corps subtil mais dénués de désir, correspondant aux quatre niveaux de dhyana (absorption méditative)." },
+  { num: 'III', title: 'Arupadhatu', sub: 'La sphère sans forme', body: "Les quatre plans les plus élevés du samsara, purement mentaux, sans corps ni lieu au sens ordinaire — la limite supérieure du cycle des renaissances, non l'éveil lui-même." },
+];
+---
+<PageLayout
+  title="Cosmologie Bouddhiste"
+  serie="Mythologies du Monde"
+  description="Le mont Meru au centre du monde, trois sphères d'existence (désir, forme, sans-forme) et une roue de la vie à six royaumes de renaissance — un système cosmique commun à toute l'Asie bouddhiste, qui se superpose aux mythologies locales sans jamais les remplacer."
+  href="mythologie-cosmologie-bouddhiste.html"
+  egg="bouddhiste"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="☸ MONT MERU ☸"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Mont Meru · Trois sphères · Roue de la vie</p>
+  <p class="tagline" slot="hero">
+    Une seule et même architecture cosmique — une montagne centrale, trois sphères
+    d'existence, six royaumes de renaissance — traverse le bouddhisme depuis l'Inde jusqu'au
+    Japon, en s'adaptant à chaque culture sans jamais remplacer ses mythologies locales.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="Trois sphères, une montagne centrale"
+    intro="Contrairement aux mythologies précédentes de cette série, il ne s'agit pas ici d'un récit de création unique : la cosmologie bouddhiste décrit un système cyclique sans commencement ni fin, où des univers entiers naissent et se dissolvent à l'infini.">
+    <Fragment slot="title"><Decode glyphs="bouddhiste">Trois sphères, une montagne centrale</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+        <path d="M300 220 L340 60 L360 60 L300 20 L240 60 L260 60 Z" fill="none" stroke="#e8c164" stroke-width="2"/>
+        <text x="300" y="14" text-anchor="middle" fill="#e8c164" font-family="Cinzel, serif" font-size="12">MERU</text>
+        <ellipse cx="300" cy="220" rx="220" ry="30" fill="none" stroke="#8088a0" stroke-width="2" opacity="0.7"/>
+        <text x="90" y="224" fill="#c8ccd8" font-size="10">JAMBUDVĪPA</text>
+        <text x="470" y="224" fill="#c8ccd8" font-size="10">3 AUTRES CONTINENTS</text>
+      </svg>
+    </div>
+    <p class="map-caption">Le mont Meru au centre, entouré de quatre continents dont Jambudvīpa (le monde humain, au sud) — une géographie cosmique partagée, à des degrés divers, avec la cosmologie hindoue voisine.</p>
+    <div class="card-grid compact">
+      {spheres.map((s) => <InfoCard {...s} />)}
+    </div>
+    <p class="map-caption">Le compte traditionnel de « 31 plans d'existence » suit le Canon pali (tradition theravada) ; les traditions mahayana et vajrayana proposent des décomptes légèrement différents — une variation assumée plutôt que lissée en un chiffre unique.</p>
+  </Section>
+
+  <Section id="pantheon" label="~14 figures majeures" title="Les figures de la cosmologie" scrollFx="meruStrate">
+    <Fragment slot="title"><Decode glyphs="bouddhiste">Les figures de la cosmologie</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Indra (Śakra)" role="Roi des dieux du sommet de Meru" tags={['Trāyastriṃśa', 'Ciel du désir']} body="Règne sur le plus élevé des cieux du désir encore accessible par le mérite humain, au sommet même du mont Meru — une figure héritée telle quelle de la cosmologie védique antérieure." />
+      <FigureCard name="Brahma" role="Habitant des cieux de la forme" tags={['Rupadhatu', 'Sans désir']} body="Doté d'un corps subtil mais dénué de désir, il implore le Bouddha nouvellement éveillé de partager son enseignement plutôt que de rester en silence — un épisode central du récit de l'Éveil." />
+      <FigureCard name="Yama" role="Juge des morts" tags={['Roue de la vie', 'Karma, pas jugement moral']} body="Tient la Roue de la Vie dans ses mâchoires sur les représentations traditionnelles — moins un souverain punitif qu'un miroir impartial du karma accumulé par chaque être." />
+      <FigureCard name="Māra" role="Tentateur et personnification de la mort" tags={['Épreuve de l\'Éveil', 'Attachement']} body="Tente le Bouddha sous l'arbre de la Bodhi par la peur puis par le désir — une figure de l'attachement au samsara, pas un démon malveillant au sens occidental du terme." />
+      <FigureCard name="Maitreya" role="Le Bouddha du futur" tags={['Ciel Tushita', 'Espérance partagée']} body="Attend actuellement dans le ciel Tushita le moment prophétisé de sa venue sur terre — une figure d'espérance commune à l'ensemble des grandes traditions bouddhistes d'Asie." />
+      <FigureCard name="Les Quatre Rois Célestes" role="Gardiens des points cardinaux" tags={['Lokapala', 'Protecteurs du dharma']} body="Dhritarashtra, Virudhaka, Virupaksha et Vaishravana gardent chacun un point cardinal et un continent au pied du mont Meru, protégeant le monde et l'enseignement du Bouddha." />
+      <FigureCard name="Avalokiteśvara" role="Bodhisattva de la compassion" tags={['Mille bras', 'Panasiatique']} body="L'un des bodhisattvas les plus universellement vénérés à travers l'Asie bouddhiste, connu sous des noms locaux distincts (Guanyin en Chine, Kannon au Japon) tout en restant reconnaissable." />
+      <FigureCard name="Les Nāga" role="Esprits-serpents des eaux" tags={['Gardiens', 'Sagesse cachée']} body="Gardent des trésors et des enseignements cachés sous les eaux et dans le sol, jouant un rôle récurrent de gardiens ou de bienfaiteurs dans de nombreux récits bouddhistes." />
+      <FigureCard name="Les Garuda" role="Êtres-oiseaux monumentaux" tags={['Ennemis des nāga', 'Force']} body="Rivaux traditionnels des nāga, hérités eux aussi du fonds mythologique indien antérieur au bouddhisme et intégrés à sa cosmologie." />
+      <FigureCard name="Les Asura" role="Demi-dieux belliqueux" tags={['Kamadhatu', 'Rivalité avec les devas']} body="En guerre perpétuelle contre les dieux du ciel de Trāyastriṃśa pour le contrôle de certains territoires cosmiques, notamment un arbre merveilleux dont les fruits leur échappent toujours." />
+      <FigureCard name="Les Pretas" role="Esprits affamés" tags={['Kamadhatu', 'Insatisfaction']} body="Dotés d'un ventre immense et d'une bouche minuscule, incapables de se rassasier — une image de l'insatisfaction karmique plutôt qu'une simple punition arbitraire." />
+      <FigureCard name="Les Kinnara" role="Musiciens célestes mi-humains mi-oiseaux" tags={['Art', 'Beauté']} body="Figures associées à la musique et à la beauté céleste, fréquemment représentées dans la sculpture et la peinture bouddhistes de toute l'Asie du Sud-Est." />
+      <FigureCard name="Śākyamuni" role="Le Bouddha historique" tags={['Référence centrale', 'Éveil']} body="Bien que sa vie relève de l'histoire autant que du mythe, sa biographie légendaire (conception, renoncement, épreuve de Māra, éveil) structure l'ensemble du système cosmologique qui l'entoure." />
+      <FigureCard name="Les êtres des enfers (Naraka)" role="Habitants des plans inférieurs" tags={['Kamadhatu', 'Souffrance temporaire']} body="Contrairement à un enfer occidental éternel, les plans infernaux bouddhistes sont des états de renaissance temporaires, aussi longs et douloureux soient-ils, jamais définitifs." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 sphères, pas 3 lignées de sang"
+    title="Une hiérarchie de détachement, pas de filiation"
+    intro="Contrairement aux autres chapitres de cette série, il n'existe ici aucune parenté biologique entre les figures présentées : les « maisons » sont les trois sphères cosmologiques elles-mêmes, organisées par degré de détachement spirituel plutôt que par lignée. Un écart assumé, pas une simplification.">
+    <Fragment slot="title"><Decode glyphs="bouddhiste">Une hiérarchie de détachement, pas de filiation</Decode></Fragment>
+    <InteractiveGenealogy
+      nodes={SPHERE_NODES}
+      edges={SPHERE_EDGES}
+      houses={SPHERE_HOUSES}
+      houseLabels={SPHERE_HOUSE_LABELS}
+      glyphs="☸◉ॐ✴"
+      viewBox={{ w: 700, h: 260 }}
+      lineColor="#3a4058"
+    />
+    <p class="map-caption">Les liens ici marqués « spécial » ne représentent pas une filiation mais une relation cosmologique ou narrative (rivalité, protection, attente) — la seule forme de lien pertinente dans ce système.</p>
+  </Section>
+
+  <Section id="creatures" label="8 êtres notables" title="Esprits, gardiens et rivaux cosmiques">
+    <Fragment slot="title"><Decode glyphs="bouddhiste">Esprits, gardiens et rivaux cosmiques</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Nāga" tag="Serpents des eaux" body="Gardiens de trésors et d'enseignements cachés, figures récurrentes de bienveillance prudente plutôt que de simples monstres à vaincre." />
+      <MiniCard title="Garuda" tag="Oiseaux monumentaux" body="Rivaux traditionnels des nāga, hérités du fonds mythologique indien antérieur, intégrés tels quels à la cosmologie bouddhiste." />
+      <MiniCard title="Asura" tag="Demi-dieux belliqueux" body="En guerre constante contre les devas pour le contrôle de certains territoires cosmiques, sans jamais parvenir à une victoire durable." />
+      <MiniCard title="Preta" tag="Esprits affamés" body="Ventre démesuré, gorge minuscule — une image directe de l'insatisfaction karmique plutôt qu'une simple punition arbitraire." />
+      <MiniCard title="Kinnara" tag="Musiciens célestes" body="Êtres mi-humains mi-oiseaux associés à la musique et à la beauté, largement représentés dans l'art bouddhiste d'Asie du Sud-Est." />
+      <MiniCard title="Yaksha" tag="Esprits de la nature" body="Gardiens de lieux naturels ou de trésors, à l'origine ambivalents dans le folklore indien prébouddhique, souvent intégrés comme protecteurs du dharma." />
+      <MiniCard title="Apsara" tag="Nymphes célestes" body="Danseuses et musiciennes des cieux, omniprésentes dans la sculpture des temples bouddhistes et hindous d'Asie du Sud-Est, dont Angkor." />
+      <MiniCard title="Êtres des enfers" tag="Renaissance temporaire" body="Habitants des plans les plus douloureux du samsara, dont la souffrance, aussi intense soit-elle, reste temporaire plutôt qu'éternelle." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="9 légendes" title="Les grands récits de la cosmologie">
+    <Fragment slot="title"><Decode glyphs="bouddhiste">Les grands récits de la cosmologie</Decode></Fragment>
+    <StoryBlock num="Légende I" title="La tentation de Māra" body={["Sous l'arbre de la Bodhi, Māra tente d'abord d'effrayer le futur Bouddha en envoyant ses armées démoniaques, puis de le séduire en envoyant ses filles.", "Le futur Bouddha touche la terre de la main droite pour la prendre à témoin de ses vies antérieures de générosité, repoussant Māra et atteignant l'Éveil complet — un épisode qui structure l'iconographie bouddhiste dans toute l'Asie (le mudra dit « de la prise à témoin de la terre »)."]} quote="La terre elle-même se dresse en témoin." cite="Résumé traditionnel de l'épisode de l'Éveil" />
+    <StoryBlock num="Légende II" title="La supplique de Brahma" body="Après son Éveil, le Bouddha hésite à enseigner, jugeant sa réalisation trop subtile pour être transmise. Brahma, habitant des cieux de la forme, descend le supplier d'enseigner par compassion pour ceux dont « les yeux ne sont couverts que d'un peu de poussière » — sans cette intervention céleste, selon la tradition, l'enseignement bouddhiste n'aurait jamais été partagé." />
+    <StoryBlock num="Légende III" title="Maudgalyayana sauve sa mère" body="Le disciple Maudgalyayana, doué de pouvoirs surnaturels, découvre par vision que sa mère défunte est renée dans le royaume des esprits affamés (pretas), incapable de s'alimenter. Suivant les instructions du Bouddha, il organise une offrande collective à la communauté monastique dont le mérite la libère de cette condition — un récit à l'origine directe des fêtes bouddhistes des ancêtres (Ullambana, Obon) encore célébrées aujourd'hui." />
+    <StoryBlock num="Légende IV" title="Le rêve de la reine Maya" body="La mère du futur Bouddha rêve qu'un éléphant blanc à six défenses pénètre dans son flanc, signe annonciateur de la conception d'un être exceptionnel — un récit qui inscrit d'emblée la biographie du Bouddha dans le registre cosmologique plutôt que purement historique." />
+    <StoryBlock num="Légende V" title="La guerre sans fin des asuras et des devas" body="Les asuras, exclus d'un arbre merveilleux aux fruits succulents qui pousse sur leur territoire mais dont les branches s'étendent dans le ciel des devas, mènent une guerre perpétuelle et jamais définitivement tranchée contre les dieux du sommet de Meru — une image cosmique de rivalité sans résolution plutôt qu'un conflit destiné à une victoire finale." />
+    <StoryBlock num="Légende VI" title="Le filet d'Indra" body="Dans la tradition Avatamsaka, le palais d'Indra est orné d'un filet infini dont chaque nœud porte un joyau reflétant tous les autres joyaux à l'infini — une image philosophique de l'interdépendance universelle, devenue l'une des métaphores les plus citées de toute la pensée bouddhiste mahayana." />
+    <StoryBlock num="Légende VII" title="Les cycles de destruction et de reformation" body="Selon l'Abhidharma, chaque univers traverse quatre grandes phases — formation, durée, dissolution, vide — avant qu'un nouvel univers ne se forme ailleurs, dans un cycle sans commencement ni fin assigné, à l'opposé d'un récit de création unique." />
+    <StoryBlock num="Légende VIII" title="La prophétie de Maitreya" body="Le Bouddha annonce qu'un futur Bouddha, actuellement en attente dans le ciel Tushita, viendra sur terre après le déclin complet de son propre enseignement, pour raviver le dharma pour une nouvelle ère — une figure d'espérance qui a nourri, à travers l'histoire, plusieurs mouvements messianiques bouddhistes." />
+    <StoryBlock num="Légende IX" title="La Roue de la Vie expliquée par le Bouddha" body="Selon la tradition, le Bouddha lui-même aurait suggéré de peindre la Roue de la Vie à l'entrée des monastères pour enseigner aux non-lettrés les six royaumes de renaissance et les liens de causalité qui les régissent — un outil pédagogique cosmologique toujours utilisé aujourd'hui." />
+  </Section>
+
+  <Section id="anecdotes" label="8 curiosités" title="Faits marquants et architecture cosmique">
+    <Fragment slot="title"><Decode glyphs="bouddhiste">Faits marquants et architecture cosmique</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Angkor Vat, un mont Meru en pierre" tag="Architecture khmère" body="Le temple déjà décrit dans la page consacrée aux Khmers reproduit délibérément la géographie du mont Meru entouré de ses océans — une cosmologie bouddhiste (et hindoue) traduite directement en plan architectural." />
+      <MiniCard title="Borobudur, un mandala à gravir" tag="Java, VIIIe-IXe siècle" body="Le plus grand monument bouddhiste au monde reproduit en pierre l'ascension à travers les sphères cosmologiques, du désir vers le sans-forme, que le pèlerin parcourt physiquement en montant." />
+      <MiniCard title="Le mont Kailash, un Meru terrestre" tag="Tibet, pèlerinage vivant" body="De nombreux pèlerins bouddhistes et hindous identifient ce sommet réel du Tibet à une manifestation terrestre du mont Meru cosmique, en faisant un lieu de pèlerinage actif aujourd'hui." />
+      <MiniCard title="Un multivers avant l'heure" tag="« Trois mille grands mille mondes »" body="Certains textes bouddhistes anciens décrivent une multiplicité de systèmes-mondes coexistants — une idée qui résonne, sans lien de cause à effet démontrable, avec les hypothèses cosmologiques contemporaines de multivers." />
+      <MiniCard title="Un socle partagé avec l'hindouisme" tag="Héritage védique commun" body="Le mont Meru et plusieurs figures (Indra, Brahma) proviennent d'un fonds cosmologique antérieur au bouddhisme, partagé et réinterprété différemment par les deux traditions." />
+      <MiniCard title="Vasubandhu, systématisateur de la cosmologie" tag="Abhidharmakośa, IVe-Ve siècle" body="Ce traité reste la synthèse de référence la plus citée pour la description systématique des sphères, plans et cycles cosmiques du bouddhisme classique indien." />
+      <MiniCard title="Une lecture symbolique de plus en plus répandue" tag="Débat interne à la tradition" body="De nombreux enseignants bouddhistes contemporains présentent aujourd'hui les six royaumes de renaissance comme des états psychologiques plutôt que des lieux littéraux — un débat vivant au sein même du bouddhisme, pas une critique extérieure." />
+      <MiniCard title="Le Wheel of Life dans l'art tibétain" tag="Outil pédagogique toujours peint" body="La Roue de la Vie continue d'être peinte à l'entrée de monastères tibétains contemporains, preuve d'un usage pédagogique resté vivant plutôt que relégué à l'histoire de l'art." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="De l'Inde à tout le monde bouddhiste">
+    <Fragment slot="title"><Decode glyphs="bouddhiste">De l'Inde à tout le monde bouddhiste</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="260" cy="110" r="9" fill="#e8c164"/>
+        <text x="260" y="92" text-anchor="middle" fill="#e8c164" font-size="12" font-family="Cinzel, serif">INDE</text>
+        {[[420,60,'Asie du Sud-Est (Angkor, Borobudur)'],[470,140,'Sri Lanka'],[180,60,'Tibet'],[130,140,'Chine'],[380,170,'Japon (via la Chine)']].map(([x,y,label]) => (
+          <g>
+            <line x1="260" y1="110" x2={x} y2={y} stroke="#8088a0" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#242838" stroke="#c9982f" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#c8ccd8" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">Un même socle cosmologique adapté, jamais simplement copié, par chaque culture bouddhiste rencontrée en chemin.</p>
+    <div class="card-grid">
+      <InfoCard title="Sri Lanka" sub="Tradition theravada" body="Conserve le compte des 31 plans du Canon pali comme référence cosmologique de base, transmise sans interruption majeure." />
+      <InfoCard title="Asie du Sud-Est continentale" sub="Angkor, Borobudur, Pagan" body="Traduit la cosmologie en architecture monumentale, temple-montagne après temple-montagne, sur plusieurs siècles." />
+      <InfoCard title="Tibet" sub="Vajrayana" body="Développe des raffinements cosmologiques et méditatifs propres, tout en conservant Meru et les six royaumes comme cadre commun." />
+      <InfoCard title="Chine puis Japon" sub="Mahayana d'Asie de l'Est" body="Réinterprète les figures cosmologiques sous des noms et des styles artistiques locaux (Guanyin, Kannon), sans abandonner la structure de fond." />
+      <InfoCard title="Diaspora bouddhiste mondiale" sub="XXe-XXIe siècle" body="La Roue de la Vie et le mont Meru restent enseignés comme cadres pédagogiques dans les centres bouddhistes du monde entier, Asie comprise." />
+      <InfoCard title="Études bouddhologiques modernes" sub="Discipline universitaire" body="La cosmologie bouddhiste reste un champ de recherche actif, notamment sur les variations entre écoles et sur sa réception historique en Asie." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="bouddhiste">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'v. VIe-Ve siècle av. J.-C.', title: 'Vie du Bouddha historique', body: "Śākyamuni enseigne en Inde du Nord ; sa biographie légendaire structure l'ensemble du système cosmologique qui se développera ensuite." },
+      { year: 'IIIe siècle av. J.-C.', title: 'Diffusion sous l\'empereur Ashoka', body: "Le bouddhisme, et avec lui sa cosmologie, commence à se répandre au-delà de l'Inde du Nord." },
+      { year: 'Ier siècle apr. J.-C.', title: 'Introduction en Chine', body: "Le bouddhisme atteint la Chine par les routes commerciales d'Asie centrale, entamant sa réinterprétation est-asiatique." },
+      { year: 'IVe-Ve siècle apr. J.-C.', title: 'Rédaction de l\'Abhidharmakośa', body: "Vasubandhu systématise la cosmologie classique indienne dans le traité qui reste la référence la plus citée aujourd'hui." },
+      { year: 'VIe siècle apr. J.-C.', title: 'Introduction au Japon', body: "Le bouddhisme, transmis via la Chine et la Corée, atteint l'archipel japonais avec sa cosmologie." },
+      { year: 'VIIIe-IXe siècle apr. J.-C.', title: 'Construction de Borobudur', body: "Le plus grand monument bouddhiste au monde traduit en pierre, à Java, l'ascension à travers les sphères cosmologiques." },
+      { year: 'XIIe siècle apr. J.-C.', title: 'Construction d\'Angkor Vat', body: "Le temple khmer reproduit la géographie du mont Meru entouré de ses océans, déjà documenté sur la page culture correspondante." },
+      { year: 'XXe siècle', title: 'Études bouddhologiques occidentales', body: "La cosmologie bouddhiste devient un objet d'étude universitaire systématique en dehors de l'Asie." },
+      { year: 'XXe-XXIe siècle', title: 'Lecture psychologique contemporaine', body: "De nombreux enseignants bouddhistes modernes proposent une lecture symbolique des six royaumes, plutôt que littérale, un débat toujours actif aujourd'hui." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette cosmologie fait encore">
+    <Fragment slot="title"><Decode glyphs="bouddhiste">Ce que cette cosmologie fait encore</Decode></Fragment>
+    <HeritageBlock title="Un cadre pédagogique toujours peint et enseigné" body="La Roue de la Vie continue d'orner l'entrée de monastères actifs à travers l'Asie bouddhiste, utilisée pour l'enseignement plutôt que conservée comme simple relique artistique." />
+    <HeritageBlock title="Une empreinte architecturale mondiale" body="D'Angkor à Borobudur, cette cosmologie a directement façonné certains des monuments religieux les plus visités au monde." />
+    <HeritageBlock title="Un débat vivant sur sa lecture" body="La tension entre lecture littérale et lecture symbolique des royaumes de renaissance continue d'animer l'enseignement bouddhiste contemporain, en Asie comme dans sa diffusion mondiale." />
+    <CautionBox>
+      Cette cosmologie n'est pas un vestige archaïque « dépassé » par la science moderne : elle
+      continue de structurer la pratique et l'enseignement de centaines de millions de
+      bouddhistes aujourd'hui, dont beaucoup en proposent eux-mêmes une lecture symbolique
+      plutôt que littérale. Présenter ce débat comme un désaveu extérieur imposé à la
+      tradition serait aussi inexact que de la traiter comme une simple curiosité folklorique.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Vasubandhu, Abhidharmakośa, trad. Louis de La Vallée-Poussin, Paul Geuthner, IVe-Ve s. apr. J.-C. (éd. moderne 1923-1931)", note: "Source systématique de référence pour les sphères et plans cosmologiques décrits en #royaumes." },
+    { label: "Randy Kloetzli, Buddhist Cosmology: Science and Theology in the Images of Motion and Light, Motilal Banarsidass, 1983", note: "Synthèse moderne de la cosmologie bouddhiste classique citée en #royaumes et #anecdotes." },
+    { label: "Donald S. Lopez Jr., Buddhism and Science: A Guide for the Perplexed, University of Chicago Press, 2008", note: "Étude de référence sur les lectures littérale et symbolique contemporaines citée en #heritage." },
+    { label: "UNESCO, Centre du patrimoine mondial, « Borobudur Temple Compounds » (n° 592), inscrit en 1991", url: "https://whc.unesco.org/en/list/592/", note: "Statut patrimonial du monument cité en #anecdotes et #frise." },
+  ]} />
+</PageLayout>

@@ -1,0 +1,161 @@
+---
+/*
+  Le Jersey Devil — dix-neuvième créature de la série. Structure imposée
+  par docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict.
+
+  Angle distinctif : contrairement à la plupart des créatures de la série,
+  une partie de l'historiographie propose une origine du récit comme
+  satire politique délibérée (la querelle Leeds/Franklin) plutôt qu'un
+  folklore spontané — un cas de « légende peut-être fabriquée
+  intentionnellement », à traiter avec la même prudence que le Trésor des
+  Templiers côté objets (légende reconnue comme moderne).
+
+  Effets : data-egg="jerseydevil" + data-scroll-fx="jerseyDevilOmbre" sur
+  #portrait — une ombre ailée cornue qui traverse très vite (variante de
+  mothmanShadow).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Pins Barrens sombre, brume des marais du New Jersey, lueur de panique
+   de 1909 : la matière régionale plutôt qu'une palette "démon" générique. */
+const palette = {
+  bg: '#12160f',
+  'bg-deep': '#0a0c08',
+  surface: '#1c2418',
+  'surface-alt': '#263020',
+  border: '#4a5c3a',
+  ink: '#eef2e8',
+  text: '#c8d0b8',
+  'text-dim': '#84947a',
+  accent: '#6a2a2a',
+  'accent-bright': '#9a4a3a',
+  accent2: '#4a5848',
+  'accent2-bright': '#748a70',
+  verdict: '#3a2e1e',
+  'verdict-bright': '#5c4a30',
+  glow: 'rgba(106,42,42,0.2)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Récits' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Jersey Devil"
+  serie="Créatures Légendaires du Monde"
+  description="Née dans les Pine Barrens du New Jersey colonial, la créature ailée aux sabots fourchus pourrait devoir sa diffusion à une querelle commerciale du XVIIIe siècle entre almanachs rivaux — avant de déclencher, en janvier 1909, une semaine de panique collective abondamment documentée par la presse régionale."
+  href="creature-jersey-devil.html"
+  egg="jerseydevil"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="NEW JERSEY · PINE BARRENS"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Le treizième enfant maudit des Pine Barrens</p>
+  <p class="tagline" slot="hero">
+    Une légende qui pourrait devoir sa toute première diffusion non à une rencontre réelle,
+    mais à une querelle commerciale entre almanachs rivaux du XVIIIe siècle — avant de
+    déclencher, deux siècles plus tard, l'une des paniques collectives les mieux documentées
+    de la presse américaine.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Folklore régional du XIXe siècle, jamais de preuve tangible"
+    note="Aucune preuve zoologique de la créature n'a jamais été produite. Une partie de l'historiographie propose même une origine délibérément fabriquée du récit, comme instrument de satire politique plutôt que comme folklore spontané — une hypothèse à prendre au sérieux, pas une certitude absolue."
+  />
+
+  <Section id="origine" label="Première mention" title="Mère Leeds et la querelle des almanachs" intro="Deux récits d'origine coexistent : la légende surnaturelle de la mère maudite, et une hypothèse historique plus prosaïque liée à une rivalité commerciale bien réelle.">
+    <div class="card-grid">
+      <InfoCard num="I" title="La légende de Mère Leeds" sub="Colonie du New Jersey, v. 1735" body="Une femme épuisée par une treizième grossesse aurait maudit l'enfant à naître en s'écriant qu'il pouvait bien être le diable ; l'enfant, né normal, se serait aussitôt transformé en créature ailée et se serait envolé en hurlant vers les marais." />
+      <InfoCard num="II" title="Daniel Leeds, almanachs et occultisme" sub="Fin du XVIIe siècle" body="Un éditeur d'almanach du New Jersey nommé Daniel Leeds, connu pour ses sympathies occultistes mal vues des quakers de la colonie, devient une cible de moqueries publiques de la part d'éditeurs rivaux." />
+      <InfoCard num="III" title="La rivalité avec Benjamin Franklin" sub="Almanachs concurrents" body="Certains historiens avancent que Benjamin Franklin, éditeur de son propre almanach rival, aurait contribué à railler publiquement la famille Leeds, un terreau propice à la naissance ultérieure du surnom « Leeds Devil » attaché à la créature." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapporte la tradition" title="Une silhouette composite à sabots fourchus" scrollFx="jerseyDevilOmbre">
+    <div class="card-grid wide">
+      <FigureCard name="Une tête chevaline ou caprine" role="Description dominante" tags={['Composite', 'Variable selon les récits']} body="La plupart des descriptions attribuent à la créature une tête évoquant un cheval ou une chèvre, sur un corps par ailleurs largement composite selon les témoignages." />
+      <FigureCard name="Des ailes de chauve-souris" role="Capacité de vol" tags={['Vitesse', 'Cri perçant']} body="Des ailes membraneuses lui permettraient un vol rapide, souvent accompagné dans les récits d'un cri strident caractéristique." />
+      <FigureCard name="Des sabots fourchus et une queue" role="Détails récurrents" tags={['Symbolique diabolique']} body="Sabots fourchus et longue queue complètent une silhouette qui emprunte délibérément aux représentations traditionnelles du diable dans l'iconographie chrétienne populaire." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Témoignages marquants" title="De la légende coloniale à la panique de 1909">
+    <StoryBlock num="Récit I" title="Les récits coloniaux dispersés" body="Des mentions éparses d'une créature des Pine Barrens circulent dans le folklore régional dès le XVIIIe siècle, sans qu'aucune ne bénéficie encore de la notoriété qu'apportera la presse du XXe siècle." />
+    <StoryBlock num="Récit II" title="La semaine de panique de janvier 1909" body={["Sur une semaine, des dizaines de témoignages affluent de tout le sud du New Jersey et jusqu'à Philadelphie, largement relayés par la presse régionale ; écoles et usines ferment par précaution, des groupes de chasseurs improvisés battent la campagne.", "Le musée de P. T. Barnum aurait même offert une récompense de dix mille dollars pour sa capture, un détail qui alimente aujourd'hui l'hypothèse d'un coup publicitaire délibéré plutôt que d'une simple panique spontanée."]} quote="Toute la vallée du Delaware retenait son souffle cette semaine-là." cite="Résumé de la couverture de presse de janvier 1909" />
+    <StoryBlock num="Récit III" title="Des témoignages sporadiques depuis" body="Des observations isolées continuent d'être rapportées dans les Pine Barrens jusqu'à aujourd'hui, sans jamais retrouver l'ampleur ni la couverture médiatique de l'épisode de 1909." />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un folklore régional à une mascotte sportive" title="Comment le Jersey Devil est devenu une identité du New Jersey">
+    <div class="card-grid compact">
+      <MiniCard title="Les New Jersey Devils, franchise de hockey" tag="Sport professionnel" body="La franchise de hockey sur glace de la LNH adopte directement le nom et l'imagerie de la créature comme identité de marque depuis son installation dans l'État en 1982." />
+      <MiniCard title="Un motif touristique des Pine Barrens" tag="Identité régionale" body="La légende reste un argument touristique et identitaire fort pour la région forestière du sud du New Jersey, entre festivals locaux et produits dérivés." />
+      <MiniCard title="Un sujet récurrent de documentaires" tag="Émissions de cryptozoologie" body="Le Jersey Devil figure systématiquement parmi les cryptides nord-américains les plus traités par les émissions et podcasts consacrés au mystère et au paranormal." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que l'histoire et la science peuvent affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucune preuve zoologique, mais une piste historique documentée" body="Aucun spécimen, trace ou preuve génétique n'a jamais permis d'établir l'existence réelle de la créature. L'hypothèse d'une origine satirique délibérée liée à la querelle des almanachs Leeds/Franklin repose en revanche sur des sources documentaires réelles de l'époque coloniale." />
+    <ScienceBlock num="Enquête 2" title="La panique de 1909, un emballement médiatique documenté" body="La vague de témoignages de janvier 1909 est abondamment couverte par la presse régionale d'époque, ce qui en fait un cas d'étude solide sur la mécanique de la panique collective relayée par les médias, indépendamment de la question de l'existence réelle de la créature." />
+    <ScienceBlock num="Enquête 3" title="Des explications naturelles plausibles pour certains témoignages" body="Des animaux mal identifiés dans l'obscurité, notamment des grands oiseaux ou des mammifères inhabituels dans la région à l'époque, sont avancés comme explications plausibles d'une partie au moins des observations rapportées." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Une légende née d'une satire politique délibérée"
+      level="plausible"
+      status="Hypothèse historique sérieuse"
+      body="Plusieurs historiens du folklore américain soutiennent que le récit aurait été initialement diffusé ou amplifié comme moquerie publique visant la famille Leeds, avant de se folkloriser progressivement en créature surnaturelle indépendante de son origine polémique."
+      attrib="Hypothèse discutée en histoire du folklore colonial américain"
+    />
+    <TheoryCard
+      title="Des animaux mal identifiés et une panique médiatique amplifiée"
+      level="plausible"
+      status="Explication sceptique dominante pour 1909"
+      body="La plupart des chercheurs sceptiques expliquent la vague de témoignages de 1909 par une combinaison de méprises sur des animaux réels et d'un emballement médiatique auto-entretenu, possiblement encouragé par des acteurs en quête de publicité."
+      attrib="Position dominante chez les folkloristes contemporains"
+    />
+    <TheoryCard
+      title="Une créature surnaturelle réellement présente dans les Pine Barrens"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune preuve matérielle sérieuse n'est jamais venue appuyer l'existence réelle d'une créature correspondant à la description légendaire." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette légende fait encore">
+    <HeritageBlock title="Une identité sportive nationale" body="Le nom de la créature reste porté par une franchise professionnelle de hockey sur glace parmi les plus reconnues des États-Unis." />
+    <HeritageBlock title="Un pilier de l'identité régionale du New Jersey" body="La légende continue de structurer une part de l'identité culturelle et touristique de l'État, bien au-delà du seul cercle des amateurs de cryptozoologie." />
+    <HeritageBlock title="Un cas d'école sur la fabrication de légendes" body="L'hypothèse d'une origine satirique délibérée en fait un exemple précieux pour étudier comment une moquerie politique peut, avec le temps, se transformer en folklore surnaturel autonome." />
+    <CautionBox>
+      L'hypothèse d'une origine satirique délibérée reste une piste historique sérieuse, pas
+      une certitude définitivement établie — les sources de l'époque coloniale sur la querelle
+      Leeds/Franklin sont réelles, mais le lien de causalité direct avec la légende telle
+      qu'on la connaît aujourd'hui continue de faire débat parmi les historiens du folklore.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "James F. McCloy et Ray Miller Jr., The Jersey Devil, Middle Atlantic Press, 1976", note: "Synthèse de référence sur l'histoire et les témoignages cités en #origine et #temoins-recits." },
+    { label: "Brian Regal, \"The Jersey Devil: The Real Origins of America's Most Elusive Cryptid\", Fortean Times, articles successifs", note: "Recherche historique sur l'hypothèse de la querelle Leeds/Franklin citée en #origine et #theories." },
+    { label: "Coupures de presse régionale du New Jersey et de Philadelphie, janvier 1909 (archives numérisées, bibliothèques historiques du New Jersey)", note: "Sources primaires de la panique de 1909 citées en #temoins-recits et #science." },
+    { label: "New Jersey Devils (LNH), historique officiel de la franchise et de son identité visuelle", url: "https://www.nhl.com/devils/", note: "Source de l'adoption du nom par la franchise sportive citée en #culture-populaire et #heritage." },
+  ]} />
+</PageLayout>

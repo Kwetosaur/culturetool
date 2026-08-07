@@ -1,0 +1,173 @@
+---
+/*
+  Le Loup-Garou — quinzième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict.
+
+  Point de vigilance : cette page couvre à la fois un folklore ancien
+  (Lycaon, Petrone) et une vague réelle de procès judiciaires européens
+  (XVIe-XVIIe s.) où des personnes bien réelles ont été torturées et
+  exécutées. #temoins-recits et #science doivent rester factuels et sobres
+  sur ce point précis : les aveux de l'époque ont très probablement été
+  extorqués sous la torture, dans un climat de panique comparable à celui
+  des procès de sorcellerie contemporains — jamais un fait divers présenté
+  comme du frisson.
+
+  Effets : data-egg="loupgarou" + data-scroll-fx="ombreLoupGarou" sur
+  #portrait — une ombre humaine portée au sol qui s'allonge en silhouette
+  de loup, la transformation par l'ombre seule, aucune violence montrée.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Forêt nocturne, lune d'argent, terre battue : la matière du folklore
+   européen plutôt qu'une palette "monstre" générique. */
+const palette = {
+  bg: '#12161a',
+  'bg-deep': '#090c0e',
+  surface: '#1a2126',
+  'surface-alt': '#222b31',
+  border: '#3a4a52',
+  ink: '#eef2f4',
+  text: '#c4d0d4',
+  'text-dim': '#7e9098',
+  accent: '#8a98a0',
+  'accent-bright': '#b8c4ca',
+  accent2: '#5a3a2a',
+  'accent2-bright': '#8a5a3f',
+  verdict: '#3a2418',
+  'verdict-bright': '#6a4028',
+  glow: 'rgba(184,196,202,0.2)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Récits' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Loup-Garou"
+  serie="Créatures Légendaires du Monde"
+  description="Un homme qui se change en loup, croyance attestée depuis l'Antiquité grecque et responsable, aux XVIe-XVIIe siècles, d'une vague de procès judiciaires bien réels où des accusés furent torturés puis exécutés — la frontière entre folklore, maladie et fait divers judiciaire y est particulièrement ténue."
+  href="creature-loup-garou.html"
+  egg="loupgarou"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="EUROPE"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">La transformation la plus ancienne d'Europe</p>
+  <p class="tagline" slot="hero">
+    Un motif attesté depuis la Grèce antique, devenu au XVIe siècle le prétexte de procès
+    judiciaires bien réels — où des confessions arrachées sous la torture ont envoyé de
+    vraies personnes au bûcher pour un crime resté, depuis, impossible à commettre.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Croyance folklorique ancienne, en partie liée à des maladies réelles et à des procès historiques documentés"
+    note="Aucune transformation physique en loup n'a de fondement scientifique. Ce qui est en revanche bien réel : des maladies (rage, troubles mentaux), des procès judiciaires du XVIe-XVIIe siècle et, dans au moins un cas documenté, un tueur en série ayant lui-même invoqué la légende."
+  />
+
+  <Section id="origine" label="Première mention" title="De Lycaon à Pétrone" intro="Le motif de l'homme changé en loup traverse toute l'Antiquité méditerranéenne avant de devenir un folklore proprement européen au Moyen Âge.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Le mythe de Lycaon" sub="Grèce antique" body="Roi d'Arcadie changé en loup par Zeus pour lui avoir servi de la chair humaine lors d'un banquet — le récit donne son nom au terme médical « lycanthropie »." />
+      <InfoCard num="II" title="Le récit de Pétrone" sub="Satyricon, Ier siècle apr. J.-C." body="Le plus ancien récit littéraire connu d'une transformation complète et détaillée : un personnage se dévêt au bord d'une route, urine en cercle autour de ses habits selon un rite précis, puis se change en loup sous les yeux du narrateur." />
+      <InfoCard num="III" title="Diffusion médiévale, XIIe-XVe siècle" sub="Folklore européen" body="Le motif se répand dans toute l'Europe sous des formes locales (loup-garou français, wilkatlakas balte, vlkodlak slave), souvent associé à un pacte avec le diable ou à l'usage d'une ceinture ou d'un onguent magique." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapporte la tradition" title="Un homme sous la peau, un loup au-dessus" scrollFx="ombreLoupGarou">
+    <div class="card-grid wide">
+      <FigureCard name="Une transformation nocturne" role="Description folklorique" tags={['Nuit', 'Pacte ou malédiction']} body="Selon les traditions, la transformation survient par malédiction, par pacte avec le diable, ou par l'usage d'un onguent ou d'une ceinture en peau de loup — les modalités varient fortement d'une région à l'autre." />
+      <FigureCard name="Des yeux qui restent humains" role="Motif récurrent" tags={['Regard', 'Reconnaissance']} body="De nombreux récits insistent sur le fait que le regard du loup-garou reste reconnaissablement humain — un détail qui permet, dans la fiction populaire, à une victime de reconnaître son agresseur après coup." />
+      <FigureCard name="La pleine lune, un ajout tardif" role="Idée reçue à nuancer" tags={['XXe siècle', 'Cinéma']} body="Le folklore ancien lie rarement la transformation à un cycle lunaire précis ; ce lien systématique doit largement son universalité au cinéma américain du XXe siècle, notamment au film Le Loup-Garou (1941)." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Des procès bien réels" title="Quand la légende est devenue un dossier judiciaire">
+    <StoryBlock num="Récit I" title="Peter Stumpp, le loup-garou de Bedburg" body={["En 1589, dans la région de Cologne, Peter Stumpp est jugé pour une série de meurtres et de mutilations d'une extrême violence, dont il aurait, selon le procès, confessé être l'auteur sous forme de loup grâce à une ceinture magique offerte par le diable.", "Son exécution, d'une brutalité exceptionnelle même pour l'époque, est documentée par des pamphlets contemporains largement diffusés en Europe — l'un des cas les mieux attestés de toute la vague de procès de lycanthropie."]} />
+    <StoryBlock num="Récit II" title="Gilles Garnier, le loup-garou de Dole" body="Jugé en 1573 en Franche-Comté pour l'agression d'enfants, Gilles Garnier confesse, également sous la torture, avoir agi sous forme de loup ; son procès est l'un des tout premiers de la vague française bien documentée du dernier tiers du XVIe siècle." />
+    <StoryBlock num="Récit III" title="Jean Grenier, un tournant judiciaire" body="En 1603, un adolescent des Landes affirme lui-même être un loup-garou responsable de plusieurs attaques d'enfants. Fait rare pour l'époque, le parlement de Bordeaux le juge atteint de troubles mentaux plutôt que coupable de sorcellerie, et le fait interner dans un couvent plutôt que de l'exécuter — un basculement précoce du jugement religieux vers un jugement médical." quote="Le tribunal estima qu'il fallait le traiter comme un insensé plutôt que comme un criminel." cite="D'après les minutes rapportées du procès de 1603" />
+  </Section>
+
+  <Section id="culture-populaire" label="Du folklore paysan au cinéma" title="Comment le loup-garou a conquis Hollywood">
+    <div class="card-grid compact">
+      <MiniCard title="Le Loup-Garou (The Wolf Man), 1941" tag="Cinéma fondateur" body="Le film qui fixe pour un siècle l'image dominante du loup-garou moderne : morsure contaminante, cycle lunaire strict, faiblesse à l'argent — des éléments largement absents ou marginaux dans le folklore antérieur." />
+      <MiniCard title="La balle d'argent, un ajout littéraire" tag="XIXe-XXe siècle" body="Contrairement à une idée répandue, la vulnérabilité systématique à l'argent n'est pas un invariant du folklore ancien : elle se généralise surtout à travers la littérature et le cinéma populaires plus récents." />
+      <MiniCard title="Une figure toujours vivante en fiction" tag="Twilight, Underworld, Teen Wolf" body="Le motif continue d'alimenter des franchises cinématographiques et télévisuelles majeures, souvent en le combinant à d'autres figures du bestiaire fantastique comme le vampire." />
+      <MiniCard title="Un jeu de société devenu mondial" tag="Loup-Garou de Thiercelieux" body="Le jeu de déduction sociale « Loup-Garou », popularisé en France dans les années 2000, a exporté le motif sous une forme ludique bien au-delà de son folklore d'origine." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que la science peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucune transformation, plusieurs maladies réelles derrière la légende" body="La rage, transmise par morsure animale, provoque agressivité, hypersalivation et confusion — des symptômes qui ont pu alimenter des récits d'attaques attribuées à des hommes-loups. L'hypertrichose, une maladie génétique rare provoquant une pilosité excessive, a par ailleurs longtemps servi de curiosité de foire sous des noms évoquant le loup-garou, sans aucun rapport avec les procès de sorcellerie." />
+    <ScienceBlock num="Enquête 2" title="La porphyrie, une hypothèse largement surestimée" body="Une théorie médicale des années 1960 a proposé la porphyrie (photosensibilité, troubles neurologiques) comme explication scientifique du mythe ; les historiens de la médecine considèrent aujourd'hui cette hypothèse comme séduisante mais largement sur-vendue, sans preuve solide d'un lien direct avec les récits historiques de lycanthropie." />
+    <ScienceBlock num="Enquête 3" title="La lycanthropie clinique, un délire rare mais bien réel" body="La psychiatrie contemporaine reconnaît la « lycanthropie clinique » comme un délire rare où un patient est intimement convaincu de se transformer physiquement en animal — un trouble documenté aujourd'hui, distinct de toute transformation réelle, mais qui montre la persistance du motif jusque dans la nosographie moderne." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Des attaques animales réelles attribuées à des humains"
+      level="plausible"
+      status="Explication sceptique dominante"
+      body="La majorité des historiens et folkloristes s'accordent à voir dans le mythe une explication a posteriori d'attaques de loups ou de chiens sauvages réelles, dans des sociétés rurales où la présence de prédateurs était une menace quotidienne bien réelle."
+      attrib="Position dominante en folkloristique"
+    />
+    <TheoryCard
+      title="Des confessions extorquées sous la torture, dans un climat de panique collective"
+      level="plausible"
+      status="Bien étayée par les sources judiciaires"
+      body="Les minutes conservées des procès du XVIe-XVIIe siècle documentent des interrogatoires sous torture caractéristiques des procès de sorcellerie de la même époque — un contexte qui explique la cohérence troublante de certains « aveux » sans supposer aucune transformation réelle."
+      attrib="Lecture standard des historiens du judiciaire moderne"
+    />
+    <TheoryCard
+      title="Un ou plusieurs meurtriers réels ayant invoqué la légende comme couverture"
+      level="plausible"
+      status="Documenté dans au moins un cas"
+      body="Certains chercheurs soutiennent que des individus réellement violents, comme dans le dossier de Peter Stumpp, ont pu se saisir eux-mêmes de la croyance ambiante, volontairement ou sous la contrainte de l'interrogatoire, pour expliquer des actes bien réels."
+      attrib="Hypothèse discutée en histoire de la criminalité"
+    />
+    <TheoryCard
+      title="Une transformation physique littérale en loup"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune preuve biologique ou médicale ne vient appuyer l'idée d'une métamorphose corporelle réelle d'un être humain en loup — la croyance relève entièrement du folklore et de la fiction." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette légende fait encore">
+    <HeritageBlock title="Un vocabulaire médical toujours en usage" body="Les termes « lycanthropie » et « lycanthropie clinique » restent employés en psychiatrie pour désigner un délire précis, un rare cas où un mythe ancien a directement nourri une catégorie médicale moderne." />
+    <HeritageBlock title="Une figure incontournable de la culture populaire mondiale" body="Du cinéma d'horreur classique aux franchises contemporaines, le loup-garou reste l'une des figures les plus stables du bestiaire fantastique occidental, aux côtés du vampire." />
+    <HeritageBlock title="Un rappel sur l'histoire judiciaire européenne" body="Les procès de lycanthropie du XVIe-XVIIe siècle s'inscrivent dans le même climat que les grands procès de sorcellerie contemporains — un pan sombre et bien documenté de l'histoire judiciaire européenne, pas une simple anecdote pittoresque." />
+    <CautionBox>
+      Les personnes exécutées à la suite de ces procès étaient des êtres humains réels,
+      probablement pour beaucoup victimes de tortures ayant produit de faux aveux, ou
+      atteintes de troubles que la médecine de l'époque ne pouvait ni nommer ni traiter. Le
+      cas de Jean Grenier, jugé irresponsable plutôt qu'exécuté, montre qu'un traitement plus
+      humain était déjà envisageable au début du XVIIe siècle — un rappel utile face à la
+      tentation de réduire ces dossiers à un simple frisson de fiction.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Caroline Oates, \"Metamorphosis and Lycanthropy in Franche-Comté, 1521-1643\", in Fragments for a History of the Human Body, Zone Books, 1989", note: "Étude de référence sur les procès français de lycanthropie cités en #temoins-recits." },
+    { label: "Pétrone, Satyricon, trad. Alfred Ernout, Les Belles Lettres, Ier siècle apr. J.-C. (éd. moderne)", note: "Source du premier récit littéraire complet de transformation cité en #origine." },
+    { label: "Willem de Blécourt (dir.), Werewolf Histories, Palgrave Macmillan, 2015", note: "Synthèse académique sur les procès de Bedburg et de Dole, et sur l'historiographie du mythe, citée en #temoins-recits et #science." },
+    { label: "George W. M. Reynolds et sources de presse d'époque sur le procès de Jean Grenier, 1603 (analysées dans l'historiographie moderne du droit criminel français)", note: "Base du récit du traitement judiciaire distinct de Jean Grenier cité en #temoins-recits et #heritage." },
+  ]} />
+</PageLayout>

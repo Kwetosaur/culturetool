@@ -1,0 +1,161 @@
+---
+/*
+  Champ — vingtième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict.
+
+  Point de vigilance factuel : l'attribution à Samuel de Champlain d'une
+  observation de la créature en 1609 est aujourd'hui jugée douteuse par la
+  plupart des historiens — son journal décrit un poisson correspondant à
+  une espèce connue (probablement un lépisosté), pas un monstre. #origine
+  corrige explicitement cette attribution populaire plutôt que de la
+  reconduire sans examen.
+
+  Effets : data-egg="champ" + data-scroll-fx="champVague" sur #portrait —
+  une vague en V qui traverse un lac calme, sans créature visible,
+  l'ambiguïté de la photo Mansi comme effet.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Bleu profond du lac Champlain, vert automnal des Adirondacks, brume
+   matinale : la matière du lieu plutôt qu'une palette lacustre déjà
+   utilisée pour Ogopogo. */
+const palette = {
+  bg: '#0e141a',
+  'bg-deep': '#080c10',
+  surface: '#161e26',
+  'surface-alt': '#1e2830',
+  border: '#3a4c5c',
+  ink: '#eef2f5',
+  text: '#c0ccd8',
+  'text-dim': '#7e8ca0',
+  accent: '#2a5c8a',
+  'accent-bright': '#4a84b4',
+  accent2: '#8a5a2a',
+  'accent2-bright': '#c48a4a',
+  verdict: '#2e3a1e',
+  'verdict-bright': '#4a5c30',
+  glow: 'rgba(42,92,138,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Récits' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Champ"
+  serie="Créatures Légendaires du Monde"
+  description="Le monstre du lac Champlain, à la frontière des États-Unis et du Canada — un folklore du XIXe siècle et une photographie de 1977 jamais authentifiée, dans un parallèle si direct avec le Loch Ness que les deux dossiers s'éclairent mutuellement."
+  href="creature-champ.html"
+  egg="champ"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="LAC CHAMPLAIN · ÉTATS-UNIS / CANADA"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Le cousin américain du Loch Ness</p>
+  <p class="tagline" slot="hero">
+    Une photographie de 1977 montrant une forme émergeant des eaux, jamais authentifiée ni
+    formellement démontée — et une attribution à l'explorateur Samuel de Champlain que
+    l'examen de ses propres écrits ne confirme pas.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Folklore du XIXe siècle et photo « Mansi » (1977) jamais authentifiée formellement, parallèle direct de Nessie"
+    note="Aucune preuve zoologique n'a jamais confirmé l'existence d'un grand animal inconnu dans le lac Champlain. L'attribution populaire d'une observation à Samuel de Champlain en 1609 est aujourd'hui jugée douteuse par la plupart des historiens : son journal décrit un poisson correspondant à une espèce connue."
+  />
+
+  <Section id="origine" label="Première mention" title="Une attribution à Champlain aujourd'hui contestée" intro="Le nom même de la créature entretient une confusion avec celui de l'explorateur français qui a donné son nom au lac — une association que l'examen des sources historiques ne confirme pas.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Le journal de Samuel de Champlain, 1609" sub="Souvent cité à tort comme première mention" body="L'explorateur décrit dans son journal un poisson d'environ deux mètres à l'aspect impressionnant, qui correspond en réalité assez précisément à la description d'un lépisosté, un poisson connu de la région — pas un monstre inconnu." />
+      <InfoCard num="II" title="Des traditions orales antérieures à la colonisation" sub="Peuples abénakis et iroquois" body="Des traditions orales autochtones antérieures à l'arrivée des colons européens évoquent des présences dans les eaux du lac, dans un registre spirituel distinct du folklore touristique ultérieur." />
+      <InfoCard num="III" title="Les premiers récits de colons du XIXe siècle" sub="Diffusion du folklore moderne" body="C'est au XIXe siècle que se multiplient les récits de colons rapportant une créature dans le lac, posant les bases du folklore de « Champ » tel qu'on le connaît aujourd'hui." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapporte la tradition" title="Une silhouette à bosses, comme au Loch Ness" scrollFx="champVague">
+    <div class="card-grid wide">
+      <FigureCard name="Une silhouette sombre et allongée" role="Description dominante" tags={['Bosses multiples', 'Grande taille']} body="La majorité des témoignages décrivent une forme sombre et allongée émergeant par bosses successives, une description quasiment interchangeable avec celle du Loch Ness ou d'Ogopogo." />
+      <FigureCard name="Une tête parfois décrite" role="Détails variables" tags={['Chevaline ou reptilienne selon les récits']} body="Certains témoignages ajoutent une tête distincte, tantôt décrite comme chevaline, tantôt comme reptilienne, sans convergence claire entre les récits." />
+      <FigureCard name="La photographie Mansi, 1977" role="Document le plus discuté" tags={['Jamais authentifiée', 'Jamais démontée']} body="Prise par Sandra Mansi au bord du lac, cette photographie montrant une forme évoquant un long cou émergé reste l'une des images de cryptide les plus discutées, sans authentification ni réfutation formelle définitive." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Témoignages marquants" title="De la colonisation du XIXe siècle à la photo de 1977">
+    <StoryBlock num="Récit I" title="Les premiers récits de colons" body="Dès le XIXe siècle, des riverains du lac Champlain rapportent des observations de créatures inhabituelles, posant les bases d'un folklore local qui se développera au fil des décennies suivantes." />
+    <StoryBlock num="Récit II" title="La photographie de Sandra Mansi, 1977" body={["En vacances au bord du lac, Sandra Mansi photographie ce qu'elle décrit comme une forme émergée à long cou, restée depuis l'une des images les plus reproduites de toute la cryptozoologie nord-américaine.", "Plusieurs analyses techniques ont été menées sur le cliché au fil des décennies, sans qu'aucune ne parvienne à trancher définitivement entre une créature réelle, un tronc flottant ou un autre artefact optique."]} quote="Une forme qui continue de résister à toute conclusion définitive, dans un sens comme dans l'autre." cite="Résumé de l'état des analyses techniques de la photographie Mansi" />
+    <StoryBlock num="Récit III" title="Des témoignages continus jusqu'à aujourd'hui" body="Des observations sporadiques continuent d'être rapportées par des riverains et des touristes du lac Champlain, entretenant une légende locale toujours vivante sans jamais atteindre le niveau de preuve exigé par la science." />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un folklore lacustre à une protection légale symbolique" title="Comment Champ est devenu une fierté régionale">
+    <div class="card-grid compact">
+      <MiniCard title="Port Henry, « capitale de Champ »" tag="Identité municipale" body="Cette ville de l'État de New York se présente explicitement comme le foyer de la légende, avec statue et festival annuel dédiés à la créature." />
+      <MiniCard title="Des résolutions législatives symboliques" tag="New York et Vermont" body="Les deux États riverains ont, à différentes époques, envisagé ou adopté des textes largement symboliques évoquant une forme de protection de la créature, illustrant l'ampleur de son adoption locale." />
+      <MiniCard title="Un parallèle constant avec le Loch Ness" tag="Comparaison directe" body="Champ est systématiquement présenté, dans la presse et les documentaires, comme l'équivalent nord-américain du monstre du Loch Ness, un rapprochement qui structure une bonne partie de sa réception populaire." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que la science peut affirmer">
+    <ScienceBlock num="Enquête 1" title="L'attribution à Champlain ne résiste pas à l'examen du texte" body="Une lecture attentive du journal de l'explorateur montre qu'il décrit un poisson aux caractéristiques compatibles avec un lépisosté, une espèce parfaitement connue de la région — l'association avec un monstre relève d'une reconstruction plus tardive, pas du texte original." />
+    <ScienceBlock num="Enquête 2" title="Aucune preuve zoologique concluante" body="Malgré des décennies de témoignages et une photographie très discutée, aucune analyse d'ADN environnemental, aucun spécimen ni aucune image incontestable n'a permis de confirmer la présence d'un grand animal inconnu dans le lac Champlain." />
+    <ScienceBlock num="Enquête 3" title="Des explications naturelles plausibles" body="Rondins flottants, esturgeons ou autres grands poissons mal identifiés, et effets de vagues sont les explications les plus souvent avancées par les chercheurs sceptiques pour la majorité des témoignages recensés." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Des poissons ou des rondins mal identifiés"
+      level="plausible"
+      status="Explication sceptique dominante"
+      body="La majorité des chercheurs sceptiques privilégient une combinaison de grands poissons connus, de rondins flottants et d'effets de vagues pour expliquer la plupart des témoignages, sans qu'aucune de ces explications ne rende compte à elle seule de la totalité du dossier."
+      attrib="Position dominante chez les chercheurs sceptiques nord-américains"
+    />
+    <TheoryCard
+      title="La photographie Mansi montre un objet flottant, pas une créature"
+      level="plausible"
+      status="Hypothèse sceptique sérieuse"
+      body="Certains analystes proposent qu'un tronc flottant partiellement immergé, sous un éclairage particulier, pourrait expliquer la forme visible sur le cliché de 1977, sans que cette hypothèse n'ait jamais été formellement confirmée par une reconstitution concluante."
+      attrib="Hypothèse sceptique discutée dans l'analyse de la photographie"
+    />
+    <TheoryCard
+      title="Un grand animal aquatique inconnu bien réel"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune preuve matérielle indiscutable n'a jamais permis d'établir l'existence réelle d'un animal de grande taille inconnu de la science dans le lac Champlain." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette légende fait encore">
+    <HeritageBlock title="Un pilier du tourisme régional" body="La légende continue de soutenir une économie touristique locale active autour du lac Champlain, entre statues, festivals et produits dérivés." />
+    <HeritageBlock title="Une référence constante de la cryptozoologie nord-américaine" body="Champ reste systématiquement cité aux côtés du Loch Ness et d'Ogopogo dans toute synthèse consacrée aux monstres de lac à travers le monde." />
+    <HeritageBlock title="Un cas d'école sur les attributions historiques erronées" body="La correction de l'attribution à Champlain lui-même illustre bien comment une légende peut s'enrichir, avec le temps, d'une paternité historique qu'un examen rigoureux des sources ne confirme pas." />
+    <CautionBox>
+      Présenter Samuel de Champlain comme le premier témoin de la créature, comme le fait
+      encore une partie de la presse touristique, relève d'une lecture erronée de son propre
+      texte. Le corriger n'enlève rien à l'intérêt du folklore plus tardif, mais évite de
+      prêter à un texte historique réel une affirmation qu'il ne contient pas.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Samuel de Champlain, Des Sauvages, 1609 (éd. moderne, Voyages de Samuel de Champlain, Société de l'Histoire de France)", note: "Source primaire réexaminée en #origine et #science." },
+    { label: "Joseph W. Zarzynski, Champ: Beyond the Legend, Bannister Publications, 1988", note: "Synthèse de référence sur le folklore et les témoignages citée en #temoins-recits et #culture-populaire." },
+    { label: "Benjamin Radford, \"Champ: Investigating Vermont's Loch Ness Monster\", Live Science, 2013", url: "https://www.livescience.com/", note: "Analyse sceptique moderne citée en #science et #theories." },
+    { label: "Joe Zarzynski, analyses techniques de la photographie Mansi, comptes rendus publiés dans le cadre de la Lake Champlain Phenomena Investigation", note: "Source des analyses techniques du cliché de 1977 citées en #portrait et #temoins-recits." },
+  ]} />
+</PageLayout>

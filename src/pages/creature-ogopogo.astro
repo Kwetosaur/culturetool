@@ -1,0 +1,162 @@
+---
+/*
+  Ogopogo — dix-septième créature de la série. Structure imposée par
+  docs/plans/plan-serie-creatures.md : 7 sections, badge de verdict.
+
+  Point de vigilance : l'origine réelle de la créature est le N'ha-a-itk
+  syilx (peuple autochtone du lac Okanagan), une entité spirituelle
+  respectée et honorée par une offrande avant de traverser le lac — pas
+  un simple « monstre » comme le folklore colon l'a ensuite présenté sous
+  le nom comique « Ogopogo », emprunté à une chanson de music-hall
+  britannique de 1924. #origine et #heritage distinguent explicitement les
+  deux traditions plutôt que de les fondre en une seule.
+
+  Effets : data-egg="ogopogo" + data-scroll-fx="ogopogoArceaux" sur
+  #portrait — une série d'arceaux qui percent la surface d'un lac puis
+  disparaissent (variante de nessie).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Bleu profond du lac Okanagan, vert des collines de Colombie-Britannique,
+   brume matinale : la matière du lieu plutôt qu'une palette "lac" générique. */
+const palette = {
+  bg: '#0e181a',
+  'bg-deep': '#081010',
+  surface: '#162428',
+  'surface-alt': '#1e3034',
+  border: '#3a5c5e',
+  ink: '#eef7f5',
+  text: '#c0dcd8',
+  'text-dim': '#7ea8a4',
+  accent: '#2a7a8a',
+  'accent-bright': '#4aa4b4',
+  accent2: '#4a6a3a',
+  'accent2-bright': '#7a9a5a',
+  verdict: '#3a4a1e',
+  'verdict-bright': '#5c7a30',
+  glow: 'rgba(42,122,138,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Récits' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Ogopogo"
+  serie="Créatures Légendaires du Monde"
+  description="Une entité respectée du lac Okanagan (Colombie-Britannique), N'ha-a-itk dans la tradition syilx, à qui l'on offrait un petit sacrifice avant de traverser le lac — devenue, sous un nom anglais tiré d'une chanson de music-hall de 1924, l'un des cryptides lacustres les plus populaires d'Amérique du Nord."
+  href="creature-ogopogo.html"
+  egg="ogopogo"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="LAC OKANAGAN · COLOMBIE-BRITANNIQUE"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Du N'ha-a-itk syilx à la mascotte touristique</p>
+  <p class="tagline" slot="hero">
+    Avant de devenir une mascotte au nom comique, cette entité du lac Okanagan était honorée
+    d'une offrande par les voyageurs syilx avant chaque traversée — deux traditions bien
+    distinctes que ce site refuse de fondre en une seule histoire.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Folklore local et méprises probables (rondins flottants, loutres en ligne, effets de vagues)"
+    note="Aucune preuve zoologique n'est jamais venue confirmer l'existence d'un grand animal inconnu dans le lac Okanagan. La tradition spirituelle syilx associée au lieu, elle, est bien réelle et distincte de la légende touristique qui porte le nom d'Ogopogo."
+  />
+
+  <Section id="origine" label="Première mention" title="N'ha-a-itk avant Ogopogo" intro="Deux traditions bien distinctes se superposent sur ce même lac : une entité spirituelle autochtone respectée de longue date, et un nom anglais comique greffé dessus près d'un siècle plus tard.">
+    <div class="card-grid">
+      <InfoCard num="I" title="N'ha-a-itk, tradition syilx" sub="Peuple autochtone du lac Okanagan" body="Les Syilx (peuple Okanagan) désignent de longue date une entité du lac près de Squally Point, à qui les voyageurs offraient traditionnellement un petit sacrifice avant de traverser cette partie du lac — une pratique de respect, pas une chasse au monstre." />
+      <InfoCard num="II" title="Le nom « Ogopogo », 1924" sub="Chanson de music-hall britannique" body="Le nom aujourd'hui associé à la créature est emprunté à une chanson comique britannique de l'époque (« The Ogo-Pogo, the Funny Fox-Trot »), adoptée avec humour par les colons de la région — un nom anglais sans rapport avec la tradition syilx originelle." />
+      <InfoCard num="III" title="Premiers récits de colons" sub="Fin du XIXe - début du XXe siècle" body="Les premiers témoignages écrits de colons rapportant une créature dans le lac Okanagan datent de cette période, bien après l'installation des traditions autochtones locales." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapporte la tradition" title="Un serpent de lac aux bosses ondulantes" scrollFx="ogopogoArceaux">
+    <div class="card-grid wide">
+      <FigureCard name="Une silhouette ondulante" role="Description dominante" tags={['Bosses multiples', 'Longue silhouette']} body="La grande majorité des témoignages décrivent une silhouette sombre et allongée, formant plusieurs bosses successives à la surface — une description quasiment interchangeable avec celle du monstre du Loch Ness." />
+      <FigureCard name="Une taille estimée variable" role="Témoignages divergents" tags={['5 à 15 mètres', 'Estimations peu fiables']} body="Les estimations de longueur varient fortement d'un témoignage à l'autre, sans qu'aucune mesure objective n'ait jamais pu être établie sur une preuve matérielle tangible." />
+      <FigureCard name="N'ha-a-itk, gardien du lieu" role="Tradition syilx distincte" tags={['Respect', 'Pas un monstre chassé']} body="Dans la tradition syilx, l'entité n'est pas décrite comme une créature à traquer ou à photographier, mais comme une présence du lieu à respecter — une différence fondamentale avec le folklore touristique qui s'est développé autour du nom Ogopogo." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Témoignages marquants" title="De la vague de 1926 au film de 1968">
+    <StoryBlock num="Récit I" title="La vague de témoignages de 1926" body="Plusieurs dizaines de personnes rapportent la même année avoir aperçu une créature inhabituelle dans le lac Okanagan, l'une des premières vagues massives de témoignages qui installent durablement la légende dans la presse régionale canadienne." />
+    <StoryBlock num="Récit II" title="Le film Whitehead, 1968" body="Une séquence filmée par Art Folden en 1968 montre une forme ondulante traversant le lac ; analysée depuis à plusieurs reprises, elle n'a jamais permis de conclure de façon indiscutable à la présence d'un animal inconnu plutôt qu'à un phénomène de vagues ou de sillage." />
+    <StoryBlock num="Récit III" title="Des décennies de témoignages touristiques" body="Depuis les années 1920, le lac Okanagan continue de générer des témoignages réguliers, souvent de la part de touristes plutôt que de riverains, ce qui alimente les chercheurs sceptiques dans l'hypothèse d'une attente culturelle influençant l'interprétation d'observations banales." quote="Une vague, un tronc flottant, ou une attente collective suffisamment forte pour transformer l'un ou l'autre en créature." cite="Résumé de la position sceptique dominante sur les témoignages touristiques" />
+  </Section>
+
+  <Section id="culture-populaire" label="D'une chanson de music-hall à la mascotte de Kelowna" title="Comment un nom comique est devenu une identité régionale">
+    <div class="card-grid compact">
+      <MiniCard title="Kelowna, capitale touristique d'Ogopogo" tag="Identité municipale" body="La ville riveraine du lac Okanagan a pleinement adopté la créature comme symbole touristique, avec statues, festivals et produits dérivés portant son nom." />
+      <MiniCard title="Une chanson britannique de 1924 à l'origine du nom" tag="Emprunt culturel assumé" body="Le nom « Ogopogo » est directement tiré d'une chanson comique de music-hall britannique, adoptée localement avec un clin d'œil plutôt que comme une traduction du terme syilx original." />
+      <MiniCard title="Une déclinaison nord-américaine d'un motif partagé" tag="Parallèle avec Nessie et Champ" body="Ogopogo appartient à toute une famille de « monstres de lac » nord-américains (Champ dans le lac Champlain, Nahuelito en Argentine) partageant la même structure narrative que le Loch Ness écossais." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que la science peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Aucune preuve zoologique concluante" body="Malgré près d'un siècle de témoignages, aucune analyse d'ADN environnemental, aucun spécimen ni aucune image incontestable n'a permis de confirmer la présence d'un grand animal aquatique inconnu dans le lac Okanagan." />
+    <ScienceBlock num="Enquête 2" title="Des explications naturelles plausibles et multiples" body="Rondins flottants portés par le courant, groupes d'oiseaux aquatiques ou de loutres nageant en ligne créant une illusion de silhouette ondulante, et effets d'interférence de vagues sont les explications les plus souvent avancées par les chercheurs sceptiques — sans qu'aucune ne rende compte, à elle seule, de la totalité des témoignages recensés." />
+    <ScienceBlock num="Enquête 3" title="Une tradition spirituelle distincte de la légende touristique" body="La croyance syilx associée au lieu relève d'un registre spirituel de respect du territoire, pas d'une revendication zoologique — un point que les analyses purement sceptiques du folklore « Ogopogo » ont parfois tendance à effacer en confondant les deux traditions." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Des rondins flottants et des effets de vagues"
+      level="plausible"
+      status="Explication sceptique dominante"
+      body="Le lac Okanagan, profond et sujet à des vents changeants, produit régulièrement des effets de vagues et transporte des troncs flottants susceptibles d'être interprétés comme une créature ondulante par un observateur déjà prédisposé à la voir."
+      attrib="Position dominante chez les chercheurs sceptiques nord-américains"
+    />
+    <TheoryCard
+      title="Des groupes d'animaux nageant en ligne"
+      level="plausible"
+      status="Hypothèse sérieuse"
+      body="Des loutres ou des oiseaux aquatiques nageant en file resserrée peuvent, vus de loin, donner l'illusion d'une silhouette continue à plusieurs bosses — un mécanisme de méprise déjà documenté pour d'autres cryptides lacustres comparables."
+      attrib="Hypothèse répandue en zoologie comportementale"
+    />
+    <TheoryCard
+      title="Un grand animal aquatique inconnu bien réel"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune preuve matérielle, génétique ou photographique fiable n'a jamais permis d'établir l'existence réelle d'un animal de grande taille inconnu de la science dans le lac Okanagan." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette légende fait encore">
+    <HeritageBlock title="Un pilier du tourisme de Kelowna" body="La légende continue de soutenir une économie touristique locale active, entre statues, festivals et produits dérivés portant le nom d'Ogopogo." />
+    <HeritageBlock title="Une tradition syilx toujours vivante" body="Au-delà de la légende touristique, la relation spirituelle syilx au lac Okanagan continue d'être transmise au sein de la communauté, indépendamment de la mascotte anglophone qui porte aujourd'hui un nom différent." />
+    <HeritageBlock title="Une figure régionale reconnaissable" body="Ogopogo reste l'un des cryptides lacustres nord-américains les plus identifiables, aux côtés de Champ et de Nessie, dans la culture populaire régionale et au-delà." />
+    <CautionBox>
+      Le nom « Ogopogo », emprunté à une chanson comique britannique, ne doit pas faire
+      oublier que le lac Okanagan porte une signification spirituelle réelle et antérieure
+      pour le peuple syilx, sous le nom de N'ha-a-itk. Réduire cette tradition à une simple
+      variante locale du folklore des monstres de lac serait passer à côté de sa signification
+      propre.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Mary Moon, Ogopogo: The Okanagan Mystery, J.J. Douglas, 1977", note: "Recueil de référence des témoignages historiques cité en #temoins-recits." },
+    { label: "Arlene Gaal, Ogopogo: The Living Legend of the Okanagan Lake, Hancock House, 2001", note: "Synthèse des témoignages et de l'histoire culturelle du nom citée en #origine et #culture-populaire." },
+    { label: "Nation Okanagan (Syilx), documentation culturelle sur la tradition N'ha-a-itk (Westbank First Nation, ressources publiques)", url: "https://www.wfn.ca/", note: "Source de la tradition spirituelle syilx citée en #origine et #heritage." },
+    { label: "Benjamin Radford, \"Ogopogo: Investigating Canada's Loch Ness Monster\", Live Science, 2013", url: "https://www.livescience.com/", note: "Synthèse sceptique moderne des explications naturelles citée en #science et #theories." },
+  ]} />
+</PageLayout>

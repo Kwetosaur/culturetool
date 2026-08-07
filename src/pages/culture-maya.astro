@@ -1,0 +1,220 @@
+---
+/*
+  Maya (culture) — dix-septième page de la série « Peuples & Cultures du
+  Monde ». Même structure à 10 sections que culture-khmers.astro.
+
+  Positionnement vis-à-vis de mythologie-azteque-maya.html : cette page
+  traite l'angle civilisationnel (écriture, calendrier, cités-états,
+  effondrement classique) et non le récit mythologique du Popol Vuh, déjà
+  couvert par la page mythologie — même principe que Rome antique/Grèce
+  antique vis-à-vis d'une éventuelle page mythologie correspondante.
+
+  Point de vigilance : le mythe populaire d'une « disparition » maya est
+  faux — des millions de personnes mayas vivent aujourd'hui au Guatemala,
+  au Mexique et au Belize et parlent des langues mayas. #anecdotes et
+  #heritage corrigent explicitement ce point. La panique de 2012 (fin de
+  calendrier = apocalypse) est également corrigée en #anecdotes.
+
+  Effets : data-egg="maya" + data-scroll-fx="mayaNombre" sur
+  #style-de-vie, piste documentée dans plan-effets.md ("un nombre qui se
+  compose en points et barres").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Jade des offrandes, bleu maya (pigment unique à base d'indigo et de
+   palygorskite), calcaire des cités : la matière maya plutôt qu'une
+   palette "Mésoamérique" recyclée de la page mythologie. */
+const palette = {
+  bg: '#0f1a16',
+  'bg-deep': '#081109',
+  surface: '#17251f',
+  'surface-alt': '#1f3129',
+  border: '#3a5c4a',
+  ink: '#eef5ee',
+  text: '#c4d8c8',
+  'text-dim': '#7ea888',
+  accent: '#2f8a7a',
+  'accent-bright': '#4fb3a0',
+  accent2: '#1a6a9a',
+  'accent2-bright': '#3a94c4',
+  verdict: '#8a4a2a',
+  'verdict-bright': '#c47a4a',
+  glow: 'rgba(47,138,122,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Maya (culture)"
+  serie="Peuples & Cultures du Monde"
+  description="La seule écriture pleinement développée des Amériques précolombiennes, un calendrier d'une précision remarquable et un zéro inventé indépendamment — porté par des cités-États rivales jamais unifiées en empire, et un effondrement classique toujours débattu par les chercheurs, sans qu'aucune disparition n'ait jamais eu lieu : des millions de Mayas vivent aujourd'hui."
+  href="culture-maya.html"
+  egg="maya"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="MÉSOAMÉRIQUE · IIIe-Xe SIÈCLE APR. J.-C."
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Une écriture, un zéro, des cités jamais unifiées</p>
+  <p class="tagline" slot="hero">
+    La seule civilisation précolombienne des Amériques à avoir développé une écriture
+    complète, un calendrier d'une précision qui continue d'étonner les astronomes modernes —
+    et un peuple qui n'a jamais disparu, contrairement à un mythe populaire tenace.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="Un monde de cités-États, pas un empire"
+    intro="Le monde maya s'étend sur l'actuel Yucatán mexicain, le Guatemala, le Belize et des franges du Honduras et du Salvador, organisé en cités-États rivales plutôt qu'en empire centralisé — un modèle plus proche des cités grecques antiques que de l'empire aztèque voisin.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="150" cy="80" r="7" fill="#4fb3a0"/>
+        <text x="150" y="66" text-anchor="middle" fill="#eef5ee" font-size="11" font-family="Cinzel, serif">CALAKMUL</text>
+        <circle cx="210" cy="130" r="8" fill="#e8c164"/>
+        <text x="210" y="150" text-anchor="middle" fill="#eef5ee" font-size="12" font-family="Cinzel, serif">TIKAL</text>
+        <circle cx="120" cy="200" r="6" fill="#3a94c4"/>
+        <text x="120" y="216" fill="#a0c8d8" font-size="10">Palenque</text>
+        <circle cx="260" cy="220" r="6" fill="#3a94c4"/>
+        <text x="260" y="236" fill="#a0c8d8" font-size="10">Copán</text>
+        <circle cx="180" cy="40" r="6" fill="#4aa8a8"/>
+        <text x="180" y="28" fill="#a0d8d8" font-size="10">Chichén Itzá</text>
+      </svg>
+    </div>
+    <p class="map-caption">Tikal et Calakmul, rivales de premier plan pendant des siècles ; Palenque et Copán, foyers artistiques et scientifiques majeurs ; Chichén Itzá, cité tardive marquée par des influences toltèques.</p>
+    <div class="card-grid">
+      <InfoCard title="Tikal" sub="Guatemala, période classique" body="L'une des plus grandes cités mayas, rivale historique de Calakmul dans une guerre de plusieurs siècles documentée par leurs inscriptions respectives." />
+      <InfoCard title="Calakmul" sub="Mexique, période classique" body="Tête d'un vaste réseau d'alliances rivales de Tikal, dont la « guerre des étoiles » (attaques calées sur les cycles de Vénus) est documentée par l'épigraphie moderne." />
+      <InfoCard title="Palenque" sub="Chiapas, VIIe siècle" body="Foyer artistique majeur sous le règne de K'inich Janaab' Pakal, dont la tombe richement sculptée reste l'une des découvertes archéologiques mayas les plus célèbres." />
+      <InfoCard title="Chichén Itzá" sub="Yucatán, période postclassique" body="Cité tardive marquée par des influences toltèques venues du centre du Mexique, aujourd'hui l'un des sites mayas les plus visités au monde." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Rois divins, scribes et bâtisseurs" intro="Une société hiérarchisée autour du k'uhul ajaw (« seigneur sacré »), appuyée sur une caste de scribes lettrés et une main-d'œuvre considérable pour les grands chantiers monumentaux.">
+    <div class="card-grid wide">
+      <FigureCard name="Le k'uhul ajaw" role="Seigneur sacré" tags={['Royauté divine', 'Cité-État']} body="Chaque cité maya majeure est gouvernée par son propre souverain sacré, sans autorité centrale unique sur l'ensemble du monde maya — un modèle politique fragmenté plutôt qu'impérial." />
+      <FigureCard name="Les scribes (aj tz'iib')" role="Lettrés de cour" tags={['Écriture', 'Prestige']} body="Une caste lettrée maîtrisant l'écriture hiéroglyphique, souvent elle-même de haute naissance, chargée de consigner généalogies royales, victoires militaires et cycles calendaires." />
+      <FigureCard name="Les bâtisseurs et artisans" role="Main-d'œuvre monumentale" tags={['Anonymat', 'Pyramides']} body="Des dizaines de milliers de travailleurs, largement anonymes dans les sources, ont permis l'édification des temples-pyramides et des palais qui subsistent aujourd'hui." />
+      <FigureCard name="Les Mayas contemporains" role="Continuité vivante" tags={['Millions de locuteurs', 'Guatemala, Mexique, Belize']} body="Plusieurs millions de personnes parlent aujourd'hui une trentaine de langues mayas distinctes — la civilisation n'a jamais « disparu », contrairement à une idée reçue tenace." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Souverains, déchiffreurs et bâtisseurs de savoir">
+    <div class="card-grid wide">
+      <FigureCard name="K'inich Janaab' Pakal" role="Souverain de Palenque" tags={['615-683 apr. J.-C.']} body="L'un des règnes les mieux documentés de l'histoire maya classique, dont la tombe richement sculptée au Temple des Inscriptions reste une référence archéologique majeure." />
+      <FigureCard name="Yuri Knorozov" role="Linguiste soviétique" tags={['Déchiffrement, années 1950']} body="Le premier à proposer une méthode phonétique convaincante pour lire l'écriture maya, en dépit d'un scepticisme initial marqué de la communauté académique occidentale en pleine guerre froide." />
+      <FigureCard name="Linda Schele et David Stuart" role="Épigraphistes modernes" tags={['« Break the Maya Code », 1970-1990']} body="Parmi les chercheurs qui, en poursuivant les travaux de Knorozov, permettent la lecture systématique des inscriptions royales et transforment la compréhension de l'histoire politique maya classique." />
+      <FigureCard name="Diego de Landa" role="Évêque et destructeur-préservateur" tags={['1562', 'Paradoxe historiographique']} body="Ordonne l'autodafé de Maní en 1562, détruisant la quasi-totalité des livres mayas connus — puis rédige lui-même un compte-rendu détaillé de la culture maya qui deviendra, ironiquement, une source cruciale pour le déchiffrement moderne." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="De la guerre des étoiles à l'autodafé de Maní">
+    <StoryBlock num="Épisode I" title="La rivalité Tikal-Calakmul" body="Pendant des siècles, ces deux cités-États dominent des réseaux d'alliances rivaux, s'affrontant dans des guerres documentées par leurs propres inscriptions royales — un jeu de puissance mésoaméricain qui n'a rien à envier aux rivalités des cités grecques antiques." />
+    <StoryBlock num="Épisode II" title="La guerre calée sur Vénus" body="L'épigraphie moderne a révélé que certaines attaques militaires majeures entre cités mayas étaient délibérément programmées selon les cycles observés de la planète Vénus — un exemple concret et daté de l'astronomie mise directement au service de la stratégie politique." />
+    <StoryBlock num="Épisode III" title="L'autodafé de Maní, 1562" body={["L'évêque franciscain Diego de Landa fait brûler d'innombrables manuscrits mayas jugés idolâtres lors d'un autodafé à Maní, dans le Yucatán — l'un des actes de destruction culturelle les mieux documentés de l'histoire coloniale des Amériques.", "Seuls quatre codex mayas sont aujourd'hui connus pour avoir survécu à la période coloniale : les codex de Dresde, de Madrid, de Paris et de Grolier."]} quote="Nous avons trouvé un grand nombre de livres [...] et comme ils ne contenaient rien qui ne fût superstition et mensonges du démon, nous les avons tous brûlés." cite="Diego de Landa, Relación de las cosas de Yucatán, 1566" />
+    <StoryBlock num="Épisode IV" title="Le déchiffrement moderne de l'écriture" body="À partir des années 1950, Yuri Knorozov propose une lecture phonétique de l'écriture maya, longtemps contestée en Occident ; les travaux ultérieurs de Linda Schele, David Stuart et d'autres épigraphistes achèvent, entre les années 1970 et 1990, de transformer des inscriptions jusque-là illisibles en une histoire politique maya détaillée, dynastie par dynastie." />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Écriture, zéro et pigment indestructible">
+    <div class="card-grid compact">
+      <MiniCard title="L'écriture hiéroglyphique maya" tag="Logo-syllabique" body="Seule écriture pleinement développée des Amériques précolombiennes, combinant logogrammes et syllabes, aujourd'hui largement déchiffrée grâce aux travaux de Knorozov, Schele et Stuart." />
+      <MiniCard title="Le zéro maya" tag="Invention indépendante" body="Le système numéral maya, en base vingt, utilise un glyphe en forme de coquillage pour le zéro — l'une des rares civilisations au monde à avoir inventé ce concept indépendamment, sans emprunt extérieur." />
+      <MiniCard title="Les trois calendriers combinés" tag="Précision remarquable" body="Le Tzolk'in rituel de 260 jours, le Haab' solaire de 365 jours et le Compte Long s'articulent en un système d'une précision qui continue d'impressionner les astronomes modernes." />
+      <MiniCard title="Le bleu maya" tag="Pigment indestructible" body="Un pigment unique obtenu par la combinaison d'indigo et d'argile de palygorskite, d'une stabilité chimique exceptionnelle qui a permis sa conservation sur des fresques pendant plus d'un millénaire." />
+      <MiniCard title="Le jeu de balle rituel (pitz)" tag="Pratique religieuse et sportive" body="Présent sur la quasi-totalité des grands sites mayas sous forme de terrains dédiés, ce jeu combinait enjeu sportif et signification religieuse, parfois jusqu'au sacrifice rituel selon les sites et les périodes." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et idées reçues à corriger">
+    <div class="card-grid compact">
+      <MiniCard title="Les Mayas n'ont jamais disparu" tag="Idée reçue majeure" body="Plusieurs millions de personnes parlent aujourd'hui une trentaine de langues mayas au Guatemala, au Mexique et au Belize — la civilisation classique a décliné politiquement, le peuple n'a jamais cessé d'exister." />
+      <MiniCard title="2012 n'était pas une prophétie de fin du monde" tag="Malentendu populaire" body="La fin du treizième b'ak'tun du Compte Long, le 21 décembre 2012, marquait simplement un cycle calendaire qui recommence — aucune source maya n'annonce une apocalypse à cette date, contrairement à la panique médiatique qui a précédé l'événement." />
+      <MiniCard title="Diego de Landa, destructeur et sauveur malgré lui" tag="Paradoxe historiographique" body="L'homme responsable de la destruction de la quasi-totalité des livres mayas connus a lui-même rédigé, plus tard, l'une des sources les plus précieuses pour comprendre la culture qu'il avait contribué à effacer." />
+      <MiniCard title="Une civilisation sans roue ni métal lourd" tag="Contrainte technique réelle" body="Les Mayas connaissaient le principe de la roue (attestée sur des jouets) sans l'utiliser pour le transport, et travaillaient peu le métal — des choix ou contraintes techniques qui n'ont pourtant pas empêché des prouesses architecturales et astronomiques majeures." />
+      <MiniCard title="Le chocolat, monnaie et boisson rituelle" tag="Cacao" body="Les fèves de cacao servaient à la fois de monnaie d'échange et d'ingrédient d'une boisson rituelle amère, bien éloignée du chocolat sucré moderne." />
+      <MiniCard title="Seulement quatre codex ont survécu" tag="Perte documentaire massive" body="Face aux centaines de manuscrits qui existaient probablement avant la conquête espagnole, seuls les codex de Dresde, Madrid, Paris et Grolier nous sont parvenus." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="Astronomes, joueurs de balle et scribes de cour"
+    intro="La vie quotidienne maya classique se documente par l'archéologie et par les inscriptions royales elles-mêmes, qui mêlent généalogie dynastique, cycles calendaires et événements militaires."
+    scrollFx="mayaNombre">
+    <div class="card-grid compact">
+      <MiniCard title="L'observation astronomique de cour" tag="Savoir royal" body="Le suivi des cycles de Vénus et d'autres corps célestes relevait directement des prérogatives royales, mêlant observation scientifique et légitimation politique du souverain." />
+      <MiniCard title="Le jeu de balle rituel" tag="Sport et religion" body="Pratiqué sur des terrains dédiés dans presque toutes les grandes cités, ce jeu combinait enjeu sportif, symbolique cosmologique et, selon les sites, une issue parfois sacrificielle." />
+      <MiniCard title="La saignée rituelle royale" tag="Pratique religieuse" body="Les inscriptions et reliefs montrent des souverains et reines pratiquant l'auto-saignée rituelle pour communiquer avec les ancêtres et les divinités — une pratique bien documentée par l'iconographie classique." />
+      <MiniCard title="L'agriculture sur milpa" tag="Subsistance" body="Le système de culture itinérante sur brûlis (milpa), centré sur le maïs, les haricots et la courge, reste pratiqué par des communautés mayas contemporaines selon des principes largement hérités." />
+      <MiniCard title="Le marché urbain" tag="Vie économique" body="Les grandes cités mayas organisaient des marchés réguliers où circulaient cacao, textiles, obsidienne et jade entre régions parfois éloignées de plusieurs centaines de kilomètres." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="D'un effondrement débattu à un peuple toujours vivant">
+    <div class="card-grid">
+      <InfoCard title="L'effondrement classique (env. 800-900 apr. J.-C.)" sub="Cause multifactorielle débattue" body="Sécheresses prolongées, dégradation environnementale, intensification des guerres inter-cités et crises dynastiques se combinent probablement, sans qu'aucun facteur unique ne fasse consensus parmi les chercheurs." />
+      <InfoCard title="La persistance postclassique" sub="Chichén Itzá, Mayapán" body="Après le déclin des grandes cités classiques du sud, des centres politiques mayas majeurs continuent de prospérer plus au nord jusqu'à l'arrivée espagnole." />
+      <InfoCard title="La conquête espagnole" sub="XVIe-XVIIe siècle" body="Contrairement à l'empire aztèque, la conquête du monde maya s'étale sur plus d'un siècle, cité après cité, faute de pouvoir central unique à faire tomber d'un seul coup." />
+      <InfoCard title="Les langues mayas aujourd'hui" sub="Environ 6 millions de locuteurs" body="Une trentaine de langues mayas distinctes restent parlées au Guatemala, au Mexique, au Belize et dans leurs diasporas respectives." />
+      <InfoCard title="Le tourisme archéologique mondial" sub="Chichén Itzá, Tikal, Copán" body="Les grands sites mayas comptent aujourd'hui parmi les destinations archéologiques les plus visitées des Amériques." />
+      <InfoCard title="Les mouvements d'affirmation maya contemporains" sub="Guatemala, Mexique" body="Des mouvements politiques et culturels mayas contemporains revendiquent aujourd'hui activement la reconnaissance de leurs langues et de leurs droits." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. 2000 av. J.-C.', title: 'Débuts de la période préclassique', body: "Premiers villages agricoles mayas dans la région mésoaméricaine." },
+      { year: 'v. 250-900 apr. J.-C.', title: 'Période classique', body: "Apogée des grandes cités-États, de l'écriture hiéroglyphique et du système calendaire complet." },
+      { year: 'v. 615-683 apr. J.-C.', title: 'Règne de K\'inich Janaab\' Pakal à Palenque', body: "L'un des règnes les mieux documentés par l'épigraphie maya classique." },
+      { year: 'v. 695-736 apr. J.-C.', title: 'Apogée de la rivalité Tikal-Calakmul', body: "Guerre de longue durée entre les deux grandes puissances rivales du monde maya classique." },
+      { year: 'v. 800-900 apr. J.-C.', title: 'Effondrement classique', body: "Déclin rapide des grandes cités du sud, pour des raisons encore débattues par les chercheurs." },
+      { year: 'v. 900-1524 apr. J.-C.', title: 'Période postclassique', body: "Essor de nouveaux centres politiques plus au nord, dont Chichén Itzá et Mayapán." },
+      { year: '1521-1697', title: 'Conquête espagnole progressive', body: "Contrairement à l'empire aztèque, la conquête du monde maya s'étale sur plus d'un siècle et demi, cité par cité." },
+      { year: '1562', title: 'Autodafé de Maní', body: "Diego de Landa fait détruire la quasi-totalité des livres mayas connus." },
+      { year: 'Années 1950', title: 'Percée de Yuri Knorozov', body: "Première méthode phonétique convaincante de lecture de l'écriture maya." },
+      { year: 'Années 1970-1990', title: '« Déchiffrer le code maya »', body: "Linda Schele, David Stuart et d'autres épigraphistes achèvent la lecture systématique des inscriptions royales classiques." },
+      { year: '21 décembre 2012', title: 'Fin du treizième b\'ak\'tun', body: "Un cycle calendaire majeur s'achève sans qu'aucune fin du monde, contrairement à la panique médiatique qui l'a précédé, ne se produise." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que les Mayas laissent encore">
+    <HeritageBlock title="Un peuple toujours vivant, pas un vestige" body="Plusieurs millions de personnes continuent de parler des langues mayas et de transmettre des pratiques culturelles directement héritées de cette civilisation." />
+    <HeritageBlock title="Une révolution dans la compréhension de l'écriture précolombienne" body="Le déchiffrement moderne de l'écriture maya reste l'un des grands succès de l'épigraphie du XXe siècle, transformant des siècles de silence en une histoire politique détaillée." />
+    <HeritageBlock title="Un pilier du tourisme archéologique mondial" body="Les sites mayas comptent parmi les destinations culturelles les plus visitées des Amériques, avec les enjeux de conservation et de gestion touristique que cela implique." />
+    <CautionBox>
+      Le récit populaire d'une civilisation maya « mystérieusement disparue » est à la fois
+      inexact et involontairement irrespectueux envers les millions de personnes mayas qui
+      vivent aujourd'hui. Ce qui s'est effondré au IXe siècle, c'est un système politique de
+      cités-États classiques — pas un peuple, ses langues, ni sa culture, qui se poursuivent
+      jusqu'à aujourd'hui.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Michael D. Coe, Breaking the Maya Code, Thames & Hudson, 1992 (éd. révisée 1999)", note: "Récit de référence du déchiffrement de l'écriture maya cité en #figures et #recits." },
+    { label: "Simon Martin et Nikolai Grube, Chronicle of the Maya Kings and Queens, Thames & Hudson, 2000", note: "Synthèse de référence sur la rivalité Tikal-Calakmul et l'histoire dynastique citée en #recits et #frise." },
+    { label: "Diego de Landa, Relación de las cosas de Yucatán, trad. Alfred M. Tozzer, Peabody Museum, 1566 (éd. moderne 1941)", url: "https://www.gutenberg.org/", note: "Source directe de l'autodafé de Maní citée en #recits et #anecdotes." },
+    { label: "David Stuart, The Order of Days: The Maya World and the Truth about 2012, Harmony Books, 2011", note: "Correction de référence du malentendu sur 2012 cité en #anecdotes." },
+  ]} />
+</PageLayout>

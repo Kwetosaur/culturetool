@@ -1,0 +1,181 @@
+---
+/*
+  La Ménorah du Second Temple — vingtième objet de la série. Structure
+  imposée par docs/plans/plan-serie-objets.md : 9 sections, badge de
+  nature.
+
+  Angle éditorial central : un objet dont on possède le portrait sans
+  posséder l'objet lui-même — sculptée sur l'arc de Titus à Rome, jamais
+  retrouvée depuis le VIe siècle. #traces suit sa piste documentée
+  (Rome, Vandales, Constantinople) jusqu'à ce que la trace s'arrête net,
+  sans jamais affirmer une conclusion que les sources ne permettent pas.
+
+  Point de vigilance : objet religieux vivant (distinct de la Hanoukkia à
+  neuf branches) et emblème officiel de l'État d'Israël depuis 1949 — traité
+  factuellement en #heritage, sans prise de position sur les usages
+  politiques contemporains du symbole, qui dépassent le cadre de cette page.
+
+  Effets : data-egg="menorah" + data-scroll-fx="menorahFlammes" sur
+  #description — sept flammes qui s'allument de gauche à droite, puis un
+  relief de pierre qui les recouvre (l'arc de Titus).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Or du chandelier, gris de la pierre romaine qui porte son seul portrait
+   fiable, bleu sacré : la matière de l'objet plutôt qu'une palette
+   "Antiquité" générique. */
+const palette = {
+  bg: '#171307',
+  'bg-deep': '#0d0a04',
+  surface: '#241d0f',
+  'surface-alt': '#2f2614',
+  border: '#5c4a1e',
+  ink: '#f5ecd0',
+  text: '#d8c896',
+  'text-dim': '#a08858',
+  accent: '#c9982f',
+  'accent-bright': '#e8c164',
+  accent2: '#4a5058',
+  'accent2-bright': '#7a828c',
+  verdict: '#2e3a5c',
+  'verdict-bright': '#4a5c8a',
+  glow: 'rgba(201,152,47,0.24)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="La Ménorah du Second Temple"
+  serie="Objets Légendaires du Monde"
+  description="Le chandelier à sept branches du Second Temple de Jérusalem, emporté à Rome après la prise de la ville en 70 apr. J.-C. et sculpté sur l'arc de Titus qui commémore cette victoire — le seul portrait fiable qui nous en reste, sa trace s'arrêtant après le VIe siècle sans qu'aucune retrouvaille n'ait jamais été confirmée."
+  href="objet-menorah.html"
+  egg="menorah"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="JÉRUSALEM · ROME · 70 APR. J.-C."
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">L'objet dont on garde le portrait, pas l'original</p>
+  <p class="tagline" slot="hero">
+    Un chandelier d'or emporté en triomphe à Rome, gravé pour toujours dans la pierre d'un
+    arc encore debout aujourd'hui — et dont la trace matérielle s'efface ensuite, sans qu'on
+    sache avec certitude ce qu'il est devenu après le VIe siècle.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet réel disparu"
+    note="L'existence de la ménorah du Second Temple est attestée par des sources textuelles et iconographiques convergentes, notamment le relief de l'arc de Titus. Sa disparition après le VIe siècle est également documentée ; aucune redécouverte revendiquée depuis n'a jamais été confirmée."
+  />
+
+  <Section id="origine" label="Première attestation" title="Du chandelier du désert au Second Temple" intro="Distinguer le modèle biblique originel du chandelier réellement présent dans le Second Temple : deux objets séparés de plusieurs siècles, dans une tradition de continuité formelle plutôt que de survivance matérielle directe.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Le modèle du Tabernacle" sub="Exode 25, tradition biblique" body="Le texte biblique décrit un chandelier d'or battu à sept branches, façonné par Bezalel selon des instructions divines détaillées — le modèle formel dont hérite, des siècles plus tard, la ménorah du Second Temple." />
+      <InfoCard num="II" title="La ménorah du Second Temple" sub="Reconstruit à partir de 516 av. J.-C." body="Après le retour d'exil babylonien, un nouveau chandelier est installé dans le Temple reconstruit à Jérusalem, en continuité formelle avec le modèle biblique plutôt qu'en tant qu'objet matériellement identique." />
+      <InfoCard num="III" title="Le relief de l'arc de Titus" sub="Rome, inauguré en 81 apr. J.-C." body="La plus ancienne représentation fiable et détaillée de l'objet nous vient d'un monument romain, pas d'une source juive directe — la ménorah y est portée en triomphe par des soldats après la prise de Jérusalem en 70 apr. J.-C." />
+    </div>
+  </Section>
+
+  <Section id="description" label="Forme et fonction" title="Un chandelier à sept branches, pas neuf" scrollFx="menorahFlammes">
+    <div class="card-grid wide">
+      <FigureCard name="Sept branches, pas neuf" role="Distinction essentielle" tags={['Menorah', 'Hanoukkia']} body="La ménorah du Temple compte sept branches, à ne pas confondre avec la hanoukkia à neuf branches utilisée aujourd'hui pour la fête de Hanouca — une confusion fréquente que cette page prend soin d'éviter." />
+      <FigureCard name="Un objet d'or massif" role="Description du relief" tags={['Orfèvrerie', 'Poids symbolique']} body="Le relief de l'arc de Titus la montre portée sur un brancard par plusieurs hommes, une charge suffisamment lourde pour nécessiter un dispositif de transport dédié lors du défilé triomphal romain." />
+      <FigureCard name="Un socle à décor disputé" role="Détail iconographique débattu" tags={['Hexagones', 'Dragons marins ?']} body="Le socle sculpté sur l'arc de Titus porte des motifs que certains chercheurs ont interprétés comme des créatures marines mythologiques romaines, une lecture jugée douteuse par d'autres spécialistes qui y voient plutôt un ornement géométrique sans signification religieuse particulière." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="De la prise de Jérusalem au défilé de Rome">
+    <StoryBlock num="Récit I" title="La chute du Second Temple, 70 apr. J.-C." body="Au terme d'un siège prolongé pendant la première guerre judéo-romaine, les légions de Titus prennent Jérusalem et détruisent le Temple ; ses trésors, dont la ménorah, sont saisis comme butin de guerre." />
+    <StoryBlock num="Récit II" title="Le triomphe romain" body={["Flavius Josèphe, témoin et historien juif passé au service de Rome, décrit dans La Guerre des Juifs le défilé triomphal où les trésors du Temple, ménorah en tête, sont exhibés devant la foule romaine.", "L'arc de Titus, achevé après sa mort sous le règne de son frère Domitien, immortalise cette scène en pierre pour les siècles suivants."]} quote="Parmi les dépouilles [...] on remarquait surtout un chandelier d'or." cite="D'après Flavius Josèphe, La Guerre des Juifs, livre VII" />
+    <StoryBlock num="Récit III" title="Le sac de Rome par les Vandales, 455" body="Selon la tradition historique reprise par plusieurs chroniqueurs byzantins, les trésors du Temple de Peace où la ménorah était conservée sont emportés à Carthage lors du sac de Rome par les Vandales, ouvrant un nouveau chapitre incertain dans la trajectoire de l'objet." />
+  </Section>
+
+  <Section id="facture" label="Matière et fabrication" title="Ce que l'orfèvrerie antique permettait vraiment" intro="Même à partir d'un simple relief de pierre, on peut apprendre beaucoup sur un savoir-faire métallurgique réel : celui des orfèvres du Levant antique.">
+    <div class="card-grid compact">
+      <MiniCard title="L'or battu (miqshah)" tag="Technique biblique nommée" body="Le texte biblique précise que le chandelier originel devait être façonné d'une seule pièce d'or battu au marteau plutôt qu'assemblé à partir de pièces coulées séparément — une prescription technique explicite, rare pour un objet de cette antiquité." />
+      <MiniCard title="Une pièce massive à transporter" tag="Contrainte logistique" body="Le relief de l'arc de Titus montre l'objet porté à plusieurs sur un brancard, cohérent avec la masse d'or considérable qu'impliquerait un chandelier de cette taille façonné selon les prescriptions bibliques." />
+      <MiniCard title="Le décor du socle, une question ouverte" tag="Débat archéologique" body="L'interprétation exacte des motifs sculptés à la base du chandelier sur l'arc de Titus reste discutée par les spécialistes, faute d'autre représentation antique aussi détaillée à laquelle la comparer." />
+      <MiniCard title="Une forme reproduite sans interruption" tag="Continuité symbolique" body="Malgré la disparition de l'original, la forme à sept branches a continué d'être reproduite sans discontinuité dans l'art et le culte juifs depuis l'Antiquité jusqu'à aujourd'hui — la continuité est dans la forme transmise, pas dans la matière conservée." />
+    </div>
+  </Section>
+
+  <Section id="traces" label="Candidats matériels" title="Une trace qui s'arrête au VIe siècle">
+    <Timeline items={[
+      { year: '70 apr. J.-C.', title: 'Prise de Jérusalem et saisie de la ménorah', body: "Les légions de Titus s'emparent des trésors du Second Temple lors de sa destruction." },
+      { year: '71 apr. J.-C.', title: 'Défilé triomphal à Rome', body: "La ménorah est exhibée publiquement lors du triomphe conjoint de Vespasien et Titus, tel que décrit par Flavius Josèphe." },
+      { year: '81 apr. J.-C.', title: 'Achèvement de l\'arc de Titus', body: "Le monument commémoratif, portant le relief qui reste aujourd'hui le témoignage visuel le plus fiable de l'objet, est inauguré à Rome." },
+      { year: 'Après 75 apr. J.-C.', title: 'Conservation au Temple de la Paix', body: "Selon Flavius Josèphe, les trésors du Temple sont exposés dans ce monument romain érigé par Vespasien." },
+      { year: '455 apr. J.-C.', title: 'Sac de Rome par les Vandales', body: "La tradition historique rapporte que les trésors du Temple de la Paix, dont la ménorah, sont emportés à Carthage par les troupes vandales." },
+      { year: '534 apr. J.-C.', title: 'Conquête byzantine du royaume vandale', body: "Le général byzantin Bélisaire s'empare de Carthage ; certaines sources tardives affirment que la ménorah est alors rapportée à Constantinople." },
+      { year: 'VIe siècle apr. J.-C.', title: 'Dernière mention fiable', body: "Selon certains récits byzantins tardifs, l'empereur Justinien aurait fait envoyer l'objet vers des églises de Jérusalem — après quoi toute trace documentaire fiable s'arrête." },
+      { year: "Aujourd'hui", title: 'Aucune redécouverte confirmée', body: "Des légendes persistantes évoquent sa présence dans les caves du Vatican ; le Saint-Siège dément officiellement en détenir aucune trace, et aucune preuve n'appuie cette affirmation." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un butin de guerre à un emblème national" title="Un objet religieux devenu symbole d'État">
+    <div class="card-grid compact">
+      <MiniCard title="L'arc de Titus, lieu de mémoire disputé" tag="Tourisme et mémoire" body="Le monument romain reste aujourd'hui visité à la fois comme prouesse architecturale antique et comme lieu de mémoire d'une défaite majeure de l'histoire juive." />
+      <MiniCard title="Une rumeur persistante sur le Vatican" tag="Légende urbaine démentie" body="La croyance selon laquelle la ménorah serait conservée dans les collections vaticanes circule depuis des décennies dans certains cercles, sans jamais avoir été confirmée, et explicitement démentie par les autorités du Saint-Siège." />
+      <MiniCard title="Une confusion fréquente avec la hanoukkia" tag="Nuance à préserver" body="La ménorah à sept branches du Temple est très souvent confondue, dans la culture populaire, avec la hanoukkia à neuf branches utilisée pour Hanouca — deux objets distincts par leur nombre de branches et leur usage rituel." />
+    </div>
+  </Section>
+
+  <Section id="verite" label="Section pivot" title="Ce qu'on peut affirmer aujourd'hui">
+    <ScienceBlock num="Enquête 1" title="Une existence et une disparition toutes deux bien documentées" body="Contrairement aux objets purement littéraires de cette série, l'existence de la ménorah du Second Temple et sa capture par Rome en 70 sont attestées par des sources convergentes — textuelles (Flavius Josèphe) et iconographiques (l'arc de Titus). Sa trace s'arrête ensuite, sans que cela remette en cause la réalité historique de l'objet lui-même." />
+    <TheoryCard
+      title="L'objet a été fondu ou détruit à une date inconnue après le VIe siècle"
+      level="plausible"
+      status="Hypothèse la plus économe"
+      body="De nombreux objets précieux antiques ont fini fondus pour leur métal au fil des sièges, pillages et crises économiques successifs qui ont traversé l'Antiquité tardive et le haut Moyen Âge — une fin peu spectaculaire mais statistiquement plus probable qu'une conservation ininterrompue."
+      attrib="Hypothèse par défaut en histoire des objets précieux disparus"
+    />
+    <TheoryCard
+      title="L'objet est conservé, caché ou non identifié quelque part"
+      level="folklore"
+      status="Spéculatif, non étayé"
+      body="Les rumeurs sur une conservation secrète, notamment au Vatican, ne reposent sur aucune preuve documentaire ou matérielle et sont explicitement démenties par l'institution visée."
+      attrib="Légende populaire sans confirmation institutionnelle"
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cet objet fait encore">
+    <HeritageBlock title="L'emblème officiel de l'État d'Israël" body="Depuis 1949, la ménorah — dans une version directement inspirée du relief de l'arc de Titus — figure sur l'emblème officiel de l'État d'Israël, faisant d'un symbole de défaite et de dispersion antiques un emblème de restauration nationale moderne." />
+    <HeritageBlock title="Un motif religieux et artistique ininterrompu" body="La forme à sept branches continue d'orner synagogues, objets rituels et œuvres d'art juives à travers le monde, en continuité symbolique directe avec la description biblique originelle." />
+    <HeritageBlock title="Un cas d'école sur la mémoire par l'image" body="La ménorah illustre de façon particulièrement nette comment un objet disparu peut rester intégralement connu par son image plutôt que par sa matière — le relief qui commémorait sa perte est devenu, paradoxalement, la garantie de sa mémoire." />
+    <CautionBox>
+      Cet objet reste un symbole religieux et national vivant pour des millions de personnes
+      aujourd'hui. Cette page décrit son histoire documentée et sa trajectoire matérielle,
+      sans prendre position sur les usages contemporains, politiques ou identitaires, que ce
+      symbole continue de porter — un sujet qui dépasse le cadre d'une page consacrée à
+      l'objet et à son histoire.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Flavius Josèphe, La Guerre des Juifs, livre VII, trad. Pierre Savinel, Éditions de Minuit, Ier siècle apr. J.-C. (éd. moderne 1977)", note: "Source antique du défilé triomphal citée en #origine et #recits." },
+    { label: "Steven Fine, The Menorah: From the Bible to Modern Israel, Harvard University Press, 2016", note: "Étude de référence sur l'histoire complète de l'objet et son devenir symbolique, citée en #traces et #heritage." },
+    { label: "Yaron Z. Eliav, \"The Emblem of the State of Israel and the Arch of Titus Menorah\", Images, vol. 11, 2018", note: "Étude sur la reprise du relief de l'arc de Titus par l'emblème d'Israël, citée en #heritage." },
+    { label: "Musei Vaticani, communication officielle sur l'absence de la ménorah dans les collections du Vatican (démentis répétés, presse et sources muséales)", note: "Source du démenti officiel cité en #culture-populaire et #verite." },
+  ]} />
+</PageLayout>

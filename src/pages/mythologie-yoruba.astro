@@ -37,6 +37,33 @@ import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
 import Decode from '../components/Decode.astro';
 import Sources from '../components/Sources.astro';
+import InteractiveGenealogy from '../components/InteractiveGenealogy.astro';
+
+const YORUBA_HOUSES = {
+  ile_ife: { head: '#f0c94e', normal: '#ded0e6', dim: '#a495b8' },
+  shango: { head: '#d8443a', normal: '#e0a0a0', dim: '#a495b8' },
+  ifa: { head: '#a35fc9', normal: '#c9a0e0', dim: '#a495b8' },
+};
+const YORUBA_HOUSE_LABELS = {
+  ile_ife: "Maison d'Ile-Ife",
+  shango: 'Maison de Shango',
+  ifa: "Maison d'Ifa",
+};
+const YORUBA_NODES = [
+  { id: 'obatala', label: 'Obatala', house: 'ile_ife', head: true, x: 110, y: 60, detail: "Descend du ciel sur une chaîne pour créer la terre ferme, puis façonne les corps humains dans l'argile — un mythe qui explique aussi, dans la tradition, sa protection particulière des personnes nées avec un handicap." },
+  { id: 'oduduwa', label: 'Oduduwa', house: 'ile_ife', x: 110, y: 190, detail: "Premier roi d'Ile-Ife dans la tradition dominante, ancêtre revendiqué de la plupart des dynasties royales yoruba encore en fonction aujourd'hui." },
+  { id: 'shango', label: 'Shango', house: 'shango', head: true, x: 380, y: 60, detail: "Cas rare dans cette série : un roi réel d'Oyo, dont le règne s'achève en catastrophe, devient après sa mort le dieu du tonnerre — la déification d'un souverain historique, pas d'une entité éternelle." },
+  { id: 'oya', label: 'Oya', house: 'shango', x: 300, y: 190, detail: 'Gardienne du fleuve Niger et des portes du cimetière, associée aux bouleversements et aux transformations violentes mais nécessaires.' },
+  { id: 'oshun', label: 'Oshun', house: 'shango', x: 380, y: 190, detail: "Liée à la rivière Osun (aujourd'hui site classé UNESCO), figure de la beauté et de la négociation — sans qui, selon le mythe, aucune entreprise des autres orishas ne peut aboutir." },
+  { id: 'oba', label: 'Oba', house: 'shango', x: 460, y: 190, detail: 'Trompée par une coépouse jalouse, elle se mutile pour plaire à Shango — un récit souvent lu comme une mise en garde contre la manipulation entre coépouses plutôt qu\'un jugement sur elle.' },
+  { id: 'orunmila', label: 'Orunmila', house: 'ifa', head: true, x: 630, y: 60, detail: "Témoin de la destinée de chaque être depuis la création, à l'origine du système divinatoire Ifa que consultent encore aujourd'hui des millions de personnes via les babalawo." },
+  { id: 'babalawo', label: 'Babalawo', house: 'ifa', dim: true, x: 630, y: 190, detail: 'Titre porté par les prêtres devins d\'Ifa, formés pendant des années à mémoriser le corpus oral des seize signes principaux (Odu) et leurs versets attachés.' },
+];
+const YORUBA_EDGES = [
+  ['obatala', 'oduduwa', 'filiation'],
+  ['shango', 'oya', 'union'], ['shango', 'oshun', 'union'], ['shango', 'oba', 'union'],
+  ['orunmila', 'babalawo', 'special'],
+];
 
 /* Indigo adire, rouge de Shango, or des perles : les couleurs textiles et
    rituelles yoruba plutôt qu'une palette « Afrique » générique. */
@@ -145,40 +172,16 @@ const domaines = [
     title="Trois structures de transmission"
     intro="Ici encore, la parenté biologique ne raconte pas tout : une maison est royale (Ife), une autre naît de la déification d'un roi historique (Oyo), une troisième transmet un savoir plutôt qu'un sang (Ifa). Trois logiques différentes, assumées comme telles.">
     <Fragment slot="title"><Decode glyphs="yoruba">Trois structures de transmission</Decode></Fragment>
-    <div class="map-diagram">
-      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
-        <text x="110" y="34" text-anchor="middle" fill="#f0c94e" font-family="Cinzel, serif" font-size="13">MAISON D'ILE-IFE</text>
-        <circle cx="110" cy="80" r="20" fill="#f0c94e" stroke="#fff" stroke-width="1.5"/>
-        <text x="110" y="85" text-anchor="middle" font-size="9" fill="#160f1c" font-weight="700">Obatala</text>
-        <line x1="110" y1="100" x2="110" y2="150" stroke="#f0c94e" stroke-width="1.5"/>
-        <circle cx="110" cy="170" r="16" fill="#2c2140" stroke="#f0c94e" stroke-width="1.3"/>
-        <text x="110" y="174" text-anchor="middle" font-size="8" fill="#f0c94e">Oduduwa</text>
-        <text x="110" y="210" text-anchor="middle" fill="#a495b8" font-size="9">rois yoruba actuels</text>
-
-        <text x="320" y="34" text-anchor="middle" fill="#d8443a" font-family="Cinzel, serif" font-size="13">MAISON DE SHANGO</text>
-        <circle cx="320" cy="80" r="20" fill="#d8443a" stroke="#f26a4a" stroke-width="1.5"/>
-        <text x="320" y="85" text-anchor="middle" font-size="9" fill="#160f1c" font-weight="700">Shango</text>
-        <line x1="290" y1="95" x2="260" y2="150" stroke="#d8443a" stroke-width="1" stroke-dasharray="3 4"/>
-        <line x1="320" y1="100" x2="320" y2="150" stroke="#d8443a" stroke-width="1" stroke-dasharray="3 4"/>
-        <line x1="350" y1="95" x2="380" y2="150" stroke="#d8443a" stroke-width="1" stroke-dasharray="3 4"/>
-        <circle cx="260" cy="165" r="13" fill="#2c2140" stroke="#d8443a" stroke-width="1"/>
-        <text x="260" y="185" text-anchor="middle" font-size="8" fill="#e0a0a0">Oya</text>
-        <circle cx="320" cy="165" r="13" fill="#2c2140" stroke="#d8443a" stroke-width="1"/>
-        <text x="320" y="185" text-anchor="middle" font-size="8" fill="#e0a0a0">Oshun</text>
-        <circle cx="380" cy="165" r="13" fill="#2c2140" stroke="#d8443a" stroke-width="1"/>
-        <text x="380" y="185" text-anchor="middle" font-size="8" fill="#e0a0a0">Oba</text>
-        <text x="320" y="215" text-anchor="middle" fill="#a495b8" font-size="9">roi historique d'Oyo déifié</text>
-
-        <text x="530" y="34" text-anchor="middle" fill="#a35fc9" font-family="Cinzel, serif" font-size="13">MAISON D'IFA</text>
-        <circle cx="530" cy="80" r="20" fill="#a35fc9" stroke="#fff" stroke-width="1.5"/>
-        <text x="530" y="85" text-anchor="middle" font-size="9" fill="#160f1c" font-weight="700">Orunmila</text>
-        <line x1="530" y1="100" x2="530" y2="150" stroke="#a35fc9" stroke-width="1" stroke-dasharray="1 3"/>
-        <circle cx="530" cy="168" r="14" fill="#2c2140" stroke="#a35fc9" stroke-width="1"/>
-        <text x="530" y="172" text-anchor="middle" font-size="7" fill="#c9a0e0">babalawo</text>
-        <text x="530" y="210" text-anchor="middle" fill="#a495b8" font-size="9">transmission de savoir, pas de sang</text>
-      </svg>
-    </div>
-    <p class="map-caption">Trait plein = filiation ; pointillé = union ou transmission. La maison de Shango mêle mythe et personnage historiquement attesté — un cas rare dans cette série.</p>
+    <InteractiveGenealogy
+      nodes={YORUBA_NODES}
+      edges={YORUBA_EDGES}
+      houses={YORUBA_HOUSES}
+      houseLabels={YORUBA_HOUSE_LABELS}
+      glyphs="☀◈✦❖"
+      viewBox={{ w: 700, h: 260 }}
+      lineColor="#4a3a63"
+    />
+    <p class="map-caption">Trait plein = filiation ; pointillé = union ou transmission. La maison de Shango mêle mythe et personnage historiquement attesté — un cas rare dans cette série. Glissez un nom pour l'écarter du reste, cliquez pour lire un court repère sur la figure.</p>
   </Section>
 
   <Section id="creatures" label="8 êtres notables" title="Esprits, doubles et gardiens">

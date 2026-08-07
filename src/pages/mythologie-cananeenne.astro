@@ -1,0 +1,294 @@
+---
+/*
+  Mythologie Cananéenne / Ougaritique — vingtième mythologie de la série.
+  Structure imposée par docs/plans/plan-serie-mythologies.md : 10 sections fixes.
+
+  #royaumes : cosmologie dérivée directement du Cycle de Baal (tablettes de
+  Ras Shamra/Ougarit, XIVe-XIIe s. av. J.-C.) — quatre domaines réels
+  (montagne d'El, mont Sapan de Baal, la Mer de Yam, le Monde-d'en-bas de
+  Mot), pas un chiffre emprunté à un autre chapitre (cf. correctif du
+  26/07/2026).
+
+  #genealogie : les « 3 maisons » sont la maison d'El (le patriarche et son
+  épouse Athirat, mère de soixante-dix dieux), la maison de Baal (le clan de
+  l'orage, en tension permanente avec son propre père putatif Dagan) et la
+  maison du chaos (Yam et Mot, tous deux explicitement appelés « fils
+  bien-aimés d'El » dans les tablettes malgré leur hostilité à Baal) — une
+  généalogie où l'ordre et le chaos sortent du même patriarche.
+
+  Traitement : ce corpus n'est plus une religion pratiquée aujourd'hui (à la
+  différence de Yoruba ou Inca) — le ton reste néanmoins un ton d'étude
+  sérieuse d'un corpus fondateur, jamais un ton de curiosité pour un
+  « paganisme mort » sans conséquence : cette mythologie est directement
+  derrière une partie du texte biblique lui-même (voir #anecdotes et
+  #heritage).
+
+  Effets : data-egg="cananeen" + data-scroll-fx="baalCornes" sur #pantheon.
+  Déchiffrement des titres (mécanisme 3, minimum non négociable) :
+  glyphs="ougaritique", nouveau pool ajouté à GLYPH_POOLS dans effects.js —
+  l'alphabet cunéiforme ougaritique réel (30 signes), distinct du cunéiforme
+  mésopotamien déjà utilisé pour la page mésopotamienne.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
+import InteractiveGenealogy from '../components/InteractiveGenealogy.astro';
+
+const CANAAN_HOUSES = {
+  el: { head: '#c9982f', normal: '#d8c8a8', dim: '#7d94a0' },
+  baal: { head: '#3d6ea5', normal: '#8fb4d6', dim: '#7d94a0' },
+  chaos: { head: '#6a4a3a', normal: '#a07858', dim: '#7d94a0' },
+};
+const CANAAN_HOUSE_LABELS = {
+  el: "Maison d'El", baal: 'Maison de Baal', chaos: 'Maison du chaos',
+};
+const CANAAN_NODES = [
+  { id: 'el', label: 'El', house: 'el', head: true, x: 110, y: 60, detail: "Patriarche des dieux, « Taureau El », vit au confluent mythique des deux fleuves, à la source des eaux primordiales. Il tranche les conflits entre ses enfants sans presque jamais agir lui-même." },
+  { id: 'athirat', label: 'Athirat', house: 'el', x: 110, y: 190, detail: "Épouse d'El, mère de soixante-dix dieux selon les tablettes — une fécondité littérale qui fait d'elle la matrice du panthéon entier." },
+  { id: 'baal', label: 'Baal Hadad', house: 'baal', head: true, x: 380, y: 60, detail: "Dieu de l'orage et de la pluie fertilisante, « Chevaucheur des nuées » — une épithète que le texte biblique réutilisera plus tard pour Yahvé." },
+  { id: 'anat', label: 'Anat', house: 'baal', x: 300, y: 190, detail: "Sœur et parèdre guerrière de Baal, capable d'une violence rituelle extrême pour venger son frère — voir sa vengeance sur Mot en #legendes." },
+  { id: 'dagan', label: 'Dagan', house: 'baal', dim: true, x: 460, y: 190, detail: "Désigné « père de Baal » dans certaines formules rituelles alors que Baal grandit et agit surtout aux côtés d'El — une tension généalogique jamais résolue par les textes eux-mêmes." },
+  { id: 'yam', label: 'Yam', house: 'chaos', head: true, x: 630, y: 60, detail: "La Mer personnifiée, « fils bien-aimé d'El » malgré son hostilité à Baal — le chaos n'est pas extérieur à la famille divine, il en fait partie." },
+  { id: 'mot', label: 'Mot', house: 'chaos', x: 630, y: 190, detail: "La Mort personnifiée, « fils bien-aimé d'El » lui aussi, dont la bouche est décrite comme une lèvre au ciel et une lèvre à la terre — un gouffre plutôt qu'un personnage." },
+];
+const CANAAN_EDGES = [
+  ['el', 'athirat', 'union'],
+  ['el', 'baal', 'special'], ['el', 'yam', 'filiation'], ['el', 'mot', 'filiation'],
+  ['dagan', 'baal', 'special'],
+  ['baal', 'anat', 'union'],
+];
+
+/* Orage méditerranéen, or du taureau El, argile levantine : la matière du
+   corpus de Ras Shamra plutôt qu'une palette « Moyen-Orient » générique. */
+const palette = {
+  bg: '#141b24',
+  'bg-deep': '#0b0f15',
+  surface: '#1e2830',
+  'surface-alt': '#26333d',
+  border: '#3d5164',
+  ink: '#eef3f5',
+  text: '#c8d6dc',
+  'text-dim': '#7d94a0',
+  accent: '#3d6ea5',
+  'accent-bright': '#5f96c9',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#274a3a',
+  'verdict-bright': '#3f7a5c',
+  glow: 'rgba(61,110,165,0.24)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Domaines' },
+  { id: 'pantheon', nav: 'Panthéon' },
+  { id: 'genealogie', nav: 'Généalogie' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const domaines = [
+  { num: 'I', title: "La montagne d'El", sub: 'Source des deux fleuves', body: "Demeure du patriarche, à la source mythique de deux fleuves cosmiques — un lieu de conseil plus que d'action, où les dieux viennent plaider leurs causes devant lui." },
+  { num: 'II', title: 'Le mont Sapan', sub: 'Palais de Baal (Jebel al-Aqra)', body: "Résidence de Baal, bâtie en cèdre, argent et or par l'artisan divin Kothar-wa-Khasis — identifiée à une vraie montagne encore visible depuis le site de Ras Shamra." },
+  { num: 'III', title: 'Yam, la Mer', sub: 'Domaine du chaos liquide', body: "Le royaume de Yam n'est pas un lieu qu'on visite : c'est la mer elle-même, hostile à l'ordre que Baal impose sur terre." },
+  { num: 'IV', title: "Le Monde-d'en-bas de Mot", sub: 'La Gorge', body: "Décrit comme une gorge béante entre ciel et terre plutôt qu'un royaume souterrain structuré à l'égyptienne — on y descend, on n'y règne pas." },
+];
+---
+<PageLayout
+  title="Mythologie Cananéenne"
+  serie="Mythologies du Monde"
+  description="Le panthéon d'Ougarit — Baal, Anat, El, Yam et Mot — redécouvert en 1929 sous les tablettes cunéiformes de Ras Shamra, et directement à l'origine de certaines formules et images reprises, en polémique ou en emprunt, par la Bible hébraïque."
+  href="mythologie-cananeenne.html"
+  egg="cananeen"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="𐎁𐎓𐎍"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">El · Baal Hadad · Anat · Ras Shamra</p>
+  <p class="tagline" slot="hero">
+    Un panthéon oublié pendant trois mille ans, restitué d'un coup en 1929 par la charrue
+    d'un paysan syrien — et dont l'ombre traverse, en creux, une bonne partie de la Bible
+    hébraïque elle-même.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="Quatre domaines, pas un empilement vertical"
+    intro="Le Cycle de Baal ne décrit pas des niveaux cosmiques empilés à la mésopotamienne ou à l'égyptienne : il oppose une montagne de conseil (El), une montagne de pouvoir (Baal), une mer hostile (Yam) et un gouffre (Mot) — une géographie de tensions plutôt qu'une architecture.">
+    <Fragment slot="title"><Decode glyphs="ougaritique">Quatre domaines, pas un empilement vertical</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="120" cy="60" r="26" fill="none" stroke="#c9982f" stroke-width="2"/>
+        <text x="120" y="65" text-anchor="middle" fill="#e8c164" font-size="11" font-family="Cinzel, serif">EL</text>
+        <path d="M340 30 L390 100 L290 100 Z" fill="none" stroke="#5f96c9" stroke-width="2"/>
+        <text x="340" y="120" text-anchor="middle" fill="#5f96c9" font-size="11" font-family="Cinzel, serif">SAPAN</text>
+        <path d="M60 210 Q300 170 560 210" fill="none" stroke="#3d6ea5" stroke-width="3" opacity="0.7"/>
+        <text x="60" y="200" fill="#8fb4d6" font-size="11">YAM</text>
+        <ellipse cx="500" cy="70" rx="50" ry="26" fill="#26333d" stroke="#6a4a3a" stroke-width="2"/>
+        <text x="500" y="75" text-anchor="middle" fill="#a07858" font-size="10">MOT</text>
+      </svg>
+    </div>
+    <p class="map-caption">El en conseil, Sapan en pouvoir, Yam en menace liquide, Mot en gouffre — quatre domaines réels du Cycle de Baal, jamais présentés comme un compte rond dans les tablettes elles-mêmes.</p>
+    <div class="card-grid compact">
+      {domaines.map((d) => <InfoCard {...d} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~16 divinités majeures" title="Le panthéon d'Ougarit" scrollFx="baalCornes">
+    <Fragment slot="title"><Decode glyphs="ougaritique">Le panthéon d'Ougarit</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="El" role="Patriarche, « Taureau El »" tags={['Créateur', 'Juge']} body="Père et juge de la plupart des dieux, décrit comme miséricordieux et sage, mais politiquement en retrait : c'est Baal, pas lui, qui mène les batailles qui structurent le cycle." />
+      <FigureCard name="Athirat (Asherah)" role="Épouse d'El, mère des dieux" tags={['Fécondité', '70 fils']} body="« Créatrice des dieux » selon son épithète, mère de soixante-dix divinités — une figure que la polémique biblique visera ensuite directement sous le nom d'Ashéra." />
+      <FigureCard name="Baal Hadad" role="Dieu de l'orage, « Chevaucheur des nuées »" tags={['Pluie', 'Fertilité']} body="Dieu de l'orage et de la pluie fertilisante indispensable à l'agriculture levantine ; son épithète de « chevaucheur des nuées » sera reprise presque mot pour mot pour Yahvé dans les psaumes bibliques." />
+      <FigureCard name="Anat" role="Déesse guerrière, sœur de Baal" tags={['Violence rituelle', 'Vengeance']} body="Capable d'une violence rituelle extrême pour défendre Baal — la tablette décrit ses sandales éclaboussées de sang jusqu'aux genoux après une bataille, puis son geste tout aussi extrême contre Mot en #legendes." />
+      <FigureCard name="Yam" role="La Mer personnifiée" tags={['Chaos', 'Fils d\'El']} body="Personnification hostile de la mer, réclame la royauté divine et la soumission de Baal — le combat qui les oppose est probablement à l'origine lointaine du motif biblique du combat contre la mer primordiale." />
+      <FigureCard name="Mot" role="La Mort personnifiée" tags={['Gouffre', 'Fils d\'El']} body="Décrit avec une lèvre touchant le ciel et une lèvre touchant la terre, une gorge qui dévore tout ce qui vit — Baal doit littéralement descendre dans sa gueule pour mourir temporairement." />
+      <FigureCard name="Dagan" role="Dieu du grain, père nominal de Baal" tags={['Agriculture', 'Ambiguïté']} body="Désigné père de Baal dans les formules rituelles, sans jamais apparaître à ses côtés dans les récits eux-mêmes — l'une des tensions généalogiques que le corpus ne résout jamais explicitement." />
+      <FigureCard name="Kothar-wa-Khasis" role="Artisan et architecte divin" tags={['Forge', 'Architecture']} body="Bâtit le palais de Baal sur le mont Sapan et forge les deux armes magiques qui lui permettent de vaincre Yam — l'équivalent ougaritique d'Héphaïstos ou de Ptah." />
+      <FigureCard name="Shapash" role="Déesse solaire" tags={['Soleil', 'Messagère des morts']} body="Le soleil au féminin, qui éclaire aussi bien les vivants que le royaume de Mot — elle sert de messagère à El pendant la disparition de Baal et négocie avec les Rephaim." />
+      <FigureCard name="Yarikh" role="Dieu lunaire" tags={['Lune', 'Mariage']} body="Divinité de la lune, dont le mariage avec la déesse Nikkal-wa-Ib fait l'objet d'un poème mythologique séparé centré sur les rites nuptiaux plutôt que sur un combat cosmique." />
+      <FigureCard name="Resheph" role="Dieu de la peste et de la guerre" tags={['Fléau', 'Redouté']} body="Divinité redoutée associée à la maladie soudaine et à la guerre, invoquée autant pour se protéger de lui que pour obtenir sa faveur." />
+      <FigureCard name="Astarté (Ashtart)" role="Déesse de la guerre et de l'amour" tags={['Guerre', 'Amour']} body="Souvent associée ou distinguée d'Anat selon les textes, elle deviendra plus tard Astarté dans le monde phénicien puis grec, une des divinités cananéennes les plus durablement diffusées." />
+      <FigureCard name="Horon" role="Dieu chthonien, maître des serpents" tags={['Magie', 'Guérison']} body="Invoqué dans des formules d'exorcisme contre les morsures de serpent — un dieu davantage sollicité par la pratique magique quotidienne que par le grand récit mythologique." />
+      <FigureCard name="Les Kotharat" role="Déesses de la naissance" tags={['Accouchement', 'Collectif']} body="Groupe de déesses invoquées collectivement pour assister les accouchements et bénir les mariages, jamais individualisées par des noms propres dans les tablettes retrouvées." />
+      <FigureCard name="Shahar et Shalim" role="Jumeaux de l'aube et du crépuscule" tags={['Jumeaux', 'Nés d\'El']} body="Engendrés par El auprès de deux femmes mortelles dans l'un des textes les plus poétiques du corpus — l'aube et le crépuscule personnifiés comme des divinités à part entière." />
+      <FigureCard name="Les Rephaim" role="Ancêtres royaux divinisés" tags={['Ancêtres', 'Royauté']} body="Esprits de rois défunts convoqués par Shapash pour un banquet funéraire royal — une couche de croyance sur la continuité de la royauté après la mort, distincte du panthéon des grands dieux." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 maisons, un seul patriarche"
+    title="L'ordre et le chaos sortent du même père"
+    intro="Ni Yam ni Mot ne sont des puissances étrangères au panthéon : les tablettes les appellent explicitement « fils bien-aimés d'El », au même titre que Baal. La tension centrale du corpus tient dans cette parenté commune, pas dans une guerre entre panthéons rivaux.">
+    <Fragment slot="title"><Decode glyphs="ougaritique">L'ordre et le chaos sortent du même père</Decode></Fragment>
+    <InteractiveGenealogy
+      nodes={CANAAN_NODES}
+      edges={CANAAN_EDGES}
+      houses={CANAAN_HOUSES}
+      houseLabels={CANAAN_HOUSE_LABELS}
+      glyphs="𐎀𐎁𐎂𐎄𐎐𐎚"
+      viewBox={{ w: 700, h: 260 }}
+      lineColor="#3d5164"
+    />
+    <p class="map-caption">Trait plein = filiation ; pointillé = union ou lien spécial. La ligne El→Baal est marquée « spécial » : les tablettes ne tranchent jamais si Baal est vraiment fils d'El ou seulement son protégé politique.</p>
+  </Section>
+
+  <Section id="creatures" label="7 êtres notables" title="Serpents, ombres et convives des morts">
+    <Fragment slot="title"><Decode glyphs="ougaritique">Serpents, ombres et convives des morts</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Lotan (Litan)" tag="Serpent à sept têtes" body="Allié monstrueux de Yam décrit comme « le serpent tortueux, le puissant aux sept têtes » — le nom et l'image passeront presque sans changement dans le Léviathan biblique." />
+      <MiniCard title="Tunnanu" tag="Dragon marin" body="Autre créature marine associée au camp de Yam, vaincue par Anat selon certains fragments — un second monstre marin distinct de Lotan dans le même cycle." />
+      <MiniCard title="Gapn et Ugar" tag="Messagers de Baal" body="Deux divinités mineures qui servent d'émissaires à Baal, portant ses messages et ses défis jusqu'au trône de Yam." />
+      <MiniCard title="Les Rephaim" tag="Ombres royales" body="Esprits des rois morts, convoqués pour un banquet par Shapash — une classe d'êtres à mi-chemin entre ancêtres et divinités mineures." />
+      <MiniCard title="Qadesh" tag="Épithète divine ambiguë" body="Titre de « sainteté » attaché à plusieurs déesses du corpus, signe que les frontières entre certaines figures féminines (Athirat, Anat, Astarté) restent floues dans les textes eux-mêmes." />
+      <MiniCard title="La gueule de Mot" tag="Image plutôt qu'être" body="Décrite comme un gouffre à lèvre céleste et lèvre terrestre — moins une créature qu'une image cosmique de l'engloutissement, reprise plus tard par l'imagerie du Sheol biblique." />
+      <MiniCard title="Les taureaux d'El" tag="Attribut animal" body="El est systématiquement désigné « Taureau El » — un attribut animal de force et de fécondité plutôt qu'une créature séparée, à l'origine probable du motif du veau d'or biblique." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="9 légendes" title="Le Cycle de Baal et ses suites">
+    <Fragment slot="title"><Decode glyphs="ougaritique">Le Cycle de Baal et ses suites</Decode></Fragment>
+    <StoryBlock num="Légende I" title="Baal contre Yam" body={["Yam envoie des messagers réclamer la soumission de Baal devant l'assemblée des dieux ; Baal veut les frapper sur place, mais El a déjà promis la royauté à Yam et Baal doit ravaler sa colère.", "Kothar-wa-Khasis forge alors deux armes magiques, Yagrush (« Chasseur ») et Ayamur (« Poursuivant ») : la première échoue, la seconde frappe Yam entre les yeux et le terrasse. Baal peut enfin réclamer la royauté sur les dieux."]} quote="Chasse, ô Yagrush, chasse Yam, chasse Yam de son trône !" cite="Tablette KTU 1.2, Cycle de Baal" />
+      <StoryBlock num="Légende II" title="Le palais de cèdre et d'or" body="Baal, victorieux, veut un palais digne de son rang. Anat et Athirat intercèdent auprès d'El pour l'obtenir ; Kothar-wa-Khasis le bâtit en cèdre, argent et or sur le mont Sapan. Baal hésite longtemps à y percer une fenêtre, de peur qu'elle ne laisse Yam s'y engouffrer par la brèche — un débat architectural qui occupe une tablette entière avant qu'il ne cède." />
+      <StoryBlock num="Légende III" title="Baal descend chez Mot" body={["Mot, jaloux de la royauté de Baal, l'invite à un banquet dans sa propre gorge béante — une invitation qui équivaut à une condamnation à mort. Baal s'y rend, s'unit à une génisse pour assurer sa descendance, puis meurt, avalé.", "Le monde se dessèche aussitôt : sans Baal, plus de pluie, plus de récolte."]} />
+      <StoryBlock num="Légende IV" title="Le deuil et la fureur d'Anat" body={["El et Anat pleurent Baal en se lacérant le visage et le corps selon les rites de deuil décrits en détail dans la tablette. Puis Anat retrouve Mot et, plutôt que de négocier, le tranche à l'épée, le vanne au tamis, le brûle au feu, le broie à la meule et sème sa chair dans un champ pour que les oiseaux la dévorent.", "Un geste d'une violence rituelle extrême, à lire comme un rite agraire de destruction du grain plutôt qu'un simple règlement de comptes personnel."]} quote="Elle le fend à l'épée, elle le vanne au tamis, elle le brûle au feu, elle le broie à la meule, dans un champ elle sème sa chair." cite="Tablette KTU 1.6, Cycle de Baal" />
+      <StoryBlock num="Légende V" title="La résurrection de Baal" body="Shapash, déesse solaire, aide El à retrouver le corps de Baal ; la pluie revient, les rivières coulent à nouveau de miel, et Baal reprend son trône sur Sapan — un motif de mort et de retour directement lié au cycle agricole méditerranéen des saisons sèches et humides." />
+      <StoryBlock num="Légende VI" title="Le combat final entre Baal et Mot" body="Mot revient après sept ans réclamer sa revanche ; les deux dieux se battent comme des taureaux jusqu'à ce que Shapash intervienne et menace Mot de la colère d'El s'il continue — le conflit se referme sur un équilibre, pas sur une victoire définitive de l'un ou de l'autre." />
+      <StoryBlock num="Légende VII" title="L'épopée de Kirta" body="Un roi sans héritier, Kirta, reçoit d'El en songe l'ordre d'assiéger une ville pour y prendre épouse ; il obtient femme et postérité, tombe gravement malade, se rétablit par intervention divine, puis doit affronter la rébellion de son propre fils Yassib, qui juge son père trop faible pour continuer à régner — un texte qui mêle épopée royale et question très humaine de la légitimité du pouvoir." />
+      <StoryBlock num="Légende VIII" title="L'épopée d'Aqhat" body={["Danel, autre roi sans fils, obtient d'El un héritier, Aqhat, à qui Kothar-wa-Khasis offre un arc magnifique. Anat, éblouie par l'arme, propose à Aqhat l'immortalité en échange de l'arc ; il refuse et l'insulte, la traitant de simple femme qui n'a pas besoin d'arc de chasse.", "Anat le fait tuer par un sbire pour récupérer l'arc — qui tombe dans la mer et se perd, si bien que personne, finalement, n'en profite."]} />
+      <StoryBlock num="Légende IX" title="La vengeance de Pughat" body="Pughat, sœur d'Aqhat, comprend que le meurtrier de son frère se cache parmi des mercenaires venus fêter sa mort, les enivre, puis le tue de ses propres mains — le texte s'interrompt avant la fin sur cette tablette, l'une des plus abîmées du corpus retrouvé." />
+    </Section>
+
+  <Section id="anecdotes" label="8 curiosités" title="Faits marquants et emprunts bibliques">
+    <Fragment slot="title"><Decode glyphs="ougaritique">Faits marquants et emprunts bibliques</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Découverte par une charrue, 1928" tag="Hasard archéologique" body="Un paysan syrien heurte accidentellement une tombe en labourant un champ près de Ras Shamra, menant à l'ouverture du site l'année suivante par l'archéologue Claude Schaeffer." />
+      <MiniCard title="Un alphabet déchiffré en quelques semaines" tag="1930-1932" body="Trois savants travaillant indépendamment — Hans Bauer, Édouard Dhorme et Charles Virolleaud — percent le système cunéiforme alphabétique ougaritique de trente signes en un temps remarquablement court." />
+      <MiniCard title="« Chevaucheur des nuées »" tag="Épithète recyclée" body="L'épithète de Baal est reprise presque mot pour mot pour désigner Yahvé dans le Psaume 68 — un emprunt poétique direct, longtemps invisible avant le déchiffrement du corpus ougaritique." />
+      <MiniCard title="Lotan devient Léviathan" tag="Continuité textuelle" body="Le serpent à sept têtes allié de Yam donne, par évolution linguistique directe, le nom du Léviathan biblique — la même créature change de camp mythologique sans changer vraiment de forme." />
+      <MiniCard title="Le Psaume 29, un hymne à Baal recyclé" tag="Hypothèse répandue" body="Plusieurs spécialistes de philologie sémitique soutiennent que ce psaume conserve la structure et le vocabulaire d'un hymne à Baal simplement réappliqué à Yahvé — une hypothèse solide, non une certitude absolue." />
+      <MiniCard title="Élie contre les prophètes de Baal" tag="1 Rois 18" body="Le fameux duel biblique sur le mont Carmel n'oppose pas Yahvé à une divinité fictive : Baal Hadad est le dieu même dont les tablettes d'Ougarit détaillent le culte, ce qui donne au texte biblique une polémique très concrète, pas abstraite." />
+      <MiniCard title="Ougarit, cité cosmopolite" tag="Commerce international" body="Port de premier plan de la fin de l'âge du bronze, Ougarit entretient des relations commerciales avec l'Égypte, les Hittites, Chypre et le monde mycénien — un carrefour, pas un royaume isolé." />
+      <MiniCard title="Un site menacé aujourd'hui" tag="Vigilance patrimoniale" body="Ras Shamra a subi des dégradations et des risques de pillage documentés pendant le conflit syrien récent — un rappel que ce patrimoine, vieux de plus de trois mille ans, reste vulnérable dans le présent." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="D'Ougarit à la Bible, en passant par Carthage">
+    <Fragment slot="title"><Decode glyphs="ougaritique">D'Ougarit à la Bible, en passant par Carthage</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="300" cy="90" r="9" fill="#3d6ea5"/>
+        <text x="300" y="72" text-anchor="middle" fill="#5f96c9" font-size="12" font-family="Cinzel, serif">OUGARIT</text>
+        {[[430,50,'Égypte'],[470,120,'Chypre'],[520,60,'Monde hittite'],[160,60,'Levant sud / Israël'],[110,140,'Phénicie / Carthage'],[380,150,'Monde mycénien']].map(([x,y,label]) => (
+          <g>
+            <line x1="300" y1="90" x2={x} y2={y} stroke="#7d94a0" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#26333d" stroke="#3d6ea5" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#c8d6dc" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">Un port cosmopolite de la fin de l'âge du bronze, dont l'écho religieux dépasse largement sa taille réelle — jusque dans les psaumes bibliques et le nom même du Léviathan.</p>
+    <div class="card-grid">
+      <InfoCard title="Levant biblique" sub="Polémique et emprunt" body="Le monothéisme israélite se construit en partie contre ce panthéon (polémiques contre Baal et Ashéra) et en partie avec son vocabulaire poétique, repris pour Yahvé." />
+      <InfoCard title="Phénicie puis Carthage" sub="Continuité culturelle" body="Le fonds religieux cananéen se prolonge dans les cités phéniciennes puis à Carthage, où Baal Hammon devient une figure majeure du culte punique." />
+      <InfoCard title="Égypte du Nouvel Empire" sub="Échanges attestés" body="Ougarit entretient des relations diplomatiques et commerciales suivies avec l'Égypte, dont témoignent des lettres retrouvées sur le site lui-même." />
+      <InfoCard title="Monde hittite" sub="Voisinage politique" body="Vassal puis allié du royaume hittite à la fin de son existence, Ougarit s'inscrit dans les grands équilibres diplomatiques de la fin de l'âge du bronze méditerranéen." />
+      <InfoCard title="Chypre et le monde mycénien" sub="Réseau maritime" body="Céramiques mycéniennes et chypriotes retrouvées en abondance sur le site attestent d'un commerce maritime actif à travers toute la Méditerranée orientale." />
+      <InfoCard title="Études sémitiques modernes" sub="Discipline universitaire" body="L'ougaritologie, née du déchiffrement de 1930-1932, reste aujourd'hui un champ universitaire actif, central pour comprendre la poésie biblique hébraïque la plus ancienne." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="ougaritique">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'v. 1450-1200 av. J.-C.', title: 'Apogée du royaume d\'Ougarit', body: "Port cosmopolite du Levant, en relations suivies avec l'Égypte, les Hittites et le monde mycénien." },
+      { year: 'v. 1400-1190 av. J.-C.', title: 'Rédaction des tablettes du Cycle de Baal', body: "Les principaux textes mythologiques retrouvés sont copiés par le scribe Ilimilku à cette période, sur commande du roi Niqmaddu." },
+      { year: 'v. 1190 av. J.-C.', title: 'Destruction d\'Ougarit', body: "La cité est détruite lors des bouleversements de la fin de l'âge du bronze (« peuples de la mer ») et jamais reconstruite — un archivage involontaire qui préserve les tablettes jusqu'à nous." },
+      { year: 'IXe siècle av. J.-C. (contexte narratif)', title: 'Élie et les prophètes de Baal', body: "Le récit biblique du 1er Livre des Rois met en scène une polémique religieuse directement dirigée contre le culte de Baal Hadad." },
+      { year: '1928', title: 'Découverte fortuite de Ras Shamra', body: "Un paysan heurte une tombe ancienne en labourant, menant à l'ouverture du site l'année suivante." },
+      { year: '1929', title: 'Début des fouilles de Claude Schaeffer', body: "Premières tablettes cunéiformes alphabétiques mises au jour à Ras Shamra." },
+      { year: '1930-1932', title: 'Déchiffrement de l\'alphabet ougaritique', body: "Hans Bauer, Édouard Dhorme et Charles Virolleaud percent indépendamment le système des trente signes cunéiformes." },
+      { year: 'Années 1930-1950', title: 'Traduction du Cycle de Baal', body: "Les grandes tablettes mythologiques sont progressivement traduites et publiées, révélant tout le panthéon décrit ici." },
+      { year: 'Seconde moitié du XXe siècle', title: 'Essor de l\'ougaritologie comparée', body: "Les parallèles avec la poésie biblique hébraïque (vocabulaire, épithètes, parallélisme) deviennent un champ d'étude à part entière." },
+      { year: 'Années 2010-2020', title: 'Menaces sur le site de Ras Shamra', body: "Le conflit syrien fait peser un risque réel de pillage et de dégradation sur le site archéologique lui-même." },
+      { year: "Aujourd'hui", title: 'Tablettes conservées entre Damas et Paris', body: "Le corpus principal reste réparti entre le musée national de Damas et le Louvre, où certaines pièces majeures sont exposées." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ce panthéon a laissé, souvent sans le dire">
+    <Fragment slot="title"><Decode glyphs="ougaritique">Ce que ce panthéon a laissé, souvent sans le dire</Decode></Fragment>
+    <HeritageBlock title="Une empreinte cachée dans la Bible" body="Une partie non négligeable du vocabulaire poétique biblique — épithètes divines, images de combat contre la mer, nom même du Léviathan — provient directement ou indirectement de ce corpus, longtemps invisible avant 1929." />
+    <HeritageBlock title="Une discipline universitaire à part entière" body="L'ougaritologie reste un champ de recherche actif, indispensable pour quiconque étudie sérieusement la formation du monothéisme levantin et la poésie hébraïque ancienne." />
+    <HeritageBlock title="Un patrimoine matériellement fragile" body="Contrairement aux grands temples égyptiens ou aux sites incas, Ras Shamra n'est qu'un tell archéologique aux vestiges modestes en élévation — sa vraie richesse tient aux tablettes déjà extraites, ce qui n'empêche pas le site lui-même de rester vulnérable." />
+    <CautionBox>
+      Cette mythologie n'est plus pratiquée : aucune communauté vivante n'en revendique
+      aujourd'hui le culte, à la différence de plusieurs autres chapitres de cette série. Le
+      respect qui lui est dû n'est donc pas celui d'une religion vivante, mais celui qu'on
+      doit à un texte fondateur d'une partie de la littérature biblique elle-même — le traiter
+      avec sérieux plutôt qu'avec la curiosité distante d'un « paganisme mort et sans suite »
+      serait une erreur de lecture.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Dennis Pardee, Ritual and Cult at Ugarit, Society of Biblical Literature, 2002", note: "Traduction et commentaire de référence sur les pratiques rituelles décrites en #royaumes et #creatures." },
+    { label: "Mark S. Smith, The Ugaritic Baal Cycle, Volume I-II, Brill, 1994-2009", url: "https://brill.com/display/title/6094", note: "Traduction et analyse philologique de référence du Cycle de Baal résumé en #legendes." },
+    { label: "Mark S. Smith, The Origins of Biblical Monotheism: Israel's Polytheistic Background and the Ugaritic Texts, Oxford University Press, 2001", note: "Étude des emprunts et polémiques bibliques cités en #anecdotes et #heritage." },
+    { label: "Wilfred G. E. Watson & Nicolas Wyatt (dir.), Handbook of Ugaritic Studies, Brill, 1999", note: "Synthèse de référence sur le déchiffrement de 1930-1932 et l'histoire du site cité en #frise." },
+  ]} />
+</PageLayout>

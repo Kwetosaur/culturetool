@@ -1,0 +1,162 @@
+---
+/*
+  Les Sirènes / Femmes-poissons — seizième créature de la série. Structure
+  imposée par docs/plans/plan-serie-creatures.md : 7 sections, badge de
+  verdict.
+
+  Point de vigilance : Mami Wata, esprit des eaux d'Afrique de l'Ouest et
+  centrale et de sa diaspora, est une croyance spirituelle vivante et
+  pratiquée aujourd'hui — traitée en #origine et #heritage avec la même
+  prudence que le Wendigo ou le Skinwalker ailleurs sur ce site, jamais
+  comme un simple folklore éteint parmi d'autres.
+
+  Effets : data-egg="sirenes" + data-scroll-fx="sireneRocher" sur
+  #portrait — une silhouette assise sur un rocher qui plonge, ne laissant
+  que des ondes concentriques (variante de nessie).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Bleu-vert des profondeurs, écume argentée, nacre : la matière marine
+   plutôt qu'une palette "conte de fées" générique. */
+const palette = {
+  bg: '#0e1a1e',
+  'bg-deep': '#081113',
+  surface: '#152428',
+  'surface-alt': '#1c3034',
+  border: '#3a5a5c',
+  ink: '#eef7f5',
+  text: '#c0dcd8',
+  'text-dim': '#7ea8a4',
+  accent: '#3a8a9a',
+  'accent-bright': '#5ab4c4',
+  accent2: '#8a7a5a',
+  'accent2-bright': '#c4b088',
+  verdict: '#1e3a4a',
+  'verdict-bright': '#3a5c74',
+  glow: 'rgba(58,138,154,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'portrait', nav: 'Portrait' },
+  { id: 'temoins-recits', nav: 'Récits' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Les Sirènes"
+  serie="Créatures Légendaires du Monde"
+  description="Des sirènes-oiseaux d'Homère aux femmes-poissons médiévales, en passant par Mami Wata, esprit des eaux toujours vénéré en Afrique de l'Ouest et dans sa diaspora — une croyance mondiale largement attribuée à des méprises sur des mammifères marins bien réels, lamantins et dugongs."
+  href="creature-sirenes.html"
+  egg="sirenes"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="MONDIALE"
+  nextUp="Prochain chapitre de la série « Créatures Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Des oiseaux d'Homère aux poissons du Moyen Âge</p>
+  <p class="tagline" slot="hero">
+    Les sirènes d'Homère n'avaient pas de queue de poisson : elles étaient des femmes-oiseaux.
+    L'image qui domine aujourd'hui est une fusion médiévale tardive — et l'ordre zoologique
+    des lamantins et dugongs porte encore, depuis Linné, le nom savant des sirènes elles-mêmes.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Croyance ancienne largement attribuée à des méprises sur des mammifères marins (lamantins, dugongs)"
+    note="Aucune preuve zoologique d'un hybride mi-femme mi-poisson n'existe. Une part significative des témoignages historiques de « sirènes » correspond vraisemblablement à des observations de lamantins ou de dugongs, dont l'ordre zoologique Sirenia porte justement leur nom."
+  />
+
+  <Section id="origine" label="Première mention" title="Des femmes-oiseaux grecques aux déesses-poissons du Levant" intro="Le motif d'un être mi-humain mi-aquatique ou ailé apparaît dans plusieurs traditions anciennes indépendantes avant de converger, au Moyen Âge, vers l'image aujourd'hui dominante.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Les Sirènes d'Homère" sub="Odyssée, VIIIe siècle av. J.-C." body="Dans le texte grec le plus ancien, les Sirènes sont des femmes-oiseaux, pas des femmes-poissons : leur chant, non leur apparence, est l'arme qui attire les marins vers un naufrage certain." />
+      <InfoCard num="II" title="Atargatis, déesse-poisson du Levant" sub="Syrie antique" body="Divinité syrienne représentée mi-femme mi-poisson, souvent citée comme l'une des plus anciennes figures connues associant explicitement une queue de poisson à un buste humain." />
+      <InfoCard num="III" title="La fusion médiévale" sub="Bestiaires européens, XIe-XIIe siècle" body="Les bestiaires médiévaux européens combinent progressivement l'image de la sirène-oiseau grecque et celle des déesses-poissons plus anciennes, fixant la forme aujourd'hui dominante." />
+    </div>
+  </Section>
+
+  <Section id="portrait" label="Ce que rapporte la tradition" title="Un chant qui attire, une forme qui varie" scrollFx="sireneRocher">
+    <div class="card-grid wide">
+      <FigureCard name="Un chant irrésistible" role="Motif central grec" tags={['Odyssée', 'Naufrage']} body="Le pouvoir des Sirènes homériques tient à leur voix, réputée impossible à ignorer pour tout marin qui l'entend, plutôt qu'à une apparence physique menaçante." />
+      <FigureCard name="Une forme qui varie selon les cultures" role="Diversité des traditions" tags={['Poisson', 'Oiseau', 'Composite']} body="Selon les traditions, l'être est mi-poisson, mi-oiseau, ou combine les deux registres — la forme n'est jamais figée avant la standardisation tardive de l'image occidentale moderne." />
+      <FigureCard name="Mami Wata, esprit des eaux" role="Croyance vivante" tags={['Afrique de l\'Ouest', 'Diaspora']} body="Esprit ou déesse des eaux vénéré aujourd'hui encore en Afrique de l'Ouest et centrale, et dans les traditions afro-caribéennes et afro-américaines qui en descendent — une figure de dévotion vivante, pas un simple motif décoratif." />
+    </div>
+  </Section>
+
+  <Section id="temoins-recits" label="Témoignages marquants" title="De Christophe Colomb aux mummies de ningyo japonaises">
+    <StoryBlock num="Récit I" title="Christophe Colomb et les « sirènes » des Caraïbes" body="Dans son journal de bord de janvier 1493, Colomb rapporte avoir vu trois « sirènes » près de la côte, ajoutant lui-même qu'elles n'étaient « pas aussi jolies qu'on les représente » — une observation aujourd'hui unanimement attribuée à des lamantins des Caraïbes." />
+    <StoryBlock num="Récit II" title="Le ningyo et la nonne aux huit cents ans" body="Le folklore japonais rapporte la légende d'une religieuse ayant, par erreur, mangé de la chair de ningyo (être mi-humain mi-poisson) et vécu huit cents ans sans vieillir — un exemple de tradition asiatique indépendante attribuant à la créature un pouvoir sur la vie plutôt qu'un simple danger marin." />
+    <StoryBlock num="Récit III" title="La sirène de Fidji, 1842" body={["P. T. Barnum expose à New York une prétendue momie de sirène, présentée comme capturée dans le Pacifique : l'examen révèle un torse et une tête de singe cousus à une queue de poisson.", "Le canular, monté avec un naturaliste complice, connaît un succès public immédiat malgré (ou grâce à) la controverse qu'il suscite — l'un des cas de fraude les mieux documentés de toute l'histoire des créatures légendaires."]} quote="Ni tout à fait poisson, ni tout à fait singe, et manifestement pas du tout une sirène." cite="Résumé des observations naturalistes de l'époque sur l'exemplaire Barnum" />
+  </Section>
+
+  <Section id="culture-populaire" label="D'Andersen à Disney" title="Comment la sirène est devenue une héroïne">
+    <div class="card-grid compact">
+      <MiniCard title="La Petite Sirène, 1837" tag="Hans Christian Andersen" body="Le conte danois transforme la figure dangereuse des traditions plus anciennes en héroïne tragique sacrifiant sa voix pour l'amour — un tournant majeur dans la perception populaire occidentale du personnage." />
+      <MiniCard title="Le logo Starbucks" tag="Icône commerciale mondiale" body="Le logo de l'enseigne s'inspire d'une mélusine à double queue issue de gravures nordiques anciennes — la sirène comme motif décoratif générique bien au-delà de son folklore d'origine." />
+      <MiniCard title="Le renouveau cinématographique Disney, 1989" tag="Adaptation populaire majeure" body="L'adaptation animée d'Andersen fixe pour plusieurs générations l'image mondialement dominante de la sirène occidentale contemporaine." />
+      <MiniCard title="Mami Wata dans l'art contemporain" tag="Continuité vivante" body="La figure continue d'inspirer peintures, sculptures et pratiques de dévotion actuelles en Afrique de l'Ouest et dans sa diaspora, loin d'être cantonnée à un folklore historique figé." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce que la science peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Le lamantin et le dugong, explication dominante" body="L'ordre zoologique Sirenia (lamantins et dugongs), nommé directement d'après les sirènes mythologiques, regroupe des mammifères marins massifs capables, de loin et dans une mer agitée, d'évoquer une silhouette humaine partiellement émergée — l'explication naturaliste la plus solidement documentée du motif." />
+    <ScienceBlock num="Enquête 2" title="Des canulars matériellement démontés" body="Plusieurs « momies de sirènes » exposées aux XIXe et XXe siècles, dont l'exemplaire Barnum de 1842, ont été examinées et identifiées comme des assemblages composites de parties animales cousues ensemble — des fraudes matériellement documentées, pas des découvertes zoologiques." />
+    <ScienceBlock num="Enquête 3" title="Aucune preuve d'un hybride vivant" body="Aucun spécimen, squelette ou trace génétique n'a jamais confirmé l'existence d'un être mi-humain mi-poisson vivant — la créature reste, sur le plan strictement biologique, sans aucun fondement matériel." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Des méprises sur des mammifères marins réels"
+      level="plausible"
+      status="Explication scientifique dominante"
+      body="La ressemblance, de loin, entre un lamantin ou un dugong allaitant à la surface et une silhouette humaine partiellement immergée est considérée par la majorité des chercheurs comme la source la plus probable d'un grand nombre de témoignages historiques."
+      attrib="Position dominante en zoologie et en histoire des sciences naturelles"
+    />
+    <TheoryCard
+      title="Une convergence indépendante de plusieurs traditions religieuses"
+      level="plausible"
+      status="Bien étayée historiquement"
+      body="Le motif d'un esprit ou d'une déesse des eaux à forme humaine partielle apparaît indépendamment en Syrie antique, en Grèce, au Japon et en Afrique de l'Ouest — une convergence culturelle documentée plutôt qu'une origine unique diffusée."
+      attrib="Lecture standard en histoire comparée des religions"
+    />
+    <TheoryCard
+      title="Un être hybride réellement existant"
+      level="folklore"
+      status="Non démontré"
+      body="Aucune preuve matérielle, génétique ou photographique fiable n'est jamais venue appuyer l'existence biologique réelle d'un hybride mi-humain mi-poisson." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette légende fait encore">
+    <HeritageBlock title="Un motif décoratif mondialement diffusé" body="De la statuaire portuaire européenne aux logos commerciaux, la silhouette de la sirène reste l'un des motifs visuels les plus reconnaissables et les plus réutilisés au monde." />
+    <HeritageBlock title="Une figure de dévotion toujours vivante" body="Mami Wata continue d'être vénérée activement en Afrique de l'Ouest et centrale ainsi que dans les traditions afro-diasporiques des Amériques, bien au-delà d'un simple folklore de curiosité." />
+    <HeritageBlock title="Une industrie culturelle entière" body="Films, parcs à thème, spectacles aquatiques et produits dérivés continuent d'exploiter la figure de la sirène pour un public mondial, loin de son origine dans des textes anciens souvent bien plus sombres." />
+    <CautionBox>
+      Réduire Mami Wata à une simple variante folklorique de la sirène occidentale serait une
+      erreur de respect : il s'agit d'une figure de dévotion religieuse vivante pour des
+      millions de croyants aujourd'hui, avec ses propres rites et sa propre cohérence
+      spirituelle, pas d'une créature de conte à ranger aux côtés des mascottes de parcs
+      aquatiques.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Homère, Odyssée, chant XII, trad. Victor Bérard, Les Belles Lettres (VIIIe s. av. J.-C., éd. moderne)", note: "Source du récit des Sirènes-oiseaux cité en #origine et #portrait." },
+    { label: "Christophe Colomb, Journal de bord, entrée du 9 janvier 1493, éd. Bartolomé de Las Casas", note: "Source du témoignage cité en #temoins-recits." },
+    { label: "Henry A. Callahan et al., analyses naturalistes de la « sirène de Fidji » de P. T. Barnum, Peabody Essex Museum, collections modernes", url: "https://www.pem.org/", note: "Documentation de l'examen matériel du canular cité en #temoins-recits et #science." },
+    { label: "Sylvester Ogbechie, \"Mami Wata: Arts for Water Spirits in Africa and Its Diasporas\", UCLA Fowler Museum, 2008 (catalogue d'exposition)", note: "Étude de référence sur la pratique dévotionnelle vivante citée en #portrait et #heritage." },
+  ]} />
+</PageLayout>

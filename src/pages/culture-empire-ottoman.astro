@@ -1,0 +1,218 @@
+---
+/*
+  Empire ottoman — dix-neuvième page de la série « Peuples & Cultures du
+  Monde ». Même structure à 10 sections que culture-khmers.astro.
+
+  Positionnement vis-à-vis de culture-byzance.astro : la prise de
+  Constantinople par Mehmed II en 1453 est la suite directe et assumée de
+  l'histoire byzantine déjà traitée — cette page ne répète pas le contenu
+  byzantin, elle prend le relais à partir de la conquête.
+
+  Point de vigilance : la thèse classique du « déclin » ottoman à partir du
+  XVIIe siècle est aujourd'hui largement révisée par l'historiographie
+  moderne, qui y voit une adaptation continue plutôt qu'un affaissement
+  linéaire — #anecdotes et #heritage présentent cette révision explicitement
+  plutôt que de reconduire le récit daté.
+
+  Effets : data-egg="ottoman" + data-scroll-fx="domeIznik" sur
+  #style-de-vie, piste documentée dans plan-effets.md ("un dôme qui se
+  referme pierre par pierre ; variante : une tulipe iznik qui s'ouvre").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Rouge ottoman des étendards, turquoise des céramiques d'Iznik, or des
+   dômes impériaux : la matière ottomane plutôt qu'une palette "Islam"
+   générique déjà utilisée pour Al-Andalus. */
+const palette = {
+  bg: '#170f0f',
+  'bg-deep': '#0d0808',
+  surface: '#241a1a',
+  'surface-alt': '#302222',
+  border: '#5c3a3a',
+  ink: '#f5ece8',
+  text: '#d8c0b8',
+  'text-dim': '#a08880',
+  accent: '#9a2e2a',
+  'accent-bright': '#c85a4a',
+  accent2: '#2a8a8a',
+  'accent2-bright': '#4ab4b4',
+  verdict: '#6b4a1e',
+  'verdict-bright': '#9a7830',
+  glow: 'rgba(154,46,42,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Empire ottoman"
+  serie="Peuples & Cultures du Monde"
+  description="Six siècles de carrefour entre Europe et Asie, depuis la prise de Constantinople en 1453 jusqu'à la dissolution de 1922 — une administration multiconfessionnelle originale (le système des millets), l'architecture de Sinan, et une thèse du « déclin » aujourd'hui largement révisée par les historiens."
+  href="culture-empire-ottoman.html"
+  egg="ottoman"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ISTANBUL · 1299-1922"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Six siècles au carrefour de deux continents</p>
+  <p class="tagline" slot="hero">
+    D'un petit beylik anatolien à un empire multiconfessionnel s'étendant sur trois
+    continents, prenant directement la suite de Byzance à Constantinople — une histoire trop
+    longtemps résumée en un simple récit de déclin que l'historiographie récente corrige.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="D'un beylik anatolien à un empire tricontinental"
+    intro="Fondé en Anatolie occidentale, l'empire s'étend à son apogée des Balkans à l'Afrique du Nord et à l'Arabie, avec Istanbul (l'ancienne Constantinople) comme capitale depuis 1453.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="260" cy="90" r="8" fill="#c85a4a"/>
+        <text x="260" y="76" text-anchor="middle" fill="#e8dcc8" font-size="12" font-family="Cinzel, serif">ISTANBUL</text>
+        <circle cx="150" cy="70" r="6" fill="#4ab4b4"/>
+        <text x="150" y="56" fill="#a0d8d8" font-size="10">Balkans</text>
+        <circle cx="300" cy="150" r="6" fill="#4ab4b4"/>
+        <text x="300" y="166" fill="#a0d8d8" font-size="10">Anatolie</text>
+        <circle cx="220" cy="200" r="6" fill="#4ab4b4"/>
+        <text x="220" y="216" fill="#a0d8d8" font-size="10">Levant/Arabie</text>
+        <circle cx="100" cy="180" r="6" fill="#4ab4b4"/>
+        <text x="100" y="196" fill="#a0d8d8" font-size="10">Égypte/Afrique du Nord</text>
+      </svg>
+    </div>
+    <p class="map-caption">Istanbul comme centre névralgique entre Balkans européens, Anatolie, Levant et Afrique du Nord — un empire structurellement tricontinental dès son apogée.</p>
+    <div class="card-grid">
+      <InfoCard title="Istanbul (Constantinople)" sub="Capitale depuis 1453" body="Prise par Mehmed II, la ville devient le centre politique, religieux et économique de l'empire, prenant directement la suite de son statut byzantin millénaire." />
+      <InfoCard title="Les Balkans" sub="Province européenne majeure" body="Longtemps la région la plus densément intégrée à l'administration ottomane en Europe, laissant un héritage architectural et culturel encore visible aujourd'hui." />
+      <InfoCard title="L'Anatolie" sub="Cœur territorial" body="Berceau du beylik fondateur et cœur démographique et militaire de l'empire tout au long de son histoire." />
+      <InfoCard title="Le Levant et l'Arabie" sub="Conquête de 1516-1517" body="La prise de ces régions, dont les villes saintes de La Mecque et Médine, permet au sultan de revendiquer le titre de calife." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Sultans, janissaires et communautés protégées" intro="Une société structurée par le millet (système d'autonomie religieuse communautaire) et par une élite militaro-administrative en partie recrutée par la conscription d'enfants chrétiens.">
+    <div class="card-grid wide">
+      <FigureCard name="Le sultan-calife" role="Double autorité" tags={['Politique', 'Religieuse après 1517']} body="Après la conquête du Hedjaz en 1517, les sultans ottomans revendiquent le titre de calife, cumulant autorité politique impériale et prétention à une primauté religieuse sur l'ensemble du monde sunnite." />
+      <FigureCard name="Les janissaires" role="Infanterie d'élite" tags={['Devshirme', 'Puissance politique croissante']} body="Corps d'élite recruté à l'origine par la conscription d'enfants chrétiens des Balkans (devshirme), convertis et formés dès l'enfance ; devenu au fil des siècles une force politique si puissante qu'il sera aboli dans la violence en 1826." />
+      <FigureCard name="Les communautés du millet" role="Autonomie religieuse encadrée" tags={['Chrétiens orthodoxes', 'Arméniens', 'Juifs']} body="Chaque grande communauté religieuse non musulmane conserve une autonomie juridique et administrative interne significative sous l'autorité de ses propres chefs religieux, moyennant reconnaissance de la souveraineté ottomane." />
+      <FigureCard name="Les grands vizirs" role="Chefs de l'administration" tags={['Pouvoir exécutif']} body="Premiers ministres de facto de l'empire, disposant d'un pouvoir exécutif considérable, parfois plus déterminant encore que celui du sultan lui-même selon les époques." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Conquérants, législateurs et architectes">
+    <div class="card-grid wide">
+      <FigureCard name="Mehmed II le Conquérant" role="Preneur de Constantinople" tags={['1453']} body="Met fin à onze siècles de continuité romaine en Orient en s'emparant de Constantinople, qu'il fait aussitôt sa nouvelle capitale plutôt que de la raser." />
+      <FigureCard name="Soliman le Magnifique" role="Législateur et conquérant" tags={['1520-1566']} body="Règne à l'apogée territoriale et culturelle de l'empire, codifie un vaste corpus légal qui lui vaut en turc le titre de « Kanuni », le Législateur." />
+      <FigureCard name="Mimar Sinan" role="Architecte impérial" tags={['XVIe siècle']} body="Chef architecte du règne de Soliman, auteur de centaines de bâtiments dont la mosquée Süleymaniye et la mosquée Selimiye d'Edirne, qu'il considérait lui-même comme son chef-d'œuvre." />
+      <FigureCard name="Mustafa Kemal Atatürk" role="Fondateur de la République turque" tags={['1923']} body="Officier ottoman devenu le fondateur de la Turquie républicaine après la dissolution de l'empire, abolissant le sultanat puis le califat lui-même en 1924." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="De la prise de Constantinople à l'incident de 1826">
+    <StoryBlock num="Épisode I" title="La prise de Constantinople, 1453" body="Après un siège de plusieurs semaines mené avec une artillerie de siège d'une puissance inédite, Mehmed II s'empare de la ville, mettant fin à l'Empire byzantin déjà traité dans cette série — un basculement qui fait d'Istanbul la nouvelle capitale d'un empire en pleine expansion plutôt qu'une simple prise militaire." />
+    <StoryBlock num="Épisode II" title="Le siège de Vienne, 1529" body="L'armée de Soliman le Magnifique assiège la capitale des Habsbourg sans parvenir à s'en emparer, marquant la limite occidentale de l'expansion ottomane en Europe centrale — un échec militaire qui n'empêche pas l'empire de rester une puissance majeure pendant encore des siècles." />
+    <StoryBlock num="Épisode III" title="L'incident faste de 1826" body="Face à la résistance des janissaires à toute réforme militaire moderne, le sultan Mahmud II fait supprimer le corps par la force, dans une répression violente qui met fin à près de cinq siècles d'existence d'une institution devenue un obstacle plus qu'un atout pour l'État." />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Architecture, droit et diplomatie multiconfessionnelle">
+    <div class="card-grid compact">
+      <MiniCard title="L'architecture de Sinan" tag="Prouesse structurelle" body="Les grandes mosquées impériales conçues par Sinan résolvent des défis structurels comparables à ceux de la basilique Sainte-Sophie qui l'a inspiré, avec des dômes d'une ampleur et d'une légèreté remarquables pour leur époque." />
+      <MiniCard title="Le système des millets" tag="Pluralisme juridique" body="Une forme d'autonomie communautaire religieuse encadrée, permettant à des populations très diverses de coexister sous une même autorité impériale sans imposer une conversion générale." />
+      <MiniCard title="La céramique d'Iznik" tag="Art décoratif" body="Une production de céramique à motifs floraux stylisés (dont la tulipe) d'une qualité technique et esthétique qui reste une référence de l'art ottoman." />
+      <MiniCard title="Le droit kanun" tag="Codification laïque complémentaire" body="Un corpus de lois impériales (kanun) complète le droit religieux (charia) pour les matières fiscales, pénales et administratives, une codification poussée sous Soliman." />
+      <MiniCard title="Le café et les cafés publics" tag="Institution sociale nouvelle" body="Les cafés d'Istanbul du XVIe siècle comptent parmi les premiers espaces publics de sociabilité informelle de ce type, une institution qui se diffusera ensuite vers l'Europe." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et révisions historiographiques">
+    <div class="card-grid compact">
+      <MiniCard title="La thèse du « déclin », aujourd'hui révisée" tag="Débat historiographique" body="L'idée d'un déclin ottoman ininterrompu depuis le XVIIe siècle, longtemps dominante, est aujourd'hui largement révisée par les historiens, qui y voient plutôt une capacité d'adaptation institutionnelle continue jusqu'au XIXe siècle." />
+      <MiniCard title="Le devshirme, une pratique aux jugements contrastés" tag="Nuance historique nécessaire" body="Le prélèvement d'enfants chrétiens pour former janissaires et administrateurs reste une pratique dont l'appréciation historique varie fortement, entre violence de l'arrachement familial et réelles possibilités d'ascension sociale offertes à certains de ces enfants devenus hauts dignitaires." />
+      <MiniCard title="L'imprimerie tardive et restreinte" tag="Choix politique, pas retard technique" body="L'introduction de l'imprimerie en caractères arabes dans l'empire, en 1727 seulement, résulte de choix politiques et religieux délibérés plutôt que d'une ignorance de la technique, déjà bien connue par ailleurs dans l'empire pour d'autres alphabets." />
+      <MiniCard title="Suite directe de Byzance" tag="Continuité urbaine" body="Après 1453, l'administration ottomane conserve et adapte une partie des infrastructures et pratiques administratives byzantines plutôt que de tout reconstruire depuis rien." />
+      <MiniCard title="La fin du califat, 1924" tag="Rupture républicaine" body="L'abolition du califat par Atatürk met fin à une institution que les sultans ottomans revendiquaient depuis 1517, un choix politique majeur de la jeune République turque." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="Cafés, hammams et jardins de tulipes"
+    intro="La vie quotidienne ottomane se documente par une riche tradition de miniatures, de récits de voyageurs et de registres administratifs détaillés, rare pour une société prémoderne."
+    scrollFx="domeIznik">
+    <div class="card-grid compact">
+      <MiniCard title="Les cafés publics" tag="Sociabilité urbaine" body="Lieux de conversation, de jeux et de récits, les cafés stambouliotes deviennent rapidement des espaces de sociabilité informelle centraux dans la vie urbaine ottomane." />
+      <MiniCard title="Les hammams" tag="Hygiène et rituel social" body="Bains publics hérités en partie de la tradition byzantine et romaine antérieure, réinterprétés selon les usages ottomans comme lieux d'hygiène autant que de sociabilité." />
+      <MiniCard title="L'ère des Tulipes" tag="Début du XVIIIe siècle" body="Période de raffinement culturel marquée par un engouement de cour pour les jardins de tulipes, dont le nom donne sa désignation à toute une période historique." />
+      <MiniCard title="Le harem impérial" tag="Institution politique méconnue" body="Loin du seul fantasme orientaliste occidental qui l'a longtemps caricaturé, le harem impérial constitue une institution politique et administrative complexe, parfois directement influente sur les affaires d'État." />
+      <MiniCard title="La musique de cour ottomane" tag="Tradition musicale raffinée" body="Un répertoire musical savant se développe à la cour impériale, distinct des musiques militaires (mehter) plus connues en Occident." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="De Vienne au siège des Nations unies">
+    <div class="card-grid">
+      <InfoCard title="L'Europe centrale et balkanique" sub="Influence culturelle durable" body="L'architecture, la cuisine et le vocabulaire de plusieurs langues balkaniques portent encore aujourd'hui une empreinte ottomane durable." />
+      <InfoCard title="Le monde arabe" sub="Quatre siècles d'administration" body="La domination ottomane sur le Levant et l'Afrique du Nord pendant plusieurs siècles continue de structurer une part de l'historiographie régionale contemporaine." />
+      <InfoCard title="La diplomatie européenne moderne" sub="Intégration au concert des nations" body="L'empire s'intègre progressivement au système diplomatique européen à partir du XIXe siècle, tout en cherchant à s'y maintenir face aux puissances montantes." />
+      <InfoCard title="La République de Turquie" sub="Héritage et rupture" body="La Turquie moderne se construit à la fois en héritière et en rupture assumée avec l'héritage impérial ottoman, un rapport encore débattu politiquement aujourd'hui." />
+      <InfoCard title="Le tourisme patrimonial contemporain" sub="Istanbul, mosquées impériales" body="Les mosquées de Sinan et les palais impériaux d'Istanbul comptent aujourd'hui parmi les sites les plus visités de Turquie." />
+      <InfoCard title="Les études ottomanes modernes" sub="Discipline historiographique active" body="La révision de la thèse du déclin reste un chantier historiographique actif, renouvelant la compréhension des trois derniers siècles ottomans." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. 1299', title: 'Fondation traditionnelle du beylik ottoman', body: "Osman Ier établit la principauté anatolienne qui donnera son nom à la dynastie." },
+      { year: '1453', title: 'Prise de Constantinople', body: "Mehmed II met fin à l'Empire byzantin et fait de la ville sa nouvelle capitale." },
+      { year: '1516-1517', title: 'Conquête du Levant, de l\'Égypte et du Hedjaz', body: "Sélim Ier étend l'empire au Moyen-Orient et revendique le titre de calife." },
+      { year: '1520-1566', title: 'Règne de Soliman le Magnifique', body: "Apogée territoriale et législative de l'empire." },
+      { year: '1529', title: 'Premier siège de Vienne', body: "Limite occidentale de l'expansion ottomane en Europe centrale." },
+      { year: '1727', title: 'Introduction de l\'imprimerie', body: "Ibrahim Müteferrika obtient l'autorisation d'imprimer en caractères arabes, avec des restrictions notables." },
+      { year: '1826', title: 'Incident faste', body: "Suppression violente du corps des janissaires par Mahmud II." },
+      { year: 'XIXe siècle', title: 'Réformes du Tanzimat', body: "Vaste programme de modernisation administrative, légale et militaire de l'empire." },
+      { year: '1918-1922', title: 'Effondrement après la Première Guerre mondiale', body: "Défaite militaire, occupation alliée et guerre d'indépendance turque menant à la dissolution de l'empire." },
+      { year: '1923', title: 'Fondation de la République de Turquie', body: "Mustafa Kemal Atatürk proclame la République, abolissant le sultanat." },
+      { year: '1924', title: 'Abolition du califat', body: "La jeune République met fin à l'institution califale revendiquée par les sultans depuis 1517." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que l'Empire ottoman laisse encore">
+    <HeritageBlock title="Une empreinte architecturale majeure" body="Les mosquées impériales de Sinan restent parmi les sommets reconnus de l'architecture religieuse mondiale, étudiées bien au-delà de la seule Turquie." />
+    <HeritageBlock title="Un objet de mémoire toujours disputé" body="L'héritage ottoman continue de nourrir des lectures historiques et politiques contrastées, entre nostalgie impériale et rupture républicaine assumée." />
+    <HeritageBlock title="Une historiographie en révision active" body="La correction de la thèse du déclin illustre comment la recherche historique continue de transformer la compréhension de six siècles d'histoire ottomane." />
+    <CautionBox>
+      Résumer six siècles d'histoire ottomane à un récit linéaire de « grandeur puis déclin »
+      simplifie à l'excès une réalité bien plus complexe d'adaptations institutionnelles
+      continues, comme le montre l'historiographie récente. De même, présenter le système des
+      millets comme une tolérance religieuse moderne au sens actuel du terme serait anachronique :
+      il s'agissait d'une autonomie communautaire encadrée, pas d'une égalité de droits telle
+      qu'on l'entend aujourd'hui.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Caroline Finkel, Osman's Dream: The Story of the Ottoman Empire, 1300-1923, Basic Books, 2005", note: "Synthèse de référence sur l'histoire politique ottomane citée en #recits et #frise." },
+    { label: "Suraiya Faroqhi, Subjects of the Sultan: Culture and Daily Life in the Ottoman Empire, I.B. Tauris, 2000", note: "Étude de référence sur la vie quotidienne citée en #style-de-vie." },
+    { label: "Gülru Necipoğlu, The Age of Sinan: Architectural Culture in the Ottoman Empire, Reaktion Books, 2005", note: "Étude de référence sur l'architecture de Sinan citée en #figures et #inventions." },
+    { label: "Dana Sajdi (dir.), Ottoman Tulips, Ottoman Coffee: Leisure and Lifestyle in the Eighteenth Century, I.B. Tauris, 2007", note: "Étude sur l'ère des Tulipes et la révision historiographique citée en #anecdotes et #heritage." },
+  ]} />
+</PageLayout>

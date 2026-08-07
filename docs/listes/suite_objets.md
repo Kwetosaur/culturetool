@@ -29,8 +29,8 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 | La Lance Sacrée (de Longin) ✅ | `obj-lance-sacree` | 8 | Vienne / Rome / Etchmiadzin | Relique contestée | **Au moins quatre lances concurrentes** revendiquent le titre. Celle de Vienne, datée du VIIIe siècle par les analyses publiées en 2003, a servi d'insigne impérial à Otton Ier puis d'obsession à la propagande nazie — un objet dont l'histoire politique est mieux documentée que l'origine. |
 | La Chambre d'Ambre ✅ | `obj-chambre-ambre` | 8 | Königsberg / Tsarskoïe Selo | Objet réel disparu | Six tonnes d'ambre offertes à Pierre le Grand en 1716, démontées par la Wehrmacht en 1941, disparues en 1945. Reconstitution achevée en 2003 ; la chasse à l'original est toujours ouverte, avec de fausses pistes régulières. Le seul objet de la liste dont la disparition est datée au mois près. |
 | Les épées Ulfberht ✅ | `obj-ulfberht` | 7 | Scandinavie / Rhénanie, IXe-XIe s. | Objet réel, pouvoirs légendaires | ~170 lames retrouvées, toutes signées `+VLFBERH+T`, en acier d'une pureté inattendue pour l'époque. Les **contrefaçons médiévales se reconnaissent à la position de la croix dans la signature** : une affaire de marque déposée au IXe siècle. Section `#facture` en or. |
-| La Pierre de Scone | `obj-pierre-scone` | 7 | Écosse | Objet réel, pouvoirs légendaires | Un simple bloc de grès — dont le seul pouvoir est politique. Saisi par Édouard Ier en 1296, encastré sous le trône de Westminster, dérobé par des étudiants nationalistes en 1950, rendu à l'Écosse en 1996. Sert encore aux couronnements britanniques. |
-| Durandal | `obj-durandal` | 7 | France (Roncevaux / Rocamadour) | Objet de fiction | Épée de Roland dans la *Chanson de Roland* (v. 1100). Une « Durandal » était scellée dans la falaise de Rocamadour depuis le Moyen Âge : **elle a été dérobée en 2024**, ce qui donne à la page une actualité que peu de sujets légendaires offrent. |
+| La Pierre de Scone ✅ | `obj-pierre-scone` | 7 | Écosse | Objet réel, pouvoirs légendaires | Un simple bloc de grès — dont le seul pouvoir est politique. Saisi par Édouard Ier en 1296, encastré sous le trône de Westminster, dérobé par des étudiants nationalistes en 1950, rendu à l'Écosse en 1996. Sert encore aux couronnements britanniques. |
+| Durandal ✅ | `obj-durandal` | 7 | France (Roncevaux / Rocamadour) | Objet de fiction | Épée de Roland dans la *Chanson de Roland* (v. 1100). Une « Durandal » était scellée dans la falaise de Rocamadour depuis le Moyen Âge : **elle a été dérobée en 2024**, ce qui donne à la page une actualité que peu de sujets légendaires offrent. |
 | Le Trésor des Templiers | `obj-tresor-templiers` | 6 | France | Objet de fiction (légende moderne) | Aucun inventaire médiéval ne le mentionne. La légende se construit au XVIIIe-XIXe siècle et explose avec Rennes-le-Château puis l'édition populaire. Excellent contre-exemple d'objet légendaire **entièrement fabriqué à l'époque contemporaine**. |
 | Le Sampo | `obj-sampo` | 6 | Finlande (Kalevala) | Objet de fiction | Moulin ? Pilier du monde ? Coffre ? Le *Kalevala* ne le décrit **jamais clairement**, et c'est volontaire. Unique dans la liste : un objet légendaire dont la nature même est l'énigme, et dont la fabrication par Ilmarinen occupe des chants entiers. |
 | La Couronne de fer de Lombardie | `obj-couronne-fer` | 6 | Monza, Italie | Objet réel, pouvoirs légendaires | L'anneau intérieur est présenté depuis des siècles comme forgé d'un clou de la Crucifixion ; les analyses de 1993 concluent à de l'argent. A couronné des rois lombards, Charles Quint et Napoléon (1805). |
@@ -52,8 +52,8 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 | Objet | id | Score | Origine | Nature probable | Ce qui le rend unique |
 |---|---|---|---|---|---|
 | L'Arche d'Alliance ✅ | `obj-arche-alliance` | 10 | Israël / Éthiopie | Relique contestée | Le seul objet de la liste dont **le texte fondateur donne les dimensions et le procédé de fabrication** (Exode 25). Disparaît des sources après 587 av. J.-C. Revendiquée par l'église Sainte-Marie-de-Sion à Aksoum, où elle n'est montrée à personne. Aucun élément archéologique. |
-| La Ménorah du Second Temple | `obj-menorah` | 7 | Jérusalem / Rome | Objet réel disparu | Objet **dont on possède le portrait sans posséder l'objet** : sculptée sur l'arc de Titus, emportée à Rome en 70, trace perdue au Ve siècle. Devenue l'emblème de l'État d'Israël. |
-| Zulfiqar | `obj-zulfiqar` | 7 | Arabie / Istanbul | Relique contestée | Épée attribuée à Ali, dont des exemplaires sont conservés au Trésor de Topkapı. Objet de dévotion vivante pour des centaines de millions de personnes **et** emblème politique contemporain — à traiter avec le même soin que les pages Wendigo/Skinwalker. |
+| La Ménorah du Second Temple ✅ | `obj-menorah` | 7 | Jérusalem / Rome | Objet réel disparu | Objet **dont on possède le portrait sans posséder l'objet** : sculptée sur l'arc de Titus, emportée à Rome en 70, trace perdue au Ve siècle. Devenue l'emblème de l'État d'Israël. |
+| Zulfiqar ✅ | `obj-zulfiqar` | 7 | Arabie / Istanbul | Relique contestée | Épée attribuée à Ali, dont des exemplaires sont conservés au Trésor de Topkapı. Objet de dévotion vivante pour des centaines de millions de personnes **et** emblème politique contemporain — à traiter avec le même soin que les pages Wendigo/Skinwalker. |
 | L'Anneau de Salomon | `obj-anneau-salomon` | 6 | Moyen-Orient | Objet mythologique | Sceau commandant aux djinns, présent dans les traditions juive, chrétienne et islamique — et à l'origine du « sceau de Salomon » de la magie médiévale européenne. Bon fil pour montrer la circulation d'un objet entre trois corpus religieux. |
 
 ## Asie
@@ -63,8 +63,8 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 | Les Trois Trésors impériaux du Japon ✅ | `obj-tresors-japon` | 9 | Japon | Relique contestée | Épée Kusanagi, miroir Yata no Kagami, joyau Yasakani no Magatama : **jamais montrés, jamais photographiés**, l'empereur lui-même ne les verrait pas. L'intronisation de 2019 s'est déroulée devant des coffres fermés. Le secret comme mode de conservation du sacré. |
 | L'Épée de Goujian ✅ | `obj-goujian` | 8 | Chine (Hubei) | Objet réel, pouvoirs légendaires | Exhumée en 1965, **sans corrosion après 2 500 ans et encore tranchante**, inscription en écriture-oiseau. Le seul cas de la liste où l'objet réel est plus impressionnant que sa légende — et une section `#facture` exceptionnelle (alliage, étamage). |
 | Le Koh-i-Noor ✅ | `obj-koh-i-noor` | 8 | Inde / Londres | Objet réel, pouvoirs légendaires | 105 carats, « malédiction » réputée frapper ses possesseurs masculins. Cédé en 1849 par un maharajah de dix ans. **Contentieux de restitution actif** revendiqué par l'Inde, le Pakistan, l'Iran et l'Afghanistan : la page ne peut pas éviter le sujet, et ne doit pas. |
-| Le Sceau de jade impérial | `obj-sceau-jade` | 7 | Chine | Objet réel disparu | Sceau de transmission du mandat céleste pendant plus d'un millénaire, perdu au Xe siècle. Sa **disparition a servi à délégitimer des dynasties entières** — un objet dont l'absence a plus pesé que la présence. |
-| Le Honjo Masamune | `obj-honjo-masamune` | 7 | Japon | Objet réel disparu | Trésor national remis avec des milliers d'autres sabres à l'occupant américain en 1945, jamais retrouvé depuis. Dossier documenté, recherche toujours ouverte, et un vrai sujet sur ce que la défaite fait au patrimoine. |
+| Le Sceau de jade impérial ✅ | `obj-sceau-jade` | 7 | Chine | Objet réel disparu | Sceau de transmission du mandat céleste pendant plus d'un millénaire, perdu au Xe siècle. Sa **disparition a servi à délégitimer des dynasties entières** — un objet dont l'absence a plus pesé que la présence. |
+| Le Honjo Masamune ✅ | `obj-honjo-masamune` | 7 | Japon | Objet réel disparu | Trésor national remis avec des milliers d'autres sabres à l'occupant américain en 1945, jamais retrouvé depuis. Dossier documenté, recherche toujours ouverte, et un vrai sujet sur ce que la défaite fait au patrimoine. |
 | Le Vajra ✅ | `obj-vajra` | 7 | Inde / Tibet | Objet mythologique | **Trajectoire inverse de tous les autres** : la foudre d'Indra est devenue un objet rituel bien réel, forgé et manipulé aujourd'hui dans tout le bouddhisme tantrique. Du mythe vers la matière, et non l'inverse. |
 | Le Ruyi Jingu Bang | `obj-ruyi-jingu-bang` | 6 | Chine | Objet de fiction | Le bâton de Sun Wukong (*Pérégrination vers l'Ouest*, XVIe s.), à l'origine pilier de mesure des océans. Probablement l'objet de fiction le plus populaire d'Asie de l'Est, et un contrepoint léger dans une liste de reliques graves. |
 
@@ -93,7 +93,7 @@ La colonne **id** est l'identifiant à utiliser partout (pin `map.html`, icône
 
 ---
 
-## Déjà couvertes (17)
+## Déjà couvertes (23)
 
 **Excalibur** (26/07/2026) — première page de la série, et première page du site écrite avec
 le socle Astro (`src/pages/objet-excalibur.astro`).
@@ -125,7 +125,21 @@ méditerranéens antiques rédigés coup sur coup, l'un avec une explication mat
 (orpaillage caucasien), l'autre avec la démonstration la plus nette de toute la série d'un
 objet légendaire né d'une simple erreur de traduction (pithos devenu pyxis chez Érasme).
 
-Les 20 autres ont déjà leur icône dans `public/icons/objet/` (4 tailles chacune) et leur pin
+**Durandal** et **Le Sceau de jade impérial** (07/08/2026) — huitième vague : l'épée de
+Roland, seule page de la série à ce jour dont la relique locale associée (la lame de
+Rocamadour) a fait l'actualité en 2024, et un objet réel disparu dont l'absence a
+directement délégitimé plusieurs dynasties chinoises successives.
+
+**La Ménorah du Second Temple** et **Zulfiqar** (07/08/2026) — neuvième vague : le seul
+objet de la série dont on garde un portrait fiable (l'arc de Titus) sans posséder l'original,
+disparu depuis le VIe siècle, et une relique contestée de dévotion vivante traitée avec le
+même soin que le Tabouret d'or des Ashanti.
+
+**La Pierre de Scone** et **Le Honjo Masamune** (07/08/2026) — dixième vague : un objet dont
+le seul vrai pouvoir est politique, et le premier objet de la série disparu dans une mémoire
+administrative presque contemporaine (1945) plutôt que dans le silence des siècles.
+
+Les 14 autres ont déjà leur icône dans `public/icons/objet/` (4 tailles chacune) et leur pin
 placé dans `PLACES_FUTURE` de `public/map.html` : il ne manque que les pages.
 
 **Objets volontairement écartés** : Suaire de Turin, Mécanisme d'Anticythère (publié) et
@@ -158,19 +172,15 @@ Troisième vague (hors top 5, choisie pour l'équilibre continental — voir la 
 
 ## Prochaine vague recommandée
 
-*(Mis à jour le 29/07/2026 — La Toison d'Or et La Boîte de Pandore, les deux derniers objets
-de Méditerranée antique de la liste, sont publiées.)*
+*(Mis à jour le 07/08/2026 — Durandal, Le Sceau de jade impérial, La Ménorah du Second
+Temple, Zulfiqar, La Pierre de Scone et Le Honjo Masamune, qui occupaient les six premières
+places, sont publiés.)*
 
-1. **Durandal** (7, France) — actualité rare pour un objet légendaire : la lame scellée dans
-   la falaise de Rocamadour a été dérobée en 2024.
-2. **Le Sceau de jade impérial** (7, Chine) — objet réel disparu dont l'absence a délégitimé
-   des dynasties entières.
-3. **La Ménorah du Second Temple** (7, Jérusalem/Rome) — sculptée sur l'arc de Titus, jamais
-   retrouvée depuis le Ve siècle.
-4. **Zulfiqar** (7, Arabie/Istanbul) — objet de dévotion vivante et emblème politique
-   contemporain, à traiter avec le même soin que Le Tabouret d'or des Ashanti.
-5. **La Pierre de Scone** (7, Écosse) — un simple bloc de grès dont le seul pouvoir est
-   politique, volé par des étudiants nationalistes en 1950.
+1. **L'Anneau de Salomon** (6, Moyen-Orient) — sceau commandant aux djinns, présent dans les
+   traditions juive, chrétienne et islamique.
+2. **Le Trésor des Templiers** (6, France) — excellent contre-exemple d'objet légendaire
+   entièrement fabriqué à l'époque contemporaine.
+3. **Le Sampo** (6, Finlande) — objet dont la nature même est l'énigme dans le *Kalevala*.
 
 ## Note d'équilibre pour la carte
 

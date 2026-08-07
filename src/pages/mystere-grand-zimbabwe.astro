@@ -1,0 +1,170 @@
+---
+/*
+  Grand Zimbabwe (mystère) — dix-neuvième mystère de la série. Structure
+  imposée par docs/plans/plan-serie-mysteres.md : 7 sections, badge de
+  verdict.
+
+  Redondance volontaire avec culture-grand-zimbabwe.astro : cette page ne
+  traite pas la civilisation shona elle-même (déjà couverte par la page
+  culture), mais spécifiquement la controverse historiographique coloniale
+  sur l'attribution du site — même principe que l'Égypte (mythologie +
+  culture) déjà appliqué ailleurs sur ce site, documenté dans
+  docs/plans/plan-carte-icones.md.
+
+  Effets : data-egg="zimbabwemystere" + data-scroll-fx="zimbabweEtiquette"
+  sur #enigme — un mur qui s'assemble bloc par bloc, puis une fausse
+  étiquette explicative qui s'effrite (l'historiographie coloniale
+  démentie).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Parchemin d'archive colonial, encre rouge de la contestation, granite
+   du site lui-même : la matière du dossier historiographique plutôt que
+   la palette "civilisation" déjà utilisée par la page culture. */
+const palette = {
+  bg: '#171410',
+  'bg-deep': '#0d0b08',
+  surface: '#241f18',
+  'surface-alt': '#2f2820',
+  border: '#5c4e34',
+  ink: '#f0e8d0',
+  text: '#d0c4a0',
+  'text-dim': '#98886a',
+  accent: '#8a2e2a',
+  'accent-bright': '#c45a4a',
+  accent2: '#5c5040',
+  'accent2-bright': '#8a7a60',
+  verdict: '#1e3a6e',
+  'verdict-bright': '#3a5a9a',
+  glow: 'rgba(138,46,42,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Grand Zimbabwe (mystère)"
+  serie="Grands Mystères du Monde"
+  description="Qui a bâti la plus vaste cité de pierre d'Afrique australe médiévale ? La question n'a jamais été un vrai mystère archéologique : dès le XIXe siècle, des explorateurs et administrateurs coloniaux ont sciemment nié l'origine africaine du site pour des raisons ouvertement racistes — une controverse historiographique aujourd'hui entièrement résolue par la science, mais qui a retardé la vérité pendant près d'un siècle."
+  href="mystere-grand-zimbabwe.html"
+  egg="zimbabwemystere"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ZIMBABWE · XIXe-XXe SIÈCLE"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Le mystère qui n'en était pas un</p>
+  <p class="tagline" slot="hero">
+    L'archéologie a résolu la question de savoir qui a bâti le Grand Zimbabwe depuis
+    longtemps. Le vrai mystère de ce dossier est ailleurs : pourquoi a-t-il fallu près d'un
+    siècle, et l'éviction professionnelle d'un archéologue, pour que cette évidence soit
+    officiellement acceptée ?
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Largement résolu aujourd'hui (bâti par des ancêtres des Shona), mais longtemps nié pour des raisons coloniales racistes"
+    note="L'archéologie moderne établit sans ambiguïté que le site a été conçu et bâti par les ancêtres du peuple shona. La véritable énigme de ce dossier n'est donc pas archéologique mais historiographique : comprendre pourquoi ce fait a été activement nié par des autorités coloniales pendant près d'un siècle."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Un site africain, une controverse importée" intro="Avant d'aborder le déni colonial lui-même, ce qui ne fait aujourd'hui aucun débat scientifique sérieux : l'origine et la datation du site.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une cité shona du XIe-XVe siècle" sub="Confirmé par datation et style" body="Datations au radiocarbone, styles céramiques et comparaison avec d'autres sites de la région confirment sans ambiguïté une construction et une occupation par les ancêtres directs des populations shona actuelles." />
+      <InfoCard num="II" title="Aucune preuve d'un bâtisseur étranger" sub="Absence totale de vestige contradictoire" body="Aucune trace archéologique — inscription, style architectural, objet importé en position de fondation — ne vient appuyer une origine phénicienne, arabe ou biblique jamais démontrée par un seul élément matériel sérieux." />
+      <InfoCard num="III" title="Un consensus académique international" sub="Depuis les années 1970-1980" body="La communauté archéologique internationale converge aujourd'hui unanimement vers l'attribution africaine du site, un consensus qui ne fait plus l'objet d'aucun débat scientifique sérieux." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Pourquoi a-t-on nié l'évidence pendant un siècle ?" scrollFx="zimbabweEtiquette" intro="La vraie question de ce dossier n'est pas archéologique mais historiographique et politique : comment un déni aussi manifestement contredit par les preuves a-t-il pu perdurer institutionnellement si longtemps ?">
+    <div class="card-grid wide">
+      <FigureCard name="Une prémisse coloniale explicitement raciste" role="Cadre idéologique de départ" tags={['XIXe siècle', 'Suprématie présumée']} body="Les premiers explorateurs et administrateurs coloniaux européens partent du postulat explicite que des populations africaines n'auraient pas pu concevoir une architecture aussi sophistiquée, cherchant systématiquement une origine extérieure au continent." />
+      <FigureCard name="Une pression politique directe sur l'archéologie" role="Rhodésie blanche" tags={['Peter Garlake', 'Éviction professionnelle']} body="Dans la Rhodésie à majorité blanche des années 1960-1970, l'archéologue Peter Garlake, dont les travaux confirment scientifiquement l'origine africaine du site, subit des pressions politiques et professionnelles qui le poussent finalement à quitter le pays." />
+      <FigureCard name="Une théorie sans aucun fondement matériel" role="Contraste frappant" tags={['Aucune preuve jamais produite']} body="Malgré des décennies de recherches actives d'une origine non-africaine, aucune preuve matérielle sérieuse n'a jamais été produite à l'appui de cette thèse — un contraste qui souligne à quel point elle reposait sur un préjugé plutôt que sur des données." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment le déni s'est construit et défait" title="De l'exploration coloniale à la réhabilitation scientifique">
+    <Timeline items={[
+      { year: '1871', title: 'Visite de Karl Mauch', body: "L'explorateur allemand décrit le site et spécule aussitôt sur une origine biblique ou phénicienne, lançant la controverse." },
+      { year: 'Années 1890', title: 'Théories de la British South Africa Company', body: "Des figures associées à la compagnie de Cecil Rhodes promeuvent activement des théories d'origine non-africaine, alignées sur l'idéologie coloniale de l'époque." },
+      { year: '1905-1929', title: 'Premières fouilles scientifiques contradictoires' , body: "Des archéologues comme David Randall-MacIver puis Gertrude Caton-Thompson concluent déjà à une origine africaine et médiévale, sans convaincre l'establishment colonial rhodésien." },
+      { year: 'Années 1960-1970', title: 'Travaux de Peter Garlake', body: "Ses recherches confirment définitivement, par des méthodes modernes, l'attribution africaine et la datation médiévale du site — au prix de pressions politiques qui le conduisent à quitter la Rhodésie." },
+      { year: '1980', title: 'Indépendance du Zimbabwe', body: "Le nouveau pays adopte officiellement l'attribution africaine du site, mettant fin institutionnellement à la controverse sur son propre territoire." },
+      { year: 'Depuis les années 1980', title: 'Consensus académique international', body: "La recherche archéologique mondiale converge sans réserve vers l'attribution shona, reléguant les théories antérieures au rang d'erreur historiographique documentée." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un déni institutionnel à un symbole de réhabilitation" title="Comment cette controverse est devenue un cas d'école">
+    <div class="card-grid compact">
+      <MiniCard title="Un cas d'école de l'archéologie postcoloniale" tag="Enseignement universitaire" body="Le dossier est aujourd'hui régulièrement enseigné comme exemple classique de la manière dont des présupposés idéologiques peuvent biaiser durablement une discipline scientifique entière." />
+      <MiniCard title="Un symbole de fierté nationale zimbabwéenne" tag="Réappropriation" body="La confirmation scientifique de l'origine africaine du site est devenue un élément central de la fierté nationale du Zimbabwe indépendant, qui en a fait son nom même." />
+      <MiniCard title="Un parallèle avec d'autres controverses archéologiques coloniales" tag="Comparaison historiographique" body="Le cas rejoint d'autres exemples documentés de déni ou de minimisation coloniale des réalisations africaines et non-européennes, un motif récurrent de l'histoire de l'archéologie du XIXe et du début du XXe siècle." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="L'attribution africaine est scientifiquement incontestable aujourd'hui" body="Datations, styles architecturaux et céramiques, comparaisons avec des sites apparentés de la région convergent unanimement pour confirmer que le site a été conçu et bâti par les ancêtres du peuple shona, sans qu'aucune preuve contradictoire sérieuse n'ait jamais été produite." />
+    <ScienceBlock num="Enquête 2" title="Le déni relevait d'un préjugé, pas d'un doute scientifique légitime" body="Les tenants des théories d'origine non-africaine n'ont, à aucun moment, produit de preuve matérielle à l'appui de leur position — un signe clair que leur scepticisme reposait sur un préjugé racial plutôt que sur une évaluation rigoureuse des données disponibles." />
+    <ScienceBlock num="Enquête 3" title="Une pression politique documentée sur la recherche elle-même" body="Le cas de Peter Garlake illustre concrètement comment un contexte politique peut peser directement sur la carrière d'un chercheur dont les conclusions scientifiques contredisent l'idéologie dominante d'un régime." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Construction par les ancêtres du peuple shona"
+      level="consensus"
+      status="Consensus scientifique international"
+      body="L'ensemble des preuves archéologiques disponibles converge sans réserve sérieuse vers cette conclusion, aujourd'hui acceptée par la quasi-totalité de la communauté scientifique mondiale."
+      attrib="Consensus archéologique international depuis les années 1970-1980"
+    />
+    <TheoryCard
+      title="Une origine phénicienne, arabe ou biblique"
+      level="folklore"
+      status="Écarté, sans fondement matériel"
+      body="Ces théories, promues principalement pour des raisons idéologiques coloniales, n'ont jamais été appuyées par la moindre preuve archéologique sérieuse et sont aujourd'hui unanimement rejetées par la recherche."
+      attrib="Théorie historique aujourd'hui réfutée"
+    />
+    <TheoryCard
+      title="Une influence extérieure marginale dans certains détails techniques"
+      level="plausible"
+      status="Nuance mineure, non centrale au débat"
+      body="Comme toute civilisation ayant participé à un vaste réseau commercial de l'océan Indien, le Grand Zimbabwe a pu intégrer certains éléments ou objets d'origine extérieure — une évidence de contact commercial banal, à ne pas confondre avec une paternité architecturale étrangère du site lui-même." />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette controverse enseigne encore">
+    <HeritageBlock title="Une leçon sur les biais de l'archéologie coloniale" body="Le dossier reste une référence pédagogique majeure pour illustrer comment des présupposés idéologiques ont pu retarder pendant des décennies l'acceptation d'une évidence archéologique par ailleurs solide." />
+    <HeritageBlock title="Une victoire de la méthode scientifique sur le préjugé" body="La confirmation finale de l'origine africaine par des méthodes archéologiques rigoureuses illustre la capacité de la discipline à se corriger, même sous une forte pression politique contraire." />
+    <HeritageBlock title="Un symbole national pleinement assumé" body="Le Zimbabwe indépendant a transformé cette controverse résolue en pilier explicite de son identité nationale, jusque dans le choix de son propre nom." />
+    <CautionBox>
+      Ce dossier n'est pas un simple débat académique abstrait : il s'agit d'un cas documenté
+      où une idéologie raciste a directement influencé une discipline scientifique et pesé sur
+      la carrière de chercheurs qui en contredisaient les présupposés. Le présenter comme une
+      curiosité historiographique neutre, sans nommer ce qu'il était, serait une forme
+      d'euphémisme historique.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Peter Garlake, Great Zimbabwe, Thames & Hudson, 1973", note: "Étude archéologique fondatrice au cœur de la controverse, citée en #enigme et #decouverte." },
+    { label: "Martin Hall, Archaeology Africa, David Philip Publishers, 1996", note: "Analyse historiographique du déni colonial citée en #contexte et #science." },
+    { label: "Webber Ndoro, The Preservation of Great Zimbabwe: Your Monument, Our Shrine, ICCROM, 2005", note: "Étude sur la réappropriation patrimoniale postcoloniale citée en #culture-populaire et #heritage." },
+    { label: "Innocent Pikirayi, The Zimbabwe Culture: Origins and Decline of Southern Zambezian States, AltaMira Press, 2001", note: "Synthèse archéologique de référence sur la datation et l'attribution du site, citée en #contexte et #science." },
+  ]} />
+</PageLayout>

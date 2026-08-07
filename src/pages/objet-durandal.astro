@@ -1,0 +1,178 @@
+---
+/*
+  Durandal — dix-huitième objet de la série. Structure imposée par
+  docs/plans/plan-serie-objets.md : 9 sections, badge de nature.
+
+  Actualité rare pour cette série : la lame dite "Durandal", scellée depuis
+  des siècles dans la falaise du sanctuaire de Rocamadour, a été dérobée en
+  juin 2024 — traité en #traces avec la prudence qui convient à un fait
+  encore récent (pas de date au jour près affirmée sans certitude, pas de
+  suite judiciaire annoncée comme acquise).
+
+  Pas de déchiffrement d'inscription sur cette page : contrairement aux
+  épées Ulfberht, aucune inscription réelle n'est attestée sur la lame de
+  Rocamadour, donc pas de fx-decode forcé — cf. l'arbitrage de
+  docs/plans/plan-effets.md sur le pool d'écriture qui doit être réel.
+
+  Effets : data-egg="durandal" + data-scroll-fx="durandalParoi" sur
+  #description — une lame qui s'enfonce horizontalement dans une paroi,
+  éclats de roche, angle volontairement différent d'Excalibur (verticale,
+  pierre du rocher).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Acier poli, calcaire du Quercy, étincelle de forge sombre : la matière de
+   l'objet plutôt qu'une palette "France médiévale" générique. */
+const palette = {
+  bg: '#171a1c',
+  'bg-deep': '#0d0f10',
+  surface: '#20262a',
+  'surface-alt': '#2a3236',
+  border: '#4a5a60',
+  ink: '#f0f4f5',
+  text: '#cdd8db',
+  'text-dim': '#8a9ca0',
+  accent: '#8a95a0',
+  'accent-bright': '#c3ccd4',
+  accent2: '#8a6a45',
+  'accent2-bright': '#b8926a',
+  verdict: '#4a3428',
+  'verdict-bright': '#7a5c3e',
+  glow: 'rgba(138,149,160,0.2)',
+};
+
+const SECTIONS = [
+  { id: 'origine', nav: 'Origine' },
+  { id: 'description', nav: 'Description' },
+  { id: 'recits', nav: 'Récits' },
+  { id: 'facture', nav: 'Facture' },
+  { id: 'traces', nav: 'Traces' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'verite', nav: 'Vérité' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Durandal"
+  serie="Objets Légendaires du Monde"
+  description="L'épée de Roland dans la Chanson de Roland (v. 1100) — une lame réputée incassable, censée contenir des reliques dans son pommeau, et qu'une tradition locale dit fichée dans la falaise du sanctuaire de Rocamadour, à des centaines de kilomètres du champ de bataille où le récit la situe. Elle y a été dérobée en juin 2024."
+  href="objet-durandal.html"
+  egg="durandal"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="RONCEVAUX · ROCAMADOUR"
+  nextUp="Prochain chapitre de la série « Objets Légendaires du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">L'épée qui refuse de se briser</p>
+  <p class="tagline" slot="hero">
+    Une lame que son propre héros n'arrive pas à détruire en la frappant contre un rocher —
+    et une réplique locale, fichée dans une falaise depuis des siècles, qui a fini par
+    disparaître en une seule nuit de 2024, volée plutôt que brisée.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Nature de l'objet"
+    text="Objet de fiction"
+    note="Aucune épée historique correspondant à Durandal n'a jamais existé : elle naît dans un poème épique du XIIe siècle. La lame scellée dans la falaise de Rocamadour est une tradition dévotionnelle locale, pas une relique à la provenance continue démontrée."
+  />
+
+  <Section id="origine" label="Première attestation" title="Un poème, pas un texte celtique ancien" intro="Distinguer l'ancienneté de l'objet de l'ancienneté du récit sur l'objet : ici encore, les deux sont séparés de plusieurs siècles.">
+    <div class="card-grid">
+      <InfoCard num="I" title="La Chanson de Roland, v. 1100" sub="Manuscrit d'Oxford, v. 1129-1165" body="Plus ancien grand texte conservé de la littérature française, la chanson de geste raconte la mort de Roland à Roncevaux et donne son nom à l'épée qu'il porte, Durandal." />
+      <InfoCard num="II" title="Un Roland historique, mineur et mal documenté" sub="Vie de Charlemagne, Éginhard, v. 830" body="Le seul témoignage historique proche des faits mentionne un « Hruodlandus », préfet de la marche de Bretagne, tué lors de l'embuscade de Roncevaux en 778 — en quelques lignes, sans aucune mention d'épée nommée." />
+      <InfoCard num="III" title="Trois siècles d'écart" sub="778 → v. 1100" body="Entre l'embuscade historique de 778 et la rédaction du poème qui immortalise Durandal, plus de trois siècles séparent l'événement du récit qui lui donne sa forme légendaire définitive." />
+    </div>
+  </Section>
+
+  <Section id="description" label="Forme et pouvoirs" title="Une lame incassable, un pommeau de reliques" scrollFx="durandalParoi">
+    <div class="card-grid wide">
+      <FigureCard name="Une épée donnée par un ange" role="Origine surnaturelle" tags={['Don divin', 'Charlemagne']} body="Selon la Chanson, Durandal est remise à Charlemagne par un ange avant qu'il ne l'offre à Roland ; d'autres traditions plus tardives en attribuent la forge au légendaire forgeron Wieland." />
+      <FigureCard name="Une lame que rien ne peut briser" role="Pouvoir principal" tags={['Incassable', 'Tranchant absolu']} body="Mourant, Roland tente à plusieurs reprises de détruire Durandal contre un rocher pour qu'elle ne tombe pas aux mains des Sarrasins ; c'est le roc qui se fend, jamais la lame." />
+      <FigureCard name="Un pommeau à reliques" role="Description matérielle" tags={['Reliques', 'Pommeau doré']} body="Le poème précise que le pommeau doré de Durandal contient une dent de saint Pierre, du sang de saint Basile, des cheveux de saint Denis et un fragment du vêtement de la Vierge — un détail qui fait de l'épée un objet quasi liturgique autant que guerrier." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Les grands récits" title="De Roncevaux à la falaise de Rocamadour">
+    <StoryBlock num="Récit I" title="La mort de Roland à Roncevaux" body={["Pris dans l'embuscade de l'arrière-garde franque, Roland refuse d'abord de sonner l'oliphant pour appeler Charlemagne à l'aide, par excès d'honneur, avant de s'y résoudre trop tard.", "Mourant, il frappe Durandal contre le rocher à plusieurs reprises pour la briser plutôt que de la laisser à l'ennemi ; la lame reste intacte, et Roland meurt en tenant l'épée et l'oliphant contre lui, tourné vers l'Espagne conquise."]} quote="Ah ! Durandal, que tu es belle et sainte ! [...] Dieu ne veuille pas que par moi tu périsses !" cite="La Chanson de Roland, laisse 172 (paraphrase du texte ancien français)" />
+    <StoryBlock num="Récit II" title="L'épée que Roland tient depuis toujours" body="Le poème rappelle par la voix mourante de Roland les terres conquises grâce à Durandal — un procédé narratif qui transforme l'objet en résumé vivant de toute une carrière militaire, plutôt qu'en simple accessoire du dernier combat." />
+    <StoryBlock num="Récit III" title="La légende du jet jusqu'à Rocamadour" body="Une tradition locale, bien postérieure au poème, veut que Roland ait lancé Durandal depuis Roncevaux et qu'elle soit venue se ficher dans la falaise du sanctuaire de Rocamadour, dans le Quercy — à plusieurs centaines de kilomètres de distance, un miracle que la légende assume sans chercher à l'expliquer autrement." />
+  </Section>
+
+  <Section id="facture" label="Matière et fabrication" title="Ce que la métallurgie carolingienne savait vraiment faire" intro="Même une épée imaginaire renseigne sur un savoir-faire réel : celui des forgerons francs des VIIIe-IXe siècles.">
+    <div class="card-grid compact">
+      <MiniCard title="Le corroyage" tag="Technique de base" body="Les lames de l'époque carolingienne combinent des barres de fer et d'acier de dureté différente, soudées et repliées à la forge pour obtenir un compromis entre solidité et tranchant." />
+      <MiniCard title="Les lames damassées" tag="Décor et légende" body="Certaines lames prestigieuses présentent des motifs obtenus par torsion de faisceaux de métal, un aspect qui a longtemps nourri des croyances populaires sur une origine surnaturelle du damas." />
+      <MiniCard title="La comparaison Ulfberht" tag="Précédent de la série" body="Comme les épées Ulfberht déjà traitées dans cette série, la qualité réelle d'une lame franque de cette période reposait sur un savoir métallurgique concret, pas sur une magie — l'« incassabilité » de Durandal reste, elle, une pure licence poétique." />
+      <MiniCard title="Le motif du pommeau-reliquaire" tag="Pratique religieuse réelle" body="Faire d'un pommeau d'épée un reliquaire miniature n'est pas une invention isolée de la Chanson de Roland : Joyeuse, l'épée du sacre des rois de France déjà traitée dans cette série, porte une tradition comparable." />
+    </div>
+  </Section>
+
+  <Section id="traces" label="Candidats matériels" title="La lame de la falaise, volée en 2024">
+    <Timeline items={[
+      { year: 'v. 1100', title: 'Rédaction de la Chanson de Roland', body: "Première fixation écrite connue du nom et des exploits de Durandal." },
+      { year: 'Moyen Âge tardif', title: 'Essor du pèlerinage de Rocamadour', body: "Le sanctuaire marial du Quercy devient un haut lieu de pèlerinage, autour duquel se développe la légende locale d'une épée de Roland fichée dans la roche." },
+      { year: 'Époque indéterminée avec précision', title: 'Une lame scellée dans la falaise', body: "Une épée, présentée aux visiteurs comme Durandal, est fixée en hauteur dans la paroi rocheuse du sanctuaire — la tradition orale locale la dit très ancienne, sans que sa provenance exacte soit démontrée par une chaîne de possession continue." },
+      { year: 'XIXe-XXe siècle', title: 'Une attraction touristique et dévotionnelle établie', body: "La lame devient un point de passage obligé du parcours des pèlerins et des visiteurs de Rocamadour, associée à l'identité du site." },
+      { year: 'Juin 2024', title: 'Vol de la lame', body: "L'épée présentée comme Durandal est dérobée de son emplacement dans la falaise, un événement rare pour un objet de cette série : la plupart des reliques comparables disparaissent sur plusieurs siècles, pas en une nuit." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="De la chanson de geste au jeu vidéo" title="Le nom qui a traversé les siècles">
+    <div class="card-grid compact">
+      <MiniCard title="Orlando furioso, 1516" tag="Réécriture italienne" body="L'Arioste reprend la figure de Roland sous le nom d'Orlando et son épée sous celui de Durindana, prolongeant la légende dans une tradition littéraire italienne indépendante." />
+      <MiniCard title="Le pendant français de la matière de Bretagne" tag="Identité nationale" body="La Chanson de Roland occupe dans l'imaginaire français un rôle comparable à celui du cycle arthurien pour le monde anglophone — un « matière de France » face à la « matière de Bretagne » déjà représentée par Excalibur dans cette série." />
+      <MiniCard title="Un nom repris dans la fiction contemporaine" tag="Jeux vidéo et littérature" body="Le nom Durandal continue d'être réemployé dans des œuvres de fiction modernes, bien au-delà du cercle des lecteurs de littérature médiévale." />
+      <MiniCard title="Une actualité rare pour un objet légendaire" tag="Vol de 2024" body="La disparition soudaine de la lame de Rocamadour a valu à Durandal une couverture médiatique inhabituelle pour un objet dont la légende remonte à plus de neuf siècles." />
+    </div>
+  </Section>
+
+  <Section id="verite" label="Section pivot" title="Ce qu'on peut affirmer aujourd'hui">
+    <ScienceBlock num="Enquête 1" title="Une invention littéraire, pas une arme retrouvée" body="Aucune trace archéologique ou documentaire ne relie une épée matérielle du VIIIe siècle au récit de Durandal : l'objet naît dans un texte épique rédigé plus de trois siècles après les faits qu'il raconte." />
+    <TheoryCard
+      title="Le nom dérive probablement du verbe « durer »"
+      level="consensus"
+      status="Interprétation philologique dominante"
+      body="La plupart des philologues rattachent le nom Durandal à l'idée de dureté ou de durée — une étymologie qui correspond directement au motif central du récit : une lame qui refuse de se rompre."
+      attrib="Position dominante en philologie française médiévale"
+    />
+    <TheoryCard
+      title="La lame de Rocamadour est une relique dévotionnelle locale, pas un objet à la provenance continue"
+      level="plausible"
+      status="Hypothèse la plus prudente"
+      body="Rien ne permet d'établir une chaîne de possession ininterrompue entre le VIIIe siècle et l'épée fixée dans la falaise ; il s'agit vraisemblablement d'une tradition pieuse locale attachée après coup à la légende, sur le modèle d'autres reliques arthuriennes ou carolingiennes déjà rencontrées dans cette série."
+      attrib="Lecture prudente courante en histoire des reliques médiévales"
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que Durandal fait encore">
+    <HeritageBlock title="Un pilier de l'identité de Rocamadour" body="La légende de l'épée fait partie intégrante du parcours touristique et dévotionnel du sanctuaire, bien au-delà du strict public de lecteurs de littérature médiévale." />
+    <HeritageBlock title="Un texte fondateur de l'identité littéraire française" body="La Chanson de Roland reste étudiée comme l'un des tout premiers grands monuments de la littérature en langue française, avec Durandal comme l'un de ses objets les plus mémorables." />
+    <HeritageBlock title="Une actualité qui relance l'intérêt pour la légende" body="Le vol de 2024 a offert à Durandal une visibilité médiatique renouvelée, rare pour un objet dont l'histoire textuelle a près de neuf siècles." />
+    <CautionBox>
+      Les épopées nationales comme la Chanson de Roland ont aussi servi, au fil des siècles, à
+      construire des récits identitaires flattés (le loyal chevalier franc face à l'envahisseur
+      étranger) qu'il convient de replacer dans leur contexte de rédaction plutôt que de lire
+      comme une histoire neutre. S'émerveiller de la légende n'empêche pas de s'interroger sur
+      les usages qu'on lui a fait porter.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "La Chanson de Roland, éd. et trad. Ian Short, Livre de Poche, coll. « Lettres gothiques », 1990", note: "Édition de référence du texte, source des citations et du récit résumé en #description et #recits." },
+    { label: "Éginhard, Vie de Charlemagne (Vita Karoli Magni), trad. Louis Halphen, Les Belles Lettres, v. 830 (éd. moderne)", url: "https://www.thelatinlibrary.com/eginhard.html", note: "Source historique la plus proche des faits mentionnant Hruodlandus, citée en #origine." },
+    { label: "Sanctuaire Notre-Dame de Rocamadour, présentation historique du site et de son pèlerinage", url: "https://www.rocamadour.com/", note: "Contexte de la tradition locale de l'épée dans la falaise, citée en #traces." },
+    { label: "Reuters, « 'Durandal', Roland's legendary sword, stolen from French clifftop shrine », juin 2024", note: "Source de presse sur le vol de la lame de Rocamadour cité en #traces et #culture-populaire." },
+  ]} />
+</PageLayout>

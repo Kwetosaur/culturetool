@@ -23,6 +23,12 @@
 | 17 | Vietnamienne | ✅ Fait |
 | 18 | Finnoise (Kalevala) | ✅ Fait |
 | 19 | Polynésienne | ✅ Fait |
+| 20 | Cananéenne / ougaritique | ✅ Fait |
+| 21 | Ashanti / Akan | ✅ Fait |
+| 22 | Coréenne | ✅ Fait |
+| 23 | Cosmologie bouddhiste (transversale) | ✅ Fait |
+| 24 | Tibétaine / Bön | ✅ Fait |
+| 25 | Hittite | ✅ Fait |
 
 Chaque page est un fichier HTML autonome (`mythologie-XXX.html`), sans dépendance externe hors polices Google Fonts.
 
@@ -95,10 +101,12 @@ Le détail des sources et du raisonnement par culture est conservé dans l'histo
 
 ---
 
-**19 mythologies rédigées.** La série initiale des 10 chapitres est terminée ; la Chinoise,
+**25 mythologies rédigées.** La série initiale des 10 chapitres est terminée ; la Chinoise,
 puis la Perse, la Yoruba, l'Inca, l'Aborigène australienne, la Dogon, la Vietnamienne, la
-Finnoise et la Polynésienne l'ont prolongée entre le 26 et le 29/07/2026, et **30 candidates
-restent listées** dans `docs/listes/suite_mythologies.md`. La série n'est donc plus « close » :
+Finnoise et la Polynésienne l'ont prolongée entre le 26 et le 29/07/2026, et la Cananéenne /
+ougaritique, l'Ashanti / Akan, la Coréenne, la Cosmologie bouddhiste (transversale), la
+Tibétaine / Bön puis l'Hittite le 07/08/2026 — **24 candidates restent listées** dans
+`docs/listes/suite_mythologies.md`. La série n'est donc plus « close » :
 chaque nouvelle mythologie applique le correctif ci-dessus (nombre de royaumes dérivé des
 sources propres à la culture, jamais aligné sur un autre chapitre), ainsi que le principe du
 socle Astro (toutes écrites avec les composants partagés plutôt qu'en HTML statique — voir

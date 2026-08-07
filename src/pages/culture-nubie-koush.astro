@@ -1,0 +1,220 @@
+---
+/*
+  Nubie / Koush — quinzième page de la série « Peuples & Cultures du Monde ».
+  Même structure à 10 sections que culture-khmers.astro.
+
+  Point de vigilance : cette civilisation a longtemps été minorée par
+  l'égyptologie occidentale (les « pharaons noirs » de la XXVe dynastie
+  traités comme une parenthèse plutôt que comme une puissance impériale à
+  part entière qui a gouverné l'Égypte pendant près d'un siècle) — traité
+  explicitement en #anecdotes et en #heritage, sur le même principe que la
+  note du Grand Zimbabwe côté Mystères/Cultures.
+
+  Effets : data-egg="nubie" + data-scroll-fx="pyramideMeroe" sur
+  #style-de-vie, piste documentée dans plan-effets.md ("une pyramide
+  méroïtique qui se dessine, visiblement plus effilée qu'une égyptienne").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Grès rouge-brun des pyramides de Méroé, teal du Nil, noir du fer forgé :
+   la matière propre à Koush plutôt qu'une palette « Égypte » recyclée. */
+const palette = {
+  bg: '#1c150f',
+  'bg-deep': '#100b07',
+  surface: '#282016',
+  'surface-alt': '#332920',
+  border: '#5c4a34',
+  ink: '#f5ecd8',
+  text: '#d8c8a8',
+  'text-dim': '#a08858',
+  accent: '#b5652f',
+  'accent-bright': '#d68a52',
+  accent2: '#2f8a7a',
+  'accent2-bright': '#4fb3a0',
+  verdict: '#4a3418',
+  'verdict-bright': '#7a5c2a',
+  glow: 'rgba(181,101,47,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Nubie / Koush"
+  serie="Peuples & Cultures du Monde"
+  description="Un royaume qui a gouverné l'Égypte pendant près d'un siècle sous sa propre XXVe dynastie, laissé plus de pyramides que l'Égypte elle-même — plus de deux cents, plus petites et bien plus effilées — et dont une reine borgne a tenu tête à Rome."
+  href="culture-nubie-koush.html"
+  egg="nubie"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="NAPATA · MÉROÉ"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Le royaume qui a conquis ses conquérants</p>
+  <p class="tagline" slot="hero">
+    Longtemps traité par l'égyptologie occidentale comme un simple voisin mineur de l'Égypte,
+    le royaume de Koush l'a pourtant gouvernée pendant près d'un siècle, a bâti plus de
+    pyramides qu'elle, et a tenu tête à l'Empire romain — une histoire trop souvent réduite
+    à une note de bas de page.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="Le long des cataractes du Nil"
+    intro="Le royaume de Koush s'étend en amont de l'Égypte, le long du Nil soudanais, structuré autour de trois capitales successives : Kerma, Napata puis Méroé.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+        <path d="M200 10 Q170 120 200 220 Q220 280 190 330" fill="none" stroke="#2f8a7a" stroke-width="10" opacity="0.55"/>
+        <circle cx="196" cy="70" r="6" fill="#d68a52"/>
+        <text x="220" y="74" fill="#d8c8a8" font-size="11">Kerma</text>
+        <circle cx="192" cy="160" r="7" fill="#b5652f"/>
+        <text x="216" y="164" fill="#e8dcc8" font-size="12" font-family="Cinzel, serif">Napata</text>
+        <circle cx="200" cy="250" r="7" fill="#e8c164"/>
+        <text x="224" y="254" fill="#e8dcc8" font-size="12" font-family="Cinzel, serif">Méroé</text>
+        <text x="60" y="30" fill="#7d94a0" font-size="10" font-style="italic">vers l'Égypte</text>
+      </svg>
+    </div>
+    <p class="map-caption">Trois capitales successives en remontant le Nil vers le sud : Kerma (la plus ancienne), Napata (près du Djebel Barkal) puis Méroé, où se concentrent la plupart des pyramides encore visibles aujourd'hui.</p>
+    <div class="card-grid">
+      <InfoCard title="Kerma" sub="v. 2500-1500 av. J.-C." body="Première grande capitale koushite, dotée d'un immense temple-forteresse en brique crue (le « Deffufa »), rivale directe de l'Égypte pharaonique dès le Moyen Empire." />
+      <InfoCard title="Napata et le Djebel Barkal" sub="Capitale depuis c. 900 av. J.-C." body="Ville sainte adossée à une montagne sacrée identifiée à une résidence d'Amon, où les rois de la XXVe dynastie continueront à se faire couronner même après avoir déplacé leur capitale à Méroé." />
+      <InfoCard title="Méroé" sub="Capitale depuis c. 590 av. J.-C." body="Cité industrielle et religieuse, célèbre pour son quartier royal et pour la concentration la plus dense de pyramides du monde antique." />
+      <InfoCard title="Les cataractes du Nil" sub="Frontière naturelle" body="Une série de rapides rocheux qui ont longtemps freiné la navigation continue entre Égypte et Nubie, façonnant deux zones culturelles distinctes malgré leur proximité géographique." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Rois-prêtres, reines guerrières et forgerons" intro="Une société où la légitimité royale passe par le culte d'Amon adopté d'Égypte, mais où le pouvoir politique et parfois militaire revient régulièrement à des reines, une spécificité que l'Égypte voisine ne connaît pas au même degré.">
+    <div class="card-grid wide">
+      <FigureCard name="Les rois de Napata puis Méroé" role="Souveraineté sacrée" tags={['Culte d\'Amon', 'Élection divine']} body="Le roi est théoriquement désigné par l'oracle d'Amon au Djebel Barkal — un mécanisme de légitimation religieuse directement inspiré de l'Égypte, mais maintenu bien après que Koush ait cessé de la contrôler." />
+      <FigureCard name="Les kandakés (candaces)" role="Reines régnantes ou co-régentes" tags={['Pouvoir féminin', 'Titre royal']} body="Titre porté par plusieurs femmes qui règnent seules ou aux côtés d'un roi, avec une autorité politique et parfois militaire directe — un rôle bien plus institutionnalisé qu'en Égypte pharaonique contemporaine." />
+      <FigureCard name="Les prêtres d'Amon de Napata" role="Pouvoir religieux" tags={['Djebel Barkal', 'Légitimation royale']} body="Gardiens du sanctuaire où se joue, selon la tradition rapportée par les sources grecques, la désignation divine du souverain — un pouvoir religieux à la fois complémentaire et parfois concurrent de l'autorité royale." />
+      <FigureCard name="Les artisans du fer de Méroé" role="Industrie métallurgique" tags={['Sidérurgie', 'Exportation']} body="Une véritable industrie sidérurgique s'installe à Méroé, valant à la cité le surnom moderne de « Birmingham de l'Afrique antique » forgé par l'archéologue Anthony Arkell." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Ceux qui ont fait Koush">
+    <div class="card-grid wide">
+      <FigureCard name="Piye" role="Fondateur de la XXVe dynastie" tags={['v. 744-714 av. J.-C.']} body="Conquiert l'Égypte fragmentée et fonde une dynastie koushite qui la gouvernera durant près d'un siècle ; sa stèle de victoire, très pieuse, raconte qu'il refuse l'hommage des princes égyptiens dont les chevaux ont été maltraités pendant le siège." />
+      <FigureCard name="Taharqa" role="Pharaon-bâtisseur, mentionné dans la Bible" tags={['690-664 av. J.-C.']} body="Souverain le plus connu de la dynastie, cité sous le nom de « Tirhaka, roi de Koush » dans le second Livre des Rois ; il agrandit considérablement les grands temples égyptiens avant de devoir affronter l'invasion assyrienne." />
+      <FigureCard name="Amanirenas" role="Kandaké, adversaire de Rome" tags={['règne v. 40-10 av. J.-C.']} body="Décrite par l'historien grec Strabon comme borgne, elle mène une campagne militaire contre les garnisons romaines d'Égypte vers 27-24 av. J.-C., fait enterrer une tête de statue en bronze de l'empereur Auguste sous le seuil d'un temple de Méroé — une insulte délibérée retrouvée par l'archéologie — puis négocie un traité relativement favorable avec Rome." />
+      <FigureCard name="Natakamani et Amanitore" role="Couple royal bâtisseur" tags={['Ier siècle apr. J.-C.']} body="Règnent ensemble et lancent l'un des plus vastes programmes de construction de temples et de pyramides de toute l'histoire méroïtique, laissant certains des monuments les mieux conservés du site." />
+      <FigureCard name="Francis Llewellyn Griffith" role="Déchiffreur du méroïtique" tags={['1909']} body="Égyptologue britannique qui établit les valeurs phonétiques de l'écriture méroïtique en 1909 — une avancée qui permet de lire les textes à voix haute sans, à ce jour, en comprendre pleinement le sens." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="De la conquête de l'Égypte au sac romain">
+    <StoryBlock num="Épisode I" title="Piye conquiert l'Égypte" body="Face à une Égypte fragmentée entre plusieurs princes locaux, Piye descend le Nil, prend ville après ville et impose sa suzeraineté sans même s'installer durablement sur place, préférant repartir vers Napata après avoir fait reconnaître son autorité — un choix qui distingue sa conquête d'une simple annexion." />
+    <StoryBlock num="Épisode II" title="L'expulsion assyrienne" body="Sous Taharqa puis son successeur Tanoutamon, les rois assyriens Esarhaddon et Assurbanipal envahissent l'Égypte à plusieurs reprises et repoussent progressivement les Koushites vers le sud, mettant fin en 656 av. J.-C. à près d'un siècle de domination koushite sur l'Égypte." />
+    <StoryBlock num="Épisode III" title="Le transfert de la capitale à Méroé" body="Après un raid égyptien sur Napata vers 593 av. J.-C., le centre politique du royaume se déplace progressivement plus au sud, à Méroé — plus loin des frontières égyptiennes, mais aussi plus proche des routes commerciales vers l'Afrique subsaharienne." />
+    <StoryBlock num="Épisode IV" title="Amanirenas contre Rome" body={["Après l'annexion romaine de l'Égypte en 30 av. J.-C., des tensions frontalières dégénèrent en conflit ouvert : les troupes koushites attaquent des garnisons romaines et rapportent notamment la tête d'une statue de bronze d'Auguste, enterrée sous le seuil d'un temple de Méroé pour que chacun continue littéralement de marcher dessus.", "Le préfet romain d'Égypte riposte, mais les deux camps finissent par négocier un traité relativement équilibré vers 21-20 av. J.-C. — un dénouement rare pour un royaume africain face à Rome à cette époque."]} quote="Elle rapporta la tête de César, qu'elle fit enterrer sous le seuil d'un temple, pour que le peuple pût la fouler aux pieds à jamais." cite="D'après Strabon, Géographie, XVII" />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="Le fer, l'écriture propre et la pyramide effilée">
+    <div class="card-grid compact">
+      <MiniCard title="L'écriture méroïtique" tag="Système propre, non déchiffré" body="Un alphabet-syllabaire d'une vingtaine de signes, en partie dérivé de l'écriture égyptienne mais adapté à une langue africaine distincte — dont les valeurs phonétiques sont connues depuis 1909, sans que le sens de la plupart des textes soit compris." />
+      <MiniCard title="La sidérurgie de Méroé" tag="Industrie du fer" body="D'importants gisements de minerai et des réserves de bois pour le charbon de bois font de Méroé un centre de production de fer majeur pour son époque, avec des monticules de scories encore visibles aujourd'hui." />
+      <MiniCard title="La pyramide méroïtique" tag="Angle plus raide, taille réduite" body="Plus de deux cents pyramides recensées, plus nombreuses qu'en Égypte, mais nettement plus petites et bâties selon un angle beaucoup plus raide — une signature architecturale propre, pas une simple copie égyptienne." />
+      <MiniCard title="Les hafirs" tag="Gestion de l'eau" body="Grands réservoirs artificiels creusés loin du Nil pour capter les eaux de pluie saisonnières et permettre l'élevage dans des zones autrement trop arides." />
+      <MiniCard title="L'archerie koushite" tag="Réputation antique" body="Les Égyptiens eux-mêmes désignaient une partie de la Nubie « Ta-Seti », le pays de l'arc — une réputation militaire suffisamment forte pour laisser une trace directe dans la toponymie égyptienne." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et curiosités">
+    <div class="card-grid compact">
+      <MiniCard title="Plus de pyramides qu'en Égypte" tag="Fait souvent ignoré" body="Le Soudan compte plus de pyramides que l'Égypte — environ deux cents à Méroé contre une centaine de grandes pyramides égyptiennes reconnues — un fait que la notoriété touristique inverse presque totalement." />
+      <MiniCard title="Les « pharaons noirs », un terme tardif" tag="Redécouverte occidentale" body="L'expression n'apparaît dans les grandes expositions et la presse occidentales qu'à la fin du XXe siècle : l'égyptologie classique a longtemps traité la XXVe dynastie comme une parenthèse mineure plutôt que comme une puissance impériale à part entière." />
+      <MiniCard title="Une reine borgne face à Rome" tag="Amanirenas" body="Strabon la décrit explicitement comme borgne, sans que cela affecte en rien son autorité militaire — un détail physique rapporté par une source hostile, pas par la tradition koushite elle-même." />
+      <MiniCard title="Aethiopia, un nom trompeur" tag="Confusion géographique" body="Les auteurs grecs et romains désignaient la Nubie sous le nom d'« Éthiopie » (« pays des visages brûlés ») — un terme sans rapport direct avec l'Éthiopie moderne, source de confusions encore fréquentes aujourd'hui." />
+      <MiniCard title="Amon, dieu importé et réapproprié" tag="Djebel Barkal" body="Le culte d'Amon, importé d'Égypte, s'installe si durablement à Napata que les rois koushites continueront à s'y faire introniser des siècles après la fin de leur domination sur l'Égypte elle-même." />
+      <MiniCard title="Apedemak, le dieu-lion propre à Koush" tag="Panthéon distinct" body="Aux côtés des emprunts égyptiens, Koush vénère des divinités qui lui sont propres, comme le dieu-lion guerrier Apedemak, absent du panthéon égyptien classique." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="Entre temple d'Amon et forge de fer"
+    intro="La vie quotidienne méroïtique se documente surtout par l'archéologie plutôt que par des récits directs à la manière du témoignage de Zhou Daguan sur Angkor : temples, ateliers métallurgiques et céramiques peintes en sont les principales sources."
+    scrollFx="pyramideMeroe">
+    <div class="card-grid compact">
+      <MiniCard title="Les processions royales au Djebel Barkal" tag="Cérémonial religieux" body="Les couronnements et grandes fêtes religieuses se déroulent au pied de la montagne sacrée, identifiée dans la tradition comme une demeure d'Amon lui-même." />
+      <MiniCard title="La céramique méroïtique peinte" tag="Artisanat raffiné" body="Une poterie fine à décor peint, souvent citée comme l'une des plus élégantes de l'Afrique antique, témoigne d'un artisanat de luxe distinct des modèles égyptiens." />
+      <MiniCard title="Les ateliers de forge" tag="Vie ouvrière" body="Autour des monticules de scories encore visibles à Méroé s'organisait une activité artisanale et industrielle qui employait une main-d'œuvre spécialisée considérable." />
+      <MiniCard title="L'élevage autour des hafirs" tag="Adaptation à l'aridité" body="Les grands réservoirs artificiels permettaient de maintenir des troupeaux loin du Nil, structurant un mode de vie semi-pastoral complémentaire de l'agriculture irriguée." />
+      <MiniCard title="Le commerce caravanier" tag="Ivoire, or, ébène" body="Méroé sert de plaque tournante pour des marchandises venues d'Afrique plus profonde — ivoire, or, ébène, animaux exotiques — revendues ensuite vers l'Égypte et la Méditerranée." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="Entre Égypte, Rome et l'Afrique profonde">
+    <div class="card-grid">
+      <InfoCard title="La XXVe dynastie égyptienne" sub="Domination directe" body="Pendant près d'un siècle, des rois koushites règnent directement sur l'Égypte elle-même, y compris sur la Basse-Égypte, avant l'expulsion assyrienne." />
+      <InfoCard title="Le traité avec Rome" sub="v. 21-20 av. J.-C." body="Après le conflit mené par Amanirenas, un accord relativement favorable à Koush marque l'une des rares négociations d'égal à égal entre un royaume africain et Rome à cette époque." />
+      <InfoCard title="Les routes commerciales subsahariennes" sub="Ivoire, or, ébène" body="Méroé sert d'intermédiaire commercial entre l'Afrique de l'Est et du Centre et le monde méditerranéen, une position stratégique qui explique une bonne part de sa prospérité." />
+      <InfoCard title="Les royaumes chrétiens nubiens" sub="Nobatie, Makurie, Alodia" body="Après le déclin de Méroé, des royaumes chrétiens nubiens perpétuent une continuité politique dans la même région pendant près d'un millénaire, jusqu'à l'expansion islamique médiévale." />
+      <InfoCard title="Le Soudan contemporain" sub="Identité nationale" body="Le Soudan moderne revendique aujourd'hui explicitement l'héritage de Koush comme une part centrale de son identité nationale et de son offre touristique naissante." />
+      <InfoCard title="L'ougaritologie... et la méroïtologie" sub="Discipline universitaire" body="L'étude de la langue et de l'écriture méroïtiques reste un champ de recherche actif, freiné par le petit nombre de textes longs disponibles pour la comparaison." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. 2500-1500 av. J.-C.', title: 'Royaume de Kerma', body: "Première grande puissance nubienne, rivale directe de l'Égypte du Moyen Empire, dotée de son propre temple-forteresse monumental." },
+      { year: 'v. 1500-1070 av. J.-C.', title: 'Colonisation égyptienne de la Nubie', body: "Le Nouvel Empire égyptien administre directement la région, imposant durablement le culte d'Amon et l'écriture hiéroglyphique." },
+      { year: 'v. 1070 av. J.-C.', title: 'Retrait égyptien', body: "L'affaiblissement du pouvoir central égyptien permet l'émergence d'un royaume koushite indépendant centré sur Napata." },
+      { year: 'v. 744-714 av. J.-C.', title: 'Piye conquiert l\'Égypte', body: "Fondation de la XXVe dynastie égyptienne d'origine koushite." },
+      { year: '690-664 av. J.-C.', title: 'Règne de Taharqa', body: "Apogée de la dynastie koushite en Égypte, mentionné dans la Bible hébraïque ; grands travaux dans les temples égyptiens." },
+      { year: '671-663 av. J.-C.', title: 'Invasions assyriennes', body: "Esarhaddon puis Assurbanipal repoussent progressivement les rois koushites hors d'Égypte." },
+      { year: '656 av. J.-C.', title: 'Fin de la domination koushite sur l\'Égypte', body: "Défaite de Tanoutamon, dernier roi de la XXVe dynastie à avoir tenté de reconquérir l'Égypte." },
+      { year: 'v. 593 av. J.-C.', title: 'Raid égyptien sur Napata', body: "Le pharaon Psammétique II attaque Napata, accélérant le déplacement du centre politique koushite vers le sud." },
+      { year: 'v. 590 av. J.-C. et après', title: 'Essor de Méroé comme capitale', body: "Méroé devient le principal centre politique et religieux du royaume, loin des frontières égyptiennes." },
+      { year: 'v. 27-24 av. J.-C.', title: 'Guerre d\'Amanirenas contre Rome', body: "Attaques koushites contre les garnisons romaines d'Égypte après l'annexion romaine du pays." },
+      { year: 'v. 21-20 av. J.-C.', title: 'Traité entre Koush et Rome', body: "Accord de paix relativement favorable négocié après le conflit, sur l'île de Samos selon la tradition rapportée par les sources antiques." },
+      { year: 'Ier siècle apr. J.-C.', title: 'Règne de Natakamani et Amanitore', body: "Vaste programme de construction de temples et de pyramides, parmi les mieux conservés du site aujourd'hui." },
+      { year: 'v. IVe siècle apr. J.-C.', title: 'Déclin du royaume de Méroé', body: "Affaibli par des facteurs multiples et débattus, le royaume décline ; une inscription du roi aksoumite Ezana évoque une intervention dans la région, dont la portée exacte reste discutée par les historiens." },
+      { year: '1909', title: 'Déchiffrement phonétique du méroïtique', body: "Francis Llewellyn Griffith établit la lecture des signes, sans percer le sens de la langue elle-même." },
+      { year: '2011', title: 'Classement UNESCO des sites de Méroé', body: "Les pyramides et sites archéologiques de la région de Méroé rejoignent la liste du patrimoine mondial." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que Koush laisse encore">
+    <HeritageBlock title="Une fierté nationale soudanaise" body="Le Soudan contemporain met en avant l'héritage de Koush comme un pilier de son identité nationale, distinct de l'héritage égyptien voisin bien plus médiatisé." />
+    <HeritageBlock title="Une discipline de recherche encore ouverte" body="Le déchiffrement complet de la langue méroïtique reste un objectif de recherche actif — l'un des rares grands systèmes d'écriture antiques dont on sait lire les sons sans en comprendre pleinement le sens." />
+    <HeritageBlock title="Un tourisme archéologique naissant" body="Les pyramides de Méroé restent aujourd'hui bien moins visitées que les sites égyptiens comparables, malgré leur nombre et leur classement au patrimoine mondial." />
+    <CautionBox>
+      L'égyptologie occidentale a longtemps traité la XXVe dynastie koushite comme une simple
+      parenthèse « étrangère » dans l'histoire égyptienne plutôt que comme ce qu'elle a été :
+      une puissance impériale africaine qui a gouverné l'Égypte selon ses propres termes
+      pendant près d'un siècle. Le musée national de Khartoum, qui conservait une part
+      importante de ce patrimoine, a par ailleurs subi des dommages documentés pendant le
+      conflit soudanais récent — un rappel que cet héritage reste vulnérable dans le présent,
+      pas seulement menacé par l'oubli historiographique.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "László Török, The Kingdom of Kush: Handbook of the Napatan-Meroitic Civilization, Brill, 1997", note: "Synthèse de référence sur l'histoire politique et sociale de Koush, citée en #peuples et #frise." },
+    { label: "Derek A. Welsby, The Kingdom of Kush: The Napatan and Meroitic Empires, British Museum Press, 1996", note: "Étude de référence sur l'architecture, la pyramide méroïtique et la sidérurgie citées en #inventions." },
+    { label: "Strabon, Géographie, Livre XVII (trad. française, Les Belles Lettres)", note: "Source antique du récit d'Amanirenas et du traité avec Rome cité en #recits et #anecdotes." },
+    { label: "UNESCO, Centre du patrimoine mondial, « Île de Méroé » (n° 1336), inscrit en 2011", url: "https://whc.unesco.org/en/list/1336/", note: "Statut patrimonial des sites de Méroé cité en #frise et #heritage." },
+  ]} />
+</PageLayout>

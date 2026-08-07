@@ -1,0 +1,274 @@
+---
+/*
+  Mythologie Hittite — vingt-cinquième mythologie de la série. Structure
+  imposée par docs/plans/plan-serie-mythologies.md : 10 sections fixes.
+
+  #royaumes : cosmologie hittito-hourrite en générations de dieux du ciel
+  (Alalu, Anu, Kumarbi, Teshub) plutôt qu'un empilement de niveaux — une
+  théogonie de succession, authentiquement attestée par les tablettes de
+  Hattusa, pas un chiffre emprunté à un autre chapitre.
+
+  Point notable : le cycle de Kumarbi (castration d'Anu, naissance de
+  Teshub) présente des parallèles structurels frappants avec la Théogonie
+  d'Hésiode (Ouranos/Cronos) — un lien de transmission via l'Anatolie
+  largement discuté par les hittitologues, mentionné en #anecdotes comme
+  hypothèse sérieuse, pas comme fait tranché.
+
+  Effets : data-egg="hittite" + data-scroll-fx="illuyankaSerpent" sur
+  #pantheon — un serpent-dragon qui s'enroule puis se dénoue et s'efface.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
+import InteractiveGenealogy from '../components/InteractiveGenealogy.astro';
+
+const HITTITE_HOUSES = {
+  anciens: { head: '#6a5a4a', normal: '#a09080', dim: '#8a8070' },
+  teshub: { head: '#2a4a8a', normal: '#5a7ec4', dim: '#8a8070' },
+  arinna: { head: '#c9982f', normal: '#e8c164', dim: '#8a8070' },
+};
+const HITTITE_HOUSE_LABELS = {
+  anciens: 'Les Anciens Dieux', teshub: 'Maison de Teshub', arinna: "Maison d'Arinna",
+};
+const HITTITE_NODES = [
+  { id: 'alalu', label: 'Alalu', house: 'anciens', head: true, x: 110, y: 60, detail: "Premier roi des dieux selon le cycle de Kumarbi, renversé après neuf ans de règne — le point de départ d'une théogonie de succession violente." },
+  { id: 'anu', label: 'Anu', house: 'anciens', x: 110, y: 190, detail: "Renverse Alalu puis règne à son tour, avant d'être mutilé par Kumarbi lui-même — un dieu du ciel dont la défaite féconde, littéralement, la génération suivante." },
+  { id: 'kumarbi', label: 'Kumarbi', house: 'teshub', head: true, x: 380, y: 60, detail: "Mord et avale le sexe d'Anu lors de leur affrontement, devenant ainsi porteur de plusieurs dieux dont Teshub, qui finira par le renverser à son tour." },
+  { id: 'teshub', label: 'Teshub', house: 'teshub', x: 380, y: 190, detail: "Dieu de l'orage, souverain du panthéon hittite historique, dont la naissance même sort du corps de son prédécesseur et rival Kumarbi." },
+  { id: 'arinna', label: "Déesse Soleil d'Arinna", house: 'arinna', head: true, x: 630, y: 60, detail: "Divinité solaire féminine, épouse rituelle de Teshub et chef suprême du panthéon officiel hittite — un cas rare de divinité solaire au féminin dans une tradition proche-orientale ancienne." },
+  { id: 'telipinu', label: 'Telipinu', house: 'arinna', x: 630, y: 190, detail: "Fils de Teshub, dieu de la végétation dont la colère et la disparition provoquent la stérilité du monde — jusqu'à ce qu'une abeille le retrouve." },
+];
+const HITTITE_EDGES = [
+  ['alalu', 'anu', 'special'], ['anu', 'kumarbi', 'special'], ['kumarbi', 'teshub', 'filiation'],
+  ['teshub', 'arinna', 'union'], ['teshub', 'telipinu', 'filiation'],
+];
+
+/* Basalte anatolien, bleu-gris de l'orage, bronze des premiers alliages :
+   la matière hittite plutôt qu'une palette "Moyen-Orient" déjà utilisée
+   par la page cananéenne. */
+const palette = {
+  bg: '#14161a',
+  'bg-deep': '#0a0b0d',
+  surface: '#1e2126',
+  'surface-alt': '#282c32',
+  border: '#4a5058',
+  ink: '#eef0f2',
+  text: '#c8ccd0',
+  'text-dim': '#84888e',
+  accent: '#4a5c8a',
+  'accent-bright': '#7a94c4',
+  accent2: '#8a6a3a',
+  'accent2-bright': '#c49a5e',
+  verdict: '#3a2e1e',
+  'verdict-bright': '#5c4a30',
+  glow: 'rgba(74,92,138,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Générations' },
+  { id: 'pantheon', nav: 'Panthéon' },
+  { id: 'genealogie', nav: 'Généalogie' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const generations = [
+  { num: 'I', title: 'Les Anciens Dieux', sub: 'Alalu et Anu', body: "Deux souverains célestes déchus l'un après l'autre — Alalu renversé par Anu, qui subira ensuite le même sort face à Kumarbi." },
+  { num: 'II', title: 'Kumarbi', sub: 'Le père déposé', body: "Devient porteur de plusieurs dieux après avoir mutilé Anu, avant d'être à son tour renversé par l'un de ses propres « enfants », Teshub." },
+  { num: 'III', title: "Teshub et l'Arinna", sub: 'Le panthéon régnant', body: "Le dieu de l'orage et la déesse solaire d'Arinna forment le sommet du panthéon officiel hittite historiquement attesté par les tablettes de Hattusa." },
+];
+---
+<PageLayout
+  title="Mythologie Hittite"
+  serie="Mythologies du Monde"
+  description="Le combat du dieu de l'orage contre le dragon Illuyanka, l'un des plus anciens récits de combat contre un dragon jamais mis par écrit — et un cycle de succession divine (Kumarbi) aux parallèles frappants avec la Théogonie grecque, révélés par les 30 000 tablettes cunéiformes de la capitale Hattusa."
+  href="mythologie-hittite.html"
+  egg="hittite"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="𒀭𒌋 HATTUSA"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Teshub · Illuyanka · Kumarbi</p>
+  <p class="tagline" slot="hero">
+    Un dragon terrassé par la ruse plutôt que par la seule force, un père des dieux mutilé
+    par son propre héritier, et une déesse du soleil au sommet du panthéon — l'un des plus
+    anciens corpus mythologiques écrits jamais retrouvés, gravé dans l'argile de l'Anatolie
+    du bronze.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="Trois générations de dieux du ciel"
+    intro="Plutôt qu'un empilement de niveaux cosmiques, la théogonie hittito-hourrite raconte une succession violente de souverains célestes déposés l'un après l'autre — une structure authentiquement attestée par les tablettes de Hattusa.">
+    <Fragment slot="title"><Decode glyphs="hittite">Trois générations de dieux du ciel</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="120" cy="100" r="30" fill="none" stroke="#84888e" stroke-width="2"/>
+        <text x="120" y="105" text-anchor="middle" fill="#c8ccd0" font-size="11" font-family="Cinzel, serif">ALALU/ANU</text>
+        <path d="M155 100 L245 100" stroke="#7a94c4" stroke-width="2"/>
+        <circle cx="300" cy="100" r="34" fill="none" stroke="#c49a5e" stroke-width="2"/>
+        <text x="300" y="105" text-anchor="middle" fill="#c49a5e" font-size="11" font-family="Cinzel, serif">KUMARBI</text>
+        <path d="M338 100 L440 100" stroke="#7a94c4" stroke-width="2"/>
+        <circle cx="490" cy="100" r="36" fill="none" stroke="#7a94c4" stroke-width="2"/>
+        <text x="490" y="105" text-anchor="middle" fill="#e8c164" font-size="11" font-family="Cinzel, serif">TESHUB</text>
+      </svg>
+    </div>
+    <p class="map-caption">Chaque génération dépose la précédente — une théogonie de succession, pas un panthéon figé, directement comparable au cycle grec Ouranos/Cronos/Zeus.</p>
+    <div class="card-grid compact">
+      {generations.map((g) => <InfoCard {...g} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~14 divinités majeures" title="Le panthéon hittito-hourrite" scrollFx="illuyankaSerpent">
+    <Fragment slot="title"><Decode glyphs="hittite">Le panthéon hittito-hourrite</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Teshub (Tarhunna)" role="Dieu de l'orage, souverain" tags={['Panthéon régnant', 'Foudre']} body="Chef du panthéon officiel hittite, sa naissance sort littéralement du corps de son prédécesseur Kumarbi — une théogonie de renversement plutôt que d'harmonie familiale." />
+      <FigureCard name="Déesse Soleil d'Arinna" role="Chef suprême féminin du panthéon" tags={['Solaire', 'Épouse rituelle de Teshub']} body="Divinité solaire féminine à la tête du panthéon officiel — une configuration rare parmi les grandes religions proche-orientales anciennes, où le soleil est le plus souvent masculin." />
+      <FigureCard name="Kumarbi" role="Père déposé" tags={['Cycle de succession', 'Anatolie/Hourrite']} body="Mutile son prédécesseur Anu et devient porteur malgré lui de plusieurs dieux, dont Teshub, qui le renversera à son tour — un père destitué par son propre héritage biologique." />
+      <FigureCard name="Anu" role="Ancien dieu du ciel" tags={['Déposé', 'Fécond dans la défaite']} body="Renversé et mutilé par Kumarbi ; la légende retient moins son règne que sa chute, qui engendre paradoxalement la génération suivante de dieux." />
+      <FigureCard name="Illuyanka" role="Dragon-serpent" tags={['Adversaire de Teshub', 'Deux versions du mythe']} body="Le grand adversaire du dieu de l'orage dans l'un des plus anciens récits connus de combat contre un dragon, vaincu par la ruse plus que par la seule force." />
+      <FigureCard name="Inara" role="Fille du dieu de l'orage" tags={['Alliée mortelle', 'Piège du festin']} body="Organise, avec l'aide du mortel Hupasiya, le festin où Illuyanka s'enivre avant d'être vaincu — une divinité qui agit par stratagème plutôt que par la force brute." />
+      <FigureCard name="Telipinu" role="Dieu de la végétation" tags={['Disparition', 'Colère apaisée']} body="Sa colère et sa disparition assèchent le monde ; son retour, obtenu par une abeille et un rituel d'apaisement, restaure la fertilité — un mythe agraire d'une grande douceur psychologique." />
+      <FigureCard name="Hannahanna" role="Déesse grand-mère" tags={['Recherche de Telipinu', 'Sagesse']} body="Orchestre la recherche du dieu disparu Telipinu, mobilisant les autres divinités et jusqu'à une simple abeille pour le retrouver." />
+      <FigureCard name="Hebat" role="Mère divine hourrite" tags={['Parèdre de Teshub', 'Yazılıkaya']} body="Grande déesse hourrite intégrée au panthéon hittite tardif, figurée aux côtés de Teshub sur les reliefs du sanctuaire rupestre de Yazılıkaya." />
+      <FigureCard name="Sharruma" role="Fils de Teshub et Hebat" tags={['Yazılıkaya', 'Jeune dieu']} body="Représenté sur les reliefs de Yazılıkaya aux côtés de ses parents divins, complétant la triade familiale du panthéon impérial tardif." />
+      <FigureCard name="Kubaba" role="Grande déesse d'Anatolie" tags={['Ancêtre de Cybèle']} body="Déesse anatolienne dont le culte se prolonge bien après la chute hittite, jusqu'à influencer directement la Cybèle du monde grec puis romain." />
+      <FigureCard name="Le Soleil du Ciel et le Soleil de la Terre" role="Double principe solaire" tags={['Théologie distinctive']} body="Les textes hittites distinguent explicitement un soleil céleste et un soleil souterrain lié au monde des morts — une théologie solaire à deux niveaux rarement attestée aussi clairement ailleurs." />
+      <FigureCard name="Pirwa" role="Divinité tutélaire équestre" tags={['Protection royale']} body="Divinité associée au cheval et à la protection, dont le culte reste attesté sans que sa nature exacte soit toujours bien précisée par les textes retrouvés." />
+      <FigureCard name="Les Mille Dieux de Hatti" role="Formule collective des traités" tags={['Pluralisme religieux', 'Garants des serments']} body="Formule récurrente des traités hittites invoquant collectivement l'ensemble indéfini des dieux du royaume comme garants des serments — un signe explicite de pluralisme religieux assumé plutôt que d'orthodoxie stricte." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 générations de succession"
+    title="Une théogonie de renversements"
+    intro="Contrairement à un arbre familial paisible, chaque génération de cette lignée dépose la précédente par la ruse ou la violence — une structure de succession plutôt qu'une simple filiation, directement comparable au cycle grec Ouranos/Cronos/Zeus.">
+    <Fragment slot="title"><Decode glyphs="hittite">Une théogonie de renversements</Decode></Fragment>
+    <InteractiveGenealogy
+      nodes={HITTITE_NODES}
+      edges={HITTITE_EDGES}
+      houses={HITTITE_HOUSES}
+      houseLabels={HITTITE_HOUSE_LABELS}
+      glyphs="𒀭𒌋𒆠𒂗"
+      viewBox={{ w: 700, h: 260 }}
+      lineColor="#4a5058"
+    />
+    <p class="map-caption">Les liens marqués « spécial » (Alalu→Anu, Anu→Kumarbi) sont des renversements violents, pas des transmissions pacifiques — le trait plein réservé ici à la seule filiation directe de sang.</p>
+  </Section>
+
+  <Section id="creatures" label="7 êtres notables" title="Dragons, géants et animaux sacrés">
+    <Fragment slot="title"><Decode glyphs="hittite">Dragons, géants et animaux sacrés</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Illuyanka" tag="Dragon-serpent" body="Le grand adversaire du dieu de l'orage, dont le nom même signifie simplement « serpent » dans les langues anatoliennes anciennes." />
+      <MiniCard title="Ullikummi" tag="Géant de pierre" body="Créature monstrueuse engendrée par Kumarbi pour renverser Teshub, croissant depuis le fond de la mer jusqu'à menacer le ciel lui-même — un parallèle frappant avec le Typhon grec." />
+      <MiniCard title="Le taureau de Teshub" tag="Animal sacré" body="Le taureau sert d'attribut et de monture symbolique au dieu de l'orage, une association bovine partagée par de nombreuses divinités de l'orage proche-orientales." />
+      <MiniCard title="L'aigle bicéphale" tag="Motif à longue postérité" body="Le premier aigle à deux têtes connu de l'art mondial apparaît sur des sceaux et reliefs hittites, bien avant sa reprise par les traditions byzantine, seldjoukide puis héraldique européenne." />
+      <MiniCard title="Les sphinx de Hattusa" tag="Gardiens monumentaux" body="Des sphinx de pierre gardent certaines portes de la capitale hittite, témoignant d'échanges artistiques avec l'Égypte et le Proche-Orient plus large." />
+      <MiniCard title="Les lions de la Porte des Lions" tag="Gardiens monumentaux" body="Des lions sculptés protègent l'une des principales entrées fortifiées de Hattusa, dans un style qui influencera l'art anatolien ultérieur." />
+      <MiniCard title="Le lion de Kubaba" tag="Attribut divin" body="La grande déesse anatolienne Kubaba est traditionnellement représentée accompagnée d'un lion, un attribut qu'elle transmettra à la Cybèle gréco-romaine." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="9 légendes" title="Les grands récits hittites">
+    <Fragment slot="title"><Decode glyphs="hittite">Les grands récits hittites</Decode></Fragment>
+    <StoryBlock num="Légende I" title="Illuyanka contre Teshub, première version" body="Le dragon Illuyanka vainc d'abord le dieu de l'orage et lui dérobe cœur et yeux. Teshub s'unit à une mortelle dont il a un fils, qui épouse ensuite la fille d'Illuyanka et récupère ainsi les organes volés de son père ; Teshub, restauré, tue le dragon — mais son propre fils, resté du côté du dragon par loyauté conjugale, périt avec lui." />
+    <StoryBlock num="Légende II" title="Illuyanka contre Teshub, seconde version" body={["Vaincu une première fois, Teshub sollicite l'aide de sa fille Inara, qui organise un grand festin où elle enivre Illuyanka et toute sa descendance.", "Le mortel Hupasiya, séduit par Inara en échange de son aide, ligote le dragon ivre, permettant à Teshub de le tuer enfin — l'une des plus anciennes victoires de la ruse sur la force brute jamais mises par écrit."]} quote="Ivre, le dragon ne pouvait plus regagner son trou." cite="Résumé du mythe d'Illuyanka, tablette de Hattusa" />
+    <StoryBlock num="Légende III" title="La castration d'Anu par Kumarbi" body="Kumarbi affronte Anu, le mord et avale son sexe, devenant ainsi porteur malgré lui de plusieurs divinités dont Teshub — un motif de succession violente aux parallèles frappants avec la castration d'Ouranos par Cronos dans la Théogonie d'Hésiode, plusieurs siècles plus tard." />
+    <StoryBlock num="Légende IV" title="Le chant d'Ullikummi" body="Pour se venger de Teshub, Kumarbi engendre un gigantesque être de pierre, Ullikummi, qui croît depuis le fond marin jusqu'à menacer de crever le ciel. Les dieux, désespérés, retrouvent l'antique outil qui avait autrefois séparé le ciel de la terre et l'utilisent pour trancher le géant à la cheville, le rendant enfin vulnérable." />
+    <StoryBlock num="Légende V" title="La disparition de Telipinu" body="Furieux pour une raison que le texte ne précise jamais clairement, le dieu de la végétation Telipinu quitte le monde, provoquant sécheresse et stérilité universelles. Après une recherche menée par plusieurs dieux, c'est une simple abeille qui le retrouve endormi et le pique pour le réveiller ; un rituel d'apaisement calme enfin sa colère et restaure la fertilité du monde." />
+    <StoryBlock num="Légende VI" title="Le mariage de Teshub et Hebat" body="L'intégration de la grande déesse hourrite Hebat au panthéon hittite comme parèdre de Teshub illustre la façon dont l'empire absorbe et fusionne les traditions religieuses des peuples conquis ou alliés plutôt que de les effacer." />
+    <StoryBlock num="Légende VII" title="Le traité de Kadesh et ses dieux témoins" body="Le traité de paix conclu entre Hattusili III et Ramsès II invoque solennellement les « Mille Dieux de Hatti » aux côtés des divinités égyptiennes comme garants du serment — un texte diplomatique où le panthéon entier sert littéralement de tribunal international." />
+    <StoryBlock num="Légende VIII" title="Le rituel de purification royale" body="Plusieurs textes hittites détaillent des rituels de purification destinés à protéger le roi et l'armée avant une campagne militaire, mêlant invocations divines et gestes symboliques précisément décrits — un aperçu rare de religion pratique plutôt que seulement narrative." />
+    <StoryBlock num="Légende IX" title="La déesse solaire visite les enfers" body="Certains textes évoquent un passage de la déesse solaire à travers un domaine souterrain distinct, associé au « Soleil de la Terre » — une théologie solaire à deux niveaux qui distingue nettement le principe céleste du principe chthonien." />
+  </Section>
+
+  <Section id="anecdotes" label="8 curiosités" title="Faits marquants et déchiffrement moderne">
+    <Fragment slot="title"><Decode glyphs="hittite">Faits marquants et déchiffrement moderne</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="30 000 tablettes retrouvées à Hattusa" tag="Fouilles depuis 1906" body="L'archive cunéiforme de la capitale hittite, l'une des plus vastes de l'Antiquité proche-orientale, a permis de reconstituer en détail ce panthéon et ses mythes." />
+      <MiniCard title="Le hittite, plus ancienne langue indo-européenne attestée" tag="Déchiffrement de 1915" body="Bedřich Hrozný démontre que le hittite appartient à la famille indo-européenne, une découverte linguistique majeure qui bouleverse la compréhension de l'histoire de ces langues." />
+      <MiniCard title="Le plus ancien traité de paix intégralement conservé" tag="Traité de Kadesh, 1259 av. J.-C." body="Une copie du texte est aujourd'hui exposée au siège des Nations unies comme symbole de la diplomatie internationale la plus ancienne documentée avec ce niveau de détail." />
+      <MiniCard title="Un parallèle scruté avec la Théogonie grecque" tag="Hypothèse de transmission anatolienne" body="La ressemblance entre le cycle de Kumarbi et la castration d'Ouranos par Cronos chez Hésiode est largement discutée par les spécialistes comme un possible cas de transmission mythologique du Proche-Orient vers la Grèce via l'Anatolie — une hypothèse sérieuse, pas un fait définitivement tranché." />
+      <MiniCard title="Le premier aigle bicéphale connu" tag="Art hittite" body="Le motif de l'aigle à deux têtes, plus tard repris par Byzance puis par de nombreuses maisons royales européennes, apparaît d'abord sur des sceaux et reliefs hittites anatoliens." />
+      <MiniCard title="Kubaba devenue Cybèle" tag="Continuité religieuse à longue portée" body="La grande déesse anatolienne se prolonge, sous un nom transformé, jusque dans le culte romain de Cybèle — un fil religieux continu de plus de mille ans." />
+      <MiniCard title="Yazılıkaya, un panthéon gravé dans la roche" tag="Sanctuaire à ciel ouvert" body="Ce sanctuaire rupestre près de Hattusa présente en reliefs sculptés la procession complète des divinités hittites tardives, une source iconographique de tout premier ordre." />
+      <MiniCard title="Un droit plus clément que celui de Hammurabi" tag="Codification hittite" body="Les lois hittites retrouvées privilégient plus souvent l'amende que la peine capitale pour de nombreux délits, un contraste notable avec le code babylonien contemporain." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="De l'Anatolie du bronze à la Grèce archaïque">
+    <Fragment slot="title"><Decode glyphs="hittite">De l'Anatolie du bronze à la Grèce archaïque</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="300" cy="100" r="9" fill="#7a94c4"/>
+        <text x="300" y="82" text-anchor="middle" fill="#c49a5e" font-size="12" font-family="Cinzel, serif">HATTUSA</text>
+        {[[460,60,'Mésopotamie'],[480,150,'Égypte (traité de Kadesh)'],[150,60,'Monde égéen / grec'],[130,150,'Levant / Ougarit'],[380,175,'Rome (via Cybèle)']].map(([x,y,label]) => (
+          <g>
+            <line x1="300" y1="100" x2={x} y2={y} stroke="#84888e" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#282c32" stroke="#7a94c4" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#c8ccd0" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">Un empire au carrefour du Proche-Orient et du monde égéen, dont les mythes et symboles ont probablement voyagé dans les deux directions.</p>
+    <div class="card-grid">
+      <InfoCard title="Le monde égéen et grec" sub="Hypothèse de transmission mythologique" body="Le parallèle Kumarbi/Ouranos-Cronos alimente un débat scientifique actif sur les voies de transmission mythologique entre Proche-Orient et Grèce archaïque." />
+      <InfoCard title="L'Égypte ramesside" sub="Traité de Kadesh" body="Les deux versions, hittite et égyptienne, du même traité de paix constituent un cas rare de source diplomatique croisée pour cette période." />
+      <InfoCard title="Le monde hourrite et mésopotamien" sub="Emprunts mutuels" body="De nombreuses divinités et récits hittites, dont Hebat et Kumarbi lui-même, proviennent directement du fonds religieux hourrite voisin." />
+      <InfoCard title="Rome, via Cybèle" sub="Continuité de Kubaba" body="Le culte de la grande déesse anatolienne se prolonge, transformé, jusque dans la Rome antique sous le nom de Cybèle." />
+      <InfoCard title="Byzance et au-delà" sub="L'aigle bicéphale" body="Un motif artistique né en Anatolie hittite continue son voyage symbolique jusque dans l'héraldique européenne moderne." />
+      <InfoCard title="La hittitologie moderne" sub="Discipline universitaire" body="L'étude des tablettes de Hattusa reste un champ de recherche actif, renouvelant régulièrement la compréhension de ce panthéon." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="hittite">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'v. 1650 av. J.-C.', title: 'Fondation du royaume hittite ancien', body: "Hattusili Ier établit sa capitale à Hattusa." },
+      { year: 'v. 1350-1322 av. J.-C.', title: 'Apogée de l\'empire sous Suppiluliuma Ier', body: "Le royaume hittite atteint son extension maximale au Proche-Orient." },
+      { year: '1274 av. J.-C.', title: 'Bataille de Kadesh', body: "L'une des plus grandes batailles de chars de l'Antiquité, opposant Hittites et Égyptiens sans vainqueur décisif." },
+      { year: '1259 av. J.-C.', title: 'Traité de Kadesh', body: "Signature du plus ancien traité de paix intégralement conservé dans les deux langues des parties signataires." },
+      { year: 'v. 1200 av. J.-C.', title: 'Effondrement de l\'âge du bronze', body: "L'empire hittite s'effondre dans les bouleversements généraux qui frappent la Méditerranée orientale à cette période." },
+      { year: 'VIIIe siècle av. J.-C. (contexte littéraire)', title: 'Rédaction de la Théogonie d\'Hésiode', body: "Le poème grec présente des parallèles structurels étudiés avec le cycle de Kumarbi, plusieurs siècles après la chute hittite." },
+      { year: '1906', title: 'Début des fouilles de Hattusa', body: "Hugo Winckler met au jour l'archive cunéiforme qui permettra de reconstituer ce panthéon." },
+      { year: '1915', title: 'Déchiffrement du hittite comme langue indo-européenne', body: "Bedřich Hrozný établit la filiation linguistique du hittite." },
+      { year: '1986', title: 'Classement UNESCO de Hattusa', body: "Le site rejoint la liste du patrimoine mondial." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ce panthéon a laissé">
+    <Fragment slot="title"><Decode glyphs="hittite">Ce que ce panthéon a laissé</Decode></Fragment>
+    <HeritageBlock title="Un jalon de l'histoire de la diplomatie" body="Le traité de Kadesh reste cité comme référence historique dans l'histoire du droit international, une copie étant même exposée au siège des Nations unies." />
+    <HeritageBlock title="Un motif artistique toujours en usage" body="L'aigle bicéphale né en Anatolie hittite continue d'apparaître dans des emblèmes contemporains, souvent sans que son origine la plus ancienne soit connue du grand public." />
+    <HeritageBlock title="Une discipline scientifique active" body="La hittitologie continue d'affiner la compréhension de ce panthéon et de ses liens avec les mythologies voisines, mésopotamienne comme grecque." />
+    <CautionBox>
+      Le parallèle entre le cycle de Kumarbi et la Théogonie grecque reste une hypothèse de
+      transmission largement discutée, pas un fait archéologiquement démontré au sens strict.
+      La présenter comme une certitude irait au-delà de ce que les sources permettent
+      d'affirmer aujourd'hui.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Gary Beckman, Hittite Myths, 2e éd., Society of Biblical Literature, 1998", note: "Traduction de référence des mythes d'Illuyanka, de Kumarbi et de Telipinu résumés en #legendes." },
+    { label: "Volkert Haas, Die hethitische Literatur, De Gruyter, 2006", note: "Synthèse de référence sur le panthéon et la théogonie hittito-hourrite citée en #royaumes et #pantheon." },
+    { label: "Trevor Bryce, Life and Society in the Hittite World, Oxford University Press, 2002", note: "Contexte historique et religieux général cité en #anecdotes et #frise." },
+    { label: "Traité de paix égypto-hittite (traité de Kadesh), copie exposée au siège de l'ONU, New York", note: "Source du traité cité en #legendes, #anecdotes et #heritage." },
+  ]} />
+</PageLayout>

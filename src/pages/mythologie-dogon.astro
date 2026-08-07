@@ -34,6 +34,31 @@ import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
 import Decode from '../components/Decode.astro';
 import Sources from '../components/Sources.astro';
+import InteractiveGenealogy from '../components/InteractiveGenealogy.astro';
+
+const DOGON_HOUSES = {
+  amma: { head: '#e8c164', normal: '#e0d0a8', dim: '#a89468' },
+  desordre: { head: '#a83a4a', normal: '#e0d0a8', dim: '#a89468' },
+  ancetres: { head: '#6a8aa8', normal: '#e0d0a8', dim: '#a89468' },
+};
+const DOGON_HOUSE_LABELS = {
+  amma: "Maison d'Amma",
+  desordre: 'Maison du désordre',
+  ancetres: 'Maison des ancêtres',
+};
+const DOGON_NODES = [
+  { id: 'amma', label: 'Amma', house: 'amma', head: true, x: 100, y: 60, detail: "Façonne l'univers à partir d'un œuf cosmique (Aduno tal) contenant les germes de toute chose — une divinité créatrice qui se retire ensuite, laissant le monde aux Nommo et aux hommes." },
+  { id: 'nommo', label: 'Les Nommo', house: 'amma', dim: true, x: 100, y: 190, detail: "Êtres mi-humains mi-poissons envoyés par Amma pour apporter aux hommes la parole, le tissage et l'agriculture — une civilisation transmise par l'eau plutôt que conquise par la force." },
+  { id: 'ogo', label: 'Ogo (Yurugu)', house: 'desordre', head: true, x: 300, y: 60, detail: "Sort prématurément de l'œuf d'Amma avant l'heure, emportant un fragment du placenta primordial — son geste introduit le désordre dans le monde, mais fonde aussi la divination par les traces de renard, toujours pratiquée aujourd'hui." },
+  { id: 'renard_pale', label: 'Le renard pâle', house: 'desordre', dim: true, x: 300, y: 190, detail: 'Chaque nuit, des devins dogon tracent des grilles de sable que le renard pâle vient parcourir — ses traces sont lues au matin comme des réponses oraculaires, une pratique divinatoire toujours vivante dans certains villages.' },
+  { id: 'lebe', label: 'Lébé', house: 'ancetres', head: true, x: 500, y: 60, detail: 'Mort le premier, il revient sous forme de serpent pour lécher la terre et la purifier — geste fondateur associé à l\'agriculture et à l\'institution du Hogon.' },
+  { id: 'hogon', label: 'Le Hogon', house: 'ancetres', dim: true, x: 500, y: 190, detail: "N'est pas un dieu mais l'autorité spirituelle suprême d'une région dogon, censé recevoir la visite nocturne du serpent de Lébé qui purifie son corps — une charge religieuse et politique bien réelle, toujours en fonction aujourd'hui." },
+];
+const DOGON_EDGES = [
+  ['amma', 'nommo', 'special'],
+  ['ogo', 'renard_pale', 'special'],
+  ['lebe', 'hogon', 'special'],
+];
 
 /* Terre cuite de la falaise de Bandiagara, indigo des tissus rituels, éclat
    d'étoile blanche : la matière du pays dogon plutôt qu'une palette
@@ -138,31 +163,16 @@ const niveaux = [
     title="Ordre, rébellion et ancêtres"
     intro="Pas de généalogie divine au sens grec : la tradition dogon organise plutôt une tension entre trois lignées de sens — l'ordre voulu par Amma, le désordre introduit par son fils rebelle, et la lignée ancestrale des hommes.">
     <Fragment slot="title"><Decode glyphs="dogon">Ordre, rébellion et ancêtres</Decode></Fragment>
-    <div class="map-diagram">
-      <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
-        <text x="100" y="30" text-anchor="middle" fill="#e8c164" font-family="Cinzel, serif" font-size="12">MAISON D'AMMA</text>
-        <circle cx="100" cy="70" r="18" fill="#c9982f"/>
-        <text x="100" y="75" text-anchor="middle" font-size="8" fill="#1a1408" font-weight="700">Amma</text>
-        <line x1="100" y1="88" x2="100" y2="130" stroke="#c9982f" stroke-width="1" stroke-dasharray="3 4"/>
-        <circle cx="100" cy="145" r="13" fill="#342815" stroke="#c9982f" stroke-width="1.3"/>
-        <text x="100" y="165" text-anchor="middle" font-size="8" fill="#e0d0a8">les Nommo</text>
-
-        <text x="300" y="30" text-anchor="middle" fill="#a83a4a" font-family="Cinzel, serif" font-size="12">MAISON DU DÉSORDRE</text>
-        <circle cx="300" cy="70" r="18" fill="#7a2030"/>
-        <text x="300" y="75" text-anchor="middle" font-size="8" fill="#f5ecd8" font-weight="700">Ogo</text>
-        <line x1="300" y1="88" x2="300" y2="130" stroke="#a83a4a" stroke-width="1" stroke-dasharray="2 4"/>
-        <circle cx="300" cy="145" r="13" fill="#342815" stroke="#a83a4a" stroke-width="1.3"/>
-        <text x="300" y="165" text-anchor="middle" font-size="8" fill="#e0d0a8">renard pâle</text>
-
-        <text x="500" y="30" text-anchor="middle" fill="#6a8aa8" font-family="Cinzel, serif" font-size="12">MAISON DES ANCÊTRES</text>
-        <circle cx="500" cy="70" r="18" fill="#3a5a7a"/>
-        <text x="500" y="75" text-anchor="middle" font-size="8" fill="#f5ecd8" font-weight="700">Lébé</text>
-        <line x1="500" y1="88" x2="500" y2="130" stroke="#6a8aa8" stroke-width="1" stroke-dasharray="2 4"/>
-        <circle cx="500" cy="145" r="13" fill="#342815" stroke="#6a8aa8" stroke-width="1.3"/>
-        <text x="500" y="165" text-anchor="middle" font-size="8" fill="#e0d0a8">le Hogon</text>
-      </svg>
-    </div>
-    <p class="map-caption">Trait plein = filiation directe ; pointillé = héritage rituel. Les sources dogon elles-mêmes varient selon les villages et les informateurs — Griaule et Dieterlen ont recueilli plusieurs versions parfois divergentes.</p>
+    <InteractiveGenealogy
+      nodes={DOGON_NODES}
+      edges={DOGON_EDGES}
+      houses={DOGON_HOUSES}
+      houseLabels={DOGON_HOUSE_LABELS}
+      glyphs="▲▽◇✦"
+      viewBox={{ w: 600, h: 250 }}
+      lineColor="#5c4a28"
+    />
+    <p class="map-caption">Trait pointillé = héritage rituel. Les sources dogon elles-mêmes varient selon les villages et les informateurs — Griaule et Dieterlen ont recueilli plusieurs versions parfois divergentes. Glissez un nom pour l'écarter du reste, cliquez pour lire un court repère sur la figure.</p>
   </Section>
 
   <Section id="creatures" label="8 êtres notables" title="Le bestiaire dogon">

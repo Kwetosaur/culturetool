@@ -32,6 +32,32 @@ import HeritageBlock from '../components/HeritageBlock.astro';
 import CautionBox from '../components/CautionBox.astro';
 import Decode from '../components/Decode.astro';
 import Sources from '../components/Sources.astro';
+import InteractiveGenealogy from '../components/InteractiveGenealogy.astro';
+
+const INCA_HOUSES = {
+  hanan_pacha: { head: '#f7dc8a', normal: '#dccee0', dim: '#9c88a8' },
+  kay_pacha: { head: '#dccee0', normal: '#dccee0', dim: '#9c88a8' },
+  uku_pacha: { head: '#5ac0d4', normal: '#a0c8d0', dim: '#9c88a8' },
+};
+const INCA_HOUSE_LABELS = {
+  hanan_pacha: 'Maison de Hanan Pacha',
+  kay_pacha: 'Maison de Kay Pacha',
+  uku_pacha: "Maison d'Uku Pacha",
+};
+const INCA_NODES = [
+  { id: 'inti', label: 'Inti', house: 'hanan_pacha', head: true, x: 110, y: 60, detail: "Ancêtre revendiqué de la dynastie inca elle-même : le Sapa Inca gouverne comme « fils du Soleil », faisant du culte solaire un pilier autant politique que religieux." },
+  { id: 'mama_quilla', label: 'Mama Quilla', house: 'hanan_pacha', x: 50, y: 190, detail: "Épouse et sœur d'Inti, associée au calendrier rituel et aux femmes — un temple lui est dédié à Coricancha, à égalité architecturale avec celui du Soleil." },
+  { id: 'illapa', label: 'Illapa', house: 'hanan_pacha', x: 170, y: 190, detail: 'Fait gronder le tonnerre en frappant une jarre céleste tenue par sa sœur — la rivière du ciel (la Voie lactée) — pour libérer la pluie sur les cultures.' },
+  { id: 'manco_capac', label: 'Manco Cápac', house: 'kay_pacha', head: true, x: 380, y: 60, detail: "Émerge du lac Titicaca (ou d'une grotte selon une autre tradition) avec un bâton d'or, envoyé par Inti pour fonder Cusco à l'endroit où l'outil s'enfoncerait dans le sol." },
+  { id: 'mama_ocllo', label: 'Mama Ocllo', house: 'kay_pacha', x: 380, y: 190, detail: "Enseigne le tissage aux femmes de Cusco tandis que Manco Cápac enseigne l'agriculture aux hommes — un partage de savoirs fondateurs mis en scène comme un couple complémentaire." },
+  { id: 'supay', label: 'Supay', house: 'uku_pacha', head: true, x: 630, y: 60, detail: 'Gouverne le monde d\'en dessous sans être un principe du mal au sens chrétien — une figure redoutée et respectée, dont le culte survivra sous une forme syncrétique dans les mines coloniales.' },
+  { id: 'apus', label: 'Les Apus', house: 'uku_pacha', dim: true, x: 630, y: 190, detail: 'Chaque grand sommet andin est une puissance personnelle qu\'on continue de consulter et d\'honorer — pas une allégorie, un interlocuteur rituel bien réel pour de nombreuses communautés aujourd\'hui.' },
+];
+const INCA_EDGES = [
+  ['inti', 'mama_quilla', 'union'], ['inti', 'illapa', 'special'],
+  ['manco_capac', 'mama_ocllo', 'union'],
+  ['supay', 'apus', 'special'],
+];
 
 /* Or d'Inti, indigo du ciel nocturne, terre volcanique : les trois Pacha en
    couleurs plutôt qu'une palette "Amérique du Sud" générique — et distincte
@@ -140,36 +166,16 @@ const pachas = [
     title="Trois familles pour trois Pacha"
     intro="La généalogie andine ne fonctionne pas comme un arbre grec de mariages et de naissances : elle organise plutôt trois « maisons » alignées sur les trois mondes eux-mêmes.">
     <Fragment slot="title"><Decode glyphs="inca">Trois familles pour trois Pacha</Decode></Fragment>
-    <div class="map-diagram">
-      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg">
-        <text x="110" y="34" text-anchor="middle" fill="#f7dc8a" font-family="Cinzel, serif" font-size="13">MAISON DE HANAN PACHA</text>
-        <circle cx="110" cy="80" r="20" fill="#e8c164" stroke="#fff" stroke-width="1.5"/>
-        <text x="110" y="85" text-anchor="middle" font-size="9" fill="#161020" font-weight="700">Inti</text>
-        <line x1="95" y1="95" x2="70" y2="150" stroke="#e8c164" stroke-width="1" stroke-dasharray="2 4"/>
-        <line x1="125" y1="95" x2="150" y2="150" stroke="#e8c164" stroke-width="1" stroke-dasharray="2 4"/>
-        <circle cx="70" cy="165" r="13" fill="#2c213c" stroke="#e8c164" stroke-width="1.3"/>
-        <text x="70" y="185" text-anchor="middle" font-size="8" fill="#dccee0">Mama Quilla</text>
-        <circle cx="150" cy="165" r="13" fill="#2c213c" stroke="#e8c164" stroke-width="1.3"/>
-        <text x="150" y="185" text-anchor="middle" font-size="8" fill="#dccee0">Illapa</text>
-
-        <text x="330" y="34" text-anchor="middle" fill="#dccee0" font-family="Cinzel, serif" font-size="13">MAISON DE KAY PACHA</text>
-        <circle cx="330" cy="80" r="20" fill="#dccee0" stroke="#fff" stroke-width="1.5"/>
-        <text x="330" y="85" text-anchor="middle" font-size="8" fill="#161020" font-weight="700">Manco Cápac</text>
-        <line x1="330" y1="100" x2="330" y2="150" stroke="#dccee0" stroke-width="1" stroke-dasharray="2 4"/>
-        <circle cx="330" cy="165" r="13" fill="#2c213c" stroke="#dccee0" stroke-width="1.3"/>
-        <text x="330" y="185" text-anchor="middle" font-size="8" fill="#dccee0">Mama Ocllo</text>
-        <text x="330" y="215" text-anchor="middle" fill="#9c88a8" font-size="9">lignée des Sapa Inca</text>
-
-        <text x="530" y="34" text-anchor="middle" fill="#5ac0d4" font-family="Cinzel, serif" font-size="13">MAISON D'UKU PACHA</text>
-        <circle cx="530" cy="80" r="20" fill="#2e8a9e" stroke="#5ac0d4" stroke-width="1.5"/>
-        <text x="530" y="85" text-anchor="middle" font-size="9" fill="#f5eef5" font-weight="700">Supay</text>
-        <line x1="530" y1="100" x2="530" y2="150" stroke="#5ac0d4" stroke-width="1" stroke-dasharray="1 3"/>
-        <circle cx="530" cy="165" r="13" fill="#2c213c" stroke="#5ac0d4" stroke-width="1"/>
-        <text x="530" y="185" text-anchor="middle" font-size="8" fill="#a0c8d0">les Apus</text>
-        <text x="530" y="215" text-anchor="middle" fill="#9c88a8" font-size="9">ancêtres et esprits de la terre</text>
-      </svg>
-    </div>
-    <p class="map-caption">Trait plein = filiation directe ; pointillé = parenté rituelle. La maison de Kay Pacha est la seule à revendiquer une descendance humaine réelle — celle des Sapa Inca.</p>
+    <InteractiveGenealogy
+      nodes={INCA_NODES}
+      edges={INCA_EDGES}
+      houses={INCA_HOUSES}
+      houseLabels={INCA_HOUSE_LABELS}
+      glyphs="☀◈▲✦"
+      viewBox={{ w: 700, h: 260 }}
+      lineColor="#4a3a5c"
+    />
+    <p class="map-caption">Trait plein = filiation directe ; pointillé = parenté rituelle. La maison de Kay Pacha est la seule à revendiquer une descendance humaine réelle — celle des Sapa Inca. Glissez un nom pour l'écarter du reste, cliquez pour lire un court repère sur la figure.</p>
   </Section>
 
   <Section id="creatures" label="8 êtres notables" title="Le bestiaire des trois mondes">

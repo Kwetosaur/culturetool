@@ -209,4 +209,10 @@ liste complète et les scores.)*
 | 15 | Le Vajra | publiée (27/07/2026) |
 | 16 | La Toison d'Or | publiée (29/07/2026) |
 | 17 | La Boîte de Pandore | publiée (29/07/2026) |
-| — | 20 autres sujets | à démarrer |
+| 18 | Durandal | publiée (07/08/2026) |
+| 19 | Le Sceau de jade impérial | publiée (07/08/2026) |
+| 20 | La Ménorah du Second Temple | publiée (07/08/2026) |
+| 21 | Zulfiqar | publiée (07/08/2026) |
+| 22 | La Pierre de Scone | publiée (07/08/2026) |
+| 23 | Le Honjo Masamune | publiée (07/08/2026) |
+| — | 14 autres sujets | à démarrer |

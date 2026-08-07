@@ -1,0 +1,291 @@
+---
+/*
+  Mythologie Coréenne — vingt-deuxième mythologie de la série. Structure
+  imposée par docs/plans/plan-serie-mythologies.md : 10 sections fixes.
+
+  #royaumes : cosmologie coréenne authentique en quatre domaines — le ciel
+  de Hwanin, Sinsi (la « Cité de dieu » fondée par Hwanung sur terre), le
+  royaume humain de Dangun, et Jeoseung (le monde des morts du chamanisme
+  coréen) — pas un chiffre emprunté à un autre chapitre.
+
+  #genealogie : les « 3 maisons » sont la maison de Hwanin (le ciel), la
+  maison de Sinsi (Hwanung, Ungnyeo l'ourse devenue femme, et leur fils
+  Dangun) et le panthéon chamanique (Sansin, Yongwang, Chilseong — des
+  esprits liés par fonction, pas par le sang).
+
+  Traitement : le chamanisme coréen (muism/mu-sok) reste pratiqué
+  aujourd'hui, certains rituels gut étant reconnus patrimoine culturel
+  immatériel — aucun ton de folklore éteint. Le mythe de Dangun est aussi
+  un objet politique contemporain (fête nationale, tombeau nord-coréen
+  contesté) — traité avec prudence en #anecdotes et #heritage.
+
+  Effets : data-egg="coreenne" + data-scroll-fx="ungnyeoTransform" sur
+  #pantheon — une silhouette d'ourse qui devient femme par fondu très
+  progressif, sobre, aucune métamorphose spectaculaire.
+  Déchiffrement des titres (mécanisme 3, minimum non négociable) :
+  glyphs="coreen", nouveau pool décoratif de syllabes hangeul ajouté à
+  GLYPH_POOLS (le hangeul est postérieur de plusieurs millénaires au mythe
+  lui-même, créé en 1443 — un choix décoratif assumé, sur le principe déjà
+  suivi pour les pools yoruba/akan).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
+import InteractiveGenealogy from '../components/InteractiveGenealogy.astro';
+
+const COREE_HOUSES = {
+  hwanin: { head: '#e8c164', normal: '#e0a0a0', dim: '#8088a0' },
+  sinsi: { head: '#c23a3a', normal: '#e05a5a', dim: '#8088a0' },
+  chamanisme: { head: '#2f5a9a', normal: '#4f7ec4', dim: '#8088a0' },
+};
+const COREE_HOUSE_LABELS = {
+  hwanin: 'Maison de Hwanin', sinsi: 'Maison de Sinsi', chamanisme: 'Panthéon chamanique',
+};
+const COREE_NODES = [
+  { id: 'hwanin', label: 'Hwanin', house: 'hwanin', head: true, x: 110, y: 60, detail: "Le « Seigneur du Ciel », père de Hwanung — une figure distante, dont le nom même porte la trace d'une influence bouddhiste tardive sur le texte écrit du XIIIe siècle (assimilation avec Indra)." },
+  { id: 'hwanung', label: 'Hwanung', house: 'sinsi', head: true, x: 380, y: 60, detail: "Fils de Hwanin, il descend sur le mont Baekdu (ou Taebaek selon les versions) avec trois mille compagnons et fonde Sinsi, la « Cité de dieu », pour gouverner les affaires humaines." },
+  { id: 'ungnyeo', label: 'Ungnyeo', house: 'sinsi', x: 300, y: 190, detail: "L'ourse qui endure cent jours dans une grotte, à l'armoise et à l'ail, sans lumière du jour, pour devenir femme — contrairement au tigre, qui abandonne l'épreuve." },
+  { id: 'dangun', label: 'Dangun Wanggeom', house: 'sinsi', x: 460, y: 190, detail: "Fils de Hwanung et d'Ungnyeo, fondateur légendaire du royaume de Gojoseon en 2333 av. J.-C. selon la datation traditionnelle du Samguk Yusa." },
+  { id: 'sansin', label: 'Sansin', house: 'chamanisme', head: true, x: 630, y: 60, detail: "Le dieu de la montagne, presque toujours représenté accompagné d'un tigre — vénéré aujourd'hui encore dans des sanctuaires dédiés (sanshingak) au sein même de temples bouddhistes." },
+  { id: 'yongwang', label: 'Yongwang', house: 'chamanisme', x: 630, y: 190, detail: "Le Roi-Dragon des mers, maître d'un palais sous-marin où se rendent plusieurs héros de contes coréens, dont la légende de Sim Cheong." },
+];
+const COREE_EDGES = [
+  ['hwanin', 'hwanung', 'filiation'],
+  ['hwanung', 'ungnyeo', 'union'], ['hwanung', 'dangun', 'special'], ['ungnyeo', 'dangun', 'filiation'],
+  ['sansin', 'yongwang', 'special'],
+];
+
+/* Rouge et bleu du taegeuk, or des sanctuaires, noir encre : les couleurs
+   de l'identité coréenne plutôt qu'une palette "Asie de l'Est" recyclée. */
+const palette = {
+  bg: '#12141c',
+  'bg-deep': '#0a0b10',
+  surface: '#1c1f2a',
+  'surface-alt': '#242836',
+  border: '#3a4058',
+  ink: '#f0eef5',
+  text: '#c8ccd8',
+  'text-dim': '#8088a0',
+  accent: '#c23a3a',
+  'accent-bright': '#e05a5a',
+  accent2: '#2f5a9a',
+  'accent2-bright': '#4f7ec4',
+  verdict: '#8a6a1e',
+  'verdict-bright': '#c9982f',
+  glow: 'rgba(194,58,58,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Domaines' },
+  { id: 'pantheon', nav: 'Panthéon' },
+  { id: 'genealogie', nav: 'Généalogie' },
+  { id: 'creatures', nav: 'Êtres' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const domaines = [
+  { num: 'I', title: 'Le ciel de Hwanin', sub: 'Seigneur distant', body: "Domaine céleste du père de Hwanung, rarement l'objet d'un culte direct dans la pratique chamanique quotidienne." },
+  { num: 'II', title: 'Sinsi', sub: 'La Cité de dieu sur terre', body: "Fondée par Hwanung sur le mont sacré avec trois ministres (vent, pluie, nuage), pour gouverner trois cent soixante affaires humaines." },
+  { num: 'III', title: 'Le royaume de Dangun', sub: 'Gojoseon', body: "Le monde humain gouverné, selon la tradition, par le fils de Hwanung et d'Ungnyeo à partir de 2333 av. J.-C." },
+  { num: 'IV', title: 'Jeoseung', sub: 'Le monde des morts', body: "Royaume chamanique de l'au-delà, distinct du monde des vivants (Iseung), où opèrent les mudang lors des rites funéraires (gut)." },
+];
+---
+<PageLayout
+  title="Mythologie Coréenne"
+  serie="Mythologies du Monde"
+  description="Dangun, fils d'un dieu et d'une ourse devenue femme, fonde selon la tradition le royaume de Gojoseon en 2333 av. J.-C. — un mythe fondateur toujours célébré chaque 3 octobre, aux côtés d'un chamanisme (mudang, gut) encore pratiqué aujourd'hui en Corée."
+  href="mythologie-coreenne.html"
+  egg="coreenne"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="홍익인간"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Hwanin · Hwanung · Ungnyeo · Dangun</p>
+  <p class="tagline" slot="hero">
+    Un dieu descendu du ciel, une ourse qui endure cent jours de patience pour devenir femme,
+    et un fils fondateur de royaume — un mythe toujours célébré par une fête nationale, aux
+    côtés d'un chamanisme dont certains rituels restent pratiqués aujourd'hui.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="Quatre domaines, du ciel au monde des morts"
+    intro="La cosmologie coréenne authentique distingue le ciel de Hwanin, la Cité de dieu fondée sur terre par Hwanung, le royaume humain de Dangun, et le monde chamanique des morts — une structure dérivée des sources coréennes elles-mêmes, pas alignée sur un autre chapitre de la série.">
+    <Fragment slot="title"><Decode glyphs="coreen">Quatre domaines, du ciel au monde des morts</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="300" cy="46" rx="190" ry="32" fill="none" stroke="#e8c164" stroke-width="2" opacity="0.7"/>
+        <text x="300" y="32" text-anchor="middle" fill="#e8c164" font-family="Cinzel, serif" font-size="12">HWANIN</text>
+        <line x1="300" y1="78" x2="300" y2="120" stroke="#c23a3a" stroke-width="2" stroke-dasharray="4 4"/>
+        <ellipse cx="300" cy="145" rx="150" ry="26" fill="none" stroke="#c23a3a" stroke-width="2" opacity="0.8"/>
+        <text x="300" y="149" text-anchor="middle" fill="#e0a0a0" font-family="Cinzel, serif" font-size="11">SINSI</text>
+        <ellipse cx="300" cy="200" rx="180" ry="26" fill="none" stroke="#4f7ec4" stroke-width="2" opacity="0.7"/>
+        <text x="300" y="204" text-anchor="middle" fill="#c8ccd8" font-family="Cinzel, serif" font-size="11">GOJOSEON / JEOSEUNG</text>
+      </svg>
+    </div>
+    <p class="map-caption">Le ciel de Hwanin, Sinsi la cité fondée par Hwanung, puis le royaume humain et le monde des morts en dessous — reliés à la verticale.</p>
+    <div class="card-grid compact">
+      {domaines.map((d) => <InfoCard {...d} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~15 figures majeures" title="Le panthéon coréen" scrollFx="ungnyeoTransform">
+    <Fragment slot="title"><Decode glyphs="coreen">Le panthéon coréen</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Hwanin" role="Seigneur du Ciel" tags={['Distant', 'Père de Hwanung']} body="Figure céleste dont le nom, dans le texte écrit du XIIIe siècle, est glosé par une référence bouddhiste à Indra — un signe explicite de syncrétisme religieux dans la source elle-même." />
+      <FigureCard name="Hwanung" role="Fondateur de Sinsi" tags={['Trois ministres', 'Gouvernance']} body="Descend sur la montagne sacrée avec trois mille compagnons et trois ministres — vent, pluie, nuage — pour gouverner trois cent soixante affaires humaines." />
+      <FigureCard name="Ungnyeo" role="L'ourse devenue femme" tags={['Patience', 'Épreuve de cent jours']} body="Endure cent jours dans une grotte, nourrie d'armoise et d'ail, sans lumière du jour, pour devenir humaine — quand le tigre, moins patient, abandonne." />
+      <FigureCard name="Dangun Wanggeom" role="Fondateur légendaire de Gojoseon" tags={['2333 av. J.-C.', 'Fils de l\'union']} body="Fils de Hwanung et d'Ungnyeo, fondateur traditionnel du premier royaume coréen — une fête nationale coréenne, Gaecheonjeol, continue de célébrer cet événement chaque 3 octobre." />
+      <FigureCard name="Sansin" role="Dieu de la montagne" tags={['Tigre compagnon', 'Sanctuaires vivants']} body="Presque toujours représenté avec un tigre à ses côtés, vénéré dans des sanctuaires (sanshingak) que l'on trouve encore aujourd'hui au sein de nombreux temples bouddhistes coréens." />
+      <FigureCard name="Yongwang" role="Roi-Dragon des mers" tags={['Palais sous-marin', 'Sim Cheong']} body="Maître d'un royaume englouti où se rendent plusieurs héros de contes coréens, dont l'héroïne du conte de Sim Cheong." />
+      <FigureCard name="Chilseong" role="Divinités de la Grande Ourse" tags={['Sept étoiles', 'Destin, longévité']} body="Les sept étoiles de la Grande Ourse personnifiées, traditionnellement invoquées pour la santé des enfants et la longévité, avec leurs propres sanctuaires (chilseonggak)." />
+      <FigureCard name="Samshin Halmoni" role="Grand-mère de la naissance" tags={['Accouchement', 'Protection des enfants']} body="Esprit protecteur invoqué lors des accouchements et pour la santé des nouveau-nés, l'une des figures chamaniques les plus intimement liées à la vie domestique." />
+      <FigureCard name="Seonangsin" role="Esprit gardien des villages" tags={['Seuils', 'Voyageurs']} body="Vénéré aux limites des villages et aux cols de montagne (seonangdang), où des empilements de pierres marquent encore aujourd'hui sa présence protectrice." />
+      <FigureCard name="Jowangshin" role="Déesse du foyer" tags={['Cuisine', 'Vie domestique']} body="Esprit gardien de l'âtre et de la cuisine, honoré dans certains foyers coréens traditionnels comme protecteur du bien-être familial quotidien." />
+      <FigureCard name="Mireuk" role="Figure cosmique créatrice" tags={['Mythe de Jeju', 'Concours de fleurs']} body="Dans le mythe de création propre à l'île de Jeju (Cheonjiwang bonpuri), il rivalise avec Seokga pour la maîtrise du monde à travers un concours de culture de fleurs." />
+      <FigureCard name="Seokga" role="Rival trompeur de Mireuk" tags={['Mythe de Jeju', 'Tricherie']} body="Remporte le concours contre Mireuk en trichant pendant son sommeil — un mythe qui explique, dans la tradition de Jeju, pourquoi le monde humain reste imparfait." />
+      <FigureCard name="Les trois ministres de Hwanung" role="Vent, pluie, nuage" tags={['Gouvernance', 'Collectif']} body="Pungbaek, Usa et Unsa, les esprits du vent, de la pluie et des nuages, qui accompagnent Hwanung dans la fondation et l'administration de Sinsi." />
+      <FigureCard name="Le Tigre" role="Candidat malheureux à l'humanité" tags={['Échec', 'Impatience']} body="Contrairement à l'ourse, il abandonne l'épreuve de la grotte avant son terme — et reste depuis l'un des animaux les plus centraux du folklore coréen, mi-menaçant mi-comique selon les contes." />
+      <FigureCard name="La mudang" role="Chamane intermédiaire" tags={['Vivante', 'Rites gut']} body="Praticienne rituelle, très majoritairement une femme, qui continue aujourd'hui de mener les cérémonies (gut) reliant le monde des vivants à celui des esprits et des ancêtres." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 maisons, trois logiques"
+    title="Le ciel, la cité fondée et le panthéon des fonctions"
+    intro="Une lignée de sang unique (Hwanin, Hwanung, Dangun) coexiste avec un panthéon chamanique organisé par fonction plutôt que par filiation — deux logiques de transmission bien distinctes.">
+    <Fragment slot="title"><Decode glyphs="coreen">Le ciel, la cité fondée et le panthéon des fonctions</Decode></Fragment>
+    <InteractiveGenealogy
+      nodes={COREE_NODES}
+      edges={COREE_EDGES}
+      houses={COREE_HOUSES}
+      houseLabels={COREE_HOUSE_LABELS}
+      glyphs="단군곰범천"
+      viewBox={{ w: 700, h: 260 }}
+      lineColor="#3a4058"
+    />
+    <p class="map-caption">Trait plein = filiation ; pointillé = union ou lien spécial. Sansin et Yongwang ne sont liés par aucun lien de sang : ils appartiennent au même panthéon chamanique par fonction, pas par généalogie.</p>
+  </Section>
+
+  <Section id="creatures" label="8 êtres notables" title="Renards, gobelins et messagers du soleil">
+    <Fragment slot="title"><Decode glyphs="coreen">Renards, gobelins et messagers du soleil</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Gumiho" tag="Renarde à neuf queues" body="Figure généralement plus constamment malveillante que ses équivalents chinois ou japonais, capable de prendre forme humaine pour séduire et tromper — l'une des créatures les plus populaires de la fiction coréenne contemporaine." />
+      <MiniCard title="Dokkaebi" tag="Esprit farceur, pas un « gobelin »" body="Créature espiègle associée à la richesse et aux tours pendables, souvent réduite à tort en traduction occidentale à un simple « gobelin » alors qu'elle n'a rien de systématiquement malveillant." />
+      <MiniCard title="Haetae" tag="Gardien de la justice" body="Créature hybride lion-dragon censée distinguer le bien du mal, dont des statues protègent aujourd'hui encore certains bâtiments officiels de Séoul contre le feu et l'injustice." />
+      <MiniCard title="Imugi" tag="Dragon en devenir" body="Serpent qui doit attendre mille ans avant de pouvoir se transformer en véritable dragon — une figure d'attente et de potentiel inaccompli plutôt qu'un monstre menaçant." />
+      <MiniCard title="Bulgasari" tag="Dévoreur de métal" body="Créature née, selon la légende, de grains de riz façonnés en figurine par une famille affamée, qui prend vie et grandit démesurément en dévorant tout le métal qu'elle rencontre." />
+      <MiniCard title="Le Tigre" tag="Figure ambivalente" body="À la fois candidat malheureux du mythe fondateur et personnage central du folklore populaire, tantôt menaçant, tantôt naïf et comique selon les contes." />
+      <MiniCard title="Samjoko" tag="Corbeau tricéphale solaire" body="Corbeau à trois pattes représentant le soleil, attesté sur les peintures murales des tombeaux royaux de Goguryeo — un symbole solaire est-asiatique dans sa variante spécifiquement coréenne." />
+      <MiniCard title="Cheonma" tag="Cheval céleste" body="Immortalisé par la peinture retrouvée dans le tombeau de Cheonmachong (« tombeau du cheval céleste ») du royaume de Silla, représentant un cheval blanc ascendant vers le ciel." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="10 légendes" title="Les grands récits coréens">
+    <Fragment slot="title"><Decode glyphs="coreen">Les grands récits coréens</Decode></Fragment>
+    <StoryBlock num="Légende I" title="La fondation de Gojoseon" body={["Hwanung, fils de Hwanin, désire gouverner le monde humain ; son père lui accorde trois sceaux du ciel et l'envoie sur la montagne sacrée avec trois mille compagnons et trois ministres du vent, de la pluie et des nuages.", "Une ourse et un tigre, désirant devenir humains, reçoivent de lui de l'armoise et de l'ail, avec l'ordre de rester cent jours sans voir la lumière du jour. Le tigre abandonne ; l'ourse tient vingt et un jours et devient femme. Hwanung l'épouse, et leur fils Dangun Wanggeom fonde Gojoseon en 2333 av. J.-C."]} quote="Celle qui endure devient." cite="Résumé traditionnel du mythe de Dangun, Samguk Yusa" />
+    <StoryBlock num="Légende II" title="Le concours de fleurs de Mireuk et Seokga" body="Dans le mythe de création de l'île de Jeju, deux divinités rivales, Mireuk et Seokga, s'affrontent pour déterminer qui gouvernera le monde humain à travers un concours de culture de fleurs pendant leur sommeil. Seokga triche en échangeant les pousses pendant que Mireuk dort et remporte ainsi la victoire — un mythe qui explique, dans la tradition locale, pourquoi le monde humain reste marqué par la tromperie et l'imperfection." />
+    <StoryBlock num="Légende III" title="Sim Cheong et le Roi-Dragon" body={["Pour rendre la vue à son père aveugle, la fille dévouée Sim Cheong se sacrifie en se jetant à la mer, offerte à des marins qui doivent apaiser les flots. Plutôt que de périr, elle est accueillie dans le palais sous-marin de Yongwang, le Roi-Dragon.", "Elle en ressort ensuite renaissant à la surface dans une fleur de lotus géante, est reconnue reine, et retrouve son père — dont la vue est miraculeusement restaurée par l'émotion des retrouvailles."]} />
+    <StoryBlock num="Légende IV" title="Le tombeau du cheval céleste" body="Dans un tumulus royal de la capitale de Silla, Gyeongju, les archéologues découvrent une écaille de bouleau peinte d'un cheval blanc bondissant vers le ciel — la Cheonma-do, ou « peinture du cheval céleste » — associée à l'ascension de l'âme royale vers l'au-delà." />
+    <StoryBlock num="Légende V" title="Le dokkaebi et le bûcheron honnête" body="Un pauvre bûcheron, ayant perdu sa hache dans un étang, se voit proposer par un dokkaebi (ou un esprit de l'eau selon les versions) le choix entre une hache d'or, une d'argent et la sienne, en bois. Son honnêteté à réclamer uniquement la sienne lui vaut d'être récompensé des trois — un schéma de conte largement partagé, mais raconté ici avec la figure typiquement coréenne du dokkaebi." />
+    <StoryBlock num="Légende VI" title="La légende de la gumiho au cœur humain" body="De nombreux contes rapportent qu'une gumiho pourrait devenir pleinement humaine si elle s'abstient de dévorer des cœurs ou des foies humains pendant cent jours — un parallèle structurel frappant avec l'épreuve d'Ungnyeo, où la patience plutôt que la force est la condition du passage à l'humanité." />
+    <StoryBlock num="Légende VII" title="Sansin et le tigre du sanctuaire" body="De nombreux temples bouddhistes coréens conservent un pavillon séparé (sanshingak) dédié à Sansin, le dieu de la montagne, systématiquement peint aux côtés d'un tigre — un exemple rare de figure chamanique pleinement intégrée au paysage religieux bouddhiste plutôt qu'écartée par lui." />
+    <StoryBlock num="Légende VIII" title="Bulgasari, le dévoreur de fer" body="Née des grains de riz façonnés par une famille en temps de disette, la créature s'anime en dévorant d'abord des aiguilles à coudre en métal, puis grandit en engloutissant des outils, des armes, et finit par menacer le royaume lui-même — un récit souvent lu comme une mise en garde contre un appétit ou un pouvoir devenu incontrôlable." />
+    <StoryBlock num="Légende IX" title="La prière aux étoiles de Chilseong" body="Les familles coréennes prient traditionnellement les sept étoiles de la Grande Ourse pour la santé et la longévité de leurs enfants, une pratique qui persiste dans certains sanctuaires chilseonggak au sein même de temples bouddhistes." />
+    <StoryBlock num="Légende X" title="Les pierres du seonangdang" body="Aux cols de montagne et aux entrées de village, les voyageurs déposaient traditionnellement une pierre sur un tas déjà formé, en offrande au seonangsin protecteur du lieu — une pratique dont des vestiges se retrouvent encore aujourd'hui le long de certains sentiers de montagne coréens." />
+  </Section>
+
+  <Section id="anecdotes" label="8 curiosités" title="Faits marquants et usages contemporains">
+    <Fragment slot="title"><Decode glyphs="coreen">Faits marquants et usages contemporains</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Un mythe absent du plus ancien texte historique" tag="Samguk Sagi, 1145" body="La chronique confucéenne de Kim Busik, plus ancienne et plus « officielle », omet entièrement le mythe de Dangun ; celui-ci n'apparaît qu'un siècle et demi plus tard dans le Samguk Yusa du moine bouddhiste Iryeon." />
+      <MiniCard title="Gaecheonjeol, fête nationale vivante" tag="3 octobre" body="La Corée du Sud célèbre chaque année la fondation légendaire de Gojoseon par un jour férié national, preuve d'un mythe fondateur toujours actif dans la vie civique contemporaine." />
+      <MiniCard title="Le chamanisme reconnu patrimoine immatériel" tag="Rites gut" body="Certaines cérémonies chamaniques, comme le Jindo Ssitgimgut, sont officiellement classées biens culturels immatériels importants par l'État sud-coréen." />
+      <MiniCard title="Un tombeau nord-coréen contesté" tag="1993" body="La Corée du Nord annonce en 1993 avoir découvert la tombe authentique de Dangun près de Pyongyang et y bâtit un mausolée — une revendication scientifiquement très contestée, à traiter avec le scepticisme qu'elle appelle plutôt que comme un fait établi." />
+      <MiniCard title="Le tigre, silhouette symbolique de la Corée" tag="Cartographie populaire" body="La péninsule coréenne est traditionnellement représentée dans l'imaginaire populaire sous la forme d'un tigre bondissant — une image renforcée par la mascotte olympique Soohorang en 2018." />
+      <MiniCard title="Haetae, mascotte officielle de Séoul" tag="Symbole municipal" body="La créature protectrice du folklore coréen est devenue le symbole officiel de la ville de Séoul, présente jusque dans son identité visuelle institutionnelle." />
+      <MiniCard title="Dokkaebi mal traduit en « gobelin »" tag="Nuance de traduction" body="Une traduction occidentale trop rapide masque une figure bien plus ambivalente et moins systématiquement malveillante que le gobelin européen — la même prudence de traduction que pour le terme « orisha » côté yoruba." />
+      <MiniCard title="La gumiho, star des dramas contemporains" tag="Culture populaire mondiale" body="La renarde à neuf queues alimente une production continue de séries et de films sud-coréens à succès international, preuve d'un folklore ancien parfaitement vivant dans l'industrie culturelle actuelle." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="De Gojoseon à la vague culturelle coréenne">
+    <Fragment slot="title"><Decode glyphs="coreen">De Gojoseon à la vague culturelle coréenne</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="300" cy="100" r="9" fill="#c23a3a"/>
+        <text x="300" y="82" text-anchor="middle" fill="#e05a5a" font-size="12" font-family="Cinzel, serif">GOJOSEON</text>
+        {[[430,60,'Corée du Nord'],[430,150,'Corée du Sud'],[520,90,'Diaspora Japon'],[120,70,'Diaspora Chine'],[150,160,'Diaspora Amériques']].map(([x,y,label]) => (
+          <g>
+            <line x1="300" y1="100" x2={x} y2={y} stroke="#8088a0" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#242836" stroke="#c23a3a" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#c8ccd8" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">Un mythe fondateur revendiqué par les deux Corées, et un folklore aujourd'hui diffusé mondialement par la vague culturelle coréenne (Hallyu).</p>
+    <div class="card-grid">
+      <InfoCard title="Corée du Sud" sub="Fête nationale, tourisme" body="Gaecheonjeol reste un jour férié majeur, et le folklore de Dangun irrigue une part de l'identité nationale contemporaine." />
+      <InfoCard title="Corée du Nord" sub="Usage politique du mythe" body="Le régime nord-coréen a mobilisé le mythe de Dangun à des fins de légitimation nationale, jusqu'à la construction contestée d'un mausolée en 1993." />
+      <InfoCard title="Diaspora coréenne mondiale" sub="Continuité culturelle" body="Les communautés coréennes d'Amérique du Nord, du Japon et d'ailleurs perpétuent fêtes et récits traditionnels bien au-delà de la péninsule." />
+      <InfoCard title="La vague culturelle (Hallyu)" sub="Exportation mondiale" body="Films, séries et jeux vidéo exportent aujourd'hui gumiho, dokkaebi et autres figures du folklore coréen vers un public mondial sans précédent." />
+      <InfoCard title="Le chamanisme dans la diaspora" sub="Pratiques transplantées" body="Des communautés de mudang continuent d'exercer y compris hors de Corée, notamment aux États-Unis, perpétuant les rites gut pour les communautés immigrées." />
+      <InfoCard title="Études coréanologiques" sub="Discipline universitaire" body="L'étude comparée du mythe de Dangun et du chamanisme coréen reste un champ de recherche actif en anthropologie religieuse est-asiatique." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="coreen">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: '2333 av. J.-C. (date traditionnelle)', title: 'Fondation légendaire de Gojoseon', body: "Selon le Samguk Yusa, Dangun Wanggeom fonde le premier royaume coréen." },
+      { year: 'IVe-VIIe siècle apr. J.-C.', title: 'Peintures murales de Goguryeo', body: "Les tombeaux royaux de Goguryeo représentent le corbeau solaire tricéphale Samjoko parmi d'autres symboles cosmologiques." },
+      { year: 'Ve-VIe siècle apr. J.-C.', title: 'Tombeau du cheval céleste, Silla', body: "La peinture Cheonma-do est déposée dans le tumulus royal de Gyeongju, associée à l'ascension de l'âme royale." },
+      { year: '1145', title: 'Rédaction du Samguk Sagi', body: "La chronique confucéenne de Kim Busik ne mentionne pas le mythe de Dangun." },
+      { year: '1281', title: 'Rédaction du Samguk Yusa', body: "Le moine bouddhiste Iryeon consigne la version du mythe de Dangun qui deviendra la référence dominante." },
+      { year: '1287', title: 'Rédaction du Jewang ungi', body: "Yi Seung-hyu propose une version alternative et à peu près contemporaine du mythe fondateur." },
+      { year: '1392-1897', title: 'Dynastie Joseon', body: "Le confucianisme d'État marginalise officiellement le chamanisme, qui subsiste néanmoins dans la pratique populaire." },
+      { year: '1910-1945', title: 'Période coloniale japonaise', body: "Les pratiques chamaniques coréennes subissent une répression supplémentaire dans le cadre plus large de la politique culturelle coloniale." },
+      { year: '1949', title: 'Institution de Gaecheonjeol', body: "La fête nationale commémorant la fondation légendaire de Gojoseon est établie en Corée du Sud." },
+      { year: '1993', title: 'Annonce du tombeau nord-coréen de Dangun', body: "La Corée du Nord revendique la découverte de restes authentiques et construit un mausolée près de Pyongyang — une affirmation scientifiquement très contestée." },
+      { year: 'Années 1980-2000', title: 'Reconnaissances patrimoniales du chamanisme', body: "Plusieurs rites gut sont classés biens culturels immatériels importants par l'État sud-coréen." },
+      { year: "Années 2000-2020", title: 'Essor mondial du Hallyu', body: "Films, séries et jeux exportent massivement gumiho, dokkaebi et autres figures mythologiques coréennes à l'échelle mondiale." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ce mythe fait encore">
+    <Fragment slot="title"><Decode glyphs="coreen">Ce que ce mythe fait encore</Decode></Fragment>
+    <HeritageBlock title="Une fête nationale toujours célébrée" body="Gaecheonjeol reste un jour férié majeur en Corée du Sud, ancrant le mythe de Dangun dans le calendrier civique contemporain." />
+    <HeritageBlock title="Un chamanisme vivant, quoique minoritaire" body="Le mu-sok continue d'être pratiqué aujourd'hui, y compris par des générations plus jeunes en quête de repères spirituels alternatifs au christianisme et au bouddhisme dominants." />
+    <HeritageBlock title="Une exportation culturelle mondiale sans précédent" body="Le folklore coréen, porté par le Hallyu, atteint aujourd'hui un public international d'une ampleur inédite pour une mythologie nationale de cette taille." />
+    <CautionBox>
+      Le mythe de Dangun a été et reste mobilisé à des fins politiques par les deux Corées,
+      de la fête nationale sud-coréenne au tombeau nord-coréen scientifiquement contesté de
+      1993. Présenter ce mythe fondateur sans mentionner ces usages contemporains reviendrait
+      à ignorer une part réelle et actuelle de son histoire, pas seulement un vestige antique
+      sans suite politique.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Iryeon, Samguk Yusa (Mémorables des Trois Royaumes), trad. Ha Tae-hung et Grafton K. Mintz, Yonsei University Press, 1281 (éd. moderne 1972)", note: "Source textuelle principale du mythe de Dangun résumé en #origine et #legendes." },
+    { label: "Laurel Kendall, Shamans, Housewives, and Other Restless Spirits: Women in Korean Ritual Life, University of Hawaii Press, 1985", note: "Étude de référence sur le chamanisme coréen contemporain citée en #pantheon et #heritage." },
+    { label: "James Huntley Grayson, Myths and Legends from Korea: An Annotated Compendium of Ancient and Modern Materials, Routledge, 2001", note: "Recueil de référence des légendes résumées en #creatures et #legendes." },
+    { label: "Administration du patrimoine culturel de Corée (Cultural Heritage Administration), fiches de classement des biens culturels immatériels importants", url: "https://www.cha.go.kr/", note: "Source du classement des rites gut cité en #anecdotes et #heritage." },
+  ]} />
+</PageLayout>

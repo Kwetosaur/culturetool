@@ -88,8 +88,8 @@ fait croire le travail terminé.
 | Égyptienne | ✅ fait | Œil d'Horus |
 | Mésopotamienne | ✅ fait | Ziggourat |
 | Perse/zoroastrienne | ✅ fait | Flamme sacrée |
-| Cananéenne/ougaritique | icône prête | Taureau stylisé |
-| Hittite | icône prête | Dragon enroulé (Illuyanka) |
+| Cananéenne/ougaritique | ✅ fait | Taureau stylisé |
+| Hittite | ✅ fait | Dragon enroulé (Illuyanka) |
 | Arabe préislamique | icône prête | Croissant + étoile |
 
 ### Asie
@@ -99,12 +99,12 @@ fait croire le travail terminé.
 | Japonaise | ✅ fait | Torii |
 | Aztèque & Maya | ✅ fait | Serpent à plumes (S ondulant) |
 | Chinoise | ✅ fait | Dragon serpentin |
-| Coréenne | icône prête | Ourse (Dangun) |
-| Tibétaine/Bön | icône prête | Montagne sacrée |
+| Coréenne | ✅ fait | Ourse (Dangun) |
+| Tibétaine/Bön | ✅ fait | Montagne sacrée |
 | Mongole | icône prête | Loup gris ou ciel étoilé |
 | Vietnamienne | ✅ fait | Œuf fendu |
 | Turque/Asie centrale | icône prête | Loup gris (Asena) |
-| Cosmologie bouddhiste | icône prête | Mont Meru (montagne à degrés) |
+| Cosmologie bouddhiste | ✅ fait | Mont Meru (montagne à degrés) |
 | Ainu | icône prête | Ours de face, silhouette sobre (kamuy) |
 | Javanaise / indonésienne | icône prête | Marionnette wayang de profil |
 | Philippines | icône prête | Jarre funéraire à figure sculptée sur le couvercle |
@@ -114,7 +114,7 @@ fait croire le travail terminé.
 |---|---|---|
 | Yoruba | ✅ fait | Hache double (Shango) |
 | Dogon | ✅ fait | Étoile Sirius |
-| Ashanti/Akan | icône prête | Araignée (Anansi) |
+| Ashanti/Akan | ✅ fait | Araignée (Anansi) |
 | Zoulou | icône prête | Bouclier + lance |
 | Éthiopienne | icône prête | Arche/couronne |
 | Berbère / amazighe | icône prête | Éclair au-dessus d'une jarre d'eau (Anzar, la pluie) |
@@ -154,7 +154,7 @@ fait croire le travail terminé.
 | Celtes (Gaule/Îles britanniques) | icône prête | Bouclier celtique/torque |
 | Empire byzantin | ✅ fait | Aigle bicéphale |
 | Cités-États italiennes | icône prête | Lion ailé (Venise) |
-| Al-Andalus | icône prête | Arc outrepassé (fer à cheval) de Cordoue |
+| Al-Andalus | ✅ fait | Arc outrepassé (fer à cheval) de Cordoue |
 | Minoens (Crète) | icône prête | Taureau bondissant de profil |
 
 ### Moyen-Orient & Méditerranée
@@ -162,8 +162,8 @@ fait croire le travail terminé.
 |---|---|---|
 | Mésopotamie (culture) | ✅ fait | Tablette cunéiforme |
 | Empire perse achéménide | ✅ fait | Colonne de Persépolis |
-| Phéniciens | icône prête | Voilier + lettre d'alphabet |
-| Empire ottoman | icône prête | Croissant + dôme |
+| Phéniciens | ✅ fait | Voilier + lettre d'alphabet |
+| Empire ottoman | ✅ fait | Croissant + dôme |
 | Carthage | icône prête | Cheval cabré au-dessus d'une proue de navire (monnayage punique) |
 
 ### Asie
@@ -183,8 +183,8 @@ fait croire le travail terminé.
 |---|---|---|
 | Égypte Antique | ✅ fait | Pyramide + soleil levant |
 | Empire du Mali | ✅ fait | Pièce d'or / manuscrit (Tombouctou) |
-| Nubie/Koush | icône prête | Pyramide méroïtique (fine et pointue) |
-| Grand Zimbabwe (culture) | icône prête | Mur de pierre courbe — *voir note redondance ci-dessous* |
+| Nubie/Koush | ✅ fait | Pyramide méroïtique (fine et pointue) |
+| Grand Zimbabwe (culture) | ✅ fait | Mur de pierre courbe — *voir note redondance ci-dessous* |
 | Éthiopie/Aksoum | icône prête | Stèle/obélisque |
 | Côte swahilie | icône prête | Boutre à voile latine triangulaire |
 | Empire songhaï | icône prête | Mosquée de terre à poutres saillantes |
@@ -193,7 +193,7 @@ fait croire le travail terminé.
 | Page | Statut | Icône |
 |---|---|---|
 | Incas (culture) | icône prête | Terrasse andine / Machu Picchu |
-| Maya (culture) | icône prête | Glyphe maya stylisé |
+| Maya (culture) | ✅ fait | Glyphe maya stylisé |
 | Aztèques (culture) | icône prête | Aigle sur cactus |
 | Peuples des Plaines | icône prête | Tipi + bison |
 
@@ -215,9 +215,9 @@ fait croire le travail terminé.
 | Bête du Gévaudan | ✅ fait | Yeux ambrés dans le noir |
 | Monstre du Loch Ness | ✅ fait | Silhouette émergeant de l'eau |
 | Le Kraken | ✅ fait | Tentacule enroulé |
-| Les Sirènes | icône prête | Silhouette mi-femme mi-poisson |
-| Le Loup-Garou | icône prête | Silhouette de loup debout |
-| Black Shuck | icône prête | Chien noir, yeux rouges |
+| Les Sirènes | ✅ fait | Silhouette mi-femme mi-poisson |
+| Le Loup-Garou | ✅ fait | Silhouette de loup debout |
+| Black Shuck | ✅ fait | Chien noir, yeux rouges |
 | Le Golem de Prague | ✅ fait | Silhouette d'argile massive et sans visage, petit parchemin à la bouche |
 | La Tarasque | ✅ fait | Dragon trapu à carapace, monté sur roues de procession |
 | Le Basilic | icône prête | Coq à queue de serpent |
@@ -230,11 +230,11 @@ fait croire le travail terminé.
 | Le Mothman | ✅ fait | Silhouette ailée, yeux rouges |
 | Le Wendigo | icône prête | Silhouette décharnée (sobre, respect culturel) |
 | Le Skinwalker | icône prête | Symbole abstrait, pas de représentation frontale (respect culturel) |
-| Ogopogo | icône prête | Silhouette de vague/serpent de lac |
-| Le Jersey Devil | icône prête | Silhouette ailée cornue |
+| Ogopogo | ✅ fait | Silhouette de vague/serpent de lac |
+| Le Jersey Devil | ✅ fait | Silhouette ailée cornue |
 | Le Rougarou | icône prête | Variante loup-garou cajun |
 | Créature de Loveland | icône prête | Silhouette de grenouille humanoïde |
-| Champ | icône prête | Silhouette émergeant de l'eau (variante Nessie) |
+| Champ | ✅ fait | Silhouette émergeant de l'eau (variante Nessie) |
 | Bête de Bray Road | icône prête | Silhouette de loup-garou debout (variante) |
 | Le Thunderbird | ✅ fait | Grand oiseau de face, ailes déployées, **éclairs sous les ailes** — l'éclair est ce qui le distingue du corbeau totémique du Pacifique Nord-Ouest |
 
@@ -292,7 +292,7 @@ fait croire le travail terminé.
 | Suaire de Turin | ✅ fait | Tissu drapé |
 | Crop circles | icône prête | Cercle géométrique dans un champ |
 | Homme de Piltdown | icône prête | Crâne fissuré |
-| Newgrange | icône prête | Tumulus/spirale néolithique |
+| Newgrange | ✅ fait | Tumulus/spirale néolithique |
 
 ### Méditerranée & Afrique
 | Page | Statut | Icône |
@@ -301,10 +301,10 @@ fait croire le travail terminé.
 | Atlantide | icône prête | Colonne engloutie |
 | Cité d'Héracléion | icône prête | Statue engloutie |
 | Batterie de Bagdad | icône prête | Jarre stylisée |
-| Malédiction de Toutânkhamon | icône prête | Masque funéraire stylisé |
-| Grand Zimbabwe (mystère) | icône prête | Mur de pierre courbe |
+| Malédiction de Toutânkhamon | ✅ fait | Masque funéraire stylisé |
+| Grand Zimbabwe (mystère) | ✅ fait | Mur de pierre courbe |
 | Göbekli Tepe | ✅ fait | Deux piliers en T dressés côte à côte |
-| Disque de Phaistos | icône prête | Disque couvert de petits signes disposés en spirale — la spirale est ce qui le distingue du disque de Dropa et de la Pierre du Soleil |
+| Disque de Phaistos | ✅ fait | Disque couvert de petits signes disposés en spirale — la spirale est ce qui le distingue du disque de Dropa et de la Pierre du Soleil |
 
 ### Asie
 | Page | Statut | Icône |
@@ -320,7 +320,7 @@ fait croire le travail terminé.
 | Lignes de Nazca | ✅ fait | Colibri au trait |
 | Île de Pâques | ✅ fait | Moaï stylisé |
 | Col Dyatlov | ✅ fait | Tente/montagne, très sobre |
-| Explosion de la Toungouska | icône prête | Troncs d'arbres couchés en éventail |
+| Explosion de la Toungouska | ✅ fait | Troncs d'arbres couchés en éventail |
 | Rongorongo | icône prête | Tablette de bois gravée de lignes de petits glyphes |
 
 ### Amérique du Nord (affaires réelles)
@@ -328,7 +328,7 @@ fait croire le travail terminé.
 |---|---|---|
 | Zodiac Killer | icône prête | Sujet sensible, traiter avec sobriété |
 | Vol MH370 | icône prête | Silhouette d'avion sur océan, sobre |
-| Le Somerton Man | icône prête | Bout de papier déchiré, strictement abstrait — mort réelle, aucune mise en scène |
+| Le Somerton Man | ✅ fait | Bout de papier déchiré, strictement abstrait — mort réelle, aucune mise en scène |
 
 ---
 
@@ -353,8 +353,8 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 | La Lance Sacrée | ✅ fait | Fer de lance long et fin, hampe coupée |
 | La Chambre d'Ambre | ✅ fait | Fragment de panneau mural orné, angle brisé |
 | Les épées Ulfberht | ✅ fait | Lame à plat portant une inscription stylisée (traits, pas de lettres lisibles) |
-| La Pierre de Scone | icône prête | Bloc de pierre rectangulaire avec ses deux anneaux de transport |
-| Durandal | icône prête | Épée fichée **horizontalement** dans une paroi rocheuse (angle volontairement différent d'Excalibur) |
+| La Pierre de Scone | ✅ fait | Bloc de pierre rectangulaire avec ses deux anneaux de transport |
+| Durandal | ✅ fait | Épée fichée **horizontalement** dans une paroi rocheuse (angle volontairement différent d'Excalibur) |
 | Le Trésor des Templiers | icône prête | Coffre fermé portant une croix pattée |
 | Le Sampo | icône prête | Mécanisme-moulin à la forme volontairement indistincte |
 | La Couronne de fer de Lombardie | icône prête | Couronne basse, anneau intérieur marqué d'un trait |
@@ -374,8 +374,8 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 | Page | Statut | Icône |
 |---|---|---|
 | L'Arche d'Alliance | ✅ fait | Coffre à barres de transport, surmonté de deux ailes |
-| La Ménorah du Second Temple | icône prête | Chandelier à sept branches |
-| Zulfiqar | icône prête | Épée à lame bifide, strictement neutre |
+| La Ménorah du Second Temple | ✅ fait | Chandelier à sept branches |
+| Zulfiqar | ✅ fait | Épée à lame bifide, strictement neutre |
 | L'Anneau de Salomon | icône prête | Anneau portant une étoile à six branches |
 
 ### Asie (7)
@@ -384,8 +384,8 @@ neutres, sans ajout de contexte religieux ni de mise en scène.
 | Les Trois Trésors impériaux du Japon | ✅ fait | **Trois coffres fermés alignés** — ne jamais dessiner les objets, qui n'ont jamais été montrés : l'icône dit exactement le sujet de la page |
 | L'Épée de Goujian | ✅ fait | Épée courte de bronze, lame large, vue de face |
 | Le Koh-i-Noor | ✅ fait | Diamant taillé, facettes géométriques |
-| Le Sceau de jade impérial | icône prête | Sceau carré à poignée sculptée |
-| Le Honjo Masamune | icône prête | Katana dans son fourreau, courbe marquée |
+| Le Sceau de jade impérial | ✅ fait | Sceau carré à poignée sculptée |
+| Le Honjo Masamune | ✅ fait | Katana dans son fourreau, courbe marquée |
 | Le Vajra | ✅ fait | Vajra à branches symétriques |
 | Le Ruyi Jingu Bang | icône prête | Bâton long à extrémités cerclées |
 

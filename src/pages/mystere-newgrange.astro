@@ -1,0 +1,167 @@
+---
+/*
+  Newgrange — vingtième mystère de la série. Structure imposée par
+  docs/plans/plan-serie-mysteres.md : 7 sections, badge de verdict.
+
+  Bon complément direct de mystere-stonehenge.html déjà publié : même
+  logique d'alignement astronomique, mais Newgrange précède Stonehenge de
+  plusieurs siècles et rend l'alignement observable en une expérience
+  précise et datée (17 minutes à l'aube du solstice d'hiver).
+
+  Effets : data-egg="newgrange" + data-scroll-fx="newgrangeRai" sur
+  #enigme — un rai de lumière qui progresse dans un couloir jusqu'à la
+  chambre (variante directe de `solstice`).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Vert irlandais, gris mégalithique, or du rai de soleil solsticial : la
+   matière du site plutôt que la palette pierre/brume déjà utilisée pour
+   Stonehenge. */
+const palette = {
+  bg: '#0f160f',
+  'bg-deep': '#080d08',
+  surface: '#182418',
+  'surface-alt': '#203020',
+  border: '#3a5c3a',
+  ink: '#eef5ee',
+  text: '#c4d8c4',
+  'text-dim': '#7ea87e',
+  accent: '#5c6a5c',
+  'accent-bright': '#8a9a8a',
+  accent2: '#c9982f',
+  'accent2-bright': '#e8c164',
+  verdict: '#1e3a6e',
+  'verdict-bright': '#3a5a9a',
+  glow: 'rgba(201,152,47,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Newgrange"
+  serie="Grands Mystères du Monde"
+  description="Un tombeau à couloir irlandais plus ancien que Stonehenge et que les pyramides d'Égypte, dont l'alignement précis laisse le soleil du solstice d'hiver illuminer sa chambre funéraire pendant environ 17 minutes — une prouesse d'ingénierie néolithique confirmée en 1967 seulement, et un art mégalithique dont le sens exact reste débattu."
+  href="mystere-newgrange.html"
+  egg="newgrange"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="IRLANDE · v. 3200 AV. J.-C."
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Un rai de lumière, une fois par an, depuis cinq mille ans</p>
+  <p class="tagline" slot="hero">
+    Plus vieux que les pyramides d'Égypte et que Stonehenge, un tumulus irlandais capte
+    encore aujourd'hui, dix-sept minutes durant à l'aube du solstice d'hiver, un rayon de
+    soleil qui traverse tout son couloir jusqu'à la chambre funéraire la plus reculée.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Fonction (tombeau et observatoire solsticial) bien comprise ; méthodes de construction exactes et sens de l'art mégalithique toujours débattus"
+    note="L'alignement astronomique du monument est aujourd'hui parfaitement établi et vérifiable chaque année. Restent ouvertes des questions plus fines : l'organisation exacte du chantier néolithique, et la signification précise des motifs gravés sur ses pierres, notamment la triple spirale de la pierre d'entrée."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Un tombeau à couloir plus vieux que les pyramides" intro="Avant d'aborder ce qui reste incertain, ce qui ne fait pas débat : l'ancienneté du monument et la précision de son alignement solaire.">
+    <div class="card-grid">
+      <InfoCard num="I" title="Une construction d'environ 3200 av. J.-C." sub="Antériorité remarquable" body="Le monument précède Stonehenge de plusieurs siècles et les grandes pyramides égyptiennes de plusieurs générations, une antériorité aujourd'hui solidement confirmée par datation." />
+      <InfoCard num="II" title="Un tumulus de 200 000 tonnes de matériaux" sub="Prouesse logistique néolithique" body="Le monticule qui recouvre la chambre funéraire nécessite l'accumulation d'une masse considérable de terre et de pierre, rassemblée sans outils métalliques ni roue." />
+      <InfoCard num="III" title="Un « roof-box » calculé avec précision" sub="Dispositif architectural délibéré" body="Une ouverture spécialement aménagée au-dessus de l'entrée du couloir permet au rayon de soleil du solstice d'hiver de pénétrer jusqu'à la chambre la plus reculée, à environ 19 mètres de l'entrée." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Comment, et pour quoi précisément ?" scrollFx="newgrangeRai" intro="Deux questions distinctes restent ouvertes : les méthodes exactes d'organisation du chantier, et la signification précise de l'art gravé qui orne certaines pierres du site.">
+    <div class="card-grid wide">
+      <FigureCard name="Une logistique de chantier encore mal reconstituée" role="Question d'ingénierie" tags={['200 000 tonnes', 'Sans roue ni métal']} body="Si la faisabilité technique du transport et de l'empilement des matériaux par des sociétés néolithiques n'est plus mise en doute, l'organisation précise du travail collectif — main-d'œuvre, durée, logistique locale — reste largement reconstituée par hypothèse plutôt que directement documentée." />
+      <FigureCard name="Le sens de l'art mégalithique reste débattu" role="Question de signification" tags={['Triple spirale', 'Kerbstone K1']} body="Les motifs gravés sur la pierre d'entrée, dont la célèbre triple spirale, n'ont jamais reçu d'interprétation consensuelle — calendaire, cosmologique, purement décorative — faute de tout texte contemporain pour les accompagner." />
+      <FigureCard name="Une fonction funéraire, mais pour qui exactement" role="Question sociale" tags={['Peu de restes humains identifiés']} body="Les quelques restes humains retrouvés à l'intérieur ne permettent pas de déterminer avec certitude qui avait le privilège d'y être inhumé, ni selon quels critères sociaux ou rituels précis." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment on l'a étudié" title="De la première fouille de 1699 à la redécouverte du solstice en 1967">
+    <Timeline items={[
+      { year: 'v. 3200 av. J.-C.', title: 'Construction du monument', body: "Édification du tumulus et de sa chambre funéraire par des communautés agricoles néolithiques de la vallée de la Boyne." },
+      { year: '1699', title: 'Première exploration moderne documentée', body: "Le propriétaire terrien Charles Campbell fait dégager l'entrée, révélant l'existence du couloir intérieur." },
+      { year: 'XVIIIe-XIXe siècle', title: 'Premières descriptions savantes', body: "Le site attire l'attention d'antiquaires et de premiers archéologues, sans que sa fonction astronomique précise ne soit encore soupçonnée." },
+      { year: '1962-1975', title: 'Fouilles de Michael J. O\'Kelly', body: "Restauration et étude scientifique approfondie du site, incluant la reconstruction de la façade de quartz aujourd'hui visible." },
+      { year: '1967', title: 'Confirmation de l\'alignement solsticial', body: "Michael J. O'Kelly devient le premier témoin moderne connu à observer directement le rayon de lumière du solstice d'hiver pénétrer jusqu'à la chambre." },
+      { year: '1993', title: 'Classement UNESCO', body: "Newgrange rejoint la liste du patrimoine mondial au sein de l'ensemble de Brú na Bóinne, avec Knowth et Dowth." },
+      { year: 'Depuis les années 1990', title: 'Loterie publique annuelle', body: "Face à la demande considérable, l'accès à la chambre lors du solstice d'hiver est désormais attribué par tirage au sort public." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'un tumulus oublié à un rendez-vous solsticial mondial" title="Comment Newgrange est devenu un événement annuel suivi">
+    <div class="card-grid compact">
+      <MiniCard title="Une loterie très demandée" tag="Accès contemporain" body="Des dizaines de milliers de candidatures sont déposées chaque année pour les quelques places disponibles lors du lever de soleil du solstice d'hiver dans la chambre elle-même." />
+      <MiniCard title="Une retransmission en direct" tag="Diffusion mondiale" body="L'événement solsticial est aujourd'hui filmé et retransmis en ligne, permettant à un public mondial de suivre à distance le phénomène observé pour la première fois en 1967." />
+      <MiniCard title="Un motif national irlandais" tag="Identité culturelle" body="La triple spirale de la pierre d'entrée est devenue un motif graphique largement identifié à l'identité culturelle irlandaise contemporaine, bien au-delà du strict cercle archéologique." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Un alignement solaire intentionnel, pas un hasard architectural" body="La précision du dispositif du roof-box, calculé pour laisser passer la lumière uniquement à une période précise de l'année, exclut une coïncidence fortuite et démontre une intention astronomique délibérée de la part des bâtisseurs néolithiques." />
+    <ScienceBlock num="Enquête 2" title="Une prouesse logistique confirmée mais partiellement reconstituée" body="L'ampleur des matériaux rassemblés confirme une capacité d'organisation collective considérable pour une société néolithique, sans que le détail exact de cette organisation soit documenté par autre chose que des hypothèses archéologiques raisonnables." />
+    <ScienceBlock num="Enquête 3" title="Un art gravé toujours indéchiffré dans son sens" body="Contrairement à la fonction astronomique du monument, la signification précise des motifs gravés, notamment la triple spirale, n'a jamais fait l'objet d'un consensus scientifique, faute de toute source textuelle contemporaine pour les éclairer." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Un tombeau à fonction également calendaire et rituelle"
+      level="consensus"
+      status="Position dominante"
+      body="La plupart des archéologues s'accordent sur une fonction combinée : lieu de sépulture pour une élite ou une communauté restreinte, doublé d'un marqueur calendaire précis du retour de la lumière après le solstice d'hiver."
+      attrib="Consensus dominant en archéologie néolithique irlandaise"
+    />
+    <TheoryCard
+      title="La triple spirale comme représentation calendaire ou cosmologique"
+      level="plausible"
+      status="Hypothèse répandue, non confirmée"
+      body="Certains chercheurs proposent une lecture calendaire ou cosmologique des motifs gravés, sans qu'aucune interprétation n'ait jamais pu être confirmée de façon indépendante et décisive."
+      attrib="Hypothèse discutée en archéologie de l'art mégalithique"
+    />
+    <TheoryCard
+      title="Un simple motif décoratif sans signification calendaire précise"
+      level="plausible"
+      status="Hypothèse concurrente sérieuse"
+      body="D'autres chercheurs restent prudents face à toute lecture calendaire trop précise des gravures, y voyant plutôt un langage symbolique dont le sens exact nous échappe probablement de façon définitive."
+      attrib="Position prudente concurrente en archéologie de l'art préhistorique" />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que ce monument fait encore">
+    <HeritageBlock title="Un rendez-vous solsticial toujours observé" body="Le phénomène lumineux continue de se produire chaque année et attire un public et une couverture médiatique internationale renouvelée." />
+    <HeritageBlock title="Un site touristique et patrimonial majeur" body="Newgrange, avec Knowth et Dowth, compte parmi les principales destinations archéologiques d'Irlande et un pilier du tourisme culturel du pays." />
+    <HeritageBlock title="Un complément direct de Stonehenge" body="Les deux sites, malgré leurs différences architecturales, illustrent une même préoccupation néolithique européenne pour l'observation précise des cycles solaires." />
+    <CautionBox>
+      Les interprétations les plus poussées de l'art gravé de Newgrange, notamment celles qui
+      y voient un calendrier précis ou un système symbolique complexe, restent des hypothèses
+      de recherche et non des faits établis. La rigueur impose de distinguer nettement ce que
+      l'alignement solaire démontre avec certitude de ce que l'art mégalithique laisse
+      seulement supposer.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Michael J. O'Kelly, Newgrange: Archaeology, Art and Legend, Thames & Hudson, 1982", note: "Compte-rendu de référence des fouilles et de la découverte de l'alignement solsticial, cité en #decouverte et #science." },
+    { label: "Office of Public Works (Irlande), documentation officielle du site de Brú na Bóinne", url: "https://heritageireland.ie/", note: "Source de la loterie d'accès et de la gestion contemporaine du site, citée en #culture-populaire et #heritage." },
+    { label: "UNESCO, Centre du patrimoine mondial, « Brú na Bóinne – Archaeological Ensemble of the Bend of the Boyne » (n° 659), inscrit en 1993", url: "https://whc.unesco.org/en/list/659/", note: "Statut patrimonial cité en #decouverte et #heritage." },
+    { label: "Muiris O'Sullivan, Duma na nGiall: The Mound of the Hostages, Tara, Wordwell, 2005", note: "Contexte archéologique comparatif sur les tombeaux à couloir irlandais cité en #contexte et #theories." },
+  ]} />
+</PageLayout>

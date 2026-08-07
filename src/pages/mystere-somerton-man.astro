@@ -1,0 +1,170 @@
+---
+/*
+  Le Somerton Man — dix-septième mystère de la série. Structure imposée
+  par docs/plans/plan-serie-mysteres.md : 7 sections, badge de verdict.
+
+  Point de vigilance majeur : il s'agit de la mort réelle d'un être humain,
+  identifié en 2022 comme étant probablement Charles Webb. Toute la page
+  doit rester factuelle et sobre, sans mise en scène ni détail macabre
+  superflu — même exigence que pour le Col Dyatlov. Le chercheur principal
+  du dossier, Derek Abbott, a par ailleurs épousé la petite-fille de la
+  femme longtemps soupçonnée d'en savoir plus (« Jestyn ») : une dimension
+  personnelle de l'enquête à mentionner factuellement, sans sensationnalisme.
+
+  Effets : data-egg="somerton" + data-scroll-fx="somertonPapier" sur
+  #enigme — un bout de papier déchiré qui se pose, et rien d'autre,
+  sobriété absolue.
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import VerdictBadge from '../components/VerdictBadge.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import Timeline from '../components/Timeline.astro';
+import TheoryCard from '../components/TheoryCard.astro';
+import ScienceBlock from '../components/ScienceBlock.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Sépia des années 1940, crépuscule sur la plage d'Adélaïde, encre fanée :
+   la matière du dossier plutôt qu'une palette "polar" générique. */
+const palette = {
+  bg: '#161412',
+  'bg-deep': '#0d0b0a',
+  surface: '#221e1a',
+  'surface-alt': '#2c2620',
+  border: '#5c4c3a',
+  ink: '#f0ece0',
+  text: '#d0c4a8',
+  'text-dim': '#948868',
+  accent: '#8a7a5a',
+  'accent-bright': '#b8a478',
+  accent2: '#2e4a5a',
+  'accent2-bright': '#4a728a',
+  verdict: '#1e3a6e',
+  'verdict-bright': '#3a5a9a',
+  glow: 'rgba(138,122,90,0.2)',
+};
+
+const SECTIONS = [
+  { id: 'contexte', nav: 'Contexte' },
+  { id: 'enigme', nav: 'Énigme' },
+  { id: 'decouverte', nav: 'Découverte' },
+  { id: 'culture-populaire', nav: 'Culture pop' },
+  { id: 'science', nav: 'Science' },
+  { id: 'theories', nav: 'Théories' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Le Somerton Man"
+  serie="Grands Mystères du Monde"
+  description="Le 1er décembre 1948, un homme non identifié est retrouvé mort sur une plage d'Adélaïde, en Australie, une étiquette « Tamám Shud » — « c'est fini » en persan — cousue dans une poche cachée de son pantalon. Son identité a été établie en 2022 par généalogie génétique, mais la cause de sa mort et le sens d'un code jamais déchiffré restent, eux, non résolus."
+  href="mystere-somerton-man.html"
+  egg="somerton"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ADÉLAÏDE · 1er DÉCEMBRE 1948"
+  nextUp="Prochain chapitre de la série « Grands Mystères du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Un inconnu, un mot persan, un code jamais résolu</p>
+  <p class="tagline" slot="hero">
+    Soixante-treize ans après sa mort, un homme retrouvé sans identité sur une plage
+    australienne a enfin reçu un nom, grâce à la généalogie génétique. La cause de sa mort et
+    le sens des lignes de lettres retrouvées avec lui restent, à ce jour, sans réponse certaine.
+  </p>
+  <VerdictBadge
+    slot="hero"
+    label="Verdict"
+    text="Identité résolue par généalogie génétique en 2022 (avec réserves officielles) ; cause de la mort et signification du code toujours non élucidées"
+    note="Une mort réelle et jusque-là non résolue. L'identification proposée en 2022 n'a pas, à ce jour, été confirmée par une exhumation officielle et une comparaison ADN directe, d'où les réserves qui subsistent dans le dossier judiciaire."
+  />
+
+  <Section id="contexte" label="Ce qui est établi" title="Un corps sans nom sur une plage d'Adélaïde" intro="Avant d'aborder ce qui reste incertain, ce qui ne fait pas débat : la découverte du corps, l'absence totale d'identification initiale, et les objets retrouvés sur lui.">
+    <div class="card-grid">
+      <InfoCard num="I" title="La découverte, 1er décembre 1948" sub="Plage de Somerton Park, Adélaïde" body="Le corps d'un homme bien habillé, sans papier d'identité et dont toutes les étiquettes de vêtements ont été retirées, est découvert sur la plage tôt le matin." />
+      <InfoCard num="II" title="Une autopsie sans conclusion certaine" sub="Cause de la mort non déterminée avec certitude" body="L'examen médical ne permet pas d'établir formellement la cause du décès ; un empoisonnement est fortement suspecté par les médecins légistes de l'époque, sans preuve toxicologique définitive au dossier." />
+      <InfoCard num="III" title="« Tamám Shud »" sub="Fragment de papier caché" body="Des semaines après la découverte, un minuscule fragment de papier imprimé des mots persans « Tamám Shud » (« c'est fini », dernière formule du Rubaiyat d'Omar Khayyam) est retrouvé cousu dans une poche secrète du pantalon de l'homme." />
+    </div>
+  </Section>
+
+  <Section id="enigme" label="Ce qui reste à expliquer" title="Un code jamais percé, une identité longtemps inconnue" scrollFx="somertonPapier" intro="Deux questions structurent ce dossier depuis 1948 : qui était cet homme, et que signifient les lignes de lettres retrouvées avec lui ?">
+    <div class="card-grid wide">
+      <FigureCard name="Le livre retrouvé et son code" role="Pièce centrale du dossier" tags={['Rubaiyat', 'Lettres jamais déchiffrées']} body="Un exemplaire du Rubaiyat d'Omar Khayyam, dont la page portant « Tamám Shud » a été arrachée, est retrouvé jeté dans une voiture non verrouillée près de la plage. Au dos figurent cinq lignes de lettres majuscules griffonnées au crayon, jamais déchiffrées avec certitude malgré des décennies de tentatives." />
+      <FigureCard name="Un numéro de téléphone et une inconnue" role="Piste jamais pleinement élucidée" tags={['« Jestyn »', 'Témoin réticent']} body="Le même livre porte, griffonné, un numéro de téléphone menant à une infirmière vivant près de la plage, surnommée « Jestyn » par les enquêteurs. Présentée avec un moulage du visage de l'inconnu, elle nie l'avoir reconnu — une réponse que les enquêteurs de l'époque comme les chercheurs ultérieurs ont longtemps jugée peu convaincante, sans jamais pouvoir la contredire formellement." />
+      <FigureCard name="Une identité restée secrète pendant 74 ans" role="Résolution tardive" tags={['2022', 'Généalogie génétique']} body="Ce n'est qu'en 2022 que des techniques de généalogie génétique, appliquées à des cheveux préservés sur un moulage du visage de l'homme, permettent de proposer un nom : Charles Webb, ingénieur électricien de Melbourne né en 1905." />
+    </div>
+  </Section>
+
+  <Section id="decouverte" label="Comment on l'a étudié" title="De l'autopsie de 1948 à la généalogie génétique de 2022">
+    <Timeline items={[
+      { year: '1er décembre 1948', title: 'Découverte du corps', body: "Un homme non identifié est retrouvé mort sur la plage de Somerton Park, à Adélaïde, en Australie-Méridionale." },
+      { year: 'Décembre 1948', title: 'Autopsie sans conclusion certaine', body: "Un empoisonnement est fortement suspecté sans preuve toxicologique définitive au dossier." },
+      { year: 'Janvier 1949', title: 'Découverte du fragment « Tamám Shud »', body: "Le morceau de papier caché dans une poche secrète du pantalon est enfin repéré lors d'un nouvel examen des vêtements." },
+      { year: 'Janvier 1949', title: 'Retrouvaille du livre et de son code', body: "Un exemplaire du Rubaiyat correspondant à la page arrachée est retrouvé dans une voiture non verrouillée garée près de la plage, portant au dos les cinq lignes de lettres codées." },
+      { year: 'Années 1950-1970', title: 'Tentatives de décryptage et pistes d\'espionnage', body: "Le contexte de guerre froide et la proximité du site d'essais de fusées de Woomera nourrissent des théories d'espionnage jamais confirmées." },
+      { year: 'Années 1990-2000', title: 'Reprise universitaire de l\'enquête', body: "Le chercheur Derek Abbott, de l'Université d'Adélaïde, consacre une part importante de sa carrière à documenter le dossier, y compris sa dimension humaine et judiciaire." },
+      { year: '2011-2013', title: 'Débats autour d\'une exhumation', body: "Des demandes d'exhumation du corps pour analyse ADN directe sont débattues par les autorités sud-australiennes, sans suite immédiate." },
+      { year: '2022', title: 'Identification par généalogie génétique', body: "Des analyses menées avec la généalogiste Colleen Fitzpatrick permettent de proposer l'identité de Charles Webb, avec un accueil prudent mais largement favorable de la communauté scientifique." },
+    ]} />
+  </Section>
+
+  <Section id="culture-populaire" label="D'une énigme judiciaire à un phénomène mondial" title="Comment ce dossier est devenu une référence des mystères non résolus">
+    <div class="card-grid compact">
+      <MiniCard title="Un cas d'école du genre « cold case »" tag="Documentaires et podcasts" body="L'affaire figure aujourd'hui parmi les dossiers non résolus les plus documentés au monde, régulièrement traitée par des podcasts et documentaires spécialisés dans les enquêtes irrésolues." />
+      <MiniCard title="Une théorie d'espionnage jamais confirmée" tag="Contexte de guerre froide" body="La proximité du site d'essais militaires de Woomera a nourri des spéculations sur un lien avec l'espionnage de la guerre froide, sans qu'aucune preuve n'ait jamais permis de les confirmer." />
+      <MiniCard title="Une dimension personnelle rare pour un chercheur" tag="Derek Abbott" body="Le principal chercheur universitaire du dossier a épousé la petite-fille de la femme longtemps soupçonnée d'en savoir davantage sur l'identité de l'homme — un fait rapporté par la presse australienne comme l'un des aspects les plus singuliers de toute l'affaire." />
+    </div>
+  </Section>
+
+  <Section id="science" label="Section pivot" title="Ce qu'on peut affirmer">
+    <ScienceBlock num="Enquête 1" title="Une identité probable, pas encore officiellement confirmée" body="L'analyse génétique de 2022 pointe vers Charles Webb avec un niveau de confiance jugé élevé par les spécialistes en généalogie forensique, mais les autorités sud-australiennes maintenaient, à la dernière mise à jour connue du dossier, des réserves officielles en l'absence de confirmation par exhumation directe." />
+    <ScienceBlock num="Enquête 2" title="Le code des cinq lignes reste non déchiffré" body="Aucune méthode cryptographique appliquée depuis plus de sept décennies n'a permis d'établir avec certitude s'il s'agit d'un véritable chiffrement, d'un aide-mémoire personnel (initiales d'un poème ou d'une chanson), ou d'une suite sans signification particulière." />
+    <ScienceBlock num="Enquête 3" title="La cause de la mort reste incertaine" body="L'hypothèse d'un empoisonnement reste la plus discutée dans la littérature spécialisée, sans qu'aucune analyse toxicologique moderne n'ait pu être menée sur des échantillons d'époque suffisamment conservés pour trancher la question." />
+  </Section>
+
+  <Section id="theories" label="Panorama équitable" title="Ce que chaque théorie vaut vraiment">
+    <TheoryCard
+      title="Un empoisonnement, accidentel ou volontaire"
+      level="plausible"
+      status="Hypothèse la plus discutée"
+      body="Les symptômes rapportés par les médecins légistes de 1948 sont compatibles avec plusieurs poisons de l'époque, sans qu'aucune identification toxicologique définitive n'ait pu être établie faute de moyens d'analyse suffisants alors disponibles."
+      attrib="Hypothèse dominante dans la littérature médico-légale sur l'affaire"
+    />
+    <TheoryCard
+      title="Une affaire d'espionnage de la guerre froide"
+      level="folklore"
+      status="Spéculatif, non étayé"
+      body="La proximité du site d'essais de Woomera a nourri des théories d'espionnage largement reprises par la presse populaire, sans qu'aucun document déclassifié n'ait jamais confirmé de lien réel entre l'homme et une activité de renseignement."
+      attrib="Théorie populaire non confirmée par les sources disponibles"
+    />
+    <TheoryCard
+      title="Un suicide discret lié à une rupture amoureuse"
+      level="plausible"
+      status="Hypothèse minoritaire sérieuse"
+      body="Certains chercheurs, dont Derek Abbott, ont avancé l'hypothèse d'un lien affectif non résolu avec « Jestyn » comme mobile possible d'un geste volontaire — une piste qui reste, comme les autres, non confirmée par une preuve matérielle décisive."
+      attrib="Hypothèse minoritaire avancée par certains chercheurs du dossier"
+    />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette affaire fait encore">
+    <HeritageBlock title="Une référence mondiale des mystères non résolus" body="L'affaire reste l'un des cas d'étude les plus cités dans la littérature consacrée aux disparitions et morts non résolues, aux côtés d'affaires comme celle du Zodiac Killer." />
+    <HeritageBlock title="Un cas d'école de généalogie forensique" body="L'identification de 2022 illustre concrètement les progrès récents de la généalogie génétique appliquée aux cold cases, une méthode aujourd'hui utilisée dans de nombreuses autres enquêtes non résolues à travers le monde." />
+    <HeritageBlock title="Un dossier judiciaire toujours techniquement ouvert" body="Tant qu'une confirmation officielle par exhumation n'aura pas eu lieu, l'identité de l'homme retrouvé sur la plage de Somerton reste, au sens strictement judiciaire, une conclusion probable plutôt qu'un fait définitivement clos." />
+    <CautionBox>
+      Cette page traite la mort réelle d'un être humain, dont l'identité n'a été rendue à sa
+      possible famille qu'en 2022, soixante-quatorze ans après les faits. La curiosité pour
+      l'énigme du code ne doit jamais faire perdre de vue qu'il s'agit d'abord d'une vie
+      humaine et d'un deuil resté sans réponse pendant des décennies.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Gerald Feltus, The Unknown Man: A Suspicious Death at Somerton Beach, publication indépendante, 2010", note: "Synthèse de référence du dossier d'enquête original, citée en #contexte et #decouverte, par l'ancien détective en charge de l'affaire." },
+    { label: "Derek Abbott et al., \"Resolving the Enigma of the Somerton Man\", University of Adelaide, documentation de recherche continue", url: "https://find-somerton-man.blogspot.com/", note: "Source de l'état de la recherche universitaire citée en #enigme et #decouverte." },
+    { label: "Colleen Fitzpatrick et Derek Abbott, annonce de l'identification par généalogie génétique, communiqués de presse et couverture académique, juillet 2022", note: "Source de l'identification de Charles Webb citée en #decouverte et #science." },
+    { label: "ABC News Australia, \"Somerton Man mystery: DNA analysis identifies Charles Webb\", août 2022", url: "https://www.abc.net.au/news/", note: "Couverture journalistique de référence sur les réserves officielles persistantes citées en #verdict et #heritage." },
+  ]} />
+</PageLayout>

@@ -1,0 +1,214 @@
+---
+/*
+  Phéniciens — dix-huitième page de la série « Peuples & Cultures du
+  Monde ». Même structure à 10 sections que culture-khmers.astro.
+
+  Positionnement vis-à-vis de mythologie-cananeenne.html : cette page
+  traite l'angle civilisationnel (alphabet, thalassocratie, colonies,
+  pourpre) et ne répète pas le panthéon de Baal/El/Anat déjà couvert par
+  la page mythologie — même principe que Rome antique/Grèce antique.
+
+  Point de vigilance : la question du sacrifice d'enfants dans les tophets
+  puniques (notamment Carthage) reste un débat archéologique et
+  historiographique réel et non tranché — #anecdotes et #heritage
+  présentent les deux lectures en présence plutôt que d'en privilégier
+  une, sur le même principe que la convivencia d'Al-Andalus.
+
+  Effets : data-egg="pheniciens" + data-scroll-fx="alphabetPropagation"
+  sur #style-de-vie, piste documentée dans plan-effets.md ("des lettres
+  d'alphabet qui se propagent de port en port le long d'une côte").
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Sources from '../components/Sources.astro';
+
+/* Pourpre de Tyr, bleu de la Méditerranée, bois de cèdre : la matière
+   phénicienne plutôt qu'une palette "Levant" recyclée de la mythologie
+   cananéenne. */
+const palette = {
+  bg: '#160f1a',
+  'bg-deep': '#0c0810',
+  surface: '#221a28',
+  'surface-alt': '#2c2234',
+  border: '#5c3a5c',
+  ink: '#f5ecf0',
+  text: '#d8c0d0',
+  'text-dim': '#a088a0',
+  accent: '#7a2a6a',
+  'accent-bright': '#a84a94',
+  accent2: '#1a5c8a',
+  'accent2-bright': '#3a84b4',
+  verdict: '#5c4020',
+  'verdict-bright': '#8a6a3a',
+  glow: 'rgba(122,42,106,0.24)',
+};
+
+const SECTIONS = [
+  { id: 'carte', nav: 'Carte' },
+  { id: 'peuples', nav: 'Peuples' },
+  { id: 'figures', nav: 'Figures' },
+  { id: 'recits', nav: 'Histoire' },
+  { id: 'inventions', nav: 'Génie' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'style-de-vie', nav: 'Style de vie' },
+  { id: 'monde', nav: 'Rayonnement' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+---
+<PageLayout
+  title="Phéniciens"
+  serie="Peuples & Cultures du Monde"
+  description="L'invention de l'alphabet consonantique, ancêtre direct du grec, du latin et de la plupart des écritures occidentales actuelles — portée par une thalassocratie commerciale qui a fondé des comptoirs de Byblos à Cadix, en passant par Carthage, et dont la teinture pourpre valait plus cher que l'or."
+  href="culture-pheniciens.html"
+  egg="pheniciens"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="BYBLOS · TYR · SIDON · CARTHAGE"
+  nextUp="Prochain chapitre de la série « Peuples & Cultures du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Le peuple qui a donné ses lettres au monde</p>
+  <p class="tagline" slot="hero">
+    Sans empire ni armée comparable à ses voisins, une fédération de cités marchandes du
+    Levant a diffusé par le commerce un alphabet dont héritent aujourd'hui la plupart des
+    écritures occidentales — de l'hébreu à l'arabe, du grec au latin.
+  </p>
+
+  <Section
+    id="carte"
+    label="Géographie & Territoire"
+    title="Un réseau de cités-comptoirs, de Byblos à Cadix"
+    intro="Les Phéniciens ne forment jamais un État unifié : un réseau de cités-États du littoral levantin (Byblos, Tyr, Sidon, Arwad) essaime des comptoirs commerciaux à travers toute la Méditerranée, jusqu'à l'Atlantique.">
+    <div class="map-diagram">
+      <svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="420" cy="80" r="7" fill="#a84a94"/>
+        <text x="420" y="66" text-anchor="middle" fill="#f5ecf0" font-size="11" font-family="Cinzel, serif">TYR</text>
+        <circle cx="260" cy="140" r="8" fill="#e8c164"/>
+        <text x="260" y="160" text-anchor="middle" fill="#f5ecf0" font-size="12" font-family="Cinzel, serif">CARTHAGE</text>
+        <circle cx="40" cy="180" r="6" fill="#3a84b4"/>
+        <text x="40" y="196" fill="#a0c8d8" font-size="10">Cadix</text>
+        <circle cx="160" cy="60" r="6" fill="#3a84b4"/>
+        <text x="160" y="46" fill="#a0c8d8" font-size="10">Sardaigne</text>
+      </svg>
+    </div>
+    <p class="map-caption">Tyr, Sidon et Byblos comme foyers d'origine levantins ; Carthage comme colonie devenue puissance à part entière ; Cadix, l'une des plus anciennes villes d'Europe occidentale encore habitées, comme point le plus lointain du réseau.</p>
+    <div class="card-grid">
+      <InfoCard title="Byblos" sub="L'une des plus anciennes cités du Levant" body="Donne indirectement son nom au mot « Bible » via le grec, en tant que port d'exportation majeur du papyrus égyptien vers la Méditerranée." />
+      <InfoCard title="Tyr" sub="Capitale de la thalassocratie" body="Cité insulaire fortifiée, foyer de la légendaire fondatrice de Carthage et centre de production de la pourpre la plus réputée de toute l'Antiquité." />
+      <InfoCard title="Carthage" sub="Fondée v. 814 av. J.-C." body="Colonie tyrienne devenue puissance méditerranéenne autonome, dont l'histoire ultérieure est traitée dans une perspective distincte par la liste des cultures à venir." />
+      <InfoCard title="Cadix (Gadir)" sub="v. 1100 av. J.-C." body="L'un des comptoirs les plus lointains du réseau phénicien, aujourd'hui l'une des plus anciennes villes d'Europe occidentale sans interruption d'occupation." />
+    </div>
+  </Section>
+
+  <Section id="peuples" label="Société & Groupes" title="Marchands, navigateurs et artisans du verre et de la pourpre" intro="Une société urbaine organisée autour du commerce maritime plutôt que de la conquête territoriale, avec une élite marchande influente et des artisans hautement spécialisés.">
+    <div class="card-grid wide">
+      <FigureCard name="Les cités-États levantines" role="Fédération sans empire" tags={['Byblos', 'Tyr', 'Sidon']} body="Chaque cité conserve son autonomie politique, unie par la langue, la religion et les intérêts commerciaux communs plutôt que par une administration centrale unique." />
+      <FigureCard name="Les marchands-navigateurs" role="Élite économique" tags={['Commerce maritime', 'Prestige']} body="Le commerce à longue distance, plutôt que la naissance seule, constitue une voie majeure d'ascension sociale et de prestige dans les cités phéniciennes." />
+      <FigureCard name="Les artisans du verre et de la pourpre" role="Savoir-faire spécialisés" tags={['Teinturerie', 'Verrerie']} body="Des ateliers hautement spécialisés produisent la teinture pourpre et un verre d'une qualité recherchée dans toute la Méditerranée antique." />
+      <FigureCard name="Les colons des comptoirs" role="Réseau diasporique" tags={['Carthage', 'Cadix', 'Sardaigne']} body="Des colons essaiment des comptoirs commerciaux sur tout le pourtour méditerranéen, certains devenant des puissances indépendantes majeures comme Carthage." />
+    </div>
+  </Section>
+
+  <Section id="figures" label="Grandes Figures" title="Fondatrices, navigateurs et inventeurs de lettres">
+    <div class="card-grid wide">
+      <FigureCard name="Elissa (Didon)" role="Fondatrice légendaire de Carthage" tags={['v. 814 av. J.-C.']} body="Princesse tyrienne dont la tradition rapporte la fuite et la fondation de Carthage — un récit repris et romancé plus tard par Virgile dans l'Énéide, bien après les faits qu'il raconte." />
+      <FigureCard name="Hannon le Navigateur" role="Explorateur carthaginois" tags={['Ve siècle av. J.-C.']} body="Aurait mené une expédition le long des côtes atlantiques de l'Afrique, dont le récit (le Périple d'Hannon) reste l'une des rares sources directes sur l'exploration maritime punique." />
+      <FigureCard name="Les marins de Nékao II" role="Circumnavigateurs de l'Afrique" tags={['v. 600 av. J.-C.']} body="Selon Hérodote, des marins phéniciens affrétés par un pharaon égyptien auraient contourné l'Afrique par la mer ; leur propre remarque, rapportée avec scepticisme par Hérodote, que le soleil se trouvait au nord à un moment de leur périple est aujourd'hui lue par plusieurs historiens comme un indice en faveur de l'authenticité du voyage plutôt que contre elle." />
+      <FigureCard name="Les scribes de l'alphabet consonantique" role="Inventeurs anonymes" tags={['XIIe-XIe siècle av. J.-C.']} body="Aucun nom individuel ne nous est parvenu pour l'invention de l'alphabet phénicien lui-même — l'une des innovations les plus durables de l'histoire humaine reste, paradoxalement, anonyme." />
+    </div>
+  </Section>
+
+  <Section id="recits" label="Grands épisodes" title="De la fuite d'Elissa au contournement de l'Afrique">
+    <StoryBlock num="Épisode I" title="La fondation de Carthage" body="Selon la tradition, la princesse tyrienne Elissa fuit sa cité natale après le meurtre de son époux par son propre frère, le roi Pygmalion de Tyr, et fonde Carthage sur la côte nord-africaine — un récit de fondation par l'exil plutôt que par la conquête, typique du modèle colonial phénicien." />
+    <StoryBlock num="Épisode II" title="Le périple d'Hannon" body="Le navigateur carthaginois Hannon rapporte, dans un texte traduit du punique en grec et conservé, une expédition le long des côtes atlantiques africaines, mentionnant des populations locales et des phénomènes naturels impressionnants — l'un des rares témoignages directs, bien que partiellement légendaire dans sa transmission, de l'exploration maritime punique." />
+    <StoryBlock num="Épisode III" title="Le tour de l'Afrique commandité par Nékao II" body={["Hérodote rapporte qu'un pharaon égyptien aurait envoyé des marins phéniciens contourner l'Afrique par la mer depuis la mer Rouge, un voyage de plusieurs années achevé par un retour via Gibraltar.", "Hérodote lui-même se dit sceptique sur un détail du récit — le soleil aperçu au nord à un moment du trajet — qui correspond pourtant exactement à ce qu'on observerait dans l'hémisphère sud, un indice que des historiens modernes lisent comme un gage d'authenticité plutôt qu'une preuve d'invention."]} quote="Pour ma part, je ne le crois pas, mais un autre peut-être le croira." cite="Hérodote, Histoires, Livre IV, à propos du soleil aperçu au nord" />
+  </Section>
+
+  <Section id="inventions" label="Génie civilisationnel" title="L'alphabet, la pourpre et le verre soufflé">
+    <div class="card-grid compact">
+      <MiniCard title="L'alphabet consonantique" tag="Innovation fondatrice" body="Vingt-deux signes consonantiques, sans voyelles, à l'origine directe ou indirecte des alphabets grec, latin, araméen, hébreu et arabe — la matrice de la plupart des écritures utilisées aujourd'hui dans le monde." />
+      <MiniCard title="La pourpre de Tyr" tag="Teinture la plus chère de l'Antiquité" body="Extraite goutte à goutte de milliers de coquillages murex, cette teinture réservée à l'origine à la royauté a probablement donné leur nom grec aux Phéniciens eux-mêmes (« pays de la pourpre »)." />
+      <MiniCard title="Le verre soufflé et coloré" tag="Artisanat recherché" body="Les ateliers phéniciens produisent un verre d'une qualité et d'une finesse recherchées dans toute la Méditerranée antique, exporté aussi loin que leurs comptoirs commerciaux." />
+      <MiniCard title="La navigation hauturière" tag="Savoir-faire maritime" body="Des techniques de navigation avancées, notamment l'orientation nocturne par les étoiles, permettent des traversées de longue distance rares pour l'époque." />
+      <MiniCard title="Le bois de cèdre du Liban" tag="Ressource stratégique" body="Le cèdre du Liban, exporté vers l'Égypte et la Mésopotamie pour la construction navale et monumentale, constitue l'une des principales ressources économiques des cités phéniciennes." />
+    </div>
+  </Section>
+
+  <Section id="anecdotes" label="Petite histoire" title="Distinctions utiles et débats non tranchés">
+    <div class="card-grid compact">
+      <MiniCard title="« Alphabet », un mot qui vient d'eux" tag="Étymologie directe" body="Les lettres grecques alpha et bêta, à l'origine du mot « alphabet » lui-même, dérivent directement des lettres phéniciennes aleph et beth." />
+      <MiniCard title="La controverse des tophets" tag="Débat archéologique actif" body="Les cimetières d'enfants retrouvés à Carthage et ailleurs (tophets) font l'objet d'un débat non tranché : sacrifice rituel d'enfants comme le rapportent des sources grecques et romaines hostiles, ou simple nécropole d'enfants morts en bas âge ou mort-nés ? Les études archéologiques et bioarchéologiques récentes n'ont pas mis tout le monde d'accord." />
+      <MiniCard title="Le nom « Phénicien » vient des autres" tag="Exonyme grec" body="Les habitants des cités levantines ne se désignaient probablement pas eux-mêmes sous ce nom, qui leur est attribué de l'extérieur par les auteurs grecs, souvent en référence à la pourpre." />
+      <MiniCard title="Cadix, doyenne de l'Europe occidentale" tag="Continuité urbaine" body="La ville comptée parmi les plus anciennes d'Europe occidentale à occupation ininterrompue trouve son origine dans un comptoir phénicien du début du Ier millénaire av. J.-C." />
+      <MiniCard title="Une écriture sans voyelles" tag="Système consonantique" body="L'alphabet phénicien ne note que les consonnes ; ce sont les Grecs qui, en l'adoptant, ajoutent les premières voyelles écrites de l'histoire connue." />
+    </div>
+  </Section>
+
+  <Section
+    id="style-de-vie"
+    label="Vie quotidienne"
+    title="Ports, ateliers de teinture et comptoirs lointains"
+    intro="La vie quotidienne phénicienne se documente surtout par l'archéologie portuaire et les objets exportés, les sources écrites internes étant rares comparées aux témoignages extérieurs grecs et bibliques."
+    scrollFx="alphabetPropagation">
+    <div class="card-grid compact">
+      <MiniCard title="Le port comme centre de la vie urbaine" tag="Économie maritime" body="L'activité portuaire structure l'essentiel de la vie économique et sociale des cités phéniciennes, bien plus que l'agriculture intérieure." />
+      <MiniCard title="Les ateliers de teinture pourpre" tag="Odeur et industrie" body="La production de pourpre, réputée pour son odeur nauséabonde, s'effectue dans des ateliers dédiés généralement tenus à l'écart des quartiers résidentiels." />
+      <MiniCard title="Les scribes marchands" tag="Écriture pratique" body="Contrairement aux scribes mésopotamiens ou égyptiens dédiés au temple ou au palais, l'écriture phénicienne se développe d'abord comme un outil pratique de comptabilité commerciale." />
+      <MiniCard title="Les comptoirs lointains" tag="Vie de la diaspora commerciale" body="Des communautés phéniciennes s'installent durablement dans des comptoirs éloignés de plusieurs milliers de kilomètres de leur cité d'origine, tout en conservant des liens religieux et commerciaux avec le Levant." />
+      <MiniCard title="Le culte de Melqart" tag="Religion urbaine" body="Chaque grande cité phénicienne vénère des divinités tutélaires propres, Melqart étant associé en particulier à Tyr et à ses colonies, dont Carthage." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Rayonnement" title="De l'alphabet grec à l'écriture arabe">
+    <div class="card-grid">
+      <InfoCard title="L'alphabet grec" sub="Adopté v. VIIIe siècle av. J.-C." body="Les Grecs empruntent l'alphabet phénicien et y ajoutent des voyelles, posant les bases de l'alphabet utilisé ensuite par les Étrusques puis les Romains." />
+      <InfoCard title="L'alphabet araméen" sub="Ancêtre indirect" body="Dérivé lui aussi de l'alphabet phénicien, il donne naissance aux écritures hébraïque et arabe modernes par des voies de transmission distinctes." />
+      <InfoCard title="Carthage et la Méditerranée occidentale" sub="Autonomie politique" body="La colonie tyrienne devient une puissance méditerranéenne à part entière, dont l'histoire ultérieure fait l'objet d'un traitement propre dans cette série." />
+      <InfoCard title="Les comptoirs atlantiques" sub="Cadix et au-delà" body="Le réseau commercial phénicien atteint l'Atlantique bien avant la plupart des autres civilisations méditerranéennes de son temps." />
+      <InfoCard title="L'héritage linguistique mondial" sub="Écritures contemporaines" body="Une majorité des systèmes d'écriture utilisés aujourd'hui dans le monde descendent, directement ou indirectement, de l'innovation consonantique phénicienne." />
+      <InfoCard title="La recherche archéologique méditerranéenne" sub="Discipline active" body="L'étude des sites phéniciens et puniques, notamment la question des tophets, reste un champ de recherche archéologique actif et parfois disputé." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Timeline items={[
+      { year: 'v. 3000 av. J.-C.', title: 'Fondation ancienne de Byblos', body: "L'une des plus anciennes cités du Levant, déjà active dans le commerce du bois de cèdre vers l'Égypte." },
+      { year: 'v. 1200-1100 av. J.-C.', title: 'Élaboration de l\'alphabet consonantique', body: "Développement du système de vingt-deux signes qui deviendra la matrice de nombreuses écritures ultérieures." },
+      { year: 'v. 1100 av. J.-C.', title: 'Fondation traditionnelle de Cadix (Gadir)', body: "L'un des comptoirs les plus lointains du réseau commercial phénicien, aujourd'hui parmi les plus anciennes villes d'Europe occidentale." },
+      { year: 'v. 814 av. J.-C.', title: 'Fondation traditionnelle de Carthage', body: "Selon la tradition, la princesse tyrienne Elissa fonde la colonie qui deviendra une puissance méditerranéenne autonome." },
+      { year: 'v. VIIIe siècle av. J.-C.', title: 'Adoption de l\'alphabet par les Grecs', body: "Les Grecs empruntent et adaptent l'alphabet phénicien en y ajoutant des voyelles." },
+      { year: 'v. 600 av. J.-C.', title: 'Expédition phénicienne autour de l\'Afrique', body: "Selon Hérodote, des marins affrétés par le pharaon Nékao II auraient contourné l'Afrique par la mer." },
+      { year: 'Ve siècle av. J.-C.', title: 'Périple d\'Hannon', body: "Le navigateur carthaginois explore les côtes atlantiques africaines, laissant l'un des rares récits directs de l'exploration punique." },
+      { year: '332 av. J.-C.', title: 'Siège de Tyr par Alexandre le Grand', body: "La chute de la cité levantine marque un tournant majeur dans le déclin de l'indépendance politique phénicienne d'origine." },
+      { year: '146 av. J.-C.', title: 'Destruction de Carthage', body: "La rivale méditerranéenne de Rome est rasée à l'issue de la troisième guerre punique — un épisode traité dans une perspective propre par cette série." },
+      { year: 'XIXe-XXe siècle', title: 'Redécouverte archéologique moderne', body: "Les fouilles des sites phéniciens et puniques, dont les tophets, relancent des débats historiographiques toujours actifs aujourd'hui." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que les Phéniciens laissent encore">
+    <HeritageBlock title="L'écriture de la moitié du monde" body="La plupart des systèmes d'écriture alphabétiques utilisés aujourd'hui, de l'anglais à l'arabe en passant par l'hébreu et le russe, descendent directement ou indirectement de leur innovation consonantique." />
+    <HeritageBlock title="Une identité nationale revendiquée" body="Le Liban contemporain revendique explicitement l'héritage phénicien comme un pilier de son identité nationale, distinct de ses voisins arabes." />
+    <HeritageBlock title="Un modèle précoce de mondialisation commerciale" body="Le réseau de comptoirs phéniciens reste cité comme l'un des premiers exemples historiques d'un commerce maritime véritablement transméditerranéen." />
+    <CautionBox>
+      La question des sacrifices d'enfants dans les tophets puniques reste un débat
+      archéologique et historiographique ouvert, entre lecture littérale de sources grecques
+      et romaines hostiles et lecture alternative en simple nécropole infantile. Trancher
+      cette question dans un sens ou dans l'autre sans le dire explicitement serait présenter
+      comme acquis ce que la recherche actuelle continue de débattre.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Glenn E. Markoe, Phoenicians, British Museum Press, 2000", note: "Synthèse de référence sur la société et l'expansion phénicienne citée en #peuples et #monde." },
+    { label: "Hérodote, Histoires, Livre IV, trad. Andrée Barguet, Gallimard, Ve s. av. J.-C. (éd. moderne)", note: "Source du récit de circumnavigation de l'Afrique cité en #figures et #recits." },
+    { label: "Josephine Quinn, In Search of the Phoenicians, Princeton University Press, 2018", note: "Étude critique moderne sur l'identité phénicienne et le débat des tophets cité en #anecdotes et #heritage." },
+    { label: "Périple d'Hannon, trad. et éd. critique dans Corpus des inscriptions puniques, référence académique standard", note: "Source directe de l'expédition d'Hannon citée en #figures et #recits." },
+  ]} />
+</PageLayout>

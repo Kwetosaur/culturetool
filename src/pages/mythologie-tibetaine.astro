@@ -1,0 +1,279 @@
+---
+/*
+  Mythologie Tibétaine / Bön — vingt-quatrième mythologie de la série.
+  Structure imposée par docs/plans/plan-serie-mythologies.md : 10 sections
+  fixes.
+
+  #royaumes : cosmologie tripartite authentiquement bönpo — lha (dieux du
+  ciel), nyen (esprits de l'atmosphère et des montagnes), lu (esprits
+  serpents des eaux et du sous-sol) — distincte du mont Meru déjà traité
+  par la page « Cosmologie bouddhiste », qui reste le cadre pan-asiatique
+  englobant sans le remplacer.
+
+  #genealogie : les « 3 maisons » sont la lignée de Tonpa Shenrab
+  (fondateur du Bön), la lignée de Padmasambhava (qui subjugue les
+  divinités locales pour les lier au bouddhisme par serment) et le
+  panthéon des protecteurs (dharmapala) — trois logiques de transmission
+  distinctes.
+
+  Traitement : religion et pratique toujours vivantes au Tibet et dans sa
+  diaspora — aucun ton de curiosité pour un folklore éteint. Yeti/migyu
+  n'est qu'évoqué en passant : sa page complète est `creature-yeti.astro`.
+
+  Effets : data-egg="tibetaine" + data-scroll-fx="priereDrapeaux" sur
+  #pantheon — des drapeaux de prière qui claquent en chaîne, révélant une
+  montagne sortie de la brume (réutilise `mistDrift`).
+*/
+import PageLayout from '../layouts/PageLayout.astro';
+import Section from '../components/Section.astro';
+import InfoCard from '../components/InfoCard.astro';
+import FigureCard from '../components/FigureCard.astro';
+import MiniCard from '../components/MiniCard.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import Timeline from '../components/Timeline.astro';
+import HeritageBlock from '../components/HeritageBlock.astro';
+import CautionBox from '../components/CautionBox.astro';
+import Decode from '../components/Decode.astro';
+import Sources from '../components/Sources.astro';
+import InteractiveGenealogy from '../components/InteractiveGenealogy.astro';
+
+const TIBET_HOUSES = {
+  bon: { head: '#c9982f', normal: '#e0c090', dim: '#8a7a6a' },
+  padma: { head: '#8a2a2a', normal: '#c46a5a', dim: '#8a7a6a' },
+  dharmapala: { head: '#2a4a8a', normal: '#5a7ec4', dim: '#8a7a6a' },
+};
+const TIBET_HOUSE_LABELS = {
+  bon: 'Lignée de Tonpa Shenrab', padma: 'Lignée de Padmasambhava', dharmapala: 'Panthéon des protecteurs',
+};
+const TIBET_NODES = [
+  { id: 'shenrab', label: 'Tonpa Shenrab', house: 'bon', head: true, x: 110, y: 60, detail: "Fondateur légendaire du Bön, originaire du royaume semi-légendaire de Zhang Zhung — la figure fondatrice de la tradition prébouddhiste tibétaine." },
+  { id: 'padma', label: 'Padmasambhava', house: 'padma', head: true, x: 380, y: 60, detail: "Maître tantrique venu du sous-continent indien au VIIIe siècle, à qui la tradition attribue la subjugation des divinités locales et la fondation du premier monastère bouddhiste tibétain, Samyé." },
+  { id: 'yeshe', label: 'Yeshe Tsogyal', house: 'padma', x: 300, y: 190, detail: "Maîtresse tantrique et parèdre spirituelle de Padmasambhava, figure majeure de la tradition Nyingma, à qui l'on attribue la préservation de nombreux enseignements cachés (terma)." },
+  { id: 'milarepa', label: 'Milarepa', house: 'padma', x: 460, y: 190, detail: "Yogi et poète du XIe siècle, dont les chants restent parmi les textes spirituels les plus populaires du bouddhisme tibétain — affronte le prêtre bönpo Naro Bönchung dans la célèbre course du mont Kailash." },
+  { id: 'paldenlhamo', label: 'Palden Lhamo', house: 'dharmapala', head: true, x: 630, y: 60, detail: "Protectrice féroce de Lhassa et des dalaï-lamas, chevauchant une mule à travers une mer de sang selon l'iconographie traditionnelle — l'une des rares divinités protectrices exclusivement féminines de ce rang." },
+  { id: 'yulha', label: 'Yul lha', house: 'dharmapala', x: 630, y: 190, detail: "Dieux-montagnes territoriaux, chacun protecteur d'une région ou d'un sommet précis — un système qui ancre le sacré dans une géographie locale très concrète." },
+];
+const TIBET_EDGES = [
+  ['padma', 'yeshe', 'union'], ['padma', 'milarepa', 'special'],
+  ['shenrab', 'padma', 'special'],
+  ['paldenlhamo', 'yulha', 'special'],
+];
+
+/* Grenat et safran des robes monastiques, blanc neige de l'Himalaya,
+   turquoise sacrée : la matière tibétaine plutôt qu'une palette
+   "bouddhiste" déjà utilisée par la page cosmologie transversale. */
+const palette = {
+  bg: '#170f10',
+  'bg-deep': '#0d0808',
+  surface: '#241a1a',
+  'surface-alt': '#302222',
+  border: '#5c3a3a',
+  ink: '#f5ece8',
+  text: '#d8c0b8',
+  'text-dim': '#a08880',
+  accent: '#8a2a2a',
+  'accent-bright': '#c45a4a',
+  accent2: '#2a8a8a',
+  'accent2-bright': '#4ab4b4',
+  verdict: '#c9982f',
+  'verdict-bright': '#e8c164',
+  glow: 'rgba(138,42,42,0.22)',
+};
+
+const SECTIONS = [
+  { id: 'royaumes', nav: 'Domaines' },
+  { id: 'pantheon', nav: 'Panthéon' },
+  { id: 'genealogie', nav: 'Lignées' },
+  { id: 'creatures', nav: 'Esprits' },
+  { id: 'legendes', nav: 'Légendes' },
+  { id: 'anecdotes', nav: 'Anecdotes' },
+  { id: 'monde', nav: 'Monde' },
+  { id: 'frise', nav: 'Frise' },
+  { id: 'heritage', nav: 'Héritage' },
+];
+
+const domaines = [
+  { num: 'I', title: 'Lha', sub: 'Dieux du ciel', body: "Domaine céleste des divinités supérieures, dont beaucoup de protecteurs (dharmapala) subjugués et liés par serment lors de la christianisation... bouddhisation du Tibet." },
+  { num: 'II', title: 'Nyen', sub: "Esprits de l'atmosphère et des montagnes", body: "Domaine intermédiaire peuplé des yul lha (dieux-montagnes territoriaux) et d'esprits atmosphériques, directement liés à des lieux géographiques précis." },
+  { num: 'III', title: 'Lu', sub: 'Esprits serpents des eaux', body: "Domaine souterrain et aquatique, gardien de richesses et de maladies selon qu'on les respecte ou qu'on les insulte — un pendant tibétain des nāga indiens." },
+];
+---
+<PageLayout
+  title="Mythologie Tibétaine / Bön"
+  serie="Mythologies du Monde"
+  description="Une religion chamanique prébouddhiste (le Bön) fusionnée avec le bouddhisme tantrique venu d'Inde au VIIIe siècle — cosmologie de montagnes sacrées, esprits protecteurs (dharmapala) et une tradition de trésors cachés (terma) toujours révélés aujourd'hui."
+  href="mythologie-tibetaine.html"
+  egg="tibetaine"
+  palette={palette}
+  sections={SECTIONS}
+  epigraph="ཨོཾ་མ་ཎི་པདྨེ་ཧཱུྃ"
+  nextUp="Prochain chapitre de la série « Mythologies du Monde » : à déterminer"
+>
+  <p class="subtitle" slot="hero">Bön · Padmasambhava · Dharmapala</p>
+  <p class="tagline" slot="hero">
+    Une religion chamanique de montagnes et d'esprits territoriaux, entrée en dialogue avec
+    le bouddhisme tantrique venu d'Inde au VIIIe siècle — sans que l'un n'efface jamais
+    complètement l'autre, jusqu'à aujourd'hui.
+  </p>
+
+  <Section
+    id="royaumes"
+    label="Cosmogonie"
+    title="Trois domaines, une géographie sacrée"
+    intro="La cosmologie bönpo distingue le ciel des dieux, l'atmosphère et les montagnes des esprits territoriaux, et les eaux souterraines des esprits serpents — une structure tripartite authentiquement tibétaine, distincte du mont Meru déjà traité par la page « Cosmologie bouddhiste »." >
+    <Fragment slot="title"><Decode glyphs="tibetain">Trois domaines, une géographie sacrée</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="300" cy="46" rx="190" ry="32" fill="none" stroke="#e8c164" stroke-width="2" opacity="0.7"/>
+        <text x="300" y="32" text-anchor="middle" fill="#e8c164" font-family="Cinzel, serif" font-size="12">LHA</text>
+        <path d="M240 200 L300 100 L360 200 Z" fill="none" stroke="#c45a4a" stroke-width="2"/>
+        <text x="300" y="120" text-anchor="middle" fill="#c45a4a" font-size="11" font-family="Cinzel, serif">NYEN</text>
+        <ellipse cx="300" cy="210" rx="150" ry="20" fill="none" stroke="#4ab4b4" stroke-width="2" opacity="0.8"/>
+        <text x="300" y="214" text-anchor="middle" fill="#4ab4b4" font-family="Cinzel, serif" font-size="11">LU</text>
+      </svg>
+    </div>
+    <p class="map-caption">Le ciel des lha, la montagne des nyen, les eaux des lu — une géographie du sacré directement ancrée dans le paysage himalayen réel.</p>
+    <div class="card-grid compact">
+      {domaines.map((d) => <InfoCard {...d} />)}
+    </div>
+  </Section>
+
+  <Section id="pantheon" label="~14 figures majeures" title="Le panthéon tibétain" scrollFx="priereDrapeaux">
+    <Fragment slot="title"><Decode glyphs="tibetain">Le panthéon tibétain</Decode></Fragment>
+    <div class="card-grid wide">
+      <FigureCard name="Tonpa Shenrab" role="Fondateur légendaire du Bön" tags={['Zhang Zhung', 'Antériorité']} body="Originaire du royaume semi-légendaire de Zhang Zhung, il incarne la tradition religieuse prébouddhiste dont le bouddhisme tibétain hérite en partie les pratiques et les esprits territoriaux." />
+      <FigureCard name="Padmasambhava (Guru Rinpoche)" role="Maître tantrique fondateur" tags={['VIIIe siècle', 'Subjugation des esprits']} body="Selon la tradition, il subjugue les divinités et démons locaux du Tibet et les lie par serment (damtsig) à la protection du dharma, puis fonde Samyé, premier monastère bouddhiste tibétain." />
+      <FigureCard name="Yeshe Tsogyal" role="Maîtresse tantrique" tags={['Nyingma', 'Terma']} body="Parèdre spirituelle de Padmasambhava, à qui l'on attribue la préservation de nombreux enseignements cachés destinés à être révélés aux générations futures." />
+      <FigureCard name="Milarepa" role="Yogi-poète" tags={['XIe siècle', 'Chants spirituels']} body="Ancien pratiquant de magie noire devenu l'un des plus grands ascètes et poètes du bouddhisme tibétain, dont les Cent Mille Chants restent lus et chantés aujourd'hui." />
+      <FigureCard name="Palden Lhamo" role="Protectrice de Lhassa" tags={['Dharmapala', 'Féroce']} body="Chevauche une mule à travers une mer de sang selon l'iconographie traditionnelle — protectrice attitrée de la ville de Lhassa et des dalaï-lamas successifs." />
+      <FigureCard name="Mahakala" role="Grand protecteur noir" tags={['Dharmapala', 'Forme féroce']} body="Forme protectrice courroucée largement répandue dans tout le bouddhisme tantrique d'Asie, adoptée avec des attributs propres dans le contexte tibétain." />
+      <FigureCard name="Yama Dharmaraja" role="Roi de la justice des morts" tags={['Jugement karmique']} body="Juge du sort des défunts selon leur karma accumulé, figure centrale des visions décrites dans le Bardo Thödol lors du passage post-mortem." />
+      <FigureCard name="Nyenchen Tanglha" role="Dieu-montagne majeur" tags={['Yul lha', 'Protecteur territorial']} body="L'un des plus importants dieux-montagnes du Tibet central, dont le sommet réel porte directement son nom divin." />
+      <FigureCard name="Le roi Gesar de Ling" role="Héros épique" tags={['Plus long poème épique au monde', 'Tradition orale vivante']} body="Héros central de l'épopée tibétaine la plus longue jamais composée, toujours enrichie aujourd'hui par des bardes qui affirment recevoir de nouveaux vers en rêve ou en transe." />
+      <FigureCard name="Hayagriva" role="Manifestation courroucée" tags={['Tête de cheval', 'Protection']} body="Divinité tantrique à tête chevaline, invoquée pour sa capacité à subjuguer les obstacles les plus tenaces sur le chemin spirituel." />
+      <FigureCard name="Tara verte et Tara blanche" role="Bodhisattvas de la compassion active" tags={['Secours rapide', 'Longévité']} body="Deux des formes les plus vénérées de la bodhisattva Tara au Tibet, invoquées respectivement pour une aide immédiate et pour la longévité." />
+      <FigureCard name="Naro Bönchung" role="Rival bönpo de Milarepa" tags={['Course du mont Kailash']} body="Prêtre bön dont la légendaire course contre Milarepa au sommet du Kailash reste l'un des récits les plus populaires de rivalité entre les deux traditions." />
+      <FigureCard name="Les dakini" role="Messagères de sagesse" tags={['Énergie éveillée', 'Figures féminines']} body="Figures féminines tantriques incarnant une énergie spirituelle transformatrice, ni simples démones ni anges au sens occidental du terme." />
+      <FigureCard name="Le Dalaï-Lama (institution)" role="Lignée de tulku" tags={['Réincarnation reconnue', 'Institution vivante']} body="Institution de la réincarnation reconnue (tulku) qui structure encore aujourd'hui l'autorité spirituelle tibétaine, bien au-delà d'une simple figure mythologique." />
+    </div>
+  </Section>
+
+  <Section
+    id="genealogie"
+    label="3 lignées, trois logiques"
+    title="Fondation, subjugation et protection"
+    intro="Aucune parenté de sang ne relie ces figures : une lignée fonde une tradition antérieure (Bön), une autre subjugue et lie par serment les puissances locales (Padmasambhava), une troisième protège le dharma une fois établi (dharmapala) — trois logiques successives plutôt qu'un seul arbre.">
+    <Fragment slot="title"><Decode glyphs="tibetain">Fondation, subjugation et protection</Decode></Fragment>
+    <InteractiveGenealogy
+      nodes={TIBET_NODES}
+      edges={TIBET_EDGES}
+      houses={TIBET_HOUSES}
+      houseLabels={TIBET_HOUSE_LABELS}
+      glyphs="☸卐◈✦"
+      viewBox={{ w: 700, h: 260 }}
+      lineColor="#5c3a3a"
+    />
+    <p class="map-caption">Trait plein = union ; pointillé = lien spécial (subjugation, rivalité, protection). Le lien Shenrab→Padmasambhava est marqué « spécial » : il s'agit d'une rencontre de traditions, pas d'une filiation.</p>
+  </Section>
+
+  <Section id="creatures" label="7 esprits notables" title="Serpents, démons et esprits de lieu">
+    <Fragment slot="title"><Decode glyphs="tibetain">Serpents, démons et esprits de lieu</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Lu" tag="Esprits-serpents des eaux" body="Gardiens de richesses souterraines et aquatiques, réputés provoquer certaines maladies de peau si leur territoire est souillé ou perturbé sans égard." />
+      <MiniCard title="Nyen" tag="Esprits de l'atmosphère" body="Peuplent l'espace intermédiaire entre ciel et terre, souvent associés aux arbres et aux lieux naturels marquants." />
+      <MiniCard title="Tsen" tag="Esprits rouges guerriers" body="Associés aux rochers et aux lieux de bataille, réputés capricieux et parfois hostiles envers les voyageurs imprudents." />
+      <MiniCard title="Düd" tag="Forces obstructives" body="Personnifications des obstacles sur le chemin spirituel, à ne pas confondre avec un simple mal absolu au sens occidental." />
+      <MiniCard title="Migyu (le « Yeti » tibétain)" tag="Renvoi vers sa propre page" body="La créature himalayenne largement popularisée en Occident sous le nom de Yeti dispose de sa propre page dédiée dans la série Créatures ; on se contente ici de noter son ancrage dans le folklore local." />
+      <MiniCard title="Les gardiens des quatre directions" tag="Protection territoriale" body="Figures protectrices assignées à chaque point cardinal autour des monastères et des lieux sacrés, héritées en partie du fonds indien plus large." />
+      <MiniCard title="Les esprits du foyer domestique" tag="Vie quotidienne" body="Présences protectrices propres à chaque maison, honorées par de petites offrandes régulières dans la pratique populaire tibétaine." />
+    </div>
+  </Section>
+
+  <Section id="legendes" label="9 légendes" title="Les grands récits tibétains">
+    <Fragment slot="title"><Decode glyphs="tibetain">Les grands récits tibétains</Decode></Fragment>
+    <StoryBlock num="Légende I" title="La subjugation des divinités locales" body="Invité à établir le bouddhisme au Tibet, Padmasambhava affronte et subjugue un à un les esprits et démons locaux hostiles à la nouvelle religion, les liant par un serment sacré (damtsig) à devenir désormais protecteurs du dharma plutôt que ses ennemis — un récit qui explique, dans la tradition, comment tant de divinités bönpo ont pu s'intégrer au panthéon bouddhiste tibétain sans être simplement effacées." />
+    <StoryBlock num="Légende II" title="La fondation de Samyé" body="Padmasambhava fonde le premier monastère bouddhiste tibétain à Samyé, dont le plan architectural reproduit délibérément la cosmologie du mont Meru et de ses continents environnants — un exemple direct de cosmologie traduite en architecture, comme Angkor ou Borobudur ailleurs en Asie." />
+    <StoryBlock num="Légende III" title="La course du mont Kailash" body={["Milarepa et le prêtre bön Naro Bönchung s'affrontent pour déterminer à quelle tradition reviendra le mont Kailash, dans une course dont le vainqueur doit atteindre le sommet au lever du soleil.", "Naro Bönchung part à dos de tambour rituel ; Milarepa, resté assis en méditation jusqu'au dernier moment, atteint pourtant le sommet le premier en chevauchant un simple rayon de soleil — remportant la montagne pour le bouddhisme tout en laissant, selon certaines versions, un lieu de pratique au Bön en contrepartie."]} quote="Le rayon de l'aube porte plus vite que le tambour du prêtre." cite="Résumé traditionnel de la course du mont Kailash" />
+    <StoryBlock num="Légende IV" title="Milarepa et la tour de Marpa" body="Avant de devenir un grand yogi, Milarepa doit, sur ordre de son maître Marpa, construire puis démolir plusieurs tours de pierre de ses propres mains sans explication — une épreuve d'humilité et de purification karmique pour les actes de sorcellerie destructrice de sa jeunesse, avant d'être enfin accepté comme disciple." />
+    <StoryBlock num="Légende V" title="Le sauvetage du roi Gesar" body="Selon l'épopée, Gesar naît dans des circonstances humbles et méprisées avant de remporter une course de chevaux truquée par la ruse et la protection divine, devenant ainsi roi de Ling et menant ensuite ses armées contre des démons et des rois ennemis à travers l'Asie centrale mythique." />
+    <StoryBlock num="Légende VI" title="Les trésors cachés (terma)" body="Padmasambhava et Yeshe Tsogyal auraient caché, à travers le Tibet, des textes et objets sacrés destinés à être révélés seulement lorsque les conditions seraient propices, par des « découvreurs de trésors » (tertön) reconnus des siècles plus tard — une tradition qui continue de produire de nouveaux textes religieux jusqu'à une période récente." />
+    <StoryBlock num="Légende VII" title="Le voyage à travers le bardo" body="Le Bardo Thödol (« Livre tibétain des morts ») décrit l'état intermédiaire entre mort et renaissance, peuplé de visions de divinités paisibles puis courroucées, lu traditionnellement à voix haute près du corps du défunt pour guider sa conscience vers une renaissance favorable." />
+    <StoryBlock num="Légende VIII" title="L'origine du peuple tibétain" body="Une tradition largement répandue fait descendre le peuple tibétain de l'union d'un singe (émanation d'Avalokiteshvara) et d'une ogresse des rochers — un mythe qui inscrit dès l'origine une tension entre compassion et nature sauvage au cœur de l'identité tibétaine." />
+    <StoryBlock num="Légende IX" title="La consécration des dieux-montagnes" body="Chaque grand sommet tibétain est traditionnellement associé à un dieu-montagne (yul lha) précis, dont l'ascension profane était autrefois évitée par respect — une pratique qui a directement façonné les débats contemporains sur l'alpinisme de certains sommets himalayens sacrés." />
+  </Section>
+
+  <Section id="anecdotes" label="8 curiosités" title="Faits marquants et pratiques vivantes">
+    <Fragment slot="title"><Decode glyphs="tibetain">Faits marquants et pratiques vivantes</Decode></Fragment>
+    <div class="card-grid compact">
+      <MiniCard title="Le plus long poème épique du monde" tag="Épopée de Gesar" body="L'épopée du roi Gesar dépasse en longueur cumulée l'ensemble des grandes épopées européennes et indiennes réunies, et continue d'être composée oralement par des bardes contemporains." />
+      <MiniCard title="Des bardes en transe toujours actifs" tag="Tradition orale vivante" body="Certains bardes de l'épopée de Gesar affirment aujourd'hui encore recevoir de nouveaux vers en rêve ou en état de transe, une pratique de composition orale rarement documentée avec une telle continuité ailleurs dans le monde." />
+      <MiniCard title="Le mont Kailash, jamais gravi" tag="Tabou respecté" body="Aucune ascension officielle du sommet n'a jamais été menée à bien par respect pour sa signification sacrée partagée par bouddhistes, hindous, jaïns et adeptes du Bön." />
+      <MiniCard title="Les drapeaux de prière, une pratique quotidienne" tag="Rituel vivant" body="Les drapeaux multicolores toujours accrochés aux cols et aux monastères diffusent, selon la croyance, les prières qui y sont imprimées au gré du vent — une pratique visible et active aujourd'hui, pas un simple motif décoratif." />
+      <MiniCard title="Le sky burial, une pratique funéraire réelle" tag="Adaptation au terrain" body="L'exposition du corps aux vautours reste pratiquée dans certaines régions tibétaines, en cohérence avec l'enseignement bouddhiste de l'impermanence et les contraintes concrètes d'un terrain rocheux pauvre en bois." />
+      <MiniCard title="Le Bön reconnu comme cinquième tradition" tag="Statut religieux officiel" body="Le gouvernement tibétain en exil reconnaît officiellement le Bön aux côtés des quatre grandes écoles bouddhistes tibétaines, plutôt que de le traiter comme un simple folklore résiduel." />
+      <MiniCard title="Le terma, une justification religieuse originale" tag="Innovation doctrinale" body="Le mécanisme des textes cachés (terma) permet à la tradition tibétaine d'intégrer de nouveaux enseignements religieux tout en les rattachant à l'autorité ancienne de Padmasambhava — un dispositif original de légitimation textuelle." />
+      <MiniCard title="Zhang Zhung, royaume aux traces ténues" tag="Archéologie en cours" body="Le royaume d'origine du Bön reste mal documenté archéologiquement ; les recherches actuelles tentent encore de préciser son étendue réelle et sa chronologie exacte." />
+    </div>
+  </Section>
+
+  <Section id="monde" label="Expansion réelle" title="Du plateau tibétain à la diaspora mondiale">
+    <Fragment slot="title"><Decode glyphs="tibetain">Du plateau tibétain à la diaspora mondiale</Decode></Fragment>
+    <div class="map-diagram">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="300" cy="100" r="9" fill="#c45a4a"/>
+        <text x="300" y="82" text-anchor="middle" fill="#e8c164" font-size="12" font-family="Cinzel, serif">TIBET</text>
+        {[[430,60,'Inde (Dharamsala)'],[470,150,'Népal'],[130,60,'Mongolie'],[150,150,'Bhoutan'],[380,175,'Diaspora mondiale']].map(([x,y,label]) => (
+          <g>
+            <line x1="300" y1="100" x2={x} y2={y} stroke="#a08880" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+            <circle cx={x} cy={y} r="6" fill="#302222" stroke="#c45a4a" stroke-width="1.3"/>
+            <text x={x} y={y - 12} text-anchor="middle" fill="#d8c0b8" font-size="10">{label}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+    <p class="map-caption">Une tradition dispersée par l'exil politique depuis 1959, mais toujours pratiquée activement sur le plateau tibétain, dans l'Himalaya voisin et dans une diaspora mondiale.</p>
+    <div class="card-grid">
+      <InfoCard title="Tibet" sub="Foyer d'origine" body="Le plateau tibétain reste le foyer historique de la pratique, malgré des restrictions politiques importantes sur la religion depuis le milieu du XXe siècle." />
+      <InfoCard title="Dharamsala, Inde" sub="Siège du gouvernement en exil" body="Devenue le principal centre de la diaspora tibétaine et de son autorité religieuse depuis l'exil du 14e dalaï-lama en 1959." />
+      <InfoCard title="Népal et Bhoutan" sub="Continuité himalayenne" body="Des traditions bouddhistes tibétaines apparentées restent pratiquées activement dans ces régions himalayennes voisines." />
+      <InfoCard title="Mongolie" sub="Bouddhisme tibétain transplanté" body="Le bouddhisme tibétain s'est historiquement diffusé en Mongolie, y façonnant durablement la pratique religieuse locale." />
+      <InfoCard title="Diaspora mondiale" sub="Centres contemporains" body="Des centres d'enseignement du bouddhisme tibétain se sont multipliés en Europe et en Amérique du Nord depuis la seconde moitié du XXe siècle." />
+      <InfoCard title="Études tibétologiques" sub="Discipline universitaire" body="La tibétologie reste un champ de recherche actif, notamment sur les rapports complexes entre Bön ancien et bouddhisme tantrique tibétain." />
+    </div>
+  </Section>
+
+  <Section id="frise" label="Frise chronologique" title="Repères historiques">
+    <Fragment slot="title"><Decode glyphs="tibetain">Repères historiques</Decode></Fragment>
+    <Timeline items={[
+      { year: 'Antériorité non datée avec précision', title: 'Tradition bönpo ancienne', body: "Religion chamanique et cosmologie tripartite (lha/nyen/lu) déjà établies avant l'arrivée du bouddhisme." },
+      { year: 'VIIe siècle apr. J.-C.', title: 'Premiers contacts bouddhistes', body: "Le roi Songtsen Gampo favorise l'introduction du bouddhisme au Tibet par des alliances matrimoniales avec le Népal et la Chine." },
+      { year: 'VIIIe siècle apr. J.-C.', title: 'Mission de Padmasambhava', body: "Selon la tradition, il subjugue les divinités locales et fonde Samyé, premier monastère bouddhiste tibétain." },
+      { year: 'XIe siècle apr. J.-C.', title: 'Vie de Milarepa', body: "Le yogi-poète devient l'une des figures spirituelles les plus populaires du bouddhisme tibétain." },
+      { year: 'XIVe siècle apr. J.-C. et après', title: 'Essor du système des tulku', body: "L'institution des lamas réincarnés se structure progressivement, jusqu'à la lignée des dalaï-lamas." },
+      { year: '1950-1959', title: 'Annexion chinoise et exil', body: "L'occupation puis l'intégration du Tibet à la République populaire de Chine conduisent à l'exil du 14e dalaï-lama en Inde." },
+      { year: 'Depuis 1959', title: 'Diaspora et gouvernement en exil', body: "Dharamsala devient le principal centre religieux et politique de la diaspora tibétaine." },
+      { year: 'Seconde moitié du XXe siècle', title: 'Diffusion mondiale du bouddhisme tibétain', body: "Des centres d'enseignement s'implantent durablement en Europe et en Amérique du Nord." },
+      { year: "Aujourd'hui", title: 'Reconnaissance officielle du Bön', body: "Le gouvernement tibétain en exil reconnaît le Bön comme cinquième tradition religieuse tibétaine à part entière." },
+    ]} />
+  </Section>
+
+  <Section id="heritage" label="Aujourd'hui" title="Ce que cette tradition fait encore">
+    <Fragment slot="title"><Decode glyphs="tibetain">Ce que cette tradition fait encore</Decode></Fragment>
+    <HeritageBlock title="Une pratique quotidienne toujours visible" body="Drapeaux de prière, moulins à prière et pèlerinages autour des montagnes sacrées restent des pratiques actives, pas des reconstitutions folkloriques." />
+    <HeritageBlock title="Une épopée toujours composée" body="L'épopée de Gesar continue d'être enrichie par des bardes contemporains, un cas rare de tradition orale épique encore vivante à cette échelle." />
+    <HeritageBlock title="Une diffusion mondiale continue" body="Le bouddhisme tibétain compte aujourd'hui des pratiquants et des centres d'enseignement sur tous les continents, bien au-delà de son aire d'origine himalayenne." />
+    <CautionBox>
+      Cette tradition religieuse reste directement liée à une situation politique
+      contemporaine sensible : l'exil de sa principale autorité spirituelle et les
+      restrictions exercées sur sa pratique au Tibet même font partie de son histoire récente,
+      pas d'un simple contexte accessoire à la mythologie présentée ici.
+    </CautionBox>
+  </Section>
+
+  <Sources items={[
+    { label: "Per Kvaerne, The Bon Religion of Tibet: The Iconography of a Living Tradition, Serindia Publications, 1995", note: "Étude de référence sur le Bön et son iconographie citée en #royaumes et #creatures." },
+    { label: "Tsering Wangdu Shakya, The Dragon in the Land of Snows: A History of Modern Tibet Since 1947, Columbia University Press, 1999", note: "Contexte historique moderne cité en #frise et #heritage." },
+    { label: "The Epic of Gesar of Ling, trad. Robin Kornman, Sangye Khandro, Lama Chönam, Shambhala, 2012", note: "Traduction de référence de l'épopée résumée en #pantheon et #legendes." },
+    { label: "Walter Yeeling Evans-Wentz (éd.), Le Livre des morts tibétain (Bardo Thödol), trad. française, Adyar, 1927 (éd. moderne)", note: "Source du récit du passage post-mortem cité en #legendes." },
+  ]} />
+</PageLayout>
